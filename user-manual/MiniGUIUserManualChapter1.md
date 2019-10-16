@@ -49,7 +49,7 @@ components since MiniGUI v3.2.0:
   provides a simple 3D API for app. You can use mG3d to create simple
   3D UI.
 
-## Source Tarballs and Repos
+### Source Tarballs and Repos
 
 The source code tarballs of MiniGUI and its components can be
 downloaded from the download zone of [MiniGUI Official Website]:
@@ -78,7 +78,7 @@ for examples:
 * mEagle, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
 
-You can find the public repositories of the above apps on:
+You can find the public repositories of above apps on:
 
 <https://github.com/FMSoftCN>
 
@@ -88,7 +88,7 @@ and others. Please refer to:
 
 <http://www.minigui.com/en/download>
 
-## Documents for MiniGUI
+### Documents for MiniGUI
 
 FMSoft now maintains the documents of MiniGUI on GitHub as well:
 
@@ -109,7 +109,7 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 <https://github.com/VincentWei/minigui/wiki>
 
-## Build and Run mGUXDemo on Linux
+## First Run of MiniGUI
 
 *TBC*
 
