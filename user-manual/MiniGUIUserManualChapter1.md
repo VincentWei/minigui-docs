@@ -1,6 +1,11 @@
 # Quick Start
 
-## A Brief Introduction
+- [Introduction](#introduction)
+  * [Source Tarballs and Repos](#source-tarballs-and-repos)
+  * [Documents](#documents)
+- [First Run](#first-run)
+
+## Introduction
 
 MiniGUI, developed by [FMSoft Technologies],
 originates from a famous free and open source software project,
@@ -88,7 +93,7 @@ and others. Please refer to:
 
 <http://www.minigui.com/en/download>
 
-### Documents for MiniGUI
+### Documents
 
 FMSoft now maintains the documents of MiniGUI on GitHub as well:
 
@@ -109,7 +114,7 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 <https://github.com/VincentWei/minigui/wiki>
 
-## First Run of MiniGUI
+## First Run
 
 *TBC*
 
