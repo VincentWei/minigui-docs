@@ -1,5 +1,8 @@
 # Quick Start
 
+This manual mainly describes the compile-time configuration options and
+the runtime configuration options of MiniGUI.
+
 ## A Brief Introduction
 
 MiniGUI, developed by Beijing FMSoft Technologies Co. Ltd.[^1],
@@ -58,9 +61,14 @@ components since MiniGUI v3.2.0:
 ## Source Tarballs and Repos
 
 The source code tarballs of MiniGUI and its components can be
-downloaded from MiniGUI official website:
+downloaded from the download zone of [MiniGUI official website]:
 
-<http://www.minigui.com>
+<http://www.minigui.com/en/download>
+
+FMSoft had created the public repositories for MiniGUI core, MiniGUI
+components on GitHub. You can visit them on:
+
+<https://github.com/VincentWei>
 
 FMSoft also releases some open source apps for MiniGUI on the site above,
 for examples:
@@ -79,10 +87,15 @@ for examples:
 * mEagle, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
 
-FMSoft had created the public repositories for MiniGUI core, MiniGUI
-components, and other open source apps on GitHub. You can visit them on:
+You can find the public repositories of the above apps on:
 
-<https://github.com/VincentWei>
+<https://github.com/FMSoftCN>
+
+Besides MiniGUI, FMSoft also releases some tools and dependencies of MiniGUI,
+such as the virtual buffer program, FreeType, libjpeg, libpng, zlib, and others.
+Please refer to:
+
+<http://www.minigui.com/en/download>
 
 ## Documents for MiniGUI
 
@@ -90,53 +103,34 @@ FMSoft now maintains the documents of MiniGUI on GitHub as well:
 
 <https://github.com/VincentWei/minigui-docs>
 
+All documents are classified into the following volumes:
+
+- [MiniGUI User Manual]: The user manual describes how to configure,
+build, and run MiniGUI.
+- [MiniGUI Programming Guide]: This guide describes in
+detail the foundation knowledge of MiniGUI on developing MiniGUI apps.
+- [MiniGUI Porting Guide]: This guide describes how to port MiniGUI
+to various RTOSes.
+- [MiniGUI API Reference Manuals]: The online API reference manuals for
+MiniGUI core and MiniGUI components.
+
 We also maintain some supplementary documents on MiniGUI Wiki:
 
 <https://github.com/VincentWei/minigui/wiki>
 
-This is the user manual for how to configure, build, and run MiniGUI.
-Except for this manual, FMSoft also provides the following documents:
-
-- [MiniGUI Programming Guide]: This guide describes in
-detail the foundation knowledge of MiniGUI on developing MiniGUI apps.
-The content of which involves various aspects of MiniGUI programming,
-include message looping, window procedure, dialog box, controls,
-graphics interfaces, and so on.
-- [MiniGUI API Reference Manuals]: The online API reference manuals for
-MiniGUI core and MiniGUI components.
-
-1.3 MiniGUI Source Code and Samples
------------------------------------
+## Source Code Tarballs
 
 In the download area of MiniGUI official website, the following MiniGUI
 source code package and sample package are listed:
 
-MiniGUI Core Lib: libminigui-3.0.x-&lt;os&gt;.tar.gz, MiniGUI V3.0.x
+- MiniGUI Core Lib: libminigui-3.0.x-&lt;os&gt;.tar.gz, MiniGUI V3.0.x
 library source code for &lt;os&gt; (such as linux) operating system.
 
-MiniGUI Resources: minigui-res-3.0.x.tar.gz, the resources used by
+- MiniGUI Resources: minigui-res-3.0.x.tar.gz, the resources used by
 MiniGUI, including basic fonts, icons, bitmaps and mouse cursors.
 
-MiniGUI Samples: mg-samples-3.0.x.tar.gz, a sample program of "MiniGUI
+- MiniGUI Samples: mg-samples-3.0.x.tar.gz, a sample program of "MiniGUI
 Programming Guide".
-
-Also provide the following source code package:
-
-MiniGUI component.
-
-Tools and dependencies, virtual buffer program GVFB and freetype,
-libjpeg, libpng, zlib and other libraries.
-
-1.4 Optional Components of MiniGUI
-----------------------------------
-
-Except for the MiniGUI product, FMSoft also provides some
-MiniGUI component products and other MiniGUI applications such as
-mSpider. Figure 1.1 shows the product line of FMSoft.
-
-![](media/image2.jpeg){width="4.760884733158355in"
-height="2.801240157480315in"}\
-Figure 1.1 Product line of FMSoft
 
 mGUtils provides users with several functional templates that allow
 users to write code for commonly used functions.
@@ -197,31 +191,11 @@ For the complete Feynman products, please visit the following web page:
 
 http://www.minigui.com/en/download/
 
-1.5 miniStudio development tools 
----------------------------------
-
-MiniStudio is an integrated development environment for MiniGUI,
-providing users with WYSWYG interface design, automatic generation and
-maintenance of MiniGUI program framework, code editing, compiling,
-running and debugging based on Eclipse, speeding up the development of
-MiniGUI applications and reducing Use the threshold of MiniGUI. When
-using MiniGUI, users can focus more on the specific applications related
-to the business and greatly reduce the R & D costs of MiniGUI related
-applications and provide better products.
-
-miniStudio is a non-open source commercial software product developed by
-FMSoft. It provides two versions of Windows and Ubuntu Linux.
-You can visit MiniGUI's official website to download the product for
-evaluation or trial license.
-
-1.6 About this Manual
----------------------
-
-This manual mainly describes the compile-time configuration options and
-the runtime configuration options of MiniGUI.
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [MiniGUI Official Site]: https://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
 [MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI API Reference Manuals]: /api-reference/README.md
