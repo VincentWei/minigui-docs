@@ -7,8 +7,9 @@ All rights reserved.
 
 ## Contents
 
-- [Introduction to MiniGUI](MiniGUIUserManualChapter1.md)
+- [Quick Start](MiniGUIUserManualChapter1.md)
 - [Building MiniGUI](MiniGUIUserManualChapter2.md)
 - [Runtime Configuration Options](MiniGUIUserManualChapter3.md)
 - [Developing MiniGUI Apps on PC](MiniGUIUserManualChapter4.md)
+- [Feature List](MiniGUIDataSheet.md)
 - [FAQs](MiniGUIUserManualAppendixA.md)
