@@ -58,7 +58,7 @@ components since MiniGUI v3.2.0:
 ## Source Tarballs and Repos
 
 The source code tarballs of MiniGUI and its components can be
-downloaded from the download zone of [MiniGUI official website]:
+downloaded from the download zone of [MiniGUI Official Website]:
 
 <http://www.minigui.com/en/download>
 
