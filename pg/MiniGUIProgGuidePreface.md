@@ -19,100 +19,100 @@ This handbook is a complete guide on MiniGUI 3.2 programming, which describes th
 
 The documents related to this guide:
 
-- [Technology White Paper (PDF)](http://www.minigui.com/docs/MiniGUITechWhitePaper-3.2.pdf) - The goals, features, advantages, and road map of MiniGUI V3.2.
-- [Datasheet (PDF)](http://www.minigui.com/docs/MINIGUI-DATASHEET-3.2.pdf) - The feature list of MiniGUI V3.2.
-- [User Manual](MiniGUIUserManualV32) - How to configure, install, and run MiniGUI V3.2.
-- [Release Notes](MiniGUIReleaseNotesV32) - Release notes of the official MiniGUI V3.2 releases.
+- [[http://www.minigui.com/docs/MiniGUITechWhitePaper-3.2.pdf][Technology White Paper (PDF)]] - The goals, features, advantages, and road map of MiniGUI V3.2.
+- [[http://www.minigui.com/docs/MINIGUI-DATASHEET-3.2.pdf][Datasheet (PDF)]] - The feature list of MiniGUI V3.2.
+- [[MiniGUIUserManualV32][User Manual]] - How to configure, install, and run MiniGUI V3.2.
+- [[MiniGUIReleaseNotesV32][Release Notes]] - Release notes of the official MiniGUI V3.2 releases.
 
 - API References:
-   - [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
-   - [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
-   - [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
-   - [mGUtils 1.2 API Reference](http://www.minigui.com/api_ref/mgutils-1.2.0/procs/index.html) - The API reference for mGUtils V1.2.
-   - [mGPlus 1.4 API Reference](http://www.minigui.com/api_ref/mgplus-1.4.0/procs/index.html) - The API reference for mGUtils V1.4.
-   - [mGEff 1.2 API Reference](http://www.minigui.com/api_ref/mgeff-1.4.0/procs/index.html) - The API reference for mGEff V1.2.
-   - [mGNCS 1.2 API Reference](http://www.minigui.com/api_ref/mgncs-1.2.0/procs/index.html) - The API reference for mGNCS V1.2.
+   - [[http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html][MiniGUI 3.2 API Reference (MiniGUI-Processes mode)]] - The API reference for MiniGUI V3.2 multi-process runmode.
+   - [[http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html][MiniGUI 3.2 API Reference (MiniGUI-Threads mode)]] - The API reference for MiniGUI V3.2 multi-thread runmode.
+   - [[http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html][MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)]] - The API reference for MiniGUI V3.2 standalone runmode.
+   - [[http://www.minigui.com/api_ref/mgutils-1.2.0/procs/index.html][mGUtils 1.2 API Reference]] - The API reference for mGUtils V1.2.
+   - [[http://www.minigui.com/api_ref/mgplus-1.4.0/procs/index.html][mGPlus 1.4 API Reference]] - The API reference for mGUtils V1.4.
+   - [[http://www.minigui.com/api_ref/mgeff-1.4.0/procs/index.html][mGEff 1.2 API Reference]] - The API reference for mGEff V1.2.
+   - [[http://www.minigui.com/api_ref/mgncs-1.2.0/procs/index.html][mGNCS 1.2 API Reference]] - The API reference for mGNCS V1.2.
 
 ## Organization of this Guide
 
 Except this preface, this text is divided into four parts with thirty-nine chapters in total:
 
 - Part I: Foundation of MiniGUI Programming. We describe the foundation concepts of MiniGUI programming in this part.
-   - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01)
-   - [Window and Message](MiniGUIProgGuidePart1Chapter02)
-   - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03)
-   - [Foundation of Control Programming](MiniGUIProgGuidePart1Chapter04)
-   - [Advanced Programming of Control](MiniGUIProgGuidePart1Chapter05)
-   - [Menu](MiniGUIProgGuidePart1Chapter06)
-   - [Scrollbar](MiniGUIProgGuidePart1Chapter07)
-   - [Keyboard and Mouse](MiniGUIProgGuidePart1Chapter08)
-   - [Icon, Cursor, and Caret](MiniGUIProgGuidePart1Chapter09)
-   - [Look-and-feel and UI effects](MiniGUIProgGuidePart1Chapter10)
-   - [Other Programming Topics](MiniGUIProgGuidePart1Chapter11)
-   - [Using mGUtils](MiniGUIProgGuidePart1Chapter12)
+   - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
+   - [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
+   - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03.md)
+   - [Foundation of Control Programming](MiniGUIProgGuidePart1Chapter04.md)
+   - [Advanced Programming of Control](MiniGUIProgGuidePart1Chapter05.md)
+   - [Menu](MiniGUIProgGuidePart1Chapter06.md)
+   - [Scrollbar](MiniGUIProgGuidePart1Chapter07.md)
+   - [Keyboard and Mouse](MiniGUIProgGuidePart1Chapter08.md)
+   - [Icon, Cursor, and Caret](MiniGUIProgGuidePart1Chapter09.md)
+   - [Look-and-feel and UI effects](MiniGUIProgGuidePart1Chapter10.md)
+   - [Other Programming Topics](MiniGUIProgGuidePart1Chapter11.md)
+   - [Using mGUtils](MiniGUIProgGuidePart1Chapter12.md)
 
 - Part II: Using mGNCS. We describe the concepts and the use of main APIs of mGNCS in this part.
-   - [Brief Introduction to mGNCS](MiniGUIProgGuidePart2Chapter01)
-   - [Getting Started](MiniGUIProgGuidePart2Chapter02)
-   - [Renderer and Resources Management](MiniGUIProgGuidePart2Chapter03)
-   - [Foundation Class](MiniGUIProgGuidePart2Chapter04)
-   - [Static Box Series Control Class ](MiniGUIProgGuidePart2Chapter05)
-   - [Button Series Control Class](MiniGUIProgGuidePart2Chapter06)
-   - [Panel and Its Derived Class](MiniGUIProgGuidePart2Chapter07)
-   - [Container and Its Derived Class](MiniGUIProgGuidePart2Chapter08)
-   - [Slider Series Control Class](MiniGUIProgGuidePart2Chapter09)
-   - [Spinner Series Control Class](MiniGUIProgGuidePart2Chapter10)
-   - [Progress Bar Control Class](MiniGUIProgGuidePart2Chapter11)
-   - [Property Sheet Control Class](MiniGUIProgGuidePart2Chapter12)
-   - [Edit Box Series Control Class](MiniGUIProgGuidePart2Chapter13)
-   - [Animation Control Class](MiniGUIProgGuidePart2Chapter14)
-   - [Other Advanced Control Class](MiniGUIProgGuidePart2Chapter15)
-   - [Invisible Control Class](MiniGUIProgGuidePart2Chapter16)
-   - [Other Class](MiniGUIProgGuidePart2Chapter17)
+   - [Brief Introduction to mGNCS](MiniGUIProgGuidePart2Chapter01.md)
+   - [Getting Started](MiniGUIProgGuidePart2Chapter02.md)
+   - [Renderer and Resources Management](MiniGUIProgGuidePart2Chapter03.md)
+   - [Foundation Class](MiniGUIProgGuidePart2Chapter04.md)
+   - [Static Box Series Control Class ](MiniGUIProgGuidePart2Chapter05.md)
+   - [Button Series Control Class](MiniGUIProgGuidePart2Chapter06.md)
+   - [Panel and Its Derived Class](MiniGUIProgGuidePart2Chapter07.md)
+   - [Container and Its Derived Class](MiniGUIProgGuidePart2Chapter08.md)
+   - [Slider Series Control Class](MiniGUIProgGuidePart2Chapter09.md)
+   - [Spinner Series Control Class](MiniGUIProgGuidePart2Chapter10.md)
+   - [Progress Bar Control Class](MiniGUIProgGuidePart2Chapter11.md)
+   - [Property Sheet Control Class](MiniGUIProgGuidePart2Chapter12.md)
+   - [Edit Box Series Control Class](MiniGUIProgGuidePart2Chapter13.md)
+   - [Animation Control Class](MiniGUIProgGuidePart2Chapter14.md)
+   - [Other Advanced Control Class](MiniGUIProgGuidePart2Chapter15.md)
+   - [Invisible Control Class](MiniGUIProgGuidePart2Chapter16.md)
+   - [Other Class](MiniGUIProgGuidePart2Chapter17.md)
 
 - Part III: MiniGUI Graphics Programming. We describe the use and concepts of MiniGUI graphics related APIs in this part.
-   - [Graphics Device Interfaces](MiniGUIProgGuidePart3Chapter01)
-   - [Handling and Rendering of Text](MiniGUIProgGuidePart3Chapter02)
-   - [Advanced GDI Functions](MiniGUIProgGuidePart3Chapter03)
-   - [Using mGPlus for Vector Graphics](MiniGUIProgGuidePart3Chapter04)
+   - [Graphics Device Interfaces](MiniGUIProgGuidePart3Chapter01.md)
+   - [Handling and Rendering of Text](MiniGUIProgGuidePart3Chapter02.md)
+   - [Advanced GDI Functions](MiniGUIProgGuidePart3Chapter03.md)
+   - [Using mGPlus for Vector Graphics](MiniGUIProgGuidePart3Chapter04.md)
 - Part IV: Visual Effects and Animations. We describe how to program for visual effects and animations in this part.
-   - [Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01)
-   - [Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02)
-   - [Using OpenGL ES and/or OpenVG with MiniGUI](MiniGUIProgGuidePart4Chapter03)
+   - [Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01.md)
+   - [Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02.md)
+   - [Using OpenGL ES and/or OpenVG with MiniGUI](MiniGUIProgGuidePart4Chapter03.md)
 
 - Part V: MiniGUI Advanced Programming Topics. We describe the concepts of MiniGUI-Processes related advanced programming and the development of customizing GAL and IAL engine in this part.
-   - [Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01)
-   - [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02)
-   - [GAL and IAL Engines](MiniGUIProgGuidePart5Chapter03)
-   - [Universal Startup API for RTOSes](MiniGUIProgGuidePart5Chapter04)
+   - [Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01.md)
+   - [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md)
+   - [GAL and IAL Engines](MiniGUIProgGuidePart5Chapter03.md)
+   - [Universal Startup API for RTOSes](MiniGUIProgGuidePart5Chapter04.md)
 
 - Part VI: Using MiniGUI Inherent Controsl. We describe the use of various controls provided by MiniGUI core in this part.
-   - [Static Control](MiniGUIProgGuidePart6Chapter01)
-   - [Button Control](MiniGUIProgGuidePart6Chapter02)
-   - [List Box Control](MiniGUIProgGuidePart6Chapter03)
-   - [Edit Box Control](MiniGUIProgGuidePart6Chapter04)
-   - [Combo Box Control](MiniGUIProgGuidePart6Chapter05)
-   - [Menu Button Control](MiniGUIProgGuidePart6Chapter06)
-   - [Progress Bar Control](MiniGUIProgGuidePart6Chapter07)
-   - [Track Bar Control](MiniGUIProgGuidePart6Chapter08)
-   - [Toolbar Control](MiniGUIProgGuidePart6Chapter09)
-   - [Property Sheet Control](MiniGUIProgGuidePart6Chapter10)
-   - [Scroll Window Control](MiniGUIProgGuidePart6Chapter11)
-   - [Scroll View Control](MiniGUIProgGuidePart6Chapter12)
-   - [Tree View Control](MiniGUIProgGuidePart6Chapter13)
-   - [List View Control](MiniGUIProgGuidePart6Chapter14)
-   - [Month Calendar Control](MiniGUIProgGuidePart6Chapter15)
-   - [Spin Box Control](MiniGUIProgGuidePart6Chapter16)
-   - [Cool Bar Control](MiniGUIProgGuidePart6Chapter17)
-   - [Animation Control](MiniGUIProgGuidePart6Chapter18)
-   - [GridView Control](MiniGUIProgGuidePart6Chapter19)
-   - [IconView Control](MiniGUIProgGuidePart6Chapter20)
-   - [Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21)
+   - [Static Control](MiniGUIProgGuidePart6Chapter01.md)
+   - [Button Control](MiniGUIProgGuidePart6Chapter02.md)
+   - [List Box Control](MiniGUIProgGuidePart6Chapter03.md)
+   - [Edit Box Control](MiniGUIProgGuidePart6Chapter04.md)
+   - [Combo Box Control](MiniGUIProgGuidePart6Chapter05.md)
+   - [Menu Button Control](MiniGUIProgGuidePart6Chapter06.md)
+   - [Progress Bar Control](MiniGUIProgGuidePart6Chapter07.md)
+   - [Track Bar Control](MiniGUIProgGuidePart6Chapter08.md)
+   - [Toolbar Control](MiniGUIProgGuidePart6Chapter09.md)
+   - [Property Sheet Control](MiniGUIProgGuidePart6Chapter10.md)
+   - [Scroll Window Control](MiniGUIProgGuidePart6Chapter11.md)
+   - [Scroll View Control](MiniGUIProgGuidePart6Chapter12.md)
+   - [Tree View Control](MiniGUIProgGuidePart6Chapter13.md)
+   - [List View Control](MiniGUIProgGuidePart6Chapter14.md)
+   - [Month Calendar Control](MiniGUIProgGuidePart6Chapter15.md)
+   - [Spin Box Control](MiniGUIProgGuidePart6Chapter16.md)
+   - [Cool Bar Control](MiniGUIProgGuidePart6Chapter17.md)
+   - [Animation Control](MiniGUIProgGuidePart6Chapter18.md)
+   - [GridView Control](MiniGUIProgGuidePart6Chapter19.md)
+   - [IconView Control](MiniGUIProgGuidePart6Chapter20.md)
+   - [Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21.md)
 
 - Appendix: Specifications for MiniGUI Developers. We provide some information for MiniGUI developers in this appendix.
-   - [Code Style and Project Specification](MiniGUIProgGuideAppendixA)
-   - [Specification for the Picture Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB)
-   - [Specification for the mGNCS-compliant Widget Components](MiniGUIProgGuideAppendixD)
+   - [Code Style and Project Specification](MiniGUIProgGuideAppendixA.md)
+   - [Specification for the Picture Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md)
+   - [Specification for the mGNCS-compliant Widget Components](MiniGUIProgGuideAppendixD.md)
 
 ## Obtaining Samples of the Guide
 
@@ -133,9 +133,9 @@ FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The origi
 
 ----
 
-*Next* [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01)
+*Next* [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
 
-[Contents](MiniGUIProgGuideV32)
+[[MiniGUIProgGuideV32][Contents]]
 
 
 ## Comments
