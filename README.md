@@ -1,3 +1,3 @@
-# minigui-docs
+# MiniGUI Docs
 
-Documents for MiniGUI Core and MiniGUI Components
+We maintains the documents for MiniGUI Core and MiniGUI Components in this project.
