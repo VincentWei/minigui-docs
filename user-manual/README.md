@@ -1,10 +1,5 @@
 # MiniGUI User Manual
 
-## Copying
-
-Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
-All rights reserved.
-
 ## Contents
 
 - [Quick Start](MiniGUIUserManualChapter1.md)
@@ -13,3 +8,9 @@ All rights reserved.
 - [Developing MiniGUI Apps on PC](MiniGUIUserManualChapter4.md)
 - [Feature List](MiniGUIDataSheet.md)
 - [FAQs](MiniGUIUserManualAppendixA.md)
+
+## Copying
+
+Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+All rights reserved.
+
