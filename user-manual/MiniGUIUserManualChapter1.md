@@ -120,7 +120,7 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
-[MiniGUI Official Site]: http://www.minigui.com
+[MiniGUI Official Website]: http://www.minigui.com
 [MiniGUI User Manual]: /user-manual/README.md
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
