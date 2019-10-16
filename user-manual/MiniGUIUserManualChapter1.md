@@ -117,6 +117,12 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 ## Build and Run mGUXDemo on Linux
 
+*TBC*
+
+-------------
+
+[Contents](README.md) [Next](MiniGUIUserManualChapter2.md)
+
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [MiniGUI Official Site]: http://www.minigui.com
