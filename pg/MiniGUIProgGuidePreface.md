@@ -19,19 +19,19 @@ This handbook is a complete guide on MiniGUI 3.2 programming, which describes th
 
 The documents related to this guide:
 
-- [[http://www.minigui.com/docs/MiniGUITechWhitePaper-3.2.pdf][Technology White Paper (PDF)]] - The goals, features, advantages, and road map of MiniGUI V3.2.
-- [[http://www.minigui.com/docs/MINIGUI-DATASHEET-3.2.pdf][Datasheet (PDF)]] - The feature list of MiniGUI V3.2.
-- [[MiniGUIUserManualV32][User Manual]] - How to configure, install, and run MiniGUI V3.2.
-- [[MiniGUIReleaseNotesV32][Release Notes]] - Release notes of the official MiniGUI V3.2 releases.
+- [Technology White Paper (PDF)](http://www.minigui.com/docs/MiniGUITechWhitePaper-3.2.pdf) - The goals, features, advantages, and road map of MiniGUI V3.2.
+- [Datasheet (PDF)](http://www.minigui.com/docs/MINIGUI-DATASHEET-3.2.pdf) - The feature list of MiniGUI V3.2.
+- [User Manual](MiniGUIUserManualV32) - How to configure, install, and run MiniGUI V3.2.
+- [Release Notes](MiniGUIReleaseNotesV32) - Release notes of the official MiniGUI V3.2 releases.
 
 - API References:
-   - [[http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html][MiniGUI 3.2 API Reference (MiniGUI-Processes mode)]] - The API reference for MiniGUI V3.2 multi-process runmode.
-   - [[http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html][MiniGUI 3.2 API Reference (MiniGUI-Threads mode)]] - The API reference for MiniGUI V3.2 multi-thread runmode.
-   - [[http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html][MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)]] - The API reference for MiniGUI V3.2 standalone runmode.
-   - [[http://www.minigui.com/api_ref/mgutils-1.2.0/procs/index.html][mGUtils 1.2 API Reference]] - The API reference for mGUtils V1.2.
-   - [[http://www.minigui.com/api_ref/mgplus-1.4.0/procs/index.html][mGPlus 1.4 API Reference]] - The API reference for mGUtils V1.4.
-   - [[http://www.minigui.com/api_ref/mgeff-1.4.0/procs/index.html][mGEff 1.2 API Reference]] - The API reference for mGEff V1.2.
-   - [[http://www.minigui.com/api_ref/mgncs-1.2.0/procs/index.html][mGNCS 1.2 API Reference]] - The API reference for mGNCS V1.2.
+   - [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
+   - [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
+   - [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
+   - [mGUtils 1.2 API Reference](http://www.minigui.com/api_ref/mgutils-1.2.0/procs/index.html) - The API reference for mGUtils V1.2.
+   - [mGPlus 1.4 API Reference](http://www.minigui.com/api_ref/mgplus-1.4.0/procs/index.html) - The API reference for mGUtils V1.4.
+   - [mGEff 1.2 API Reference](http://www.minigui.com/api_ref/mgeff-1.4.0/procs/index.html) - The API reference for mGEff V1.2.
+   - [mGNCS 1.2 API Reference](http://www.minigui.com/api_ref/mgncs-1.2.0/procs/index.html) - The API reference for mGNCS V1.2.
 
 ## Organization of this Guide
 
@@ -135,7 +135,7 @@ FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The origi
 
 *Next* [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
 
-[[MiniGUIProgGuideV32][Contents]]
+[Contents](MiniGUIProgGuideV32)
 
 
 ## Comments
