@@ -17,7 +17,7 @@ All rights reserved.
 
 *Note that this document is currently under development.*
 
-- [Preface](MiniGUIProgGuidePreface)
+- [Preface](MiniGUIProgGuidePreface.md)
 
 - Part I Foundation of MiniGUI Programming
    - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01)
