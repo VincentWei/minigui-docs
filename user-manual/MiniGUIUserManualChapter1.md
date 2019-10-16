@@ -119,9 +119,10 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 *TBC*
 
--------------
+---
 
-[Contents](README.md) [Next](MiniGUIUserManualChapter2.md)
+[Table of Contents](README.md)  
+[Next Chapter](MiniGUIUserManualChapter2.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
