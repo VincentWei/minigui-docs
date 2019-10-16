@@ -72,14 +72,11 @@ for examples:
 * mDolphin, licensed under Apache 2.0, is a full-featured
   WEB/WAP browser, which is developed based on the open source browser
   core WebKit and uses MiniGUI as its underlying graphics support system.
-
 * mGallery, licensed under Apache 2.0, intends to
   provide a total solution for PMP (Portable Multimedia Player),
   which uses MiniGUI as the graphics platform.
-
 * mSpider, licensed under GPL 3.0, intends to provide a
   light-weight MiniGUI-based web browser (HTML 3.2 and part JavaScript)
-
 * mEagle, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
 
