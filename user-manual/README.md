@@ -1,5 +1,7 @@
 # MiniGUI User Manual
 
+How to configure, build, install, and run MiniGUI version 3.2 or later.
+
 ## Contents
 
 - [Quick Start](MiniGUIUserManualChapter1.md)

@@ -1,20 +1,17 @@
-1 Introduction to MiniGUI
-=========================
+# Quick Start
 
-1.1 A Brief Introduction
-------------------------
+## A Brief Introduction
 
 MiniGUI, developed by Beijing FMSoft Technologies Co. Ltd.[^1],
-originates from a world famous free software project, which is initiated
-by Wei Yongming. MiniGUI aims to provide a fast, stable and lightweight
-graphics user interface (GUI) support system for real-time embedded
-systems. MiniGUI is “a cross-operating-system graphics user interface
-support system for embedded devices”, and “an embedded graphics
-middleware”. After over nine years of development since the end of 1998,
-MiniGUI has become a stable and reliable one for widespread application
-in a variety of products and programs; it can run on Linux/uClinux,
-eCos, VxWorks, pSOS, ThreadX, Nucleus, OSE, and even uC/OS-II, also on
-the Win32 platform.
+originates from a famous free and open source software project,
+which is initiated by Wei Yongming. MiniGUI aims to provide a fast,
+stable and lightweight graphics user interface (GUI) support system
+for real-time embedded systems and smart IoT devices. After over 20
+years of development since the end of 1998, MiniGUI has become
+a stable and reliable one for widespread application in a variety
+of products and programs; it can run on Linux/uClinux, ThreadX,
+RT-Thread, RTEMS, FreeRTOS, eCos, VxWorks, pSOS, ThreadX, Nucleus,
+OSE, and even uC/OS-II.
 
 MiniGUI defines a set of lightweight windowing and graphics interfaces
 for applications. Using these interfaces, an application can create
@@ -23,90 +20,90 @@ boxes. MiniGUI provides powerful graphics functions for developers,
 helping to display all kinds of bitmaps and draw complicated graphics in
 windows.
 
-However, the versions that you download freely from our site would be
-only used to develop GPL applications. If you are using MiniGUI for
-developing commercial applications or other software that are not
-covered by the terms listed in GPL, you should have a commercial license
-for MiniGUI from Feynman Software.
+## MiniGUI Components
 
-Currently, MiniGUI V3.0.x provides support for multi-process-based
-operating systems, like Linux; and provides support for traditional
-real-time embedded operating systems, which are multi-thread- or
-multi-task- based. The former provides support for the runtime modes
-MiniGUI-Processes and MiniGUI-Threads, and the later provides support
-for the runtime mode MiniGUI-Threads.
+Besides MiniGUI Core, which provides windowing and graphics interfaces
+as well as a lot of standard controls (toolkit), FMSoft also releases
+some components for easy development of MiniGUI apps:
 
-The official release of MiniGUI and its components source code package,
-sample package, etc., can be downloaded from the MiniGUI official
-website[^2].
+- `mGUtils` is a MiniGUI component which contains miscellaneous utilities
+  like `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
 
-In addition, the complete source code of MiniGUI and its components is
-now hosted on GitHub, which contains the source code repository for the
-under development (yet to be released) MiniGUI and its components[^3].
+- `mGPlus` is a MiniGUI component which provides support for advanced graphics
+    functions like path, gradient, anti-aliase stretch, and color combination.
 
-MiniGUI 3.0 is divided into a series of products according to the
-operating systems, please see Table 1.1. Table 1.1 also illustrates the
-runtime mode(s) provided by the products.
+- `mGEff` is a MiniGUI component, which provides an animation framework for
+   MiniGUI app. It also provides some popular UI special effects.
 
-Table 1.1 MiniGUI os and runtime modes supported
+- `mGNCS` is a MiniGUI component, which provides a new control set for
+   MiniGUI app.
 
-  ------------------------------------------------------------
-  **Products and versions**    **Runtime mode(s) supported**
-  ---------------------------- -------------------------------
-  MiniGUI 3.0.x for Linux      MiniGUI-Processes
-                               
-                               MiniGUI-Threads
-                               
-                               MiniGUI-Standalone
+- `mGNCS4Touch` provides some new controls, which are compliant to the new
+   control specification of mGNCS, for devices with touch screens.
 
-  MiniGUI 3.0.x for uClinux    MiniGUI-Threads
-                               
-                               MiniGUI-Standalone
+There are also some legacy MiniGUI components. But we will not maintain these
+components since MiniGUI v3.2.0:
 
-  MiniGUI 3.0.x for VxWorks    MiniGUI-Threads
-                               
-                               MiniGUI-Standalone
+* mGi: An input method component for MiniGUI. This component provides
+  some typical input methods (such as soft keyboard, hand-writing, and
+  predict text input for mobile phone) for MiniGUI apps.
 
-  MiniGUI 3.0.x for ThreadX    MiniGUI-Threads
-                               
-                               MiniGUI-Standalone
+* mGp: A printing component for MiniGUI. By using mGp, you can print
+  out the graphics created by MiniGUI app to general-purpose printers.
 
-  MiniGUI 3.0.x for uC/OS-II   MiniGUI-Threads
-                               
-                               MiniGUI-Standalone
-  ------------------------------------------------------------
+* mG3d: A simple three-dimension component for MiniGUI. This component
+  provides a simple 3D API for app. You can use mG3d to create simple
+  3D UI.
 
-Except for the difference of runtime modes supported, these two versions
-have the almost same features.
+## Source Tarballs and Repos
 
-For the detailed description about runtime modes and MiniGUI features,
-please refer to *MiniGUI Technology White paper for V3.0* and *Datasheet
-for MiniGUI V3.0*.
+The source code tarballs of MiniGUI and its components can be
+downloaded from MiniGUI official website:
 
-1.2 Documents for MiniGUI
--------------------------
+<http://www.minigui.com>
 
-Except for this manual, Feynman Software have provided the following
-documents available through the official website of MiniGUI download or
-visit[^4]:
+FMSoft also releases some open source apps for MiniGUI on the site above,
+for examples:
 
-*MiniGUI Programming Guide* Version 3.0-5. This guide describes in
-detail the foundation knowledge of MiniGUI on developing embedded
-application software, technical documents and development skills, the
-content of which involves various aspects of MiniGUI programming,
+* mDolphin, licensed under Apache 2.0, is a full-featured
+  WEB/WAP browser, which is developed based on the open source browser
+  core WebKit and uses MiniGUI as its underlying graphics support system.
+
+* mGallery, licensed under Apache 2.0, intends to
+  provide a total solution for PMP (Portable Multimedia Player),
+  which uses MiniGUI as the graphics platform.
+
+* mSpider, licensed under GPL 3.0, intends to provide a
+  light-weight MiniGUI-based web browser (HTML 3.2 and part JavaScript)
+
+* mEagle, licensed under GPL 3.0, is an embedded GIS development platform
+  which addresses the needs of map browse, query, analysis, etc
+
+FMSoft had created the public repositories for MiniGUI core, MiniGUI
+components, and other open source apps on GitHub. You can visit them on:
+
+<https://github.com/VincentWei>
+
+## Documents for MiniGUI
+
+FMSoft now maintains the documents of MiniGUI on GitHub as well:
+
+<https://github.com/VincentWei/minigui-docs>
+
+We also maintain some supplementary documents on MiniGUI Wiki:
+
+<https://github.com/VincentWei/minigui/wiki>
+
+This is the user manual for how to configure, build, and run MiniGUI.
+Except for this manual, FMSoft also provides the following documents:
+
+- [MiniGUI Programming Guide]: This guide describes in
+detail the foundation knowledge of MiniGUI on developing MiniGUI apps.
+The content of which involves various aspects of MiniGUI programming,
 include message looping, window procedure, dialog box, controls,
 graphics interfaces, and so on.
-
-Datasheet for MiniGUI V3.0.x. MiniGUI feature table.
-
-*MiniGUI API Reference Manual* for MiniGUI Version 3.0. This manual
-describes the APIs of MiniGUI V3.0.x (MiniGUI-Processes runtime mode) in
-detail[^5].
-
-*MiniGUI Technology White paper* *for V3.0.*
-
-MiniGUI developers also maintain a wiki[^6] site to maintain the latest
-version of the above documents, please visit.
+- [MiniGUI API Reference Manuals]: The online API reference manuals for
+MiniGUI core and MiniGUI components.
 
 1.3 MiniGUI Source Code and Samples
 -----------------------------------
@@ -133,13 +130,13 @@ libjpeg, libpng, zlib and other libraries.
 1.4 Optional Components of MiniGUI
 ----------------------------------
 
-Except for the MiniGUI product, Feynman Software also provides some
+Except for the MiniGUI product, FMSoft also provides some
 MiniGUI component products and other MiniGUI applications such as
-mSpider. Figure 1.1 shows the product line of Feynman Software.
+mSpider. Figure 1.1 shows the product line of FMSoft.
 
 ![](media/image2.jpeg){width="4.760884733158355in"
 height="2.801240157480315in"}\
-Figure 1.1 Product line of Feynman Software
+Figure 1.1 Product line of FMSoft
 
 mGUtils provides users with several functional templates that allow
 users to write code for commonly used functions.
@@ -157,7 +154,7 @@ MiniGUI to develop an animation interface for the main window animation
 based on double buffering.
 
 mGNCS - In the development of miniStudio, in order to the WYSWYG design
-of visual graphical interface, Feynman Software has developed a new set
+of visual graphical interface, FMSoft has developed a new set
 of controls based on the existing interface of MiniGUI. The new control
 set introduced by miniStudio is based on the original MiniGUI control
 set. It is distinguished from MiniGUI Intrinsic Control Set and is
@@ -183,7 +180,7 @@ that mGp only provides the support for Linux operating system.
 mG3d is a 3D rendering library for applications based on MiniGUI. By
 using this library, you can render 3D objects in your applications.
 
-Except for these three component products above, Feynman Software also
+Except for these three component products above, FMSoft also
 provides MiniGUI SDK for Win32. By using MiniGUI SDK for Win32, you can
 run MiniGUI and its applications on Win32 platform. You can even write
 and debug MiniGUI applications by using Visual Studio IDE tool. However,
@@ -213,7 +210,7 @@ to the business and greatly reduce the R & D costs of MiniGUI related
 applications and provide better products.
 
 miniStudio is a non-open source commercial software product developed by
-Feynman Software. It provides two versions of Windows and Ubuntu Linux.
+FMSoft. It provides two versions of Windows and Ubuntu Linux.
 You can visit MiniGUI's official website to download the product for
 evaluation or trial license.
 
@@ -223,3 +220,8 @@ evaluation or trial license.
 This manual mainly describes the compile-time configuration options and
 the runtime configuration options of MiniGUI.
 
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Site]: https://www.minigui.com
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
