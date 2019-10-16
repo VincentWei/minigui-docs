@@ -1,6 +1,7 @@
 # MiniGUI User Manual
 
-How to configure, build, install, and run MiniGUI version 3.2 or later.
+This manual mainly describes the compile-time configuration options and
+the runtime configuration options of MiniGUI version 3.2 or later.
 
 ## Contents
 

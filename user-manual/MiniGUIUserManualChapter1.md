@@ -1,8 +1,5 @@
 # Quick Start
 
-This manual mainly describes the compile-time configuration options and
-the runtime configuration options of MiniGUI.
-
 ## A Brief Introduction
 
 MiniGUI, developed by [FMSoft Technologies],
@@ -117,8 +114,6 @@ MiniGUI core and MiniGUI components.
 We also maintain some supplementary documents on MiniGUI Wiki:
 
 <https://github.com/VincentWei/minigui/wiki>
-
-## MiniGUI Components
 
 ## Build and Run mGUXDemo on Linux
 
