@@ -4,8 +4,8 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
 
 ## Contents
 
-- [MiniGUI User Manual](um/README.md)
-- [MiniGUI Programming Guide](pg/README.md)
+- [MiniGUI User Manual](user-manual/README.md)
+- [MiniGUI Programming Guide](programming-guide/README.md)
 
 ## Current Status
 
