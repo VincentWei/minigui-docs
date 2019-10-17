@@ -175,6 +175,8 @@ The following figures are some screenshots of mGUXDemo.
 ![mGUXDemo Screenshot 3](figures/mguxdemo-3.png)
 ![mGUXDemo Screenshot 4](figures/mguxdemo-4.png)
 ![mGUXDemo Screenshot 5](figures/mguxdemo-5.png)
+![mGUXDemo Screenshot 6](figures/mguxdemo-6.png)
+![mGUXDemo Screenshot 6](figures/mguxdemo-7.png)
 
 ### Building MiniGUI 4.0
 
