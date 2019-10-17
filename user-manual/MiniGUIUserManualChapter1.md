@@ -61,6 +61,32 @@ these components since MiniGUI v3.2.0:
 
 ### Source Tarballs and Repos
 
+The list of all software of MiniGUI is as follow:
+
+- MiniGUI core and components:
+   * `libminigui`: MiniGUI Core.
+   * `libmgutils`: mGUtils component.
+   * `libmgplus`: mGPlus component.
+   * `libmgeff`: mGEff component.
+   * `libmgncs`: mGNCS component.
+   * `libmgncs4touch`: mGNCS4Touch component.
+   * `minigui-res`: the resource tarball including contains fonts, cursors, icons, and bitmaps used by MiniGUI.
+   * `mg-tests`: The unit tests for MiniGUI core (since 4.0.0).
+- Samples and Demos:
+   * `mg-samples`: The samples for MiniGUI and components.
+   * `mguxdemo`: mGUXDemo is the comprehensive demonstration for MiniGUI core and components.
+   * `mg-demos`: A set of demos as supplements of mGUXDemo.
+- Tools and Third Party Libraries
+   * `gvfb`: the virtual frame buffer Gtk version.
+   * `mg-tools`: The tools for fonts conversion and in-core resource generation.
+   * libjpeg v7: MiniGUI uses this library to decode JPEG image files.
+   * libpng v1.2.x: MiniGUI uses this library to decode PNG image files.
+   * libpng v1.6.x: MiniGUI uses this library to decode PNG image files (MiniGUI Core 4.0.0 or later).
+   * zlib V1.2.x: libpng uses the compression algorithm providing by this library.
+   * freetype v2.6.x: MiniGUI uses this library to render TrueType/OpenType/Type1 fonts.
+   * harfbuzz v2.5.x: MiniGUI Core 4.0.0 or later uses this library to shape complex scripts.
+   * chipmunk v5.3.1: mGNCS4Touch uses this library for animation timing.
+
 The source code tarballs of MiniGUI and its components can be
 downloaded from the download zone of [MiniGUI Official Website]:
 
@@ -246,7 +272,7 @@ update them. You can run `clean-build-all.sh` to uninstall, clean,
 and re-install them.
 
 Note that you might need to run `ldconfig` to refresh the shared libraries cache
-when running `mguxdemo`.
+before running `mguxdemo`.
 
 #### Commands to build dependencies
 
