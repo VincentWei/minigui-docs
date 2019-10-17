@@ -1,6 +1,6 @@
 # Building MiniGUI
 
-- [Compile-time Macros](#compile-time-macros)
+- [Introduction](#introduction)
 - [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
 - [Configuration Options and Macros](#configuration-options-and-macros)
@@ -20,6 +20,8 @@
    * [Dependent libraries and tools](#dependent-libraries-and-tools)
    * [In GNU environment](in-gnu-environment)
    * [In Non-GNU environment](in-non-gnu-environment)
+
+## Introduction
 
 In general, embedded systems are special systems, and they have
 various requirements for different applications. For example, some
@@ -44,11 +46,8 @@ Generally, we can configure MiniGUI core in the following aspects:
 
 In this chapter, we will show you the compile-time configuration options
 of MiniGUI core and the ways to configure it, in order that you can build
-a most suitable MiniGUI for your target devices.
-
-We will also show you how to build MiniGUI core too.
-
-## Compile-time Macros
+a most suitable MiniGUI for your target devices. We will also show you how
+to build MiniGUI core too.
 
 A file named `mgconfig.h.in` is located in the root directory of
 MiniGUI source tree. There are many C language macros listed in the file,
