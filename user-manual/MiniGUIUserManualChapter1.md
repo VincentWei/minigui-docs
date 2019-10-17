@@ -255,7 +255,7 @@ your information:
         $ make; sudo make install
         $ cd ..
 
-1. Make and install `chipmunk` library (DO NOT use the chipmunk-dev package
+1. Make and install `chipmunk` library (DO NOT use the `chipmunk-dev` package
    which is provided by Ubuntu):
 
         $ cd 3rd-party/chipmunk
@@ -263,7 +263,7 @@ your information:
         $ make; sudo make install
         $ cd ../..
 
-1. Make and install `harfbuzz` library (DO NOT use the harfbuzz-dev package
+1. Make and install `harfbuzz` library (DO NOT use the `harfbuzz-dev` package
    which is provided by Ubuntu):
 
         $ cd 3rd-party/harfbuzz
