@@ -27,23 +27,24 @@ windows.
 
 MiniGUI consists of MiniGUI Core and multiple MiniGUI components.
 
-MiniGUI Core provides windowing and graphics interfaces
-as well as a lot of standard controls (toolkit), Besides MiniGUI Core,
+MiniGUI Core provides the basic windowing and graphics interfaces
+as well as a lot of standard controls (toolkit). Besides MiniGUI Core,
 FMSoft also releases some components for easy development of MiniGUI apps:
 
-- `mGUtils` is a MiniGUI component which contains miscellaneous utilities
+- `mGUtils` contains miscellaneous utilities
   like `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
-- `mGPlus` is a MiniGUI component which provides support for advanced graphics
-  functions like path, gradient, anti-aliase stretch, and color combination.
-- `mGEff` is a MiniGUI component, which provides an animation framework for
+- `mGPlus` provides support for 2D vector
+  graphics functions like path, gradient, anti-aliased stretch,
+  and color combination.
+- `mGEff` provides an animation framework for
   MiniGUI app. It also provides some popular UI special effects.
-- `mGNCS` is a MiniGUI component, which provides a new control set for
+- `mGNCS` provides a new control set for
   MiniGUI app.
-- `mGNCS4Touch` provides some new controls, which are compliant to the new
-   control specification of mGNCS, for devices with touch screens.
+- `mGNCS4Touch` provides some new controls, which are compliant to
+  the control specification of mGNCS, for devices with touch screens.
 
-There are also some legacy MiniGUI components. But we no longer maintain these
-components since MiniGUI v3.2.0:
+There are also some legacy MiniGUI components. But we no longer maintain
+these components since MiniGUI v3.2.0:
 
 * mGi: An input method component for MiniGUI. This component provides
   some typical input methods (such as soft keyboard, hand-writing, and
@@ -61,7 +62,7 @@ downloaded from the download zone of [MiniGUI Official Website]:
 
 <http://www.minigui.com/en/download>
 
-FMSoft had created the public repositories for MiniGUI core, MiniGUI
+FMSoft had created the public repositories for MiniGUI core and
 components on GitHub. You can visit them on:
 
 <https://github.com/VincentWei>
@@ -92,7 +93,7 @@ and others. Please refer to:
 
 ### Documents
 
-FMSoft now maintains the documents of MiniGUI on GitHub as well:
+FMSoft now maintains the documents of MiniGUI on GitHub:
 
 <https://github.com/VincentWei/minigui-docs>
 
