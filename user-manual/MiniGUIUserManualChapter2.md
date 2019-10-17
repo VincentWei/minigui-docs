@@ -29,7 +29,7 @@ We will also show you how to build MiniGUI core too.
 
 ## Compile-time Configuration Options
 
-A file named **mgconfig.h** is located in the root directory of
+A file named `mgconfig.h` is located in the root directory of
 MiniGUI source code. A lot of ANSI C macros are defined in this file.
 We can configure MiniGUI by enabling or disabling these macros.
 Generally, we can modify this file in order to configure MiniGUI. You
@@ -37,64 +37,53 @@ must recompile MiniGUI if this file is modified. After that you should
 install the header files and the libraries on your system. If your
 applications are static linking to MiniGUI, you should rebuild your
 applications, too. Please note that you should placed the
-**mgconfig.h** in a MiniGUI header file directory which your compiler
+`mgconfig.h` in a MiniGUI header file directory which your compiler
 can find it and overwrite the old one.
 
-In general, the content of **mgconfig.h** is as follow:
+In general, the content of `mgconfig.h` is as follow:
 
 ```cpp
 ...
 /* Define if compile for VxWorks operating system */
-
 #define __VXWORKS__ 1
 
 /* Define if include advanced 2D graphics APIs */
-
 #define _MGHAVE_ADV_2DAPI 1
 
 /* Define if support Arabic charset */
-
 /* #undef _MGCHARSET_ARABIC */
 
 /* Define if include the 2440 IAL engine */
-
 /* #undef _MGIAL_2440 */
 
 /* Define if include the automatic IAL engine */
-
 /* #undef _MGIAL_AUTO */
 
 /* Define if support BIG5 charset */
-
 #define _MGCHARSET_BIG5 1
 
 /* Define if include clipboard support */
-
 #define _MGHAVE_CLIPBOARD 1
 ...
 
 ```
 
-Above produces is a piece of **mgconfig.h**. Macro \_\_VXWORKS\_\_ is
-defined in this file and this macro will open the VxWorks support code
-in the MiniGUI source code. Macro \_MGHAVE\_CLIPBOARD is defined in this
-file, too. It will open the clipboard support code. Macro \_MGIAL\_AUTO
-is not defined in this file and MiniGUI will not support for Auto input
+Above code is a snippet of `mgconfig.h`. The macro `__VXWORKS__` is
+defined in this file and this macro will enable the support code for VxWorks
+in the MiniGUI source code. The macro `_MGHAVE_CLIPBOARD` is defined in this
+file, it will enable the support for clipboard. Macro `_MGIAL_AUTO`
+is not defined in this file and MiniGUI will not support the `auto` input
 engine.
 
-The attention, in **mgconfig.h** also contains other some macro
-definitions, for instance MiniGUI version number and so on. Please
-maintain these macro definitions to be invariable; do not have
-voluntarily to revise these macro definitions.
+Note that `mgconfig.h` also contains other macro
+definitions, for instance, the MiniGUI version number and so on. Please
+do not change these macro definitions manually.
 
-The handwork revises **mgconfig.h** the procedure extremely tediously,
-moreover is easy to make a mistake. If you use the GNU development
-environment, then may use the configure script to configure MiniGUI. The
-following section introduces how to use the configure script
-automatically to produce the **mgconfig.h** file in the GNU development
-environment.
+It will be very hard to modify `mgconfig.h` manually to meet your needs.
+When you use the GNU GCC toolchain, you should use the `configure` script
+to configure MiniGUI and generate `mgconfig.h` file automatically.
 
-### Using Configure Script in GNU Development Environment
+### Configuring MiniGUI in GNU Development Environment
 
 It’s known that we can conveniently maintain the program package using
 makefile. Through makefile, we may compile, clean or install the
@@ -120,7 +109,7 @@ need to install Automake/Autoconf tool itself, but you just run the
 configure script in the MiniGUI source code package then to complete the
 configuration.\
 If you run the configure script, it can produce not only makefile, but
-also **mgconfig.h** file base on each of option in the configure script.
+also `mgconfig.h` file base on each of option in the configure script.
 Afterwards, we just need run make and make install commands to compile
 MiniGUI, and then MiniGUI library and header files will be installed to
 the directory, which you assigned.
@@ -132,7 +121,7 @@ running on Windows and so on, It may apply to MiniGUI product version
 like Linux, uClinux, eCos.**
 
 There are lot of options in the MiniGUI configure script, and each
-configuration option corresponds a certain macro in **mgconfig.h**. If
+configuration option corresponds a certain macro in `mgconfig.h`. If
 you enable an option when run configure, then the correspondence macro
 will be defined; otherwise can’t define this macro. Run the following
 command.
@@ -232,7 +221,6 @@ Optional Features:
   --enable-detaildebug     detailed debug info <default=no>
   --enable-tracemsg        trace messages of MiniGUI <default=no>
   --enable-msgstr          include symbol name of message <default=no>
-  --enable-standalone      build MiniGUI-Standalone version <default=no>
   --enable-incoreres       use incore resource instead file IO to initialize MiniGUI <default=no>
   --enable-miniguientry    use minigui_entry function in MiniGUI <default=no>
   --enable-fixedmath       include fixed math routines <default=yes>
@@ -427,7 +415,7 @@ control which function codes were supported when compile MiniGUI. For
 example, run:
 
 ```
-user$ ./configure --enable-procs --with-ttfsupport=ft2
+user$ ./configure --with-runmode=sa --enable-incoreres
 ```
 
 You may configure MiniGUI that is the Freetype2 Truetype font support
@@ -437,38 +425,38 @@ and the MiniGUI-Process runtime mode. If you run:
 user$ ./configure --disable-cursor --disable-screensaver
 ```
 
-Then configure MiniGUI that is disable the cursor and default screen
+Then configure MiniGUI that is disable the cursor and the default screen
 saver function.
 
-**./configure** command will produce a Makefile with default
+`./configure` command will produce a Makefile with default
 configuration options. Each compiling configuration option has provided
-a default setting in its explanation: &lt;**default=yes**&gt; (Expressed
+a default setting in its explanation: `<default=yes>`; (Expressed
 this compiling configuration option is enabled default) or
-&lt;**default=no**&gt; (Expressed this compiling configuration option is
+`<default=no>`; (Expressed this compiling configuration option is
 disabled default).
 
 Besides the MiniGUI has defined configuration options, the configure
 script also has some important general compiling configuration options.
 
-#### 1) Prefix Option
+#### Prefix Option
 
 This compiling configuration option assigns the MiniGUI library where to
-install. The default installation path is **/usr/local**. If you run:
+install. The default installation path is `/usr/local`. If you run:
 
 ```
 user$ ./configure --prefix=/home/test
 ```
 
-After executing ‘make install’ command, the function library, header
-files and reference document are installed in **/home/test/lib**,
-**/home/test/include** and **/home/test/man** directory.
+After executing `make install` command, the function library, header
+files and reference document are installed in `/home/test/lib`,
+`/home/test/include` and `/home/test/man` directory.
 
 #### Cross Compiling Options
 
-The compiling configuration options **--build**, **--host** and
-**--target** are very important to cross compile applications. For
-example, if you use the arm-linux cross compiling toolchain, then you
-may assign option like **--build**, thus let the configure script
+The compiling configuration options `--build`, `--host` and
+`--target` are very important to cross compile applications. For
+example, if you use the `arm-linux` cross compiling toolchain, then you
+may assign option like `--build`, thus let the configure script
 produces the makefile file used to complete the arm-linux’s cross
 compiling:
 
@@ -480,9 +468,9 @@ user$ CC=arm-linux-gcc ./configure
     --target=arm-unknown-linux
 ```
 
-In above command, the **--prefix** option is used to set the installing
+In above command, the `--prefix` option is used to set the installing
 MiniGUI configuration file, the function library and the header files
-directory’s prefix, when you executed **make install** command, MiniGUI
+directory’s prefix, when you executed `make install` command, MiniGUI
 configuration file, the library file and header files will be installed
 in the following position:
 
@@ -494,7 +482,7 @@ in the following position:
 
 The two configuration options assign whether generating static function
 library or dynamic function library. If you do not need to produce the
-static library, then you may use the **--disable-static** configuration
+static library, then you may use the `--disable-static` configuration
 option, it will take less time to compile the library than default.
 
 There are several predefined targets in the makefile, which produced by
@@ -504,34 +492,33 @@ follow:
 The function storehouse, a document and so on are installed in the way,
 which assigns
 
-make all: Produce the target set. Only run make command also to be
+- `make all`: Produce the target set. Only run make command also to be
 allowed, this time can start to compile the source code, then link it
 and produces the executable file or function library.
-
 - `make clean`: Clean the previous object files(\*.o).
 - `make install`: Install the function library, header files and so on to
 the directory which you assigned.
 
-### Configuration under Non-GNU environment
+### Configuring MiniGUI in Non-GNU Environment
 
 A majority of traditional embedded operating system supported by
 MiniGUI, user usually can use the integrated development environment
 running on Windows platform, such as Tornado, ADS, etc. Because these
 environment provide the development tools chain that is not GNU
 compatible, therefore, we are unable to use the configure script that is
-described in section 2.1.1 to produce makefile and the **mgconfig.h**
+described in section 2.1.1 to produce makefile and the `mgconfig.h`
 file automatically. In this kind of situation, we need voluntarily to
-revise the **mgconfig.h** file to complete the MiniGUI compiling
+revise the `mgconfig.h` file to complete the MiniGUI compiling
 configuration. Fortunately, Feynman Software already prepares the
-**mgconfig.h** file for the majority operating system, which can
+`mgconfig.h` file for the majority operating system, which can
 directly be used (store in MiniGUI source code **build/** directory);
 moreover Feynman Software also prepared the corresponding development
 environment project file. You may directly manually revise the
-**mgconfig.h** file based on these project environments, and compile the
+`mgconfig.h` file based on these project environments, and compile the
 MiniGUI library. For more detail information, please refer to the
 section 2.4.2.
 
-## Detailed Description on Compiling, Configuration Options of MiniGUI
+## Configuration Options and Macros
 
 In this chapter, we will give detailed description on all compiling,
 configuration options of MiniGUI. MiniGUI has many compiling,
@@ -551,7 +538,7 @@ configuration option.
 
 In the next chapter, we will give configuration option of MiniGUI by
 classify. We will description on configuration names of configure script
-and macro names in the **mgconfig.h** file.
+and macro names in the `mgconfig.h` file.
 
 ### Operating System Options and Macros
 
@@ -565,7 +552,7 @@ user$ ./configure --with-osname=uclinux
 ```
 
 If you specify an operating system, the corresponding macro was defined
-in **mgconfig.h**. For some operating systems, we will open other some
+in `mgconfig.h`. For some operating systems, we will open other some
 macros. Table 2.1 lists relevant options and macros of operating
 systems.
 
@@ -574,13 +561,13 @@ Table 2.1 operating systems relevant options and macros
   ----------------------------------------------------------------------------------------------------------------------------------------------
   Configuration options   Macro                      Other relevant macro   Memo
   ----------------------- -------------------------- ---------------------- --------------------------------------------------------------------
-  --with-osname=linux     \_\_LINUX\_\_                                     Default value, for Linux operating system
+  --with-osname=linux     `__LINUX__`                                     Default value, for Linux operating system
 
-  --with-osname=uclinux   \_\_uClinux\_\_                                   For uClinux operating system
+  --with-osname=uclinux   `__uClinux__`                                   For uClinux operating system
 
-  --with-osname=ecos      \_\_ECOS\_\_               \_\_NOUNIX\_\_         For eCos operating system
+  --with-osname=ecos      `__ECOS__`               `__NOUNIX__`         For eCos operating system
 
-  --with-osname=ucos2     \_\_UCOSII\_\_             \_\_NOUNIX\_\_         For uC/OS-II operating system
+  --with-osname=ucos2     `__UCOSII__`             `__NOUNIX__`         For uC/OS-II operating system
                                                                             
                                                      \_INCORE\_RES          
                                                                             
@@ -590,21 +577,21 @@ Table 2.1 operating systems relevant options and macros
                                                                             
                                                      \_USE\_OWN\_PTHREAD    
 
-  --with-osname=swlinux   \_\_WINBOND\_SWLINUX\_\_                          For SWLinux operating system, mutation of uClinux operating system
+  --with-osname=swlinux   `__WINBOND\_SWLINUX__`                          For SWLinux operating system, mutation of uClinux operating system
 
-  --with-osname=vxworks   \_\_VXWORKS\_\_            \_\_NOUNIX\_\_         For VxWorks operating system
+  --with-osname=vxworks   `__VXWORKS__`            `__NOUNIX__`         For VxWorks operating system
                                                                             
                                                      \_USE\_OWN\_STDIO      
                                                                             
                                                      \_USE\_OWN\_PTHREAD    
 
-  --with-osname=cygwin    \_\_CYGWIN\_\_             \_\_NOUNIX\_\_         For cygwin environment
+  --with-osname=cygwin    `__CYGWIN__`             `__NOUNIX__`         For cygwin environment
 
-  --with-osname=win32     WIN32                      \_\_NOUNIX\_\_         For Win32 platform
+  --with-osname=win32     WIN32                      `__NOUNIX__`         For Win32 platform
 
-  --with-osname=darwin    \_\_DARWIN\_\_             \_\_NOUNIX\_\_         For MacOS X operating system
+  --with-osname=darwin    `__DARWIN__`             `__NOUNIX__`         For MacOS X operating system
 
-  --with-osname=threadx   \_\_THREADX\_\_            \_\_NOUNIX\_\_         For ThreadX operating system
+  --with-osname=threadx   `__THREADX__`            `__NOUNIX__`         For ThreadX operating system
                                                                             
                                                      \_INCORE\_RES          
                                                                             
@@ -614,7 +601,7 @@ Table 2.1 operating systems relevant options and macros
                                                                             
                                                      \_USE\_OWN\_PTHREAD    
 
-  --with-osname=nucleus   \_\_NUCLEUS\_\_            \_\_NOUNIX\_\_         For Nucleus operating system
+  --with-osname=nucleus   `__NUCLEUS__`            `__NOUNIX__`         For Nucleus operating system
                                                                             
                                                      \_INCORE\_RES          
                                                                             
@@ -624,13 +611,13 @@ Table 2.1 operating systems relevant options and macros
                                                                             
                                                      \_USE\_OWN\_PTHREAD    
 
-  --with-osname=ose       \_\_OSE\_\_                \_\_NOUNIX\_\_         For OSE operating system
+  --with-osname=ose       `__OSE__`                `__NOUNIX__`         For OSE operating system
                                                                             
                                                      \_INCORE\_RES          
                                                                             
                                                      \_USE\_OWN\_PTHREAD    
 
-  --with-osname=psos      \_\_PSOS\_\_               \_\_NOUNIX\_\_         For pSOS operating system
+  --with-osname=psos      `__PSOS__`               `__NOUNIX__`         For pSOS operating system
                                                                             
                                                      \_INCORE\_RES          
                                                                             
@@ -660,18 +647,18 @@ Table 2.2 target board related options and macros
 
   Configuration options       Macro                      Memo
   --------------------------- -------------------------- ----------------------------------------------------------
-  --with-targetname=stb810    \_\_TARGET\_STB810\_\_     Philips STB810 development board base on Linux
-  --with-targetname=vfanvil   \_\_TARGET\_VFANVIL\_\_    VisualFone development board base on ThreadX
-  --with-targetname=vxi386    \_\_TARGET\_VXI386\_\_     i386 target base on VxWorks
-  --with-targetname=qvfb      \_\_TARGET\_QVFB\_\_       Include qvfb sub-driver of Shadow engine base on Linux
-  --with-targetname=wvfb      \_\_TARGET\_WVFB\_\_       Include wvfb sub-driver of Shadow engine base on Windows
-  --with-targetname=fbcon     \_\_TARGET\_FBCON\_\_      Include fbcon sub-driver of Shadow engine base on Linux
-  --with-targetname=mx21      \_\_TARGET\_MX21\_\_       MX21 development board base on OSE
-  --with-targetname=c33l05    \_\_TARGET\_C33L05\_\_     Epson C33L05 development board base on axLinux
-  --with-targetname=bfin      \_\_TARGET\_BLACKFIN\_\_   BlackFin537 development board base on uClinux
-  --with-targetname=vxppc     \_\_TARGET\_PPC\_\_        PowerPC target base on VxWorks
-  --with-targetname=monaco    \_\_TARGET\_MONACO\_\_     monaco development board base on Nucleus
-  --with-targetname=unkown    \_\_TARGET\_UNKNOWN\_\_    Unknown development board: default value
+  --with-targetname=stb810    `__TARGET\_STB810__`     Philips STB810 development board base on Linux
+  --with-targetname=vfanvil   `__TARGET\_VFANVIL__`    VisualFone development board base on ThreadX
+  --with-targetname=vxi386    `__TARGET\_VXI386__`     i386 target base on VxWorks
+  --with-targetname=qvfb      `__TARGET\_QVFB__`       Include qvfb sub-driver of Shadow engine base on Linux
+  --with-targetname=wvfb      `__TARGET\_WVFB__`       Include wvfb sub-driver of Shadow engine base on Windows
+  --with-targetname=fbcon     `__TARGET\_FBCON__`      Include fbcon sub-driver of Shadow engine base on Linux
+  --with-targetname=mx21      `__TARGET\_MX21__`       MX21 development board base on OSE
+  --with-targetname=c33l05    `__TARGET\_C33L05__`     Epson C33L05 development board base on axLinux
+  --with-targetname=bfin      `__TARGET\_BLACKFIN__`   BlackFin537 development board base on uClinux
+  --with-targetname=vxppc     `__TARGET\_PPC__`        PowerPC target base on VxWorks
+  --with-targetname=monaco    `__TARGET\_MONACO__`     monaco development board base on Nucleus
+  --with-targetname=unkown    `__TARGET\_UNKNOWN__`    Unknown development board: default value
 
 ### 2.2.3 Runtime Mode Related Options and Macros
 
@@ -685,11 +672,11 @@ and macros.
 
 Table 2.3 runtime mode related options and macros
 
-  Configuration options   Macro                Memo                                                                  Default
-  ----------------------- -------------------- --------------------------------------------------------------------- ----------
-  not assigned            \_MGRM\_THREADS      MiniGUI-Threads runtime mode                                          Enabled
-  procs                   \_MGRM\_PROCESSES    MiniGUI-Processes runtime mode, support Linux operating system only   Disabled
-  standalone              \_MGRM\_STANDALONE   MiniGUI-Standalone runtime mode, support all operating system.        Disabled
+| Configuration options | Macro              | Memo                                                                | Default  |
+|-----------------------|--------------------|---------------------------------------------------------------------|----------|
+| not assigned          | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode                                        | Enabled  |
+| procs                 | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only | Disabled |
+| standalone            | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system.      | Disabled |
 
 ### 2.2.4 Graphics Engine Related Options and Macros
 
@@ -1234,7 +1221,7 @@ configurations and macros
   ownstdio               \_MGUSE\_OWN\_STDIO     Use MiniGUI implemented stdio format input and output function family   Disable
   ownpthread             \_MGUSE\_OWN\_PTHREAD   Use MiniGUI implemented thread function family                          Disable
 
-Otherwise, you must define this macro: \_\_MINIGUI\_LIB\_\_ , when you
+Otherwise, you must define this macro: `__MINIGUI\_LIB__` , when you
 use yourself makefile to compile MiniGUI function library in the Non-GNU
 development environment.
 
@@ -1242,7 +1229,7 @@ Table 2.20 other compile macros
 
   Macro                  Comment                         Memo
   ---------------------- ------------------------------- ----------------------------------------------------------------
-  \_\_MINIGUI\_LIB\_\_   Compile MiniGUI library macro   You must define this macros, when you use the Non-GNU makefile
+  `__MINIGUI\_LIB__`   Compile MiniGUI library macro   You must define this macros, when you use the Non-GNU makefile
 
 Start with MiniGUI 3.0, you can specify the name suffix of the MiniGUI
 library through the configure option. By default, the name of the
@@ -1407,7 +1394,7 @@ smaller.
 
 ### 2.3.2 Corresponding mgconfig.h
 
-The **mgconfig.h** file to be generated in the configuration script
+The `mgconfig.h` file to be generated in the configuration script
 above, listed as follows:
 
 ...
@@ -2097,99 +2084,99 @@ resources) \*/
 
 /\* Define if compile for Cygwin platform \*/
 
-/\* \#undef \_\_CYGWIN\_\_ \*/
+/\* \#undef `__CYGWIN__` \*/
 
 /\* Define if compile for OpenDarwin \*/
 
-/\* \#undef \_\_DARWIN\_\_ \*/
+/\* \#undef `__DARWIN__` \*/
 
 /\* Define if compile for eCos \*/
 
-/\* \#undef \_\_ECOS\_\_ \*/
+/\* \#undef `__ECOS__` \*/
 
 /\* Define if compile for Linux \*/
 
-\#define \_\_LINUX\_\_ 1
+\#define `__LINUX__` 1
 
 /\* Define if compile for non-UNIX like OS \*/
 
-/\* \#undef \_\_NOUNIX\_\_ \*/
+/\* \#undef `__NOUNIX__` \*/
 
 /\* Define if compile for Nucleus \*/
 
-/\* \#undef \_\_NUCLEUS\_\_ \*/
+/\* \#undef `__NUCLEUS__` \*/
 
 /\* Define if compile for OSE \*/
 
-/\* \#undef \_\_OSE\_\_ \*/
+/\* \#undef `__OSE__` \*/
 
 /\* Define if compile for pSOS \*/
 
-/\* \#undef \_\_PSOS\_\_ \*/
+/\* \#undef `__PSOS__` \*/
 
 /\* Define for Blackfin run uClinux \*/
 
-/\* \#undef \_\_TARGET\_BLACKFIN\_\_ \*/
+/\* \#undef `__TARGET\_BLACKFIN__` \*/
 
 /\* Define for EPSON C33L05 (axLinux) \*/
 
-/\* \#undef \_\_TARGET\_C33L05\_\_ \*/
+/\* \#undef `__TARGET\_C33L05__` \*/
 
 /\* Define for FMSoft internal use \*/
 
-/\* \#undef \_\_TARGET\_FMSOFT\_\_ \*/
+/\* \#undef `__TARGET\_FMSOFT__` \*/
 
 /\* Define for Monaco ANVIL target \*/
 
-/\* \#undef \_\_TARGET\_MONACO\_\_ \*/
+/\* \#undef `__TARGET\_MONACO__` \*/
 
 /\* Define for FMSoft miniStudio \*/
 
-/\* \#undef \_\_TARGET\_MSTUDIO\_\_ \*/
+/\* \#undef `__TARGET\_MSTUDIO__` \*/
 
 /\* Define for OSE on mx21 \*/
 
-/\* \#undef \_\_TARGET\_MX21\_\_ \*/
+/\* \#undef `__TARGET\_MX21__` \*/
 
 /\* Define for VxWorks on PowerPC \*/
 
-/\* \#undef \_\_TARGET\_PPC\_\_ \*/
+/\* \#undef `__TARGET\_PPC__` \*/
 
 /\* Define for Philips STB810 target \*/
 
-/\* \#undef \_\_TARGET\_STB810\_\_ \*/
+/\* \#undef `__TARGET\_STB810__` \*/
 
 /\* Define for unknown target \*/
 
-\#define \_\_TARGET\_UNKNOWN\_\_ 1
+\#define `__TARGET\_UNKNOWN__` 1
 
 /\* Define for VirualFone ANVIL target \*/
 
-/\* \#undef \_\_TARGET\_VFANVIL\_\_ \*/
+/\* \#undef `__TARGET\_VFANVIL__` \*/
 
 /\* Define for VxWorks on i386 \*/
 
-/\* \#undef \_\_TARGET\_VXI386\_\_ \*/
+/\* \#undef `__TARGET\_VXI386__` \*/
 
 /\* Define if compile for ThreadX \*/
 
-/\* \#undef \_\_THREADX\_\_ \*/
+/\* \#undef `__THREADX__` \*/
 
 /\* Define if compile for uC/OS-II \*/
 
-/\* \#undef \_\_UCOSII\_\_ \*/
+/\* \#undef `__UCOSII__` \*/
 
 /\* Define if compile for VxWorks \*/
 
-/\* \#undef \_\_VXWORKS\_\_ \*/
+/\* \#undef `__VXWORKS__` \*/
 
 /\* Define if compile for Winbond SWLinux \*/
 
-/\* \#undef \_\_WINBOND\_SWLINUX\_\_ \*/
+/\* \#undef `__WINBOND\_SWLINUX__` \*/
 
 /\* Define if compile for uClinux \*/
 
-/\* \#undef \_\_uClinux\_\_ \*/
+/\* \#undef `__uClinux__` \*/
 
 ...
 
@@ -2518,7 +2505,7 @@ cygwin\$ /usr/bin/make –f makefile.ng clean
 
 You can clean all object files to compile afresh.
 
-Note: if you modify **mgconfig.h** and other files in the cygwin
+Note: if you modify `mgconfig.h` and other files in the cygwin
 environment, first of all you execute the command above to clean all
 object files, then compile MiniGUI afresh.
 
