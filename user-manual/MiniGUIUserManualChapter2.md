@@ -558,71 +558,21 @@ systems.
 
 Table 2.1 operating systems relevant options and macros
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------
-  Configuration options   Macro                      Other relevant macro   Memo
-  ----------------------- -------------------------- ---------------------- --------------------------------------------------------------------
-  --with-osname=linux     `__LINUX__`                                     Default value, for Linux operating system
-
-  --with-osname=uclinux   `__uClinux__`                                   For uClinux operating system
-
-  --with-osname=ecos      `__ECOS__`               `__NOUNIX__`         For eCos operating system
-
-  --with-osname=ucos2     `__UCOSII__`             `__NOUNIX__`         For uC/OS-II operating system
-                                                                            
-                                                     \_INCORE\_RES          
-                                                                            
-                                                     \_USE\_OWN\_MALLOC     
-                                                                            
-                                                     \_USE\_OWN\_STDIO      
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-
-  --with-osname=swlinux   `__WINBOND\_SWLINUX__`                          For SWLinux operating system, mutation of uClinux operating system
-
-  --with-osname=vxworks   `__VXWORKS__`            `__NOUNIX__`         For VxWorks operating system
-                                                                            
-                                                     \_USE\_OWN\_STDIO      
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-
-  --with-osname=cygwin    `__CYGWIN__`             `__NOUNIX__`         For cygwin environment
-
-  --with-osname=win32     WIN32                      `__NOUNIX__`         For Win32 platform
-
-  --with-osname=darwin    `__DARWIN__`             `__NOUNIX__`         For MacOS X operating system
-
-  --with-osname=threadx   `__THREADX__`            `__NOUNIX__`         For ThreadX operating system
-                                                                            
-                                                     \_INCORE\_RES          
-                                                                            
-                                                     \_USE\_OWN\_MALLOC     
-                                                                            
-                                                     \_USE\_OWN\_STDIO      
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-
-  --with-osname=nucleus   `__NUCLEUS__`            `__NOUNIX__`         For Nucleus operating system
-                                                                            
-                                                     \_INCORE\_RES          
-                                                                            
-                                                     \_USE\_OWN\_MALLOC     
-                                                                            
-                                                     \_USE\_OWN\_STDIO      
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-
-  --with-osname=ose       `__OSE__`                `__NOUNIX__`         For OSE operating system
-                                                                            
-                                                     \_INCORE\_RES          
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-
-  --with-osname=psos      `__PSOS__`               `__NOUNIX__`         For pSOS operating system
-                                                                            
-                                                     \_INCORE\_RES          
-                                                                            
-                                                     \_USE\_OWN\_PTHREAD    
-  ----------------------------------------------------------------------------------------------------------------------------------------------
+| Configuration options  | Macro                    | Other macros         | Comment  |
+| -----------------------|--------------------------|----------------------|-------|
+| --with-osname=linux    | `__LINUX__`              |                      | Default value; for Linux operating system |
+| --with-osname=uclinux  | `__uClinux__`            |                      | For uClinux operating system |
+| --with-osname=ecos     | `__ECOS__`               | `__NOUNIX__`         | For eCos operating system |
+| --with-osname=ucos2    | `__UCOSII__`             | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
+| --with-osname=swlinux  | `__WINBOND_SWLINUX__`    |                      | Deprecated; for SWLinux operating system |
+| --with-osname=vxworks  |  `__VXWORKS__`           | `__NOUNIX__``_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
+| --with-osname=cygwin   | `__CYGWIN__`             | `__NOUNIX__`         | For cygwin environment |
+| --with-osname=win32    | `WIN32`                  | `__NOUNIX__`         | For Win32 platform |
+| --with-osname=darwin   | `__DARWIN__`             | `__NOUNIX__`         | For MacOS X operating system |
+| --with-osname=threadx  | `__THREADX__`            | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
+| --with-osname=nucleus  | `__NUCLEUS__`            | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
+| --with-osname=ose      | `__OSE__`                | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_PTHREAD` | For OSE operating system |
+| --with-osname=psos     |  `__PSOS__`              | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_PTHREAD` | For pSOS operating system |
 
 According to operating system, we divide MiniGUI value-added release, so
 the MiniGUI value-added release product for certain operating system
@@ -647,18 +597,18 @@ Table 2.2 target board related options and macros
 
   Configuration options       Macro                      Memo
   --------------------------- -------------------------- ----------------------------------------------------------
-  --with-targetname=stb810    `__TARGET\_STB810__`     Philips STB810 development board base on Linux
-  --with-targetname=vfanvil   `__TARGET\_VFANVIL__`    VisualFone development board base on ThreadX
-  --with-targetname=vxi386    `__TARGET\_VXI386__`     i386 target base on VxWorks
-  --with-targetname=qvfb      `__TARGET\_QVFB__`       Include qvfb sub-driver of Shadow engine base on Linux
-  --with-targetname=wvfb      `__TARGET\_WVFB__`       Include wvfb sub-driver of Shadow engine base on Windows
-  --with-targetname=fbcon     `__TARGET\_FBCON__`      Include fbcon sub-driver of Shadow engine base on Linux
-  --with-targetname=mx21      `__TARGET\_MX21__`       MX21 development board base on OSE
-  --with-targetname=c33l05    `__TARGET\_C33L05__`     Epson C33L05 development board base on axLinux
-  --with-targetname=bfin      `__TARGET\_BLACKFIN__`   BlackFin537 development board base on uClinux
-  --with-targetname=vxppc     `__TARGET\_PPC__`        PowerPC target base on VxWorks
-  --with-targetname=monaco    `__TARGET\_MONACO__`     monaco development board base on Nucleus
-  --with-targetname=unkown    `__TARGET\_UNKNOWN__`    Unknown development board: default value
+  --with-targetname=stb810    `__TARGET_STB810__`     Philips STB810 development board base on Linux
+  --with-targetname=vfanvil   `__TARGET_VFANVIL__`    VisualFone development board base on ThreadX
+  --with-targetname=vxi386    `__TARGET_VXI386__`     i386 target base on VxWorks
+  --with-targetname=qvfb      `__TARGET_QVFB__`       Include qvfb sub-driver of Shadow engine base on Linux
+  --with-targetname=wvfb      `__TARGET_WVFB__`       Include wvfb sub-driver of Shadow engine base on Windows
+  --with-targetname=fbcon     `__TARGET_FBCON__`      Include fbcon sub-driver of Shadow engine base on Linux
+  --with-targetname=mx21      `__TARGET_MX21__`       MX21 development board base on OSE
+  --with-targetname=c33l05    `__TARGET_C33L05__`     Epson C33L05 development board base on axLinux
+  --with-targetname=bfin      `__TARGET_BLACKFIN__`   BlackFin537 development board base on uClinux
+  --with-targetname=vxppc     `__TARGET_PPC__`        PowerPC target base on VxWorks
+  --with-targetname=monaco    `__TARGET_MONACO__`     monaco development board base on Nucleus
+  --with-targetname=unknown   `__TARGET_UNKNOWN__`    Unknown development board: default value
 
 ### 2.2.3 Runtime Mode Related Options and Macros
 
@@ -674,9 +624,9 @@ Table 2.3 runtime mode related options and macros
 
 | Configuration options | Macro              | Memo                                                                | Default  |
 |-----------------------|--------------------|---------------------------------------------------------------------|----------|
-| not assigned          | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode                                        | Enabled  |
-| procs                 | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only | Disabled |
-| standalone            | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system.      | Disabled |
+| --with-runmode=procs  | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only | Yes      |
+| --with-runmode=ths    | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode, support all operating system          | No       |
+| --with-runmode=sa     | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system.      | No       |
 
 ### 2.2.4 Graphics Engine Related Options and Macros
 
