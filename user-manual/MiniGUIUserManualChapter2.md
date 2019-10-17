@@ -558,21 +558,21 @@ systems.
 
 Table 2.1 operating systems relevant options and macros
 
-| Configuration options  | Macro                    | Other macros         | Comment  |
-| -----------------------|--------------------------|----------------------|-------|
-| --with-osname=linux    | `__LINUX__`              |                      | Default value; for Linux operating system |
-| --with-osname=uclinux  | `__uClinux__`            |                      | For uClinux operating system |
-| --with-osname=ecos     | `__ECOS__`               | `__NOUNIX__`         | For eCos operating system |
-| --with-osname=ucos2    | `__UCOSII__`             | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
-| --with-osname=swlinux  | `__WINBOND_SWLINUX__`    |                      | Deprecated; for SWLinux operating system |
-| --with-osname=vxworks  |  `__VXWORKS__`           | `__NOUNIX__``_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
-| --with-osname=cygwin   | `__CYGWIN__`             | `__NOUNIX__`         | For cygwin environment |
-| --with-osname=win32    | `WIN32`                  | `__NOUNIX__`         | For Win32 platform |
-| --with-osname=darwin   | `__DARWIN__`             | `__NOUNIX__`         | For MacOS X operating system |
-| --with-osname=threadx  | `__THREADX__`            | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
-| --with-osname=nucleus  | `__NUCLEUS__`            | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_MALLOC`, `_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
-| --with-osname=ose      | `__OSE__`                | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_PTHREAD` | For OSE operating system |
-| --with-osname=psos     |  `__PSOS__`              | `__NOUNIX__`, `_MGINCORE_RES`, `_MGUSE_OWN_PTHREAD` | For pSOS operating system |
+| Configuration options  | Macro                | Other macros         | Comment  |
+| -----------------------|----------------------|----------------------|-------|
+| --with-osname=linux    | `__LINUX__`          |                      | Default value; for Linux operating system |
+| --with-osname=uclinux  | `__uClinux__`        |                      | For uClinux operating system |
+| --with-osname=ecos     | `__ECOS__`           | `__NOUNIX__`         | For eCos operating system |
+| --with-osname=ucos2    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
+| --with-osname=vxworks  |  `__VXWORKS__`       | `__NOUNIX__``_MGUSE_OWN_STDIO`, `_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
+| --with-osname=cygwin   | `__CYGWIN__`         | `__NOUNIX__`         | For cygwin environment |
+| --with-osname=win32    | `WIN32`              | `__NOUNIX__`         | For Win32 platform |
+| --with-osname=darwin   | `__DARWIN__`         | `__NOUNIX__`         | For MacOS X operating system |
+| --with-osname=threadx  | `__THREADX__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
+| --with-osname=nucleus  | `__NUCLEUS__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
+| --with-osname=ose      | `__OSE__`            | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For OSE operating system |
+| --with-osname=psos     | `__PSOS__`           | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For pSOS operating system |
+| --with-osname=swlinux  | `__WINBOND_SWLINUX__`|                      | Deprecated; for SWLinux operating system |
 
 According to operating system, we divide MiniGUI value-added release, so
 the MiniGUI value-added release product for certain operating system
