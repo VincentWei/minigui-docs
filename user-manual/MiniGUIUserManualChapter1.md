@@ -171,9 +171,10 @@ Ubuntu Linux distribution.
 
 The following figures are some screenshots of mGUXDemo.
 
-![mGUXDemo Screenshot 1](figures/mguxdemo-1.png){:height="auto" width="437px"}
-
-![mGUXDemo Screenshot 2](figures/mguxdemo-2.png){:height="auto" width="437px"}
+![mGUXDemo Screenshot 1](figures/mguxdemo-1.png)
+![mGUXDemo Screenshot 2](figures/mguxdemo-2.png)
+![mGUXDemo Screenshot 3](figures/mguxdemo-3.png)
+![mGUXDemo Screenshot 4](figures/mguxdemo-4.png)
 
 ### Building MiniGUI 4.0
 
