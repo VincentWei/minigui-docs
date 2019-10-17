@@ -1,5 +1,26 @@
 # Building MiniGUI
 
+- [Compile-time Macros](#compile-time-macros)
+- [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
+- [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
+- [Configuration Options and Macros](#configuration-options-and-macros)
+   * [Operating Systems](#operating-systems)
+   * [Target Board](#target-board)
+   * [Runtime Mode](#runtime-mode)
+   * [Graphics Engine](#graphics-engine)
+   * [Input Engine](#input-engine)
+   * [Keyboard Layout](#keyboard-layout)
+   * [Global Options and Macros](#global-options-and-macros)
+   * [Character Set and Font](#character-set-and-font)
+   * [Image File Format](#image-file-format)
+   * [Appearance Renderer](#appearance-renderer)
+   * [Control](#control)
+   * [Others](#others)
+- [Compiling and Installing MiniGUI](#compiling-and-installing-minigui)
+   * [Dependent libraries and tools](#dependent-libraries-and-tools)
+   * [In GNU environment](in-gnu-environment)
+   * [In Non-GNU environment](in-non-gnu-environment)
+
 In general, embedded systems are special systems, and they have
 various requirements for different applications. For example, some
 systems require a basic graphics function to show images, but others may
@@ -8,7 +29,7 @@ a HTML5 web browser. Therefore, an embedded graphics system like MiniGUI
 must be tailorable.
 
 For easy tailoring MiniGUI, MiniGUI provides a lot of compile-time
-configuration options to specify the features of MiniGUI core.
+macros to control the features of MiniGUI core.
 
 Generally, we can configure MiniGUI core in the following aspects:
 
@@ -27,23 +48,40 @@ a most suitable MiniGUI for your target devices.
 
 We will also show you how to build MiniGUI core too.
 
-## Compile-time Configuration Options
+## Compile-time Macros
 
-A file named `mgconfig.h` is located in the root directory of
-MiniGUI source code. A lot of ANSI C macros are defined in this file.
-We can configure MiniGUI by enabling or disabling these macros.
-Generally, we can modify this file in order to configure MiniGUI. You
-must recompile MiniGUI if this file is modified. After that you should
-install the header files and the libraries on your system. If your
-applications are static linking to MiniGUI, you should rebuild your
-applications, too. Please note that you should placed the
-`mgconfig.h` in a MiniGUI header file directory which your compiler
-can find it and overwrite the old one.
+A file named `mgconfig.h.in` is located in the root directory of
+MiniGUI source tree. There are many C language macros listed in the file,
+but there are all undefined:
+
+```cpp
+...
+
+/* Define to 1 if using `alloca.c'. */
+#undef C_ALLOCA
+
+/* MiniGUI configure file name */
+#undef ETCFILENAME
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+#undef HAVE_ALLOCA
+
+...
+```
+
+When a C compiler building MiniGUI from source code, the MiniGUI source
+will include a file named `mgconfig.h`. We can tailor MiniGUI by
+enabling some macros in `mgconfig.h`, while all macros supported are listed
+in `mgconfig.h.in`.
+
+Generally, we can copy `mgconfig.h.in` to `mgconfig.h` and modify `mgconfig.h`
+file manually in order to tailor MiniGUI.
 
 In general, the content of `mgconfig.h` is as follow:
 
 ```cpp
 ...
+
 /* Define if compile for VxWorks operating system */
 #define __VXWORKS__ 1
 
@@ -64,80 +102,106 @@ In general, the content of `mgconfig.h` is as follow:
 
 /* Define if include clipboard support */
 #define _MGHAVE_CLIPBOARD 1
+
 ...
 
 ```
 
-Above code is a snippet of `mgconfig.h`. The macro `__VXWORKS__` is
+Above code is a snippet of a real `mgconfig.h`. The macro `__VXWORKS__` is
 defined in this file and this macro will enable the support code for VxWorks
 in the MiniGUI source code. The macro `_MGHAVE_CLIPBOARD` is defined in this
-file, it will enable the support for clipboard. Macro `_MGIAL_AUTO`
-is not defined in this file and MiniGUI will not support the `auto` input
-engine.
+file tool, it will enable the support for clipboard. Macro `_MGIAL_AUTO`
+is not defined (commented out) in this file and MiniGUI will not support
+the `auto` input engine.
 
-Note that `mgconfig.h` also contains other macro
-definitions, for instance, the MiniGUI version number and so on. Please
-do not change these macro definitions manually.
+It will be very hard to modify `mgconfig.h` manually to meet our needs.
+Fortunately, when you use GNU GCC toolchain, you can use the `configure`
+script to configure MiniGUI and generate `mgconfig.h` file automatically.
 
-It will be very hard to modify `mgconfig.h` manually to meet your needs.
-When you use the GNU GCC toolchain, you should use the `configure` script
-to configure MiniGUI and generate `mgconfig.h` file automatically.
+Note that you must rebuild MiniGUI if this file is modified. Once MiniGUI
+is built, you should install the MiniGUI headers and `mgconfig.h` to
+your system's header file directory.
 
-### Configuring MiniGUI in GNU Development Environment
+Specifically, since Windows 10, Microsoft has reinstated the
+POSIX-compliant subsystem on the Windows platform with WSL (Windows
+Subsystem for Linux) as well as an Ubuntu distribution through the
+Microsoft Store. In this way, we can use the Ubuntu environment running
+on Windows 10 to configure and compile MiniGUI. This will bring us a lot
+of convenience because Ubuntu running on Windows is a complete GNU
+development environment so we can use the GNU *autoconf/automake* script
+to configure MiniGUI for operating systems like VxWorks and its
+development environment.
+
+## Configuring MiniGUI in GNU Environment
 
 It’s known that we can conveniently maintain the program package using
-makefile. Through makefile, we may compile, clean or install the
-function library, [executable
-file](http://www.iciba.com/?s=executable%2520file) and header files in
-the software package, etc. Although it is possible to organize a big
-project with makefile, it is not an easy job to create such a makefile
+makefile. By using makefile, we can easily compile and install
+the function libraries, executable files, and header files to system.
+
+Although it is possible to organize a big project with makefile,
+it is not an easy job to create such a makefile
 manually. When we need to maintain a large-scale source code directory
 tree, the makefile maintenance work can greatly increase. Therefore, the
 Free Software Foundation's GNU project has developed the
-Autoconf/Automake tool for many software projects, which is based on the
-C language. Using this tool, we may automatically produce the makefile,
-and can check the system configuration information, which helps
-enhancement application software probability.
+Autoconf/Automake tool for many software projects which is based on the
+C and C++ language. Using this tool, we may automatically generate the
+makefile, and can check the system configuration information, which helps
+enhancement the customizability of the software.
 
-MiniGUI (MiniGUI library and sample programs package) is through the GNU
-Automake/Autoconf script organization. Therefore, if you use the GNU
-compatible development environment, for instance the Linux platform or
-Cygwin environment in Windows platform and so on, you may use MiniGUI’s
-Automake/Autoconf configuration script to configure MiniGUI. Uses
-MiniGUI’s Automake/Autoconf configuration script, certainly does not
-need to install Automake/Autoconf tool itself, but you just run the
-configure script in the MiniGUI source code package then to complete the
-configuration.\
-If you run the configure script, it can produce not only makefile, but
-also `mgconfig.h` file base on each of option in the configure script.
-Afterwards, we just need run make and make install commands to compile
-MiniGUI, and then MiniGUI library and header files will be installed to
-the directory, which you assigned.
+MiniGUI (MiniGUI core, components, and sample packages) uses the GNU
+Automake/Autoconf to organize the source code. Therefore, if you use
+the GNU GCC toolchain for your target system, you may use MiniGUI’s
+Automake/Autoconf configuration script to configure MiniGUI and generate
+the makefiles.
 
-**\[NOTE\] The MiniGUI configure script only can be used in the GNU
-compatible development environment. The GNU compatible development
-environment usually has: the Linux system, the cygwin environment
-running on Windows and so on, It may apply to MiniGUI product version
-like Linux, uClinux, eCos.**
+We know many embedded system vendors are now using the GNU GCC toolchain,
+which can easily run on a Linux PC box. Therefore, we can configure
+and build MiniGUI on a Linux PC box for your target system.
 
-There are lot of options in the MiniGUI configure script, and each
-configuration option corresponds a certain macro in `mgconfig.h`. If
-you enable an option when run configure, then the correspondence macro
-will be defined; otherwise can’t define this macro. Run the following
-command.
+If you get MiniGUI source code from the tarball (`libminigui-x.y.z.tar.gz`),
+there will be a ready-to-use `configure` script. Run this script with some options,
+MiniGUI will be got configured. After this, run `make` command to build
+MiniGUI:
+
+    $ ./configure; make;
+
+If you fetch MiniGUI source code a public Git repository, there will not be
+a ready-to-use `configure` script. For this situation, you should make sure
+have `autoconf` installed in your system, and run `autogen.sh` script to
+generate `configure` script:
+
+    $ ./autogen.sh
+
+You can also play the above commands in Cygwin environment on
+Windows platform. For more information about Cygwin, please refer to:
+
+<https://www.cygwin.com/>
+
+If you run `configure` script, it will generate not only makefile, but
+also `mgconfig.h` file base on the options for the configuration script.
+Afterwards, we just need run `make` and `make install` commands to compile
+MiniGUI, and MiniGUI library and header files will be installed to
+the system default directory or one directory which is specified by
+using an option.
+
+There are lot of options defined by MiniGUI configuration script, and each
+option corresponds to a certain macro in `mgconfig.h`. If
+you enable an option when running `configure` script, then the
+correspondence macro will be defined; otherwise the macro will be undefined.
+
+You can run the following command for all options supported by the configuration
+script:
 
 ```
 user$ ./configure --help
 ```
 
 You can obtain the whole options detailed list. For instance, supposing
-you use Ubuntu Linux 16.04(i386) as your development environment, the
+you use Ubuntu Linux 18.04 LTS as your development environment, the
 command runs in the MiniGUI source code directory and the running result
-as follows (this command output may have differently on other Linux
-release version):
+as follow (this command output may be different on other Linux distribution):
 
 ```
-$ ./configure --help
 `configure' configures libminigui 3.2.2 to adapt to many kinds of systems.
 
 Usage: ./configure [OPTION]... [VAR=VALUE]...
@@ -438,7 +502,7 @@ disabled default).
 Besides the MiniGUI has defined configuration options, the configure
 script also has some important general compiling configuration options.
 
-#### Prefix Option
+### Prefix Option
 
 This compiling configuration option assigns the MiniGUI library where to
 install. The default installation path is `/usr/local`. If you run:
@@ -499,7 +563,7 @@ and produces the executable file or function library.
 - `make install`: Install the function library, header files and so on to
 the directory which you assigned.
 
-### Configuring MiniGUI in Non-GNU Environment
+## Configuring MiniGUI in Non-GNU Environment
 
 A majority of traditional embedded operating system supported by
 MiniGUI, user usually can use the integrated development environment
@@ -540,7 +604,7 @@ In the next chapter, we will give configuration option of MiniGUI by
 classify. We will description on configuration names of configure script
 and macro names in the `mgconfig.h` file.
 
-### Operating System Options and Macros
+### Operating Systems
 
 MiniGUI provides support for multiple operating systems, you can specify
 operating system when execute configure script, default operating system
@@ -580,7 +644,7 @@ cannot run on anther operating system. In order to run MiniGUI
 value-added release product on corresponding operating system, you make
 sure that the above macros were defined when you modify configuration.
 
-### Target Board Related Options and Macros
+### Target Board
 
 In MiniGUI certain codes are related with a special target board; if you
 want run MiniGUI must on these target boards correctly, you need to
@@ -610,7 +674,7 @@ Table 2.2 target board related options and macros
   --with-targetname=monaco    `__TARGET_MONACO__`     monaco development board base on Nucleus
   --with-targetname=unknown   `__TARGET_UNKNOWN__`    Unknown development board: default value
 
-### 2.2.3 Runtime Mode Related Options and Macros
+### Runtime Mode
 
 We can configure MiniGUI as one of three kind of runtime mode:
 MiniGUI-Processes runtime mode base on multi-processes, MiniGUI-Threads
@@ -628,7 +692,7 @@ Table 2.3 runtime mode related options and macros
 | --with-runmode=ths    | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode, support all operating system          | No       |
 | --with-runmode=sa     | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system.      | No       |
 
-### 2.2.4 Graphics Engine Related Options and Macros
+### Graphics Engine
 
 MiniGUI supports many kinds of graphics engine. The commonly used
 graphics engine mainly includes the Dummy graphics engine, Qt Virtual
@@ -726,7 +790,7 @@ defined by the user. The rtos/ directory of the MiniGUI source tree
 contains the CommLCD graphics engine implementation for each operating
 system. You can modify this file to support your own LCD controller.
 
-### 2.2.5 Input Engine Related Options and Macros
+### Input Engine
 
 MiniGUI provides some input engine, which can be used directly for many
 kinds of development board. Generally the input engines include the
@@ -806,7 +870,7 @@ Table 2.9 mouse and touch screen adjustment related options and macros
   ----------------------- -------------------------- --------------------------------- ---------
   mousecalibrate          \_MGHAVE\_MOUSECALIBRATE   Support touch screen adjustment   Enabled
 
-### 2.2.6 Keyboard Layout Related Options and Macros
+### Keyboard Layout
 
 The MiniGUI keyboard layout uses for control the behavior of function
 TranslateMessage. Different keyboard layout will translate a same key as
@@ -833,7 +897,7 @@ Table 2.10 keyboard layout related options and macros
   kbdhebrewpc             \_MGKBDLAYOUT\_HEBREWPC   hebrewpc               Keyboard layout for Hebrew PC keyboard                     Disabled
   kbdarabicpc             \_MGKBDLAYOUT\_ARABICPC   arabicpc               Keyboard layout for Arabic PC keyboard                     Disabled
 
-### 2.2.7 System Global Configuration Options and Macros
+### Global Options and Macros
 
 The table 2.11 lists system global configuration options and macros.
 
@@ -896,7 +960,7 @@ Splash and screensaver options are used to define the splash screen and
 MiniGUI built-in screen saver program. In the actual project, you can
 usually close these two options.
 
-### 2.2.8 Character Set and Font Related Options and Macros
+### Character Set and Font
 
 MiniGUI has rich support for font. It supports RBF font, VBF font (these
 two kinds of font are defined by MiniGUI), UPF/QPF font, TrueType font,
@@ -1037,7 +1101,7 @@ Table 2.15 TrueType cache related options and macros
   --with-ttfcachesize=512                           512           
   --with-ttfcachesize=1024                          1024          
 
-### 2.2.9 Image File Format Related Options and Macros
+### Image File Format
 
 MiniGUI support for multiple image file formats, idiographic, MiniGUI
 include Windows BMP, GIF, JPEG, PNG, PCX, LBM/PBM, TGA and so on.
@@ -1063,7 +1127,7 @@ Table 2.16 image file format related configuration options and macros
   lbmsupport             \_MGIMAGE\_LBM   Support for LBM/PBM file   Disable
   tgasupport             \_MGIMAGE\_TGA   Support for TGA file       Disable
 
-### 2.2.10 Appearance Style Related Options and Macros
+### Appearance Renderer
 
 In MiniGUI 3.0, we introduced Look and Feel (LF) concept. The original
 flat, classic, fashion window style abstraction as a new LF renderer
@@ -1080,7 +1144,7 @@ Table 2.17 appearance style related configuration options and macros
   --enable-flatlf        \_MGLF\_RDR\_FLAT   Simple flat style                                Enabled
   --enable-skinlf        \_MGLF\_RDR\_SKIN   Skin style, window and control fill by bitmap.   Enabled
 
-### 2.2.11 Control Related Options and Macros
+### Control
 
 MiniGUI provides configuration options for all base controls. MiniGUI
 base controls refer to the controls contained in the MiniGUI core
@@ -1148,7 +1212,7 @@ Table 2.18 control related configuration options and macros
   ctrlanimation          \_MGCTRL\_ANIMATION                  Include the ANIMATION control and provides support for GIF89a files   Enable
   -------------------------------------------------------------------------------------------------------------------------------------------------
 
-### 2.2.12 Other Options and Macros
+### Others
 
 MiniGUI implemented some function families of the standard C function
 libraries to be fit in with all kinds of embedded operating system
@@ -1191,148 +1255,85 @@ MiniGUI-Standalone mode of operation.
 You can specify a special library name suffix with the --with-libsuffix
 option.
 
-2.3 Minimum Configuration Options
----------------------------------
+## Minimum Configuration Options
 
 In this chapter, we will give an example of minimum configuration
 options in MiniGUI.
 
-### 2.3.1 Using GNU Configure Script
+### Using GNU Configure Script
 
 There is a buildlib-min script in the MiniGUI source codes build
 directory. The buildlib-min script will be as the following:
 
-\#!/bin/sh
-
+```bash
+#!/bin/sh
 ./configure \\
-
 --disable-dblclk \\
-
 --disable-cursor \\
-
 --disable-mousecalibrate \\
-
 --disable-clipboard \\
-
 --disable-adv2dapi \\
-
 --disable-splash \\
-
 --disable-screensaver \\
-
 --disable-flatlf \\
-
 --disable-skinlf \\
-
 --disable-rbfvgaoem \\
-
 --disable-rbfterminal \\
-
 --disable-vbfsupport \\
-
 --disable-qpfsupport \\
-
 --disable-upfsupport \\
-
 --disable-bmpfsupport \\
-
 --disable-latin9support \\
-
 --disable-gbsupport \\
-
 --disable-gbksupport \\
-
 --disable-unicodesupport \\
-
 --disable-savebitmap \\
-
 --disable-jpgsupport \\
-
 --disable-pngsupport \\
-
 --disable-gifsupport \\
-
 --disable-aboutdlg \\
-
 --disable-savescreen \\
-
 --disable-mousecalibrate \\
-
 --disable-ctrlanimation \\
-
 --disable-ctrlnewtextedit \\
-
 --disable-consoleps2 \\
-
 --disable-consoleimps2 \\
-
 --disable-consolems \\
-
 --disable-consolems3 \\
-
 --disable-consolegpm
+```
 
 By this script, you can configure MiniGUI to the minimum function
-library that only supports ISO8859-1 charset.
+library that only supports ISO8859-1 charset:
 
 Compiling MiniGUI to be MiniGUI-Threads.
-
 No support for double click mouse button.
-
 No support for cursor.
-
 No support for code doing mouse calibration.
-
 No support for clipboard.
-
 No including VGAOEM/Terminal incoreres font.
-
 No support for VBF font.
-
 No support for Qt Prerendered Font(QPF).
-
 No support for UPF Prerendered Font(UPF).
-
 No support for TrueType font.
-
 No support bitmap font.
-
 No support for Latin 9(ISO-8859-15, West Extended) charset.
-
 No support for EUC GB2312 charset.
-
 No support for GBK charset.
-
 No support for BIG5 charset.
-
 No support for UNICODE (ISO-10646-1and UTF-8).
-
 No support for BITMAP saving function.
-
 No support for JPG image format.
-
 No support for PNG image format.
-
 No support for GIF image format.
-
 No including “About MiniGUI” dialog box.
-
-No support for screen save function.
-
 No support for advanced 2D graphics APIs
-
 No include new TEXTEDIT support.
-
 No building the console engine subdriver for PS2 mouse.
-
 No building the console engine subdriver for IntelligentMouse (IMPS/2).
-
 No building the console engine subdriver for old MS serial mouse.
-
 No building the console engine subdriver for MS3 mouse.
-
 No building the console engine subdriver for GPM daemon.
-
 No Skin and Flat support.
 
 Based on the configuration above, you can also delete some functions if
@@ -1342,798 +1343,17 @@ configuration script above, so there is not GIF animation control in
 your compiled functions library, the MiniGUI functions library is made
 smaller.
 
-### 2.3.2 Corresponding mgconfig.h
+### Corresponding mgconfig.h
 
 The `mgconfig.h` file to be generated in the configuration script
 above, listed as follows:
 
-...
+```
+```
 
-/\* MiniGUI configure file name \*/
+## Compiling and Installing MiniGUI
 
-\#define ETCFILENAME "MiniGUI.cfg"
-
-...
-
-/\* Binary age of MiniGUI \*/
-
-\#define MINIGUI\_BINARY\_AGE 0
-
-/\* Interface age of MiniGUI \*/
-
-\#define MINIGUI\_INTERFACE\_AGE 0
-
-/\* Major version of MiniGUI \*/
-
-\#define MINIGUI\_MAJOR\_VERSION 3
-
-/\* Micro version of MiniGUI \*/
-
-\#define MINIGUI\_MICRO\_VERSION 13
-
-/\* Minor version of MiniGUI \*/
-
-\#define MINIGUI\_MINOR\_VERSION 0
-
-...
-
-/\* Define if support Arabic charset \*/
-
-/\* \#undef \_MGCHARSET\_ARABIC \*/
-
-/\* Define if support BIG5 charset \*/
-
-/\* \#undef \_MGCHARSET\_BIG5 \*/
-
-/\* Define if support Cyrillic charset \*/
-
-/\* \#undef \_MGCHARSET\_CYRILLIC \*/
-
-/\* Define if support EUCJP charset \*/
-
-/\* \#undef \_MGCHARSET\_EUCJP \*/
-
-/\* Define if support EUCKR charset \*/
-
-/\* \#undef \_MGCHARSET\_EUCKR \*/
-
-/\* Define if support GB2312 charset \*/
-
-/\* \#undef \_MGCHARSET\_GB \*/
-
-/\* Define if support GB18030 charset \*/
-
-/\* \#undef \_MGCHARSET\_GB18030 \*/
-
-/\* Define if support GBK charset \*/
-
-/\* \#undef \_MGCHARSET\_GBK \*/
-
-/\* Define if support Greek charset \*/
-
-/\* \#undef \_MGCHARSET\_GREEK \*/
-
-/\* Define if support Hebrew charset \*/
-
-/\* \#undef \_MGCHARSET\_HEBREW \*/
-
-/\* Define if support Latin 10 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN10 \*/
-
-/\* Define if support Latin 2 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN2 \*/
-
-/\* Define if support Latin 3 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN3 \*/
-
-/\* Define if support Latin 4 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN4 \*/
-
-/\* Define if support Latin 5 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN5 \*/
-
-/\* Define if support Latin 6 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN6 \*/
-
-/\* Define if support Latin 7 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN7 \*/
-
-/\* Define if support Latin 8 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN8 \*/
-
-/\* Define if support Latin 9 charset \*/
-
-/\* \#undef \_MGCHARSET\_LATIN9 \*/
-
-/\* Define if support SHIFTJIS charset \*/
-
-/\* \#undef \_MGCHARSET\_SHIFTJIS \*/
-
-/\* Define if support Thai charset \*/
-
-/\* \#undef \_MGCHARSET\_THAI \*/
-
-/\* Define if support UNICODE \*/
-
-/\* \#undef \_MGCHARSET\_UNICODE \*/
-
-/\* Define if include GPM mouse subdriver \*/
-
-/\* \#undef \_MGCONSOLE\_GPM \*/
-
-/\* Define if include IMPS2 mouse subdriver \*/
-
-/\* \#undef \_MGCONSOLE\_IMPS2 \*/
-
-/\* Define if include MS mouse subdriver \*/
-
-/\* \#undef \_MGCONSOLE\_MS \*/
-
-/\* Define if include MS3 mouse subdriver \*/
-
-/\* \#undef \_MGCONSOLE\_MS3 \*/
-
-/\* Define if include PS2 mouse subdriver \*/
-
-/\* \#undef \_MGCONSOLE\_PS2 \*/
-
-/\* Define if your Linux have text mode \*/
-
-\#define \_MGCONSOLE\_TEXTMODE 1
-
-/\* Define if include ANIMATION control \*/
-
-/\* \#undef \_MGCTRL\_ANIMATION \*/
-
-/\* Define if include BIDISLEDIT control \*/
-
-/\* \#undef \_MGCTRL\_BIDISLEDIT \*/
-
-/\* Define if include BUTTON control \*/
-
-\#define \_MGCTRL\_BUTTON 1
-
-/\* Define if include COMBOBOX control \*/
-
-\#define \_MGCTRL\_COMBOBOX 1
-
-/\* Define if include COOLBAR control \*/
-
-/\* \#undef \_MGCTRL\_COOLBAR \*/
-
-/\* Define if include GRIDVIEW control \*/
-
-/\* \#undef \_MGCTRL\_GRIDVIEW \*/
-
-/\* Define if include ICONVIEW control \*/
-
-/\* \#undef \_MGCTRL\_ICONVIEW \*/
-
-/\* Define if include LISTBOX control \*/
-
-\#define \_MGCTRL\_LISTBOX 1
-
-/\* Define if include LISTVIEW control \*/
-
-/\* \#undef \_MGCTRL\_LISTVIEW \*/
-
-/\* Define if include MENUBUTTON control \*/
-
-/\* \#undef \_MGCTRL\_MENUBUTTON \*/
-
-/\* Define if include MONTHCALENDAR control \*/
-
-/\* \#undef \_MGCTRL\_MONTHCAL \*/
-
-/\* Define if include NEWTOOLBAR control \*/
-
-/\* \#undef \_MGCTRL\_NEWTOOLBAR \*/
-
-/\* Define if include PROGRESSBAR control \*/
-
-\#define \_MGCTRL\_PROGRESSBAR 1
-
-/\* Define if include PROPSHEET control \*/
-
-\#define \_MGCTRL\_PROPSHEET 1
-
-/\* Define if include SCROLLBAR control \*/
-
-/\* \#undef \_MGCTRL\_SCROLLBAR \*/
-
-/\* Define if include SCROLLVIEW control \*/
-
-/\* \#undef \_MGCTRL\_SCROLLVIEW \*/
-
-/\* Define if include SLEDIT control \*/
-
-\#define \_MGCTRL\_SLEDIT 1
-
-/\* Define if include SPINBOX control \*/
-
-/\* \#undef \_MGCTRL\_SPINBOX \*/
-
-/\* Define if include STATIC control \*/
-
-\#define \_MGCTRL\_STATIC 1
-
-/\* Define if include TEXTEDIT control \*/
-
-/\* \#undef \_MGCTRL\_TEXTEDIT \*/
-
-/\* Define if use new implementation of TEXTEDIT control \*/
-
-/\* \#undef \_MGCTRL\_TEXTEDIT\_USE\_NEW\_IMPL \*/
-
-/\* Define if include TRACKBAR control \*/
-
-/\* \#undef \_MGCTRL\_TRACKBAR \*/
-
-/\* Define if include TREEVIEW control \*/
-
-/\* \#undef \_MGCTRL\_TREEVIEW \*/
-
-/\* Define if include TREEVIEWRDR control \*/
-
-/\* \#undef \_MGCTRL\_TREEVIEW\_RDR \*/
-
-/\* Define if support Bitmap fonts \*/
-
-/\* \#undef \_MGFONT\_BMPF \*/
-
-/\* Define if support TrueType font based on FreeType2 \*/
-
-/\* \#undef \_MGFONT\_FT2 \*/
-
-/\* Define if support QPF font \*/
-
-/\* \#undef \_MGFONT\_QPF \*/
-
-/\* Define if support raw bitmap fonts \*/
-
-\#define \_MGFONT\_RBF 1
-
-/\* Define if support SEF scripteary font \*/
-
-/\* \#undef \_MGFONT\_SEF \*/
-
-/\* Define if support TrueType font \*/
-
-/\* \#undef \_MGFONT\_TTF \*/
-
-/\* Define if include ttf cache \*/
-
-/\* \#undef \_MGFONT\_TTF\_CACHE \*/
-
-/\* Define if support UPF font \*/
-
-/\* \#undef \_MGFONT\_UPF \*/
-
-/\* Define if support var bitmap fonts \*/
-
-/\* \#undef \_MGFONT\_VBF \*/
-
-/\* Define if include NEWGAL engine for BF533 OSD via SPI \*/
-
-/\* \#undef \_MGGAL\_BF533 \*/
-
-/\* Define if include NEWGAL engine for Common LCD \*/
-
-/\* \#undef \_MGGAL\_COMMLCD \*/
-
-/\* Define if include custom NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_CUSTOMGAL \*/
-
-/\* Define if include NEWGAL engine for DirectFB \*/
-
-/\* \#undef \_MGGAL\_DFB \*/
-
-/\* Define if include ST7167 subdriver for NEWGAL engine of DirectFB \*/
-
-/\* \#undef \_MGGAL\_DFB\_ST7167 \*/
-
-/\* Define if include dummy NEWGAL engine \*/
-
-\#define \_MGGAL\_DUMMY 1
-
-/\* Define if include NEWGAL engine for EM85xx OSD \*/
-
-/\* \#undef \_MGGAL\_EM85XXOSD \*/
-
-/\* Define if include NEWGAL engine for EM85xx YUV \*/
-
-/\* \#undef \_MGGAL\_EM85XXYUV \*/
-
-/\* Define if include NEWGAL engine for EM86xx GFX \*/
-
-/\* \#undef \_MGGAL\_EM86GFX \*/
-
-/\* Define if include FrameBuffer console NEWGAL engine \*/
-
-\#define \_MGGAL\_FBCON 1
-
-/\* Define if include GDL Video NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_GDL \*/
-
-/\* Define if include Hi35XX Video NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_HI3510 \*/
-
-/\* Define if include Hi35XX Video NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_HI3560 \*/
-
-/\* Define if include Hi3560A Video NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_HI3560A \*/
-
-/\* Define if include NEWGAL engine for mb93493 YUV FrameBuffer driver
-\*/
-
-/\* \#undef \_MGGAL\_MB93493 \*/
-
-/\* Define if include MLShadow NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_MLSHADOW \*/
-
-/\* Define if include mstar NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_MSTAR \*/
-
-/\* Define if include nexus NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_NEXUS \*/
-
-/\* Define if include PC Virtual FrameBuffer NEWGAL engine \*/
-
-\#define \_MGGAL\_PCXVFB 1
-
-/\* Define if include Qt Virtual FrameBuffer NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_QVFB \*/
-
-/\* Define if include RTOS Virtual FrameBuffer NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_RTOSXVFB \*/
-
-/\* Define if include s3c6410 NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_S3C6410 \*/
-
-/\* Define if include Shadow NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_SHADOW \*/
-
-/\* Define if include sigma8654 NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_SIGMA8654 \*/
-
-/\* Define if include NEWGAL engine for STGFB \*/
-
-/\* \#undef \_MGGAL\_STGFB \*/
-
-/\* Define if include NEWGAL engine for SVPXX OSD \*/
-
-/\* \#undef \_MGGAL\_SVPXXOSD \*/
-
-/\* Define if include NEWGAL engine for UTPMC \*/
-
-/\* \#undef \_MGGAL\_UTPMC \*/
-
-/\* Define if include windows Virtual FrameBuffer NEWGAL engine \*/
-
-/\* \#undef \_MGGAL\_WVFB \*/
-
-/\* Define if include advanced 2D graphics APIs \*/
-
-/\* \#undef \_MGHAVE\_ADV\_2DAPI \*/
-
-/\* Define if include clipboard support \*/
-
-/\* \#undef \_MGHAVE\_CLIPBOARD \*/
-
-/\* Define if include cursor support \*/
-
-/\* \#undef \_MGHAVE\_CURSOR \*/
-
-/\* Define if include fixed math routines \*/
-
-\#define \_MGHAVE\_FIXED\_MATH 1
-
-/\* Define if support menu \*/
-
-\#define \_MGHAVE\_MENU 1
-
-/\* Define if include code for mouse calibration \*/
-
-/\* \#undef \_MGHAVE\_MOUSECALIBRATE \*/
-
-/\* Define if include message string names \*/
-
-/\* \#undef \_MGHAVE\_MSG\_STRING \*/
-
-/\* Define if PCIAccess lib is available \*/
-
-/\* \#undef \_MGHAVE\_PCIACCESS \*/
-
-/\* Define if trace message dispatching of MiniGUI \*/
-
-/\* \#undef \_MGHAVE\_TRACE\_MSG \*/
-
-/\* Define if include the 2440 IAL engine \*/
-
-/\* \#undef \_MGIAL\_2440 \*/
-
-/\* Define if include the automatic IAL engine \*/
-
-/\* \#undef \_MGIAL\_AUTO \*/
-
-/\* Define if include IAL engine for Cisco touchpad \*/
-
-/\* \#undef \_MGIAL\_CISCO\_TOUCHPAD \*/
-
-/\* Define if include the common IAL engine \*/
-
-/\* \#undef \_MGIAL\_COMM \*/
-
-/\* Define if include console (Linux console) IAL engine \*/
-
-\#define \_MGIAL\_CONSOLE 1
-
-/\* Define if include IAL engine for customer's board \*/
-
-/\* \#undef \_MGIAL\_CUSTOM \*/
-
-/\* Define if include the DAVINCI6446 IAL engine \*/
-
-/\* \#undef \_MGIAL\_DAVINCI6446 \*/
-
-/\* Define if include the DFB IAL engine \*/
-
-/\* \#undef \_MGIAL\_DFB \*/
-
-/\* Define if include dlcustom IAL engine \*/
-
-/\* \#undef \_MGIAL\_DLCUSTOM \*/
-
-/\* Define if include the dummy IAL engine \*/
-
-\#define \_MGIAL\_DUMMY 1
-
-/\* Define if include IAL engine for iPAQ H3600 \*/
-
-/\* \#undef \_MGIAL\_IPAQ\_H3600 \*/
-
-/\* Define if include IAL engine for iPAQ H5400 \*/
-
-/\* \#undef \_MGIAL\_IPAQ\_H5400 \*/
-
-/\* Define if include the JZ4740 IAL engine \*/
-
-/\* \#undef \_MGIAL\_JZ4740 \*/
-
-/\* Define if include the lide IAL engine \*/
-
-/\* \#undef \_MGIAL\_LIDE \*/
-
-/\* Define if include IAL engine for MStar \*/
-
-/\* \#undef \_MGIAL\_MSTAR \*/
-
-/\* Define if include IAL engine for net's board \*/
-
-/\* \#undef \_MGIAL\_NET \*/
-
-/\* Define if include IAL engine for Nexus \*/
-
-/\* \#undef \_MGIAL\_NEXUS \*/
-
-/\* Define if include the QEMU IAL engine \*/
-
-/\* \#undef \_MGIAL\_QEMU \*/
-
-/\* Define if include the QVFB IAL engine \*/
-
-/\* \#undef \_MGIAL\_QVFB \*/
-
-/\* Define if include the random IAL engine \*/
-
-/\* \#undef \_MGIAL\_RANDOM \*/
-
-/\* Define if include IAL engine for TSLIB \*/
-
-/\* \#undef \_MGIAL\_TSLIB \*/
-
-/\* Define if include the WVFB IAL engine \*/
-
-/\* \#undef \_MGIAL\_WVFB \*/
-
-/\* Define if support GIF bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_GIF \*/
-
-/\* Define if support JPEG bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_JPG \*/
-
-/\* Define if support LBM bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_LBM \*/
-
-/\* Define if support PCX bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_PCX \*/
-
-/\* Define if support PNG bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_PNG \*/
-
-/\* Define if support TGA bmp file format \*/
-
-/\* \#undef \_MGIMAGE\_TGA \*/
-
-/\* Define if include in-core font: Courier \*/
-
-/\* \#undef \_MGINCOREFONT\_COURIER \*/
-
-/\* Define if include in-core font: SansSerif \*/
-
-/\* \#undef \_MGINCOREFONT\_SANSSERIF \*/
-
-/\* Define if include in-core font: System \*/
-
-/\* \#undef \_MGINCOREFONT\_SYSTEM \*/
-
-/\* Define if include in-core UPF Times fonts \*/
-
-/\* \#undef \_MGINCOREFONT\_TIMES \*/
-
-/\* Define if include in-core FixedSys RBF for ISO8859-1 \*/
-
-\#define \_MGINCORERBF\_LATIN1\_FIXEDSYS 1
-
-/\* Define if include in-core Terminal RBF for ISO8859-1 \*/
-
-/\* \#undef \_MGINCORERBF\_LATIN1\_TERMINAL \*/
-
-/\* Define if include in-core VGAOEM RBF for ISO8859-1 \*/
-
-/\* \#undef \_MGINCORERBF\_LATIN1\_VGAOEM \*/
-
-/\* Define if build MiniGUI for no file I/O system (use in-core
-resources) \*/
-
-/\* \#undef \_MGINCORE\_RES \*/
-
-/\* Define if use the Arabic PC keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_ARABICPC \*/
-
-/\* Define if use the German keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_DE \*/
-
-/\* Define if use the German-Latin1 keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_DELATIN1 \*/
-
-/\* Define if use the Spanish keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_ES \*/
-
-/\* Define if use the Spanish CP850 keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_ESCP850 \*/
-
-/\* Define if use the French keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_FR \*/
-
-/\* Define if use the French PC keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_FRPC \*/
-
-/\* Define if use the Hebrew PC keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_HEBREWPC \*/
-
-/\* Define if use the Italian keyboard layout \*/
-
-/\* \#undef \_MGKBDLAYOUT\_IT \*/
-
-/\* Define if include flat Look and Feel \*/
-
-/\* \#undef \_MGLF\_RDR\_FLAT \*/
-
-/\* Define if include skin Look and Feel \*/
-
-/\* \#undef \_MGLF\_RDR\_SKIN \*/
-
-/\* MiniGUI library suffix \*/
-
-\#define \_MGLIB\_SUFFIX "ths"
-
-/\* Define if compile max ttf cahce number for 10 (default value) \*/
-
-/\* \#undef \_MGMAX\_TTF\_CACHE \*/
-
-/\* Define if include About MiniGUI Dialog Box \*/
-
-/\* \#undef \_MGMISC\_ABOUTDLG \*/
-
-/\* Define if mouse button can do double click \*/
-
-/\* \#undef \_MGMISC\_DOUBLE\_CLICK \*/
-
-/\* Define if include SaveBitmap function \*/
-
-/\* \#undef \_MGMISC\_SAVEBITMAP \*/
-
-/\* Define if include code for screenshots \*/
-
-/\* \#undef \_MGMISC\_SAVESCREEN \*/
-
-/\* Define if build MiniGUI-Processes \*/
-
-/\* \#undef \_MGRM\_PROCESSES \*/
-
-/\* Define if build MiniGUI-Standalone \*/
-
-/\* \#undef \_MGRM\_STANDALONE \*/
-
-/\* Define if build MiniGUI-Threads \*/
-
-\#define \_MGRM\_THREADS 1
-
-/\* Define if the unit of timer is 10ms \*/
-
-\#define \_MGTIMER\_UNIT\_10MS 1
-
-/\* Define if compile max ttf cahce size for 256k \*/
-
-/\* \#undef \_MGTTF\_CACHE\_SIZE \*/
-
-/\* Define if use own implementation of malloc functions \*/
-
-/\* \#undef \_MGUSE\_OWN\_MALLOC \*/
-
-/\* Define if use own implementation of pthread functions \*/
-
-/\* \#undef \_MGUSE\_OWN\_PTHREAD \*/
-
-/\* Define if use own implementation of stdio functions \*/
-
-/\* \#undef \_MGUSE\_OWN\_STDIO \*/
-
-/\* Define if build the mgeff support version \*/
-
-/\* \#undef \_MG\_MINIMALGDI \*/
-
-/\* Define if insert a productid into the library file \*/
-
-/\* \#undef \_MG\_PRODUCTID \*/
-
-/\* Define if build MiniGUI-Standalone (back-compatibility definition)
-\*/
-
-/\* \#undef \_STAND\_ALONE \*/
-
-/\* Define if use minigui\_entry function in MiniGUI \*/
-
-/\* \#undef \_USE\_MINIGUIENTRY \*/
-
-/\* Define if compile for Cygwin platform \*/
-
-/\* \#undef `__CYGWIN__` \*/
-
-/\* Define if compile for OpenDarwin \*/
-
-/\* \#undef `__DARWIN__` \*/
-
-/\* Define if compile for eCos \*/
-
-/\* \#undef `__ECOS__` \*/
-
-/\* Define if compile for Linux \*/
-
-\#define `__LINUX__` 1
-
-/\* Define if compile for non-UNIX like OS \*/
-
-/\* \#undef `__NOUNIX__` \*/
-
-/\* Define if compile for Nucleus \*/
-
-/\* \#undef `__NUCLEUS__` \*/
-
-/\* Define if compile for OSE \*/
-
-/\* \#undef `__OSE__` \*/
-
-/\* Define if compile for pSOS \*/
-
-/\* \#undef `__PSOS__` \*/
-
-/\* Define for Blackfin run uClinux \*/
-
-/\* \#undef `__TARGET\_BLACKFIN__` \*/
-
-/\* Define for EPSON C33L05 (axLinux) \*/
-
-/\* \#undef `__TARGET\_C33L05__` \*/
-
-/\* Define for FMSoft internal use \*/
-
-/\* \#undef `__TARGET\_FMSOFT__` \*/
-
-/\* Define for Monaco ANVIL target \*/
-
-/\* \#undef `__TARGET\_MONACO__` \*/
-
-/\* Define for FMSoft miniStudio \*/
-
-/\* \#undef `__TARGET\_MSTUDIO__` \*/
-
-/\* Define for OSE on mx21 \*/
-
-/\* \#undef `__TARGET\_MX21__` \*/
-
-/\* Define for VxWorks on PowerPC \*/
-
-/\* \#undef `__TARGET\_PPC__` \*/
-
-/\* Define for Philips STB810 target \*/
-
-/\* \#undef `__TARGET\_STB810__` \*/
-
-/\* Define for unknown target \*/
-
-\#define `__TARGET\_UNKNOWN__` 1
-
-/\* Define for VirualFone ANVIL target \*/
-
-/\* \#undef `__TARGET\_VFANVIL__` \*/
-
-/\* Define for VxWorks on i386 \*/
-
-/\* \#undef `__TARGET\_VXI386__` \*/
-
-/\* Define if compile for ThreadX \*/
-
-/\* \#undef `__THREADX__` \*/
-
-/\* Define if compile for uC/OS-II \*/
-
-/\* \#undef `__UCOSII__` \*/
-
-/\* Define if compile for VxWorks \*/
-
-/\* \#undef `__VXWORKS__` \*/
-
-/\* Define if compile for Winbond SWLinux \*/
-
-/\* \#undef `__WINBOND\_SWLINUX__` \*/
-
-/\* Define if compile for uClinux \*/
-
-/\* \#undef `__uClinux__` \*/
-
-...
-
-2.4 Compiling and Installing MiniGUI 
--------------------------------------
-
-### 2.4.1 compile and install the dependent library
+### Dependent libraries and tools
 
 Before running MiniGUI, you need to install the dependent libraries
 required by MiniGUI. MiniGUI mainly uses LibFreeType, LibPNG, LibJPEG,
@@ -2156,9 +1376,9 @@ command:
 This section is given below in the source code package based on the
 compiler, install these dependent libraries steps, for reference only.
 
-\$ sudo apt-get install libfreetype6-dev libpng12-dev libjpeg-dev
+    $ sudo apt-get install libfreetype6-dev libpng12-dev libjpeg-dev
 
-***LibFreeType***
+#### LibFreeType
 
 The FreeType Library is an open source, high quality, and portable font
 engine that provides a unified interface for accessing a variety of font
@@ -2176,16 +1396,14 @@ Download the source code package of FreeType 2 from the official website
 of MiniGUI or the FreeType official website and unzip it into the source
 directory, then run the following command:
 
-\$ ./configure --prefix=/usr/local
-
-\$ make
-
-\$ sudo make install
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ sudo make install
 
 The FreeType 2 library and header files will be installed in /usr/local
 directory.
 
-***LibJPEG, LibPNG, LibZ and other dependent libraries***
+#### LibJPEG, LibPNG, LibZ and other dependent libraries
 
 The library on which MiniGUI runs depends on libjpeg for JPEG images,
 libpng for PNG images, and more. Like the FreeType library, these
@@ -2198,11 +1416,9 @@ and installing LibPNG, first install the LibZ library. Download and
 unzip LibZ library source code package, and then enter the source root
 directory, execute the following command:
 
-\$ ./configure --prefix=/usr/local
-
-\$ make
-
-\$ sudo make install
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ sudo make install
 
 The LibZ library and header files will be installed in /usr/local
 directory.
@@ -2210,20 +1426,16 @@ directory.
 Download LibPng library source code, untied into the root directory of
 the source code, execute the following command:
 
-\$ ./configure --prefix=/usr/local
-
-\$ make
-
-\$ sudo make install
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ sudo make install
 
 Download LibJPEG library source code, untied into the root directory of
 the source code, execute the following command:
 
-\$ ./configure --prefix=/usr/local --enable-shared
-
-\$ make
-
-\$ sudo make install
+    $ ./configure --prefix=/usr/local --enable-shared
+    $ make
+    $ sudo make install
 
 The installation process may be prompted to create certain files, then
 you need to see the directory you want to install there is no
@@ -2231,16 +1443,14 @@ corresponding directory, if you do not have to create your own. This
 JPEG library header files, dynamic libraries and static libraries will
 be installed to the /usr/local directory.
 
-### 2.4.2 compile and install the virtual framebuffer program
+#### gvfb
 
-The default virtual framebuffer graphics engine in MiniGUI 3.0 is
+The default virtual frame buffer graphics engine in MiniGUI 3.0 is
 pc\_xvfb. The graphics engine defines a virtual frame buffer program
 (XVFB) specification that does not depend on a specific implementation.
 Under this specification, we can use the gvfb program on Linux Use Gtk+
 development), or use the qvfb2 program (developed using Qt) to display
 the output of MiniGUI and its application in the window of gvfb or qvfb.
-
-***gvfb***
 
 gvfb is a virtual framebuffer program that is compatible with MiniGUI
 3.0 XVFB specification and was developed using Gtk+ 2.0. To compile and
@@ -2248,53 +1458,15 @@ install gvfb, to ensure that the system has been installed Gtk+ 2.0
 development kits. Under Ubuntu Linux, use the following command to
 install the appropriate development kit:
 
-\$ sudo apt-get install libgtk2.0-dev
+    $ sudo apt-get install libgtk2.0-dev
 
 Then enter the gvfb source code directory, run the following command:
 
-\$ ./configure --prefix=/usr/local
+    $ ./configure --prefix=/usr/local
+    $ make
+    $ sudo make install
 
-\$ make
-
-\$ sudo make install
-
-***qvfb2***
-
-qvfb2 is an upgraded version of qvfb that is compatible with the XVFB
-specification proposed by MiniGUI 3.0.
-
-To compile qvfb2, you need to install Qt development package, and Qt
-version needs to be greater than or equal to 3.0.3. Specific
-installation process can refer to the source code in the README file.
-Here's an example of the specific process of installing qvfb2 in ubuntu
-environment.
-
-\$ sudo apt-get install build-essential xorg-dev
-
-Qt3 library and its header files and other related content installation:
-
-\$ sudo apt-get install libqt3-headers libqt3-mt libqt3-mt-dev
-
-Then enter the qvfb2 source code directory, run the following command:
-
-\$ ./configure --prefix=/usr/local \\
-
---with-qt-includes=/usr/include/qt3/ \\
-
---with-qt-libraries=/usr/lib/qt3/
-
-\$ make
-
-\$ sudo make install
-
-The --prefix option specifies the installation path for qvfb2;
-*--with-qt-includes* option specifies the Qt3 header file path; -
-with-qt-libraries option specifies the Qt3 library file path.
-
-If the above command is successful, then qvfb2 program will be installed
-to /usr/ local/bin directory.
-
-### 2.4.3 Compiling and Installing MiniGUI in the GNU Development Environment
+### In the GNU Environment
 
 If you configure MiniGUI with configure script in GNU development
 environment, you can compile and install MiniGUI with make tool.
@@ -2304,30 +1476,30 @@ computer for running Linux, you can execute several commands as the
 following in your MiniGUI source code directory to configure, compile
 and install MiniGUI to your system.
 
+```
 user\$ ./configure
-
 user\$ make
-
 user\$ su -c ‘make install’
+```
 
 You can also use configure script to specify a cross-compiling directory
 and installing directory and so on.
 
-### 2.4.4 Install MiniGUI Resource Package
+#### Install MiniGUI Resource Package
 
 MiniGUI resource package (minigui-res) is also organized by GNU
 autoconf/automake script, so just run the following command to install:
 
+```
 user\$ ./configure
-
 user\$ make
-
 user\$ sudo make install
+```
 
 Similarly, we can also specify the installation path using the --prefix
 option.
 
-### 2.4.5 compile and run MiniGUI sample
+#### Compile and run MiniGUI sample
 
 After compiling and installing MiniGUI according to the above steps, you
 can compile and run the sample in mg-samples. By default, MiniGUI will
@@ -2337,11 +1509,11 @@ framebuffer is gvfb.
 Run the following command to configure and compile the mg-samples code
 package:
 
+```
 user\$ sudo ldconfig
-
 user\$ ./configure
-
 user\$ make
+```
 
 The first command to refresh the Linux system dynamic library cache
 system. Because by default MiniGUI dynamic libraries are installed in
@@ -2354,23 +1526,22 @@ mginit program first and then run the other sample programs. The
 following is the process of running the same game in MiniGUI-Processes
 mode:
 
+```
 user\$ cd mginit
-
 user\$ ./mginit &
-
 user\$ cd ../same
-
 user\$ ./same
+```
 
 On MiniGUI-Threads runtime mode to run the demo program, more simple,
 direct run sample demo. Here's how to run the same game in thread mode:
 
+```
 user\$ cd same
-
 user\$ ./same
+```
 
-2.5 Compiling and Installing MiniGUI in Non-GNU Development Environment
------------------------------------------------------------------------
+### In Non-GNU Environment
 
 In the Non-GNU development environment (generally, it is Windows
 platform), we first organize MiniGUI source code solution for project of
@@ -2432,7 +1603,7 @@ Copy build/config-vxworks-i386.h to MiniGUI source code top directory,
 and rename it as mgconfig.h (we resume that current directory is MiniGUI
 source code top directory):
 
-cygwin\$ cp build/config-vxworks-i386.h mgconfig.h
+    cygwin$ cp build/config-vxworks-i386.h mgconfig.h
 
 Modify TARGET\_RULES value in rules.make file:
 
@@ -2440,18 +1611,18 @@ TARGET\_RULES=build/rules-pc.vxworks
 
 Then we compile MiniGUI using make tool of cygwin:
 
-cygwin\$ /usr/bin/make –f makefile.ng
+    cygwin$ /usr/bin/make –f makefile.ng
 
 Note that **makefile.ng** supports commands of clean and make. If you
 execute the command as follow:
 
-cygwin\$ /usr/bin/make –f makefile.ng install
+    cygwin$ /usr/bin/make –f makefile.ng install
 
 You can install MiniGUI header files and library to the directory, which
 is specified by **rules-&lt;platform&gt;.&lt;os&gt;**. If you execute
 the command as the following:
 
-cygwin\$ /usr/bin/make –f makefile.ng clean
+    cygwin$ /usr/bin/make –f makefile.ng clean
 
 You can clean all object files to compile afresh.
 
@@ -2483,40 +1654,26 @@ Table 2.21 the variables needed by makefile.ng
 
 **build/rules-pc.vxworks** file was listed as follows:
 
+```
 \# rules for pc-vxworks
-
 AS=
-
 CC=ccpentium
-
 CXX=c++pentium
-
 CPP=ccpentium
-
 AR=arpentium
-
 RANLIB=ranlibpentium
-
 MAKE=/usr/bin/make
-
 ARFLAGS=crus
-
 COFLAG=-c
-
 OBJ=o
-
 LIBA=a
-
 PREFIX=c:/cross
 
-\#vxworks
-
+#vxworks
 TARGET\_DIR=C:/Tornado2.2x86/target
-
 INCS+=-I\${TARGET\_DIR}/h
-
-CFLAGS+=-g -mcpu=pentium -march=pentium -Wall -DTOOL\_FAMILY=gnu
--DTOOL=gnu -D\_WRS\_KERNEL -DCPU=PENTIUM
+CFLAGS+=-g -mcpu=pentium -march=pentium -Wall -DTOOL\_FAMILY=gnu -DTOOL=gnu -D\_WRS\_KERNEL -DCPU=PENTIUM
+```
 
 Note that the make tool will install MiniGUI header files to the
 **\$PREFIX/include/minigui** directory under the **makefile.ng** project
@@ -2534,24 +1691,13 @@ environment, actually. This kind of circumstance usually occurs during
 using cross-compile tool chain for uClinux. If you work in the Linux
 environment, you can execute make command.
 
+```
 user\$ make –f makefile.ng
+```
 
 About other contents related with portion and configuration of MiniGUI,
 please refer to Chapter 18 “*GAL and IAL Engines*” and Appendix A “*A
 Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
-
-2.6 Use Ubuntu on Windows to configure and compile MiniGUI
-----------------------------------------------------------
-
-Specifically, since Windows 10, Microsoft has reinstated the
-POSIX-compliant subsystem on the Windows platform with WSL(Windows
-Subsystem for Linux) as well as an Ubuntu distribution through the
-Microsoft Store. In this way, we can use the Ubuntu environment running
-on Windows 10 to configure and compile MiniGUI. This will bring us a lot
-of convenience because Ubuntu running on Windows is a complete GNU
-development environment so we can use the GNU *autoconf/automake* script
-to configure MiniGUI for operating systems like VxWorks and its
-development environment.
 
 ---
 
