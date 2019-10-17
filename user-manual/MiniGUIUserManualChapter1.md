@@ -92,7 +92,7 @@ especially if the new features of MiniGUI 4.0.x are must for your new apps.
 
 ### Source Tarballs and Repos
 
-The list of all software of MiniGUI is as follow:
+All software packages of MiniGUI are listed as follow:
 
 - MiniGUI core and components:
    * `libminigui`: MiniGUI Core.
@@ -103,11 +103,11 @@ The list of all software of MiniGUI is as follow:
    * `libmgncs4touch`: mGNCS4Touch component.
    * `minigui-res`: the resource tarball including contains fonts, cursors, icons, and bitmaps used by MiniGUI.
    * `mg-tests`: The unit tests for MiniGUI core (since 4.0.0).
-- Samples and Demos:
+- Samples and demos:
    * `mg-samples`: The samples for MiniGUI and components.
    * `mguxdemo`: mGUXDemo is the comprehensive demonstration for MiniGUI core and components.
    * `mg-demos`: A set of demos as supplements of mGUXDemo.
-- Tools and Third Party Libraries
+- Tools and third party libraries
    * `gvfb`: the virtual frame buffer Gtk version.
    * `mg-tools`: The tools for fonts conversion and in-core resource generation.
    * libjpeg v7: MiniGUI uses this library to decode JPEG image files.

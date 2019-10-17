@@ -1,7 +1,6 @@
-2 Configuring, Compiling, and Installing MiniGUI
-================================================
+# Building MiniGUI
 
-In general, Embedded Systems are special systems, and they have
+In general, embedded Systems are special systems, and they have
 different requirement for graphics system. Some system required a basic
 graphics function but someone required a complete graphics, window and
 controls supporting. So an embedded graphics system must be constituted.
@@ -2514,3 +2513,16 @@ development environment so we can use the GNU *autoconf/automake* script
 to configure MiniGUI for operating systems like VxWorks and its
 development environment.
 
+---
+
+[Previous Chapter](MiniGUIUserManualChapter1.md)  
+[Table of Contents](README.md)  
+[Next Chapter](MiniGUIUserManualChapter3.md)
+
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Website]: http://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
