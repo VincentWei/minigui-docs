@@ -16,10 +16,12 @@
    * [Appearance Renderer](#appearance-renderer)
    * [Control](#control)
    * [Others](#others)
+- [Minimal Configuration Options](#minimal-configuration-options)
 - [Compiling and Installing MiniGUI](#compiling-and-installing-minigui)
    * [Dependent libraries and tools](#dependent-libraries-and-tools)
    * [In GNU environment](in-gnu-environment)
    * [In Non-GNU environment](in-non-gnu-environment)
+- [Building MiniGUI Components](#building-minigui-components)
 
 ## Introduction
 
@@ -1254,55 +1256,55 @@ MiniGUI-Standalone mode of operation.
 You can specify a special library name suffix with the --with-libsuffix
 option.
 
-## Minimum Configuration Options
+## Minimal Configuration Options
 
 In this chapter, we will give an example of minimum configuration
 options in MiniGUI.
-
-### Using GNU Configure Script
 
 There is a buildlib-min script in the MiniGUI source codes build
 directory. The buildlib-min script will be as the following:
 
 ```bash
+
 #!/bin/sh
-./configure \\
---disable-dblclk \\
---disable-cursor \\
---disable-mousecalibrate \\
---disable-clipboard \\
---disable-adv2dapi \\
---disable-splash \\
---disable-screensaver \\
---disable-flatlf \\
---disable-skinlf \\
---disable-rbfvgaoem \\
---disable-rbfterminal \\
---disable-vbfsupport \\
---disable-qpfsupport \\
---disable-upfsupport \\
---disable-bmpfsupport \\
---disable-latin9support \\
---disable-gbsupport \\
---disable-gbksupport \\
---disable-unicodesupport \\
---disable-savebitmap \\
---disable-jpgsupport \\
---disable-pngsupport \\
---disable-gifsupport \\
---disable-aboutdlg \\
---disable-savescreen \\
---disable-mousecalibrate \\
---disable-ctrlanimation \\
---disable-ctrlnewtextedit \\
---disable-consoleps2 \\
---disable-consoleimps2 \\
---disable-consolems \\
---disable-consolems3 \\
---disable-consolegpm
+
+./configure \
+    --disable-dblclk \
+    --disable-cursor \
+    --disable-mousecalibrate \
+    --disable-clipboard \
+    --disable-adv2dapi \
+    --disable-splash \
+    --disable-screensaver \
+    --disable-flatlf \
+    --disable-skinlf \
+    --disable-rbfvgaoem \
+    --disable-rbfterminal \
+    --disable-vbfsupport \
+    --disable-qpfsupport \
+    --disable-upfsupport \
+    --disable-bmpfsupport \
+    --disable-latin9support \
+    --disable-gbsupport \
+    --disable-gbksupport \
+    --disable-unicodesupport \
+    --disable-savebitmap \
+    --disable-jpgsupport \
+    --disable-pngsupport \
+    --disable-gifsupport \
+    --disable-aboutdlg \
+    --disable-savescreen \
+    --disable-mousecalibrate \
+    --disable-ctrlanimation \
+    --disable-ctrlnewtextedit \
+    --disable-consoleps2 \
+    --disable-consoleimps2 \
+    --disable-consolems \
+    --disable-consolems3 \
+    --disable-consolegpm
 ```
 
-By this script, you can configure MiniGUI to the minimum function
+By using this script, you can configure MiniGUI to the minimum function
 library that only supports ISO8859-1 charset:
 
 Compiling MiniGUI to be MiniGUI-Threads.
@@ -1341,8 +1343,6 @@ application, you can add **—disable-ctrlanimation** option in the
 configuration script above, so there is not GIF animation control in
 your compiled functions library, the MiniGUI functions library is made
 smaller.
-
-### Corresponding mgconfig.h
 
 The `mgconfig.h` file to be generated in the configuration script
 above, listed as follows:
@@ -1697,6 +1697,8 @@ user\$ make –f makefile.ng
 About other contents related with portion and configuration of MiniGUI,
 please refer to Chapter 18 “*GAL and IAL Engines*” and Appendix A “*A
 Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
+
+## Building MiniGUI Components
 
 ---
 
