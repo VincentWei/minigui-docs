@@ -6,8 +6,8 @@
 - [First Run](#first-run)
    * [Recommended development environment](#recommended-development-environment)
    * [MiniGUI Releases](#minigui-releases)
-   * [Building MiniGUI 4.0](#building-minigui-4.0)
-   * [Building MiniGUI 3.2](#building-minigui-3.2)
+   * [Building MiniGUI 4.0](#building-minigui-40)
+   * [Building MiniGUI 3.2](#building-minigui-32)
 
 ## Introduction
 
@@ -137,8 +137,8 @@ The building scripts of MiniGUI are tested on these Linux distributions.
 
 Note that we are currently maintained three releases of MiniGUI:
 
-- MiniGUI version 3.0.x. This release will not be updated. This release is there
-  only for old projects.
+- MiniGUI version 3.0.x. This release will not be updated. This release is
+  there only for old projects.
 - MiniGUI version 3.2.x. Main features since version 3.0:
    * Support for 64-bit platform.
 - MiniGUI version 4.0.x. Main features since version 3.2:
@@ -164,9 +164,183 @@ notes of MiniGUI core and components:
 We strongly recommend that you use MiniGUI version 4.0.x for any new MiniGUI apps,
 especially if the new features of MiniGUI 4.0.x are must for your new apps.
 
+Since MiniGUI 3.2, we maintain some simple scripts to fast fetch the code and
+build all dependencies for the comprehensive demonstration (mGUXDemo) of
+MiniGUI core and components. So it is very easy to build MiniGUI on a
+Ubuntu Linux distribution.
+
+The following figures are some screenshots of mGUXDemo.
+
+![mGUXDemo Screenshot 1](figures/mguxdemo-1.png){:height="auto" width="437px"}
+
+![mGUXDemo Screenshot 2](figures/mguxdemo-2.png){:height="auto" width="437px"}
+
 ### Building MiniGUI 4.0
 
+#### Prerequisites
+
+First, make sure that you are using Ubuntu Linux 16.04 LTS or 18.04 LTS.
+
+You should run `apt install <package_name>` to install the following packages
+on your Ubuntu Linux.
+
+- Building tools:
+   * git
+   * gcc/g++
+   * binutils
+   * autoconf/automake
+   * libtool
+   * make
+   * cmake
+   * pkg-config
+- Dependent libraries:
+   * libgtk2.0-dev
+   * libjpeg-dev
+   * libpng12-dev (libpng-dev on Ubuntu Linux 18.04 instead)
+   * libfreetype6-dev
+   * libinput-dev
+   * libdrm-dev
+   * libsqlite3-dev
+   * libxml2-dev
+   * libssl1.0-dev
+   * electric-fence (used by mg-tests)
+
+Note that if you are using Ubuntu Linux 18.04, please install
+`libpng-dev`. Ubuntu 18.04 does not provide support for `libpng12-dev`.
+
+#### Steps
+
+Please make sure that you can visit GitHub and you can do `sudo` on your Linux box.
+
+1. Copy `config.sh` to `myconfig.sh` and edit `myconfig.sh` to match your needs:
+
+        $ cp config.sh myconfig.sh
+
+1. Run `fetch-all.sh` to fetch all source from GitHub:
+
+        $ ./fetch-all.sh
+
+1. Run `build-deps.sh` to build and install gvfb, chipmunk, and harfbuzz:
+
+        $ ./build-deps.sh
+
+1. Run `build-all.sh` to build all:
+
+        $ ./build-all.sh
+
+1. Run `mguxdemo`:
+
+        $ cd /usr/local/bin
+        $ ./mguxdemo
+
+When there were some updates in the remote repos, you can run `update-all.sh` to
+update them. You can run `clean-build-all.sh` to uninstall, clean,
+and re-install them.
+
+Note that you might need to run `ldconfig` to refresh the shared libraries cache
+when running `mguxdemo`.
+
+#### Commands to build dependencies
+
+The following steps are those ones in `build-deps.sh`. We list them here for
+your information:
+
+1. Make and install `gvfb`:
+
+        $ cd gvfb
+        $ cmake .
+        $ make; sudo make install
+        $ cd ..
+
+1. Make and install `chipmunk` library (DO NOT use the chipmunk-dev package
+   which is provided by Ubuntu):
+
+        $ cd 3rd-party/chipmunk
+        $ cmake .
+        $ make; sudo make install
+        $ cd ../..
+
+1. Make and install `harfbuzz` library (DO NOT use the harfbuzz-dev package
+   which is provided by Ubuntu):
+
+        $ cd 3rd-party/harfbuzz
+        $ ./autogen.sh
+        $ ./config-extern.sh
+        $ make; sudo make install
+        $ cd ../..
+
 ### Building MiniGUI 3.2
+
+#### Prerequisites
+
+First, make sure that you are using Ubuntu Linux 16.04 LTS.
+
+You can run `apt install <package_name>` to install the software on Ubuntu Linux.
+
+* Building tools:
+  * git
+  * gcc/g++
+  * binutils
+  * autoconf/automake
+  * libtool
+  * make
+  * cmake
+  * pkg-config
+* Dependent libraries:
+  * libgtk2.0-dev
+  * libjpeg-dev
+  * libpng12-dev
+  * libfreetype6-dev
+  * libsqlite3-dev
+  * libxml2-dev
+  * libssl-dev
+
+#### Steps
+
+Please make sure that you can visit GitHub via SSH and you can do `sudo` on your Linux box.
+
+1. Run `fetch-all.sh` to fetch all source from GitHub:
+
+        $ ./fetch-all.sh
+
+2. Make and install `gvfb`:
+
+        $ cd gvfb
+        $ cmake .
+        $ make; sudo make install
+        $ cd ..
+
+3. Make and install `chipmunk` library (DO NOT use the chipmunk-dev package
+   which is provided by Ubuntu):
+
+        $ cd 3rd-party/chipmunk-5.3.1
+        $ cmake .
+        $ make; sudo make install
+        $ cd ../..
+
+4. Install MiniGUI resources:
+
+        $ cd minigui-res
+        $ ./augen.sh
+        $ ./configure
+        $ sudo make install
+        $ cd ..
+
+5. Run `build-all.sh` to build all:
+
+        $ ./build-all.sh
+
+6. Run `mguxdemo`:
+
+        $ cd /usr/local/bin
+        $ ./mguxdemo
+
+When there were some updates in the remote repos, you can run `update-all.sh` to
+update them. You can run `clean-build-all.sh` to uninstall, clean,
+and re-install them.
+
+Note that you might need to run `ldconfig` to refresh the shared libraries cache
+before running `mguxdemo`.
 
 ---
 
