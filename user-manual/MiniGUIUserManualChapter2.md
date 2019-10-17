@@ -1,84 +1,79 @@
 # Building MiniGUI
 
-In general, embedded Systems are special systems, and they have
-different requirement for graphics system. Some system required a basic
-graphics function but someone required a complete graphics, window and
-controls supporting. So an embedded graphics system must be constituted.
-MiniGUI provides a lot of configuration options. You can specify the
-functions of MiniGUI library. Generally, we can configure MiniGUI as
-follows:
+In general, embedded systems are special systems, and they have
+various requirements for different applications. For example, some
+systems require a basic graphics function to show images, but others may
+require a complete support for windowing and controls/widgets, even needs
+a HTML5 web browser. Therefore, an embedded graphics system like MiniGUI
+must be tailorable.
 
-Specify the operating system and the target board on which MiniGUI runs.
+For easy tailoring MiniGUI, MiniGUI provides a lot of compile-time
+configuration options to specify the features of MiniGUI core.
 
-Specify MiniGUI running mode: MiniGUI-Threads base on thread,
-MiniGUI-Processes based on processes or the simple MiniGUI-Standalone.
+Generally, we can configure MiniGUI core in the following aspects:
 
-Specify the graphics engine and the input engine, as well as the options
-of these engines.
+- The operating system and the target board on which MiniGUI runs.
+- The MiniGUI runtime mode: MiniGUI-Threads, MiniGUI-Processes, or MiniGUI-Standalone.
+- The graphics engine and the input engine, as well as the options of these engines.
+- The font types supported.
+- The character sets supported.
+- The image file formats supported: Windows BMP, GIF, JPEG, and PNG.
+- The controls/widgets supported.
+- The look-and-feel renderers supported.
 
-Specify font class supported and the type of incore fonts.
+In this chapter, we will show you the compile-time configuration options
+of MiniGUI core and the ways to configure it, in order that you can build
+a most suitable MiniGUI for your target devices.
 
-Specify the supporting character set.
+We will also show you how to build MiniGUI core too.
 
-Specify the supporting image file format.
+## Compile-time Configuration Options
 
-Specify the supporting control class.
+A file named **mgconfig.h** is located in the root directory of
+MiniGUI source code. A lot of ANSI C macros are defined in this file.
+We can configure MiniGUI by enabling or disabling these macros.
+Generally, we can modify this file in order to configure MiniGUI. You
+must recompile MiniGUI if this file is modified. After that you should
+install the header files and the libraries on your system. If your
+applications are static linking to MiniGUI, you should rebuild your
+applications, too. Please note that you should placed the
+**mgconfig.h** in a MiniGUI header file directory which your compiler
+can find it and overwrite the old one.
 
-Specify the style of the controls, i.e. CLASS style, FLAT style or
-FASHION style.
+In general, the content of **mgconfig.h** is as follow:
 
-> In this chapter we will discuss the compiling configuration options,
-> in order that user can create a most suitable MiniGUI for their
-> embedded system. We will discuss the compiling and installing of
-> MiniGUI too.
+```cplusplus
+...
+/* Define if compile for VxWorks operating system */
 
-2.1 Customization of Compiling Configuration Options
-----------------------------------------------------
+#define __VXWORKS__ 1
 
-> A file named **mgconfig.h** is located in the root directory of
-> MiniGUI source code. A lot of ANSI C macros are defined in this file.
-> We can configure MiniGUI by enabling or disabling these macros.
-> Generally, we can modify this file in order to configure MiniGUI. You
-> must recompile MiniGUI if this file is modified. After that you should
-> install the header files and the libraries on your system. If your
-> applications are static linking to MiniGUI, you should rebuild your
-> applications, too. Please note that you should placed the
-> **mgconfig.h** in a MiniGUI header file directory which your compiler
-> can find it and overwrite the old one.
->
-> In general, the contents of **mgconfig.h** as the follows:
+/* Define if include advanced 2D graphics APIs */
 
+#define _MGHAVE_ADV_2DAPI 1
+
+/* Define if support Arabic charset */
+
+/* #undef _MGCHARSET_ARABIC */
+
+/* Define if include the 2440 IAL engine */
+
+/* #undef _MGIAL_2440 */
+
+/* Define if include the automatic IAL engine */
+
+/* #undef _MGIAL_AUTO */
+
+/* Define if support BIG5 charset */
+
+#define _MGCHARSET_BIG5 1
+
+/* Define if include clipboard support */
+
+#define _MGHAVE_CLIPBOARD 1
 ...
 
-/\* Define if compile for VxWorks operating system \*/
-
-\#define \_\_VXWORKS\_\_ 1
-
-/\* Define if include advanced 2D graphics APIs \*/
-
-\#define \_MGHAVE\_ADV\_2DAPI 1
-
-/\* Define if support Arabic charset \*/
-
-/\* \#undef \_MGCHARSET\_ARABIC \*/
-
-/\* Define if include the 2440 IAL engine \*/
-
-/\* \#undef \_MGIAL\_2440 \*/
-
-/\* Define if include the automatic IAL engine \*/
-
-/\* \#undef \_MGIAL\_AUTO \*/
-
-/\* Define if support BIG5 charset \*/
-
-\#define \_MGCHARSET\_BIG5 1
-
-/\* Define if include clipboard support \*/
-
-\#define \_MGHAVE\_CLIPBOARD 1
-
-...
+```
 
 Above produces is a piece of **mgconfig.h**. Macro \_\_VXWORKS\_\_ is
 defined in this file and this macro will open the VxWorks support code
@@ -99,7 +94,7 @@ following section introduces how to use the configure script
 automatically to produce the **mgconfig.h** file in the GNU development
 environment.
 
-### 2.1.1 Configuration in GNU Development Environment by Configure Script
+### Using Configure Script in GNU Development Environment
 
 It’s known that we can conveniently maintain the program package using
 makefile. Through makefile, we may compile, clean or install the
@@ -142,7 +137,9 @@ you enable an option when run configure, then the correspondence macro
 will be defined; otherwise can’t define this macro. Run the following
 command.
 
-user\$ ./configure --help
+```shell
+user $ ./configure --help
+```
 
 You can obtain the whole options detailed list. For instance, supposing
 you use Ubuntu Linux 16.04(i386) as your development environment, the
@@ -150,176 +147,279 @@ command runs in the MiniGUI source code directory and the running result
 as follows (this command output may have differently on other Linux
 release version):
 
-\`configure' configures this package to adapt to many kinds of systems.
+```
+$ ./configure --help
+`configure' configures libminigui 3.2.2 to adapt to many kinds of systems.
 
-Usage: ./configure \[OPTION\]... \[VAR=VALUE\]...
+Usage: ./configure [OPTION]... [VAR=VALUE]...
 
 To assign environment variables (e.g., CC, CFLAGS...), specify them as
-
-VAR=VALUE. See below for descriptions of some of the useful variables.
+VAR=VALUE.  See below for descriptions of some of the useful variables.
 
 Defaults for the options are specified in brackets.
 
-\$ ./configure --help
+Configuration:
+  -h, --help              display this help and exit
+      --help=short        display options specific to this package
+      --help=recursive    display the short help of all the included packages
+  -V, --version           display version information and exit
+  -q, --quiet, --silent   do not print `checking ...' messages
+      --cache-file=FILE   cache test results in FILE [disabled]
+  -C, --config-cache      alias for `--cache-file=config.cache'
+  -n, --no-create         do not create output files
+      --srcdir=DIR        find the sources in DIR [configure dir or `..']
 
-\`configure' configures libminigui 3.0.13 to adapt to many kinds of
-systems.
+Installation directories:
+  --prefix=PREFIX         install architecture-independent files in PREFIX
+                          [/usr/local]
+  --exec-prefix=EPREFIX   install architecture-dependent files in EPREFIX
+                          [PREFIX]
 
-Usage: ./configure \[OPTION\]... \[VAR=VALUE\]...
+By default, `make install' will install all the files in
+`/usr/local/bin', `/usr/local/lib' etc.  You can specify
+an installation prefix other than `/usr/local' using `--prefix',
+for instance `--prefix=$HOME'.
 
-...
+For better control, use the options below.
+
+Fine tuning of the installation directories:
+  --bindir=DIR            user executables [EPREFIX/bin]
+  --sbindir=DIR           system admin executables [EPREFIX/sbin]
+  --libexecdir=DIR        program executables [EPREFIX/libexec]
+  --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
+  --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
+  --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
+  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
+  --libdir=DIR            object code libraries [EPREFIX/lib]
+  --includedir=DIR        C header files [PREFIX/include]
+  --oldincludedir=DIR     C header files for non-gcc [/usr/include]
+  --datarootdir=DIR       read-only arch.-independent data root [PREFIX/share]
+  --datadir=DIR           read-only architecture-independent data [DATAROOTDIR]
+  --infodir=DIR           info documentation [DATAROOTDIR/info]
+  --localedir=DIR         locale-dependent data [DATAROOTDIR/locale]
+  --mandir=DIR            man documentation [DATAROOTDIR/man]
+  --docdir=DIR            documentation root [DATAROOTDIR/doc/libminigui]
+  --htmldir=DIR           html documentation [DOCDIR]
+  --dvidir=DIR            dvi documentation [DOCDIR]
+  --pdfdir=DIR            pdf documentation [DOCDIR]
+  --psdir=DIR             ps documentation [DOCDIR]
+
+Program names:
+  --program-prefix=PREFIX            prepend PREFIX to installed program names
+  --program-suffix=SUFFIX            append SUFFIX to installed program names
+  --program-transform-name=PROGRAM   run sed PROGRAM on installed program names
 
 System types:
-
---build=BUILD configure for building on BUILD \[guessed\]
-
---host=HOST cross-compile to build programs to run on HOST \[BUILD\]
-
---target=TARGET configure for building compilers for TARGET \[HOST\]
+  --build=BUILD     configure for building on BUILD [guessed]
+  --host=HOST       cross-compile to build programs to run on HOST [BUILD]
+  --target=TARGET   configure for building compilers for TARGET [HOST]
 
 Optional Features:
-
---disable-option-checking ignore unrecognized --enable/--with options
-
---disable-FEATURE do not include FEATURE (same as --enable-FEATURE=no)
-
---enable-FEATURE\[=ARG\] include FEATURE \[ARG=yes\]
-
---enable-silent-rules less verbose build output (undo: "make V=1")
-
---disable-silent-rules verbose build output (undo: "make V=0")
-
---enable-shared=PKGS build shared libraries default=yes
-
---enable-static=PKGS build static libraries default=yes
-
---enable-fast-install=PKGS optimize for fast installation default=yes
-
---enable-dependency-tracking
-
-do not reject slow dependency extractors
-
---disable-dependency-tracking
-
-speeds up one-time build
-
---disable-libtool-lock avoid locking (might break parallel builds)
-
---enable-debug build with debugging messages &lt;default=no&gt;
-
---enable-tracemsg trace messages of MiniGUI &lt;default=no&gt;
-
---enable-msgstr include symbol name of message &lt;default=no&gt;
-
---enable-procs build MiniGUI-Processes version &lt;default=no&gt;
-
---enable-standalone build MiniGUI-Standalone version &lt;default=no&gt;
-
---enable-incoreres use incore resource instead file IO to initialize
-MiniGUI &lt;default=no&gt;
-
---enable-miniguientry use minigui\_entry function in MiniGUI
-&lt;default=no&gt;
-
---enable-fixedmath include fixed math routines &lt;default=yes&gt;
-
---enable-dblclk mouse button can do double click &lt;default=yes&gt;
-
---enable-cursor include cursor support &lt;default=yes&gt;
-
---enable-clipboard include clipboard support &lt;default=yes&gt;
-
---enable-ownstdio use own implementation of stdio functions
-&lt;default=no&gt;
-
---enable-ownmalloc use own implementation of malloc functions
-&lt;default=no&gt;
-
---enable-ownpthread use own implementation of pthread functions
-&lt;default=no&gt;
-
---enable-adv2dapi include advanced 2D graphics APIs &lt;default=yes&gt;
-
---enable-minimalgdi build a minimal GDI library only &lt;default=no&gt;
-
---enable-productid insert a productid into the library file
-&lt;default=no&gt;
-
---enable-splash enable splash &lt;default=yes&gt;
-
---enable-screensaver enable screensaver &lt;default=yes&gt;
-
---enable-flatlf include flat Look and Feel renderer &lt;default=yes&gt;
-
---enable-skinlf include skin Look and Feel renderer &lt;default=yes&gt;
-
-...
+  --disable-option-checking  ignore unrecognized --enable/--with options
+  --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
+  --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
+  --enable-silent-rules   less verbose build output (undo: "make V=1")
+  --disable-silent-rules  verbose build output (undo: "make V=0")
+  --enable-shared=PKGS  build shared libraries default=yes
+  --enable-static=PKGS  build static libraries default=yes
+  --enable-fast-install=PKGS  optimize for fast installation default=yes
+  --enable-dependency-tracking
+                          do not reject slow dependency extractors
+  --disable-dependency-tracking
+                          speeds up one-time build
+  --disable-libtool-lock  avoid locking (might break parallel builds)
+  --enable-develmode       developer mode <default=no>
+  --enable-detaildebug     detailed debug info <default=no>
+  --enable-tracemsg        trace messages of MiniGUI <default=no>
+  --enable-msgstr          include symbol name of message <default=no>
+  --enable-standalone      build MiniGUI-Standalone version <default=no>
+  --enable-incoreres       use incore resource instead file IO to initialize MiniGUI <default=no>
+  --enable-miniguientry    use minigui_entry function in MiniGUI <default=no>
+  --enable-fixedmath       include fixed math routines <default=yes>
+  --enable-dblclk          mouse button can do double click <default=yes>
+  --enable-cursor          include cursor support <default=yes>
+  --enable-clipboard       include clipboard support <default=yes>
+  --enable-ownstdio        use own implementation of stdio functions <default=no>
+  --enable-ownmalloc       use own implementation of malloc functions <default=no>
+  --enable-ownpthread      use own implementation of pthread functions <default=no>
+  --enable-adv2dapi        include advanced 2D graphics APIs <default=yes>
+  --enable-syncupdate      include implementation of SyncUpdateDC <default=yes>
+  --enable-minimalgdi      build a minimal GDI library only <default=no>
+  --enable-productid       insert a productid into the library file <default=no>
+  --enable-splash          enable splash <default=yes>
+  --enable-screensaver     enable screensaver <default=no>
+  --enable-flatlf          include flat Look and Feel renderer <default=yes>
+  --enable-skinlf          include skin Look and Feel renderer <default=yes>
+  --enable-customial       build the customer IAL engine <default=no>
+  --enable-dlcustomial     build the dlcustom IAL engine <default=no>
+  --enable-netial          build the IAL engine for net <default=no>
+  --enable-cisco_touchpad_ial    build the IAL engine for Cisco Touchpad <default=no>
+  --enable-mstar_ial       build the IAL engine for MStar <default=no>
+  --enable-ipaqh3600ial    build the IAL engine for iPAQ H3600 <default=no>
+  --enable-nexusial        build the IAL engine for Nexus <default=no>
+  --enable-ipaqh5400ial    build the IAL engine for iPAQ H5400 <default=no>
+  --enable-tslibial        build the IAL engine for TSLIB <default=no>
+  --enable-dummyial        build the Dummy IAL engine <default=yes>
+  --enable-autoial         build the Automatic IAL engine <default=no>
+  --enable-randomial       build the Random IAL engine <default=no>
+  --enable-commial         build the COMM IAL engine <default=no>
+  --enable-qvfbial         build the QVFB IAL engine <default=no>
+  --enable-qemuial         build the QEMU IAL engine <default=no>
+  --enable-wvfbial         build the WVFB IAL engine <default=no>
+  --enable-jz4740ial       build the JZ4740 IAL engine <default=no>
+  --enable-lide            build the lide IAL engine <default=no>
+  --enable-2440ial         build the 2440 IAL engine <default=no>
+  --enable-davinci6446ial  build the DAVINCI6446 IAL engine <default=no>
+  --enable-dfbial          build the DFB IAL engine <default=no>
+  --enable-consoleial      build the console (Linux console) IAL engine <default=yes>
+  --enable-consoleps2      build the console engine subdriver for PS2 mouse <default=yes>
+  --enable-consoleimps2    build the console engine subdriver for IntelligentMouse (IMPS/2) mouse <default=yes>
+  --enable-consolems       build the console engine subdirver for old MS serial mouse <default=yes>
+  --enable-consolems3      build the console engine subdirver for MS3 mouse <default=yes>
+  --enable-consolegpm      build the console engine subdirver for GPM daemon <default=no>
+  --enable-textmode        Linux system have console (text mode) on FrameBuffer <default=yes>
+  --enable-rbfsupport      include raw bitmap font support <default=yes>
+  --enable-rbfvgaoem       include incore RBF font of ISO8859-1 VGAOEM (8x8) font <default=yes>
+  --enable-rbfterminal     include incore RBF font of ISO8859-1 Terminal (8x12) font <default=yes>
+  --enable-rbffixedsys     include incore RBF font of ISO8859-1 FixedSys (8x15) font <default=yes>
+  --enable-vbfsupport      include var bitmap font support <default=yes>
+  --enable-fontsserif      include incore font SansSerif (11x13) <default=yes>
+  --enable-fontcourier     include incore font Courier (8x13) <default=yes>
+  --enable-fontsystem      include incore font System (14x16) <default=yes>
+  --enable-upfsupport      build support for FMSoft Unicode Prerendered Font (UPF) <default=yes>
+  --enable-fonttimes       include incore Times UPF fonts (12x10 and 17x14) <default=yes>
+  --enable-qpfsupport      build support for Qt Prerendered Font (QPF) <default=no>
+  --enable-sefsupport      build support for koxomo scripteasy (SEF) <default=no>
+  --enable-ttfcache        include ttf cache support <default=no>
+  --enable-bmpfsupport     build support for Bitmap Font (bmpf) <default=yes>
+  --enable-latin2support   include East European (Latin 2, ISO8859-2) charset support <default=no>
+  --enable-latin3support   include South European (Latin 3, ISO8859-3) charset support <default=no>
+  --enable-latin4support   include North European (Latin 4, ISO8859-4) charset support <default=no>
+  --enable-cyrillicsupport include Cyrillic (ISO8859-5) charset support <default=no>
+  --enable-arabicsupport   include Arabic (ISO8859-6) charset support <default=no>
+  --enable-greeksupport    include Greek (ISO8859-7) charset support <default=no>
+  --enable-hebrewsupport   include Hebrew (ISO8859-8) charset support <default=no>
+  --enable-latin5support   include Turkish (Latin 5, ISO8859-9) charset support <default=no>
+  --enable-latin6support   include Nordic, Latin 6, ISO8859-10) charset support <default=no>
+  --enable-thaisupport     include Thai (ISO8859-11) charset support <default=yes>
+  --enable-latin7support   include Latin 7 (ISO8859-13) charset support <default=no>
+  --enable-latin8support   include Latin 8 (ISO8859-14) charset support <default=no>
+  --enable-latin9support   include Latin 9 (ISO8859-15, West Extended) charset support <default=yes>
+  --enable-latin10support  include Latin 10 (ISO8859-16, Romanian) charset support <default=no>
+  --enable-gbsupport       include EUC encoding of GB2312 charset support <default=yes>
+  --enable-gbksupport      include GBK charset support <default=yes>
+  --enable-gb18030support  include GB18030-0 charset support <default=no>
+  --enable-big5support     include BIG5 charset support <default=no>
+  --enable-euckrsupport    include support for EUC encoding of KSC5636 and KSC5601 charsets <default=no>
+  --enable-eucjpsupport    include support for EUC encoding of JISX0201 and JISX0208 charsets <default=no>
+  --enable-shiftjissupport include support for Shift-JIS encoding of JISX0201 and JISX0208 charsets <default=no>
+  --enable-unicodesupport  include UNICODE (ISO-10646-1 and UTF-8 encoding) support <default=yes>
+  --enable-kbdhebrewpc     include keyboard layout for Hebrew PC keyboard <default=no>
+  --enable-kbdarabicpc     include keyboard layout for Arabic PC keyboard <default=no>
+  --enable-kbdfrpc         include keyboard layout for French PC keyboard (non-US 102 keys) <default=no>
+  --enable-kbdfr           include keyboard layout for French <default=no>
+  --enable-kbdde           include keyboard layout for German <default=no>
+  --enable-kbddelatin1     include keyboard layout for German Latin1 <default=no>
+  --enable-kbdit           include keyboard layout for Italian <default=no>
+  --enable-kbdes           include keyboard layout for Spanish <default=no>
+  --enable-kbdescp850      include keyboard layout for Spanish CP850 <default=no>
+  --enable-savebitmap      include SaveBitmap-related functions <default=yes>
+  --enable-pcxsupport      include PCX file support <default=no>
+  --enable-lbmsupport      include LBM/PBM file support <default=no>
+  --enable-tgasupport      include TGA file support <default=no>
+  --enable-gifsupport      include GIF file support <default=yes>
+  --enable-jpgsupport      include JPG file support <default=yes>
+  --enable-pngsupport      include PNG file support <default=yes>
+  --enable-menu            include menu support <default=yes>
+  --enable-mousecalibrate  include code doing mouse calibration <default=yes>
+  --enable-aboutdlg        include About Dialog Box <default=yes>
+  --enable-savescreen      include code for screenshots <default=yes>
+  --enable-ctrlstatic      include STATIC control <default=yes>
+  --enable-ctrlbutton      include BUTTON control <default=yes>
+  --enable-ctrlsledit      include Single-Line EDIT control <default=yes>
+  --enable-ctrlbidisledit  include Single-Line BIDI EDIT control <default=no>
+  --enable-ctrlnewtextedit include the new implementation of TEXTEDIT control <default=yes>
+  --enable-ctrllistbox     include LISTBOX control <default=yes>
+  --enable-ctrlpgbar       include PROGRESSBAR control <default=yes>
+  --enable-ctrlcombobox    include COMBOBOX control <default=yes>
+  --enable-ctrlpropsheet   include PROPSHEET control <default=yes>
+  --enable-ctrltrackbar    include TRACKBAR control <default=no>
+  --enable-ctrlscrollbar   include SCROLLBAR control <default=no>
+  --enable-ctrlnewtoolbar  include NEWTOOLBAR control <default=yes>
+  --enable-ctrlmenubtn     include MENUBUTTON control <default=yes>
+  --enable-ctrlscrollview  include SCROLLVIEW and SCROLLWINDOW controls <default=no>
+  --enable-ctrltextedit    include old TEXTEDIT control implementation <default=no>
+  --enable-ctrlmonthcal    include MONTHCALENDAR control <default=no>
+  --enable-ctrltreeview    include TREEVIEW control <default=no>
+  --enable-ctrltreeview-rdr    include TREEVIEWRDR control using LFRDR <default=no>
+  --enable-ctrlspinbox     include SPINBOX control <default=yes>
+  --enable-ctrlcoolbar     include COOLBAR control <default=no>
+  --enable-ctrllistview    include LISTVIEW control <default=yes>
+  --enable-ctrliconview    include ICONVIEW control <default=no>
+  --enable-ctrlgridview    include GRIDVIEW control (test) <default=no>
+  --enable-ctrlanimation   include ANIMATION control and GIF87a/GIF89a support <default=yes>
+  --enable-videodummy      include dummy NEWGAL engine <default=yes>
+  --enable-videofbcon      include FrameBuffer console NEWGAL engine <default=yes>
+  --enable-videoqvfb       include Qt Virtual FrameBuffer NEWGAL engine <default=yes>
+  --enable-videopcxvfb     include PC Virtual FrameBuffer NEWGAL engine, such as qvfb, mvfb, gvfb or wvfb <default=yes>
+  --enable-videortosxvfb   include RTOS Virtual FrameBuffer NEWGAL engine <default=no>. Please disable pcxvfb to enable rtosxvfb
+  --enable-videowvfb       include Windows Virtual Frame Buffer NEWGAL engine <default=no>
+  --enable-videousvfb    include NEWGAL/IAL engines for UnixSocket Virtual Frame Buffer <default=no>
+  --enable-videocommlcd    include NEWGAL engine for Common LCD <default=no>
+  --enable-videomlshadow   include MLShadow NEWGAL engine <default=no>
+  --enable-videoshadow     include Shadow NEWGAL engine <default=no>
+  --enable-videoem86gfx    include NEWGAL engine for EM86xx GFX <default=no>
+  --enable-videoem85xxyuv  include NEWGAL engine for EM85xx YUV <default=no>
+  --enable-videoem85xxosd  include NEWGAL engine for EM85xx OSD <default=no>
+  --enable-videosvpxxosd   include SVPXXOSD NEWGAL engine <default=no>
+  --enable-videobf533      include NEWGAL engine for BF533 OSD via SPI <default=no>
+  --enable-videomb93493    include NEWGAL engine for mb93493 YUV FrameBuffer driver <default=no>
+  --enable-videoutpmc      include NEWGAL engine for UTPMC <default=no>
+  --enable-videodfb        include NEWGAL engine for DirectFB <default=no>
+  --enable-videost7167     include NEWGAL engine for ST7167 on DirectFB <default=no>
+  --enable-videostgfb      include NEWGAL engine for STGFB <default=no>
+  --enable-videohi35xx     include Hi35xx Video  NEWGAL engine <default=no>
+  --enable-videohi3560a    include Hi3560A Video  NEWGAL engine <default=no>
+  --enable-videogdl        include GDL Video NEWGAL engine <default=no>
+  --enable-videosigma8654  include sigma8654 NEWGAL engine <default=no>
+  --enable-videomstar      include mstar NEWGAL engine <default=no>
+  --enable-videocustom     include custom NEWGAL engine <default=no>
+  --enable-videonexus      include nexus NEWGAL engine <default=no>
+  --enable-videos3c6410    include s3c6410 NEWGAL engine <default=no>
 
 Optional Packages:
-
---with-PACKAGE\[=ARG\] use PACKAGE \[ARG=yes\]
-
---without-PACKAGE do not use PACKAGE (same as --with-PACKAGE=no)
-
---with-gnu-ld assume the C compiler uses GNU ld default=no
-
---with-pic try to use only PIC/non-PIC objects default=use both
-
---with-ttfsupport=ft1/ft2/none
-
-...
-
-Some influential environment variables:
-
-CC C compiler command
-
-CFLAGS C compiler flags
-
-LDFLAGS linker flags, e.g. -L&lt;lib dir&gt; if you have libraries in a
-
-nonstandard directory &lt;lib dir&gt;
-
-LIBS libraries to pass to the linker, e.g. -l&lt;library&gt;
-
-CPPFLAGS (Objective) C/C++ preprocessor flags, e.g. -I&lt;include
-dir&gt; if
-
-you have headers in a nonstandard directory &lt;include dir&gt;
-
-CPP C preprocessor
-
-Use these variables to override the choices made by \`configure' or to
-help
-
-it to find libraries and programs with nonstandard names/locations.
-
-Report bugs to the package provider. --with-style=classic/flat/fashion
-
---with-ttfcachesize=64/128/256/512/1024
-
---with-mttfcachenum=10/20/40
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-gnu-ld           assume the C compiler uses GNU ld default=no
+  --with-pic              try to use only PIC/non-PIC objects default=use both
+  --with-runmode=procs/ths/sa  the MiniGUI runtime mode <default=procs>
+  --with-ttfsupport=ft1/ft2/none   How to support TrueType font (FreeType 1/FreeType 2/None) <default=none>
+  --with-nexus-includedir=DIR  Where to find header files of nexus library
+  --with-nexus-libdir=DIR      Where to find .so files of nexus library
+  --with-libsuffix=ARG     Configure the suffix of MiniGUI library name.
+  --with-osname=linux/uclinux/ecos/ucos2/swlinux/vxworks/win32/darwin/threadx/cygwin/nucleus/ose/psos
+  --with-targetname=unknown/external/fmsoft/mstudio/stb810/vfanvil/vxi386/qvfb/fbcon/mx21/monaco/c33l05/bfin/vxppc/
+                        S3C6410/S3C2440/S3C2410/hi3560a     Define the target board name
+  --with-ttfcachesize=64/128/256/512/1024
+  --with-mttfcachenum=10/20/40
+  --with-ft1-includes=DIR    where the FreeType1 includes are
+  --with-ft2-includes=DIR    where the FreeType2 includes are
 
 Some influential environment variables:
+  CC          C compiler command
+  CFLAGS      C compiler flags
+  LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
+              nonstandard directory <lib dir>
+  LIBS        libraries to pass to the linker, e.g. -l<library>
+  CPPFLAGS    (Objective) C/C++ preprocessor flags, e.g. -I<include dir> if
+              you have headers in a nonstandard directory <include dir>
+  CPP         C preprocessor
 
-CC C compiler command
-
-CFLAGS C compiler flags
-
-LDFLAGS linker flags, e.g. -L&lt;lib dir&gt; if you have libraries in a
-
-nonstandard directory &lt;lib dir&gt;
-
-CPPFLAGS C/C++ preprocessor flags, e.g. -I&lt;include dir&gt; if you
-have
-
-headers in a nonstandard directory &lt;include dir&gt;
-
-CPP C preprocessor
-
-Use these variables to override the choices made by \`configure' or to
-help
-
+Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
+
+Report bugs to the package provider.
+```
 
 Above these parameters were already configured parameter which
 established in the configure script, and these parameters are allowed to
