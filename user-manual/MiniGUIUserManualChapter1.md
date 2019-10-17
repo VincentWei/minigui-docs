@@ -89,7 +89,7 @@ You can find the public repositories of above apps on:
 
 <https://github.com/FMSoftCN>
 
-Besides MiniGUI, FMSoft also releases some tools and dependencies of MiniGUI,
+Besides MiniGUI, FMSoft also releases the tools and dependencies of MiniGUI,
 such as the virtual buffer program GVFB, freetype, libjpeg, libpng, zlib,
 and others. Please refer to:
 
@@ -184,7 +184,7 @@ The following figures are some screenshots of mGUXDemo.
 
 First, make sure that you are using Ubuntu Linux 16.04 LTS or 18.04 LTS.
 
-You should run `apt install <package_name>` to install the following packages
+You should run `sudo apt install <package_name>` to install the following packages
 on your Ubuntu Linux.
 
 - Building tools:
@@ -214,6 +214,11 @@ Note that if you are using Ubuntu Linux 18.04, please install
 #### Steps
 
 Please make sure that you can visit GitHub and you can do `sudo` on your Linux box.
+
+1. Clone `build-minigui-4.0` repository from GitHub:
+
+        $ git clone git@github.com:VincentWei/build-minigui-4.0.git
+        $ cd build-minigui-4.0
 
 1. Copy `config.sh` to `myconfig.sh` and edit `myconfig.sh` to match your needs:
 
@@ -302,18 +307,23 @@ You can run `apt install <package_name>` to install the software on Ubuntu Linux
 
 Please make sure that you can visit GitHub via SSH and you can do `sudo` on your Linux box.
 
+1. Clone `build-minigui-3.2` repository from GitHub:
+
+        $ git clone git@github.com:VincentWei/build-minigui-3.2.git
+        $ cd build-minigui-3.2
+
 1. Run `fetch-all.sh` to fetch all source from GitHub:
 
         $ ./fetch-all.sh
 
-2. Make and install `gvfb`:
+1. Make and install `gvfb`:
 
         $ cd gvfb
         $ cmake .
         $ make; sudo make install
         $ cd ..
 
-3. Make and install `chipmunk` library (DO NOT use the chipmunk-dev package
+1. Make and install `chipmunk` library (DO NOT use the chipmunk-dev package
    which is provided by Ubuntu):
 
         $ cd 3rd-party/chipmunk-5.3.1
@@ -321,7 +331,7 @@ Please make sure that you can visit GitHub via SSH and you can do `sudo` on your
         $ make; sudo make install
         $ cd ../..
 
-4. Install MiniGUI resources:
+1. Install MiniGUI resources:
 
         $ cd minigui-res
         $ ./augen.sh
@@ -329,11 +339,11 @@ Please make sure that you can visit GitHub via SSH and you can do `sudo` on your
         $ sudo make install
         $ cd ..
 
-5. Run `build-all.sh` to build all:
+1. Run `build-all.sh` to build all:
 
         $ ./build-all.sh
 
-6. Run `mguxdemo`:
+1. Run `mguxdemo`:
 
         $ cd /usr/local/bin
         $ ./mguxdemo
