@@ -42,7 +42,7 @@ can find it and overwrite the old one.
 
 In general, the content of **mgconfig.h** is as follow:
 
-```cplusplus
+```cpp
 ...
 /* Define if compile for VxWorks operating system */
 
@@ -137,8 +137,8 @@ you enable an option when run configure, then the correspondence macro
 will be defined; otherwise can’t define this macro. Run the following
 command.
 
-```shell
-user $ ./configure --help
+```
+user$ ./configure --help
 ```
 
 You can obtain the whole options detailed list. For instance, supposing
@@ -426,12 +426,16 @@ established in the configure script, and these parameters are allowed to
 control which function codes were supported when compile MiniGUI. For
 example, run:
 
-user\$ ./configure --enable-procs --with-ttfsupport=ft2
+```
+user$ ./configure --enable-procs --with-ttfsupport=ft2
+```
 
 You may configure MiniGUI that is the Freetype2 Truetype font support
 and the MiniGUI-Process runtime mode. If you run:
 
-user\$ ./configure --disable-cursor --disable-screensaver
+```
+user$ ./configure --disable-cursor --disable-screensaver
+```
 
 Then configure MiniGUI that is disable the cursor and default screen
 saver function.
@@ -451,13 +455,15 @@ script also has some important general compiling configuration options.
 This compiling configuration option assigns the MiniGUI library where to
 install. The default installation path is **/usr/local**. If you run:
 
-user\$ ./configure --prefix=/home/test
+```
+user$ ./configure --prefix=/home/test
+```
 
 After executing ‘make install’ command, the function library, header
 files and reference document are installed in **/home/test/lib**,
 **/home/test/include** and **/home/test/man** directory.
 
-#### 2) Cross Compiling Option
+#### Cross Compiling Options
 
 The compiling configuration options **--build**, **--host** and
 **--target** are very important to cross compile applications. For
@@ -466,14 +472,13 @@ may assign option like **--build**, thus let the configure script
 produces the makefile file used to complete the arm-linux’s cross
 compiling:
 
-user\$ CC=arm-linux-gcc ./configure
---prefix=/usr/local/arm/2.95.3/arm-linux/ \\
-
---build=i386-linux \\
-
---host=arm-unknown-linux \\
-
---target=arm-unknown-linux
+```
+user$ CC=arm-linux-gcc ./configure
+    --prefix=/usr/local/arm/2.95.3/arm-linux/ \
+    --build=i386-linux \
+    --host=arm-unknown-linux \
+    --target=arm-unknown-linux
+```
 
 In above command, the **--prefix** option is used to set the installing
 MiniGUI configuration file, the function library and the header files
@@ -481,13 +486,11 @@ directory’s prefix, when you executed **make install** command, MiniGUI
 configuration file, the library file and header files will be installed
 in the following position:
 
-**/usr/local/arm/2.95/arm-linux/etc/**
+- `/usr/local/arm/2.95/arm-linux/etc/`
+- `/usr/local/arm/2.95.3/arm-linux/lib/`
+- `/usr/local/arm/2.95.3/arm-linux/include/`
 
-**/usr/local/arm/2.95.3/arm-linux/lib/**
-
-**/usr/local/arm/2.95.3/arm-linux/include/**
-
-#### 3) --enable-static and --enable-shared
+#### --enable-static and --enable-shared
 
 The two configuration options assign whether generating static function
 library or dynamic function library. If you do not need to produce the
@@ -505,12 +508,11 @@ make all: Produce the target set. Only run make command also to be
 allowed, this time can start to compile the source code, then link it
 and produces the executable file or function library.
 
-make clean: Clean the previous object files(\*.o).
-
-make install: Install the function library, header files and so on to
+- `make clean`: Clean the previous object files(\*.o).
+- `make install`: Install the function library, header files and so on to
 the directory which you assigned.
 
-### 2.1.2 Configuration under Non-GNU environment 
+### Configuration under Non-GNU environment
 
 A majority of traditional embedded operating system supported by
 MiniGUI, user usually can use the integrated development environment
@@ -529,8 +531,7 @@ environment project file. You may directly manually revise the
 MiniGUI library. For more detail information, please refer to the
 section 2.4.2.
 
-2.2 Detailed Description on Compiling, Configuration Options of MiniGUI
------------------------------------------------------------------------
+## Detailed Description on Compiling, Configuration Options of MiniGUI
 
 In this chapter, we will give detailed description on all compiling,
 configuration options of MiniGUI. MiniGUI has many compiling,
@@ -552,14 +553,16 @@ In the next chapter, we will give configuration option of MiniGUI by
 classify. We will description on configuration names of configure script
 and macro names in the **mgconfig.h** file.
 
-### 2.2.1 Operating System Options and Macros
+### Operating System Options and Macros
 
 MiniGUI provides support for multiple operating systems, you can specify
 operating system when execute configure script, default operating system
 is Linux. If you want to run MiniGUI on uClinux, you can execute command
 as the follow:
 
-user\$ ./configure --with-osname=uclinux
+```
+user$ ./configure --with-osname=uclinux
+```
 
 If you specify an operating system, the corresponding macro was defined
 in **mgconfig.h**. For some operating systems, we will open other some
@@ -640,7 +643,7 @@ cannot run on anther operating system. In order to run MiniGUI
 value-added release product on corresponding operating system, you make
 sure that the above macros were defined when you modify configuration.
 
-### 2.2.2 Target Board Related Options and Macros
+### Target Board Related Options and Macros
 
 In MiniGUI certain codes are related with a special target board; if you
 want run MiniGUI must on these target boards correctly, you need to
