@@ -1,9 +1,13 @@
 # Quick Start
 
 - [Introduction](#introduction)
-  * [Source Tarballs and Repos](#source-tarballs-and-repos)
-  * [Documents](#documents)
+   * [Source Tarballs and Repos](#source-tarballs-and-repos)
+   * [Documents](#documents)
 - [First Run](#first-run)
+   * [Recommended development environment](#recommended-development-environment)
+   * [MiniGUI Releases](#minigui-releases)
+   * [Building MiniGUI 4.0](#building-minigui-4.0)
+   * [Building MiniGUI 3.2](#building-minigui-3.2)
 
 ## Introduction
 
@@ -114,7 +118,55 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 
 ## First Run
 
-*TBC*
+### Recommended development environment
+
+Now, Linux has become a software development host system that is
+more important than Windows. Almost all building tool chains can
+all on Linux, and you can use Linux to write and debug code for
+cloud, Web, embedded devices, and many real time operating systems
+such as eCos, RTEMS, RT-Thread.
+
+Therefore, since MiniGUI version 3.2, we only maintain the building
+scripts of MiniGUI for Linux. Of course, it is still possible to
+build MiniGUI on Windows.
+
+We recommend that your use Ubuntu Linux 16.04 LTS or 18.04 LTS.
+The building scripts of MiniGUI are tested on these Linux distributions.
+
+### MiniGUI Releases
+
+Note that we are currently maintained three releases of MiniGUI:
+
+- MiniGUI version 3.0.x. This release will not be updated. This release is there
+  only for old projects.
+- MiniGUI version 3.2.x. Main features since version 3.0:
+   * Support for 64-bit platform.
+- MiniGUI version 4.0.x. Main features since version 3.2:
+   * New APIs for Unicode characters processing, which conform to Unicode 12.0.
+   * New APIs to lay out, shape, and render glyphs from complex and mixed scripts,
+     such as Arabic, Thai, and Indic.
+   * Support for all types of input devices such as multi-touch panel (gesture),
+     joystick, tablet tool, and switch.
+   * Support for modern DRM-driven graphics cards on Linux kernel for 2D/3D
+     hardware acceleration.
+
+The compatibility of some APIs (mainly MiniGUI Core) will be broken between
+different releases. For the detailed explanation, you can refer to the release
+notes of MiniGUI core and components:
+
+* [MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
+* [mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
+* [mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
+* [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
+* [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
+* [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
+
+We strongly recommend that you use MiniGUI version 4.0.x for any new MiniGUI apps,
+especially if the new features of MiniGUI 4.0.x are must for your new apps.
+
+### Building MiniGUI 4.0
+
+### Building MiniGUI 3.2
 
 ---
 
