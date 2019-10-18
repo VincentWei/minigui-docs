@@ -577,9 +577,9 @@ user$ ./configure --with-osname=vxworks --with-targetname=vxi386 --with-runmode=
 ```
 
 The above command will generate a `mgconfig.h` for VxWorks operating system.
-Note that his file is not the ultimate version, but it can be used as
-a starting point for your target system. The following code shows some
-key macros defined for the target system:
+Note that this file is not the ultimate version, but it can be used as
+a good starting point for your target system. The following code shows some
+key macros defined for the target system above:
 
 ```cpp
 ...
@@ -689,7 +689,7 @@ you can use `makefile.ng` makefiles shipped in MiniGUI source tree
 to build the MiniGUI library.
 
 For more information, please refer to the section
-[Building in Non-GNU environment](#building-in-non-gnu-environment).
+[Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment).
 
 ## Building MiniGUI in GNU Environment
 
@@ -1103,24 +1103,28 @@ CFLAGS+=-g -mcpu=pentium -march=pentium -Wall -DTOOL\_FAMILY=gnu -DTOOL=gnu -D\_
 ```
 
 Note that the make tool will install MiniGUI header files to the
-`\$PREFIX/include/minigui` directory under the `makefile.ng` project
-file of Cygwin, the function libraries were installed to the
-`\$PREFIX/lib/` directory. The `rules.make` file above will install
-MiniGUI header files to the `c:/cross/include/minigui` directory and
-MiniGUI libraries to the `c:/cross/lib` directory.
+`$PREFIX/include/minigui` directory, and the MiniGUI core library
+will be installed to the `$PREFIX/lib/` directory. Therefore,
+the `rules.make` file above will install MiniGUI header files to
+`c:/cross/include/minigui` directory and MiniGUI core library to
+`c:/cross/lib` directory.
 
-Referring to table 2.21 and the `rules.make` file above, you can write
-correct rules.make file based on actually development environment.
+By referring to the table and the `rules.make` file above, you can
+write a correct `rules.make` file based on your actually development
+environment and toolchain.
 
 Because the format of the `makefile.ng` is compatible with GNU
 makefile, so we can use `makefile.ng` to compile MiniGUI in the Linux
 environment, actually. This kind of circumstance usually occurs during
-using cross-compile tool chain for uClinux. If you work in the Linux
-environment, you can execute make command.
+using cross-compiling toolchain for uClinux. If you work in the Linux
+environment, you can execute `make` command directly:
 
 ```
-user\$ make –f makefile.ng
+user$ make –f makefile.ng
 ```
+
+For MiniGUI components, you can use the same way to compile them
+in non-GNU environment; we do not repeat them here.
 
 ---
 
