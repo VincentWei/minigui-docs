@@ -24,15 +24,18 @@ OSE, and even uC/OS-II.
 
 MiniGUI defines a set of lightweight windowing and graphics interfaces
 for applications. Using these interfaces, an application can create
-multiple main windows and controls in them, such as buttons and edit
-boxes. MiniGUI provides powerful graphics functions for developers,
-helping to display all kinds of bitmaps and draw complicated graphics in
-windows.
+multiple windows and show controls (such as buttons and edit
+boxes) in windows. MiniGUI provides powerful graphics functions for
+developers, helping to display all kinds of images and draw complicated
+graphics in windows.
 
-MiniGUI consists of MiniGUI Core and multiple MiniGUI components.
+MiniGUI consists of MiniGUI core and multiple MiniGUI components,
+as well as samples, demonstrations, and applications. MiniGUI core
+and components are written in C languages, so it is easy to run
+MiniGUI on various systems or platforms.
 
-MiniGUI Core provides the basic windowing and graphics interfaces
-as well as a lot of standard controls (toolkit). Besides MiniGUI Core,
+MiniGUI core provides the basic windowing and graphics interfaces
+as well as a lot of standard controls (toolkit). Besides MiniGUI core,
 FMSoft also releases some components for easy development of MiniGUI apps:
 
 - `mGUtils` contains miscellaneous utilities
@@ -80,12 +83,12 @@ The compatibility of some APIs (mainly MiniGUI Core) will be broken between
 different releases. For the detailed explanation, you can refer to the release
 notes of MiniGUI core and components:
 
-* [MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
-* [mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
-* [mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
-* [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
-* [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
-* [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
+* [Release Notes for MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
+* [Release Notes for mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
+* [Release Notes for mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
+* [Release Notes for mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
+* [Release Notes for mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
+* [Release Notes for mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
 
 We strongly recommend that you use MiniGUI version 4.0.x for any new MiniGUI apps,
 especially if the new features of MiniGUI 4.0.x are must for your new apps.
