@@ -4,11 +4,15 @@
 - [Configuration Header File](#configuration-header-file)
 - [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
-- [Compiling and Installing MiniGUI](#compiling-and-installing-minigui)
-   * [Dependent libraries and tools](#dependent-libraries-and-tools)
-   * [Building in GNU environment](#building-in-gnu-environment)
-   * [Building in Non-GNU environment](#building-in-non-gnu-environment)
-- [Building MiniGUI Components](#building-minigui-components)
+- [Building MiniGUI in GNU environment](#building-minigui-in-gnu-environment)
+- [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
+   * [LibFreeType](libfreetype)
+   * [LibJPEG, LibPNG, and LibZ](#libjpeg-libpng-and-libz)
+   * [gvfb](#gvfb)
+   * [MiniGUI core](#minigui-core)
+   * [MiniGUI resource](#minigui-resource)
+   * [MiniGUI components](#minigui-components)
+   * [MiniGUI samples and demos](#minigui-samples-and-demos)
 
 ## Introduction
 
@@ -680,9 +684,7 @@ to build the MiniGUI library.
 For more information, please refer to the section
 [Building in Non-GNU environment](#building-in-non-gnu-environment).
 
-## Compiling and Installing MiniGUI
-
-### Dependent libraries and tools
+## Building MiniGUI In GNU Environment
 
 Before building MiniGUI, you need to install the dependent libraries
 required by MiniGUI first. MiniGUI mainly uses LibFreeType, LibPNG,
@@ -707,7 +709,7 @@ executing the following command:
 This section describe the basic commands to compile the dependent libraries
 based on the source code.
 
-#### LibFreeType
+### LibFreeType
 
 The FreeType Library is an open source, high quality, and portable font
 engine that provides a unified interface for accessing a variety of font
@@ -731,7 +733,7 @@ directory, then run the following commands:
 The FreeType 2 library and header files will be installed in `/usr/local`
 directory.
 
-#### LibJPEG, LibPNG, and LibZ
+### LibJPEG, LibPNG, and LibZ
 
 To support various image formats, MiniGUI uses LibJPEG for JPEG images,
 LibPNG for PNG images. The support for Windows BMP and GIF is self-contained,
@@ -771,7 +773,7 @@ of the source tree, execute the following commands:
 The header files, the dynamic libraries and the static libraries will
 be installed to the `/usr/local` directory.
 
-#### gvfb
+### gvfb
 
 `gvfb` is a virtual frame buffer graphics. The developer use `gvfb` on
 a PC box as the display device of MiniGUI. In this way, we can easily
@@ -796,7 +798,7 @@ Then enter the top directory of `gvfb` source tree, run the following commands:
     $ make
     $ sudo make install
 
-### Building In GNU Environment
+### MiniGUI core
 
 After MiniGUI is configured successfully, you execute `make` command at
 the top directory of MiniGUI source tree to build MiniGUI:
@@ -837,7 +839,7 @@ user$ sudo make install
 You can also use `configure` script to specify a cross-compiling options
 and the prefix for installation directories.
 
-#### Install MiniGUI Resource Package
+### MiniGUI resource
 
 MiniGUI resource package (`minigui-res`) is also organized by GNU
 Autoconf/Automake script, so just run the following command to install:
@@ -851,7 +853,7 @@ user$ sudo make install
 Similarly, we can also specify the installation path using the `--prefix`
 option.
 
-#### Building MiniGUI components
+### MiniGUI components
 
 After building MiniGUI core, it is very straightforward to building MiniGUI
 components, because they use the same way to organize the source code, and
@@ -871,7 +873,7 @@ for comp in mgutils mgplus mgeff mgncs mgncs4touch; do
 done
 ```
 
-#### Compile and run MiniGUI sample
+### MiniGUI samples and demos
 
 After compiling and installing MiniGUI core and components according to
 the above steps, you can compile and run the sample in `mg-samples`.
@@ -913,6 +915,9 @@ Here's how to run the game `same`:
 user$ cd same
 user$ ./same
 ```
+
+In same way, you can build and run `mguxdemo` (`cell-phone-ux-demo`) and
+`mg-demos` easily.
 
 ### Building In Non-GNU Environment
 
