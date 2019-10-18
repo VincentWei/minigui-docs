@@ -6,8 +6,8 @@
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
 - [Compiling and Installing MiniGUI](#compiling-and-installing-minigui)
    * [Dependent libraries and tools](#dependent-libraries-and-tools)
-   * [In GNU environment](in-gnu-environment)
-   * [In Non-GNU environment](in-non-gnu-environment)
+   * [Building in GNU environment](#building-in-gnu-environment)
+   * [Building in Non-GNU environment](#building-in-non-gnu-environment)
 - [Building MiniGUI Components](#building-minigui-components)
 
 ## Introduction
@@ -471,6 +471,9 @@ user$ ./configure --disable-cursor --disable-screensaver
 
 Your MiniGUI version will lack of support for cursor and screen saver function.
 
+For the detailed description of the options, please refer to
+[Compile-time Configuration].
+
 If you run `./configure` command without any option, it will generate
 makefiles and `mgconfig.h` file with the default configuration options.
 
@@ -536,22 +539,727 @@ option, it will take less time to compile the library than default.
 
 ## Configuring MiniGUI in Non-GNU Environment
 
-A majority of traditional embedded operating system supported by
-MiniGUI, user usually can use the integrated development environment
-running on Windows platform, such as Tornado, ADS, etc. Because these
-environment provide the development tools chain that is not GNU
-compatible, therefore, we are unable to use the configure script that is
-described in section 2.1.1 to produce makefile and the `mgconfig.h`
-file automatically. In this kind of situation, we need voluntarily to
-revise the `mgconfig.h` file to complete the MiniGUI compile-time
-configuration. Fortunately, Feynman Software already prepares the
-`mgconfig.h` file for the majority operating system, which can
-directly be used (store in MiniGUI source code **build/** directory);
-moreover Feynman Software also prepared the corresponding development
-environment project file. You may directly manually revise the
-`mgconfig.h` file based on these project environments, and compile the
-MiniGUI library. For more detail information, please refer to the
-section 2.4.2.
+For some traditional embedded operating system supported by
+MiniGUI, the user usually can use the integrated development environment
+running on Windows, such as Tornado, ADS, etc. Because these
+environment does not provide the toolchain that is GNU compatible,
+we are unable to use the configuration script to generate makefile
+and `mgconfig.h` file automatically.
+
+In this kind of situation, we need to revise the `mgconfig.h` file
+manually for the compile-time configuration. Fortunately, FMSoft
+already prepares a basic `mgconfig.h` file for these operating systems
+in `build/` directory of MiniGUI source tree. For example, the file
+`config-vxworks-i386.h` in this directory can be used for VxWorks
+operating system running on i386.
+
+As an alternative way, you can use the Autoconf configuration script
+on Linux or Cygwin on Windows to generate a `mgconfig.h` file
+automatically for your target operating system. For example:
+
+```
+user$ ./configure ./configure --with-osname=vxworks --with-targetname=vxi386 --with-runmode=ths --enable-incoreres
+```
+
+The above command will generate a `mgconfig.h` for VxWorks operating system.
+Note that his file is not the ultimate version, but it can be used as
+a starting point for your target system:
+
+```cpp
+...
+
+/* Binary age of MiniGUI */
+#define MINIGUI_BINARY_AGE 2
+
+/* Interface age of MiniGUI */
+#define MINIGUI_INTERFACE_AGE 0
+
+/* Major version of MiniGUI */
+#define MINIGUI_MAJOR_VERSION 3
+
+/* Micro version of MiniGUI */
+#define MINIGUI_MICRO_VERSION 2
+
+/* Minor version of MiniGUI */
+#define MINIGUI_MINOR_VERSION 2
+
+/* Name of package */
+#define PACKAGE "libminigui"
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT ""
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "libminigui"
+
+/* Define to the full name and version of this package. */
+#define PACKAGE_STRING "libminigui 3.2.2"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME "libminigui"
+
+/* Define to the home page for this package. */
+#define PACKAGE_URL ""
+
+/* Define to the version of this package. */
+#define PACKAGE_VERSION "3.2.2"
+
+/* If using the C implementation of alloca, define if you know the
+   direction of stack growth for your system; otherwise it will be
+   automatically deduced at runtime.
+	STACK_DIRECTION > 0 => grows toward higher addresses
+	STACK_DIRECTION < 0 => grows toward lower addresses
+	STACK_DIRECTION = 0 => direction of growth unknown */
+/* #undef STACK_DIRECTION */
+
+/* Define to 1 if you have the ANSI C header files. */
+#define STDC_HEADERS 1
+
+/* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
+#define TIME_WITH_SYS_TIME 1
+
+/* Define to 1 if your <sys/time.h> declares `struct tm'. */
+/* #undef TM_IN_SYS_TIME */
+
+/* Version number of package */
+#define VERSION "3.2.2"
+
+/* Define if compile for Win32 platform */
+/* #undef WIN32 */
+
+/* Define if have math library */
+#define _HAVE_MATH_LIB 1
+
+/* Define if build MiniGUI-Processes (back-compatibility definition) */
+/* #undef _LITE_VERSION */
+
+/* Define if support Arabic charset */
+/* #undef _MGCHARSET_ARABIC */
+
+/* Define if support BIG5 charset */
+/* #undef _MGCHARSET_BIG5 */
+
+/* Define if support Cyrillic charset */
+/* #undef _MGCHARSET_CYRILLIC */
+
+/* Define if support EUCJP charset */
+/* #undef _MGCHARSET_EUCJP */
+
+/* Define if support EUCKR charset */
+/* #undef _MGCHARSET_EUCKR */
+
+/* Define if support GB2312 charset */
+#define _MGCHARSET_GB 1
+
+/* Define if support GB18030 charset */
+/* #undef _MGCHARSET_GB18030 */
+
+/* Define if support GBK charset */
+#define _MGCHARSET_GBK 1
+
+/* Define if support Greek charset */
+/* #undef _MGCHARSET_GREEK */
+
+/* Define if support Hebrew charset */
+/* #undef _MGCHARSET_HEBREW */
+
+/* Define if support Latin 10 charset */
+/* #undef _MGCHARSET_LATIN10 */
+
+/* Define if support Latin 2 charset */
+/* #undef _MGCHARSET_LATIN2 */
+
+/* Define if support Latin 3 charset */
+/* #undef _MGCHARSET_LATIN3 */
+
+/* Define if support Latin 4 charset */
+/* #undef _MGCHARSET_LATIN4 */
+
+/* Define if support Latin 5 charset */
+/* #undef _MGCHARSET_LATIN5 */
+
+/* Define if support Latin 6 charset */
+/* #undef _MGCHARSET_LATIN6 */
+
+/* Define if support Latin 7 charset */
+/* #undef _MGCHARSET_LATIN7 */
+
+/* Define if support Latin 8 charset */
+/* #undef _MGCHARSET_LATIN8 */
+
+/* Define if support Latin 9 charset */
+#define _MGCHARSET_LATIN9 1
+
+/* Define if support SHIFTJIS charset */
+/* #undef _MGCHARSET_SHIFTJIS */
+
+/* Define if support Thai charset */
+/* #undef _MGCHARSET_THAI */
+
+/* Define if support UNICODE */
+#define _MGCHARSET_UNICODE 1
+
+/* Define if include GPM mouse subdriver */
+/* #undef _MGCONSOLE_GPM */
+
+/* Define if include IMPS2 mouse subdriver */
+#define _MGCONSOLE_IMPS2 1
+
+/* Define if include MS mouse subdriver */
+#define _MGCONSOLE_MS 1
+
+/* Define if include MS3 mouse subdriver */
+#define _MGCONSOLE_MS3 1
+
+/* Define if include PS2 mouse subdriver */
+#define _MGCONSOLE_PS2 1
+
+/* Define if your Linux have text mode */
+#define _MGCONSOLE_TEXTMODE 1
+
+/* Define if include ANIMATION control */
+#define _MGCTRL_ANIMATION 1
+
+/* Define if include BIDISLEDIT control */
+/* #undef _MGCTRL_BIDISLEDIT */
+
+/* Define if include BUTTON control */
+#define _MGCTRL_BUTTON 1
+
+/* Define if include COMBOBOX control */
+#define _MGCTRL_COMBOBOX 1
+
+/* Define if include COOLBAR control */
+/* #undef _MGCTRL_COOLBAR */
+
+/* Define if include GRIDVIEW control */
+/* #undef _MGCTRL_GRIDVIEW */
+
+/* Define if include ICONVIEW control */
+/* #undef _MGCTRL_ICONVIEW */
+
+/* Define if include LISTBOX control */
+#define _MGCTRL_LISTBOX 1
+
+/* Define if include LISTVIEW control */
+#define _MGCTRL_LISTVIEW 1
+
+/* Define if include MENUBUTTON control */
+#define _MGCTRL_MENUBUTTON 1
+
+/* Define if include MONTHCALENDAR control */
+/* #undef _MGCTRL_MONTHCAL */
+
+/* Define if include NEWTOOLBAR control */
+#define _MGCTRL_NEWTOOLBAR 1
+
+/* Define if include PROGRESSBAR control */
+#define _MGCTRL_PROGRESSBAR 1
+
+/* Define if include PROPSHEET control */
+#define _MGCTRL_PROPSHEET 1
+
+/* Define if include SCROLLBAR control */
+#define _MGCTRL_SCROLLBAR 1
+
+/* Define if include SCROLLVIEW control */
+#define _MGCTRL_SCROLLVIEW 1
+
+/* Define if include SLEDIT control */
+#define _MGCTRL_SLEDIT 1
+
+/* Define if include SPINBOX control */
+#define _MGCTRL_SPINBOX 1
+
+/* Define if include STATIC control */
+#define _MGCTRL_STATIC 1
+
+/* Define if include TEXTEDIT control */
+#define _MGCTRL_TEXTEDIT 1
+
+/* Define if use new implementation of TEXTEDIT control */
+#define _MGCTRL_TEXTEDIT_USE_NEW_IMPL 1
+
+/* Define if include TRACKBAR control */
+#define _MGCTRL_TRACKBAR 1
+
+/* Define if include TREEVIEW control */
+/* #undef _MGCTRL_TREEVIEW */
+
+/* Define if include TREEVIEWRDR control */
+/* #undef _MGCTRL_TREEVIEW_RDR */
+
+/* Define if support Bitmap fonts */
+#define _MGFONT_BMPF 1
+
+/* Define if support TrueType font based on FreeType2 */
+#define _MGFONT_FT2 1
+
+/* Define if support QPF font */
+/* #undef _MGFONT_QPF */
+
+/* Define if support raw bitmap fonts */
+#define _MGFONT_RBF 1
+
+/* Define if support SEF scripteary font */
+/* #undef _MGFONT_SEF */
+
+/* Define if support TrueType font */
+/* #undef _MGFONT_TTF */
+
+/* Define if include ttf cache */
+#define _MGFONT_TTF_CACHE 1
+
+/* Define if support UPF font */
+#define _MGFONT_UPF 1
+
+/* Define if support var bitmap fonts */
+#define _MGFONT_VBF 1
+
+/* Define if include NEWGAL engine for BF533 OSD via SPI */
+/* #undef _MGGAL_BF533 */
+
+/* Define if include NEWGAL engine for Common LCD */
+/* #undef _MGGAL_COMMLCD */
+
+/* Define if include custom NEWGAL engine */
+/* #undef _MGGAL_CUSTOMGAL */
+
+/* Define if include NEWGAL engine for DirectFB */
+/* #undef _MGGAL_DFB */
+
+/* Define if include ST7167 subdriver for NEWGAL engine of DirectFB */
+/* #undef _MGGAL_DFB_ST7167 */
+
+/* Define if include dummy NEWGAL engine */
+#define _MGGAL_DUMMY 1
+
+/* Define if include NEWGAL engine for EM85xx OSD */
+/* #undef _MGGAL_EM85XXOSD */
+
+/* Define if include NEWGAL engine for EM85xx YUV */
+/* #undef _MGGAL_EM85XXYUV */
+
+/* Define if include NEWGAL engine for EM86xx GFX */
+/* #undef _MGGAL_EM86GFX */
+
+/* Define if include FrameBuffer console NEWGAL engine */
+#define _MGGAL_FBCON 1
+
+/* Define if include GDL Video NEWGAL engine */
+/* #undef _MGGAL_GDL */
+
+/* Define if include Hi35XX Video NEWGAL engine */
+/* #undef _MGGAL_HI3510 */
+
+/* Define if include Hi35XX Video NEWGAL engine */
+/* #undef _MGGAL_HI3560 */
+
+/* Define if include Hi3560A Video NEWGAL engine */
+/* #undef _MGGAL_HI3560A */
+
+/* Define if include NEWGAL engine for mb93493 YUV FrameBuffer driver */
+/* #undef _MGGAL_MB93493 */
+
+/* Define if include MLShadow NEWGAL engine */
+/* #undef _MGGAL_MLSHADOW */
+
+/* Define if include mstar NEWGAL engine */
+/* #undef _MGGAL_MSTAR */
+
+/* Define if include nexus NEWGAL engine */
+/* #undef _MGGAL_NEXUS */
+
+/* Define if include PC Virtual FrameBuffer NEWGAL engine */
+#define _MGGAL_PCXVFB 1
+
+/* Define if include Qt Virtual FrameBuffer NEWGAL engine */
+/* #undef _MGGAL_QVFB */
+
+/* Define if include RTOS Virtual FrameBuffer NEWGAL engine */
+/* #undef _MGGAL_RTOSXVFB */
+
+/* Define if include s3c6410 NEWGAL engine */
+/* #undef _MGGAL_S3C6410 */
+
+/* Define if include Shadow NEWGAL engine */
+/* #undef _MGGAL_SHADOW */
+
+/* Define if include sigma8654 NEWGAL engine */
+/* #undef _MGGAL_SIGMA8654 */
+
+/* Define if include NEWGAL engine for STGFB */
+/* #undef _MGGAL_STGFB */
+
+/* Define if include NEWGAL engine for SVPXX OSD */
+/* #undef _MGGAL_SVPXXOSD */
+
+/* Define if include NEWGAL engine for UnixSocket Virtual Frame Buffer */
+/* #undef _MGGAL_USVFB */
+
+/* Define if include NEWGAL engine for UTPMC */
+/* #undef _MGGAL_UTPMC */
+
+/* Define if include windows Virtual FrameBuffer NEWGAL engine */
+/* #undef _MGGAL_WVFB */
+
+/* Define if include advanced 2D graphics APIs */
+#define _MGHAVE_ADV_2DAPI 1
+
+/* Define if include clipboard support */
+#define _MGHAVE_CLIPBOARD 1
+
+/* Define if include cursor support */
+#define _MGHAVE_CURSOR 1
+
+/* Define if include fixed math routines */
+#define _MGHAVE_FIXED_MATH 1
+
+/* Define if support menu */
+#define _MGHAVE_MENU 1
+
+/* Define if include code for mouse calibration */
+#define _MGHAVE_MOUSECALIBRATE 1
+
+/* Define if include message string names */
+/* #undef _MGHAVE_MSG_STRING */
+
+/* Define if PCIAccess lib is available */
+#define _MGHAVE_PCIACCESS 1
+
+/* Define if trace message dispatching of MiniGUI */
+/* #undef _MGHAVE_TRACE_MSG */
+
+/* Define if include the 2440 IAL engine */
+/* #undef _MGIAL_2440 */
+
+/* Define if include the automatic IAL engine */
+/* #undef _MGIAL_AUTO */
+
+/* Define if include IAL engine for Cisco touchpad */
+/* #undef _MGIAL_CISCO_TOUCHPAD */
+
+/* Define if include the common IAL engine */
+/* #undef _MGIAL_COMM */
+
+/* Define if include console (Linux console) IAL engine */
+#define _MGIAL_CONSOLE 1
+
+/* Define if include IAL engine for customer's board */
+/* #undef _MGIAL_CUSTOM */
+
+/* Define if include the DAVINCI6446 IAL engine */
+/* #undef _MGIAL_DAVINCI6446 */
+
+/* Define if include the DFB IAL engine */
+/* #undef _MGIAL_DFB */
+
+/* Define if include dlcustom IAL engine */
+/* #undef _MGIAL_DLCUSTOM */
+
+/* Define if include the dummy IAL engine */
+#define _MGIAL_DUMMY 1
+
+/* Define if include IAL engine for iPAQ H3600 */
+/* #undef _MGIAL_IPAQ_H3600 */
+
+/* Define if include IAL engine for iPAQ H5400 */
+/* #undef _MGIAL_IPAQ_H5400 */
+
+/* Define if include the JZ4740 IAL engine */
+/* #undef _MGIAL_JZ4740 */
+
+/* Define if include the lide IAL engine */
+/* #undef _MGIAL_LIDE */
+
+/* Define if include IAL engine for MStar */
+/* #undef _MGIAL_MSTAR */
+
+/* Define if include IAL engine for net's board */
+/* #undef _MGIAL_NET */
+
+/* Define if include IAL engine for Nexus */
+/* #undef _MGIAL_NEXUS */
+
+/* Define if include the QEMU IAL engine */
+/* #undef _MGIAL_QEMU */
+
+/* Define if include the QVFB IAL engine */
+/* #undef _MGIAL_QVFB */
+
+/* Define if include the random IAL engine */
+/* #undef _MGIAL_RANDOM */
+
+/* Define if include IAL engine for TSLIB */
+/* #undef _MGIAL_TSLIB */
+
+/* Define if include IAL engine for UnixSocket Virtual Frame Buffer */
+/* #undef _MGIAL_USVFB */
+
+/* Define if include the WVFB IAL engine */
+/* #undef _MGIAL_WVFB */
+
+/* Define if support GIF bmp file format */
+#define _MGIMAGE_GIF 1
+
+/* Define if support JPEG bmp file format */
+#define _MGIMAGE_JPG 1
+
+/* Define if support LBM bmp file format */
+/* #undef _MGIMAGE_LBM */
+
+/* Define if support PCX bmp file format */
+/* #undef _MGIMAGE_PCX */
+
+/* Define if support PNG bmp file format */
+/* #undef _MGIMAGE_PNG */
+
+/* Define if support TGA bmp file format */
+/* #undef _MGIMAGE_TGA */
+
+/* Define if include in-core font: Courier */
+#define _MGINCOREFONT_COURIER 1
+
+/* Define if include in-core font: SansSerif */
+#define _MGINCOREFONT_SANSSERIF 1
+
+/* Define if include in-core font: System */
+#define _MGINCOREFONT_SYSTEM 1
+
+/* Define if include in-core UPF Times fonts */
+#define _MGINCOREFONT_TIMES 1
+
+/* Define if include in-core FixedSys RBF for ISO8859-1 */
+#define _MGINCORERBF_LATIN1_FIXEDSYS 1
+
+/* Define if include in-core Terminal RBF for ISO8859-1 */
+#define _MGINCORERBF_LATIN1_TERMINAL 1
+
+/* Define if include in-core VGAOEM RBF for ISO8859-1 */
+#define _MGINCORERBF_LATIN1_VGAOEM 1
+
+/* Define if build MiniGUI for no file I/O system (use in-core resources) */
+#define _MGINCORE_RES 1
+
+/* Define if use the Arabic PC keyboard layout */
+/* #undef _MGKBDLAYOUT_ARABICPC */
+
+/* Define if use the German keyboard layout */
+/* #undef _MGKBDLAYOUT_DE */
+
+/* Define if use the German-Latin1 keyboard layout */
+/* #undef _MGKBDLAYOUT_DELATIN1 */
+
+/* Define if use the Spanish keyboard layout */
+/* #undef _MGKBDLAYOUT_ES */
+
+/* Define if use the Spanish CP850 keyboard layout */
+/* #undef _MGKBDLAYOUT_ESCP850 */
+
+/* Define if use the French keyboard layout */
+/* #undef _MGKBDLAYOUT_FR */
+
+/* Define if use the French PC keyboard layout */
+/* #undef _MGKBDLAYOUT_FRPC */
+
+/* Define if use the Hebrew PC keyboard layout */
+/* #undef _MGKBDLAYOUT_HEBREWPC */
+
+/* Define if use the Italian keyboard layout */
+/* #undef _MGKBDLAYOUT_IT */
+
+/* Define if include flat Look and Feel */
+#define _MGLF_RDR_FLAT 1
+
+/* Define if include skin Look and Feel */
+#define _MGLF_RDR_SKIN 1
+
+/* MiniGUI library suffix */
+#define _MGLIB_SUFFIX "ths"
+
+/* Define if compile max ttf cahce number for 10 (default value) */
+#define _MGMAX_TTF_CACHE 10
+
+/* Define if include About MiniGUI Dialog Box */
+#define _MGMISC_ABOUTDLG 1
+
+/* Define if mouse button can do double click */
+#define _MGMISC_DOUBLE_CLICK 1
+
+/* Define if include SaveBitmap function */
+#define _MGMISC_SAVEBITMAP 1
+
+/* Define if include code for screenshots */
+#define _MGMISC_SAVESCREEN 1
+
+/* Define if build MiniGUI-Processes */
+/* #undef _MGRM_PROCESSES */
+
+/* Define if build MiniGUI-Standalone */
+/* #undef _MGRM_STANDALONE */
+
+/* Define if build MiniGUI-Threads */
+#define _MGRM_THREADS 1
+
+/* Define if the unit of timer is 10ms */
+#define _MGTIMER_UNIT_10MS 1
+
+/* Define if compile max ttf cahce size for 256k */
+#define _MGTTF_CACHE_SIZE 256
+
+/* Define if use own implementation of malloc functions */
+/* #undef _MGUSE_OWN_MALLOC */
+
+/* Define if use own implementation of pthread functions */
+/* #undef _MGUSE_OWN_PTHREAD */
+
+/* Define if use own implementation of stdio functions */
+/* #undef _MGUSE_OWN_STDIO */
+
+/* Define if include implementation of SyncUpdateDC */
+/* #undef _MGUSE_SYNC_UPDATE */
+
+/* Define if build the mgeff support version */
+/* #undef _MG_MINIMALGDI */
+
+/* Define if insert a productid into the library file */
+/* #undef _MG_PRODUCTID */
+
+/* Define if build MiniGUI-Standalone (back-compatibility definition) */
+/* #undef _STAND_ALONE */
+
+/* Define if use minigui_entry function in MiniGUI */
+/* #undef _USE_MINIGUIENTRY */
+
+/* Define if compile for Cygwin platform */
+/* #undef __CYGWIN__ */
+
+/* Define if compile for OpenDarwin */
+/* #undef __DARWIN__ */
+
+/* Define if compile for eCos */
+/* #undef __ECOS__ */
+
+/* Define if compile for Linux */
+/* #undef __LINUX__ */
+
+/* Define if compile for non-UNIX like OS */
+#define __NOUNIX__ 1
+
+/* Define if compile for Nucleus */
+/* #undef __NUCLEUS__ */
+
+/* Define if compile for OSE */
+/* #undef __OSE__ */
+
+/* Define if compile for pSOS */
+/* #undef __PSOS__ */
+
+/* Define for Blackfin run uClinux */
+/* #undef __TARGET_BLACKFIN__ */
+
+/* Define for EPSON C33L05 (axLinux) */
+/* #undef __TARGET_C33L05__ */
+
+/* Define for targets which use GAL and/or IAL engines and define the
+   interfaces externally */
+/* #undef __TARGET_EXTERNAL__ */
+
+/* Define for FMSoft internal use */
+/* #undef __TARGET_FMSOFT__ */
+
+/* Define for Monaco ANVIL target */
+/* #undef __TARGET_MONACO__ */
+
+/* Define for FMSoft miniStudio */
+/* #undef __TARGET_MSTUDIO__ */
+
+/* Define for OSE on mx21 */
+/* #undef __TARGET_MX21__ */
+
+/* Define for VxWorks on PowerPC */
+/* #undef __TARGET_PPC__ */
+
+/* Define for Philips STB810 target */
+/* #undef __TARGET_STB810__ */
+
+/* Define for unknown target */
+/* #undef __TARGET_UNKNOWN__ */
+
+/* Define for VirualFone ANVIL target */
+/* #undef __TARGET_VFANVIL__ */
+
+/* Define for VxWorks on i386 */
+#define __TARGET_VXI386__ 1
+
+/* Define if compile for ThreadX */
+/* #undef __THREADX__ */
+
+/* Define if compile for uC/OS-II */
+/* #undef __UCOSII__ */
+
+/* Define if compile for VxWorks */
+#define __VXWORKS__ 1
+
+/* Define if compile for Winbond SWLinux */
+/* #undef __WINBOND_SWLINUX__ */
+
+/* Define if compile for uClinux */
+/* #undef __uClinux__ */
+
+...
+
+```
+
+The above code shows you the MiniGUI macros (with `_MG` prefix) for
+your target system. For the detailed description of the MiniGUI macros,
+please refer to [Compile-time Configuration].
+
+However, you need to check the macros with `HAVE_` prefix in the file
+to meet the abilities of your target system. For example, you may comment
+out the following macros for most RTOSes:
+
+```cpp
+
+/* Define to 1 if you have `alloca', as a function or macro. */
+/* #undef HAVE_ALLOCA */
+
+/* Define to 1 if you have <alloca.h> and it should be used (not on Ultrix).
+   */
+/* #undef HAVE_ALLOCA_H */
+
+/* Define to 1 if you have the <dirent.h> header file, and it defines `DIR'.
+   */
+/* #undef HAVE_DIRENT_H */
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+/* #undef HAVE_DLFCN_H */
+
+/* Define to 1 if you don't have `vprintf' but do have `_doprnt.' */
+/* #undef HAVE_DOPRNT */
+
+/* Define to 1 if you have the `getpagesize' function. */
+/* undef HAVE_GETPAGESIZE */
+
+/* Define to 1 if you have a working `mmap' system call. */
+/* undef HAVE_MMAP */
+
+/* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
+/* #undef HAVE_NDIR_H */
+
+/* Define to 1 if you have the <unistd.h> header file. */
+/* #undef HAVE_UNISTD_H */
+
+...
+
+```
+
+After you got a suitable `mgconfig.h` file for your target system,
+you can use `makefile.ng` makefiles shipped in MiniGUI source tree
+to build the MiniGUI library.
+
+For more information, please refer to the section
+[Building in Non-GNU environment](#building-in-non-gnu-environment).
 
 ## Compiling and Installing MiniGUI
 
@@ -939,3 +1647,12 @@ Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI API Reference Manuals]: /api-reference/README.md
+
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIDataSheet.md
+[FAQs]: MiniGUIUserManualFAQsEN.md
