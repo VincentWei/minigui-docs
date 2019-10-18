@@ -1,6 +1,7 @@
 # Building MiniGUI
 
 - [Introduction](#introduction)
+- [Configuration Header File](#configuration-header-file)
 - [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
 - [Compiling and Installing MiniGUI](#compiling-and-installing-minigui)
@@ -15,11 +16,11 @@ In general, embedded systems are special systems, and they have
 various requirements for different applications. For example, some
 systems require a basic graphics function to show images, but others may
 require a complete support for windowing and controls/widgets, even needs
-a HTML5 web browser. Therefore, an embedded graphics system like MiniGUI
-must be tailorable.
+to run a HTML5 web browser. Therefore, an embedded graphics system like
+MiniGUI must be tailorable.
 
 For easy tailoring MiniGUI, MiniGUI provides a lot of compile-time
-macros to control the features of MiniGUI core.
+macros to control the features of MiniGUI.
 
 Generally, we can configure MiniGUI core in the following aspects:
 
@@ -37,9 +38,11 @@ of MiniGUI core and the ways to configure it, in order that you can build
 a most suitable MiniGUI for your target devices. We will also show you how
 to build MiniGUI core too.
 
+## Configuration Header File
+
 A file named `mgconfig.h.in` is located in the root directory of
-MiniGUI source tree. There are many C language macros listed in the file,
-but there are all undefined:
+the source tree of MiniGUI core. There are many C language macros
+listed in the file, but there are all undefined:
 
 ```cpp
 ...
@@ -59,7 +62,7 @@ but there are all undefined:
 When a C compiler building MiniGUI from source code, the MiniGUI source
 will include a file named `mgconfig.h`. We can tailor MiniGUI by
 enabling some macros in `mgconfig.h`, while all macros supported are listed
-in `mgconfig.h.in`.
+in `mgconfig.h.in` mentioned above.
 
 Generally, we can copy `mgconfig.h.in` to `mgconfig.h` and modify `mgconfig.h`
 file manually in order to tailor MiniGUI.
@@ -94,7 +97,7 @@ In general, the content of `mgconfig.h` is as follow:
 
 ```
 
-Above code is a snippet of a real `mgconfig.h`. The macro `__VXWORKS__` is
+The above code is a snippet of a real `mgconfig.h`. The macro `__VXWORKS__` is
 defined in this file and this macro will enable the support code for VxWorks
 in the MiniGUI source code. The macro `_MGHAVE_CLIPBOARD` is defined in this
 file tool, it will enable the support for clipboard. Macro `_MGIAL_AUTO`
@@ -105,19 +108,9 @@ It will be very hard to modify `mgconfig.h` manually to meet our needs.
 Fortunately, when you use GNU GCC toolchain, you can use the `configure`
 script to configure MiniGUI and generate `mgconfig.h` file automatically.
 
-Note that you must rebuild MiniGUI if this file is modified. Once MiniGUI
-is built, you should install the MiniGUI headers and `mgconfig.h` to
-your system's header file directory.
-
-Specifically, since Windows 10, Microsoft has reinstated the
-POSIX-compliant subsystem on the Windows platform with WSL (Windows
-Subsystem for Linux) as well as an Ubuntu distribution through the
-Microsoft Store. In this way, we can use the Ubuntu environment running
-on Windows 10 to configure and compile MiniGUI. This will bring us a lot
-of convenience because Ubuntu running on Windows is a complete GNU
-development environment so we can use the GNU *autoconf/automake* script
-to configure MiniGUI for operating systems like VxWorks and its
-development environment.
+Note that you must rebuild MiniGUI if this header file is modified.
+Once MiniGUI is built, you should install the MiniGUI headers and
+`mgconfig.h` to your system's header file directory.
 
 ## Configuring MiniGUI in GNU Environment
 
@@ -128,10 +121,10 @@ the function libraries, executable files, and header files to system.
 Although it is possible to organize a big project with makefile,
 it is not an easy job to create such a makefile
 manually. When we need to maintain a large-scale source code directory
-tree, the makefile maintenance work can greatly increase. Therefore, the
+tree, the makefile maintenance work will greatly increase. Therefore, the
 Free Software Foundation's GNU project has developed the
 Autoconf/Automake tool for many software projects which is based on the
-C and C++ language. Using this tool, we may automatically generate the
+C and C++ language. Using this tool, we can automatically generate the
 makefile, and can check the system configuration information, which helps
 enhancement the customizability of the software.
 
@@ -147,15 +140,15 @@ and build MiniGUI on a Linux PC box for your target system.
 
 If you get MiniGUI source code from the tarball (`libminigui-x.y.z.tar.gz`),
 there will be a ready-to-use `configure` script. Run this script with some options,
-MiniGUI will be got configured. After this, run `make` command to build
+MiniGUI will be configured. After this, run `make` command to build
 MiniGUI:
 
     $ ./configure; make;
 
-If you fetch MiniGUI source code a public Git repository, there will not be
-a ready-to-use `configure` script. For this situation, you should make sure
-have `autoconf` installed in your system, and run `autogen.sh` script to
-generate `configure` script:
+If you fetch MiniGUI source code from a public Git repository, there will
+not be a ready-to-use `configure` script. For this situation, you should
+make sure have `autoconf` installed in your system, and run `autogen.sh`
+script to generate `configure` script:
 
     $ ./autogen.sh
 
@@ -460,56 +453,82 @@ it to find libraries and programs with nonstandard names/locations.
 Report bugs to the package provider.
 ```
 
-Above these parameters were already configured parameter which
-established in the configure script, and these parameters are allowed to
-control which function codes were supported when compile MiniGUI. For
-example, run:
+By using the options listed as the output of `configure` script, we can
+tailor the features of MiniGUI easily. For example:
 
 ```
 user$ ./configure --with-runmode=sa --enable-incoreres
 ```
 
-You may configure MiniGUI that is the Freetype2 Truetype font support
-and the MiniGUI-Process runtime mode. If you run:
+The above command will configure MiniGUI to MiniGUI-Standalone runtime
+mode, and use the incore resource.
+
+As another example, if you run:
 
 ```
 user$ ./configure --disable-cursor --disable-screensaver
 ```
 
-Then configure MiniGUI that is disable the cursor and the default screen
-saver function.
+Your MiniGUI version will lack of support for cursor and screen saver function.
 
-`./configure` command will produce a Makefile with default
-configuration options. Each compiling configuration option has provided
-a default setting in its explanation: `<default=yes>`; (Expressed
-this compiling configuration option is enabled default) or
-`<default=no>`; (Expressed this compiling configuration option is
-disabled default).
+If you run `./configure` command without any option, it will generate
+makefiles and `mgconfig.h` file with the default configuration options.
 
-Besides the MiniGUI has defined configuration options, the configure
-script also has some important general compiling configuration options.
+Each compile-time configuration option has provided a default setting in
+its explanation: `<default=yes>` (the compile-time configuration option
+is enabled by default) or `<default=no>` (the compile-time configuration
+option is disabled by default).
+
+After MiniGUI is configured successfully, you execute `make` command at
+the top directory of MiniGUI source tree to build MiniGUI:
+
+```
+user$ make
+```
+
+This command will do the default building work. But you can also specify
+a different target to `make` command to do other building work, for example,
+
+```
+user$ make clean
+```
+
+This will remove previously generated object files or libraries.
+
+There are several predefined targets in the makefile generated by
+`configure` script. The frequently-used targets are listed as follow:
+
+- `make all` or `make`: The default building process: compile the source code,
+   then link the object files to generate the library or the executable files.
+- `make clean`: Clean the object files.
+- `make install`: Install the executables, libraries, header files, and so on
+   to the installation directory.
+
+Besides the configuration options defined by MiniGUI, the `configure`
+script also provides some important general compile-time configuration
+options.
 
 ### Prefix Option
 
-This compiling configuration option assigns the MiniGUI library where to
+This compile-time configuration option assigns the MiniGUI library where to
 install. The default installation path is `/usr/local`. If you run:
 
 ```
 user$ ./configure --prefix=/home/test
 ```
 
-After executing `make install` command, the function library, header
-files and reference document are installed in `/home/test/lib`,
-`/home/test/include` and `/home/test/man` directory.
+After executing `make install` command, the function library, the header
+files and the reference documents will be installed in `/home/test/lib`,
+`/home/test/include`, and `/home/test/man` directory respectively.
 
 #### Cross Compiling Options
 
-The compiling configuration options `--build`, `--host` and
-`--target` are very important to cross compile applications. For
-example, if you use the `arm-linux` cross compiling toolchain, then you
-may assign option like `--build`, thus let the configure script
-produces the makefile file used to complete the arm-linux’s cross
-compiling:
+The compile-time configuration options `--build`, `--host` and
+`--target` are very important for cross compilation.
+
+For example, if you use the `arm-linux-gcc` cross compiling toolchain,
+you should correctly specify `--build` option, which lets `configure`
+script generating the makefile suitable for cross compilation for ARM:
 
 ```
 user$ CC=arm-linux-gcc ./configure
@@ -519,11 +538,15 @@ user$ CC=arm-linux-gcc ./configure
     --target=arm-unknown-linux
 ```
 
+Once you configured MiniGUI by using the command above, you can run
+`make` command to cross-build MiniGUI for your target system. In this
+situation, the C source files will be compiled by using `arm-linux-gcc`
+command instead of the default `gcc` command in your system.
+
 In above command, the `--prefix` option is used to set the installing
-MiniGUI configuration file, the function library and the header files
-directory’s prefix, when you executed `make install` command, MiniGUI
-configuration file, the library file and header files will be installed
-in the following position:
+directory’s prefix. After cross-building MiniGUI, when you executed
+`make install` command, the runtime configuration file, the library file
+and header files will be installed in the following directories respectively.
 
 - `/usr/local/arm/2.95/arm-linux/etc/`
 - `/usr/local/arm/2.95.3/arm-linux/lib/`
@@ -531,24 +554,10 @@ in the following position:
 
 #### --enable-static and --enable-shared
 
-The two configuration options assign whether generating static function
-library or dynamic function library. If you do not need to produce the
+These two configuration options control whether generating static function
+library or dynamic function library. If you do not need to generate the
 static library, then you may use the `--disable-static` configuration
 option, it will take less time to compile the library than default.
-
-There are several predefined targets in the makefile, which produced by
-the configure script supply for user, here only several summaries as
-follow:
-
-The function storehouse, a document and so on are installed in the way,
-which assigns
-
-- `make all`: Produce the target set. Only run make command also to be
-allowed, this time can start to compile the source code, then link it
-and produces the executable file or function library.
-- `make clean`: Clean the previous object files(\*.o).
-- `make install`: Install the function library, header files and so on to
-the directory which you assigned.
 
 ## Configuring MiniGUI in Non-GNU Environment
 
@@ -559,7 +568,7 @@ environment provide the development tools chain that is not GNU
 compatible, therefore, we are unable to use the configure script that is
 described in section 2.1.1 to produce makefile and the `mgconfig.h`
 file automatically. In this kind of situation, we need voluntarily to
-revise the `mgconfig.h` file to complete the MiniGUI compiling
+revise the `mgconfig.h` file to complete the MiniGUI compile-time
 configuration. Fortunately, Feynman Software already prepares the
 `mgconfig.h` file for the majority operating system, which can
 directly be used (store in MiniGUI source code **build/** directory);
