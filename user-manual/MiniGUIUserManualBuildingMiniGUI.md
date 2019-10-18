@@ -5,7 +5,6 @@
 - [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
 - [Building MiniGUI in GNU environment](#building-minigui-in-gnu-environment)
-- [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
    * [LibFreeType](#libfreetype)
    * [LibJPEG, LibPNG, and LibZ](#libjpeg-libpng-and-libz)
    * [gvfb](#gvfb)
@@ -13,6 +12,7 @@
    * [MiniGUI resource](#minigui-resource)
    * [MiniGUI components](#minigui-components)
    * [MiniGUI samples and demos](#minigui-samples-and-demos)
+- [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
 
 ## Introduction
 
