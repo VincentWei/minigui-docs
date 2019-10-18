@@ -684,121 +684,119 @@ For more information, please refer to the section
 
 ### Dependent libraries and tools
 
-Before running MiniGUI, you need to install the dependent libraries
-required by MiniGUI. MiniGUI mainly uses LibFreeType, LibPNG, LibJPEG,
-LibZ and other third-party dependent libraries.
+Before building MiniGUI, you need to install the dependent libraries
+required by MiniGUI first. MiniGUI mainly uses LibFreeType, LibPNG,
+LibJPEG, LibZ and other third-party dependent libraries.
 
 These dependent library source code packages basically use the GNU
-Automake/Autoconf script to organize projects and compile and install
+Automake/Autoconf script to organize projects and compile/install
 these libraries by specifying specific environment variables and certain
 options when running `./configure` commands. We can also check the
-acceptable switch parameters for each configure script by running the
-`./configure --help` command in these dependent source files.
+acceptable options for each configuration script by running the
+`./configure --help` command in the source tree.
 
-Currently, these dependencies are basically standard configurations of
-Linux distributions (such as Ubuntu, RedHat, etc.). However,
-if you want to find these libraries while compiling MiniGUI, you need to
-install these SDKs. For example, on Ubuntu Linux, FreeType 2, LibPNG,
-LibJPEG development kits can be installed by executing the following
-command:
-
-This section is given below in the source code package based on the
-compiler, install these dependent libraries steps, for reference only.
+Currently, these dependencies have standard software packages on
+Linux distributions (such as Ubuntu, or RedHat). Therefore,
+if you want to develop MiniGUI apps on a Linux PC box, you can
+directly install the software packages. For example, on Ubuntu Linux 16.04,
+the development packages for FreeType, LibPNG, LibJPEG can be installed by
+executing the following command:
 
     $ sudo apt-get install libfreetype6-dev libpng12-dev libjpeg-dev
+
+This section describe the basic commands to compile the dependent libraries
+based on the source code.
 
 #### LibFreeType
 
 The FreeType Library is an open source, high quality, and portable font
 engine that provides a unified interface for accessing a variety of font
-format files including TrueType, OpenType, Type1, CID, CFF, Windows FON
-/ FNT, X11 PCF, etc. . MiniGUI uses the FreeType library to render
-TrueType fonts. Historically, FreeType has two major versions, one is
-FreeType 1, such as FreeType v1.3.1; the other is FreeType 2, such as
-FreeType v2.5.2. As mentioned above, MiniGUI can choose to use TrueType
-font with FreeType 1 or FreeType 2. Currently, FreeType 1 development
-has been stagnant, while FreeType 2 is the mainstream. Therefore,
-FreeType 2 should be given priority to support TrueType fonts if there
-is no special case.
+format files including TrueType, OpenType, Type1, CID, CFF, Windows
+FON/FNT, X11 PCF, etc. MiniGUI mainly uses the FreeType library to render
+TrueType, OpenType, and Type 1 fonts.
+
+Historically, FreeType has two major versions, one is FreeType 1,
+such as FreeType v1.3.1; the other is FreeType 2, such as FreeType v2.6.2.
+Currently, FreeType 1 is deprecated, so MiniGUI provides support for
+FreeType 2 only.
 
 Download the source code package of FreeType 2 from the official website
 of MiniGUI or the FreeType official website and unzip it into the source
-directory, then run the following command:
+directory, then run the following commands:
 
     $ ./configure --prefix=/usr/local
     $ make
     $ sudo make install
 
-The FreeType 2 library and header files will be installed in /usr/local
+The FreeType 2 library and header files will be installed in `/usr/local`
 directory.
 
 #### LibJPEG, LibPNG, and LibZ
 
-The library on which MiniGUI runs depends on libjpeg for JPEG images,
-libpng for PNG images, and more. Like the FreeType library, these
-libraries are included in common Linux distributions.
+To support various image formats, MiniGUI uses LibJPEG for JPEG images,
+LibPNG for PNG images. The support for Windows BMP and GIF is self-contained,
+it does not need a third-party library.
 
-First install the LibZ library. The LibZ library provides the
-compression and decompression function of the Z algorithm, while the PNG
-image format uses the same compression algorithm, so before installing
-and installing LibPNG, first install the LibZ library. Download and
-unzip LibZ library source code package, and then enter the source root
-directory, execute the following command:
+Like the FreeType library, these libraries are also included in
+common Linux distributions.
+
+To support PNG images, we first install the LibZ library. The LibZ library
+provides the compression and decompression function of the Z algorithm,
+while the PNG image format uses the algorithm.
+
+Download and unzip LibZ library source code package, enter into
+the top directory of the source tree, and execute the following commands:
 
     $ ./configure --prefix=/usr/local
     $ make
     $ sudo make install
 
-The LibZ library and header files will be installed in /usr/local
+The LibZ library and the header files will be installed in `/usr/local`
 directory.
 
-Download LibPng library source code, untied into the root directory of
-the source code, execute the following command:
+Download and extract the LibPNG library source code, enter into the top directory
+of the source tree, and execute the following commands:
 
     $ ./configure --prefix=/usr/local
     $ make
     $ sudo make install
 
-Download LibJPEG library source code, untied into the root directory of
-the source code, execute the following command:
+Download and extract the LibJPEG library source code, enter into the top directory
+of the source tree, execute the following commands:
 
     $ ./configure --prefix=/usr/local --enable-shared
     $ make
     $ sudo make install
 
-The installation process may be prompted to create certain files, then
-you need to see the directory you want to install there is no
-corresponding directory, if you do not have to create your own. This
-JPEG library header files, dynamic libraries and static libraries will
-be installed to the /usr/local directory.
+The header files, the dynamic libraries and the static libraries will
+be installed to the `/usr/local` directory.
 
 #### gvfb
 
-The default virtual frame buffer graphics engine in MiniGUI 3.0 is
-pc\_xvfb. The graphics engine defines a virtual frame buffer program
-(XVFB) specification that does not depend on a specific implementation.
-Under this specification, we can use the gvfb program on Linux Use Gtk+
-development), or use the qvfb2 program (developed using Qt) to display
-the output of MiniGUI and its application in the window of gvfb or qvfb.
+`gvfb` is a virtual frame buffer graphics. The developer use `gvfb` on
+a PC box as the display device of MiniGUI. In this way, we can easily
+develop MiniGUI app on a Linux PC box.
 
-gvfb is a virtual framebuffer program that is compatible with MiniGUI
-3.0 XVFB specification and was developed using Gtk+ 2.0. To compile and
-install gvfb, to ensure that the system has been installed Gtk+ 2.0
-development kits. Under Ubuntu Linux, use the following command to
-install the appropriate development kit:
+The default virtual frame buffer graphics engine in MiniGUI 3.0 or later
+is `pc_xvfb`. The graphics engine defines a virtual frame buffer
+(XVFB) specification that does not depend on a specific implementation.
+Under this specification, we can use the gvfb program on Linux (based-on
+Gtk+ 2), or use the `qvfb2` program (based on Qt) to display
+the output of MiniGUI and its apps in the window of gvfb or qvfb2.
+
+To compile and install `gvfb`, make sure that you have installed Gtk+ 2.0
+development packages. Under Ubuntu Linux, use the following command to
+install the appropriate development packages:
 
     $ sudo apt-get install libgtk2.0-dev
 
-Then enter the gvfb source code directory, run the following command:
+Then enter the top directory of `gvfb` source tree, run the following commands:
 
     $ ./configure --prefix=/usr/local
     $ make
     $ sudo make install
 
 ### Building In the GNU Environment
-
-If you configure MiniGUI with configure script in GNU development
-environment, you can compile and install MiniGUI with `make` command.
 
 After MiniGUI is configured successfully, you execute `make` command at
 the top directory of MiniGUI source tree to build MiniGUI:
@@ -824,6 +822,8 @@ There are several predefined targets in the makefile generated by
 - `make clean`: Clean the object files.
 - `make install`: Install the executables, libraries, header files, and so on
    to the installation directory.
+- `make uninstall`: Uninstall the executables, libraries, header files, and so on
+   from the system.
 
 Therefore, we commonly use the following commands to configure, build,
 and install MiniGUI:
@@ -848,17 +848,38 @@ user$ make
 user$ sudo make install
 ```
 
-Similarly, we can also specify the installation path using the --prefix
+Similarly, we can also specify the installation path using the `--prefix`
 option.
+
+#### Building MiniGUI components
+
+After building MiniGUI core, it is very straightforward to building MiniGUI
+components, because they use the same way to organize the source code, and
+there are few configuration options.
+
+Here is a Bash shell script to build the MiniGUI components:
+
+```bash
+#!/bin/bash
+
+for comp in mgutils mgplus mgeff mgncs mgncs4touch; do
+    cd $comp
+    ./autogen.sh; ./configure
+    make;
+    sudo make install
+    cd ..
+done
+```
 
 #### Compile and run MiniGUI sample
 
-After compiling and installing MiniGUI according to the above steps, you
-can compile and run the sample in mg-samples. By default, MiniGUI will
-use the `pc_xvfb` graphics and input engine, and the actual virtual
-frame buffer program is `gvfb`.
+After compiling and installing MiniGUI core and components according to
+the above steps, you can compile and run the sample in `mg-samples`.
 
-Run the following command to configure and compile the `mg-samples` code
+By default, MiniGUI will use the `pc_xvfb` graphics and input engine,
+and the actual virtual frame buffer program is `gvfb`.
+
+Run the following commands to configure and compile the `mg-samples` code
 package:
 
 ```
@@ -867,16 +888,16 @@ user$ ./configure
 user$ make
 ```
 
-The first command to refresh the Linux system dynamic library cache
+The first command will refresh the Linux system dynamic library cache
 system. Because by default MiniGUI dynamic libraries are installed in
 the `/usr/local/lib` directory, the system uses a cache to maintain a list
 of all the dynamic libraries installed in the system. If the cache is
-not refreshed, It may not be found installed dynamic library problem.
+not refreshed, the system may complain no dynamic library found.
 
 To run the demo in MiniGUI-Processes runtime mode, you need to start the
 `mginit` program first and then run the other sample programs. The
-following is the process of running the same game in MiniGUI-Processes
-mode:
+following commands gives the process of running a game (`same`) in
+MiniGUI-Processes mode:
 
 ```
 user$ cd mginit
@@ -885,8 +906,8 @@ user$ cd ../same
 user$ ./same
 ```
 
-On MiniGUI-Threads runtime mode to run the demo program, more simple,
-direct run sample demo. Here's how to run the same game in thread mode:
+On MiniGUI-Threads runtime mode, you can directly run a sample.
+Here's how to run the game `same`:
 
 ```
 user$ cd same
@@ -1051,8 +1072,6 @@ About other contents related with portion and configuration of MiniGUI,
 please refer to Chapter 18 “*GAL and IAL Engines*” and Appendix A “*A
 Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
 
-## Building MiniGUI Components
-
 ---
 
 [Previous Chapter](MiniGUIUserManualQuickStart.md)  
@@ -1066,7 +1085,6 @@ Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI API Reference Manuals]: /api-reference/README.md
-
 
 [Quick Start]: MiniGUIUserManualQuickStart.md
 [Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
