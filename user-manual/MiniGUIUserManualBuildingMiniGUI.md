@@ -796,7 +796,7 @@ Then enter the top directory of `gvfb` source tree, run the following commands:
     $ make
     $ sudo make install
 
-### Building In the GNU Environment
+### Building In GNU Environment
 
 After MiniGUI is configured successfully, you execute `make` command at
 the top directory of MiniGUI source tree to build MiniGUI:
