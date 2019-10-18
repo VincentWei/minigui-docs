@@ -479,6 +479,13 @@ user$ ./configure --disable-cursor --disable-screensaver
 
 Your MiniGUI version will lack of support for cursor and screen saver function.
 
+We implement all of the configuration options of MiniGUI based on
+`--disable-FEATURE` and `--enable-FEATURE`. While MiniGUI configuration
+script also provides `--with-configuration` option, you can use this
+configuration option to choose one from multiple options. For example,
+you can use `--with-osname=ecos` configuration option to specify the
+operating system on which MiniGUI runs.
+
 For the detailed description of the options, please refer to
 [Compile-time Configuration].
 

@@ -14,46 +14,32 @@
    * [Control](#control)
    * [Others](#others)
 - [Minimal Configuration Options](#minimal-configuration-options)
+- [Changes in Version 4.0](#changes-in-version-40)
 
 ## Configuration Options and Macros
 
-In this chapter, we will give detailed description on all compiling,
-configuration options of MiniGUI. MiniGUI has many compiling,
-configuration options, for your actual demand; you can combine these
-options to generate MiniGUI function library.
-
-In GNU development environment, we implement the most of configuration
-options of MiniGUI that based on **--disable-FEATURE** and
-**--enable-FEATURE**, while MiniGUI configuration script also provides
-**--with-configuration** option, you can use this configuration option
-to choose one option from multiple specified configuration. For example,
-you can use **--with-style** configuration option to specify the style
-of window and control of MiniGUI. Finally, these configuration options
-were defined macros, whatever use **--disable-FEATURE** or
-**--enable-FEATURE** or **--with-configuration** option to specify
-configuration option.
-
-In the next chapter, we will give configuration option of MiniGUI by
-classify. We will description on configuration names of configure script
-and macro names in the `mgconfig.h` file.
+In this chapter, we will give detailed description on most important
+compile-time configuration options of MiniGUI. MiniGUI has many
+such options; you can combine these options to generate your own
+MiniGUI library.
 
 ### Operating Systems
 
 MiniGUI provides support for multiple operating systems, you can specify
-operating system when execute configure script, default operating system
-is Linux. If you want to run MiniGUI on uClinux, you can execute command
+operating system when execute configuration script, the default operating
+system is Linux. If you want to run MiniGUI on eCos, you can execute command
 as the follow:
 
 ```
-user$ ./configure --with-osname=uclinux
+user$ ./configure --with-osname=ecos
 ```
 
 If you specify an operating system, the corresponding macro was defined
-in `mgconfig.h`. For some operating systems, we will open other some
-macros. Table 2.1 lists relevant options and macros of operating
-systems.
+in `mgconfig.h`. For some operating systems, the script will also enable
+other macros. The following table lists the options and macros about
+operating systems.
 
-Table 2.1 operating systems relevant options and macros
+Operating systems options and macros
 
 | Configuration options  | Macro                | Other macros         | Comment  |
 | -----------------------|----------------------|----------------------|-------|
@@ -782,6 +768,7 @@ above, listed as follows:
 ```
 ```
 
+## Changes in Version 4.0
 
 ---
 
