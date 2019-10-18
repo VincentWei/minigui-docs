@@ -39,7 +39,7 @@ in `mgconfig.h`. For some operating systems, the script will also enable
 other macros. The following table lists the options and macros about
 operating systems.
 
-Operating systems options and macros
+##### Operating systems options and macros
 
 | Configuration options  | Macro                | Other macros         | Comment  |
 | -----------------------|----------------------|----------------------|-------|
