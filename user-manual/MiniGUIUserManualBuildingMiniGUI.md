@@ -6,7 +6,7 @@
 - [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
 - [Building MiniGUI in GNU environment](#building-minigui-in-gnu-environment)
 - [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
-   * [LibFreeType](libfreetype)
+   * [LibFreeType](#libfreetype)
    * [LibJPEG, LibPNG, and LibZ](#libjpeg-libpng-and-libz)
    * [gvfb](#gvfb)
    * [MiniGUI core](#minigui-core)
@@ -684,7 +684,7 @@ to build the MiniGUI library.
 For more information, please refer to the section
 [Building in Non-GNU environment](#building-in-non-gnu-environment).
 
-## Building MiniGUI In GNU Environment
+## Building MiniGUI in GNU Environment
 
 Before building MiniGUI, you need to install the dependent libraries
 required by MiniGUI first. MiniGUI mainly uses LibFreeType, LibPNG,
@@ -919,7 +919,7 @@ user$ ./same
 In same way, you can build and run `mguxdemo` (`cell-phone-ux-demo`) and
 `mg-demos` easily.
 
-### Building In Non-GNU Environment
+### Building in Non-GNU Environment
 
 In the Non-GNU development environment (generally, it is Windows
 platform), we first organize MiniGUI source code solution for project of
