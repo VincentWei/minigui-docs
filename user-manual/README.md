@@ -5,12 +5,12 @@ the runtime configuration options of MiniGUI version 3.2 or later.
 
 ## Contents
 
-- [Quick Start](MiniGUIUserManualChapter1.md)
-- [Building MiniGUI](MiniGUIUserManualChapter2.md)
-- [Runtime Configuration Options](MiniGUIUserManualChapter3.md)
-- [Developing MiniGUI Apps on PC](MiniGUIUserManualChapter4.md)
+- [Quick Start](MiniGUIUserManualQuickStart.md)
+- [Building MiniGUI](MiniGUIUserManualBuildingMinigui.md)
+- [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
 - [Feature List](MiniGUIDataSheet.md)
-- [FAQs](MiniGUIUserManualAppendixA.md)
+- [FAQs](MiniGUIUserManualFAQsEN.md)
+- [常见问题](MiniGUIUserManualFAQsZH.md)
 
 ## Copying
 

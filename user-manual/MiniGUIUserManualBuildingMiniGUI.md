@@ -1702,7 +1702,7 @@ Universal Startup API for RTOSes*” in MiniGUI Programming Guide V3.0-5.
 
 ---
 
-[Previous Chapter](MiniGUIUserManualChapter1.md)  
+[Previous Chapter](MiniGUIUserManualQuickStart.md)  
 [Table of Contents](README.md)  
 [Next Chapter](MiniGUIUserManualChapter3.md)
 
