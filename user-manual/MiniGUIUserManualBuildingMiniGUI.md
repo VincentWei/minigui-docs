@@ -926,7 +926,7 @@ user$ ./same
 In same way, you can build and run `mguxdemo` (`cell-phone-ux-demo`) and
 `mg-demos` easily.
 
-### Building in Non-GNU Environment
+### Building MiniGUI in Non-GNU Environment
 
 In the Non-GNU development environment (generally, it is Windows
 platform), we first organize MiniGUI source code solution for project of
