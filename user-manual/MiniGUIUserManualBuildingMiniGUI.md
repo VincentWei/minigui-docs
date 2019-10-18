@@ -155,7 +155,7 @@ script to generate `configure` script:
 You can also play the above commands in Cygwin environment on
 Windows platform. For more information about Cygwin, please refer to:
 
-<https://www.Cygwin.com/>
+<https://www.cygwin.com/>
 
 If you run `configure` script, it will generate not only makefile, but
 also `mgconfig.h` file base on the options for the configuration script.
@@ -429,7 +429,7 @@ Optional Packages:
   --with-nexus-includedir=DIR  Where to find header files of nexus library
   --with-nexus-libdir=DIR      Where to find .so files of nexus library
   --with-libsuffix=ARG     Configure the suffix of MiniGUI library name.
-  --with-osname=linux/uclinux/ecos/ucos2/swlinux/vxworks/win32/darwin/threadx/Cygwin/nucleus/ose/psos
+  --with-osname=linux/uclinux/ecos/ucos2/swlinux/vxworks/win32/darwin/threadx/cygwin/nucleus/ose/psos
   --with-targetname=unknown/external/fmsoft/mstudio/stb810/vfanvil/vxi386/qvfb/fbcon/mx21/monaco/c33l05/bfin/vxppc/
                         S3C6410/S3C2440/S3C2410/hi3560a     Define the target board name
   --with-ttfcachesize=64/128/256/512/1024
@@ -1500,7 +1500,7 @@ compile and generate MiniGUI functions library.
 Many OSes (Operating System) development environments include Cygwin
 such as OSE. If there is not Cygwin in your development environment, you
 can download and install it from
-[*http://www.Cygwin.com*](http://www.Cygwin.com). Please make sure you
+[*http://www.cygwin.com*](http://www.cygwin.com). Please make sure you
 have installed make tool, compiler and BASH shell script software
 package and so on.
 
@@ -1536,7 +1536,7 @@ Copy build/config-vxworks-i386.h to MiniGUI source code top directory,
 and rename it as mgconfig.h (we resume that current directory is MiniGUI
 source code top directory):
 
-    Cygwin$ cp build/config-vxworks-i386.h mgconfig.h
+    cygwin$ cp build/config-vxworks-i386.h mgconfig.h
 
 Modify TARGET\_RULES value in rules.make file:
 
@@ -1544,18 +1544,18 @@ TARGET\_RULES=build/rules-pc.vxworks
 
 Then we compile MiniGUI using make tool of Cygwin:
 
-    Cygwin$ /usr/bin/make –f makefile.ng
+    cygwin$ /usr/bin/make –f makefile.ng
 
 Note that **makefile.ng** supports commands of clean and make. If you
 execute the command as follow:
 
-    Cygwin$ /usr/bin/make –f makefile.ng install
+    cygwin$ /usr/bin/make –f makefile.ng install
 
 You can install MiniGUI header files and library to the directory, which
 is specified by **rules-&lt;platform&gt;.&lt;os&gt;**. If you execute
 the command as the following:
 
-    Cygwin$ /usr/bin/make –f makefile.ng clean
+    cygwin$ /usr/bin/make –f makefile.ng clean
 
 You can clean all object files to compile afresh.
 
@@ -1576,7 +1576,7 @@ Table 2.21 the variables needed by makefile.ng
   CPP             Specify C++ compiler                                                  
   AR              Specify archiving tool, the tool is used to generate static library   
   RANLIB          Specify static library index tool                                     
-  MAKE            Specify make tool                                                     Generally, the make tool is /usr/bin/make in the Cygwin environment
+  MAKE            Specify make tool                                                     Generally, the make tool is /usr/bin/make in the cygwin environment
   ARFLAGS         The option that controls the archiving tool generate static library   
   COFLAG          The option that it control the compiler to compile, but not link      
   OBJ             The suffix name of the object file                                    
