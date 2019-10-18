@@ -562,14 +562,14 @@ required by MiniGUI. MiniGUI mainly uses LibFreeType, LibPNG, LibJPEG,
 LibZ and other third-party dependent libraries.
 
 These dependent library source code packages basically use the GNU
-Automake / Autoconf script to organize projects and compile and install
+Automake/Autoconf script to organize projects and compile and install
 these libraries by specifying specific environment variables and certain
-options when running ./configure commands. We can also check the
+options when running `./configure` commands. We can also check the
 acceptable switch parameters for each configure script by running the
-./configure --help command in these dependent source files.
+`./configure --help` command in these dependent source files.
 
 Currently, these dependencies are basically standard configurations of
-mainstream Linux distributions (such as Ubuntu, RedHat, etc.). However,
+Linux distributions (such as Ubuntu, RedHat, etc.). However,
 if you want to find these libraries while compiling MiniGUI, you need to
 install these SDKs. For example, on Ubuntu Linux, FreeType 2, LibPNG,
 LibJPEG development kits can be installed by executing the following
