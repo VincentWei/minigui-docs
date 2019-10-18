@@ -6,7 +6,7 @@ the runtime configuration options of MiniGUI version 3.2 or later.
 ## Contents
 
 - [Quick Start](MiniGUIUserManualQuickStart.md)
-- [Building MiniGUI](MiniGUIUserManualBuildingMinigui.md)
+- [Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md)
 - [Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md)
 - [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
 - [Tools](MiniGUIUserManualTools.md)
