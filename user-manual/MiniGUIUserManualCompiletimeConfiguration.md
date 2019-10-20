@@ -34,64 +34,86 @@ as the follow:
 user$ ./configure --with-osname=ecos
 ```
 
-If you specify an operating system, the corresponding macro was defined
-in `mgconfig.h`. For some operating systems, the script will also enable
-other macros. The following table lists the options and macros about
-operating systems.
+If you specify an operating system, some macros will be defined
+in `mgconfig.h`. For some operating systems, the configuration script
+will also enable other macros. The following table lists the options and
+macros about operating systems.
 
-##### Operating systems options and macros
+##### Table: Options and macros for different operation systems
 
-| Configuration options  | Macro                | Other macros         | Comment  |
-| -----------------------|----------------------|----------------------|-------|
-| --with-osname=linux    | `__LINUX__`          |                      | Default value; for Linux operating system |
-| --with-osname=uclinux  | `__uClinux__`        |                      | For uClinux operating system |
-| --with-osname=ecos     | `__ECOS__`           | `__NOUNIX__`         | For eCos operating system |
-| --with-osname=ucos2    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
-| --with-osname=vxworks  |  `__VXWORKS__`       | `__NOUNIX__`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
-| --with-osname=cygwin   | `__CYGWIN__`         | `__NOUNIX__`         | For cygwin environment |
-| --with-osname=win32    | `WIN32`              | `__NOUNIX__`         | For Win32 platform |
-| --with-osname=darwin   | `__DARWIN__`         | `__NOUNIX__`         | For MacOS X operating system |
-| --with-osname=threadx  | `__THREADX__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
-| --with-osname=nucleus  | `__NUCLEUS__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
-| --with-osname=ose      | `__OSE__`            | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For OSE operating system |
-| --with-osname=psos     | `__PSOS__`           | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For pSOS operating system |
-| --with-osname=swlinux  | `__WINBOND_SWLINUX__`|                      | Deprecated; for SWLinux operating system |
-
-According to operating system, we divide MiniGUI value-added release, so
-the MiniGUI value-added release product for certain operating system
-cannot run on anther operating system. In order to run MiniGUI
-value-added release product on corresponding operating system, you make
-sure that the above macros were defined when you modify configuration.
+| Configuration options    | Macro                | Other macros         | Comments  |
+| -------------------------|----------------------|----------------------|-------|
+| `--with-osname=linux`    | `__LINUX__`          |                      | For Linux operating system; Default value |
+| `--with-osname=uclinux`  | `__uClinux__`        |                      | For uClinux operating system |
+| `--with-osname=ucos2`    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
+| `--with-osname=vxworks`  | `__VXWORKS__`        | `__NOUNIX__`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
+| `--with-osname=ecos`     | `__ECOS__`           | `__NOUNIX__`         | For eCos operating system |
+| `--with-osname=threadx`  | `__THREADX__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
+| `--with-osname=nucleus`  | `__NUCLEUS__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
+| `--with-osname=ose`      | `__OSE__`            | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For OSE operating system |
+| `--with-osname=psos`     | `__PSOS__`           | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For pSOS operating system |
+| `--with-osname=rtthread` | `__RTTHREAD__`       | `__NOUNIX__`         | For RT-Thread operating system; Since MiniGUI 4.0.2 |
+| `--with-osname=rtems`    | `__RTEMS__`          | `__NOUNIX__`         | For RTEMS operating system; Since MiniGUI 4.0.2 |
+| `--with-osname=freertos` | `__FREERTOS__`       | `__NOUNIX__`         | For FreeRTOS operating system; Since MiniGUI 4.0.2 |
+| `--with-osname=cygwin`   | `__CYGWIN__`         | `__NOUNIX__`         | For Cygwin environment |
+| `--with-osname=win32`    | `WIN32`              | `__NOUNIX__`         | For Windows platform |
+| `--with-osname=darwin`   | `__DARWIN__`         | `__NOUNIX__`         | For MacOS X operating system |
+| `--with-osname=swlinux`  | `__WINBOND_SWLINUX__`|                      | Deprecated; for SWLinux operating system |
 
 ### Target Board
 
-In MiniGUI certain codes are related with a special target board; if you
-want run MiniGUI must on these target boards correctly, you need to
-assign the name of these development boards. When you run configure
-script, through the **--with-targetname** option, may assign the special
-target board name and the default name is unknown. The target board
-related options usually use for assign the sub-driver of graphics engine
-when MiniGUI uses the Shadow graphics engine or the CommLCD graphics
-engine, in other words, when uses these two engines, through the target
-board name you can determine which sub-driver contains. The table 2.2
-lists the target board related options and macros.
+In MiniGUI core, some code are related with a special target board,
+especially when you use `Shadow` NEWGAL engine or `CommLCD` NEWGAL
+engine for certain operating systems. In other words, when you use
+these two engines, the configuration script will determine which sub-drivers
+will be contained in MiniGUI core by using a configuration option.
 
-Table 2.2 target board related options and macros
+You can use `--with-targetname` option to define the name for your
+target board, especially when you use a real-time operating system.
 
-  Configuration options       Macro                      Memo
-  --------------------------- -------------------------- ----------------------------------------------------------
-  --with-targetname=stb810    `__TARGET_STB810__`     Philips STB810 development board base on Linux
-  --with-targetname=vfanvil   `__TARGET_VFANVIL__`    VisualFone development board base on ThreadX
-  --with-targetname=vxi386    `__TARGET_VXI386__`     i386 target base on VxWorks
-  --with-targetname=qvfb      `__TARGET_QVFB__`       Include qvfb sub-driver of Shadow engine base on Linux
-  --with-targetname=wvfb      `__TARGET_WVFB__`       Include wvfb sub-driver of Shadow engine base on Windows
-  --with-targetname=fbcon     `__TARGET_FBCON__`      Include fbcon sub-driver of Shadow engine base on Linux
-  --with-targetname=mx21      `__TARGET_MX21__`       MX21 development board base on OSE
-  --with-targetname=c33l05    `__TARGET_C33L05__`     Epson C33L05 development board base on axLinux
-  --with-targetname=bfin      `__TARGET_BLACKFIN__`   BlackFin537 development board base on uClinux
-  --with-targetname=vxppc     `__TARGET_PPC__`        PowerPC target base on VxWorks
-  --with-targetname=monaco    `__TARGET_MONACO__`     monaco development board base on Nucleus
-  --with-targetname=unknown   `__TARGET_UNKNOWN__`    Unknown development board: default value
+The default target board name is `unknown`. We recommend to define a
+target board name when you port MiniGUI to a new target system for a
+traditional real-time operating system, such as uC/OS-II, eCos, ThreadX,
+or others.
+
+Since MiniGUI 3.2.2, we introduce a new target name `external`.
+When you use `CommLCD` NEWGAL engine or `Comm` IAL engine to support
+your target board, you can define the target name as `external`.
+By using the target name, you do not need to change the source code
+of MiniGUI core. Instead, you implement the engines outside the MiniGUI
+core by defining some external functions.
+
+Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also support
+the target name `external`. So you can implement the sub-driver of
+`dri` engine outsize MiniGUI core.
+
+For more information, please refer to:
+
+[Using CommLCD NEWGAL Engine and Comm IAL Engine](https://github.com/VincentWei/minigui/wiki/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine)
+
+[Writing DRI Engine Driver for Your GPU](https://github.com/VincentWei/minigui/wiki/Writing-DRI-Engine-Driver-for-Your-GPU)
+
+The table lists the options and macros related to various target boards.
+
+##### Table: Options and macros for various target board
+
+| Configuration options         | Macro                    | Memo
+|-------------------------------|--------------------------|----------------------------------------------------------
+| `--with-targetname=unknown`   | `__TARGET_UNKNOWN__`     | Unknown development board: default value
+| `--with-targetname=external`  | `__TARGET_EXTERNAL__`    | Define this target name when you want to use NEWGAL and/or IAL engine which is implemented outside MiniGUI core.
+| `--with-targetname=fmsoft`    | `__TARGET_FMSOFT__`      | Only for FMSoft's internal use
+| `--with-targetname=mstudio`   | `__TARGET_MSTUDIO__`     | Only for miniStudio
+| `--with-targetname=stb810`    | `__TARGET_STB810__`      | Philips STB810 development board base on Linux
+| `--with-targetname=vfanvil`   | `__TARGET_VFANVIL__`     | VisualFone development board base on ThreadX
+| `--with-targetname=vxi386`    | `__TARGET_VXI386__`      | i386 target base on VxWorks
+| `--with-targetname=qvfb`      | `__TARGET_QVFB__`        | Include qvfb sub-driver of Shadow engine base on Linux
+| `--with-targetname=wvfb`      | `__TARGET_WVFB__`        | Include wvfb sub-driver of Shadow engine base on Windows
+| `--with-targetname=fbcon`     | `__TARGET_FBCON__`       | Include fbcon sub-driver of Shadow engine base on Linux
+| `--with-targetname=mx21`      | `__TARGET_MX21__`        | MX21 development board base on OSE
+| `--with-targetname=c33l05`    | `__TARGET_C33L05__`      | Epson C33L05 development board base on axLinux
+| `--with-targetname=bfin`      | `__TARGET_BLACKFIN__`    | BlackFin537 development board base on uClinux
+| `--with-targetname=vxppc`     | `__TARGET_PPC__`         | PowerPC target base on VxWorks
+| `--with-targetname=monaco`    | `__TARGET_MONACO__`      | Monaco development board base on Nucleus
 
 ### Runtime Mode
 
