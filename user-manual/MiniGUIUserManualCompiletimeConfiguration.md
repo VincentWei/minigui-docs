@@ -286,7 +286,7 @@ the hoop input event.
 Table 2.8 Mouse protocol related options and macros
 
 | Switch options |  Macro              | Default | Comments
-|----------------|-------- ------------|---------|---------
+|----------------|---------------------|---------|---------
 | `consoleps2`   |  `_MGCONSOLE_PS2`   | Enabled | Support PS2 mouse protocol
 | `consoleimps2` |  `_MGCONSOLE_IMPS2` | Enabled | Support intelligence mouse(IMPS/2) protocol
 | `consolems`    |  `_MGCONSOLE_MS`    | Enabled | Support old MS serial-port mouse
@@ -301,7 +301,7 @@ table 2.9 lists touch screen adjustment related options and macros.
 Table 2.9 mouse and touch screen adjustment related options and macros
 
 | Switch options   | Macro                    | Default | Comments
-| --------------------------------------------|-------------------
+|------------------|--------------------------|---------|---------
 | `mousecalibrate` | `_MGHAVE_MOUSECALIBRATE` | Enabled | Support touch screen adjustment
 
 ### Keyboard Layout
@@ -320,7 +320,7 @@ more information, please refer *MiniGUI Programming Guide V3.0-5*. Table
 Table 2.10 keyboard layout related options and macros
 
 | Switch option | Macro                   | Keyboard layout name | Default  | Comments
-| ----------------------------------------|----------------------|--------------------
+|---------------|-------------------------|----------------------|----------|---------
 | `Kbdfrpc`     | `_MGKBDLAYOUT_FRPC`     | `frpc`               | Disabled | Keyboard layout for French PC keyboard (non-US 102 keys)
 | `Kbdfr`       | `_MGKBDLAYOUT_FR`       | `fr`                 | Disabled | Keyboard layout for French
 | `Kbdde`       | `_MGKBDLAYOUT_DE`       | `de`                 | Disabled | Keyboard layout for German
@@ -338,7 +338,7 @@ The table 2.11 lists system global configuration options and macros.
 Table 2.11 system global configuration options and macros
 
 | Switch option   | Macro                    | Default  | Comments
-|-----------------|--------------------------|----------|--------
+|-----------------|--------------------------|----------|---------
 | `incoreres`     | `_MGINCORE_RES`          | Disabled | Use MiniGUI in-core resource
 | `miniguientry`  | `_USE_MINIGUIENTRY`      | Disabled | Use MiniGUI minigui_entry function
 | `debug`         | `_DEBUG`                 | Disabled | Include debug information
@@ -520,7 +520,7 @@ options and macros.
 Table 2.14 TrueType cache related options and macros
 
 | Configure option         | Macro              | Macro value | Comments
-|-----------------------------------------------|-------------|---------------
+|--------------------------|--------------------|-------------|---------------
 | `--with-mttfcachenum=10` | `_MGMAX_TTF_CACHE` | 10          | Default value
 | `--with-mttfcachenum=20` | `_MGMAX_TTF_CACHE` | 20          |
 | `--with-mttfcachenum=40` | `_MGMAX_TTF_CACHE` | 40          |
@@ -553,7 +553,7 @@ and macros.
 Table 2.16 image file format related configuration options and macros
 
 | Switch option | Macro          | Default  | Comments
-|---------------|----------------|--------------------
+|---------------|----------------|----------|---------
 | `gifsupport`  | `_MGIMAGE_GIF` | Enabled  | Support for GIF file
 | `jpgsupport`  | `_MGIMAGE_JPG` | Enabled  | Support for JPG file
 | `pngsupport`  | `_MGIMAGE_PNG` | Enabled  | Support for PNG file
@@ -596,7 +596,7 @@ Table 2.18 give all controls related configuration options and macros.
 Table 2.18 control related configuration options and macros
 
 | Switch option    | Macro                 | Default  | Comments
-| -----------------|---- ------------------|--------------------
+| -----------------|-----------------------|----------|---------
 | `ctrlstatic`     | `_MGCTRL_STATIC`      | Enabled  | Include STATIC control
 | `ctrlbutton`     | `_MGCTRL_BUTTON`      | Enabled  | Include BUTTON control
 | `ctrlsledit`     | `_MGCTRL_SLEDIT`      | Enabled  | Include Simple EDITcontrol
@@ -639,7 +639,7 @@ Table 2.19 MiniGUI implemented C library interface related
 configurations and macros
 
 | Switch option | Macro                | Default  | Comments
-| --------------|------- --------------|----------|---------
+|---------------|----------------------|----------|---------
 | `ownmalloc`   | `_MGUSE_OWN_MALLOC`  | Disabled | Use MiniGUI implemented malloc function family
 | `ownstdio`    | `_MGUSE_OWN_STDIO`   | Disabled | Use MiniGUI implemented stdio format input and output function family
 | `ownpthread`  | `_MGUSE_OWN_PTHREAD` | Disabled | Use MiniGUI implemented thread function family
