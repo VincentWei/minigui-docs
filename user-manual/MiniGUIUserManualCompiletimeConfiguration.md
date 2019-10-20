@@ -98,7 +98,7 @@ The table lists the options and macros related to various target boards.
 
 | Configuration options         | Macro                    | Comments
 |-------------------------------|--------------------------|----------------------------------------------------------
-| `--with-targetname=unknown`   | `__TARGET_UNKNOWN__`     | Unknown development board: default value
+| `--with-targetname=unknown`   | `__TARGET_UNKNOWN__`     | Unknown development board; Default value
 | `--with-targetname=external`  | `__TARGET_EXTERNAL__`    | Define this target name when you want to use NEWGAL and/or IAL engine which is implemented outside MiniGUI core.
 | `--with-targetname=fmsoft`    | `__TARGET_FMSOFT__`      | Only for FMSoft's internal use
 | `--with-targetname=mstudio`   | `__TARGET_MSTUDIO__`     | Only for miniStudio
@@ -155,16 +155,17 @@ graphics engine related options, macros and the name.
 
 Table 2.5 graphics engine related options and macros
 
-  Configuration options   Macro              Engine name   Memo                                                                                                                         Default
-  ----------------------- ------------------ ------------- ---------------------------------------------------------------------------------------------------------------------------- ----------
-  videodummy              \_MGGAL\_DUMMY     dummy         All operating system                                                                                                         Enabled
-  videofbcon              \_MGGAL\_FBCON     fbcon         Linux/uClinux                                                                                                                Enabled
-  videoqvfb               \_MGGAL\_QVFB      qvfb          Linux                                                                                                                        Enabled
-  videowvfb               \_MGGAL\_WVFB      wvfb          Win32；virtual buffer graphics engine，use Win32 。                                                                          Disabled
-  videowvfb               \_MGGAL\_PCXVFB    pc\_xvfb      Linux/Win32 Suitable for the PC's virtual buffer graphics engine, does not depend on the specific implementation platform.   Disabled
-  videocommlcd            \_MGGAL\_COMMLCD   commlcd       All operating system                                                                                                         Disabled
-  videoshadow             \_MGGAL\_SHADOW    shadow        All operating system, MiniGUI-Threads, MiniGUI-Standalone runtime mode                                                       Disabled
-  videodfb                \_MGGAL\_DFB       dfb           Run MiniGUI on DirectFB, Linux                                                                                               Disabled
+| Switch options | Macro            | Engine name | Default  | Comments
+| ---------------|------------------|-------------|----------|---------
+| `videodummy`   | `_MGGAL_DUMMY`   | `dummy`     | Enabled  | All operating system
+| `videodir`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
+| `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
+| `videopcxvfb`  | `_MGGAL_PCXVFB`  | `pc_xvfb`   | Enabled  | Linux/Windows PC; The universal virtual buffer engine
+| `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Enabled  | Linux PC; The virtual buffer engine for QVFB; Deprecated
+| `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32
+| `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
+| `videoshadow`  | `_MGGAL_SHADOW`  | `shadow`    | Disabled | All operating system, MiniGUI-Threads, MiniGUI-Standalone runtime mode
+| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB, Linux
 
 The Dummy is a graphics engine ("mute" graphics engine), which it does
 not make any actual output. Therefore, if the graphics engine for your
