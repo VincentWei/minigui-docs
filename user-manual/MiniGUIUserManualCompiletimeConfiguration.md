@@ -762,9 +762,7 @@ above, listed as follows:
 
 ---
 
-[Previous Chapter](MiniGUIUserManualBuildingMiniGUI.md)  
-[Table of Contents](README.md)  
-[Next Chapter](MiniGUIUserManualRuntimeConfiguration.md)
+[Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) | [Table of Contents](README.md) | [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn

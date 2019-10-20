@@ -1128,7 +1128,7 @@ in non-GNU environment; we do not repeat them here.
 
 ---
 
-[Previous Chapter](MiniGUIUserManualQuickStart.md) | [Table of Contents](README.md) | [Next Chapter](MiniGUIUserManualCompiletimeConfiguration.md)
+[Quick Start](MiniGUIUserManualQuickStart.md) | [Table of Contents](README.md) | [Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
