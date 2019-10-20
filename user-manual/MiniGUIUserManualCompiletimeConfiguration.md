@@ -116,7 +116,7 @@ The table lists the options and macros related to various target boards.
 
 ### Runtime Mode
 
-We can configure MiniGUI as one of three kind of runtime mode:
+We can configure MiniGUI as one of three runtime modes:
 
 - MiniGUI-Processes runtime mode base on multi-processes;
 - MiniGUI-Threads runtime mode base on multi-thread;
@@ -161,9 +161,9 @@ Table 2.5 graphics engine related options and macros
 | `videodir`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
 | `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
 | `videopcxvfb`  | `_MGGAL_PCXVFB`  | `pc_xvfb`   | Enabled  | Linux/Windows PC; The universal virtual buffer engine
+| `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
 | `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Enabled  | Linux PC; The virtual buffer engine for QVFB; Deprecated
 | `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32
-| `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
 | `videoshadow`  | `_MGGAL_SHADOW`  | `shadow`    | Disabled | All operating system, MiniGUI-Threads, MiniGUI-Standalone runtime mode
 | `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB, Linux
 
@@ -211,16 +211,6 @@ the low graphics devices.
 **wvfb**: sub-driver for Windows Virtual FrameBuffer(wvfb), support low
 than 8-bit color display mode and screen rotation.
 
-We can rotate the screen by Shadow engine. Table 2.6 lists the screen
-rotation related options and macros.
-
-Table 2.6 screen rotation related options and macros
-
-  Configuration options   Macro           Macro value      Comment   Default
-  ----------------------- --------------- ---------------- --------- ----------------------------- ----------
-  coortrans\_cw           \_COOR\_TRANS   \_ROT\_DIR\_CW   1         Rotate screen clockwise       Disabled
-  coortrans\_ccw                          \_ROT\_DIR\_CW   0         Rotate screen anticlockwise   Disabled
-
 The CommLCD graphics engine is the most used graphics engine when
 MiniGUI run on the tradition embedded operating system. CommLCD also
 uses the sub-driver structure like Shadow graphics engine. At present,
@@ -254,19 +244,19 @@ input engine related options and macros.
 
 Table 2.7 input engines related options and macros
 
-  Configuration options   Macro              Engine name   Comment                                                                            Default
-  ----------------------- ------------------ ------------- ---------------------------------------------------------------------------------- ----------
-  dummyial                \_MGIAL\_DUMMY     dummy         Dummy input engine, for all operating system                                       Enabled
-  autoial                 \_MGIAL\_AUTO      auto          Automatic input engine, for all operating system                                   Disabled
-  qvfbial                 \_MGIAL\_QVFB      qvfb          QVFB input engine, Linux, use QVFB graphics engine                                 Enabled
-  consoleial              \_MGIAL\_CONSOLE   console       Linux console input engine, Linux                                                  Enabled
-  randomial               \_MGIAL\_RANDOM    random        Random input engine, for all operating system                                      Disabled
-  wvfbial                 \_MGIAL\_WVFB      wvfb          WVFB input engine, Win32, use WVFB graphics engine                                 Disabled
-  commial                 \_MGIAL\_COMM      comm          COMM input engine, for all operating system                                        Disabled
-  dfbial                  \_MGIAL\_DFB       dfb           Base on DirectFBinput engine, Linux, use DFB graphics engine                       Disabled
-  tslibial                \_MGIAL\_TSLIB     tslib         Base on tab engine, Linux, use DFB graphics engine                                 Disabled
-  qemuial                 \_MGIAL\_QEMU      qemu          QEMU input IAL, Linux.                                                             Disabled
-  custodial               \_MGIAL\_CUSTOM    custom        Use on graphics engine that custom by MiniGUI application; any operating system.   Disabled
+| Switch options   | Macro            | Engine name | Default   | Comments
+|-------------------------|-----------|-------------|-----------|--------
+| `dummyial`       |  `_MGIAL_DUMMY`  | `dummy`     | Enabled   | Dummy input engine, for all operating system
+| `autoial`        |  `_MGIAL_AUTO`   | `auto`      | Disabled  | Automatic input engine, for all operating system
+| `qvfbial`        |  `_MGIAL_QVFB`   | `qvfb`      | Enabled   | QVFB input engine, Linux, use QVFB graphics engine
+| `consoleial`     |  `_MGIAL_CONSOLE`| `console`   | Enabled   | Linux console input engine, Linux
+| `randomial`      |  `_MGIAL_RANDOM` | `random`    | Disabled  | Random input engine, for all operating system
+| `wvfbial`        |  `_MGIAL_WVFB`   | `wvfb`      | Disabled  | WVFB input engine, Win32, use WVFB graphics engine
+| `commial`        |  `_MGIAL_COMM`   | `comm`      | Disabled  | COMM input engine, for all operating system
+| `dfbial`         |  `_MGIAL_DFB`    | `dfb`       | Disabled  | Base on DirectFBinput engine, Linux, use DFB graphics engine
+| `tslibial`       |  `_MGIAL_TSLIB`  | `tslib`     | Disabled  | Base on tab engine, Linux, use DFB graphics engine
+| `qemuial`        |  `_MGIAL_QEMU`   | `qemu`      | Disabled  | QEMU input IAL, Linux
+| `custodial`      |  `_MGIAL_CUSTOM` | `custom`    | Disabled  | Use on graphics engine that custom by MiniGUI application; any operating system
 
 The Dummy input engine ("mute" input engine) is not connected to any
 actual input device; therefore it can’t get any input. Therefore, if the
@@ -295,13 +285,13 @@ the hoop input event.
 
 Table 2.8 Mouse protocol related options and macros
 
-  configuration options   Macro                Comment                                       Default
-  ----------------------- -------------------- --------------------------------------------- ---------
-  consoleps2              \_MGCONSOLE\_PS2     Support PS2 mouse protocol                    Enabled
-  consoleimps2            \_MGCONSOLE\_IMPS2   Support intelligence mouse(IMPS/2) protocol   Enabled
-  consolems               \_MGCONSOLE\_MS      Support old MS serial-port mouse              Enabled
-  consolems3              \_MGCONSOLE\_MS3     Support MS3 mouse protocol                    Enabled
-  consolegpm              \_MGCONSOLE\_GPM     Support GPM Daemon processes                  Enabled
+| Switch options |  Macro              | Default | Comments
+|----------------|-------- ------------|---------|---------
+| `consoleps2`   |  `_MGCONSOLE_PS2`   | Enabled | Support PS2 mouse protocol
+| `consoleimps2` |  `_MGCONSOLE_IMPS2` | Enabled | Support intelligence mouse(IMPS/2) protocol
+| `consolems`    |  `_MGCONSOLE_MS`    | Enabled | Support old MS serial-port mouse
+| `consolems3`   |  `_MGCONSOLE_MS3`   | Enabled | Support MS3 mouse protocol
+| `consolegpm`   |  `_MGCONSOLE_GPM`   | Enabled | Support GPM Daemon processes
 
 Except the options above, MiniGUI has also provided mouse and touch
 screen adjustment interfaces for applications. If you want to use this
@@ -310,9 +300,9 @@ table 2.9 lists touch screen adjustment related options and macros.
 
 Table 2.9 mouse and touch screen adjustment related options and macros
 
-  configuration options   Macro                      Comment                           Default
-  ----------------------- -------------------------- --------------------------------- ---------
-  mousecalibrate          \_MGHAVE\_MOUSECALIBRATE   Support touch screen adjustment   Enabled
+| Switch options   | Macro                    | Default | Comments
+| --------------------------------------------|-------------------
+| `mousecalibrate` | `_MGHAVE_MOUSECALIBRATE` | Enabled | Support touch screen adjustment
 
 ### Keyboard Layout
 
@@ -329,17 +319,17 @@ more information, please refer *MiniGUI Programming Guide V3.0-5*. Table
 
 Table 2.10 keyboard layout related options and macros
 
-  configuration options   Macro                     Keyboard layout name   Comment                                                    Default
-  ----------------------- ------------------------- ---------------------- ---------------------------------------------------------- ----------
-  Kbdfrpc                 \_MGKBDLAYOUT\_FRPC       frpc                   Keyboard layout for French PC keyboard (non-US 102 keys)   Disabled
-  Kbdfr                   \_MGKBDLAYOUT\_FR         fr                     Keyboard layout for French                                 Disabled
-  Kbdde                   \_MGKBDLAYOUT\_DE         de                     Keyboard layout for German                                 Disabled
-  kbddelatin1             \_MGKBDLAYOUT\_DELATIN1   delatin1               Keyboard layout for German Latin1                          Disabled
-  Kbdit                   \_MGKBDLAYOUT\_IT         it                     Keyboard layout for Italian                                Disabled
-  Kbdes                   \_MGKBDLAYOUT\_ES         es                     Keyboard layout for Spanish                                Disabled
-  kbdescp850              \_MGKBDLAYOUT\_ESCP850    escp850                Keyboard layout for Spanish CP850                          Disabled
-  kbdhebrewpc             \_MGKBDLAYOUT\_HEBREWPC   hebrewpc               Keyboard layout for Hebrew PC keyboard                     Disabled
-  kbdarabicpc             \_MGKBDLAYOUT\_ARABICPC   arabicpc               Keyboard layout for Arabic PC keyboard                     Disabled
+| Switch option | Macro                   | Keyboard layout name | Default  | Comments
+| ----------------------------------------|----------------------|--------------------
+| `Kbdfrpc`     | `_MGKBDLAYOUT_FRPC`     | `frpc`               | Disabled | Keyboard layout for French PC keyboard (non-US 102 keys)
+| `Kbdfr`       | `_MGKBDLAYOUT_FR`       | `fr`                 | Disabled | Keyboard layout for French
+| `Kbdde`       | `_MGKBDLAYOUT_DE`       | `de`                 | Disabled | Keyboard layout for German
+| `kbddelatin1` | `_MGKBDLAYOUT_DELATIN1` | `delatin1`           | Disabled | Keyboard layout for German Latin1
+| `Kbdit`       | `_MGKBDLAYOUT_IT`       | `it`                 | Disabled | Keyboard layout for Italian
+| `Kbdes`       | `_MGKBDLAYOUT_ES`       | `es`                 | Disabled | Keyboard layout for Spanish
+| `kbdescp850`  | `_MGKBDLAYOUT_ESCP850`  | `escp850`            | Disabled | Keyboard layout for Spanish CP850
+| `kbdhebrewpc` | `_MGKBDLAYOUT_HEBREWPC` | `hebrewpc`           | Disabled | Keyboard layout for Hebrew PC keyboard
+| `kbdarabicpc` | `_MGKBDLAYOUT_ARABICPC` | `arabicpc`           | Disabled | Keyboard layout for Arabic PC keyboard
 
 ### Global Options and Macros
 
@@ -347,23 +337,23 @@ The table 2.11 lists system global configuration options and macros.
 
 Table 2.11 system global configuration options and macros
 
-  configuration options   Macro                       Comment                                  Default
-  ----------------------- --------------------------- ---------------------------------------- ----------
-  incoreres               \_MGINCORE\_RES             Use MiniGUI in-core resource             Disabled
-  miniguientry            \_USE\_MINIGUIENTRY         Use MiniGUI minigui\_entry function      Disabled
-  debug                   \_DEBUG                     Include debug information                Disabled
-  tracemsg                \_MGHAVE\_TRACE\_MSG        Trace MiniGUI message                    Disabled
-  msgstr                  \_MGHAVE\_MSG\_STRING       Include the string name of the message   Disabled
-  dblclk                  \_MGMISC\_DOUBLE\_CLICK     Support mouse double click               Enabled
-  cursor                  \_MGHAVE\_CURSOR            Support mouse cursor                     Enabled
-  clipboard               \_MGHAVE\_CLIPBOARD         Support clipboard                        Enabled
-  savebitmap              \_MGMISC\_SAVESCREEN        Support SaveBitmap related functions     Enabled
-  aboutdlg                \_MGHAVE\_FIXED\_MATH       Include About dialog box                 Enabled
-  savescreen              \_MGHAVE\_SAVESCREN         Support screen capture                   Enabled
-  splash                  \_MG\_ENABLE\_SPLASH        MiniGUI Splash screen                    Enabled
-  fixedmath               \_MGHAVE\_FIXED\_MATH       Use fixed math functions                 Enabled
-  adv2dapi                \_MGHAVE\_ADV\_2DAPI        Support advanced 2D graphics API         Enabled
-  screensaver             \_MG\_ENABLE\_SCREENSAVER   Screen saver                             Enabled
+| Switch option   | Macro                    | Default  | Comments
+|-----------------|--------------------------|----------|--------
+| `incoreres`     | `_MGINCORE_RES`          | Disabled | Use MiniGUI in-core resource
+| `miniguientry`  | `_USE_MINIGUIENTRY`      | Disabled | Use MiniGUI minigui_entry function
+| `debug`         | `_DEBUG`                 | Disabled | Include debug information
+| `tracemsg`      | `_MGHAVE_TRACE_MSG`      | Disabled | Trace MiniGUI message
+| `msgstr`        | `_MGHAVE_MSG_STRING`     | Disabled | Include the string name of the message
+| `dblclk`        | `_MGMISC_DOUBLE_CLICK`   | Enabled  | Support mouse double click
+| `cursor`        | `_MGHAVE_CURSOR`         | Enabled  | Support mouse cursor
+| `clipboard`     | `_MGHAVE_CLIPBOARD`      | Enabled  | Support clipboard
+| `savebitmap`    | `_MGMISC_SAVESCREEN`     | Enabled  | Support SaveBitmap related functions
+| `aboutdlg`      | `_MGHAVE_FIXED_MATH`     | Enabled  | Include About dialog box
+| `savescreen`    | `_MGHAVE_SAVESCREN`      | Enabled  | Support screen capture
+| `splash`        | `_MG_ENABLE_SPLASH`      | Enabled  | MiniGUI Splash screen
+| `fixedmath`     | `_MGHAVE_FIXED_MATH`     | Enabled  | Use fixed math functions
+| `adv2dapi`      | `_MGHAVE_ADV_2DAPI`      | Enabled  | Support advanced 2D graphics API
+| `screensaver`   | `_MG_ENABLE_SCREENSAVER` | Enabled  | Screen saver
 
 Some important configurations are introduced as the follow:
 
@@ -417,45 +407,45 @@ Table 2.13 lists character set and font related options and macros.
 
 Table 2.13 character set and font related options and macros
 
-  configuration options   Macro                             Comment                                                                    Default
-  ----------------------- --------------------------------- -------------------------------------------------------------------------- ----------
-  latin2support           \_MGCHARSET\_LATIN2               Include East European (Latin 2, ISO-8859-2) charset support                Disabled
-  latin3support           \_MGCHARSET\_LATIN3               Include South European (Latin 3, ISO-8859-3) charset support               Disabled
-  latin4support           \_MGCHARSET\_LATIN4               Include North European (Latin 4, ISO-8859-4) charset support               Disabled
-  cyrillicsupport         \_MGCHARSET\_CYRILLIC             Include Cyrillic (ISO-8859-5) charset support                              Disabled
-  arabicsupport           \_MGCHARSET\_ARABIC               Include Arabic (ISO-8859-6) charset support                                Disabled
-  greeksupport            \_MGCHARSET\_GREEK                Include Greek (ISO-8859-7) charset support                                 Disabled
-  hebrewsupport           \_MGCHARSET\_HEBREW               Include Hebrew (ISO-8859-8) charset support                                Disabled
-  latin5support           \_MGCHARSET\_LATIN5               Include Turkish (Latin 5, ISO-8859-9) charset support                      Disabled
-  latin6support           \_MGCHARSET\_LATIN6               Include Nordic, Latin 6, ISO-8859-10) charset support                      Disabled
-  thaisupport             \_MGCHARSET\_THAI                 Include Thai (ISO-8859-11) charset support                                 Disabled
-  latin7support           \_MGCHARSET\_LATIN7               Include Latin 7 (ISO-8859-13) charset support                              Disabled
-  latin8support           \_MGCHARSET\_LATIN8               Include Latin 8 (ISO-8859-14) charset support                              Disabled
-  latin9support           \_MGCHARSET\_LATIN9               Include Latin 9 (ISO-8859-15, West Extended) charset support               Disabled
-  latin10support          \_MGCHARSET\_LATIN10              Include Latin 10 (ISO-8859-16, Romanian) charset support                   Disabled
-  gbsupport               \_MGCHARSET\_GB                   Include EUC encoding of GB2312 charset support                             Enabled
-  gbksupport              \_MGCHARSET\_GBK                  Include GBK charset support                                                Enabled
-  gb18030support          \_MGCHARSET\_GB18030              Include GB18030-0 charset support                                          Disabled
-  big5support             \_MGCHARSET\_BIG5                 Include BIG5 charset support                                               Enabled
-  euckrsupport            \_MGCHARSET\_EUCKR                Include support for EUC encoding of KSC5636 and KSC5601 charsets           Disabled
-  eucjpsupport            \_MGCHARSET\_EUCJP                Include support for EUC encoding of JISX0201 and JISX0208 charsets         Disabled
-  shiftjissupport         \_MGCHARSET\_SHIFTJIS             Include support for Shift-JIS encoding of JISX0201 and JISX0208 charsets   Disabled
-  unicodesupport          \_MGCHARSET\_UNICODE              Include UNICODE (ISO-10646-1 and UTF-8 encoding) support                   Enabled
-  rbfsupport              \_MGFONT\_RBF                     Include RBFfont support                                                    Enabled
-  rbfvgaoem               \_MGINCORERBF\_LATIN1\_VGAOEM     Include incore RBF font of ISO8859-1 8x16 fixed font                       Disabled
-  rbfterminal             \_MGINCORERBF\_LATIN1\_TERMINAL   Include incore RBF font of ISO8859-1 12x24 fixed font                      Disabled
-  rbffixedsys             \_MGINCORERBF\_LATIN1\_FIXEDSYS   Include incore RBF font of GB2312 12x12 fixed/song font                    Enabled
-  vbfsupport              \_MGFONT\_VBF                     Include var bitmap font support                                            Enabled
-  fontsserif              \_MGINCOREFONT\_SANSSERIF         Include incore VBF font sansserif                                          Enabled
-  fontcourier             \_MGINCOREFONT\_COURIER           Include incore VBF font courier                                            Enabled
-  fontsystem              \_MGINCOREFONT\_SYSTEM            Include incore VBF font symbol                                             Disabled
-  upfsupport              \_MGFONT\_UPF                     Support FMSoft Unicode Prerendered Font(UPF).                              Enabled
-  fonttimes               \_MGINCOREFONT\_TIMES             Include income Times UPF font                                              Enabled
-  qpfsupport              \_MGFONT\_QPF                     Include Qt Prerendered Font (QPF) support                                  Enabled
-  ttfsupport=ft1          \_MGFONT\_TTF                     Include TrueType Library support                                           Disabled
-  ttfsupport=ft2          \_MGFONT\_FT2                     Include FreeType2 font support                                             Disabled
-  ttfcachesize=256        \_MGTTF\_CACHE\_SIZE              Include TrueType cache support                                             256
-  mttfcachenum=10         \_MGMAX\_TTF\_CACHE               Include TrueType cache num                                                 10
+| Options           | Macro                          |  Default  | Comments
+|-------------------|--------------------------------|-----------|---------
+| `latin2support`   | `_MGCHARSET_LATIN2`            |  Disabled | Include East European (Latin 2, ISO-8859-2) charset support
+| `latin3support`   | `_MGCHARSET_LATIN3`            |  Disabled | Include South European (Latin 3, ISO-8859-3) charset support
+| `latin4support`   | `_MGCHARSET_LATIN4`            |  Disabled | Include North European (Latin 4, ISO-8859-4) charset support
+| `cyrillicsupport` | `_MGCHARSET_CYRILLIC`          |  Disabled | Include Cyrillic (ISO-8859-5) charset support
+| `arabicsupport`   | `_MGCHARSET_ARABIC`            |  Disabled | Include Arabic (ISO-8859-6) charset support
+| `greeksupport`    | `_MGCHARSET_GREEK`             |  Disabled | Include Greek (ISO-8859-7) charset support
+| `hebrewsupport`   | `_MGCHARSET_HEBREW`            |  Disabled | Include Hebrew (ISO-8859-8) charset support
+| `latin5support`   | `_MGCHARSET_LATIN5`            |  Disabled | Include Turkish (Latin 5, ISO-8859-9) charset support
+| `latin6support`   | `_MGCHARSET_LATIN6`            |  Disabled | Include Nordic, Latin 6, ISO-8859-10) charset support
+| `thaisupport`     | `_MGCHARSET_THAI`              |  Disabled | Include Thai (ISO-8859-11) charset support
+| `latin7support`   | `_MGCHARSET_LATIN7`            |  Disabled | Include Latin 7 (ISO-8859-13) charset support
+| `latin8support`   | `_MGCHARSET_LATIN8`            |  Disabled | Include Latin 8 (ISO-8859-14) charset support
+| `latin9support`   | `_MGCHARSET_LATIN9`            |  Disabled | Include Latin 9 (ISO-8859-15, West Extended) charset support
+| `latin10support`  | `_MGCHARSET_LATIN10`           |  Disabled | Include Latin 10 (ISO-8859-16, Romanian) charset support
+| `gbsupport`       | `_MGCHARSET_GB`                |  Enabled  | Include EUC encoding of GB2312 charset support
+| `gbksupport`      | `_MGCHARSET_GBK`               |  Enabled  | Include GBK charset support
+| `gb18030support`  | `_MGCHARSET_GB18030`           |  Disabled | Include GB18030-0 charset support
+| `big5support`     | `_MGCHARSET_BIG5`              |  Enabled  | Include BIG5 charset support
+| `euckrsupport`    | `_MGCHARSET_EUCKR`             |  Disabled | Include support for EUC encoding of KSC5636 and KSC5601 charsets
+| `eucjpsupport`    | `_MGCHARSET_EUCJP`             |  Disabled | Include support for EUC encoding of JISX0201 and JISX0208 charsets
+| `shiftjissupport` | `_MGCHARSET_SHIFTJIS`          |  Disabled | Include support for Shift-JIS encoding of JISX0201 and JISX0208 charsets
+| `unicodesupport`  | `_MGCHARSET_UNICODE`           |  Enabled  | Include UNICODE (ISO-10646-1 and UTF-8 encoding) support
+| `rbfsupport`      | `_MGFONT_RBF`                  |  Enabled  | Include RBFfont support
+| `rbfvgaoem`       | `_MGINCORERBF_LATIN1_VGAOEM`   |  Disabled | Include incore RBF font of ISO8859-1 8x16 fixed font
+| `rbfterminal`     | `_MGINCORERBF_LATIN1_TERMINAL` |  Disabled | Include incore RBF font of ISO8859-1 12x24 fixed font
+| `rbffixedsys`     | `_MGINCORERBF_LATIN1_FIXEDSYS` |  Enabled  | Include incore RBF font of GB2312 12x12 fixed/song font
+| `vbfsupport`      | `_MGFONT_VBF`                  |  Enabled  | Include var bitmap font support
+| `fontsserif`      | `_MGINCOREFONT_SANSSERIF`      |  Enabled  | Include incore VBF font sansserif
+| `fontcourier`     | `_MGINCOREFONT_COURIER`        |  Enabled  | Include incore VBF font courier
+| `fontsystem`      | `_MGINCOREFONT_SYSTEM`         |  Disabled | Include incore VBF font symbol
+| `upfsupport`      | `_MGFONT_UPF`                  |  Enabled  | Support FMSoft Unicode Prerendered Font(UPF).
+| `fonttimes`       | `_MGINCOREFONT_TIMES`          |  Enabled  | Include income Times UPF font
+| `qpfsupport`      | `_MGFONT_QPF`                  |  Enabled  | Include Qt Prerendered Font (QPF) support
+| `ttfsupport=ft1`  | `_MGFONT_TTF`                  |  Disabled | Include TrueType Library support
+| `ttfsupport=ft2`  | `_MGFONT_FT2`                  |  Disabled | Include FreeType2 font support
+| `ttfcachesize=256`| `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
+| `mttfcachenum=10` | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
 
 The options latin2support, latin3support, cyrillicsupport,
 arabicsupport, greeksupport, hebrewsupport, latin5support,
@@ -529,21 +519,21 @@ options and macros.
 
 Table 2.14 TrueType cache related options and macros
 
-  Configure option         Macro                 Macro value   Memo
-  ------------------------ --------------------- ------------- ---------------
-  --with-mttfcachenum=10   \_MGMAX\_TTF\_CACHE   10            Default value
-  --with-mttfcachenum=20                         20            
-  --with-mttfcachenum=40                         40            
+| Configure option         | Macro              | Macro value | Comments
+|-----------------------------------------------|-------------|---------------
+| `--with-mttfcachenum=10` | `_MGMAX_TTF_CACHE` | 10          | Default value
+| `--with-mttfcachenum=20` | `_MGMAX_TTF_CACHE` | 20          |
+| `--with-mttfcachenum=40` | `_MGMAX_TTF_CACHE` | 40          |
 
 Table 2.15 TrueType cache related options and macros
 
-  Configure option           > Macro                Macro value   Memo
-  -------------------------- ---------------------- ------------- ---------------
-  --with-ttfcachesize=64     \_MGTTF\_CACHE\_SIZE   64            Default value
-  --with-ttfcachesize=128                           128           
-  --with-ttfcachesize=256                           256           
-  --with-ttfcachesize=512                           512           
-  --with-ttfcachesize=1024                          1024          
+| Configure option           | Macro               | Macro value | Comments
+|----------------------------|---------------------|-------------|---------
+| `--with-ttfcachesize=64`   | `_MGTTF_CACHE_SIZE` | 64          | Default value
+| `--with-ttfcachesize=128`  | `_MGTTF_CACHE_SIZE` | 128         |
+| `--with-ttfcachesize=256`  | `_MGTTF_CACHE_SIZE` | 256         |
+| `--with-ttfcachesize=512`  | `_MGTTF_CACHE_SIZE` | 512         |
+| `--with-ttfcachesize=1024` | `_MGTTF_CACHE_SIZE` | 1024        |
 
 ### Image File Format
 
@@ -562,14 +552,14 @@ and macros.
 
 Table 2.16 image file format related configuration options and macros
 
-  configuration option   Macro            Comment                    Default value
-  ---------------------- ---------------- -------------------------- ---------------
-  gifsupport             \_MGIMAGE\_GIF   Support for GIF file       Enable
-  jpgsupport             \_MGIMAGE\_JPG   Support for JPG file       Enable
-  pngsupport             \_MGIMAGE\_PNG   Support for PNG file       Enable
-  pcxsupport             \_MGIMAGE\_PCX   Support for PCX file       Disable
-  lbmsupport             \_MGIMAGE\_LBM   Support for LBM/PBM file   Disable
-  tgasupport             \_MGIMAGE\_TGA   Support for TGA file       Disable
+| Switch option | Macro          | Default  | Comments
+|---------------|----------------|--------------------
+| `gifsupport`  | `_MGIMAGE_GIF` | Enabled  | Support for GIF file
+| `jpgsupport`  | `_MGIMAGE_JPG` | Enabled  | Support for JPG file
+| `pngsupport`  | `_MGIMAGE_PNG` | Enabled  | Support for PNG file
+| `pcxsupport`  | `_MGIMAGE_PCX` | Disabled | Support for PCX file
+| `lbmsupport`  | `_MGIMAGE_LBM` | Disabled | Support for LBM/PBM file
+| `tgasupport`  | `_MGIMAGE_TGA` | Disabled | Support for TGA file
 
 ### Appearance Renderer
 
@@ -583,10 +573,10 @@ configuration options and the corresponding macros.
 
 Table 2.17 appearance style related configuration options and macros
 
-  configuration option   Macro               Comment                                          Memo
-  ---------------------- ------------------- ------------------------------------------------ ---------
-  --enable-flatlf        \_MGLF\_RDR\_FLAT   Simple flat style                                Enabled
-  --enable-skinlf        \_MGLF\_RDR\_SKIN   Skin style, window and control fill by bitmap.   Enabled
+| Switch option | Macro            | Default | Comments
+| --------------|------------------|---------|-----------
+| `flatlf`      | `_MGLF_RDR_FLAT` | Enabled | Simple flat style
+| `skinlf`      | `_MGLF_RDR_SKIN` | Enabled | Skin style, window and control fill by bitmap
 
 ### Control
 
@@ -605,56 +595,31 @@ Table 2.18 give all controls related configuration options and macros.
 
 Table 2.18 control related configuration options and macros
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-  configuration option   Macro                                Comment                                                               Default value
-  ---------------------- ------------------------------------ --------------------------------------------------------------------- ---------------
-  ctrlstatic             \_MGCTRL\_STATIC                     Include STATIC control                                                Enable
-
-  ctrlbutton             \_MGCTRL\_BUTTON                     Include BUTTON control                                                Enable
-
-  ctrlsledit             \_MGCTRL\_SLEDIT                     Include Simple EDITcontrol                                            Enable
-
-  ctrlbidiedit           \_MGCTRL\_BIDIEDIT                   Include BIDI EDIT control                                             Disable
-
-  newtextedit            \_MGCTRL\_TEXTEDIT\                  Include new textedit control                                          Enable
-                         \_MGCTRL\_TEXTEDIT\_USE\_NEW\_IMPL                                                                         
-
-  ctrllistbox            \_MGCTRL\_LISTBOX                    Include LISTBOX control                                               Enable
-
-  ctrlpgbar              \_MGCTRL\_PROGRESSBAR                Include PROGRESSBAR control                                           Enable
-
-  ctrlcombobox           \_MGCTRL\_COMBOBOX                   Include COMBOBOX control                                              Enable
-
-  ctrlpropsheet          \_MGCTRL\_PROPSHEET                  Include MENUBUTTON control                                            Enable
-
-  ctrltrackbar           \_MGCTRL\_TRACKBAR                   Include TRACKBARcontrol                                               Disable
-
-  ctrlscrollbar          \_MGCTRL\_SCROLLBAR                  Include SCROLLBAR control                                             Disable
-
-  ctrlnewtoolbar         \_MGCTRL\_NEWTOOLBAR                 Include NEWTOOLBAR control                                            Disable
-
-  ctrlmenubtn            \_MGCTRL\_MENUBUTTON                 Include MENUBUTTON control                                            Disable
-
-  ctrlscrollview         \_MGCTRL\_SCROLLVIEW                 Include SCROLLVIEW control                                            Disable
-
-  ctrltextedit           \_MGCTRL\_TEXTEDIT                   Include base ScrollView support textedit control                      Disable
-
-  ctrlmonthcal           \_MGCTRL\_MONTHCAL                   Include MONTHCALENDAR control                                         Disable
-
-  ctrltreeview           \_MGCTRL\_TREEVIEW                   Include TREEVIEW control                                              Disable
-
-  ctrlspinbox            \_MGCTRL\_SPINBOX                    Include SPINBOX control                                               Disable
-
-  ctrlcoolbar            \_MGCTRL\_COOLBAR                    Include COOLBAR control                                               Disable
-
-  ctrllistview           \_MGCTRL\_LISTVIEW                   Include LISTVIEW control                                              Disable
-
-  ctrliconview           \_MGCTRL\_ICONVIEW                   Include ICONVIEW control                                              Disable
-
-  ctrlgridview           \_MGCTRL\_GRIDVIEW                   Include gridview control                                              Disable
-
-  ctrlanimation          \_MGCTRL\_ANIMATION                  Include the ANIMATION control and provides support for GIF89a files   Enable
-  -------------------------------------------------------------------------------------------------------------------------------------------------
+| Switch option    | Macro                 | Default  | Comments
+| -----------------|---- ------------------|--------------------
+| `ctrlstatic`     | `_MGCTRL_STATIC`      | Enabled  | Include STATIC control
+| `ctrlbutton`     | `_MGCTRL_BUTTON`      | Enabled  | Include BUTTON control
+| `ctrlsledit`     | `_MGCTRL_SLEDIT`      | Enabled  | Include Simple EDITcontrol
+| `ctrlbidiedit`   | `_MGCTRL_BIDIEDIT`    | Disabled | Include BIDI EDIT control
+| `newtextedit`    | `_MGCTRL_TEXTEDIT`    | Enabled  | Include new textedit control
+| `ctrllistbox`    | `_MGCTRL_LISTBOX`     | Enabled  | Include LISTBOX control
+| `ctrlpgbar`      | `_MGCTRL_PROGRESSBAR` | Enabled  | Include PROGRESSBAR control
+| `ctrlcombobox`   | `_MGCTRL_COMBOBOX`    | Enabled  | Include COMBOBOX control
+| `ctrlpropsheet`  | `_MGCTRL_PROPSHEET`   | Enabled  | Include MENUBUTTON control
+| `ctrltrackbar`   | `_MGCTRL_TRACKBAR`    | Disabled | Include TRACKBARcontrol
+| `ctrlscrollbar`  | `_MGCTRL_SCROLLBAR`   | Disabled | Include SCROLLBAR control
+| `ctrlnewtoolbar` | `_MGCTRL_NEWTOOLBAR`  | Disabled | Include NEWTOOLBAR control
+| `ctrlmenubtn`    | `_MGCTRL_MENUBUTTON`  | Disabled | Include MENUBUTTON control
+| `ctrlscrollview` | `_MGCTRL_SCROLLVIEW`  | Disabled | Include SCROLLVIEW control
+| `ctrltextedit`   | `_MGCTRL_TEXTEDIT`    | Disabled | Include base ScrollView support textedit control
+| `ctrlmonthcal`   | `_MGCTRL_MONTHCAL`    | Disabled | Include MONTHCALENDAR control
+| `ctrltreeview`   | `_MGCTRL_TREEVIEW`    | Disabled | Include TREEVIEW control
+| `ctrlspinbox`    | `_MGCTRL_SPINBOX`     | Disabled | Include SPINBOX control
+| `ctrlcoolbar`    | `_MGCTRL_COOLBAR`     | Disabled | Include COOLBAR control
+| `ctrllistview`   | `_MGCTRL_LISTVIEW`    | Disabled | Include LISTVIEW control
+| `ctrliconview`   | `_MGCTRL_ICONVIEW`    | Disabled | Include ICONVIEW control
+| `ctrlgridview`   | `_MGCTRL_GRIDVIEW`    | Disabled | Include gridview control
+| `ctrlanimation`  | `_MGCTRL_ANIMATION`   | Enabled  | Include the ANIMATION control and provides support for GIF89a files
 
 ### Others
 
@@ -673,21 +638,21 @@ library interface configuration options and corresponding macros.
 Table 2.19 MiniGUI implemented C library interface related
 configurations and macros
 
-  configuration option   Macro                   Comment                                                                 Default value
-  ---------------------- ----------------------- ----------------------------------------------------------------------- ---------------
-  ownmalloc              \_MGUSE\_OWN\_MALLOC    Use MiniGUI implemented malloc function family                          Disable
-  ownstdio               \_MGUSE\_OWN\_STDIO     Use MiniGUI implemented stdio format input and output function family   Disable
-  ownpthread             \_MGUSE\_OWN\_PTHREAD   Use MiniGUI implemented thread function family                          Disable
+| Switch option | Macro                | Default  | Comments
+| --------------|------- --------------|----------|---------
+| `ownmalloc`   | `_MGUSE_OWN_MALLOC`  | Disabled | Use MiniGUI implemented malloc function family
+| `ownstdio`    | `_MGUSE_OWN_STDIO`   | Disabled | Use MiniGUI implemented stdio format input and output function family
+| `ownpthread`  | `_MGUSE_OWN_PTHREAD` | Disabled | Use MiniGUI implemented thread function family
 
 Otherwise, you must define this macro: `__MINIGUI\_LIB__` , when you
 use yourself makefile to compile MiniGUI function library in the Non-GNU
 development environment.
 
-Table 2.20 other compile macros
+##### Table Other macros
 
-  Macro                  Comment                         Memo
-  ---------------------- ------------------------------- ----------------------------------------------------------------
-  `__MINIGUI\_LIB__`   Compile MiniGUI library macro   You must define this macros, when you use the Non-GNU makefile
+| Macro             | Comments
+| ------------------|----------
+| `__MINIGUI_LIB__` | Compile MiniGUI library macro; You must define this macro
 
 Start with MiniGUI 3.0, you can specify the name suffix of the MiniGUI
 library through the configure option. By default, the name of the
