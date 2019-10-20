@@ -1,7 +1,7 @@
 # Compile-time Configuration
 
 - [Configuration Options and Macros](#configuration-options-and-macros)
-   * [Operating Systems](#operating-systems)
+   * [Operating System](#operating-system)
    * [Target Board](#target-board)
    * [Runtime Mode](#runtime-mode)
    * [Graphics Engine](#graphics-engine)
@@ -23,7 +23,7 @@ compile-time configuration options of MiniGUI. MiniGUI has many
 such options; you can combine these options to generate your own
 MiniGUI library.
 
-### Operating Systems
+### Operating System
 
 MiniGUI provides support for multiple operating systems, you can specify
 operating system when execute configuration script, the default operating
@@ -41,24 +41,24 @@ macros about operating systems.
 
 ##### Table: Options and macros for different operation systems
 
-| Configuration options    | Macro                | Other macros         | Comments  |
-| -------------------------|----------------------|----------------------|-------|
-| `--with-osname=linux`    | `__LINUX__`          |                      | For Linux operating system; Default value |
-| `--with-osname=uclinux`  | `__uClinux__`        |                      | For uClinux operating system |
-| `--with-osname=ucos2`    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system |
-| `--with-osname=vxworks`  | `__VXWORKS__`        | `__NOUNIX__`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For VxWorks operating system |
-| `--with-osname=ecos`     | `__ECOS__`           | `__NOUNIX__`         | For eCos operating system |
-| `--with-osname=threadx`  | `__THREADX__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For ThreadX operating system |
+| Configuration options    | Macro                | Other macros         | Comments
+| -------------------------|----------------------|----------------------|-------------------------------------------
+| `--with-osname=linux`    | `__LINUX__`          |                      | For Linux operating system; Default value
+| `--with-osname=uclinux`  | `__uClinux__`        |                      | For uClinux operating system
+| `--with-osname=ucos2`    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system
+| `--with-osname=vxworks`  | `__VXWORKS__`        | `__NOUNIX__`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For VxWorks operating system
+| `--with-osname=ecos`     | `__ECOS__`           | `__NOUNIX__`         | For eCos operating system
+| `--with-osname=threadx`  | `__THREADX__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For ThreadX operating system
 | `--with-osname=nucleus`  | `__NUCLEUS__`        | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For Nucleus operating system |
-| `--with-osname=ose`      | `__OSE__`            | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For OSE operating system |
-| `--with-osname=psos`     | `__PSOS__`           | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For pSOS operating system |
-| `--with-osname=rtthread` | `__RTTHREAD__`       | `__NOUNIX__`         | For RT-Thread operating system; Since MiniGUI 4.0.2 |
-| `--with-osname=rtems`    | `__RTEMS__`          | `__NOUNIX__`         | For RTEMS operating system; Since MiniGUI 4.0.2 |
-| `--with-osname=freertos` | `__FREERTOS__`       | `__NOUNIX__`         | For FreeRTOS operating system; Since MiniGUI 4.0.2 |
-| `--with-osname=cygwin`   | `__CYGWIN__`         | `__NOUNIX__`         | For Cygwin environment |
-| `--with-osname=win32`    | `WIN32`              | `__NOUNIX__`         | For Windows platform |
-| `--with-osname=darwin`   | `__DARWIN__`         | `__NOUNIX__`         | For MacOS X operating system |
-| `--with-osname=swlinux`  | `__WINBOND_SWLINUX__`|                      | Deprecated; for SWLinux operating system |
+| `--with-osname=ose`      | `__OSE__`            | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For OSE operating system
+| `--with-osname=psos`     | `__PSOS__`           | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_PTHREAD` | For pSOS operating system
+| `--with-osname=rtthread` | `__RTTHREAD__`       | `__NOUNIX__`         | For RT-Thread operating system; Since MiniGUI 4.0.2
+| `--with-osname=rtems`    | `__RTEMS__`          | `__NOUNIX__`         | For RTEMS operating system; Since MiniGUI 4.0.2
+| `--with-osname=freertos` | `__FREERTOS__`       | `__NOUNIX__`         | For FreeRTOS operating system; Since MiniGUI 4.0.2
+| `--with-osname=cygwin`   | `__CYGWIN__`         | `__NOUNIX__`         | For Cygwin environment
+| `--with-osname=win32`    | `WIN32`              | `__NOUNIX__`         | For Windows platform
+| `--with-osname=darwin`   | `__DARWIN__`         | `__NOUNIX__`         | For MacOS X operating system
+| `--with-osname=swlinux`  | `__WINBOND_SWLINUX__`|                      | Deprecated; for SWLinux operating system
 
 ### Target Board
 
@@ -94,9 +94,9 @@ For more information, please refer to:
 
 The table lists the options and macros related to various target boards.
 
-##### Table: Options and macros for various target board
+##### Table: Options and macros for target board
 
-| Configuration options         | Macro                    | Memo
+| Configuration options         | Macro                    | Comments
 |-------------------------------|--------------------------|----------------------------------------------------------
 | `--with-targetname=unknown`   | `__TARGET_UNKNOWN__`     | Unknown development board: default value
 | `--with-targetname=external`  | `__TARGET_EXTERNAL__`    | Define this target name when you want to use NEWGAL and/or IAL engine which is implemented outside MiniGUI core.
@@ -117,20 +117,23 @@ The table lists the options and macros related to various target boards.
 ### Runtime Mode
 
 We can configure MiniGUI as one of three kind of runtime mode:
-MiniGUI-Processes runtime mode base on multi-processes, MiniGUI-Threads
-runtime mode base on multi-thread, as well as MiniGUI-Standalone runtime
-mode base on non-multi-processes also non-multi-thread. MiniGUI-Threads
-runtime mode is the default mode when MiniGUI use the default
-configuration option. The table 2.3 lists runtime mode related options
-and macros.
 
-Table 2.3 runtime mode related options and macros
+- MiniGUI-Processes runtime mode base on multi-processes;
+- MiniGUI-Threads runtime mode base on multi-thread;
+- MiniGUI-Standalone runtime mode based on a single task architecture.
 
-| Configuration options | Macro              | Memo                                                                | Default  |
-|-----------------------|--------------------|---------------------------------------------------------------------|----------|
-| --with-runmode=procs  | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only | Yes      |
-| --with-runmode=ths    | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode, support all operating system          | No       |
-| --with-runmode=sa     | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system.      | No       |
+MiniGUI-Processes is the default mode for Linux operating system,
+while MiniGUI-Threads is the default mode for other operating systems.
+
+The following table lists the options and macros for runtime mode.
+
+##### Table: Options and macros for runtime mode
+
+| Configuration options   | Macro              | Comments
+|-------------------------|--------------------|--------------------------------------------------------------------------------------
+| `--with-runmode=procs`  | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only; Default for Linux
+| `--with-runmode=ths`    | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode, support all operating system; Default for operating systems other than Linux
+| `--with-runmode=sa`     | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system
 
 ### Graphics Engine
 
