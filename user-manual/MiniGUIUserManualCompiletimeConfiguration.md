@@ -155,20 +155,23 @@ graphics device.
 
 The commonly used NEWGAL engines are as follow:
 
-- `dummy`: A pure software implementation. It is not associated with
-any hardware and only provides a software implementation for easily
-debugging MiniGUI.
-- `pc_xvfb`: A pure software engine which implements a universal
+- `Dummy`: A pure software implementation; which does not make
+any actual output. It is not associated with any hardware and
+only provides a software implementation for easily debugging MiniGUI.
+- `XVFB`: A pure software engine which implements a universal
 virtual frame buffer. It is associated with a window on Linux or Windows,
 so we can see the MiniGUI screens in the window. This engine is
 helpful for developing MiniGUI apps on Linux or Windows PC.
-- `fbcon`: A NEWGAL engine which uses Linux frame buffer device driver
+- `FBCon`: A NEWGAL engine which uses Linux frame buffer device driver
 (`/dev/fb`).
-- `dri` (Since MiniGUI 4.0): A NEWGAL engine which uses Linux DRI/DRM
+- `DRI` (Since MiniGUI 4.0): A NEWGAL engine which uses Linux DRI/DRM
 to support modern graphics devices with 2D/3D hardware acceleration.
-- `commlcd`: A simple NEWGAL engine to support LCD without hardware
+- `CommLCD`: A simple NEWGAL engine to support LCD without hardware
 acceleration. We often use this engine on traditional real-time
 operating systems.
+- `Shadow`: This engine can be used to support a graphics display device
+which have color format lower than 8 bit color. It can be used to support
+the screen rotation.
 
 The following table lists the common NEWGAL engines.
 
@@ -181,7 +184,50 @@ The following table lists the common NEWGAL engines.
 | `videodri`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
 | `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
 | `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
-| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB on Linux
+| `videoshadow`  | `_MGGAL_SHADOW`  | `shadow`    | Disabled | All operating system, but only for MiniGUI-Threads and MiniGUI-Standalone runtime modes
+| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB on Linux; Deprecated, use DRI instead
+| `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Disabled | Linux PC; The virtual buffer engine for QVFB; Deprecated
+| `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32; Deprecated
+
+Note that `qvfb`/`wvfb` NEWGAL engines are deprecated since MiniGUI 3.2.
+These two engines use QVFB/WVFB to show MiniGUI screens.
+You should use XVFB (`pc_xvfb`) engine for MiniGUI 3.0 or later.
+
+XVFB is a newly designed general purpose virtual buffer graphics engine;
+it provides a universal virtual frame buffer engine for MiniGUI, and any
+program which conforms to the specification of the universal frame buffer
+can act as the virtual frame buffer to show MiniGUI screens. In other words,
+we do not need to write an engine for a specific virtual frame buffer program.
+
+Please use one of the following XVFB programs to work with `pc_xvfb`:
+
+- GVFB: Use this on a Linux+GNOME environment; <https://github.com/VincentWei/gvfb>.
+- QVFB2: Use this on a Linux+KDE environment; <https://github.com/VincentWei/qvfb2>.
+- WVFB2: Use this on a Windows platform; <https://github.com/VincentWei/wvfb2>.
+
+The `shadow` graphics engine uses the sub-driver concept. Only one
+sub-driver can be contained at one time, and this is determined by
+the target board option. The sub-drivers of the Shadow graphics in
+MiniGUI are (in MiniGUI source code directory `src/newgal/shadow`):
+
+- `unknown`: the default sub-driver, similar with the dummy graphics
+engine, user may modify this sub-driver in order to operate and visit
+the underlying graphics devices.
+- `fbcon`: sub-driver for Linux console frame buffer;
+supporting display mode less than 8-bit color and screen rotation.
+- `qvfb`: sub-driver for Linux QVFB (Qt virtual frame buffer);
+supporting display mode less than 8-bit color and screen rotation.
+- `wvfb`: sub-driver for WVFB (Windows virtual frame buffer);
+supporting display mode less than 8-bit color and screen rotation.
+
+The CommLCD engine also uses the sub-driver structure like Shadow
+graphics engine. At present, sub-drivers for CommLCD graphics engine
+are:
+
+- `external`: Use the sub-driver implemented outside MiniGUI core.
+- `vxi386`: Sub-driver for VxWorks i386 target board.
+- `unknown`: If it is eCos operating system, the engine will use
+the standard interface of eCos to implement a sub-driver.
 
 Through the configuration option or macro, we can configure MiniGUI
 to contain a certain graphics engine. But if you want MiniGUI to use
@@ -198,63 +244,6 @@ gal_engine=dummy
 
 For more information about this settings, please refer to
 [Runtime Configuration].
-
-The Dummy is a graphics engine ("mute" graphics engine), which it does
-not make any actual output. Therefore, if the graphics engine for your
-development board still cannot work, you can run MiniGUI using this
-graphics engine.
-
-The Qvfb graphics engine uses in the Linux operating system. Using qvfb,
-we can run the MiniGUI program in X Window; it may greatly facilitate
-the application debugging. Similar with the qvfb graphics engine, when
-uses MiniGUI SDK for Win32 run MiniGUI program on Win32 platform, it run
-on Windows Virtual in the FrameBuffer actually, and use the wvfb
-graphics engine.
-
-It should be noted that the original QVFB (Qt Virtual Frame Buffer) and
-WVFB (Windows Virtual Frame Buffer) have been replaced with the newly
-designed XVFB general purpose virtual buffer graphics engine in MiniGUI
-3.0.
-
-In MiniGUI also has a special Shadow graphics engine, uses the Shadow
-graphics engine, MiniGUI may support the graphic display devices which
-it is lower than 8 bit colors, also support the screen rotation. The
-Shadow graphics engine has used the sub-driver concept; it determined
-which sub-driver contains through the target board name. Only one
-sub-driver can be contained at one time, it determined by the target
-board configuration option (sees section 2.2.2). The attention, the
-Shadow graphics engine is disabled as the default; moreover it is only
-suitable for the MiniGUI-Threads and MiniGUI-Standalone runtime mode at
-present.
-
-The sub-drivers of the Shadow graphics in MiniGUI are (in MiniGUI source
-code directory **src/newgal/shadow**):
-
-**unknown**: the default sub-driver, similar with the dummy graphics
-engine, user may modify this sub-driver in order to operate and visit
-the low graphics devices.
-
-**qvfb**: sub-driver for Linux QVFB all display mode, support low than
-8-bit color display mode and screen rotation.
-
-**fbcon**: sub-driver for Linux console FrameBuffer, support low than
-8-bit color display mode and screen rotation.
-
-**wvfb**: sub-driver for Windows Virtual FrameBuffer(wvfb), support low
-than 8-bit color display mode and screen rotation.
-
-The CommLCD graphics engine is the most used graphics engine when
-MiniGUI run on the tradition embedded operating system. CommLCD also
-uses the sub-driver structure like Shadow graphics engine. At present,
-sub-drivers for CommLCD graphics engine are:
-
-**vxi386**: Sub-driver for VxWorks i386 target board.
-
-**unknown**: If is eCos operating system, then use standard interface of
-eCos to implement a sub-driver. Otherwise, the sub-driver needs to be
-defined by the user. The rtos/ directory of the MiniGUI source tree
-contains the CommLCD graphics engine implementation for each operating
-system. You can modify this file to support your own LCD controller.
 
 ### Input Engine
 
