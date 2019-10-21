@@ -284,7 +284,7 @@ The following table lists the common IAL engines.
 ##### Table: Options and macros related to IAL engines
 
 | Switch option    | Macro              | Engine name | Default   | Comments
-|------------------|------ -------------|-------------|-----------|--------
+|------------------|--------------------|-------------|-----------|---------
 | `dummyial`       |  `_MGIAL_DUMMY`    | `dummy`     | Enabled   | Dummy input engine, for all operating system
 | `consoleial`     |  `_MGIAL_CONSOLE`  | `console`   | Enabled   | Console input engine for Linux
 | `libinputial`    |  `_MGIAL_LIBINPUT` | `libinput`  | Enabled   | The input engine based on `libinput` for Linux; Since MiniGUI 4.0
