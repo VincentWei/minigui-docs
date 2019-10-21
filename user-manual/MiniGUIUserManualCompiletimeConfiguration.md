@@ -604,7 +604,7 @@ The option `--with-mttfcachenum` is used to specify the number of the
 cache blocks when TrueType cache is enabled. The default value is 10.
 The following table gives all possible values for this option.
 
-#### Table: Possible values for mttfcachenum
+##### Table: Possible values for mttfcachenum
 
 | Configure option         | Macro              | Macro value | Comments
 |--------------------------|--------------------|-------------|---------------
@@ -616,7 +616,7 @@ The option `--with-ttfcachesize` is used to specify the size of one
 cache block when TrueType cache is enabled. The default value is 256 (256KB).
 The following table gives all possible values for this option.
 
-#### Table: Possible values for ttfcachesize
+##### Table: Possible values for ttfcachesize
 
 | Configure option           | Macro               | Macro value | Comments
 |----------------------------|---------------------|-------------|---------
