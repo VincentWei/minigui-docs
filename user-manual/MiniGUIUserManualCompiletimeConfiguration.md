@@ -34,15 +34,15 @@ as the follow:
 user$ ./configure --with-osname=ecos
 ```
 
-If you specify an operating system, some macros will be defined
-in `mgconfig.h`. For some operating systems, the configuration script
-will also enable other macros. The following table lists the options and
-macros about operating systems.
+If you specify an operating system, a macro for this operating system will
+be defined in `mgconfig.h`. For some operating systems, the configuration
+script will also enable other macros. The following table lists the options
+and macros about operating systems.
 
 ##### Table: Options and macros for different operation systems
 
 | Configuration options    | Macro                | Other macros         | Comments
-| -------------------------|----------------------|----------------------|-------------------------------------------
+| -------------------------|----------------------|----------------------|---------
 | `--with-osname=linux`    | `__LINUX__`          |                      | For Linux operating system; Default value
 | `--with-osname=uclinux`  | `__uClinux__`        |                      | For uClinux operating system
 | `--with-osname=ucos2`    | `__UCOSII__`         | `__NOUNIX__`<BR/>`_MGINCORE_RES`<BR/>`_MGUSE_OWN_MALLOC`<BR/>`_MGUSE_OWN_STDIO`<BR/>`_MGUSE_OWN_PTHREAD` | For uC/OS-II operating system
@@ -62,26 +62,33 @@ macros about operating systems.
 
 ### Target Board
 
-In MiniGUI core, some code are related with a special target board,
+In MiniGUI core, some code is related with a special target board,
 especially when you use `Shadow` NEWGAL engine or `CommLCD` NEWGAL
-engine for certain operating systems. In other words, when you use
-these two engines, the configuration script will determine which sub-drivers
-will be contained in MiniGUI core by using a configuration option.
+engine for certain operating systems. More precisely, when you use
+these two engines, you need to specify which sub-drivers should be
+contained in MiniGUI core by a configuration option.
 
-You can use `--with-targetname` option to define the name for your
-target board, especially when you use a real-time operating system.
+For this purpose, you use `--with-targetname` option to define
+the name for your target board. We use this option to distinguish
+the differences among various target boards for a specific
+operating system. This occurs often when we use a real-time
+operating system, because device drivers on such operating systems
+tend to be relatively simple, but their design is not well abstracted
+to hide the hardware details.
 
-The default target board name is `unknown`. We recommend to define a
-target board name when you port MiniGUI to a new target system for a
-traditional real-time operating system, such as uC/OS-II, eCos, ThreadX,
-or others.
+The default target board name is `unknown`. For the Linux operating system,
+there is not much need to define a target board name, so we keep the
+default in most cases. However, we recommend to define a target board
+name when you port MiniGUI to a new target system for a traditional
+real-time operating system, such as uC/OS-II, eCos, ThreadX, or others.
 
 Since MiniGUI 3.2.2, we introduce a new target name `external`.
 When you use `CommLCD` NEWGAL engine or `Comm` IAL engine to support
 your target board, you can define the target name as `external`.
 By using the target name, you do not need to change the source code
 of MiniGUI core. Instead, you implement the engines outside the MiniGUI
-core by defining some external functions.
+core by defining some external functions. In this way, we reduce the
+amount of work required to port MiniGUI to a new target board.
 
 Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also support
 the target name `external`. So you can implement the sub-driver of
@@ -92,16 +99,17 @@ For more information, please refer to:
 - [Using CommLCD NEWGAL Engine and Comm IAL Engine](https://github.com/VincentWei/minigui/wiki/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine)
 - [Writing DRI Engine Driver for Your GPU](https://github.com/VincentWei/minigui/wiki/Writing-DRI-Engine-Driver-for-Your-GPU)
 
-The table lists the options and macros related to various target boards.
+The following table lists the options and macros related to
+various target boards.
 
 ##### Table: Options and macros for target board
 
 | Configuration options         | Macro                    | Comments
 |-------------------------------|--------------------------|----------------------------------------------------------
 | `--with-targetname=unknown`   | `__TARGET_UNKNOWN__`     | Unknown development board; Default value
-| `--with-targetname=external`  | `__TARGET_EXTERNAL__`    | Define this target name when you want to use NEWGAL and/or IAL engine which is implemented outside MiniGUI core.
-| `--with-targetname=fmsoft`    | `__TARGET_FMSOFT__`      | Only for FMSoft's internal use
-| `--with-targetname=mstudio`   | `__TARGET_MSTUDIO__`     | Only for miniStudio
+| `--with-targetname=external`  | `__TARGET_EXTERNAL__`    | Define this target name when you want to implement the sub-drivers outside MiniGUI core for some NEWGAL and/or IAL engines
+| `--with-targetname=fmsoft`    | `__TARGET_FMSOFT__`      | For FMSoft's internal use
+| `--with-targetname=mstudio`   | `__TARGET_MSTUDIO__`     | For miniStudio
 | `--with-targetname=stb810`    | `__TARGET_STB810__`      | Philips STB810 development board base on Linux
 | `--with-targetname=vfanvil`   | `__TARGET_VFANVIL__`     | VisualFone development board base on ThreadX
 | `--with-targetname=vxi386`    | `__TARGET_VXI386__`      | i386 target base on VxWorks
@@ -131,41 +139,65 @@ The following table lists the options and macros for runtime mode.
 
 | Configuration options   | Macro              | Comments
 |-------------------------|--------------------|--------------------------------------------------------------------------------------
-| `--with-runmode=procs`  | `_MGRM_PROCESSES`  | MiniGUI-Processes runtime mode, support Linux operating system only; Default for Linux
+| `--with-runmode=procs`  | `_MGRM_PROCESSES`<BR/>`_LITE_VERSION` (back-compatibility definition)  | MiniGUI-Processes runtime mode, support Linux operating system only; Default for Linux
 | `--with-runmode=ths`    | `_MGRM_THREADS`    | MiniGUI-Threads runtime mode, support all operating system; Default for operating systems other than Linux
-| `--with-runmode=sa`     | `_MGRM_STANDALONE` | MiniGUI-Standalone runtime mode, support all operating system
+| `--with-runmode=sa`     | `_MGRM_STANDALONE`<BR/>`_LITE_VERSION` (back-compatibility definition)<BR/>`_STAND_ALONE` (back-compatibility definition) | MiniGUI-Standalone runtime mode, support all operating system
 
 ### Graphics Engine
 
-MiniGUI supports many kinds of graphics engine. The commonly used
-graphics engine mainly includes the Dummy graphics engine, Qt Virtual
-FrameBuffer engine, Linux FrameBuffer console graphics engine, the
-COMMLCD graphics engine, the Shadow graphics engine, Windows Virtual
-FrameBuffer graphics engine and so on. Through the configuration option
-or macro, we may contain a certain graphics engine to MiniGUI. But if
-you assign MiniGUI to use a certain graphics engine, then you need to
-assign a special runtime configuration option. For instance, if you
-assign MiniGUI to use the dummy graphics engine, you may assign the
-runtime configuration option **gal\_engine=dummy** in \[**system**\]
-section, the graphics engine name is on the right of the equal sign. The
-attention, the engine name is case sensitivity. About how to revises the
-runtime configuration option, please refer the 3rd chapter of *MiniGUI
-Runtime Configuration Options* this handbook. The table 2.5 lists the
-graphics engine related options, macros and the name.
+MiniGUI supports many kinds of graphics devices through
+an abstract software layer called `NEWGAL`. We use a specific
+NEWGAL engine to support a kind of graphics device via
+the device driver provided by the operating system. A NEWGAL
+engine is a software module which provides an implementation
+for NEWGAL to drive a real graphics device or a virtual
+graphics device.
 
-Table 2.5 graphics engine related options and macros
+The commonly used NEWGAL engines are as follow:
 
-| Switch options | Macro            | Engine name | Default  | Comments
+- `dummy`: A pure software implementation. It is not associated with
+any hardware and only provides a software implementation for easily
+debugging MiniGUI.
+- `pc_xvfb`: A pure software engine which implements a universal
+virtual frame buffer. It is associated with a window on Linux or Windows,
+so we can see the MiniGUI screens in the window. This engine is
+helpful for developing MiniGUI apps on Linux or Windows PC.
+- `fbcon`: A NEWGAL engine which uses Linux frame buffer device driver
+(`/dev/fb`).
+- `dri` (Since MiniGUI 4.0): A NEWGAL engine which uses Linux DRI/DRM
+to support modern graphics devices with 2D/3D hardware acceleration.
+- `commlcd`: A simple NEWGAL engine to support LCD without hardware
+acceleration. We often use this engine on traditional real-time
+operating systems.
+
+The following table lists the common NEWGAL engines.
+
+##### Table: Options and macros related to NEWGAL engine
+
+| Switch option  | Macro            | Engine name | Default  | Comments
 | ---------------|------------------|-------------|----------|---------
 | `videodummy`   | `_MGGAL_DUMMY`   | `dummy`     | Enabled  | All operating system
-| `videodir`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
-| `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
 | `videopcxvfb`  | `_MGGAL_PCXVFB`  | `pc_xvfb`   | Enabled  | Linux/Windows PC; The universal virtual buffer engine
+| `videodri`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
+| `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
 | `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
-| `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Enabled  | Linux PC; The virtual buffer engine for QVFB; Deprecated
-| `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32
-| `videoshadow`  | `_MGGAL_SHADOW`  | `shadow`    | Disabled | All operating system, MiniGUI-Threads, MiniGUI-Standalone runtime mode
-| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB, Linux
+| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB on Linux
+
+Through the configuration option or macro, we can configure MiniGUI
+to contain a certain graphics engine. But if you want MiniGUI to use
+a certain graphics engine, you need to set the specific runtime
+configuration option.
+
+For instance, if you want MiniGUI to use the `dummy` graphics engine,
+you can set the runtime configuration option as follow:
+
+```
+[system]
+gal_engine=dummy
+```
+
+For more information about this settings, please refer to
+[Runtime Configuration].
 
 The Dummy is a graphics engine ("mute" graphics engine), which it does
 not make any actual output. Therefore, if the graphics engine for your
@@ -771,3 +803,11 @@ above, listed as follows:
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIDataSheet.md
+[FAQs]: MiniGUIUserManualFAQsEN.md
