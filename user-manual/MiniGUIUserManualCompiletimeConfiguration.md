@@ -541,8 +541,8 @@ The following table lists the options and macros related to font.
 | `fontsystem`             | `_MGINCOREFONT_SYSTEM`         |  Enabled  | Include incore VBF font System
 | `fonttimes`              | `_MGINCOREFONT_TIMES`          |  Enabled  | Include incore UPF font Times
 | `ttfcache`               | `_MGFONT_TTF_CACHE`            |  Enabled  | Use cache for TrueType fonts
-| `ttfcachesize=256`       | `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
-| `mttfcachenum=10`        | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
+| `mttfcachenum=10`        | `_MGMAX_TTF_CACHE`             |  10       | The number of TrueType font cache blocks
+| `ttfcachesize=256`       | `_MGTTF_CACHE_SIZE`            |  256      | The size of each TrueType font cache block
 
 The option `rbfsupport` controls whether including the support for
 Raw Bitmap Font (RBF) font, it is enabled by default. Because RBF
@@ -613,7 +613,7 @@ The following table gives all possible values for this option.
 | `--with-mttfcachenum=40` | `_MGMAX_TTF_CACHE` | 40          |
 
 The option `--with-ttfcachesize` is used to specify the size of one
-cache block when TrueType cache is enabled. The default value is 64 (64KB).
+cache block when TrueType cache is enabled. The default value is 256 (256KB).
 The following table gives all possible values for this option.
 
 #### Table: Possible values for ttfcachesize
@@ -629,29 +629,28 @@ The following table gives all possible values for this option.
 
 ### Image File Format
 
-MiniGUI support for multiple image file formats, idiographic, MiniGUI
-include Windows BMP, GIF, JPEG, PNG, PCX, LBM/PBM, TGA and so on.
-Thereinto, MiniGUI only support Windows BMP in incore resource, so there
-is not corresponding configuration option; The configuration option of
-GIF, JPEG, PNG file is enabled; The configuration option of PCX,
-LBM/PBM, TGA is disabled. It should be noted that if you want to MiniGUI
-support JECG and PNG picture format, you need to install corresponding
-libjpeg and libpng libraries into your system, there is the source code
-of these two function libraries in the MiniGUI official website.
+MiniGUI provides support for multiple image file formats, including
+Windows BMP, GIF, JPEG, PNG, PCX, LBM/PBM, and TGA. The support for
+Windows BMP is a built-in feature, so there is no corresponding configuration
+option. The support for other image formats can be controlled by
+the options described in this section.
 
-The table 2.16 listed image file format related configuration options
-and macros.
+The following table lists the options and macros related to image file format.
 
-Table 2.16 image file format related configuration options and macros
+##### Table: Options and macros related to image file format
 
 | Switch option | Macro          | Default  | Comments
 |---------------|----------------|----------|---------
 | `gifsupport`  | `_MGIMAGE_GIF` | Enabled  | Support for GIF file
-| `jpgsupport`  | `_MGIMAGE_JPG` | Enabled  | Support for JPG file
-| `pngsupport`  | `_MGIMAGE_PNG` | Enabled  | Support for PNG file
+| `jpgsupport`  | `_MGIMAGE_JPG` | Enabled  | Support for JPEG file; Depend on LibJPEG v7.
+| `pngsupport`  | `_MGIMAGE_PNG` | Enabled  | Support for PNG file; Depend on LibPNG 1.2.x or 1.6.x.
 | `pcxsupport`  | `_MGIMAGE_PCX` | Disabled | Support for PCX file
 | `lbmsupport`  | `_MGIMAGE_LBM` | Disabled | Support for LBM/PBM file
 | `tgasupport`  | `_MGIMAGE_TGA` | Disabled | Support for TGA file
+
+It should be noted that the support for JPEG and PNG image formats
+depends on the third-party libraries. For more information, please refer to
+[Building MiniGUI].
 
 ### Appearance Renderer
 
