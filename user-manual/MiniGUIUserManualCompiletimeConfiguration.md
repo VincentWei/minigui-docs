@@ -199,11 +199,11 @@ program which conforms to the specification of the universal frame buffer
 can act as the virtual frame buffer to show MiniGUI screens. In other words,
 we do not need to write an engine for a specific virtual frame buffer program.
 
-Please use one of the following XVFB programs to work with `pc_xvfb`:
+Please use one of the following XVFB programs to work with `pc_xvfb` engine:
 
-- GVFB: Use this on a Linux+GNOME environment; <https://github.com/VincentWei/gvfb>.
-- QVFB2: Use this on a Linux+KDE environment; <https://github.com/VincentWei/qvfb2>.
-- WVFB2: Use this on a Windows platform; <https://github.com/VincentWei/wvfb2>.
+- GVFB: Use this on a Linux+GNOME environment; Public repo: <https://github.com/VincentWei/gvfb>.
+- QVFB2: Use this on a Linux+KDE environment; Public repo: <https://github.com/VincentWei/qvfb2>.
+- WVFB2: Use this on a Windows platform; Public repo: <https://github.com/VincentWei/wvfb2>.
 
 The `shadow` graphics engine uses the sub-driver concept. Only one
 sub-driver can be contained at one time, and this is determined by
@@ -247,6 +247,57 @@ For more information about this settings, please refer to
 
 ### Input Engine
 
+MiniGUI supports many kinds of input devices through
+an abstract software layer called `IAL`. We use a specific
+IAL engine to support a kind of input device via
+the device driver provided by the operating system. A IAL
+engine is a software module which provides an implementation
+for NEWGAL to drive a real input device or a virtual
+input device.
+
+The commonly used IAL engines are as follow:
+
+- `Dummy`: Like `Dummy` NEWGAL engine, this IAL engine is not connected to
+any actual input device, and it does not generate any input events.
+Therefore, if the input engine for your target board is not ready, you can
+run MiniGUI by using this input engine for debugging. Note that MiniGUI
+will use this input engine when it cannot find the matched input engine
+specified in the runtime configuration.
+- `Auto`/`Random`: Like `Dummy` input engine, MiniGUI provide other two software
+input engines, which both are not associated to any device. One is
+`Auto` engine and the other is called `Random`. The former can generate
+input events automatically and the later generates input events randomly.
+These two engines may be used for auto-test of MiniGUI and its apps.
+- `XVFB`: This input engine works with `XVFB` NEWGAL engine, so it is controlled
+by `videopcxvfb` switch option (`_MGGAL_PCXVFB_`).
+- `Console`: This input engine works with `FBCon` NEWGAL engine on Linux.
+It gets input events from Linux keyboard and mouse devices.
+- `Comm`: Like `CommLCD` NEWGAL engine, you can use this input engine to
+implement a driver for input devices without change the source code of
+MiniGUI core.
+- `libinput` (since MiniGUI 4.0): This engine provides support for
+all modern input devices on Linux system. This engine depends on `libinput`
+introduced by [Free Desktop](https://www.freedesktop.org/wiki/) project.
+
+The following table lists the common IAL engines.
+
+##### Table: Options and macros related to IAL engines
+
+| Switch option    | Macro              | Engine name | Default   | Comments
+|------------------|------ -------------|-------------|-----------|--------
+| `dummyial`       |  `_MGIAL_DUMMY`    | `dummy`     | Enabled   | Dummy input engine, for all operating system
+| `autoial`        |  `_MGIAL_AUTO`     | `auto`      | Disabled  | Automatic input engine, for all operating system
+| `randomial`      |  `_MGIAL_RANDOM`   | `random`    | Disabled  | Random input engine, for all operating system
+| `consoleial`     |  `_MGIAL_CONSOLE`  | `console`   | Enabled   | Console input engine for Linux
+| `commial`        |  `_MGIAL_COMM`     | `comm`      | Disabled  | COMM input engine, for all operating system
+| `libinputial`    |  `_MGIAL_LIBINPUT` | `libinput`  | Enabled   | The input engine based on `libinput` for Linux; Since MiniGUI 4.0
+| `tslibial`       |  `_MGIAL_TSLIB`    | `tslib`     | Disabled  | The input engine based on `tslib` for Linux; Deprecated
+| `qvfbial`        |  `_MGIAL_QVFB`     | `qvfb`      | Disabled  | QVFB input engine for Linux, works with QVFB graphics engine; Deprecated
+| `wvfbial`        |  `_MGIAL_WVFB`     | `wvfb`      | Disabled  | WVFB input engine for Win32, works with WVFB graphics engine; Deprecated
+| `dfbial`         |  `_MGIAL_DFB`      | `dfb`       | Disabled  | This engine runs on DirectFB on Linux; Deprecated
+| `qemuial`        |  `_MGIAL_QEMU`     | `qemu`      | Disabled  | QEMU input IAL, Linux; Deprecated
+| `custodial`      |  `_MGIAL_CUSTOM`   | `custom`    | Disabled  | Use this engine when you want to implement the engine outside MiniGUI
+
 MiniGUI provides some input engine, which can be used directly for many
 kinds of development board. Generally the input engines include the
 Dummy input engine, Qt Virtual FrameBuffer engine, Linux FrameBuffer
@@ -264,34 +315,6 @@ Runtime Configuration Options* this handbook. The table 2.7 lists the
 input engine related options and macros.
 
 Table 2.7 input engines related options and macros
-
-| Switch options   | Macro            | Engine name | Default   | Comments
-|-------------------------|-----------|-------------|-----------|--------
-| `dummyial`       |  `_MGIAL_DUMMY`  | `dummy`     | Enabled   | Dummy input engine, for all operating system
-| `autoial`        |  `_MGIAL_AUTO`   | `auto`      | Disabled  | Automatic input engine, for all operating system
-| `qvfbial`        |  `_MGIAL_QVFB`   | `qvfb`      | Enabled   | QVFB input engine, Linux, use QVFB graphics engine
-| `consoleial`     |  `_MGIAL_CONSOLE`| `console`   | Enabled   | Linux console input engine, Linux
-| `randomial`      |  `_MGIAL_RANDOM` | `random`    | Disabled  | Random input engine, for all operating system
-| `wvfbial`        |  `_MGIAL_WVFB`   | `wvfb`      | Disabled  | WVFB input engine, Win32, use WVFB graphics engine
-| `commial`        |  `_MGIAL_COMM`   | `comm`      | Disabled  | COMM input engine, for all operating system
-| `dfbial`         |  `_MGIAL_DFB`    | `dfb`       | Disabled  | Base on DirectFBinput engine, Linux, use DFB graphics engine
-| `tslibial`       |  `_MGIAL_TSLIB`  | `tslib`     | Disabled  | Base on tab engine, Linux, use DFB graphics engine
-| `qemuial`        |  `_MGIAL_QEMU`   | `qemu`      | Disabled  | QEMU input IAL, Linux
-| `custodial`      |  `_MGIAL_CUSTOM` | `custom`    | Disabled  | Use on graphics engine that custom by MiniGUI application; any operating system
-
-The Dummy input engine ("mute" input engine) is not connected to any
-actual input device; therefore it can’t get any input. Therefore, if the
-input engine for your development board still cannot to work, you can
-run MiniGUI using this input engine. Attention, MiniGUI use Dummy input
-engine when it cannot find the matched input engine in configuration
-options.
-
-Like the Dummy input engine, MiniGUI provide other two input engine,
-which it is not associated to any device, for instance Auto input engine
-and Random input engine. The Auto engine may circulation produce the
-events automatic according the previous setting; But the Random input
-engine produce the random input event. These two engines may use for
-MiniGUI and its application software test automation.
 
 The Console input engine aims at the PC console of Linux operating
 system. This input engine supports the standard PC keyboard as well as
