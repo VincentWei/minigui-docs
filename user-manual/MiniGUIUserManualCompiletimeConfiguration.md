@@ -572,9 +572,9 @@ FreeType 2 are supported. If you enable this option, MiniGUI will
 use FreeType 2 to render TrueType fonts.
 
 Note that, when we use FreeType 2 as the font engine, MiniGUI can
-not only render TrueType font (font file with `.ttf` or `.ttc` postfix),
-but also OpenType font (with `.otf` postfix) and Adobe Type 1 font
-(with `.pfb` postfix).
+not only render TrueType font (font file with `.ttf` or `.ttc` suffix),
+but also OpenType font (with `.otf` suffix) and Adobe Type 1 font
+(with `.pfb` suffix).
 
 The option `complexscripts` controls whether including the support for
 the complex scripts like Arabic, Thai, and Indic. When enabled, you can
@@ -587,8 +587,9 @@ text in complex scripts.
 
 The `rbfvgaoem`, `rbfterminal`, and `rbffixedsys` options control
 whether including the built-in `VGAOEM`, `Terminal`, and `FixedSys` RBF
-fonts in MiniGUI core library respectively. These options are enabled by default,
-so that MiniGUI can show text even if there is no external font was loaded.
+fonts in MiniGUI core library respectively. These options are enabled by
+default, so that MiniGUI can show text even if there is no external font
+was loaded.
 
 The `fontsserif`, `fontcourier`, and `fontsystem` options control
 whether including the built-in `SanSerif`, `Courier` and `System` VBF
@@ -735,24 +736,18 @@ configurations and macros
 | `ownstdio`    | `_MGUSE_OWN_STDIO`   | Disabled | Use MiniGUI implemented stdio format input and output function family
 | `ownpthread`  | `_MGUSE_OWN_PTHREAD` | Disabled | Use MiniGUI implemented thread function family
 
-Otherwise, you must define this macro: `__MINIGUI\_LIB__` , when you
+Otherwise, you must define this macro: `__MINIGUI_LIB__` , when you
 use yourself makefile to compile MiniGUI function library in the Non-GNU
 development environment.
-
-##### Table Other macros
-
-| Macro             | Comments
-| ------------------|----------
-| `__MINIGUI_LIB__` | Compile MiniGUI library macro; You must define this macro
 
 Start with MiniGUI 3.0, you can specify the name suffix of the MiniGUI
 library through the configure option. By default, the name of the
 MiniGUI library varies depending on the operating mode, for example,
-libminigui-ths.so, libminigui-procs.so, libminigui-sa.so , Respectively,
+libminigui-ths.so, libminigui-procs.so, libminigui-sa.so, respectively,
 corresponding to MiniGUI-Threads, MiniGUI-Processes and
 MiniGUI-Standalone mode of operation.
 
-You can specify a special library name suffix with the --with-libsuffix
+You can specify a special library name suffix with the `--with-libsuffix`
 option.
 
 ## Minimal Configuration Options
