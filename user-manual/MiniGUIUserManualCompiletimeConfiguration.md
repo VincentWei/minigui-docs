@@ -8,7 +8,8 @@
    * [Input Engine](#input-engine)
    * [Keyboard Layout](#keyboard-layout)
    * [Global Options and Macros](#global-options-and-macros)
-   * [Character Set and Font](#character-set-and-font)
+   * [Character Set](#character-set)
+   * [Font](#font)
    * [Image File Format](#image-file-format)
    * [Appearance Renderer](#appearance-renderer)
    * [Control](#control)
@@ -456,12 +457,7 @@ These two options are used to define the splash screen and
 MiniGUI built-in screen saver. In an actual project, you can
 disable both options.
 
-### Character Set and Font
-
-MiniGUI has rich support for font. It supports RBF font, VBF font (these
-two kinds of font are defined by MiniGUI), UPF/QPF font, TrueType font,
-Adobe Type1 font and so on. Because MiniGUI supports many kinds of font,
-so there are many flexible configuration options for font.
+### Character Set
 
 Like the type of font, MiniGUI provides a well support for character
 set. A special character set support also can be flexible configured.
@@ -493,21 +489,6 @@ Table 2.13 character set and font related options and macros
 | `eucjpsupport`    | `_MGCHARSET_EUCJP`             |  Disabled | Include support for EUC encoding of JISX0201 and JISX0208 charsets
 | `shiftjissupport` | `_MGCHARSET_SHIFTJIS`          |  Disabled | Include support for Shift-JIS encoding of JISX0201 and JISX0208 charsets
 | `unicodesupport`  | `_MGCHARSET_UNICODE`           |  Enabled  | Include UNICODE (ISO-10646-1 and UTF-8 encoding) support
-| `rbfsupport`      | `_MGFONT_RBF`                  |  Enabled  | Include RBFfont support
-| `rbfvgaoem`       | `_MGINCORERBF_LATIN1_VGAOEM`   |  Disabled | Include incore RBF font of ISO8859-1 8x16 fixed font
-| `rbfterminal`     | `_MGINCORERBF_LATIN1_TERMINAL` |  Disabled | Include incore RBF font of ISO8859-1 12x24 fixed font
-| `rbffixedsys`     | `_MGINCORERBF_LATIN1_FIXEDSYS` |  Enabled  | Include incore RBF font of GB2312 12x12 fixed/song font
-| `vbfsupport`      | `_MGFONT_VBF`                  |  Enabled  | Include var bitmap font support
-| `fontsserif`      | `_MGINCOREFONT_SANSSERIF`      |  Enabled  | Include incore VBF font sansserif
-| `fontcourier`     | `_MGINCOREFONT_COURIER`        |  Enabled  | Include incore VBF font courier
-| `fontsystem`      | `_MGINCOREFONT_SYSTEM`         |  Disabled | Include incore VBF font symbol
-| `upfsupport`      | `_MGFONT_UPF`                  |  Enabled  | Support FMSoft Unicode Prerendered Font(UPF).
-| `fonttimes`       | `_MGINCOREFONT_TIMES`          |  Enabled  | Include income Times UPF font
-| `qpfsupport`      | `_MGFONT_QPF`                  |  Enabled  | Include Qt Prerendered Font (QPF) support
-| `ttfsupport=ft1`  | `_MGFONT_TTF`                  |  Disabled | Include TrueType Library support
-| `ttfsupport=ft2`  | `_MGFONT_FT2`                  |  Disabled | Include FreeType2 font support
-| `ttfcachesize=256`| `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
-| `mttfcachenum=10` | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
 
 The options latin2support, latin3support, cyrillicsupport,
 arabicsupport, greeksupport, hebrewsupport, latin5support,
@@ -521,6 +502,33 @@ The options gbsupport, gbksupport, gb18030support, big5support,
 euckrsupport, eucjpsupport, shiftjissupport, unicodesupport control
 GB2312, GBK, GB18030, BIG5, EUCKR, EUCJP, SHIFTJIS, UNICODE character
 set/code system support.
+
+### Font
+
+MiniGUI has rich support for font. It supports RBF font, VBF font (these
+two kinds of font are defined by MiniGUI), UPF/QPF font, TrueType font,
+Adobe Type1 font and so on. Because MiniGUI supports many kinds of font,
+so there are many flexible configuration options for font.
+
+| Options                 | Macro                          |  Default  | Comments
+|-------------------------|--------------------------------|-----------|---------
+| `rbfsupport`            | `_MGFONT_RBF`                  |  Enabled  | Include RBFfont support
+| `vbfsupport`            | `_MGFONT_VBF`                  |  Enabled  | Include var bitmap font support
+| `upfsupport`            | `_MGFONT_UPF`                  |  Enabled  | Support FMSoft Unicode Prerendered Font(UPF).
+| `qpfsupport`            | `_MGFONT_QPF`                  |  Enabled  | Include Qt Prerendered Font (QPF) support
+| `--with-ttfsupport=ft1` | `_MGFONT_TTF`                  |  none     | Use FreeType 1 to support TrueType font; Version 3.2 only
+| `--with-ttfsupport=ft2` | `_MGFONT_FT2`                  |  none     | Use FreeType 2 to support TrueType font; Version 3.2 only
+| `ttfsupport`            | `_MGFONT_FT2`                  |  Enabled  | Use FreeType 2 to support TrueType font; Since version 4.0
+| `complexscripts`        | `_MGCOMPLEX_SCRIPTS`           |  Enabled  | Support complex scripts based on HarfBuzz; Since version 4.0
+| `rbfvgaoem`             | `_MGINCORERBF_LATIN1_VGAOEM`   |  Disabled | Include incore RBF font of ISO8859-1 8x16 fixed font
+| `rbfterminal`           | `_MGINCORERBF_LATIN1_TERMINAL` |  Disabled | Include incore RBF font of ISO8859-1 12x24 fixed font
+| `rbffixedsys`           | `_MGINCORERBF_LATIN1_FIXEDSYS` |  Enabled  | Include incore RBF font of GB2312 12x12 fixed/song font
+| `fontsserif`            | `_MGINCOREFONT_SANSSERIF`      |  Enabled  | Include incore VBF font sansserif
+| `fontcourier`           | `_MGINCOREFONT_COURIER`        |  Enabled  | Include incore VBF font courier
+| `fontsystem`            | `_MGINCOREFONT_SYSTEM`         |  Disabled | Include incore VBF font symbol
+| `fonttimes`             | `_MGINCOREFONT_TIMES`          |  Enabled  | Include income Times UPF font
+| `ttfcachesize=256      `| `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
+| `mttfcachenum=10`       | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
 
 The option rbfsupport control whether include the support for Raw Bitmap
 Font (RBF) font, it is enabled as the default. Because RBF is the
