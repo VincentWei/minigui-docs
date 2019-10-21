@@ -273,10 +273,10 @@ by `videopcxvfb` switch option (`_MGGAL_PCXVFB_`).
 - `Console`: This input engine works with `FBCon` NEWGAL engine on Linux.
 It gets input events from Linux keyboard and mouse devices.
 - `Comm`: Like `CommLCD` NEWGAL engine, you can use this input engine to
-implement a driver for input devices without change the source code of
+implement a driver for input devices without changing the source code of
 MiniGUI core.
 - `libinput` (since MiniGUI 4.0): This engine provides support for
-all modern input devices on Linux system. This engine depends on `libinput`
+all modern input devices on Linux system, it depends on `libinput`
 introduced by [Free Desktop](https://www.freedesktop.org/wiki/) project.
 
 The following table lists the common IAL engines.
@@ -286,50 +286,47 @@ The following table lists the common IAL engines.
 | Switch option    | Macro              | Engine name | Default   | Comments
 |------------------|------ -------------|-------------|-----------|--------
 | `dummyial`       |  `_MGIAL_DUMMY`    | `dummy`     | Enabled   | Dummy input engine, for all operating system
+| `consoleial`     |  `_MGIAL_CONSOLE`  | `console`   | Enabled   | Console input engine for Linux
+| `libinputial`    |  `_MGIAL_LIBINPUT` | `libinput`  | Enabled   | The input engine based on `libinput` for Linux; Since MiniGUI 4.0
 | `autoial`        |  `_MGIAL_AUTO`     | `auto`      | Disabled  | Automatic input engine, for all operating system
 | `randomial`      |  `_MGIAL_RANDOM`   | `random`    | Disabled  | Random input engine, for all operating system
-| `consoleial`     |  `_MGIAL_CONSOLE`  | `console`   | Enabled   | Console input engine for Linux
 | `commial`        |  `_MGIAL_COMM`     | `comm`      | Disabled  | COMM input engine, for all operating system
-| `libinputial`    |  `_MGIAL_LIBINPUT` | `libinput`  | Enabled   | The input engine based on `libinput` for Linux; Since MiniGUI 4.0
+| `customial`      |  `_MGIAL_CUSTOM`   | `custom`    | Disabled  | Use this engine when you want to implement the engine outside MiniGUI
 | `tslibial`       |  `_MGIAL_TSLIB`    | `tslib`     | Disabled  | The input engine based on `tslib` for Linux; Deprecated
 | `qvfbial`        |  `_MGIAL_QVFB`     | `qvfb`      | Disabled  | QVFB input engine for Linux, works with QVFB graphics engine; Deprecated
 | `wvfbial`        |  `_MGIAL_WVFB`     | `wvfb`      | Disabled  | WVFB input engine for Win32, works with WVFB graphics engine; Deprecated
 | `dfbial`         |  `_MGIAL_DFB`      | `dfb`       | Disabled  | This engine runs on DirectFB on Linux; Deprecated
 | `qemuial`        |  `_MGIAL_QEMU`     | `qemu`      | Disabled  | QEMU input IAL, Linux; Deprecated
-| `custodial`      |  `_MGIAL_CUSTOM`   | `custom`    | Disabled  | Use this engine when you want to implement the engine outside MiniGUI
 
-MiniGUI provides some input engine, which can be used directly for many
-kinds of development board. Generally the input engines include the
-Dummy input engine, Qt Virtual FrameBuffer engine, Linux FrameBuffer
-console input engine, the COMM input engine, the Random input engine,
-Windows Virtual FrameBuffer input engine and so on. Through the
-configuration options or macros, we can contain an input engine to
-MiniGUI. But if assign MiniGUI to use a certain input engine, then you
-need to assign a special runtime configuration option. For instance, If
-you assign MiniGUI to use the dummy input engine, you may assign the
-runtime configuration option **ial\_engine=dummy** in \[**system**\]
-section, the input engine name is on the right of the equal sign. The
-attention, the engine name is case sensitivity. About how to revises the
-runtime configuration option, please refer the 3rd chapter of *MiniGUI
-Runtime Configuration Options* this handbook. The table 2.7 lists the
-input engine related options and macros.
+Through the configuration option or macro, we can configure MiniGUI
+to contain a certain input engine. But if you want MiniGUI to use
+a certain input engine, you need to set the specific runtime
+configuration option.
 
-Table 2.7 input engines related options and macros
+For instance, if you want MiniGUI to use the `dummy` input engine,
+you can set the runtime configuration option as follow:
 
-The Console input engine aims at the PC console of Linux operating
-system. This input engine supports the standard PC keyboard as well as
-many kinds of mouse protocol. You need configure mtype and mdev field in
-\[**system**\] section assign the mouse protocol and the mouse device
-when use the console input engine.
+```
+[system]
+ial_engine=dummy
+```
 
-Mouse protocol related options and macros, which console input engine
-supported, are listed in table 2.8. Attention, although MiniGUI support
-intelligence mouse, but MiniGUI does not support in the middle key and
-the hoop input event.
+The Console input engine provides support for the PC console of
+Linux operating system. This input engine supports the standard PC
+keyboard as well as many kinds of mouse protocol. You need configure
+`mtype` and `mdev` field in `system` section of the runtime configuration
+to set the correct mouse protocol and the mouse device when you use
+this engine.
 
-Table 2.8 Mouse protocol related options and macros
+For more information about this settings, please refer to
+[Runtime Configuration].
 
-| Switch options |  Macro              | Default | Comments
+There are some configuration options for the mouse protocols supported.
+The following table lists them.
+
+##### Table: Options and macros related to mouse protocols
+
+| Switch option  |  Macro              | Default | Comments
 |----------------|---------------------|---------|---------
 | `consoleps2`   |  `_MGCONSOLE_PS2`   | Enabled | Support PS2 mouse protocol
 | `consoleimps2` |  `_MGCONSOLE_IMPS2` | Enabled | Support intelligence mouse(IMPS/2) protocol
@@ -337,31 +334,42 @@ Table 2.8 Mouse protocol related options and macros
 | `consolems3`   |  `_MGCONSOLE_MS3`   | Enabled | Support MS3 mouse protocol
 | `consolegpm`   |  `_MGCONSOLE_GPM`   | Enabled | Support GPM Daemon processes
 
-Except the options above, MiniGUI has also provided mouse and touch
-screen adjustment interfaces for applications. If you want to use this
-interfaces, you need to open the option about touch screen adjusts. The
-table 2.9 lists touch screen adjustment related options and macros.
+Except the options above, MiniGUI also provides mouse and touch
+screen calibration interfaces for applications. If you want to use this
+interfaces, you need to enable the option. The following table
+lists the option and macro related to the mouse or touch screen
+calibration interface.
 
-Table 2.9 mouse and touch screen adjustment related options and macros
+##### Table: Option and macro related to mouse calibration interface
 
 | Switch options   | Macro                    | Default | Comments
 |------------------|--------------------------|---------|---------
-| `mousecalibrate` | `_MGHAVE_MOUSECALIBRATE` | Enabled | Support touch screen adjustment
+| `mousecalibrate` | `_MGHAVE_MOUSECALIBRATE` | Enabled | Support touch screen calibration
+
+**Note that new project should use `libinput` engine of MiniGUI 4.0
+instead of `console` input engine on Linux. Because `libinput` engine
+provides support for all modern input devices including keyboard, mouse,
+multiple touch panel, gesture, joystick, tablet tool, table pad,
+and even switch.**
 
 ### Keyboard Layout
 
-The MiniGUI keyboard layout uses for control the behavior of function
-TranslateMessage. Different keyboard layout will translate a same key as
-a different character (distinguish by the scan code). This translation
-process is implemented through query the scan code mapping table. At
-present, in MiniGUI contains the Western Europe country commonly used
-keyboard layout support, standard American 1.01/102 keyboard as default.
-If you want to use different keyboard layout in your program, you should
-call the function SetKeyboardLayout by the keyboard layout name. For
-more information, please refer *MiniGUI Programming Guide V3.0-5*. Table
-2.10 listed the keyboard layout related options, macros and the name.
+MiniGUI uses keyboard layout to control the behavior of function
+`TranslateMessage`. MiniGUI translates a same key press as
+a different character or character sequence under different keyboard layout.
 
-Table 2.10 keyboard layout related options and macros
+At present, MiniGUI contains support for the standard American 101/102
+keyboard as the default keyboard layout. If you want to use a different
+keyboard layout in your program, you can call `SetKeyboardLayout` by the
+keyboard layout name. For more information about these functions,
+please refer to [MiniGUI Programming Guide]. However, you need
+to enable the support for a specific keyboard layout in MiniGUI core
+before using it.
+
+The following table lists the options and macros related to
+the keyboard layout.
+
+##### Table: Options and macros related to keyboard layout
 
 | Switch option | Macro                   | Keyboard layout name | Default  | Comments
 |---------------|-------------------------|----------------------|----------|---------
@@ -377,66 +385,76 @@ Table 2.10 keyboard layout related options and macros
 
 ### Global Options and Macros
 
-The table 2.11 lists system global configuration options and macros.
+The following table lists the system global configuration options and macros.
 
-Table 2.11 system global configuration options and macros
+##### Table: System global configuration options and macros
 
 | Switch option   | Macro                    | Default  | Comments
 |-----------------|--------------------------|----------|---------
-| `incoreres`     | `_MGINCORE_RES`          | Disabled | Use MiniGUI in-core resource
-| `miniguientry`  | `_USE_MINIGUIENTRY`      | Disabled | Use MiniGUI minigui_entry function
-| `debug`         | `_DEBUG`                 | Disabled | Include debug information
+| `incoreres`     | `_MGINCORE_RES`          | Disabled | The MiniGUI resource will be built in MiniGUI core instead of loading them from file system.
+| `miniguientry`  | `_USE_MINIGUIENTRY`      | Disabled | Use MiniGUI `minigui_entry` function.
+| `develmode`     | `_DEBUG`                 | Disabled | Developer mode; internal use for MiniGUI developer.
+| `debug`         | `_DEBUG`                 | Disabled | Including debug output
 | `tracemsg`      | `_MGHAVE_TRACE_MSG`      | Disabled | Trace MiniGUI message
 | `msgstr`        | `_MGHAVE_MSG_STRING`     | Disabled | Include the string name of the message
-| `dblclk`        | `_MGMISC_DOUBLE_CLICK`   | Enabled  | Support mouse double click
 | `cursor`        | `_MGHAVE_CURSOR`         | Enabled  | Support mouse cursor
-| `clipboard`     | `_MGHAVE_CLIPBOARD`      | Enabled  | Support clipboard
-| `savebitmap`    | `_MGMISC_SAVESCREEN`     | Enabled  | Support SaveBitmap related functions
-| `aboutdlg`      | `_MGHAVE_FIXED_MATH`     | Enabled  | Include About dialog box
-| `savescreen`    | `_MGHAVE_SAVESCREN`      | Enabled  | Support screen capture
-| `splash`        | `_MG_ENABLE_SPLASH`      | Enabled  | MiniGUI Splash screen
 | `fixedmath`     | `_MGHAVE_FIXED_MATH`     | Enabled  | Use fixed math functions
+| `clipboard`     | `_MGHAVE_CLIPBOARD`      | Enabled  | Support clipboard
 | `adv2dapi`      | `_MGHAVE_ADV_2DAPI`      | Enabled  | Support advanced 2D graphics API
-| `screensaver`   | `_MG_ENABLE_SCREENSAVER` | Enabled  | Screen saver
+| `aboutdlg`      | `_MGMISC_ABOUTDLG`       | Enabled  | Include About dialog box
+| `savebitmap`    | `_MGMISC_SAVEBITMAP`     | Enabled  | Support `SaveBitmap` related functions
+| `savescreen`    | `_MGHAVE_SAVESCREEN`     | Enabled  | Support screen capture
+| `dblclk`        | `_MGMISC_DOUBLE_CLICK`   | Enabled  | Support mouse double click
+| `splash`        | `_MG_ENABLE_SPLASH`      | Enabled  | Splash screen
+| `screensaver`   | `_MG_ENABLE_SCREENSAVER` | Disabled | Screen saver; deprecated
 
-Some important configurations are introduced as the follow:
+Some important configuration options are described as follow:
 
-The **incoreres** option is used to control whether MiniGUI needs fonts,
-bitmaps, cursors, icons and so on construct in the function library.
-This option is very useful for tradition embedded operating system.
-Because in the majority situation, the tradition embedded operating
-system has not file system support, supporting by the in-core resource,
-it was allowed to construct the above resources in the function library,
-and MiniGUI can run without file system. Attention in, when uses in-core
-resources, MiniGUI runtime configuration options can be compiled into
-MiniGUI library directly.
-
-The **miniguientry** option uses for control how to implement the
-function MiniGUIMain. In the default situation (disabled this option),
-The function MiniGUIMain can be expanded to the function main, so
-application should not define the main function. The function
-MiniGUIMain can be expanded to the function **minigui\_entry** when
-option **miniguientry** is enabled. It is easy for debug and system
-integration for some tradition embedded operating system.
-
-The **fixedmath** option uses for control whether fixed math is included
-in MiniGUI library, such as fixcos and so on. The clipboard option uses
-for control whether MiniGUI is support clipboard or not; if this option
-is disabled, and the editor cannot support cut and copy. The **adv2api**
-option is control whether the MiniGUI include the advanced 2D graphics
-API.
-
-The debug, **tracemsg** and **msgstr** use for MiniGUI debugging, it is
-not suggested user use it.
-
-MiniGUI supports mouse cursor default. When target system has not any
-fix point device like mouse or touch screen, we do not need display the
-mouse cursor, so we can disabled the mouse cursor supporting from the
-configuration options.
-
-Splash and screensaver options are used to define the splash screen and
-MiniGUI built-in screen saver program. In the actual project, you can
-usually close these two options.
+- `incoreres`  
+The `incoreres` option is used to control whether the fonts,
+bitmaps, cursors, and icons used by MiniGUI core are built within
+MiniGUI core library instead of loading them from file system.
+This option is very useful for traditional embedded operating system.
+Because in the most situation, the tradition embedded operating
+system has not support for file system. By enabling `incoreres`,
+the resource used by MiniGUI core will built in the library, so
+we can run MiniGUI and its apps without file system. Note that,
+when we use incore resource, the runtime configuration options
+will be compiled into the libraries, so we can not change
+the runtime configuration without re-building the library.
+- `miniguientry`  
+The `miniguientry` option is used to control how to implement the
+function `MiniGUIMain`. In the default situation (disabled this option),
+The function `MiniGUIMain` (it is a macro actually) will be expanded to
+a call to the function `main`, so a MiniGUI app does not need to define
+`main` function explicitly. This works on Linux well. However, on some
+tradition embedded operating systems, it is not good to implement
+the entry of a MiniGUI app in `main` function. To resolve this issue,
+you can enable `miniguientry` option. When this option is enabled,
+the function `MiniGUIMain` will be expanded to a call to the function
+`minigui_entry` instead of `main`. And you can call `minigui_entry` in
+the system `main` function.
+- `develmode`, `debug`, `tracemsg`, `msgstr`  
+These options are used for debugging MiniGUI core, it is not suggested
+to enable them for a real MiniGUI app.
+- `cursor`  
+MiniGUI shows mouse cursor on screen by default. When the target system
+has not any pointing device like mouse or touch screen, we do not need
+to show the mouse cursor. In this situation, we disable this option.
+- `fixedmath`  
+The `fixedmath` option is used to control whether fixed math is included
+in MiniGUI core library, such as `fixcos` and so on.
+- `clipboard`  
+The `clipboard` option is used to control whether MiniGUI supports
+clipboard or not. If this option is disabled, the editor control cannot
+support copy-and-paste function.
+- `adv2dapi`  
+The `adv2api` option is used to control whether MiniGUI includes the
+advanced 2D graphics API.
+- `splash` and `screensaver`
+These two options are used to define the splash screen and
+MiniGUI built-in screen saver. In an actual project, you can
+disable both options.
 
 ### Character Set and Font
 
