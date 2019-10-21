@@ -763,17 +763,18 @@ and corresponding macros related to these functions.
 
 ## Minimal Configuration Options
 
-In this chapter, we will give an example of minimum configuration
+In this section, we will give an example of minimum configuration
 options in MiniGUI.
 
-There is a `buildlib-min` script in the MiniGUI source codes build
-directory. The buildlib-min script will be as the following:
+There is a `buildlib-min` script in the `build/` directory of MiniGUI
+source tree:
 
 ```bash
-
 #!/bin/sh
 
 ./configure \
+    --with-runmode=ths \
+    --with-ttfsupport=none \
     --disable-dblclk \
     --disable-cursor \
     --disable-mousecalibrate \
@@ -789,10 +790,10 @@ directory. The buildlib-min script will be as the following:
     --disable-qpfsupport \
     --disable-upfsupport \
     --disable-bmpfsupport \
-    --disable-latin9support \
-    --disable-gbsupport \
-    --disable-gbksupport \
-    --disable-unicodesupport \
+    --disable-latin9support   \
+    --disable-gbsupport       \
+    --disable-gbksupport      \
+    --disable-unicodesupport  \
     --disable-savebitmap \
     --disable-jpgsupport \
     --disable-pngsupport \
@@ -809,51 +810,44 @@ directory. The buildlib-min script will be as the following:
     --disable-consolegpm
 ```
 
-By using this script, you can configure MiniGUI to the minimum function
+By using this script, you can configure MiniGUI to the minimal function
 library that only supports ISO8859-1 charset:
 
-Compiling MiniGUI to be MiniGUI-Threads.
-No support for double click mouse button.
-No support for cursor.
-No support for code doing mouse calibration.
-No support for clipboard.
-No including VGAOEM/Terminal incoreres font.
-No support for VBF font.
-No support for Qt Prerendered Font(QPF).
-No support for UPF Prerendered Font(UPF).
-No support for TrueType font.
-No support bitmap font.
-No support for Latin 9(ISO-8859-15, West Extended) charset.
-No support for EUC GB2312 charset.
-No support for GBK charset.
-No support for BIG5 charset.
-No support for UNICODE (ISO-10646-1and UTF-8).
-No support for BITMAP saving function.
-No support for JPG image format.
-No support for PNG image format.
-No support for GIF image format.
-No including “About MiniGUI” dialog box.
-No support for advanced 2D graphics APIs
-No include new TEXTEDIT support.
-No building the console engine subdriver for PS2 mouse.
-No building the console engine subdriver for IntelligentMouse (IMPS/2).
-No building the console engine subdriver for old MS serial mouse.
-No building the console engine subdriver for MS3 mouse.
-No building the console engine subdriver for GPM daemon.
-No Skin and Flat support.
+- Compiling MiniGUI to be MiniGUI-Threads.
+- No support for double click.
+- No support for cursor.
+- No support for mouse calibration.
+- No support for clipboard.
+- No incore VGAOEM/Terminal fonts.
+- No support for VBF font.
+- No support for Qt Prerendered Font (QPF).
+- No support for UPF Prerendered Font (UPF).
+- No support for TrueType font.
+- No support bitmap font.
+- No support for Latin 9(ISO-8859-15, West Extended) charset.
+- No support for EUC GB2312 charset.
+- No support for GBK charset.
+- No support for BIG5 charset.
+- No support for UNICODE (ISO-10646-1 and UTF-8).
+- No support for BITMAP saving function.
+- No support for JPG image format.
+- No support for PNG image format.
+- No support for GIF image format.
+- No including “About MiniGUI” dialog box.
+- No support for advanced 2D graphics APIs
+- No include new TEXTEDIT support.
+- No building the console engine subdriver for PS2 mouse.
+- No building the console engine subdriver for IntelligentMouse (IMPS/2).
+- No building the console engine subdriver for old MS serial mouse.
+- No building the console engine subdriver for MS3 mouse.
+- No building the console engine subdriver for GPM daemon.
+- No support for Skin and Flat renderer.
 
 Based on the configuration above, you can also delete some functions if
-you want. For example, if you do not use menu button control in your
-application, you can add **—disable-ctrlanimation** option in the
+you want. For example, if you do not use the animation control in your
+application, you can add `--disable-ctrlanimation` option in the
 configuration script above, so there is not GIF animation control in
-your compiled functions library, the MiniGUI functions library is made
-smaller.
-
-The `mgconfig.h` file to be generated in the configuration script
-above, listed as follows:
-
-```
-```
+your compiled functions library.
 
 ## Changes in Version 4.0
 
