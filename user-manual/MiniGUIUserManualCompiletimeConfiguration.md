@@ -459,11 +459,11 @@ disable both options.
 
 ### Character Set
 
-Like the type of font, MiniGUI provides a well support for character
-set. A special character set support also can be flexible configured.
-Table 2.13 lists character set and font related options and macros.
+MiniGUI provides a well support for character sets. The character sets
+supported by your MiniGUI core library can be flexibly configured as well.
+The following table lists the options and macros related to character sets.
 
-Table 2.13 character set and font related options and macros
+##### Table: Options and macros related to character sets
 
 | Options           | Macro                          |  Default  | Comments
 |-------------------|--------------------------------|-----------|---------
@@ -490,104 +490,120 @@ Table 2.13 character set and font related options and macros
 | `shiftjissupport` | `_MGCHARSET_SHIFTJIS`          |  Disabled | Include support for Shift-JIS encoding of JISX0201 and JISX0208 charsets
 | `unicodesupport`  | `_MGCHARSET_UNICODE`           |  Enabled  | Include UNICODE (ISO-10646-1 and UTF-8 encoding) support
 
-The options latin2support, latin3support, cyrillicsupport,
-arabicsupport, greeksupport, hebrewsupport, latin5support,
-latin6support, thaisupport, latin7support, latin8support, latin9support,
-latin10support control ISO8859-2 to ISO8859-16 character set support,
-they are single byte character set. There are supporting for ASCII
-character and ISO8859-1 (Latin1) build in MiniGUI. No configuration
-options for these two character sets.
+The options `latin2support`, `latin3support`, `cyrillicsupport`,
+`arabicsupport`, `greeksupport`, `hebrewsupport`, `latin5support`,
+`latin6support`, `thaisupport`, `latin7support`, `latin8support`,
+`latin9support`, and `latin10support` control the support for ISO8859-2
+to ISO8859-16 character sets respectively.
+The support for ASCII and ISO8859-1 character sets are built in MiniGUI,
+and no configuration options applied to these two character sets.
 
-The options gbsupport, gbksupport, gb18030support, big5support,
-euckrsupport, eucjpsupport, shiftjissupport, unicodesupport control
-GB2312, GBK, GB18030, BIG5, EUCKR, EUCJP, SHIFTJIS, UNICODE character
-set/code system support.
+The options `gbsupport`, `gbksupport`, `gb18030support`, `big5support`,
+`euckrsupport`, `eucjpsupport`, and `shiftjissupport` control
+the support for GB2312, GBK, GB18030, BIG5, EUCKR, EUCJP, SHIFTJIS
+character sets or encodings respectively. And the option `unicodesupport`
+control the support for UNICODE character set, i.e., the encodings of
+UTF-16LE, UTF-16BE, and UTF-8.
+
+**Currently, in most cases we only need to enable the support for Unicode
+character set. If you need to support a particular character set or encoding
+in your app, or if you need to convert a string encoded in a specific
+character set or encoding, you need to enable the support for those character
+sets or encodings.**
 
 ### Font
 
-MiniGUI has rich support for font. It supports RBF font, VBF font (these
-two kinds of font are defined by MiniGUI), UPF/QPF font, TrueType font,
-Adobe Type1 font and so on. Because MiniGUI supports many kinds of font,
-so there are many flexible configuration options for font.
+MiniGUI provides support for various font types. It supports RBF font,
+VBF font, and UPF font, these three kinds of font are defined by MiniGUI.
+It also provides support for QPF font, TrueType font, OpenType font, and
+Adobe Type 1 font.
 
-| Options                 | Macro                          |  Default  | Comments
-|-------------------------|--------------------------------|-----------|---------
-| `rbfsupport`            | `_MGFONT_RBF`                  |  Enabled  | Include RBFfont support
-| `vbfsupport`            | `_MGFONT_VBF`                  |  Enabled  | Include var bitmap font support
-| `upfsupport`            | `_MGFONT_UPF`                  |  Enabled  | Support FMSoft Unicode Prerendered Font(UPF).
-| `qpfsupport`            | `_MGFONT_QPF`                  |  Enabled  | Include Qt Prerendered Font (QPF) support
-| `--with-ttfsupport=ft1` | `_MGFONT_TTF`                  |  none     | Use FreeType 1 to support TrueType font; Version 3.2 only
-| `--with-ttfsupport=ft2` | `_MGFONT_FT2`                  |  none     | Use FreeType 2 to support TrueType font; Version 3.2 only
-| `ttfsupport`            | `_MGFONT_FT2`                  |  Enabled  | Use FreeType 2 to support TrueType font; Since version 4.0
-| `complexscripts`        | `_MGCOMPLEX_SCRIPTS`           |  Enabled  | Support complex scripts based on HarfBuzz; Since version 4.0
-| `rbfvgaoem`             | `_MGINCORERBF_LATIN1_VGAOEM`   |  Disabled | Include incore RBF font of ISO8859-1 8x16 fixed font
-| `rbfterminal`           | `_MGINCORERBF_LATIN1_TERMINAL` |  Disabled | Include incore RBF font of ISO8859-1 12x24 fixed font
-| `rbffixedsys`           | `_MGINCORERBF_LATIN1_FIXEDSYS` |  Enabled  | Include incore RBF font of GB2312 12x12 fixed/song font
-| `fontsserif`            | `_MGINCOREFONT_SANSSERIF`      |  Enabled  | Include incore VBF font sansserif
-| `fontcourier`           | `_MGINCOREFONT_COURIER`        |  Enabled  | Include incore VBF font courier
-| `fontsystem`            | `_MGINCOREFONT_SYSTEM`         |  Disabled | Include incore VBF font symbol
-| `fonttimes`             | `_MGINCOREFONT_TIMES`          |  Enabled  | Include income Times UPF font
-| `ttfcachesize=256      `| `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
-| `mttfcachenum=10`       | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
+The following table lists the options and macros related to font.
 
-The option rbfsupport control whether include the support for Raw Bitmap
-Font (RBF) font, it is enabled as the default. Because RBF is the
-default font format, so it is not suggested that user disable the
-support for this font type.
+##### Table: Options and macros related to font
 
-rbfvgaoem, rbfterminal, rbffixedsys and other configuration options to
-control whether the corresponding RBF dot matrix font built in MiniGUI
-library. These compiler configuration options are enabled by default, so
-that MiniGUI can still run normally when no font is loaded.
+| Options                  | Macro                          |  Default  | Comments
+|--------------------------|--------------------------------|-----------|---------
+| `rbfsupport`             | `_MGFONT_RBF`                  |  Enabled  | Include support for RBF font
+| `vbfsupport`             | `_MGFONT_VBF`                  |  Enabled  | Include support for VBF font
+| `upfsupport`             | `_MGFONT_UPF`                  |  Enabled  | Include support for UPF font
+| `qpfsupport`             | `_MGFONT_QPF`                  |  Enabled  | Include support for QPF font
+| `--with-ttfsupport=none` |                                |  Yes      | Do not support TrueType font; Version 3.2 only
+| `--with-ttfsupport=ft1`  | `_MGFONT_TTF`                  |  no       | Use FreeType 1 to support TrueType font; Version 3.2 only
+| `--with-ttfsupport=ft2`  | `_MGFONT_FT2`                  |  no       | Use FreeType 2 to support TrueType font; Version 3.2 only
+| `ttfsupport`             | `_MGFONT_FT2`                  |  Enabled  | Use FreeType 2 to support TrueType font; Since version 4.0
+| `complexscripts`         | `_MGCOMPLEX_SCRIPTS`           |  Enabled  | Support complex scripts; Since version 4.0
+| `rbfvgaoem`              | `_MGINCORERBF_LATIN1_VGAOEM`   |  Enabled  | Include incore RBF font of ISO8859-1 (8x16)
+| `rbfterminal`            | `_MGINCORERBF_LATIN1_TERMINAL` |  Enabled  | Include incore RBF font of ISO8859-1 (12x24)
+| `rbffixedsys`            | `_MGINCORERBF_LATIN1_FIXEDSYS` |  Enabled  | Include incore RBF font of ISO8859-1 (6x12)
+| `fontsserif`             | `_MGINCOREFONT_SANSSERIF`      |  Enabled  | Include incore VBF font SansSerif
+| `fontcourier`            | `_MGINCOREFONT_COURIER`        |  Enabled  | Include incore VBF font Courier
+| `fontsystem`             | `_MGINCOREFONT_SYSTEM`         |  Enabled  | Include incore VBF font System
+| `fonttimes`              | `_MGINCOREFONT_TIMES`          |  Enabled  | Include incore UPF font Times
+| `ttfcache`               | `_MGFONT_TTF_CACHE`            |  Enabled  | Use cache for TrueType fonts
+| `ttfcachesize=256`       | `_MGTTF_CACHE_SIZE`            |  256      | Include TrueType cache support
+| `mttfcachenum=10`        | `_MGMAX_TTF_CACHE`             |  10       | Include TrueType cache num
 
-The option vbfsupport control whether include support for Variable
-Bitmap Font (VBF) font, it is enabled default. If this option is
-disabled, you not only disable the support for VBF font but also disable
-the VBF font build in MiniGUI. When MiniGUI is running, the runtime
-option \[**varbitmapfonts**\] section is ignored.
+The option `rbfsupport` controls whether including the support for
+Raw Bitmap Font (RBF) font, it is enabled by default. Because RBF
+is a basic font format, you should not disable the support for
+this font type.
 
-The fontsserif configuration options as well as fontcourier, fontsystem
-compilation configuration options to control whether the MiniGUI library
-built-in SanSerif, Courier and System VBF fonts. These built-in font
-options are on by default and are not affected by the incoreres option.
+The option `vbfsupport` controls whether including the support for
+Variable Bitmap Font (VBF) font.
 
-The option upfsupport controls whether support for FMSoft Unicode
-Prerendered Font (UPF) fonts is included in the MiniGUI library. Because
-UPF fonts use UNICODE encoding, allowing UPF fonts support will
-automatically enable MiniGUI's UNICODE character set support.
+The option `upfsupport` controls whether including the support for
+FMSoft Unicode Pre-rendered Font (UPF) font. Because
+UPF fonts use UNICODE encoding, enabling the support for UPF font will
+automatically enable the support for UNICODE character set.
 
-The option qpfsupport control whether support for Qt/Embedded
-Prerendered Font (QPF). Because QPF font uses UNICODE coding, so if
-support QPF font in MiniGUI, the UNICODE support is enabled
-automatically. If incoreres option is enabled, some QPF fonts will be
-built in MiniGUI.
+The option `qpfsupport` controls whether including the support for
+Qt/Embedded Pre-rendered Font (QPF). Because QPF font uses UNICODE encoding,
+if you enable the support for QPF font, the support for UNICODE character
+set will be enabled automatically.
 
-The option ft2support control whether support for FreeType2 library in
-MiniGUI library. MiniGUI can render the TrueType font by FreeType2
-library version 2.3.4. If FreeType2 library is not installed in your
-system, the configuration will disable this option automatically.
+The option `ttfsupport` controls whether including the support for
+TrueType in MiniGUI library. In version 3.2, this option uses the form
+`--with-ttfsupport`, you can specify a value to tell MiniGUI supports
+TrueType by using FreeType 1 or FreeType 2.
 
-The option ttfsupport control whether support for TrueType in MiniGUI
-library. MiniGUI also can render the TrueType font by FreeType library
-version 1.3.0. If FreeType library version 1.3.0 is not installed in
-your system, the configuration will disable this option automatically.
-The attention, the interfaces of FreeType 2 are not compatible with
-FreeType 1.
+Since version 4.0, this option changes as a switch option, i.e., only
+FreeType 2 are supported. If you enable this option, MiniGUI will
+use FreeType 2 to render TrueType fonts.
 
-The option ttfcache control whether support TrueType cache for
-FreeType1, it is enabled default. If ttfcache need enable, the option
-ttfsupport should be enabled first.
+Note that, when we use FreeType 2 as the font engine, MiniGUI can
+not only render TrueType font (font file with `.ttf` or `.ttc` postfix),
+but also OpenType font (with `.otf` postfix) and Adobe Type 1 font
+(with `.pfb` postfix).
 
-The option **--with-mttfcachenum** uses for appoint the number of the
-cache block when TrueType cache is enabled. The default value is 10.
+The option `complexscripts` controls whether including the support for
+the complex scripts like Arabic, Thai, and Indic. When enabled, you can
+use the APIs of MiniGUI to lay out, shape, and render glyphs from complex
+and mixed scripts. For more information, please refer to
+[Showing Text in Complex or Mixed Scripts]. Note that this option works
+since MiniGUI 4.0, and when you enabled this option with `ttfsupport`
+option, MiniGUI will use [HarfBuzz] as the shaping engine to shape the
+text in complex scripts.
 
-The option **--with-ttfcachesize** uses for appoint the size of cache
-block when TrueType cache is enabled, the default value is 64k.
+The `rbfvgaoem`, `rbfterminal`, and `rbffixedsys` options control
+whether including the built-in `VGAOEM`, `Terminal`, and `FixedSys` RBF
+fonts in MiniGUI core library respectively. These options are enabled by default,
+so that MiniGUI can show text even if there is no external font was loaded.
 
-Table 2.14 and table 2.15 list the TrueType cache related parameters,
-options and macros.
+The `fontsserif`, `fontcourier`, and `fontsystem` options control
+whether including the built-in `SanSerif`, `Courier` and `System` VBF
+fonts in MiniGUI core library respectively.
 
-Table 2.14 TrueType cache related options and macros
+The `fonttimes` option controls whether including the built-in `Times`
+UPF fonts in MiniGUI core library.
+
+The option `ttfcache` control whether supporting TrueType cache.
+
+The option `--with-mttfcachenum` is used to specify the number of the
+cache blocks when TrueType cache is enabled. The default value is 10.
+The following table gives all possible values for this option.
+
+#### Table: Possible values for mttfcachenum
 
 | Configure option         | Macro              | Macro value | Comments
 |--------------------------|--------------------|-------------|---------------
@@ -595,7 +611,11 @@ Table 2.14 TrueType cache related options and macros
 | `--with-mttfcachenum=20` | `_MGMAX_TTF_CACHE` | 20          |
 | `--with-mttfcachenum=40` | `_MGMAX_TTF_CACHE` | 40          |
 
-Table 2.15 TrueType cache related options and macros
+The option `--with-ttfcachesize` is used to specify the size of one
+cache block when TrueType cache is enabled. The default value is 64 (64KB).
+The following table gives all possible values for this option.
+
+#### Table: Possible values for ttfcachesize
 
 | Configure option           | Macro               | Macro value | Comments
 |----------------------------|---------------------|-------------|---------
@@ -604,6 +624,7 @@ Table 2.15 TrueType cache related options and macros
 | `--with-ttfcachesize=256`  | `_MGTTF_CACHE_SIZE` | 256         |
 | `--with-ttfcachesize=512`  | `_MGTTF_CACHE_SIZE` | 512         |
 | `--with-ttfcachesize=1024` | `_MGTTF_CACHE_SIZE` | 1024        |
+| `--with-ttfcachesize=2048` | `_MGTTF_CACHE_SIZE` | 2048        | Since 4.0
 
 ### Image File Format
 
@@ -849,3 +870,6 @@ above, listed as follows:
 [Tools]: MiniGUIUserManualTools.md
 [Feature List]: MiniGUIDataSheet.md
 [FAQs]: MiniGUIUserManualFAQsEN.md
+
+[Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
