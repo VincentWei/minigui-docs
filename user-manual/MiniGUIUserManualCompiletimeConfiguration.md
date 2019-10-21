@@ -654,45 +654,37 @@ depends on the third-party libraries. For more information, please refer to
 
 ### Appearance Renderer
 
-In MiniGUI 3.0, we introduced Look and Feel (LF) concept. The original
-flat, classic, fashion window style abstraction as a new LF renderer
-(LFRDR), retained flat, classic renderer, while introducing a skin
-renderer, while the original Fashion style through mGPlus. Where the
-classic renderer is built-in, flat and skin renderers are controlled by
-configuration options. Table 2.17 shows the appearance renderer
-configuration options and the corresponding macros.
+In MiniGUI 3.0, we introduced the look and feel renderer. The original
+classic, flat, and skin window appearance styles were re-designed as three
+appearance renderers (`LFRDR` for short). The classic LFRDR is built-in
+MiniGUI core, and there is no configuration option for this renderer.
+The flat and skin renderers are controlled by two configuration options
+respectively. The following table shows the options and the corresponding
+macros.
 
-Table 2.17 appearance style related configuration options and macros
+##### Table: Options and macros related to appearance renderers
 
 | Switch option | Macro            | Default | Comments
 | --------------|------------------|---------|-----------
 | `flatlf`      | `_MGLF_RDR_FLAT` | Enabled | Simple flat style
-| `skinlf`      | `_MGLF_RDR_SKIN` | Enabled | Skin style, window and control fill by bitmap
+| `skinlf`      | `_MGLF_RDR_SKIN` | Enabled | Skin style, window and control decorated by using bitmaps
 
 ### Control
 
-MiniGUI provides configuration options for all base controls. MiniGUI
-base controls refer to the controls contained in the MiniGUI core
-library. From MiniGUI 3.0, we provide a new set of controls through the
-mGNCS component. The new control set is well-designed and elegantly
-interfaced, which completely replaces the MiniGUI's base control set.
-Therefore, we strongly suggest that the new MiniGUI application be
-developed using mGNCS instead of the MiniGUI built-in base control.
-Because there is a better mGNCS, MiniGUI most of the base control
-configuration options are turned off by default. If your application
-uses these controls, please open the relevant configuration items.
+MiniGUI provides configuration options for all basic controls. The
+basic controls are those controls contained in the MiniGUI core
+library. The following table shows the options and macros for
+the basic controls.
 
-Table 2.18 give all controls related configuration options and macros.
-
-Table 2.18 control related configuration options and macros
+##### Table: Options and macros for basic controls
 
 | Switch option    | Macro                 | Default  | Comments
 | -----------------|-----------------------|----------|---------
 | `ctrlstatic`     | `_MGCTRL_STATIC`      | Enabled  | Include STATIC control
 | `ctrlbutton`     | `_MGCTRL_BUTTON`      | Enabled  | Include BUTTON control
-| `ctrlsledit`     | `_MGCTRL_SLEDIT`      | Enabled  | Include Simple EDITcontrol
-| `ctrlbidiedit`   | `_MGCTRL_BIDIEDIT`    | Disabled | Include BIDI EDIT control
-| `newtextedit`    | `_MGCTRL_TEXTEDIT`    | Enabled  | Include new textedit control
+| `ctrlsledit`     | `_MGCTRL_SLEDIT`      | Enabled  | Include SLEDIT (single line edit) control
+| `ctrlbidiedit`   | `_MGCTRL_BIDIEDIT`    | Disabled | Include BIDI EDIT control; Deprecated
+| `newtextedit`    | `_MGCTRL_TEXTEDIT`    | Enabled  | Include new TEXTEDIT control
 | `ctrllistbox`    | `_MGCTRL_LISTBOX`     | Enabled  | Include LISTBOX control
 | `ctrlpgbar`      | `_MGCTRL_PROGRESSBAR` | Enabled  | Include PROGRESSBAR control
 | `ctrlcombobox`   | `_MGCTRL_COMBOBOX`    | Enabled  | Include COMBOBOX control
@@ -702,59 +694,79 @@ Table 2.18 control related configuration options and macros
 | `ctrlnewtoolbar` | `_MGCTRL_NEWTOOLBAR`  | Disabled | Include NEWTOOLBAR control
 | `ctrlmenubtn`    | `_MGCTRL_MENUBUTTON`  | Disabled | Include MENUBUTTON control
 | `ctrlscrollview` | `_MGCTRL_SCROLLVIEW`  | Disabled | Include SCROLLVIEW control
-| `ctrltextedit`   | `_MGCTRL_TEXTEDIT`    | Disabled | Include base ScrollView support textedit control
+| `ctrltextedit`   | `_MGCTRL_TEXTEDIT`    | Disabled | Include old TEXTEDIT control
 | `ctrlmonthcal`   | `_MGCTRL_MONTHCAL`    | Disabled | Include MONTHCALENDAR control
 | `ctrltreeview`   | `_MGCTRL_TREEVIEW`    | Disabled | Include TREEVIEW control
 | `ctrlspinbox`    | `_MGCTRL_SPINBOX`     | Disabled | Include SPINBOX control
 | `ctrlcoolbar`    | `_MGCTRL_COOLBAR`     | Disabled | Include COOLBAR control
 | `ctrllistview`   | `_MGCTRL_LISTVIEW`    | Disabled | Include LISTVIEW control
 | `ctrliconview`   | `_MGCTRL_ICONVIEW`    | Disabled | Include ICONVIEW control
-| `ctrlgridview`   | `_MGCTRL_GRIDVIEW`    | Disabled | Include gridview control
-| `ctrlanimation`  | `_MGCTRL_ANIMATION`   | Enabled  | Include the ANIMATION control and provides support for GIF89a files
+| `ctrlgridview`   | `_MGCTRL_GRIDVIEW`    | Disabled | Include GRIDVIEW control
+| `ctrlanimation`  | `_MGCTRL_ANIMATION`   | Enabled  | Include ANIMATION control and support for GIF89a files
+
+**Since MiniGUI 3.0, we provide a new set of controls through the
+mGNCS component. The new control set is well-designed and elegantly
+interfaced, it can completely replace the basic control set.
+Therefore, we strongly suggest that the new MiniGUI application being
+developed using mGNCS instead of the MiniGUI built-in basic controls.
+Because there is a better mGNCS, most of the basic controls
+are disabled by default. If your application uses these controls, please
+enable them by yourself.**
 
 ### Others
 
-MiniGUI implemented some function families of the standard C function
-libraries to be fit in with all kinds of embedded operating system
-environment, it include malloc function family (malloc, calloc, free
-function and so on), stdio format input and output function family
-(printf, sprintf and so on) and POSIX thread function library interface
-(pthread\_create, sem\_post and so on). Default, these function families
-compile configuration options is disabled, and that they are useful in
-the some traditional embedded operating system based on thread and task.
-If you want to enable these options in the some operating systems, you
-can refer to 2.2.1 chapter. Table 2.19 listed MiniGUI implemented C
-library interface configuration options and corresponding macros.
+You must define the macro `__MINIGUI_LIB__` when you
+use yourself makefiles or building environment to build MiniGUI
+core library. MiniGUI components also need such macro. The following table
+shows the macros must defined for MiniGUI core and components when compiling
+them.
 
-Table 2.19 MiniGUI implemented C library interface related
-configurations and macros
+##### Table: Macros must be defined for compile MiniGUI core and components
+
+| Component     | Macro
+|---------------|-----------------
+| MiniGUI Core  | `__MINIGUI_LIB__`
+| mGUtils       | `__MGUTILS_LIB__`
+| mGEff         | `__MGEFF_LIB__`
+| mGPlus        | `__MGPLUS_LIB__`
+| mGNCS         | `__MGNCS_LIB__`
+| mGNCS4Touch   | `__MGNCS4TOUCH_LIB__`
+
+Since MiniGUI 3.0, you can specify a suffix for MiniGUI library name
+through a configure option. By default, the name of the
+MiniGUI library varies depending on the runtime mode, for example,
+`libminigui-ths.so`, `libminigui-procs.so`, and `libminigui-sa.so`
+for MiniGUI-Threads, MiniGUI-Processes, and MiniGUI-Standalone respectively.
+You can specify a specific library name suffix with the option `--with-libsuffix`.
+
+Moreover, in order to support some small embedded real-time operating system,
+We have implemented some standard C functions:
+
+1. `malloc` function family, including `malloc`, `calloc`, and `free`.
+1. Stdio format input and output functions, such as `printf`, `sprintf`,
+`vsprintf`, and so on.
+1. POSIX thread functions, such as `pthread_create`, `sem_post`,
+and so on.
+
+By default, the configuration options for these functions are disabled.
+If you want to enable these functions for some operating systems, you
+can enable the options. The following table lists the configuration options
+and corresponding macros related to these functions.
+
+##### Table: Options and macros for own implementation of standard C functions
 
 | Switch option | Macro                | Default  | Comments
 |---------------|----------------------|----------|---------
-| `ownmalloc`   | `_MGUSE_OWN_MALLOC`  | Disabled | Use MiniGUI implemented malloc function family
-| `ownstdio`    | `_MGUSE_OWN_STDIO`   | Disabled | Use MiniGUI implemented stdio format input and output function family
-| `ownpthread`  | `_MGUSE_OWN_PTHREAD` | Disabled | Use MiniGUI implemented thread function family
-
-Otherwise, you must define this macro: `__MINIGUI_LIB__` , when you
-use yourself makefile to compile MiniGUI function library in the Non-GNU
-development environment.
-
-Start with MiniGUI 3.0, you can specify the name suffix of the MiniGUI
-library through the configure option. By default, the name of the
-MiniGUI library varies depending on the operating mode, for example,
-libminigui-ths.so, libminigui-procs.so, libminigui-sa.so, respectively,
-corresponding to MiniGUI-Threads, MiniGUI-Processes and
-MiniGUI-Standalone mode of operation.
-
-You can specify a special library name suffix with the `--with-libsuffix`
-option.
+| `ownmalloc`   | `_MGUSE_OWN_MALLOC`  | Disabled | Use `malloc` function family implemented by MiniGUI
+| `ownstdio`    | `_MGUSE_OWN_STDIO`   | Disabled | Use stdio format input and output functions implemented by MiniGUI
+| `ownpthread`  | `_MGUSE_OWN_PTHREAD` | Disabled | Use POSIX thread functions implemented by MiniGUI; Only for uC/OS-II, VxWorks, ThreadX, pSOS, and Nucleus
 
 ## Minimal Configuration Options
 
 In this chapter, we will give an example of minimum configuration
 options in MiniGUI.
 
-There is a buildlib-min script in the MiniGUI source codes build
+There is a `buildlib-min` script in the MiniGUI source codes build
 directory. The buildlib-min script will be as the following:
 
 ```bash
