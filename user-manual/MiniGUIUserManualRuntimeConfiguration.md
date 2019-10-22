@@ -12,7 +12,6 @@
    * [Sections for devfonts](#sections-for-devfonts)
    * [Sections for Appearance Renderers](#sections-for-appearance-renderers)
    * [Other sections](#other-sections)
-   * [Default Configuration File](#Default Configuration File)
 - [Incore Configuration Options](#incore-configuration-options)
    * [Structure `ETCSETCTION`](#`structure-etcsetction)
    * [Structure `ETC_S`](#structure-etcs)
@@ -299,7 +298,7 @@ name2=ttf-pinball-rrncnn-0-0-ISO8859-1
 fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
 ```
 
-### Section systemfont
+### Section `systemfont`
 
 The section `systemfont` defines MiniGUI system font and font number,
 and defines system default font, which would be used to render text on
@@ -520,12 +519,6 @@ bgc_hilight_item=0xFF6B2408
 fgc_significant_item=0xFFFFFFFF
 bgc_significant_item=0xFF6B2408
 bgc_desktop=0xFFC08000
-```
-
-### Default Configuration File
-
-Below is the default runtime configuration file for MiniGUI library:
-```ini
 ```
 
 ## Incore Configuration Options
