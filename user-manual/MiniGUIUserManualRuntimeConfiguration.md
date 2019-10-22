@@ -257,10 +257,11 @@ The section `systemfont` defines MiniGUI system font and font number,
 and defines system default font, which would be used to render text on
 captions, menus, and controls, as well as the default font of a window.
 
-System font is the logic font^10^ that is created by the function
+System font is the logic font that is created by the function
 `CreateLogFontFromName` based on device fonts, which is defined by
 MiniGUI sections such as `rawbitmapfonts`, `varbitmapfonts`,
-`qpf`, `truetypefonts`, and `t1fonts`.
+`upf`, `qpf`, and `truetypefonts`
+(see [Sections for devfonts](#sections-for-devfonts)).
 
 The content of the section in `MiniGUI.cfg` is as follows:
 
@@ -289,6 +290,8 @@ size.
 The definition of the keys in section `systemfont` is as follows:
 
 - `font_number`: The number of system fonts created.
+**Note that the maximal number of system logfonts is 6. You should not
+set this key value to be a number larger than 6.**
 - `font<NR>`: The number `<NR>` logical font name.
 - `default`: System default font (single character set). Its value is the
 number of logical font.
@@ -309,23 +312,22 @@ system fonts, and this would affect the return value of
 must fixed width dot-matrix font, i.e RBF. And the width of multiply
 character set must be twice with the width of single character set.
 
-The content of the section in `MiniGUI.cfg` is as follows:
+The content of this section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
-# The first system font must be a logical font using RBF device font.
 [systemfont]
-font_number=6
-font0=rbf-fixed-rrncnn-8-16-ISO8859-1
-font1=*-fixed-rrncnn-*-16-GB2312
-font2=*-Courier-rrncnn-*-16-GB2312
-font3=*-SansSerif-rrncnn-*-16-GB2312
-font4=*-Times-rrncnn-*-16-GB2312
-font5=*-Helvetica-rrncnn-*-16-GB2312
+font_number=5
+font0=rbf-FixedSys-rrncnn-8-16-ISO8859-1
+font1=*-FixedSys-rrncnn-*-16-ISO8859-1
+font2=*-Courier-rrncnn-*-16-ISO8859-1
+font3=*-SansSerif-rrncnn-*-16-ISO8859-1
+font4=*-System-rrncnn-*-16-ISO8859-1
+
 default=0
-wchar_def=1
+wchar_def=4
 fixed=1
-caption=2
-menu=3
+caption=4
+menu=2
 control=3
 ```
 
