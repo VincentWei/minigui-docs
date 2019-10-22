@@ -165,7 +165,7 @@ exec_file=/usr/local/bin/gvfb
 The section `fbcon` is only effective when you define the key
 `system.gal_engine` having the value `fbcon`.
 
-The valid keys in the section `fbcon` is listed as follow:
+The valid keys in the section `fbcon` are listed as follow:
 
 - `defaultmode`: The display mode of the graphics engine `fbcon`.
 - `dpi`: The pixel density of the display, in dots (physical pixels) per inch;
@@ -187,13 +187,14 @@ dpi=96
 
 ### Section `dri`
 
-This section is dedicated to the `dri` engine which runs on Linux DRI/DRM.
+This section is dedicated to the `dri` graphics engine which runs on
+Linux DRI/DRM.
 It is available since MiniGUI 4.0.0.
 
 The section `dri` is only effective when you define the key
 `system.gal_engine` having the value `dri`.
 
-The valid keys in the section `fbcon` is listed as follow:
+The valid keys in the section `dri` are listed as follow:
 
 - `defaultmode`: The display mode of the graphics engine `fbcon`.
 - `dpi`: The pixel density of the display, in dots (physical pixels) per inch;
@@ -230,7 +231,25 @@ device=/dev/dri/card0
 # The default value is 96.
 dpi=96
 ```
+
 ### Section `libinput`
+
+This section is dedicated to the `libinput` input engine which runs on Linux.
+It is available since MiniGUI 4.0.0.
+
+The section `libinput` is only effective when you define the key
+`system.ial_engine` having the value `libinput`.
+
+The valid keys in the section `libinput` are listed as follow:
+
+- `seat`: The seat identifier; the default value is `seat0`.
+
+The content of this section in the default `MiniGUI.cfg` is as follow:
+
+```ini
+[libinput]
+seat=seat0
+```
 
 ### Section `systemfont`
 
