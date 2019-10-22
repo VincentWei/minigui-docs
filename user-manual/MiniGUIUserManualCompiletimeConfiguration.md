@@ -857,7 +857,9 @@ However, for MiniGUI components, you use the default options in most cases.
 
 ---
 
-[Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) | [Table of Contents](README.md) | [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
+[&lt;&lgt;Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) |
+[Table of Contents](README.md) |
+[Runtime Configuration &gt;&gt;](MiniGUIUserManualRuntimeConfiguration.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
@@ -872,7 +874,7 @@ However, for MiniGUI components, you use the default options in most cases.
 [Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: MiniGUIUserManualTools.md
-[Feature List]: MiniGUIDataSheet.md
+[Feature List]: MiniGUIUserManualFeatureList.md
 [FAQs]: MiniGUIUserManualFAQsEN.md
 
 [Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts

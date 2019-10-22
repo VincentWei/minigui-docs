@@ -10,7 +10,7 @@ the runtime configuration options of MiniGUI version 3.2 or later.
 - [Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md)
 - [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
 - [Tools](MiniGUIUserManualTools.md)
-- [Feature List](MiniGUIDataSheet.md)
+- [Feature List](MiniGUIUserManualFeatureList.md)
 - [FAQs](MiniGUIUserManualFAQsEN.md)
 - [常见问题](MiniGUIUserManualFAQsZH.md)
 

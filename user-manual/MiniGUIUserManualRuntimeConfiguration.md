@@ -1146,7 +1146,7 @@ static char *SYSTEM_VALUES[] = {"commlcd", "auto", "/dev/ts", "IMPS2"};
 [Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: MiniGUIUserManualTools.md
-[Feature List]: MiniGUIDataSheet.md
+[Feature List]: MiniGUIUserManualFeatureList.md
 [FAQs]: MiniGUIUserManualFAQsEN.md
 
 [Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts

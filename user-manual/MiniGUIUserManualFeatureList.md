@@ -499,3 +499,26 @@ MiniGUI components
 [^6]: New feature of MiniGUI V3.0.x
 
 [^7]: New feature of MiniGUI V3.0.x
+
+
+---
+
+[&lt;&lt;Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md) |
+[Table of Contents](README.md) |
+[FAQs &gt;&gt;](MiniGUIUserManualFAQsEN.md)
+
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Website]: http://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIUserManualFeatureList.md
+[FAQs]: MiniGUIUserManualFAQsEN.md

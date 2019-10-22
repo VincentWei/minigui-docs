@@ -1125,7 +1125,9 @@ in non-GNU environment; we do not repeat them here.
 
 ---
 
-[Quick Start](MiniGUIUserManualQuickStart.md) | [Table of Contents](README.md) | [Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md)
+[&lt;&lt;Quick Start](MiniGUIUserManualQuickStart.md) |
+[Table of Contents](README.md) |
+[Compile-time Configuration &gt;&gt;](MiniGUIUserManualCompiletimeConfiguration.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
@@ -1140,5 +1142,5 @@ in non-GNU environment; we do not repeat them here.
 [Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: MiniGUIUserManualTools.md
-[Feature List]: MiniGUIDataSheet.md
+[Feature List]: MiniGUIUserManualFeatureList.md
 [FAQs]: MiniGUIUserManualFAQsEN.md

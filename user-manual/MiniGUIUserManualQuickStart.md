@@ -385,7 +385,8 @@ before running `mguxdemo`.
 
 ---
 
-[Table of Contents](README.md) | [Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md)
+[Table of Contents](README.md) |
+[Building MiniGUI &gt;&gt;](MiniGUIUserManualBuildingMiniGUI.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn

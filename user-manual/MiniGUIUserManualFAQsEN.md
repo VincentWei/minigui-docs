@@ -302,3 +302,25 @@ A23. The main reason is that the display resolution being set in
 **MiniGUI.cfg** is higher than that supported by your FrameBuffer
 driver. Therefore, you can try to set a smaller resolution by modify
 **MiniGUI.cfg** file.
+
+----
+
+[&lt;&lt;Feature List](MiniGUIUserManualFeatureList.md) |
+[Table of Contents](README.md) |
+[常见问题 &gt;&gt;](MiniGUIUserManualFAQsZH.md)
+
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Website]: http://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIUserManualFeatureList.md
+[FAQs]: MiniGUIUserManualFAQsEN.md
