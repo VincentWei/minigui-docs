@@ -147,7 +147,30 @@ $ export MG_MDEV=/dev/input/mice
 $ export MG_MTYPE=ps2
 ```
 
-### Section fbcon
+### Section `pc_xvfb`
+
+The section `pc_xvfb` is only available when you define the
+`gal_engine` in section `system` for `pc_xvfb`. It has been
+supported by Linux(Ubuntu) and Window.
+
+The definition of the keys in section `pc_xvfb` is as follows:
+
+- `defaultmode`: The display mode of graphics engine used, its format is `<width>x<height>-bpp`.
+- `window_caption`: Window caption title of XVFB window.
+- `exec_file`: the path of the execute file.
+
+The content of the section in `MiniGUI.cfg` is as follows:
+
+```ini
+#{{ifdef _MGGAL_PCXVFB
+[pc_xvfb]
+defaultmode=800x600-16bpp
+window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
+exec_file=/usr/local/bin/gvfb
+#}}
+```
+
+### Section `fbcon`
 
 The section `fbcon` is only available when you define the
 `gal_engine` in section `system` for fbcon. It define default
@@ -167,52 +190,93 @@ The content of the section in `MiniGUI.cfg` is as follows:
 defaultmode=1024x768-16bpp
 ```
 
-### Section qvfb
+### Section `dri`
 
-The section `qvfb` is only available when you define the
-`gal_engine` in section `system` for qvfb. It shows display and
-display mode of X window used when running qvfb.
+### Section `libinput`
 
-The definition of the keys in section `qvfb` is as follows:
+### Section `systemfont`
 
-`defaultmode`: The display mode of graphics engine used, its format is
-`widthxheight-bpp`.
+The section `systemfont` defines MiniGUI system font and font number,
+and defines system default font, which would be used to render text on
+captions, menus, and controls, as well as the default font of a window.
 
-`display`: Display mode of X window used when running qvfb, default
-value is 0.
+System font is the logic font^10^ that is created by the function
+`CreateLogFontFromName` based on device fonts, which is defined by
+MiniGUI sections such as `rawbitmapfonts`, `varbitmapfonts`,
+`qpf`, `truetypefonts`, and `t1fonts`.
+
+The content of the section in `MiniGUI.cfg` is as follows:
+
+    <type>-<facename>-<style>-<width>-<height>-<charset1>
+
+The definition of each part of a logic font name is as follows:
+
+- `<type>` is the desired device font type, if you do not want to
+specify it, use `*`.
+- `<facename>` is to define the font face name, such as courier
+and times etc.
+- `<style>` is the string of six alphabets to define style of a
+logic font, such as italic, bold, underline or strike through etc.
+- `<width>` is to define the width of the logic font. Usually do
+not need to specify, use `*` instead.
+- `<height>` is to define the height of the logic font.
+- `<charset>` is to define charset of the logic font being created.
+
+Furthermore, MiniGUI V2.0.x provides auto-scaling the font glyph. If you
+want to use this function, you only need use ‘S’ in forth character when
+you define logical font styles. Note that you don’t need to use this
+style when you use vector font, such as TrueType, because vector font
+can produce corresponding font glyph according to desired logical font
+size.
+
+The definition of the keys in section `systemfont` is as follows:
+
+- `font_number`: The number of system fonts created.
+- `font<NR>`: The number `<NR>` logical font name.
+- `default`: System default font (single character set). Its value is the
+number of logical font.
+- `wchar_def`: Default font used by multiple character set. Its value
+is the number of above logical font.
+- `fixed`: The font used by fixed width character set. Its value is the
+number of above logical font.
+- `caption`: The caption font. Its value is the number of above logical
+font.
+- `menu`: The menu font. Its value is the number of above logical font.
+
+You can change the number of system font created. But you must create a
+single character set (for example: `ISO8859-1`) at least. MiniGUI defines
+the system default charsets according to `default`, `wchar_def`
+system fonts, and this would affect the return value of
+`GetSysCharset`, `GetSysCharWidth`, `GetSysCCharWidth` and
+`GetSysHeight` functions. Commonly, `default` and `wchar_def`
+must fixed width dot-matrix font, i.e RBF. And the width of multiply
+character set must be twice with the width of single character set.
 
 The content of the section in `MiniGUI.cfg` is as follows:
 
 ```ini
-[qvfb]
-defaultmode=640x480-16bpp
-display=0
+# The first system font must be a logical font using RBF device font.
+[systemfont]
+font_number=6
+font0=rbf-fixed-rrncnn-8-16-ISO8859-1
+font1=*-fixed-rrncnn-*-16-GB2312
+font2=*-Courier-rrncnn-*-16-GB2312
+font3=*-SansSerif-rrncnn-*-16-GB2312
+font4=*-Times-rrncnn-*-16-GB2312
+font5=*-Helvetica-rrncnn-*-16-GB2312
+default=0
+wchar_def=1
+fixed=1
+caption=2
+menu=3
+control=3
 ```
 
-### Section `pc_xvfb`
+### Section `cursorinfo`
 
-The section `pc_xvfb` is only available when you define the
-`gal_engine` in section `system` for `pc_xvfb`. It has been
-supported by Linux(Ubuntu) and Window.
+### Section `resinfo`
 
-The definition of the keys in section pc_x`vfb` is as follows:
-
-- `defaultmode`: The display mode of graphics engine used, its format is `<width>x<height>-bpp`.
-- `window_caption`: Window caption title of XVFB window.
-- `exec_file`: the path of the execute file.
-
-The content of the section in `MiniGUI.cfg` is as follows:
-
-```ini
-#{{ifdef _MGGAL_PCXVFB
-[pc_xvfb]
-defaultmode=800x600-16bpp
-window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
-exec_file=/usr/local/bin/gvfb
-#}}
-```
-
-### Section rawbitmapfonts, varbitmapfonts, upf, and truetypefonts
+### Sections for devfonts
 
 These sections define information of loading device fonts`,` number of
 fonts, and name and file of fonts.
@@ -298,120 +362,7 @@ name2=ttf-pinball-rrncnn-0-0-ISO8859-1
 fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
 ```
 
-### Section `systemfont`
-
-The section `systemfont` defines MiniGUI system font and font number,
-and defines system default font, which would be used to render text on
-captions, menus, and controls, as well as the default font of a window.
-
-System font is the logic font^10^ that is created by the function
-`CreateLogFontFromName` based on device fonts, which is defined by
-MiniGUI sections such as `rawbitmapfonts`, `varbitmapfonts`,
-`qpf`, `truetypefonts`, and `t1fonts`.
-
-The content of the section in `MiniGUI.cfg` is as follows:
-
-    <type>-<facename>-<style>-<width>-<height>-<charset1>
-
-The definition of each part of a logic font name is as follows:
-
-- `<type>` is the desired device font type, if you do not want to
-specify it, use `*`.
-- `<facename>` is to define the font face name, such as courier
-and times etc.
-- `<style>` is the string of six alphabets to define style of a
-logic font, such as italic, bold, underline or strike through etc.
-- `<width>` is to define the width of the logic font. Usually do
-not need to specify, use `*` instead.
-- `<height>` is to define the height of the logic font.
-- `<charset>` is to define charset of the logic font being created.
-
-Furthermore, MiniGUI V2.0.x provides auto-scaling the font glyph. If you
-want to use this function, you only need use ‘S’ in forth character when
-you define logical font styles. Note that you don’t need to use this
-style when you use vector font, such as TrueType, because vector font
-can produce corresponding font glyph according to desired logical font
-size.
-
-The definition of the keys in section `systemfont` is as follows:
-
-- `font_number`: The number of system fonts created.
-- `font<NR>`: The number `<NR>` logical font name.
-- `default`: System default font (single character set). Its value is the
-number of logical font.
-- `wchar_def`: Default font used by multiple character set. Its value
-is the number of above logical font.
-- `fixed`: The font used by fixed width character set. Its value is the
-number of above logical font.
-- `caption`: The caption font. Its value is the number of above logical
-font.
-- `menu`: The menu font. Its value is the number of above logical font.
-
-You can change the number of system font created. But you must create a
-single character set (for example: `ISO8859-1`) at least. MiniGUI defines
-the system default charsets according to `default`, `wchar_def`
-system fonts, and this would affect the return value of
-`GetSysCharset`, `GetSysCharWidth`, `GetSysCCharWidth` and
-`GetSysHeight` functions. Commonly, `default` and `wchar_def`
-must fixed width dot-matrix font, i.e RBF. And the width of multiply
-character set must be twice with the width of single character set.
-
-The content of the section in `MiniGUI.cfg` is as follows:
-
-```ini
-# The first system font must be a logical font using RBF device font.
-[systemfont]
-font_number=6
-font0=rbf-fixed-rrncnn-8-16-ISO8859-1
-font1=*-fixed-rrncnn-*-16-GB2312
-font2=*-Courier-rrncnn-*-16-GB2312
-font3=*-SansSerif-rrncnn-*-16-GB2312
-font4=*-Times-rrncnn-*-16-GB2312
-font5=*-Helvetica-rrncnn-*-16-GB2312
-default=0
-wchar_def=1
-fixed=1
-caption=2
-menu=3
-control=3
-```
-
-### Section mouse
-
-The section `mouse` defines the time of mouse `double clicked`. It
-is used to handle with system inner events. Generally, it is unnecessary
-changed.
-
-The definition of the keys in the section is as follows:
-
-- `dblclicktime`: The mouse double clicked time in ms
-
-The content of the section in `MiniGUI.cfg` is as follows:
-
-```ini
-[mouse]
-dblclicktime=300
-```
-
-### Section event
-
-The section `event` defines event timeout and auto-repeat time used by
-system internal event process. Generally, it is unnecessary changed.
-
-The definition of the keys in the section is as follows:
-
-- `timeoutusec`: Event timeout time in ms
-- `repeatusec`: Event repeat time in ms
-
-The content of the section in `MiniGUI.cfg` is as follows:
-
-```ini
-[event]
-timeoutusec=300000
-repeatusec=50000
-```
-
-### Section classic
+### Sections for appearance renderers
 
 The section `classic` defines default window element color used.
 Generally, it is unnecessary changed.
@@ -519,6 +470,39 @@ bgc_hilight_item=0xFF6B2408
 fgc_significant_item=0xFFFFFFFF
 bgc_significant_item=0xFF6B2408
 bgc_desktop=0xFFC08000
+```
+
+### Other sections
+
+The section `mouse` defines the time of mouse `double clicked`. It
+is used to handle with system inner events. Generally, it is unnecessary
+changed.
+
+The definition of the keys in the section is as follows:
+
+- `dblclicktime`: The mouse double clicked time in ms
+
+The content of the section in `MiniGUI.cfg` is as follows:
+
+```ini
+[mouse]
+dblclicktime=300
+```
+
+The section `event` defines event timeout and auto-repeat time used by
+system internal event process. Generally, it is unnecessary changed.
+
+The definition of the keys in the section is as follows:
+
+- `timeoutusec`: Event timeout time in ms
+- `repeatusec`: Event repeat time in ms
+
+The content of the section in `MiniGUI.cfg` is as follows:
+
+```ini
+[event]
+timeoutusec=300000
+repeatusec=50000
 ```
 
 ## Incore Configuration Options
