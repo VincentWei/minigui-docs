@@ -19,7 +19,7 @@
 
 ## Configuration Options and Macros
 
-In this chapter, we will give detailed description on most important
+In this chapter, we will give detailed descriptions on most important
 compile-time configuration options of MiniGUI. MiniGUI has many
 such options; you can combine these options to generate your own
 MiniGUI library.
@@ -29,10 +29,10 @@ MiniGUI library.
 MiniGUI provides support for multiple operating systems, you can specify
 operating system when execute configuration script, the default operating
 system is Linux. If you want to run MiniGUI on eCos, you can execute command
-as the follow:
+as follow:
 
 ```
-user$ ./configure --with-osname=ecos
+$ ./configure --with-osname=ecos
 ```
 
 If you specify an operating system, a macro for this operating system will
@@ -63,16 +63,16 @@ and macros about operating systems.
 
 ### Target Board
 
-In MiniGUI core, some code is related with a special target board,
+In MiniGUI Core, some code is related to a specific target board,
 especially when you use `Shadow` NEWGAL engine or `CommLCD` NEWGAL
 engine for certain operating systems. More precisely, when you use
 these two engines, you need to specify which sub-drivers should be
-contained in MiniGUI core by a configuration option.
+contained in MiniGUI Core via a configuration option.
 
-For this purpose, you use `--with-targetname` option to define
-the name for your target board. We use this option to distinguish
+For this purpose, you can use `--with-targetname` option to define
+the name for your target board. You use this option to distinguish
 the differences among various target boards for a specific
-operating system. This occurs often when we use a real-time
+operating system. This occurs often when you use a real-time
 operating system, because device drivers on such operating systems
 tend to be relatively simple, but their design is not well abstracted
 to hide the hardware details.
@@ -88,12 +88,12 @@ When you use `CommLCD` NEWGAL engine or `Comm` IAL engine to support
 your target board, you can define the target name as `external`.
 By using the target name, you do not need to change the source code
 of MiniGUI core. Instead, you implement the engines outside the MiniGUI
-core by defining some external functions. In this way, we reduce the
+Core by defining some external functions. In this way, we reduce the
 amount of work required to port MiniGUI to a new target board.
 
-Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also support
+Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also supports
 the target name `external`. So you can implement the sub-driver of
-`dri` engine outsize MiniGUI core.
+`dri` engine outside MiniGUI Core.
 
 For more information, please refer to:
 
@@ -131,8 +131,8 @@ We can configure MiniGUI as one of three runtime modes:
 - MiniGUI-Threads runtime mode base on multi-thread;
 - MiniGUI-Standalone runtime mode based on a single task architecture.
 
-MiniGUI-Processes is the default mode for Linux operating system,
-while MiniGUI-Threads is the default mode for other operating systems.
+`MiniGUI-Processes` is the default mode for Linux operating system,
+while `MiniGUI-Threads` is the default mode for other operating systems.
 
 The following table lists the options and macros for runtime mode.
 
@@ -148,35 +148,35 @@ The following table lists the options and macros for runtime mode.
 
 MiniGUI supports many kinds of graphics devices through
 an abstract software layer called `NEWGAL`. We use a specific
-NEWGAL engine to support a kind of graphics device via
-the device driver provided by the operating system. A NEWGAL
+`NEWGAL` engine to support a kind of graphics device via
+the device driver provided by the operating system. A `NEWGAL`
 engine is a software module which provides an implementation
-for NEWGAL to drive a real graphics device or a virtual
+for `NEWGAL` to drive a real graphics device or a virtual
 graphics device.
 
-The commonly used NEWGAL engines are as follow:
+The commonly used `NEWGAL` engines are as follow:
 
-- `Dummy`: A pure software implementation; which does not make
+- `Dummy`: A pure software implementation; it does not make
 any actual output. It is not associated with any hardware and
 only provides a software implementation for easily debugging MiniGUI.
 - `XVFB`: A pure software engine which implements a universal
-virtual frame buffer. It is associated with a window on Linux or Windows,
+virtual frame buffer. It is associated with a window on Linux or MS Windows,
 so we can see the MiniGUI screens in the window. This engine is
-helpful for developing MiniGUI apps on Linux or Windows PC.
-- `FBCon`: A NEWGAL engine which uses Linux frame buffer device driver
+helpful for developing MiniGUI apps on Linux or MS Windows.
+- `FBCon`: A `NEWGAL` engine uses Linux frame buffer device driver
 (`/dev/fb`).
-- `DRI` (Since MiniGUI 4.0): A NEWGAL engine which uses Linux DRI/DRM
+- `DRI` (Since MiniGUI 4.0): A `NEWGAL` engine uses Linux DRI/DRM
 to support modern graphics devices with 2D/3D hardware acceleration.
-- `CommLCD`: A simple NEWGAL engine to support LCD without hardware
+- `CommLCD`: A simple `NEWGAL` engine to support LCD without hardware
 acceleration. We often use this engine on traditional real-time
 operating systems.
 - `Shadow`: This engine can be used to support a graphics display device
 which have color format lower than 8 bit color. It can be used to support
-the screen rotation.
+screen rotation.
 
-The following table lists the common NEWGAL engines.
+The table below lists the common `NEWGAL` engines.
 
-##### Table: Options and macros related to NEWGAL engine
+##### Table: Options and macros related to `NEWGAL` engine
 
 | Switch option  | Macro            | Engine name | Default  | Comments
 | ---------------|------------------|-------------|----------|---------
@@ -190,42 +190,42 @@ The following table lists the common NEWGAL engines.
 | `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Disabled | Linux PC; The virtual buffer engine for QVFB; Deprecated
 | `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32; Deprecated
 
-Note that `qvfb`/`wvfb` NEWGAL engines are deprecated since MiniGUI 3.2.
-These two engines use QVFB/WVFB to show MiniGUI screens.
-You should use XVFB (`pc_xvfb`) engine for MiniGUI 3.0 or later.
+Note that `qvfb`/`wvfb` `NEWGAL` engines are deprecated since MiniGUI 3.2.
+These two engines use `QVFB/WVFB` to show MiniGUI screens.
+You should use `XVFB `(`pc_xvfb`) engine for MiniGUI 3.0 or later.
 
-XVFB is a newly designed general purpose virtual buffer graphics engine;
+`XVFB` is a newly designed general purpose virtual buffer graphics engine;
 it provides a universal virtual frame buffer engine for MiniGUI, and any
-program which conforms to the specification of the universal frame buffer
+program conforms to the specification of the universal frame buffer
 can act as the virtual frame buffer to show MiniGUI screens. In other words,
-we do not need to write an engine for a specific virtual frame buffer program.
+You do not need to write an engine for a specific virtual frame buffer program.
 
-Please use one of the following XVFB programs to work with `pc_xvfb` engine:
+Please use one of the following `XVFB` programs to work with `pc_xvfb` engine:
 
-- GVFB: Use this on a Linux+GNOME environment; Public repo: <https://github.com/VincentWei/gvfb>.
-- QVFB2: Use this on a Linux+KDE environment; Public repo: <https://github.com/VincentWei/qvfb2>.
-- WVFB2: Use this on a Windows platform; Public repo: <https://github.com/VincentWei/wvfb2>.
+- `GVFB`: Use this on a Linux+GNOME environment; Public repo: <https://github.com/VincentWei/gvfb>.
+- `QVFB2`: Use this on a Linux+KDE environment; Public repo: <https://github.com/VincentWei/qvfb2>.
+- `WVFB2`: Use this on a MS Windows platform; Public repo: <https://github.com/VincentWei/wvfb2>.
 
 The `shadow` graphics engine uses the sub-driver concept. Only one
 sub-driver can be contained at one time, and this is determined by
-the target board option. The sub-drivers of the Shadow graphics in
+the target board option. The sub-drivers of the `Shadow` graphics in
 MiniGUI are (in MiniGUI source code directory `src/newgal/shadow`):
 
-- `unknown`: the default sub-driver, similar with the dummy graphics
-engine, user may modify this sub-driver in order to operate and visit
+- `unknown`: the default sub-driver, similar to the dummy graphics
+engine, you may modify this sub-driver in order to operate and visit
 the underlying graphics devices.
 - `fbcon`: sub-driver for Linux console frame buffer;
 supporting display mode less than 8-bit color and screen rotation.
-- `qvfb`: sub-driver for Linux QVFB (Qt virtual frame buffer);
+- `qvfb`: sub-driver for Linux `QVFB` (Qt virtual frame buffer);
 supporting display mode less than 8-bit color and screen rotation.
-- `wvfb`: sub-driver for WVFB (Windows virtual frame buffer);
+- `wvfb`: sub-driver for `WVFB` (MS Windows virtual frame buffer);
 supporting display mode less than 8-bit color and screen rotation.
 
-The CommLCD engine also uses the sub-driver structure like Shadow
-graphics engine. At present, sub-drivers for CommLCD graphics engine
+The `CommLCD` engine also uses the sub-driver structure like `Shadow`
+graphics engine. At present, sub-drivers for `CommLCD` graphics engine
 are:
 
-- `external`: Use the sub-driver implemented outside MiniGUI core.
+- `external`: Use the sub-driver implemented outside MiniGUI Core.
 - `vxi386`: Sub-driver for VxWorks i386 target board.
 - `unknown`: If it is eCos operating system, the engine will use
 the standard interface of eCos to implement a sub-driver.
@@ -250,39 +250,39 @@ For more information about this settings, please refer to
 
 MiniGUI supports many kinds of input devices through
 an abstract software layer called `IAL`. We use a specific
-IAL engine to support a kind of input device via
-the device driver provided by the operating system. A IAL
+`IAL` engine to support a kind of input device via
+the device driver provided by the operating system. An `IAL`
 engine is a software module which provides an implementation
-for NEWGAL to drive a real input device or a virtual
+for `NEWGAL` to drive a real input device or a virtual
 input device.
 
-The commonly used IAL engines are as follow:
+The commonly used `IAL` engines are as follow:
 
-- `Dummy`: Like `Dummy` NEWGAL engine, this IAL engine is not connected to
+- `Dummy`: Like `Dummy` `NEWGAL` engine, this `IAL` engine is not connected to
 any actual input device, and it does not generate any input events.
 Therefore, if the input engine for your target board is not ready, you can
 run MiniGUI by using this input engine for debugging. Note that MiniGUI
 will use this input engine when it cannot find the matched input engine
 specified in the runtime configuration.
 - `Auto`/`Random`: Like `Dummy` input engine, MiniGUI provide other two software
-input engines, which both are not associated to any device. One is
+input engines, both are not associated to any device. One is
 `Auto` engine and the other is called `Random`. The former can generate
 input events automatically and the later generates input events randomly.
 These two engines may be used for auto-test of MiniGUI and its apps.
-- `XVFB`: This input engine works with `XVFB` NEWGAL engine, so it is controlled
+- `XVFB`: This input engine works with `XVFB` `NEWGAL` engine, so it is controlled
 by `videopcxvfb` switch option (`_MGGAL_PCXVFB_`).
-- `Console`: This input engine works with `FBCon` NEWGAL engine on Linux.
+- `Console`: This input engine works with `FBCon` `NEWGAL` engine on Linux.
 It gets input events from Linux keyboard and mouse devices.
-- `Comm`: Like `CommLCD` NEWGAL engine, you can use this input engine to
+- `Comm`: Like `CommLCD` `NEWGAL` engine, you can use this input engine to
 implement a driver for input devices without changing the source code of
 MiniGUI core.
 - `libinput` (since MiniGUI 4.0): This engine provides support for
-all modern input devices on Linux system, it depends on `libinput`
+all modern input devices on Linux systems, it depends on `libinput`
 introduced by [Free Desktop](https://www.freedesktop.org/wiki/) project.
 
-The following table lists the common IAL engines.
+The table below lists the common `IAL` engines.
 
-##### Table: Options and macros related to IAL engines
+##### Table: Options and macros related to `IAL` engines
 
 | Switch option    | Macro              | Engine name | Default   | Comments
 |------------------|--------------------|-------------|-----------|---------
@@ -312,18 +312,18 @@ you can set the runtime configuration option as follow:
 ial_engine=dummy
 ```
 
-The Console input engine provides support for the PC console of
+The Console input engine provides support for the console of
 Linux operating system. This input engine supports the standard PC
-keyboard as well as many kinds of mouse protocol. You need configure
-`mtype` and `mdev` field in `system` section of the runtime configuration
+keyboard as well as many kinds of mouse protocol. You need to configure
+`mtype` and `mdev` fields in `system` section of the runtime configuration
 to set the correct mouse protocol and the mouse device when you use
 this engine.
 
-For more information about this settings, please refer to
+For more information about the settings, please refer to
 [Runtime Configuration].
 
 There are some configuration options for the mouse protocols supported.
-The following table lists them.
+The table below lists them.
 
 ##### Table: Options and macros related to mouse protocols
 
@@ -347,7 +347,7 @@ calibration interface.
 |------------------|--------------------------|---------|---------
 | `mousecalibrate` | `_MGHAVE_MOUSECALIBRATE` | Enabled | Support touch screen calibration
 
-**Note that new project should use `libinput` engine of MiniGUI 4.0
+**Note that new projects should use `libinput` engine of MiniGUI 4.0
 instead of `console` input engine on Linux. Because `libinput` engine
 provides support for all modern input devices including keyboard, mouse,
 multiple touch panel, gesture, joystick, tablet tool, table pad,
@@ -364,10 +364,10 @@ keyboard as the default keyboard layout. If you want to use a different
 keyboard layout in your program, you can call `SetKeyboardLayout` by the
 keyboard layout name. For more information about these functions,
 please refer to [MiniGUI Programming Guide]. However, you need
-to enable the support for a specific keyboard layout in MiniGUI core
+to enable the support for a specific keyboard layout in MiniGUI Core
 before using it.
 
-The following table lists the options and macros related to
+The table below lists the options and macros related to
 the keyboard layout.
 
 ##### Table: Options and macros related to keyboard layout
@@ -386,7 +386,7 @@ the keyboard layout.
 
 ### Global Options and Macros
 
-The following table lists the system global configuration options and macros.
+The table below lists the system global configuration options and macros.
 
 ##### Table: System global configuration options and macros
 
@@ -413,38 +413,38 @@ Some important configuration options are described as follow:
 
 - `incoreres`  
 The `incoreres` option is used to control whether the fonts,
-bitmaps, cursors, and icons used by MiniGUI core are built within
-MiniGUI core library instead of loading them from file system.
+bitmaps, cursors, and icons used by MiniGUI Core are built within
+MiniGUI Core library instead of loading them from file system.
 This option is very useful for traditional embedded operating system.
 Because in the most situation, the tradition embedded operating
 system has not support for file system. By enabling `incoreres`,
-the resource used by MiniGUI core will built in the library, so
-we can run MiniGUI and its apps without file system. Note that,
+the resource used by MiniGUI Core will be built in the library, so
+you can run MiniGUI and its apps without file system. Note that,
 when we use incore resource, the runtime configuration options
-will be compiled into the libraries, so we can not change
+will be compiled into the libraries, so you can not change
 the runtime configuration without re-building the library.
 - `miniguientry`  
 The `miniguientry` option is used to control how to implement the
-function `MiniGUIMain`. In the default situation (disabled this option),
+function `MiniGUIMain`. In the default situation  (this option is disabled),
 The function `MiniGUIMain` (it is a macro actually) will be expanded to
 a call to the function `main`, so a MiniGUI app does not need to define
 `main` function explicitly. This works on Linux well. However, on some
-tradition embedded operating systems, it is not good to implement
+traditional embedded operating systems, it is not a good idea to implement
 the entry of a MiniGUI app in `main` function. To resolve this issue,
 you can enable `miniguientry` option. When this option is enabled,
 the function `MiniGUIMain` will be expanded to a call to the function
 `minigui_entry` instead of `main`. And you can call `minigui_entry` in
 the system `main` function.
 - `develmode`, `debug`, `tracemsg`, `msgstr`  
-These options are used for debugging MiniGUI core, it is not suggested
+These options are used for debugging MiniGUI Core, it is not suggested
 to enable them for a real MiniGUI app.
 - `cursor`  
 MiniGUI shows mouse cursor on screen by default. When the target system
-has not any pointing device like mouse or touch screen, we do not need
-to show the mouse cursor. In this situation, we disable this option.
+does not have any pointing device like mouse or touch screen, you do not need
+to show the mouse cursor. Under this situation, disable this option.
 - `fixedmath`  
-The `fixedmath` option is used to control whether fixed math is included
-in MiniGUI core library, such as `fixcos` and so on.
+The `fixedmath` option is used to control whether fixed point math is included
+in MiniGUI Core library, such as `fixcos` and so on.
 - `clipboard`  
 The `clipboard` option is used to control whether MiniGUI supports
 clipboard or not. If this option is disabled, the editor control cannot
@@ -459,9 +459,9 @@ disable both options.
 
 ### Character Set
 
-MiniGUI provides a well support for character sets. The character sets
-supported by your MiniGUI core library can be flexibly configured as well.
-The following table lists the options and macros related to character sets.
+MiniGUI provides a good support for character sets. The character sets
+supported by MiniGUI Core library can be flexibly configured as well.
+The table below lists the options and macros related to character sets.
 
 ##### Table: Options and macros related to character sets
 
@@ -502,23 +502,23 @@ The options `gbsupport`, `gbksupport`, `gb18030support`, `big5support`,
 `euckrsupport`, `eucjpsupport`, and `shiftjissupport` control
 the support for GB2312, GBK, GB18030, BIG5, EUCKR, EUCJP, SHIFTJIS
 character sets or encodings respectively. And the option `unicodesupport`
-control the support for UNICODE character set, i.e., the encodings of
+controls the support for UNICODE character set, i.e., the encodings of
 UTF-16LE, UTF-16BE, and UTF-8.
 
-**Currently, in most cases we only need to enable the support for Unicode
+**Currently, in most cases you only need to enable the support for Unicode
 character set. If you need to support a particular character set or encoding
 in your app, or if you need to convert a string encoded in a specific
 character set or encoding, you need to enable the support for those character
 sets or encodings.**
 
-### Font
+### Fonts
 
 MiniGUI provides support for various font types. It supports RBF font,
 VBF font, and UPF font, these three kinds of font are defined by MiniGUI.
 It also provides support for QPF font, TrueType font, OpenType font, and
 Adobe Type 1 font.
 
-The following table lists the options and macros related to font.
+The table below lists the options and macros related to fonts.
 
 ##### Table: Options and macros related to font
 
@@ -544,31 +544,31 @@ The following table lists the options and macros related to font.
 | `mttfcachenum=10`        | `_MGMAX_TTF_CACHE`             |  10       | The number of TrueType font cache blocks
 | `ttfcachesize=256`       | `_MGTTF_CACHE_SIZE`            |  256      | The size of each TrueType font cache block
 
-The option `rbfsupport` controls whether including the support for
+The option `rbfsupport` controls whether to include the support for
 Raw Bitmap Font (RBF) font, it is enabled by default. Because RBF
 is a basic font format, you should not disable the support for
 this font type.
 
-The option `vbfsupport` controls whether including the support for
+The option `vbfsupport` controls whether to include the support for
 Variable Bitmap Font (VBF) font.
 
-The option `upfsupport` controls whether including the support for
+The option `upfsupport` controls whether to include the support for
 FMSoft Unicode Pre-rendered Font (UPF) font. Because
 UPF fonts use UNICODE encoding, enabling the support for UPF font will
 automatically enable the support for UNICODE character set.
 
-The option `qpfsupport` controls whether including the support for
+The option `qpfsupport` controls whether to include the support for
 Qt/Embedded Pre-rendered Font (QPF). Because QPF font uses UNICODE encoding,
 if you enable the support for QPF font, the support for UNICODE character
 set will be enabled automatically.
 
-The option `ttfsupport` controls whether including the support for
+The option `ttfsupport` controls whether to include the support for
 TrueType in MiniGUI library. In version 3.2, this option uses the form
 `--with-ttfsupport`, you can specify a value to tell MiniGUI supports
 TrueType by using FreeType 1 or FreeType 2.
 
 Since version 4.0, this option changes as a switch option, i.e., only
-FreeType 2 are supported. If you enable this option, MiniGUI will
+FreeType 2 is supported. If you enable this option, MiniGUI will
 use FreeType 2 to render TrueType fonts.
 
 Note that, when we use FreeType 2 as the font engine, MiniGUI can
@@ -576,29 +576,29 @@ not only render TrueType font (font file with `.ttf` or `.ttc` suffix),
 but also OpenType font (with `.otf` suffix) and Adobe Type 1 font
 (with `.pfb` suffix).
 
-The option `complexscripts` controls whether including the support for
+The option `complexscripts` controls whether to include the support for
 the complex scripts like Arabic, Thai, and Indic. When enabled, you can
 use the APIs of MiniGUI to lay out, shape, and render glyphs from complex
 and mixed scripts. For more information, please refer to
 [Showing Text in Complex or Mixed Scripts]. Note that this option works
-since MiniGUI 4.0, and when you enabled this option with `ttfsupport`
+since MiniGUI 4.0, and when you enable this option with `ttfsupport`
 option, MiniGUI will use [HarfBuzz] as the shaping engine to shape the
 text in complex scripts.
 
 The `rbfvgaoem`, `rbfterminal`, and `rbffixedsys` options control
-whether including the built-in `VGAOEM`, `Terminal`, and `FixedSys` RBF
+whether to include the built-in `VGAOEM`, `Terminal`, and `FixedSys` RBF
 fonts in MiniGUI core library respectively. These options are enabled by
 default, so that MiniGUI can show text even if there is no external font
 was loaded.
 
 The `fontsserif`, `fontcourier`, and `fontsystem` options control
-whether including the built-in `SanSerif`, `Courier` and `System` VBF
-fonts in MiniGUI core library respectively.
+whether to include the built-in `SanSerif`, `Courier` and `System` VBF
+fonts in MiniGUI Core library respectively.
 
-The `fonttimes` option controls whether including the built-in `Times`
-UPF fonts in MiniGUI core library.
+The `fonttimes` option controls whether to include the built-in `Times`
+UPF fonts in MiniGUI Core library.
 
-The option `ttfcache` control whether supporting TrueType cache.
+The option `ttfcache` control whether to support TrueType cache.
 
 The option `--with-mttfcachenum` is used to specify the number of the
 cache blocks when TrueType cache is enabled. The default value is 10.
@@ -614,7 +614,7 @@ The following table gives all possible values for this option.
 
 The option `--with-ttfcachesize` is used to specify the size of one
 cache block when TrueType cache is enabled. The default value is 256 (256KB).
-The following table gives all possible values for this option.
+The table below gives all possible values for this option.
 
 ##### Table: Possible values for ttfcachesize
 
@@ -630,12 +630,12 @@ The following table gives all possible values for this option.
 ### Image File Format
 
 MiniGUI provides support for multiple image file formats, including
-Windows BMP, GIF, JPEG, PNG, PCX, LBM/PBM, and TGA. The support for
-Windows BMP is a built-in feature, so there is no corresponding configuration
+MS Windows BMP, GIF, JPEG, PNG, PCX, LBM/PBM, and TGA. The support for
+MS Windows BMP is a built-in feature, so there is no corresponding configuration
 option. The support for other image formats can be controlled by
 the options described in this section.
 
-The following table lists the options and macros related to image file format.
+The table below lists the options and macros related to image file format.
 
 ##### Table: Options and macros related to image file format
 
@@ -672,8 +672,8 @@ macros.
 ### Control
 
 MiniGUI provides configuration options for all basic controls. The
-basic controls are those controls contained in the MiniGUI core
-library. The following table shows the options and macros for
+basic controls are the controls contained in the MiniGUI Core
+library. The table below shows the options and macros for
 the basic controls.
 
 ##### Table: Options and macros for basic controls
@@ -707,8 +707,8 @@ the basic controls.
 **Since MiniGUI 3.0, we provide a new set of controls through the
 mGNCS component. The new control set is well-designed and elegantly
 interfaced, it can completely replace the basic control set.
-Therefore, we strongly suggest that the new MiniGUI application being
-developed using mGNCS instead of the MiniGUI built-in basic controls.
+Therefore, we strongly suggest that new MiniGUI applications
+developed use mGNCS instead of MiniGUI built-in basic controls.
 Because there is a better mGNCS, most of the basic controls
 are disabled by default. If your application uses these controls, please
 enable them by yourself.**
@@ -716,12 +716,12 @@ enable them by yourself.**
 ### Others
 
 You must define the macro `__MINIGUI_LIB__` when you
-use yourself makefiles or building environment to build MiniGUI
-core library. MiniGUI components also need such macro. The following table
-shows the macros must defined for MiniGUI core and components when compiling
+use your own makefiles or building environment to build MiniGUI
+Core library. MiniGUI components also need such macros. The table below
+shows the macros must defined for MiniGUI Core and components when compiling
 them.
 
-##### Table: Macros must be defined for compile MiniGUI core and components
+##### Table: Macros must be defined to compile MiniGUI Core and components
 
 | Component     | Macro
 |---------------|-----------------
@@ -736,21 +736,21 @@ Since MiniGUI 3.0, you can specify a suffix for MiniGUI library name
 through a configure option. By default, the name of the
 MiniGUI library varies depending on the runtime mode, for example,
 `libminigui-ths.so`, `libminigui-procs.so`, and `libminigui-sa.so`
-for MiniGUI-Threads, MiniGUI-Processes, and MiniGUI-Standalone respectively.
+for `MiniGUI-Threads`, `MiniGUI-Processes`, and `MiniGUI-Standalone` respectively.
 You can specify a specific library name suffix with the option `--with-libsuffix`.
 
-Moreover, in order to support some small embedded real-time operating system,
+Moreover, in order to support some small embedded real-time operating systems,
 We have implemented some standard C functions:
 
 1. `malloc` function family, including `malloc`, `calloc`, and `free`.
-1. Stdio format input and output functions, such as `printf`, `sprintf`,
+1. stdio format input and output functions, such as `printf`, `sprintf`,
 `vsprintf`, and so on.
 1. POSIX thread functions, such as `pthread_create`, `sem_post`,
 and so on.
 
 By default, the configuration options for these functions are disabled.
 If you want to enable these functions for some operating systems, you
-can enable the options. The following table lists the configuration options
+can enable these options. The table below lists the configuration options
 and corresponding macros related to these functions.
 
 ##### Table: Options and macros for own implementation of standard C functions
@@ -810,7 +810,7 @@ source tree:
     --disable-consolegpm
 ```
 
-By using this script, you can configure MiniGUI to the minimal function
+Using this script, you can configure MiniGUI to the minimal function
 library that only supports ISO8859-1 charset:
 
 - Compiling MiniGUI to be MiniGUI-Threads.
@@ -846,7 +846,7 @@ library that only supports ISO8859-1 charset:
 Based on the configuration above, you can also delete some functions if
 you want. For example, if you do not use the animation control in your
 application, you can add `--disable-ctrlanimation` option in the
-configuration script above, so there is not GIF animation control in
+configuration script above, so there is no GIF animation control in
 your compiled functions library.
 
 ## Changes in Version 4.0
