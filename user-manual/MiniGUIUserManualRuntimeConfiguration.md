@@ -80,47 +80,58 @@ an option in a section.
 Note that we often use the notation `section_name.key_name` to refer to
 an option with `key_name` in the section `section_name`.
 
-Some important sections are listed as follows.
+Some important sections are listed as follow.
 
 ### Section `system`
 
-The section `system` not only defines the graphics engine
-(`gal_engine`) and the input engine (`ial_engine`) in runtime
-MiniGUI, which must be one of engines configured on MiniGUI compiling,
-but also defines the mouse device (`mdev`) and the mouse protocol type
-(`mtype`).
+You can use the section `system` to specify the effective NEWGAL
+engine and IAL engine. For historical reasons, you can also use
+this section to specify the mouse device and mouse protocol for
+`console` IAL engine.
 
-The definition of the keys in section `system` is as follows:
+The keys of this section are listed as follow:
 
 - `gal_engine`: The graphics engine used.
-- `defaultmode`: The graphics engine display mode used, its format is widthxheight-bpp.
+- `defaultmode`: The display mode for the graphics engine.
 - `ial_engine`: The input engine used.
 - `mdev`: The mouse device file.
 - `mtype`: The mouse protocol type.
 
-The contents of the section `system` in `MiniGUI.cfg` are as follow:
+For a display mode, MiniGUI uses the following notation: `<XRES>x<YRES>-<DEPTH>bpp`.
+Here `<XRES>` means the horizontal resolution of the display mode,
+and `<YRES>` means the vertical resolution, and `<DEPTH>` means
+the color depth of bits per pixel. For example, `640x480-32bpp`.
+
+The default content of the section `system` is as follow:
 
 ```ini
 [system]
 # GAL engine and default options
-gal_engine=qvfb
+gal_engine=pc_xvfb
 defaultmode=800x600-16bpp
 
 # IAL engine
-ial_engine=qvfb
+ial_engine=pc_xvfb
 mdev=/dev/input/mice
 mtype=IMPS2
 ```
 
-Since MiniGUI Version 1.6.8, you can modify the graphics and input
-engine via environment variable. For example, if you define `fbcon`
-and `qvfb` graphics engine and `console` and `qvfb` input engine,
-and you choose the qvfb engine in `MiniGUI.cfg` or in-core resources.
-Then when configure MiniGUI, you can change the engine to fbcon and
-console in runtime by the following method, and needn’t modify
-`MiniGUI.cfg` or in-core resources configuration file.
+Since MiniGUI 1.6.8, you can specify the graphics and input
+engines via environment variables. The definition of the
+environment variables will override the runtime configuration,
+whatever you are using the configuration file or the incore configuration.
+The environment variables are listed as follow:
 
-```
+- `MG_GAL_ENGINE`: `system.gal_engine`
+- `MG_IAL_ENGINE`: `system.ial_engine`
+- `MG_DEFAULTMODE`: `system.defaultmode`
+- `MG_MDEV`: `system.mdev`
+- `MG_MTYPE`: `system.mtype`
+
+For example, if you want to use `fbcon` NEWGAL engine and `console` IAL engine,
+you can use the following commands to specify the environment variables:
+
+```shell
 $ export MG_GAL_ENGINE=fbcon
 $ export MG_IAL_ENGINE=console
 $ export MG_DEFAULTMODE=1024x768-16bpp
