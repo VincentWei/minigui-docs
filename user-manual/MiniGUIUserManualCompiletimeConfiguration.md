@@ -851,6 +851,10 @@ your compiled functions library.
 
 ## Configuring MiniGUI Components
 
+We organize the source code of MiniGUI components in the same way as
+MiniGUI Core. So you can easily configure them according to your needs.
+However, for MiniGUI components, you use the default options in most cases.
+
 ---
 
 [Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) | [Table of Contents](README.md) | [Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md)
