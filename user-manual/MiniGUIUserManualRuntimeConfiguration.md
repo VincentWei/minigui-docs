@@ -668,7 +668,9 @@ static char *SYSTEM_VALUES[] = {"commlcd", "auto", "/dev/ts", "IMPS2"};
 
 ---
 
-[&lt; Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md) | [Table of Contents](README.md) | [Feature List &gt;](MiniGUIUserManualFeatureList.md)
+[&lt;&lt; Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md) |
+[Table of Contents](README.md) |
+[Feature List &gt;&gt;](MiniGUIUserManualFeatureList.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
