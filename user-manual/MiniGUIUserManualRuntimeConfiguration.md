@@ -2,7 +2,7 @@
 
 - [Configuration File](#configuration-file)
    * [Section `system`](#section-system)
-   * [Section `pc_xvfb`](#section-pcxvfb)
+   * [Section `pc_xvfb`](#section-pc_xvfb)
    * [Section `fbcon`](#section-fbcon)
    * [Section `dri`](#section-dri)
    * [Section `libinput`](#section-libinput)
@@ -13,8 +13,8 @@
    * [Sections for Appearance Renderers](#sections-for-appearance-renderers)
    * [Other sections](#other-sections)
 - [Incore Configuration Options](#incore-configuration-options)
-   * [Structure `ETCSETCTION`](#`structure-etcsetction)
-   * [Structure `ETC_S`](#structure-etcs)
+   * [Structure `ETCSETCTION`](#structure-etcsetction)
+   * [Structure `ETC_S`](#structure-etc_s)
 - [Samples](#samples)
 
 In this chapter, we describe the MiniGUI runtime configuration options,
