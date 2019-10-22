@@ -1,18 +1,22 @@
 # Runtime configuration options
 
 - [Configuration File](#configuration-file)
-- [Look And Feel Renderer](#look-and-feel-renderer)
-- [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
-- [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
-- [Building MiniGUI in GNU environment](#building-minigui-in-gnu-environment)
-   * [LibFreeType](#libfreetype)
-   * [LibJPEG, LibPNG, and LibZ](#libjpeg-libpng-and-libz)
-   * [gvfb](#gvfb)
-   * [MiniGUI core](#minigui-core)
-   * [MiniGUI resource](#minigui-resource)
-   * [MiniGUI components](#minigui-components)
-   * [MiniGUI samples and demos](#minigui-samples-and-demos)
-- [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
+   * [Section `system`](#section-system)
+   * [Section `pc_xvfb`](#section-pcxvfb)
+   * [Section `fbcon`](#section-fbcon)
+   * [Section `dri`](#section-dri)
+   * [Section `libinput`](#section-libinput)
+   * [Section `systemfont`](#section-systemfont)
+   * [Section `cursorinfo`](#section-cursorinfo)
+   * [Section `resinfo`](#section-resinfo)
+   * [Sections for devfonts](#sections-for-devfonts)
+   * [Sections for Appearance Renderers](#sections-for-appearance-renderers)
+   * [Other sections](#other-sections)
+   * [Default Configuration File](#Default Configuration File)
+- [Incore Configuration Options](#incore-configuration-options)
+   * [Structure `ETCSETCTION`](#`structure-etcsetction)
+   * [Structure `ETC_S`](#structure-etcs)
+- [Samples](#samples)
 
 In this chapter, we describe the MiniGUI runtime configuration options,
 which effect some actions about MiniGUI running, for example, running
@@ -20,25 +24,6 @@ GAL and IAL used, device font, bitmap, and cursor etc. It is known that
 MiniGUI runtime configuration options is loaded from `MiniGUI.cfg`,
 but if compiling MiniGUI with in-core options, the options is included
 MiniGUI libraries.
-
-In GNU development environment, after installing MiniGUI by default
-configuration, the file `etc/MiniGUI-classic.cfg` in MiniGUI source
-tree will be installed in `/usr/local/etc/` directory, and rename to
-`MiniGUI.cfg`. When MiniGUI application starts, It will find
-`MiniGUI.cfg` as follow:
-
-the application first search `MiniGUI.cfg` in current directory, then
-search `.MiniGUI.cfg` in home directory.
-
-then search `MiniGUI.cfg` in `/usr/local/etc`, at last in `/etc/`.
-
-If user don’t create the file `MiniGUI.cfg` in current directory and
-home directory, the application will use the file MiniGUI.cfg in
-`/usr/local/etc/` as default configuration file.
-
-When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
-application doesn’t need the file `MiniGUI.cfg`. The required options
-are given in the file `src/sysres/mgetc.c`.
 
 MiniGUI 3.0 appearance of the window and the control drawing
 implementation, using a completely different from the previous old
@@ -77,6 +62,24 @@ configuration file, and with incore resources.
 
 ## Configuration File
 
+In GNU development environment, after installing MiniGUI by default
+configuration, the file `etc/MiniGUI-classic.cfg` in MiniGUI source
+tree will be installed in `/usr/local/etc/` directory, and rename to
+`MiniGUI.cfg`. When MiniGUI application starts, It will find
+`MiniGUI.cfg` as follow:
+
+- the application first search `MiniGUI.cfg` in current directory, then
+search `.MiniGUI.cfg` in home directory.
+- then search `MiniGUI.cfg` in `/usr/local/etc`, at last in `/etc/`.
+
+If user don’t create the file `MiniGUI.cfg` in current directory and
+home directory, the application will use the file `MiniGUI.cfg` in
+`/usr/local/etc/` as default configuration file.
+
+When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
+application doesn’t need the file `MiniGUI.cfg`. The required options
+are given in the file `src/sysres/mgetc.c`.
+
 The section describes configuration options in detail by `MiniGUI.cfg`.
 
 The format of configuration file is compact, and you can modify it easily.
@@ -99,7 +102,7 @@ specified in the form of `section-name`. The values of the key and key
 value are specified in the form of `key=value`. Some important
 sections are listed as follows.
 
-### Section system
+### Section `system`
 
 The section `system` not only defines the graphics engine
 (`gal_engine`) and the input engine (`ial_engine`) in runtime
@@ -109,16 +112,11 @@ but also defines the mouse device (`mdev`) and the mouse protocol type
 
 The definition of the keys in section `system` is as follows:
 
-`gal_engine`: The graphics engine used.
-
-`defaultmode`: The graphics engine display mode used, its format is
-widthxheight-bpp.
-
-`ial_engine`: The input engine used.
-
-`mdev`: The mouse device file.
-
-`mtype`: The mouse protocol type.
+- `gal_engine`: The graphics engine used.
+- `defaultmode`: The graphics engine display mode used, its format is widthxheight-bpp.
+- `ial_engine`: The input engine used.
+- `mdev`: The mouse device file.
+- `mtype`: The mouse protocol type.
 
 The contents of the section `system` in `MiniGUI.cfg` are as follow:
 
@@ -609,10 +607,6 @@ be limited to several sections. The system section and font related
 several sections are primary sections. In this chapter, we will give two
 configuration examples.
 
-### ISO8859-1 Charset
-
-#### Configuration File
-
 ```ini
 # The first system font must be a logical font using RBF device font.
 [systemfont]
@@ -640,23 +634,17 @@ font_number=0
 font_number=0
 ```
 
-#### Incore Configuration Options
-
 ```cpp
-static char \*SYSTEMFONT_KEYS[] =
+static char *SYSTEMFONT_KEYS[] =
 
 {"font_number", "font0", "default", "wchar_def", "fixed", "caption",
 "menu", "control"};
 
-static char \*SYSTEMFONT_VALUES[] =
+static char *SYSTEMFONT_VALUES[] =
 {
     "1","rbf-fixed-rrncnn-8-16-ISO8859-1", "0", "0", "0", "0", "0", "0"
 };
 ```
-
-### Specifying Different Graphic Engine and Input Engine
-
-#### Configuration File
 
 ```ini
 [system]
@@ -668,8 +656,6 @@ ial_engine=auto
 mdev=/dev/ts
 mtype=IMPS2
 ```
-
-#### Incore Configuration Option
 
 ```cpp
 static char *SYSTEM_KEYS[] = {"gal_engine", "ial_engine", "mdev", "mtype"};
