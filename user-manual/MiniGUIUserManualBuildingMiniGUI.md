@@ -1032,7 +1032,7 @@ Second, you modify the `rules.make` file in the top directory to
 use the real rules:
 
 ```makefile
-TARGET\_RULES=build/rules-pc.vxworks
+TARGET_RULES=build/rules-pc.vxworks
 ```
 
 Third, you compile MiniGUI using make tool of Cygwin:
@@ -1094,9 +1094,9 @@ LIBA=a
 PREFIX=c:/cross
 
 # vxworks
-TARGET\_DIR=C:/Tornado2.2x86/target
-INCS+=-I\${TARGET\_DIR}/h
-CFLAGS+=-g -mcpu=pentium -march=pentium -Wall -DTOOL\_FAMILY=gnu -DTOOL=gnu -D\_WRS\_KERNEL -DCPU=PENTIUM
+TARGET_DIR=C:/Tornado2.2x86/target
+INCS+=-I\${TARGET_DIR}/h
+CFLAGS+=-g -mcpu=pentium -march=pentium -Wall -DTOOL_FAMILY=gnu -DTOOL=gnu -D_WRS_KERNEL -DCPU=PENTIUM
 ```
 
 Note that the make tool will install MiniGUI header files to the
