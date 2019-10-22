@@ -38,30 +38,30 @@ For convenience, we call the later situation as `incore configuration`.
 
 ## Configuration File
 
-In GNU development environment, after installing MiniGUI by default
-configuration, the file `etc/MiniGUI-classic.cfg` in MiniGUI source
-tree will be installed in `/usr/local/etc/` directory, and rename to
-`MiniGUI.cfg`. When MiniGUI application starts, It will find
-`MiniGUI.cfg` as follow:
+On Linux, after building and installing MiniGUI by using the default
+configuration, the file `etc/MiniGUI.cfg` in MiniGUI source tree will
+be installed to `/usr/local/etc/` directory. However, you can deploy
+your own version of `MiniGUI.cfg` in your home directory. And this version
+will have a high priority.
 
-- the application first search `MiniGUI.cfg` in current directory, then
-search `.MiniGUI.cfg` in home directory.
-- then search `MiniGUI.cfg` in `/usr/local/etc`, at last in `/etc/`.
+Actually, when MiniGUI starts, it will locate the correct `MiniGUI.cfg`
+according to the following steps:
 
-If user don’t create the file `MiniGUI.cfg` in current directory and
-home directory, the application will use the file `MiniGUI.cfg` in
-`/usr/local/etc/` as default configuration file.
+1. search `MiniGUI.cfg` in current working directory. If not found,
+1. search `.MiniGUI.cfg` in home directory of the current user. If not found,
+1. search `MiniGUI.cfg` in `/usr/local/etc`. If not found,
+1. search `MiniGUI.cofg` in `/etc/`.
 
-When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
-application doesn’t need the file `MiniGUI.cfg`. The required options
-are given in the file `src/sysres/mgetc.c`.
+In other words, if you don't create `MiniGUI.cfg` file in the current
+directory or `.MiniGUI.cfg` file in your home directory either, MiniGUI
+will use the file `MiniGUI.cfg` in `/usr/local/etc/` as the default
+configuration file.
 
-The section describes configuration options in detail by `MiniGUI.cfg`.
-
-The format of configuration file is compact, and you can modify it easily.
-The following shows the format.
+The format of the MiniGUI configuration file is simple, and you can modify
+it easily. The following code shows the format:
 
 ```ini
+# This is a comment line
 [section-name1]
 key-name1=key-value1
 key-name2=key-value2
@@ -71,12 +71,16 @@ key-name3=key-value3
 key-name4=key-value4
 ```
 
-The parameters in the configuration file are grouped in sections, such
-as notation (#), section, key, and key value. The line that the first
-character is ‘#’ is notation line. The values of the section are
-specified in the form of `section-name`. The values of the key and key
-value are specified in the form of `key=value`. Some important
-sections are listed as follows.
+The options in the configuration file are grouped in sections.
+The line which starts with the character `#` is a comment line.
+A line in the form of `[section-name]` defines a new section.
+And a pair of key and value in the form of `key=value` defines
+an option in a section.
+
+Note that we often use the notation `section_name.key_name` to refer to
+an option with `key_name` in the section `section_name`.
+
+Some important sections are listed as follows.
 
 ### Section `system`
 
@@ -515,6 +519,10 @@ repeatusec=50000
 When use incore resources, MiniGUI don’t need the file `MiniGUI.cfg`.
 The appropriate configuration options are defined in the file
 `src/sysres/mgetc.c`.
+
+When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
+application doesn’t need the file `MiniGUI.cfg`. The required options
+are given in the file `src/sysres/mgetc.c`.
 
 Similar with the structure in `MiniGUI.cfg`, MiniGUI defines an
 structure `ETCSECTION`, array `_etc_sections` and variable MGETC in
