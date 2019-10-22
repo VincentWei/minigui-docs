@@ -14,7 +14,7 @@
 MiniGUI, developed by [FMSoft Technologies],
 originates from a famous free and open source software project,
 which is initiated by Wei Yongming. MiniGUI aims to provide a fast,
-stable and lightweight graphics user interface (GUI) support system
+stable and lightweighted graphics user interface (GUI) support system
 for real-time embedded systems and smart IoT devices. After over 20
 years of development since the end of 1998, MiniGUI has become
 a stable and reliable one for widespread application in a variety
@@ -44,9 +44,9 @@ FMSoft also releases some components for easy development of MiniGUI apps:
   graphics functions like path, gradient, anti-aliased stretch,
   and color combination.
 - `mGEff` provides an animation framework for
-  MiniGUI app. It also provides some popular UI special effects.
+  MiniGUI apps. It also provides some popular UI special effects.
 - `mGNCS` provides a new control set for
-  MiniGUI app.
+  MiniGUI apps.
 - `mGNCS4Touch` provides some new controls, which are compliant to
   the control specification of mGNCS, for devices with touch screens.
 
@@ -66,7 +66,7 @@ these components since MiniGUI v3.2.0:
 
 Note that you can download three releases of MiniGUI:
 
-- MiniGUI version 3.0.x. This release is no longer be maintained.
+- MiniGUI version 3.0.x. This release is no longer maintained.
   This release is there only for old projects.
 - MiniGUI version 3.2.x. Main features since version 3.0:
    * Support for 64-bit platform.
@@ -80,7 +80,7 @@ Note that you can download three releases of MiniGUI:
      hardware acceleration.
 
 The compatibility of some APIs (mainly MiniGUI Core) will be broken between
-different releases. For the detailed explanation, you can refer to the release
+different releases. For detailed explanation, you can refer to the release
 notes of MiniGUI core and components:
 
 * [Release Notes for MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
@@ -95,24 +95,24 @@ especially if the new features of MiniGUI 4.0.x are must for your new apps.
 
 ### Source Tarballs and Repos
 
-All software packages of MiniGUI are listed as follow:
+All software packages of MiniGUI are listed as following:
 
-- MiniGUI core and components:
+- MiniGUI Core and components:
    * `libminigui`: MiniGUI Core.
    * `libmgutils`: mGUtils component.
    * `libmgplus`: mGPlus component.
    * `libmgeff`: mGEff component.
    * `libmgncs`: mGNCS component.
    * `libmgncs4touch`: mGNCS4Touch component.
-   * `minigui-res`: the resource tarball including contains fonts, cursors, icons, and bitmaps used by MiniGUI.
-   * `mg-tests`: The unit tests for MiniGUI core (since 4.0.0).
+   * `minigui-res`: the resource tarball including fonts, cursors, icons, and bitmaps used by MiniGUI.
+   * `mg-tests`: The unit tests for MiniGUI Core (since 4.0.0).
 - Samples and demos:
-   * `mg-samples`: The samples for MiniGUI and components.
-   * `mguxdemo`: mGUXDemo is the comprehensive demonstration for MiniGUI core and components.
+   * `mg-samples`: Samples for MiniGUI Core and components.
+   * `mguxdemo`: mGUXDemo is the comprehensive demonstration for MiniGUI Core and components.
    * `mg-demos`: A set of demos as supplements of mGUXDemo.
 - Tools and third party libraries
    * `gvfb`: the virtual frame buffer Gtk version.
-   * `mg-tools`: The tools for fonts conversion and in-core resource generation.
+   * `mg-tools`: The tools for font conversion and in-core resource generation.
    * libjpeg v7: MiniGUI uses this library to decode JPEG image files.
    * libpng v1.2.x: MiniGUI uses this library to decode PNG image files.
    * libpng v1.6.x: MiniGUI uses this library to decode PNG image files (MiniGUI Core 4.0.0 or later).
@@ -126,13 +126,13 @@ downloaded from the download zone of [MiniGUI Official Website]:
 
 <http://www.minigui.com/en/download>
 
-FMSoft had created the public repositories for MiniGUI core and
-components on GitHub. You can visit them on:
+FMSoft has created public repositories for MiniGUI Core and
+components on GitHub. You can visit them at:
 
 <https://github.com/VincentWei>
 
-FMSoft also releases some open source apps for MiniGUI on the site above,
-for examples:
+FMSoft also released some open source apps for MiniGUI at the site above,
+for example:
 
 * mDolphin, licensed under Apache 2.0, is a full-featured
   WEB/WAP browser, which is developed based on the open source browser
@@ -149,7 +149,7 @@ You can find the public repositories of above apps on:
 
 <https://github.com/FMSoftCN>
 
-Besides MiniGUI, FMSoft also releases the tools and dependencies of MiniGUI,
+Besides MiniGUI, FMSoft also released tools and dependencies of MiniGUI,
 such as the virtual buffer program GVFB, freetype, libjpeg, libpng, zlib,
 and others. Please refer to:
 
@@ -161,16 +161,15 @@ FMSoft now maintains the documents of MiniGUI on GitHub:
 
 <https://github.com/VincentWei/minigui-docs>
 
-All documents are classified into the following volumes:
+All documents are classified into the following parts:
 
 - [MiniGUI User Manual]: The user manual describes how to configure,
 build, and run MiniGUI.
-- [MiniGUI Programming Guide]: This guide describes in
-detail the foundation knowledge of MiniGUI on developing MiniGUI apps.
+- [MiniGUI Programming Guide]: This guide describes the foundation knowledge of MiniGUI on developing MiniGUI apps in detail.
 - [MiniGUI Porting Guide]: This guide describes how to port MiniGUI
 to various RTOSes.
 - [MiniGUI API Reference Manuals]: The online API reference manuals for
-MiniGUI core and MiniGUI components.
+MiniGUI Core and MiniGUI components.
 
 We also maintain some supplementary documents on MiniGUI Wiki:
 
@@ -181,21 +180,21 @@ We also maintain some supplementary documents on MiniGUI Wiki:
 ### Recommended development environment
 
 Now, Linux has become a software development host system that is
-more important than Windows. Almost all building tool chains can
-all on Linux, and you can use Linux to write and debug code for
-cloud, Web, embedded devices, and many real time operating systems
+more important than MS Windows. Almost all building toolchains can
+run on Linux, and you can use Linux to write and debug code for
+Cloud, Web, embedded devices, and many real time operating systems
 such as eCos, RTEMS, RT-Thread.
 
 Therefore, since MiniGUI version 3.2, we only maintain the building
 scripts of MiniGUI for Linux. Of course, it is still possible to
-build MiniGUI on Windows.
+build MiniGUI on MS Windows.
 
 We recommend that your use Ubuntu Linux 16.04 LTS or 18.04 LTS.
-The building scripts of MiniGUI are tested on these Linux distributions.
+The building scripts of MiniGUI are tested on these two Linux distributions.
 
 Since MiniGUI 3.2, we maintain some simple scripts to fast fetch the code and
 build all dependencies for the comprehensive demonstration (mGUXDemo) of
-MiniGUI core and components. So it is very easy to build MiniGUI on a
+MiniGUI Core and components. So it is very easy to build MiniGUI on a
 Ubuntu Linux distribution.
 
 The following figures are some screenshots of mGUXDemo.
@@ -211,10 +210,10 @@ The following figures are some screenshots of mGUXDemo.
 
 #### Prerequisites
 
-First, make sure that you are using Ubuntu Linux 16.04 LTS or 18.04 LTS.
+First, make sure that you are using Ubuntu 16.04 LTS or 18.04 LTS.
 
 You should run `sudo apt install <package_name>` to install the following packages
-on your Ubuntu Linux.
+on your Ubuntu system.
 
 - Building tools:
    * git
@@ -228,7 +227,7 @@ on your Ubuntu Linux.
 - Dependent libraries:
    * libgtk2.0-dev
    * libjpeg-dev
-   * libpng12-dev (libpng-dev on Ubuntu Linux 18.04 instead)
+   * libpng12-dev (libpng-dev on Ubuntu 18.04 instead)
    * libfreetype6-dev
    * libinput-dev
    * libdrm-dev
@@ -237,12 +236,12 @@ on your Ubuntu Linux.
    * libssl1.0-dev
    * electric-fence (used by mg-tests)
 
-Note that if you are using Ubuntu Linux 18.04, please install
+Note that if you are using Ubuntu 18.04, please install
 `libpng-dev`. Ubuntu 18.04 does not provide support for `libpng12-dev`.
 
 #### Steps
 
-Please make sure that you can visit GitHub and you can do `sudo` on your Linux box.
+Please make sure that you can visit GitHub and you can do `sudo` on your Ubuntu system.
 
 1. Clone `build-minigui-4.0` repository from GitHub:
 
@@ -253,7 +252,7 @@ Please make sure that you can visit GitHub and you can do `sudo` on your Linux b
 
         $ cp config.sh myconfig.sh
 
-1. Run `fetch-all.sh` to fetch all source from GitHub:
+1. Run `fetch-all.sh` to fetch all source code from GitHub:
 
         $ ./fetch-all.sh
 
@@ -270,8 +269,8 @@ Please make sure that you can visit GitHub and you can do `sudo` on your Linux b
         $ cd /usr/local/bin
         $ ./mguxdemo
 
-When there were some updates in the remote repos, you can run `update-all.sh` to
-update them. You can run `clean-build-all.sh` to uninstall, clean,
+When there is any update in the remote repos, you can run `update-all.sh` to
+update. You can run `clean-build-all.sh` to uninstall, clean,
 and re-install them.
 
 Note that you might need to run `ldconfig` to refresh the shared libraries cache
@@ -279,7 +278,7 @@ before running `mguxdemo`.
 
 #### Commands to build dependencies
 
-The following steps are those ones in `build-deps.sh`. We list them here for
+The following steps are the ones in `build-deps.sh`. We list them here for
 your information:
 
 1. Make and install `gvfb`:
@@ -310,9 +309,9 @@ your information:
 
 #### Prerequisites
 
-First, make sure that you are using Ubuntu Linux 16.04 LTS.
+First, make sure that you are using Ubuntu 16.04 LTS.
 
-You can run `apt install <package_name>` to install the software on Ubuntu Linux.
+You can run `apt install <package_name>` to install the software on Ubuntu.
 
 * Building tools:
   * git
@@ -334,14 +333,14 @@ You can run `apt install <package_name>` to install the software on Ubuntu Linux
 
 #### Steps
 
-Please make sure that you can visit GitHub via SSH and you can do `sudo` on your Linux box.
+Please make sure that you can visit GitHub via SSH and you can do `sudo` on your Ubuntu systme.
 
 1. Clone `build-minigui-3.2` repository from GitHub:
 
         $ git clone git@github.com:VincentWei/build-minigui-3.2.git
         $ cd build-minigui-3.2
 
-1. Run `fetch-all.sh` to fetch all source from GitHub:
+1. Run `fetch-all.sh` to fetch all source code from GitHub:
 
         $ ./fetch-all.sh
 
@@ -377,8 +376,8 @@ Please make sure that you can visit GitHub via SSH and you can do `sudo` on your
         $ cd /usr/local/bin
         $ ./mguxdemo
 
-When there were some updates in the remote repos, you can run `update-all.sh` to
-update them. You can run `clean-build-all.sh` to uninstall, clean,
+When there is any update in the remote repos, you can run `update-all.sh` to
+update. You can run `clean-build-all.sh` to uninstall, clean,
 and re-install them.
 
 Note that you might need to run `ldconfig` to refresh the shared libraries cache
