@@ -529,7 +529,7 @@ http://wiki.minigui.com/twiki/bin/view/Products/WebHome
 
 ----
 
-[&lt;&lt;FAQs](MiniGUIUserManualFAQsEN.md) |
+[&lt;&lt; FAQs](MiniGUIUserManualFAQsEN.md) |
 [Table of Contents](README.md)
 
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn

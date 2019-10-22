@@ -305,7 +305,7 @@ driver. Therefore, you can try to set a smaller resolution by modify
 
 ----
 
-[&lt;&lt;Feature List](MiniGUIUserManualFeatureList.md) |
+[&lt;&lt; Feature List](MiniGUIUserManualFeatureList.md) |
 [Table of Contents](README.md) |
 [常见问题 &gt;&gt;](MiniGUIUserManualFAQsZH.md)
 
