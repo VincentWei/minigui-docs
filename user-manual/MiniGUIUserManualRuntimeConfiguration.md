@@ -17,47 +17,24 @@
    * [Structure `ETC_S`](#structure-etc_s)
 - [Samples](#samples)
 
-In this chapter, we describe the MiniGUI runtime configuration options,
-which effect some actions about MiniGUI running, for example, running
-GAL and IAL used, device font, bitmap, and cursor etc. It is known that
-MiniGUI runtime configuration options is loaded from `MiniGUI.cfg`,
-but if compiling MiniGUI with in-core options, the options is included
-MiniGUI libraries.
+In this chapter, we describe the MiniGUI runtime configuration,
+which affects the runtime behavior of MiniGUI. For example, you
+can use the runtime configuration to specify:
 
-MiniGUI 3.0 appearance of the window and the control drawing
-implementation, using a completely different from the previous old
-version of the implementation mechanism. Previous versions had to be
-compiled and configured before compilation, the style was chosen, and
-only one of three styles fashion, classic and flat was chosen. MiniGUI
-3.0 uses Look And Feel renderer technology to draw the appearance of
-windows and controls. MiniGUI support four kinds of renderers, in
-practical applications choose one. The advantage of the renderer
-technology is that the appearance can be modified through the
-MiniGUI.cfg file, and the appearance can also be controlled by API. The
-user can even customize its own renderer, which provides great
-convenience for the application to flexibly customize its own appearance
-based on the actual application environment. For details about MiniGUI
-renderer interface, please refer to MiniGUI Programming Manual.
+- The effective graphics and input engines.
+- The device fonts to load.
+- The system fonts for caption, menu, and control.
+- The mouse cursors.
+- The icons, and bitmaps to decorate window.
 
-MiniGUI Look and Feel divide the window and control attribute to some
-parts, and then use the drawing interface definition how to draw,
-forming a complete set of appearance renderer mechanism. MiniGUI 3.0
-provides four kinds of renderer: classic, flat, fashion, skin. classic
-is the default renderer, that is when MiniGUI is initialized, the
-classic renderer is used to draw windows and controls by default. The
-fashion renderer needs support by mGPlus component. MiniGUI itself does
-not provide support for the fashion renderer.
+Generally, the runtime configuration is loaded from `MiniGUI.cfg` file.
+But if you configured MiniGUI with built-in resource in building stage,
+the runtime configuration will be compiled into the MiniGUI Core library.
 
-The application can choose to use a particular renderer for a window and
-define the appearance of the window's elements. Applications can also
-define their own renderer to draw.
-
-This chapter first describes the runtime configuration options when
-using configuration files and then describes how to specify runtime
-configuration options in built-in resources.
-
-Below, we first describe running configuration options with
-configuration file, and with incore resources.
+In this chapter, we first describe the runtime configuration when
+using the configuration file, then describe how to specify runtime
+configuration if you configured MiniGUI with incore resource.
+For convenience, we call the later situation as `incore configuration`.
 
 ## Configuration File
 
@@ -363,6 +340,34 @@ fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
 ```
 
 ### Sections for appearance renderers
+
+MiniGUI 3.0 appearance of the window and the control drawing
+implementation, using a completely different from the previous old
+version of the implementation mechanism. Previous versions had to be
+compiled and configured before compilation, the style was chosen, and
+only one of three styles fashion, classic and flat was chosen. MiniGUI
+3.0 uses Look And Feel renderer technology to draw the appearance of
+windows and controls. MiniGUI support four kinds of renderers, in
+practical applications choose one. The advantage of the renderer
+technology is that the appearance can be modified through the
+MiniGUI.cfg file, and the appearance can also be controlled by API. The
+user can even customize its own renderer, which provides great
+convenience for the application to flexibly customize its own appearance
+based on the actual application environment. For details about MiniGUI
+renderer interface, please refer to MiniGUI Programming Manual.
+
+MiniGUI Look and Feel divide the window and control attribute to some
+parts, and then use the drawing interface definition how to draw,
+forming a complete set of appearance renderer mechanism. MiniGUI 3.0
+provides four kinds of renderer: classic, flat, fashion, skin. classic
+is the default renderer, that is when MiniGUI is initialized, the
+classic renderer is used to draw windows and controls by default. The
+fashion renderer needs support by mGPlus component. MiniGUI itself does
+not provide support for the fashion renderer.
+
+The application can choose to use a particular renderer for a window and
+define the appearance of the window's elements. Applications can also
+define their own renderer to draw.
 
 The section `classic` defines default window element color used.
 Generally, it is unnecessary changed.
