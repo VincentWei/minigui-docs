@@ -857,7 +857,7 @@ However, for MiniGUI components, you use the default options in most cases.
 
 ---
 
-[&lt;&lt;Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) |
+[&lt;&lt; Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md) |
 [Table of Contents](README.md) |
 [Runtime Configuration &gt;&gt;](MiniGUIUserManualRuntimeConfiguration.md)
 
