@@ -491,57 +491,28 @@ Each of these sections defines `font_number`, `name<NR>`, and `fontfile<NR>` key
 If you don't need to use a specific type of device font, you can skip
 the configuration option by set `font_number=0`.
 
-The content of these sections in `MiniGUI.cfg` are as follow:
+The content of these sections in the default `MiniGUI.cfg` is as follow:
 
 ```ini
 [rawbitmapfonts]
-font_number=4
-name0=rbf-fixed-rrncnn-8-16-ISO8859-1
-fontfile0=/usr/local/lib/minigui/res/font/8x16-iso8859-1.bin
-name1=rbf-fixed-rrncnn-16-16-GB2312-0
-fontfile1=/usr/local/lib/minigui/res/font/song-16-gb2312.bin
-name2=rbf-fixed-rrncnn-6-12-ISO8859-1
-fontfile2=/usr/local/lib/minigui/res/font/6x12-iso8859-1.bin
-name3=rbf-fixed-rrncnn-12-12-GB2312-0
-fontfile3=/usr/local/lib/minigui/res/font/song-12-gb2312.bin
+font_number=0
 
 [varbitmapfonts]
-font_number=6
-name0=vbf-Courier-rrncnn-8-13-ISO8859-1
-fontfile0=/usr/local/lib/minigui/res/font/Courier-rr-8-13.vbf
-name1=vbf-Helvetica-rrncnn-11-12-ISO8859-1
-fontfile1=/usr/local/lib/minigui/res/font/Helvetica-rr-11-12.vbf
-name2=vbf-Times-rrncnn-10-12-ISO8859-1
-fontfile2=/usr/local/lib/minigui/res/font/Times-rr-10-12.vbf
-name3=vbf-Courier-rrncnn-10-15-ISO8859-1
-fontfile3=/usr/local/lib/minigui/res/font/Courier-rr-10-15.vbf
-name4=vbf-Helvetica-rrncnn-15-16-ISO8859-1
-fontfile4=/usr/local/lib/minigui/res/font/Helvetica-rr-15-16.vbf
-name5=vbf-Times-rrncnn-13-15-ISO8859-1
-fontfile5=/usr/local/lib/minigui/res/font/Times-rr-13-15.vbf
-
-[qpf]
 font_number=0
 
 [upf]
 font_number=0
-name0=upf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312-0,GBK,BIG5
-fontfile0=/usr/local/lib/minigui/res/font/unifont_160_50.upf
-name1=upf-times-rrncnn-5-10-ISO8859-1,ISO8859-15
-fontfile1=/usr/local/lib/minigui/res/font/smoothtimes_100_50.upf
-name2=upf-helvetica-rrncnn-5-10-ISO8859-1,ISO8859-15
-fontfile2=/usr/local/lib/minigui/res/font/helvetica_100_50.upf
-name3=upf-micro-rrncnn-4-4-ISO8859-1,ISO8859-15
-fontfile3=/usr/local/lib/minigui/res/font/micro_40_50.upf
+
+[qpf]
+font_number=0
 
 [truetypefonts]
-font_number=3
-name0=ttf-arial-rrncnn-0-0-ISO8859-1
-fontfile0=/usr/local/lib/minigui/res/font/arial.ttf
-name1=ttf-times-rrncnn-0-0-ISO8859-1
-fontfile1=/usr/local/lib/minigui/res/font/times.ttf
-name2=ttf-pinball-rrncnn-0-0-ISO8859-1
-fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
+font_number=0
+# The devfont now supports multiple font family names since V4.0.0.
+name0=ttf-Source Sans Pro,SansSerif-rrncnn-0-0-ISO8859-1,UTF-8
+# The path of font file can be relative to the current working directory.
+fontfile0=font/SourceSansPro-Regular.ttf
+
 ```
 
 ### Sections for appearance renderers
@@ -645,6 +616,15 @@ checkbutton=classic_check_button.bmp
 # background picture, use your favirate photo
 bgpicture=none
 bgpicpos=center
+# bgpicpos=upleft
+# bgpicpos=downleft
+# bgpicpos=upright
+# bgpicpos=downright
+# bgpicpos=upcenter
+# bgpicpos=downcenter
+# bgpicpos=vcenterleft
+# bgpicpos=vcenterright
+# bgpicpos=none
 
 #window element metrics
 caption=20
@@ -656,30 +636,302 @@ scrollbar=16
 fgc_active_caption=0xFFFFFFFF
 bgca_active_caption=0xFF6A240A
 bgcb_active_caption=0xFF6A240A
+
 fgc_menu=0xFF000000
 bgc_menu=0xFFCED3D6
+
+
 fgc_msgbox=0xFF000000
+
 fgc_tip=0xFF000000
 bgc_tip=0xFFE7FFFF
+
 fgc_active_border=0xFFCED3D6
 fgc_inactive_border=0xFFCED3D6
+
 fgc_inactive_caption=0xFFC8D0D4
 bgca_inactive_caption=0xFF808080
 bgcb_inactive_caption=0xFF808080
+
 fgc_window=0xFF000000
 bgc_window=0xFFFFFFFF
+
 fgc_3dbox=0xFF000000
 mainc_3dbox=0xFFCED3D6
+
 fgc_selected_item=0xFFFFFFFF
 bgc_selected_item=0xFF6B2408
 bgc_selected_lostfocus=0xFFBDA69C
+
 fgc_disabled_item=0xFF848284
 bgc_disabled_item=0xFFCED3D6
+
 fgc_hilight_item=0xFFFFFFFF
 bgc_hilight_item=0xFF6B2408
+
 fgc_significant_item=0xFFFFFFFF
 bgc_significant_item=0xFF6B2408
+
 bgc_desktop=0xFFC08000
+
+#{{ifdef _MGLF_RDR_FLAT
+[flat]
+# Note that max number defined in source code is 5.
+iconnumber=5
+icon0=form-flat.ico
+icon1=failed-flat.ico
+icon2=help-flat.ico
+icon3=warning-flat.ico
+icon4=excalmatory-flat.ico
+
+# default icons for new OpenFileDialogBox
+dir=folder-flat.ico
+file=textfile-flat.ico
+
+# default icons for TreeView control
+treefold=fold-flat.ico
+treeunfold=unfold-flat.ico
+
+# bitmap used by BUTTON control
+radiobutton=flat_radio_button.bmp
+checkbutton=flat_check_button.bmp
+
+# background picture, use your favirate photo
+bgpicture=none
+bgpicpos=center
+
+#window element metrics
+caption=20
+menu=25
+border=1
+scrollbar=16
+
+#window element colors
+fgc_active_caption=0xFFFFFFFFF
+bgca_active_caption=0xFF000000
+bgcb_active_caption=0xFF000000
+
+fgc_inactive_caption=0xFF000000
+bgca_inactive_caption=0xFFFFFFFF
+bgcb_inactive_caption=0xFFFFFFFF
+
+fgc_menu=0xFF000000
+bgc_menu=0xFFD8D8D8
+
+fgc_msgbox=0xFF000000
+
+fgc_tip=0xFF000000
+bgc_tip=0xFFE7FFFF
+
+fgc_active_border=0xFF000000
+fgc_inactive_border=0xFF848284
+
+fgc_window=0xFF000000
+bgc_window=0xFFFFFFFF
+
+fgc_3dbox=0xFF000000
+mainc_3dbox=0xFFFFFFFF
+
+fgc_selected_item=0xFFFFFFFF
+bgc_selected_item=0xFF000000
+bgc_selected_lostfocus=0xFFBDA69C
+
+fgc_disabled_item=0xFF848284
+bgc_disabled_item=0xFF000000
+
+fgc_hilight_item=0xFFFFFFFF
+bgc_hilight_item=0xFF664E4A
+
+fgc_significant_item=0xFFFFFFFF
+bgc_significant_item=0xFF000000
+
+bgc_desktop=0xFFC08000
+
+flat_tab_normal_color=0xFFC6D2CF
+#}}
+
+#{{ifdef _MGLF_RDR_SKIN
+[skin]
+# Note that max number defined in source code is 5.
+iconnumber=5
+icon0=form.ico
+icon1=failed.ico
+icon2=help.ico
+icon3=warning.ico
+icon4=excalmatory.ico
+
+# default icons for new OpenFileDialogBox
+dir=folder.ico
+file=textfile.ico
+
+# default icons for TreeView control
+treefold=fold.ico
+treeunfold=unfold.ico
+
+# background picture, use your favirate photo
+bgpicture=none
+bgpicpos=center
+
+#window element metrics
+caption=25
+menu=25
+border=1
+scrollbar=17
+
+fgc_active_caption=0xFFFFFFFF
+bgca_active_caption=0xFFE35400
+bgcb_active_caption=0xFF686868
+
+fgc_menu=0xFF000000
+bgc_menu=0xFFD4D6FF
+
+fgc_msgbox=0xFF000000
+
+fgc_tip=0xFF000000
+bgc_tip=0xFFFFFFFF
+
+fgc_active_border=0xFFC8D0D4
+fgc_inactive_border=0xFFC8D0D4
+
+fgc_inactive_caption=0xFFF8E4D8
+bgca_inactive_caption=0xFFDF967A
+bgcb_inactive_caption=0xFF686868
+
+fgc_window=0xFF000000
+bgc_window=0xFFFFFFFF
+
+fgc_3dbox=0xFF000000
+mainc_3dbox=0xFFD8E9EC
+
+fgc_selected_item=0xFFFFFFFF
+bgc_selected_item=0xFFC56A31
+bgc_selected_lostfocus=0xFFD8E9EC
+
+fgc_disabled_item=0xFF99A8AC
+bgc_disabled_item=0xFFFFFFFF
+
+fgc_hilight_item=0xFFFFFFFF
+bgc_hilight_item=0xFFC56A31
+
+fgc_significant_item=0xFFFFFFFF
+bgc_significant_item=0xFFC56A31
+
+bgc_desktop=0xFF984E00
+
+skin_bkgnd=skin_bkgnd.bmp
+skin_caption=skin_caption.gif
+skin_caption_btn=skin_cpn_btn.gif
+
+#for scrollbar
+skin_scrollbar_hshaft=skin_sb_hshaft.bmp
+skin_scrollbar_vshaft=skin_sb_vshaft.bmp
+skin_scrollbar_hthumb=skin_sb_hthumb.bmp
+skin_scrollbar_vthumb=skin_sb_vthumb.bmp
+skin_scrollbar_arrows=skin_sb_arrows.bmp
+
+#for border
+skin_tborder=skin_tborder.bmp
+skin_bborder=skin_bborder.bmp
+skin_lborder=skin_lborder.bmp
+skin_rborder=skin_rborder.bmp
+
+skin_arrows=skin_arrows.gif
+skin_arrows_shell=skin_arrows_shell.bmp
+
+skin_pushbtn=skin_pushbtn.gif
+skin_radiobtn=skin_radiobtn.gif
+skin_checkbtn=skin_checkbtn.bmp
+
+#for treeview
+skin_tree=skin_tree.bmp
+
+skin_header=skin_header.bmp
+skin_tab=skin_tab.gif
+
+#for trackbar
+skin_tbslider_h=skin_tbslider_h.gif
+skin_tbslider_v=skin_tbslider_v.gif
+skin_trackbar_horz=skin_tb_horz.gif
+skin_trackbar_vert=skin_tb_vert.gif
+
+#for progressbar
+skin_progressbar_htrack=skin_pb_htrack.gif
+skin_progressbar_vtrack=skin_pb_vtrack.gif
+skin_progressbar_hchunk=skin_pb_htruck.bmp
+skin_progressbar_vchunk=skin_pb_vtruck.bmp
+#}}
+
+
+[fashion]
+# Note that max number defined in source code is 5.
+iconnumber=5
+icon0=form.ico
+icon1=failed.ico
+icon2=help.ico
+icon3=warning.ico
+icon4=excalmatory.ico
+
+# default icons for new OpenFileDialogBox
+dir=folder.ico
+file=textfile.ico
+
+# default icons for TreeView control
+treefold=fold.ico
+treeunfold=unfold.ico
+
+# bitmap used by BUTTON control
+radiobutton=fashion_radio_btn.bmp
+checkbutton=fashion_check_btn.bmp
+
+# background picture, use your favirate photo
+bgpicture=none
+bgpicpos=center
+
+#window element metrics
+caption=25
+menu=25
+border=1
+scrollbar=17
+
+fgc_active_caption=0xFFFFFFFF
+bgca_active_caption=0xFFE35400
+bgcb_active_caption=0xFFFF953D
+
+fgc_menu=0xFF000000
+bgc_menu=0xFFFFE4BF
+
+fgc_msgbox=0xFF000000
+
+fgc_tip=0xFF000000
+bgc_tip=0xFFFFFFFF
+
+fgc_active_border=0xFFC8D0D4
+fgc_inactive_border=0xFFC8D0D4
+
+fgc_inactive_caption=0xFFF8E4D8
+bgca_inactive_caption=0xFFDF967A
+bgcb_inactive_caption=0xFFEBB99D
+
+fgc_window=0xFF000000
+bgc_window=0xFFEBB99D
+
+fgc_3dbox=0xFF000000
+mainc_3dbox=0xFFD8E9EC
+
+fgc_selected_item=0xFFFFFFFF
+bgc_selected_item=0xFFC56A31
+bgc_selected_lostfocus=0xFFD8E9EC
+
+fgc_disabled_item=0xFF99A8AC
+bgc_disabled_item=0xFFFFFFFF
+
+fgc_hilight_item=0xFFFFFFFF
+bgc_hilight_item=0xFFC56A31
+
+fgc_significant_item=0xFFFFFFFF
+bgc_significant_item=0xFFC56A31
+
+bgc_desktop=0xFF984E00
 ```
 
 ### Other sections
