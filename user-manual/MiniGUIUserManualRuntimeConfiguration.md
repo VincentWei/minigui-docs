@@ -591,9 +591,9 @@ static ETC_S _ETC = {
 ```
 
 The number of section is `sizeof(_etc_sections)/sizeof(ETCSECTION)` in
-the MGETC structure; the section array is mgetc_sections array above.
+the MGETC structure; the section array is `mgetc_sections` array above.
 
-## Sample of Configuration
+## Samples
 
 Under most circumstances, we modify runtime configuration file, we will
 be limited to several sections. The system section and font related
