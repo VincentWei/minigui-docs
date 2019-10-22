@@ -1,35 +1,44 @@
-3 MiniGUI runtime configuration options
-=======================================
+# Runtime configuration options
+
+- [Configuration File](#configuration-file)
+- [Look And Feel Renderer](#look-and-feel-renderer)
+- [Configuring MiniGUI in GNU Environment](#configuring-minigui-in-gnu-environment)
+- [Configuring MiniGUI in Non-GNU Environment](#configuring-minigui-in-non-gnu-environment)
+- [Building MiniGUI in GNU environment](#building-minigui-in-gnu-environment)
+   * [LibFreeType](#libfreetype)
+   * [LibJPEG, LibPNG, and LibZ](#libjpeg-libpng-and-libz)
+   * [gvfb](#gvfb)
+   * [MiniGUI core](#minigui-core)
+   * [MiniGUI resource](#minigui-resource)
+   * [MiniGUI components](#minigui-components)
+   * [MiniGUI samples and demos](#minigui-samples-and-demos)
+- [Building MiniGUI in Non-GNU environment](#building-minigui-in-non-gnu-environment)
 
 In this chapter, we describe the MiniGUI runtime configuration options,
 which effect some actions about MiniGUI running, for example, running
 GAL and IAL used, device font, bitmap, and cursor etc. It is known that
-MiniGUI runtime configuration options is loaded from **MiniGUI.cfg**,
+MiniGUI runtime configuration options is loaded from `MiniGUI.cfg`,
 but if compiling MiniGUI with in-core options, the options is included
 MiniGUI libraries.
 
-MiniGUI.cfg
-
 In GNU development environment, after installing MiniGUI by default
-configuration, the file **etc/MiniGUI-classic.cfg** in MiniGUI source
-tree will be installed in **/usr/local/etc/** directory, and rename to
-**MiniGUI.cfg**. When MiniGUI application starts, It will find
-MiniGUI.cfg as follow:
+configuration, the file `etc/MiniGUI-classic.cfg` in MiniGUI source
+tree will be installed in `/usr/local/etc/` directory, and rename to
+`MiniGUI.cfg`. When MiniGUI application starts, It will find
+`MiniGUI.cfg` as follow:
 
-the application first search **MiniGUI.cfg** in current directory, then
-search **.MiniGUI.cfg** in home directory.
+the application first search `MiniGUI.cfg` in current directory, then
+search `.MiniGUI.cfg` in home directory.
 
-then search **MiniGUI.cfg** in **/usr/local/etc**, at last in **/etc/**.
+then search `MiniGUI.cfg` in `/usr/local/etc`, at last in `/etc/`.
 
-If user don’t create the file **MiniGUI.cfg** in current directory and
+If user don’t create the file `MiniGUI.cfg` in current directory and
 home directory, the application will use the file MiniGUI.cfg in
-**/usr/local/etc/** as default configuration file.
+`/usr/local/etc/` as default configuration file.
 
-When we compile MiniGUI with **--enable-incoreres** option, MiniGUI
-application doesn’t need the file **MiniGUI.cfg**. The required options
-are given in the file **src/sysres/mgetc.c**.
-
-***Look And Feel Renderer***
+When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
+application doesn’t need the file `MiniGUI.cfg`. The required options
+are given in the file `src/sysres/mgetc.c`.
 
 MiniGUI 3.0 appearance of the window and the control drawing
 implementation, using a completely different from the previous old
@@ -66,326 +75,274 @@ configuration options in built-in resources.
 Below, we first describe running configuration options with
 configuration file, and with incore resources.
 
-3.1 Configuration File
-----------------------
+## Configuration File
 
-The section describes configuration options in detail by
-**MiniGUI.cfg**.
+The section describes configuration options in detail by `MiniGUI.cfg`.
 
-The format of configuration file is compact, and you can modify it
-easily. The following shows the format.
+The format of configuration file is compact, and you can modify it easily.
+The following shows the format.
 
-\[section-name1\]
-
+```ini
+[section-name1]
 key-name1=key-value1
-
 key-name2=key-value2
 
-\[section-name2\]
-
+[section-name2]
 key-name3=key-value3
-
 key-name4=key-value4
+```
 
 The parameters in the configuration file are grouped in sections, such
-as notation (\#), section, key, and key value. The line that the first
-character is ‘\#’ is notation line. The values of the section are
-specified in the form of **section-name**. The values of the key and key
-value are specified in the form of **key=value**. Some important
+as notation (#), section, key, and key value. The line that the first
+character is ‘#’ is notation line. The values of the section are
+specified in the form of `section-name`. The values of the key and key
+value are specified in the form of `key=value`. Some important
 sections are listed as follows.
 
-### 3.1.1 Section system
+### Section system
 
-The section **system** not only defines the graphics engine
-(**gal\_engine**) and the input engine (**ial\_engine**) in runtime
+The section `system` not only defines the graphics engine
+(`gal_engine`) and the input engine (`ial_engine`) in runtime
 MiniGUI, which must be one of engines configured on MiniGUI compiling,
-but also defines the mouse device (**mdev**) and the mouse protocol type
-(**mtype**).
+but also defines the mouse device (`mdev`) and the mouse protocol type
+(`mtype`).
 
-The definition of the keys in section **system** is as follows:
+The definition of the keys in section `system` is as follows:
 
-**gal\_engine**: The graphics engine used.
+`gal_engine`: The graphics engine used.
 
-**defaultmode**: The graphics engine display mode used, its format is
+`defaultmode`: The graphics engine display mode used, its format is
 widthxheight-bpp.
 
-**ial\_engine**: The input engine used.
+`ial_engine`: The input engine used.
 
-**mdev**: The mouse device file.
+`mdev`: The mouse device file.
 
-**mtype**: The mouse protocol type.
+`mtype`: The mouse protocol type.
 
-The contents of the section **system** in **MiniGUI.cfg** are as follow:
+The contents of the section `system` in `MiniGUI.cfg` are as follow:
 
-\[system\]
-
-\# GAL engine and default options
-
-gal\_engine=qvfb
-
+```ini
+[system]
+# GAL engine and default options
+gal_engine=qvfb
 defaultmode=800x600-16bpp
 
-\# IAL engine
-
-ial\_engine=qvfb
-
+# IAL engine
+ial_engine=qvfb
 mdev=/dev/input/mice
-
 mtype=IMPS2
+```
 
 Since MiniGUI Version 1.6.8, you can modify the graphics and input
-engine via environment variable. For example, if you define **fbcon**
-and **qvfb** graphics engine and **console** and **qvfb** input engine,
-and you choose the qvfb engine in **MiniGUI.cfg** or in-core resources.
+engine via environment variable. For example, if you define `fbcon`
+and `qvfb` graphics engine and `console` and `qvfb` input engine,
+and you choose the qvfb engine in `MiniGUI.cfg` or in-core resources.
 Then when configure MiniGUI, you can change the engine to fbcon and
 console in runtime by the following method, and needn’t modify
-**MiniGUI.cfg** or in-core resources configuration file.
+`MiniGUI.cfg` or in-core resources configuration file.
 
-\$ export gal\_engine=fbcon
+```
+$ export MG_GAL_ENGINE=fbcon
+$ export MG_IAL_ENGINE=console
+$ export MG_DEFAULTMODE=1024x768-16bpp
+$ export MG_MDEV=/dev/input/mice
+$ export MG_MTYPE=ps2
+```
 
-\$ export ial\_engine=console
+### Section fbcon
 
-\$ export mdev=/dev/input/mice
-
-\$ export mtype=ps2
-
-\$ export defaultmode=1024x768-16bpp
-
-### 3.1.2 Section fbcon
-
-The section **fbcon** is only available when you define the
-**gal\_engine** in section **system** for fbcon. It define default
-display mode of the **fbcon** engine. When the section is undefined or
+The section `fbcon` is only available when you define the
+`gal_engine` in section `system` for fbcon. It define default
+display mode of the `fbcon` engine. When the section is undefined or
 key value is empty, the fbcon engine using the key value of system
 section.
 
-The definition of the key in section **fbcon** is as follows:
+The definition of the key in section `fbcon` is as follows:
 
-**defaultmode**: The display mode of graphics engine used, the format is
-**widthxheight-bpp**.
+`defaultmode`: The display mode of graphics engine used, the format is
+`widthxheight-bpp`.
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-\[fbcon\]
-
+```ini
+[fbcon]
 defaultmode=1024x768-16bpp
+```
 
-### 3.1.3 Section qvfb
+### Section qvfb
 
-The section **qvfb** is only available when you define the
-**gal\_engine** in section **system** for qvfb. It shows display and
+The section `qvfb` is only available when you define the
+`gal_engine` in section `system` for qvfb. It shows display and
 display mode of X window used when running qvfb.
 
-The definition of the keys in section **qvfb** is as follows:
+The definition of the keys in section `qvfb` is as follows:
 
-**defaultmode**: The display mode of graphics engine used, its format is
-**widthxheight-bpp**.
+`defaultmode`: The display mode of graphics engine used, its format is
+`widthxheight-bpp`.
 
-**display**: Display mode of X window used when running qvfb, default
+`display`: Display mode of X window used when running qvfb, default
 value is 0.
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-\[qvfb\]
-
+```ini
+[qvfb]
 defaultmode=640x480-16bpp
-
 display=0
+```
 
-### 3.1.4 Section pc\_xvfb
+### Section `pc_xvfb`
 
-The section pc\_x**vfb** is only available when you define the
-**gal\_engine** in section **system** for pc\_xvfb. It has been
+The section `pc_xvfb` is only available when you define the
+`gal_engine` in section `system` for `pc_xvfb`. It has been
 supported by Linux(Ubuntu) and Window.
 
-The definition of the keys in section pc\_x**vfb** is as follows:
+The definition of the keys in section pc_x`vfb` is as follows:
 
-**defaultmode**: The display mode of graphics engine used, its format is
-**widthxheight-bpp**.
+- `defaultmode`: The display mode of graphics engine used, its format is `<width>x<height>-bpp`.
+- `window_caption`: Window caption title of XVFB window.
+- `exec_file`: the path of the execute file.
 
-**window\_caption**: Window caption title of XVFB window.
+The content of the section in `MiniGUI.cfg` is as follows:
 
-**exec\_file**: gvfb exe file path.
-
-The content of the section in **MiniGUI.cfg** is as follows:
-
-\#{{ifdef \_MGGAL\_PCXVFB
-
-\[pc\_xvfb\]
-
+```ini
+#{{ifdef _MGGAL_PCXVFB
+[pc_xvfb]
 defaultmode=800x600-16bpp
+window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
+exec_file=/usr/local/bin/gvfb
+#}}
+```
 
-window\_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
+### Section rawbitmapfonts, varbitmapfonts, upf, and truetypefonts
 
-exec\_file=/usr/local/bin/gvfb
-
-\#}}
-
-### 3.1.5 Section rawbitmapfonts, varbitmapfonts, qpf, truetypefonts, and type1fonts
-
-These sections define information of loading device fonts**,** number of
+These sections define information of loading device fonts`,` number of
 fonts, and name and file of fonts.
 
 The format of device fonts used by MiniGUI is as follows:
 
-&lt;type&gt;-&lt;facename&gt;-&lt;style&gt;-&lt;width&gt;-&lt;height&gt;-&lt;charset1\[,charset2,...\]&gt;
+<type>-<facename>-<style>-<width>-<height>-<charset1[,charset2,...]>
 
-The definitions for each part of device **font** are as follow:
+The definitions for each part of device `font` are as follow:
 
-**&lt;type&gt;**: The type of device font, for example, RBF, VBF, QPF,
+`<type>`: The type of device font, for example, RBF, VBF, QPF,
 TrueType, and Adobe Type1 device font are rbf, vbf, qpf, ttf, and tlf.
 
-**&lt;facename&gt;**: The name of device font. Such as courier, Times
+`<facename>`: The name of device font. Such as courier, Times
 etc.
 
-**&lt;style&gt;**: The style of device font, it is grouped into six
+`<style>`: The style of device font, it is grouped into six
 alphabets. Such as bold, italic, underline or strikethrough etc.
 Generally the string is "rrncnn".
 
-**&lt;width&gt;**: The width of device font, for var-width fonts set to
+`<width>`: The width of device font, for var-width fonts set to
 be maximum width; for vector fonts set to be 0.
 
-**&lt;height&gt;**: The height of device font, for vector fonts set to
+`<height>`: The height of device font, for vector fonts set to
 be 0.
 
-**&lt;charset1, charset2&gt;**: The charset of device font supported.
+`<charset1, charset2>`: The charset of device font supported.
 
-Each of these sections defines font\_number, name**&lt;NR&gt;**, and
-fontfile**&lt;NR&gt;** keys.
+Each of these sections defines font_number, name`<NR>`, and
+fontfile`<NR>` keys.
 
-**font\_number**: The number of device font loaded.
+`font_number`: The number of device font loaded.
 
-**name&lt;NR&gt;**: The name of device font that number is
-**&lt;NR&gt;**.
+`name<NR>`: The name of device font that number is
+`<NR>`.
 
-**fontfile&lt;NR&gt;**: The font file of device font that number is
-**&lt;nr&gt;**.
+`fontfile<NR>`: The font file of device font that number is
+`<nr>`.
 
 If you don't need to use a specific type of device font, you can skip
-the configuration option by set **font\_number = 0**.
+the configuration option by set `font_number = 0`.
 
-The content of these sections in **MiniGUI.cfg** are as follow:
+The content of these sections in `MiniGUI.cfg` are as follow:
 
-\[rawbitmapfonts\]
-
-font\_number=4
-
+```ini
+[rawbitmapfonts]
+font_number=4
 name0=rbf-fixed-rrncnn-8-16-ISO8859-1
-
 fontfile0=/usr/local/lib/minigui/res/font/8x16-iso8859-1.bin
-
 name1=rbf-fixed-rrncnn-16-16-GB2312-0
-
 fontfile1=/usr/local/lib/minigui/res/font/song-16-gb2312.bin
-
 name2=rbf-fixed-rrncnn-6-12-ISO8859-1
-
 fontfile2=/usr/local/lib/minigui/res/font/6x12-iso8859-1.bin
-
 name3=rbf-fixed-rrncnn-12-12-GB2312-0
-
 fontfile3=/usr/local/lib/minigui/res/font/song-12-gb2312.bin
 
-\[varbitmapfonts\]
-
-font\_number=6
-
+[varbitmapfonts]
+font_number=6
 name0=vbf-Courier-rrncnn-8-13-ISO8859-1
-
 fontfile0=/usr/local/lib/minigui/res/font/Courier-rr-8-13.vbf
-
 name1=vbf-Helvetica-rrncnn-11-12-ISO8859-1
-
 fontfile1=/usr/local/lib/minigui/res/font/Helvetica-rr-11-12.vbf
-
 name2=vbf-Times-rrncnn-10-12-ISO8859-1
-
 fontfile2=/usr/local/lib/minigui/res/font/Times-rr-10-12.vbf
-
 name3=vbf-Courier-rrncnn-10-15-ISO8859-1
-
 fontfile3=/usr/local/lib/minigui/res/font/Courier-rr-10-15.vbf
-
 name4=vbf-Helvetica-rrncnn-15-16-ISO8859-1
-
 fontfile4=/usr/local/lib/minigui/res/font/Helvetica-rr-15-16.vbf
-
 name5=vbf-Times-rrncnn-13-15-ISO8859-1
-
 fontfile5=/usr/local/lib/minigui/res/font/Times-rr-13-15.vbf
 
-\[upf\]
+[qpf]
+font_number=0
 
-font\_number=0
+[upf]
+font_number=0
+name0=upf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312-0,GBK,BIG5
+fontfile0=/usr/local/lib/minigui/res/font/unifont_160_50.upf
+name1=upf-times-rrncnn-5-10-ISO8859-1,ISO8859-15
+fontfile1=/usr/local/lib/minigui/res/font/smoothtimes_100_50.upf
+name2=upf-helvetica-rrncnn-5-10-ISO8859-1,ISO8859-15
+fontfile2=/usr/local/lib/minigui/res/font/helvetica_100_50.upf
+name3=upf-micro-rrncnn-4-4-ISO8859-1,ISO8859-15
+fontfile3=/usr/local/lib/minigui/res/font/micro_40_50.upf
 
-\[qpf\]
-
-font\_number=3
-
-name0=qpf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312-0,GBK,BIG5
-
-fontfile0=/usr/local/lib/minigui/res/font/unifont\_160\_50.qpf
-
-name1=qpf-times-rrncnn-5-10-ISO8859-1,ISO8859-15
-
-fontfile1=/usr/local/lib/minigui/res/font/smoothtimes\_100\_50.qpf
-
-name2=qpf-helvetica-rrncnn-5-10-ISO8859-1,ISO8859-15
-
-fontfile2=/usr/local/lib/minigui/res/font/helvetica\_100\_50.qpf
-
-name3=qpf-micro-rrncnn-4-4-ISO8859-1,ISO8859-15
-
-fontfile3=/usr/local/lib/minigui/res/font/micro\_40\_50.qpf
-
-\[truetypefonts\]
-
-font\_number=3
-
+[truetypefonts]
+font_number=3
 name0=ttf-arial-rrncnn-0-0-ISO8859-1
-
 fontfile0=/usr/local/lib/minigui/res/font/arial.ttf
-
 name1=ttf-times-rrncnn-0-0-ISO8859-1
-
 fontfile1=/usr/local/lib/minigui/res/font/times.ttf
-
 name2=ttf-pinball-rrncnn-0-0-ISO8859-1
-
 fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
+```
 
-### 3.1.5 Section systemfont
+### Section systemfont
 
-The section **systemfont** defines MiniGUI system font and font number,
+The section `systemfont` defines MiniGUI system font and font number,
 and defines system default font, which would be used to render text on
 captions, menus, and controls, as well as the default font of a window.
 
 System font is the logic font^10^ that is created by the function
-**CreateLogFontFromName** based on device fonts, which is defined by
-MiniGUI sections such as **rawbitmapfonts**, **varbitmapfonts**,
-**qpf**, **truetypefonts**, and **t1fonts**.
+`CreateLogFontFromName` based on device fonts, which is defined by
+MiniGUI sections such as `rawbitmapfonts`, `varbitmapfonts`,
+`qpf`, `truetypefonts`, and `t1fonts`.
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-&lt;type&gt;-&lt;facename&gt;-&lt;style&gt;-&lt;width&gt;-&lt;height&gt;-&lt;charset1&gt;
+<type>-<facename>-<style>-<width>-<height>-<charset1>
 
 The definition of each part of a logic font name is as follows:
 
-**&lt;type&gt;** is the desired device font type, if you do not want to
-specify it, use **\***.
+`<type>` is the desired device font type, if you do not want to
+specify it, use `\`*.
 
-**&lt;facename&gt;** is to define the font face name, such as courier
+`<facename>` is to define the font face name, such as courier
 and times etc.
 
-**&lt;style&gt;** is the string of six alphabets to define style of a
+`<style>` is the string of six alphabets to define style of a
 logic font, such as italic, bold, underline or strikethrough etc.
 
-**&lt;width&gt;** is to define the width of the logic font. Usually do
-not need to specify, use **\*** instead.
+`<width>` is to define the width of the logic font. Usually do
+not need to specify, use `\`* instead.
 
-**&lt;height&gt;** is to define the height of the logic font.
+`<height>` is to define the height of the logic font.
 
-**&lt;charset&gt;** is to define charset of the logic font being
+`<charset>` is to define charset of the logic font being
 created.
 
 Furthermore, MiniGUI V2.0.x provides auto-scaling the font glyph. If you
@@ -395,42 +352,42 @@ style when you use vector font, such as TrueType, because vector font
 can produce corresponding font glyph according to desired logical font
 size.
 
-The definition of the keys in section **systemfont** is as follows:
+The definition of the keys in section `systemfont` is as follows:
 
-**font\_number**: The number of system fonts created
+`font_number`: The number of system fonts created
 
-**font&lt;NR&gt;**: The number &lt;NR&gt; logical font name
+`font<NR>`: The number <NR> logical font name
 
-**default**: System default font(single character set). Its value is the
+`default`: System default font(single character set). Its value is the
 number of logical font.
 
-**wchar\_def**: Default font used by multiple character set. Its value
+`wchar_def`: Default font used by multiple character set. Its value
 is the number of above logical font.
 
-**fixed**: The font used by fixed width character set. Its value is the
+`fixed`: The font used by fixed width character set. Its value is the
 number of above logical font.
 
-**caption**: The caption font. Its value is the number of above logical
+`caption`: The caption font. Its value is the number of above logical
 font.
 
-**menu**: The menu font. Its value is the number of above logical font.
+`menu`: The menu font. Its value is the number of above logical font.
 
 You can change the number of system font created. But you must create a
 single character set (for example: ISO8859-1) at least. MiniGUI defines
-the system default charsets according to **default**, **wchar\_def**
+the system default charsets according to `default`, `wchar_def`
 system fonts, and this would affect the return value of
-**GetSysCharset**, **GetSysCharWidth**, **GetSysCCharWidth** and
-**GetSysHeight** functions. Commonly, **default** and **wchar\_def**
+`GetSysCharset`, `GetSysCharWidth`, `GetSysCCharWidth` and
+`GetSysHeight` functions. Commonly, `default` and `wchar_def`
 must fixed width dot-matrix font, i.e RBF. And the width of multiply
 character set must be twice with the width of single character set.
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-\# The first system font must be a logical font using RBF device font.
+# The first system font must be a logical font using RBF device font.
 
-\[systemfont\]
+[systemfont]
 
-font\_number=6
+font_number=6
 
 font0=rbf-fixed-rrncnn-8-16-ISO8859-1
 
@@ -446,7 +403,7 @@ font5=\*-Helvetica-rrncnn-\*-16-GB2312
 
 default=0
 
-wchar\_def=1
+wchar_def=1
 
 fixed=1
 
@@ -458,32 +415,32 @@ control=3
 
 ### 3.1.6 Section mouse
 
-The section **mouse** defines the time of mouse **double clicked**. It
+The section `mouse` defines the time of mouse `double clicked`. It
 is used to handle with system inner events. Generally, it is unnecessary
 changed.
 
 The definition of the keys in the section is as follows:
 
-**dblclicktime**: The mouse double clicked time in ms
+`dblclicktime`: The mouse double clicked time in ms
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-\[mouse\]
+[mouse]
 
 dblclicktime=300
 
 ### 3.1.7 Section event
 
-The section **event** defines event timeout and auto-repeat time used by
+The section `event` defines event timeout and auto-repeat time used by
 system internal event process. Generally, it is unnecessary changed.
 
 The definition of the keys in the section is as follows:
 
-**timeoutusec**: Event timeout time in ms
+`timeoutusec`: Event timeout time in ms
 
-**repeatusec**: Event repeat time in ms
+`repeatusec`: Event repeat time in ms
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
 timeoutusec=300000
 
@@ -491,55 +448,55 @@ repeatusec=50000
 
 ### 3.1.8 Section classic
 
-The section **classic** defines default window element color used.
+The section `classic` defines default window element color used.
 Generally, it is unnecessary changed.
 
 Table 3.1 window element division and name in the configuration file and
 code
 
-  **Configure Option**       **Code name**                    **Comment**
+  `Configure Option`       `Code name`                    `Comment`
   -------------------------- -------------------------------- ----------------------------------------------------------------------------------------------------
-  caption                    WE\_METRICS\_CAPTION             Caption size
-                             WE\_FONT\_CAPTION                Caption fonts
-  fgc\_active\_caption       WE\_FGC\_ACTIVE\_CAPTION         Focus status caption foreground color
-  bgca\_active\_caption      WE\_BGCA\_ACTIVE\_CAPTION        Focus status caption background color gradient starting color
-  bgcb\_active\_caption      WE\_BGCB\_ACTIVE\_CAPTION        Focus Status caption background color gradient ending Color
-  fgc\_inactive\_caption     WE\_FGC\_INACTIVE\_CAPTION       Non-focus status caption foreground color
-  bgca\_inactive\_caption    WE\_BGCA\_INACTIVE\_CAPTION      Non-focus status caption background color gradient starting color
-  bgcb\_inactive\_caption    WE\_BGCB\_INACTIVE\_CAPTION      Non-focus status caption background color gradient ending color
-  menu                       WE\_METRICS\_MENU                Menu item, height of the menu bar
-                             WE\_FONT\_MENU                   Menu font
-  fgc\_menu                  WE\_FGC\_MENU                    Menu foreground color
-  bgc\_menu                  WE\_BGC\_MENU                    Menu background color
-  border                     WE\_METRICS\_WND\_BORDER         Window border width
-  fgc\_active\_border        WE\_FGC\_ACTIVE\_WND\_BORDER     Focus status window border color
-  fgc\_inactive\_border      WE\_FGC\_INACTIVE\_WND\_BORDER   Non-focus status window border color
-  scrollbar                  WE\_METRICS\_SCROLLBAR           Scroll bar size
-  fgc\_msgbox                WE\_FGC\_MESSAGEBOX              Message box foreground color
-  fgc\_msgbox                WE\_FONT\_MESSAGEBOX             Message box font
-  fgc\_tip                   WE\_FGC\_TOOLTIP                 Prompt box foreground color
-  bgc\_tip                   WE\_BGC\_TOOLTIP                 Prompt box background color
-                             WE\_FONT\_TOOLTIP                Prompt box font
-  fgc\_window                WE\_FGC\_WINDOW                  Window foreground
-  bgc\_window                WE\_BGC\_WINDOW                  Window background color
-  fgc\_3dbox                 WE\_FGC\_THREED\_BODY            The color of the symbol on the surface of the 3D box, such as the color of check mark, arrow, etc.
-  mainc\_3dbox               WE\_MAINC\_THREED\_BODY          Three-dimensional box border and surface color
-  fgc\_selected\_item        WE\_FGC\_SELECTED\_ITEM          The foreground color of the selected menu item (list item)
-  bgc\_selected\_item        WE\_BGC\_SELECTED\_ITEM          The background color of the selected menu item (list item)
-  bgc\_selected\_lostfocus   WE\_BGC\_SELECTED\_LOSTFOCUS     The background color after the selected menu item (list item) loses focus
-  fgc\_disabled\_item        WE\_FGC\_DISABLED\_ITEM          Foreground color of invalid menu item (list item)
-  bgc\_disabled\_item        WE\_BGC\_DISABLED\_ITEM          Invalid menu item (list item) background color
-  fgc\_hilight\_item         WE\_FGC\_HIGHLIGHT\_ITEM         Highlight the foreground color of the menu item (list item)
-  bgc\_hilight\_item         WE\_BGC\_HIGHLIGHT\_ITEM         Highlight the background color of the menu item (list item)
-  fgc\_significant\_item     WE\_FGC\_SIGNIFICANT\_ITEM       Foreground color of important menu item (list item)
-  bgc\_significant\_item     WE\_BGC\_SIGNIFICANT\_ITEM       Background color of important menu items (list items)
-  bgc\_desktop               WE\_BGC\_DESKTOP                 Desktop background color
+  caption                    WE_METRICS_CAPTION             Caption size
+                             WE_FONT_CAPTION                Caption fonts
+  fgc_active_caption       WE_FGC_ACTIVE_CAPTION         Focus status caption foreground color
+  bgca_active_caption      WE_BGCA_ACTIVE_CAPTION        Focus status caption background color gradient starting color
+  bgcb_active_caption      WE_BGCB_ACTIVE_CAPTION        Focus Status caption background color gradient ending Color
+  fgc_inactive_caption     WE_FGC_INACTIVE_CAPTION       Non-focus status caption foreground color
+  bgca_inactive_caption    WE_BGCA_INACTIVE_CAPTION      Non-focus status caption background color gradient starting color
+  bgcb_inactive_caption    WE_BGCB_INACTIVE_CAPTION      Non-focus status caption background color gradient ending color
+  menu                       WE_METRICS_MENU                Menu item, height of the menu bar
+                             WE_FONT_MENU                   Menu font
+  fgc_menu                  WE_FGC_MENU                    Menu foreground color
+  bgc_menu                  WE_BGC_MENU                    Menu background color
+  border                     WE_METRICS_WND_BORDER         Window border width
+  fgc_active_border        WE_FGC_ACTIVE_WND_BORDER     Focus status window border color
+  fgc_inactive_border      WE_FGC_INACTIVE_WND_BORDER   Non-focus status window border color
+  scrollbar                  WE_METRICS_SCROLLBAR           Scroll bar size
+  fgc_msgbox                WE_FGC_MESSAGEBOX              Message box foreground color
+  fgc_msgbox                WE_FONT_MESSAGEBOX             Message box font
+  fgc_tip                   WE_FGC_TOOLTIP                 Prompt box foreground color
+  bgc_tip                   WE_BGC_TOOLTIP                 Prompt box background color
+                             WE_FONT_TOOLTIP                Prompt box font
+  fgc_window                WE_FGC_WINDOW                  Window foreground
+  bgc_window                WE_BGC_WINDOW                  Window background color
+  fgc_3dbox                 WE_FGC_THREED_BODY            The color of the symbol on the surface of the 3D box, such as the color of check mark, arrow, etc.
+  mainc_3dbox               WE_MAINC_THREED_BODY          Three-dimensional box border and surface color
+  fgc_selected_item        WE_FGC_SELECTED_ITEM          The foreground color of the selected menu item (list item)
+  bgc_selected_item        WE_BGC_SELECTED_ITEM          The background color of the selected menu item (list item)
+  bgc_selected_lostfocus   WE_BGC_SELECTED_LOSTFOCUS     The background color after the selected menu item (list item) loses focus
+  fgc_disabled_item        WE_FGC_DISABLED_ITEM          Foreground color of invalid menu item (list item)
+  bgc_disabled_item        WE_BGC_DISABLED_ITEM          Invalid menu item (list item) background color
+  fgc_hilight_item         WE_FGC_HIGHLIGHT_ITEM         Highlight the foreground color of the menu item (list item)
+  bgc_hilight_item         WE_BGC_HIGHLIGHT_ITEM         Highlight the background color of the menu item (list item)
+  fgc_significant_item     WE_FGC_SIGNIFICANT_ITEM       Foreground color of important menu item (list item)
+  bgc_significant_item     WE_BGC_SIGNIFICANT_ITEM       Background color of important menu items (list items)
+  bgc_desktop               WE_BGC_DESKTOP                 Desktop background color
 
-The content of the section in **MiniGUI.cfg** is as follows:
+The content of the section in `MiniGUI.cfg` is as follows:
 
-\[classic\]
+[classic]
 
-\# Note that max number defined in source code is 5.
+# Note that max number defined in source code is 5.
 
 iconnumber=5
 
@@ -553,31 +510,31 @@ icon3=warning.ico
 
 icon4=excalmatory.ico
 
-\# default icons for new OpenFileDialogBox
+# default icons for new OpenFileDialogBox
 
 dir=folder.ico
 
 file=textfile.ico
 
-\# default icons for TreeView control
+# default icons for TreeView control
 
 treefold=fold.ico
 
 treeunfold=unfold.ico
 
-\# bitmap used by BUTTON control
+# bitmap used by BUTTON control
 
-radiobutton=classic\_radio\_button.bmp
+radiobutton=classic_radio_button.bmp
 
-checkbutton=classic\_check\_button.bmp
+checkbutton=classic_check_button.bmp
 
-\# background picture, use your favirate photo
+# background picture, use your favirate photo
 
 bgpicture=none
 
 bgpicpos=center
 
-\#window element metrics
+#window element metrics
 
 caption=20
 
@@ -587,157 +544,157 @@ border=2
 
 scrollbar=16
 
-\#window element colors
+#window element colors
 
-fgc\_active\_caption=0xFFFFFFFF
+fgc_active_caption=0xFFFFFFFF
 
-bgca\_active\_caption=0xFF6A240A
+bgca_active_caption=0xFF6A240A
 
-bgcb\_active\_caption=0xFF6A240A
+bgcb_active_caption=0xFF6A240A
 
-fgc\_menu=0xFF000000
+fgc_menu=0xFF000000
 
-bgc\_menu=0xFFCED3D6
+bgc_menu=0xFFCED3D6
 
-fgc\_msgbox=0xFF000000
+fgc_msgbox=0xFF000000
 
-fgc\_tip=0xFF000000
+fgc_tip=0xFF000000
 
-bgc\_tip=0xFFE7FFFF
+bgc_tip=0xFFE7FFFF
 
-fgc\_active\_border=0xFFCED3D6
+fgc_active_border=0xFFCED3D6
 
-fgc\_inactive\_border=0xFFCED3D6
+fgc_inactive_border=0xFFCED3D6
 
-fgc\_inactive\_caption=0xFFC8D0D4
+fgc_inactive_caption=0xFFC8D0D4
 
-bgca\_inactive\_caption=0xFF808080
+bgca_inactive_caption=0xFF808080
 
-bgcb\_inactive\_caption=0xFF808080
+bgcb_inactive_caption=0xFF808080
 
-fgc\_window=0xFF000000
+fgc_window=0xFF000000
 
-bgc\_window=0xFFFFFFFF
+bgc_window=0xFFFFFFFF
 
-fgc\_3dbox=0xFF000000
+fgc_3dbox=0xFF000000
 
-mainc\_3dbox=0xFFCED3D6
+mainc_3dbox=0xFFCED3D6
 
-fgc\_selected\_item=0xFFFFFFFF
+fgc_selected_item=0xFFFFFFFF
 
-bgc\_selected\_item=0xFF6B2408
+bgc_selected_item=0xFF6B2408
 
-bgc\_selected\_lostfocus=0xFFBDA69C
+bgc_selected_lostfocus=0xFFBDA69C
 
-fgc\_disabled\_item=0xFF848284
+fgc_disabled_item=0xFF848284
 
-bgc\_disabled\_item=0xFFCED3D6
+bgc_disabled_item=0xFFCED3D6
 
-fgc\_hilight\_item=0xFFFFFFFF
+fgc_hilight_item=0xFFFFFFFF
 
-bgc\_hilight\_item=0xFF6B2408
+bgc_hilight_item=0xFF6B2408
 
-fgc\_significant\_item=0xFFFFFFFF
+fgc_significant_item=0xFFFFFFFF
 
-bgc\_significant\_item=0xFF6B2408
+bgc_significant_item=0xFF6B2408
 
-bgc\_desktop=0xFFC08000
+bgc_desktop=0xFFC08000
 
 ### 3.1.9 Default Configuration File
 
 Below is the default runtime configuration file for MiniGUI library:
 
-\# MiniGUI Ver 3.0.x
+# MiniGUI Ver 3.0.x
 
-\# This configuration file is for classic window style.
+# This configuration file is for classic window style.
 
-\#
+#
 
-\# Copyright (C) 2002\~2017 Feynman Software
+# Copyright (C) 2002\~2017 Feynman Software
 
-\# Copyright (C) 1998\~2002 Wei Yongming.
+# Copyright (C) 1998\~2002 Wei Yongming.
 
-\#
+#
 
-\# Web: http://www.minigui.com
+# Web: http://www.minigui.com
 
-\# Web: http://www.minigui.org
+# Web: http://www.minigui.org
 
-\#
+#
 
-\# This configuration file must be installed in /etc,
+# This configuration file must be installed in /etc,
 
-\# /usr/local/etc or your home directory. When you install it in your
+# /usr/local/etc or your home directory. When you install it in your
 
-\# home directory, it should be named ".MiniGUI.cfg".
+# home directory, it should be named ".MiniGUI.cfg".
 
-\#
+#
 
-\# The priority of above configruation files is \~/.MiniGUI.cfg,
+# The priority of above configruation files is \~/.MiniGUI.cfg,
 
-\# /usr/local/etc/MiniGUI.cfg, and then /etc/MiniGUI.cfg.
+# /usr/local/etc/MiniGUI.cfg, and then /etc/MiniGUI.cfg.
 
-\#
+#
 
-\# If you change the install path of MiniGUI resource, you should
+# If you change the install path of MiniGUI resource, you should
 
-\# modify this file to meet your configuration.
+# modify this file to meet your configuration.
 
-\#
+#
 
-\# NOTE:
+# NOTE:
 
-\# The format of this configuration file has changed since the last
+# The format of this configuration file has changed since the last
 release.
 
-\# Please DONT forget to provide the latest MiniGUI.cfg file for your
+# Please DONT forget to provide the latest MiniGUI.cfg file for your
 MiniGUI.
 
-\#
+#
 
-\[system\]
+[system]
 
-\# GAL engine and default options
+# GAL engine and default options
 
-gal\_engine=pc\_xvfb
+gal_engine=pc_xvfb
 
 defaultmode=800x600-16bpp
 
-\# IAL engine
+# IAL engine
 
-ial\_engine=pc\_xvfb
+ial_engine=pc_xvfb
 
 mdev=/dev/input/mice
 
 mtype=IMPS2
 
-\[fbcon\]
+[fbcon]
 
 defaultmode=1024x768-16bpp
 
-\[qvfb\]
+[qvfb]
 
 defaultmode=640x480-16bpp
 
 display=0
 
-\#{{ifdef \_MGGAL\_PCXVFB
+#{{ifdef _MGGAL_PCXVFB
 
-\[pc\_xvfb\]
+[pc_xvfb]
 
 defaultmode=800x600-16bpp
 
-window\_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
+window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
 
-exec\_file=/usr/local/bin/gvfb
+exec_file=/usr/local/bin/gvfb
 
-\#}}
+#}}
 
-\# The first system font must be a logical font using RBF device font.
+# The first system font must be a logical font using RBF device font.
 
-\[systemfont\]
+[systemfont]
 
-font\_number=6
+font_number=6
 
 font0=rbf-fixed-rrncnn-8-16-ISO8859-1
 
@@ -753,7 +710,7 @@ font5=\*-Helvetica-rrncnn-\*-16-GB2312
 
 default=0
 
-wchar\_def=1
+wchar_def=1
 
 fixed=1
 
@@ -763,9 +720,9 @@ menu=3
 
 control=3
 
-\[rawbitmapfonts\]
+[rawbitmapfonts]
 
-font\_number=4
+font_number=4
 
 name0=rbf-fixed-rrncnn-8-16-ISO8859-1
 
@@ -783,9 +740,9 @@ name3=rbf-fixed-rrncnn-12-12-GB2312-0
 
 fontfile3=/usr/local/lib/minigui/res/font/song-12-gb2312.bin
 
-\[varbitmapfonts\]
+[varbitmapfonts]
 
-font\_number=6
+font_number=6
 
 name0=vbf-Courier-rrncnn-8-13-ISO8859-1
 
@@ -811,33 +768,33 @@ name5=vbf-Times-rrncnn-13-15-ISO8859-1
 
 fontfile5=/usr/local/lib/minigui/res/font/Times-rr-13-15.vbf
 
-\[qpf\]
+[qpf]
 
-font\_number=3
+font_number=3
 
 name0=qpf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312-0,GBK,BIG5
 
-fontfile0=/usr/local/lib/minigui/res/font/unifont\_160\_50.qpf
+fontfile0=/usr/local/lib/minigui/res/font/unifont_160_50.qpf
 
 name1=qpf-times-rrncnn-5-10-ISO8859-1,ISO8859-15
 
-fontfile1=/usr/local/lib/minigui/res/font/smoothtimes\_100\_50.qpf
+fontfile1=/usr/local/lib/minigui/res/font/smoothtimes_100_50.qpf
 
 name2=qpf-helvetica-rrncnn-5-10-ISO8859-1,ISO8859-15
 
-fontfile2=/usr/local/lib/minigui/res/font/helvetica\_100\_50.qpf
+fontfile2=/usr/local/lib/minigui/res/font/helvetica_100_50.qpf
 
 name3=qpf-micro-rrncnn-4-4-ISO8859-1,ISO8859-15
 
-fontfile3=/usr/local/lib/minigui/res/font/micro\_40\_50.qpf
+fontfile3=/usr/local/lib/minigui/res/font/micro_40_50.qpf
 
-\[upf\]
+[upf]
 
-font\_number=0
+font_number=0
 
-\[truetypefonts\]
+[truetypefonts]
 
-font\_number=3
+font_number=3
 
 name0=ttf-arial-rrncnn-0-0-ISO8859-1
 
@@ -851,77 +808,77 @@ name2=ttf-pinball-rrncnn-0-0-ISO8859-1
 
 fontfile2=/usr/local/lib/minigui/res/font/pinball.ttf
 
-\[mouse\]
+[mouse]
 
 dblclicktime=300
 
-\[event\]
+[event]
 
 timeoutusec=300000
 
 repeatusec=50000
 
-\[cursorinfo\]
+[cursorinfo]
 
-\# Edit following line to specify cursor files path
+# Edit following line to specify cursor files path
 
 cursorpath=/usr/local/lib/minigui/res/cursor/
 
 cursornumber=23
 
-cursor0=d\_arrow.cur
+cursor0=d_arrow.cur
 
-cursor1=d\_beam.cur
+cursor1=d_beam.cur
 
-cursor2=d\_pencil.cur
+cursor2=d_pencil.cur
 
-cursor3=d\_cross.cur
+cursor3=d_cross.cur
 
-cursor4=d\_move.cur
+cursor4=d_move.cur
 
-cursor5=d\_sizenwse.cur
+cursor5=d_sizenwse.cur
 
-cursor6=d\_sizenesw.cur
+cursor6=d_sizenesw.cur
 
-cursor7=d\_sizewe.cur
+cursor7=d_sizewe.cur
 
-cursor8=d\_sizens.cur
+cursor8=d_sizens.cur
 
-cursor9=d\_uparrow.cur
+cursor9=d_uparrow.cur
 
-cursor10=d\_none.cur
+cursor10=d_none.cur
 
-cursor11=d\_help.cur
+cursor11=d_help.cur
 
-cursor12=d\_busy.cur
+cursor12=d_busy.cur
 
-cursor13=d\_wait.cur
+cursor13=d_wait.cur
 
-cursor14=g\_rarrow.cur
+cursor14=g_rarrow.cur
 
-cursor15=g\_col.cur
+cursor15=g_col.cur
 
-cursor16=g\_row.cur
+cursor16=g_row.cur
 
-cursor17=g\_drag.cur
+cursor17=g_drag.cur
 
-cursor18=g\_nodrop.cur
+cursor18=g_nodrop.cur
 
-cursor19=h\_point.cur
+cursor19=h_point.cur
 
-cursor20=h\_select.cur
+cursor20=h_select.cur
 
-cursor21=ho\_split.cur
+cursor21=ho_split.cur
 
-cursor22=ve\_split.cur
+cursor22=ve_split.cur
 
-\[resinfo\]
+[resinfo]
 
 respath=/usr/local/share/minigui/res/
 
-\[classic\]
+[classic]
 
-\# Note that max number defined in source code is 5.
+# Note that max number defined in source code is 5.
 
 iconnumber=5
 
@@ -935,49 +892,49 @@ icon3=warning.ico
 
 icon4=excalmatory.ico
 
-\# default icons for new OpenFileDialogBox
+# default icons for new OpenFileDialogBox
 
 dir=folder.ico
 
 file=textfile.ico
 
-\# default icons for TreeView control
+# default icons for TreeView control
 
 treefold=fold.ico
 
 treeunfold=unfold.ico
 
-\# bitmap used by BUTTON control
+# bitmap used by BUTTON control
 
-radiobutton=classic\_radio\_button.bmp
+radiobutton=classic_radio_button.bmp
 
-checkbutton=classic\_check\_button.bmp
+checkbutton=classic_check_button.bmp
 
-\# background picture, use your favirate photo
+# background picture, use your favirate photo
 
 bgpicture=none
 
 bgpicpos=center
 
-\# bgpicpos=upleft
+# bgpicpos=upleft
 
-\# bgpicpos=downleft
+# bgpicpos=downleft
 
-\# bgpicpos=upright
+# bgpicpos=upright
 
-\# bgpicpos=downright
+# bgpicpos=downright
 
-\# bgpicpos=upcenter
+# bgpicpos=upcenter
 
-\# bgpicpos=downcenter
+# bgpicpos=downcenter
 
-\# bgpicpos=vcenterleft
+# bgpicpos=vcenterleft
 
-\# bgpicpos=vcenterright
+# bgpicpos=vcenterright
 
-\# bgpicpos=none
+# bgpicpos=none
 
-\#window element metrics
+#window element metrics
 
 caption=20
 
@@ -987,67 +944,67 @@ border=2
 
 scrollbar=16
 
-\#window element colors
+#window element colors
 
-fgc\_active\_caption=0xFFFFFFFF
+fgc_active_caption=0xFFFFFFFF
 
-bgca\_active\_caption=0xFF6A240A
+bgca_active_caption=0xFF6A240A
 
-bgcb\_active\_caption=0xFF6A240A
+bgcb_active_caption=0xFF6A240A
 
-fgc\_menu=0xFF000000
+fgc_menu=0xFF000000
 
-bgc\_menu=0xFFCED3D6
+bgc_menu=0xFFCED3D6
 
-fgc\_msgbox=0xFF000000
+fgc_msgbox=0xFF000000
 
-fgc\_tip=0xFF000000
+fgc_tip=0xFF000000
 
-bgc\_tip=0xFFE7FFFF
+bgc_tip=0xFFE7FFFF
 
-fgc\_active\_border=0xFFCED3D6
+fgc_active_border=0xFFCED3D6
 
-fgc\_inactive\_border=0xFFCED3D6
+fgc_inactive_border=0xFFCED3D6
 
-fgc\_inactive\_caption=0xFFC8D0D4
+fgc_inactive_caption=0xFFC8D0D4
 
-bgca\_inactive\_caption=0xFF808080
+bgca_inactive_caption=0xFF808080
 
-bgcb\_inactive\_caption=0xFF808080
+bgcb_inactive_caption=0xFF808080
 
-fgc\_window=0xFF000000
+fgc_window=0xFF000000
 
-bgc\_window=0xFFFFFFFF
+bgc_window=0xFFFFFFFF
 
-fgc\_3dbox=0xFF000000
+fgc_3dbox=0xFF000000
 
-mainc\_3dbox=0xFFCED3D6
+mainc_3dbox=0xFFCED3D6
 
-fgc\_selected\_item=0xFFFFFFFF
+fgc_selected_item=0xFFFFFFFF
 
-bgc\_selected\_item=0xFF6B2408
+bgc_selected_item=0xFF6B2408
 
-bgc\_selected\_lostfocus=0xFFBDA69C
+bgc_selected_lostfocus=0xFFBDA69C
 
-fgc\_disabled\_item=0xFF848284
+fgc_disabled_item=0xFF848284
 
-bgc\_disabled\_item=0xFFCED3D6
+bgc_disabled_item=0xFFCED3D6
 
-fgc\_hilight\_item=0xFFFFFFFF
+fgc_hilight_item=0xFFFFFFFF
 
-bgc\_hilight\_item=0xFF6B2408
+bgc_hilight_item=0xFF6B2408
 
-fgc\_significant\_item=0xFFFFFFFF
+fgc_significant_item=0xFFFFFFFF
 
-bgc\_significant\_item=0xFF6B2408
+bgc_significant_item=0xFF6B2408
 
-bgc\_desktop=0xFFC08000
+bgc_desktop=0xFFC08000
 
-\#{{ifdef \_MGLF\_RDR\_FLAT
+#{{ifdef _MGLF_RDR_FLAT
 
-\[flat\]
+[flat]
 
-\# Note that max number defined in source code is 5.
+# Note that max number defined in source code is 5.
 
 iconnumber=5
 
@@ -1061,31 +1018,31 @@ icon3=warning-flat.ico
 
 icon4=excalmatory-flat.ico
 
-\# default icons for new OpenFileDialogBox
+# default icons for new OpenFileDialogBox
 
 dir=folder-flat.ico
 
 file=textfile-flat.ico
 
-\# default icons for TreeView control
+# default icons for TreeView control
 
 treefold=fold-flat.ico
 
 treeunfold=unfold-flat.ico
 
-\# bitmap used by BUTTON control
+# bitmap used by BUTTON control
 
-radiobutton=flat\_radio\_button.bmp
+radiobutton=flat_radio_button.bmp
 
-checkbutton=flat\_check\_button.bmp
+checkbutton=flat_check_button.bmp
 
-\# background picture, use your favirate photo
+# background picture, use your favirate photo
 
 bgpicture=none
 
 bgpicpos=center
 
-\#window element metrics
+#window element metrics
 
 caption=20
 
@@ -1095,71 +1052,71 @@ border=1
 
 scrollbar=16
 
-\#window element colors
+#window element colors
 
-fgc\_active\_caption=0xFFFFFFFFF
+fgc_active_caption=0xFFFFFFFFF
 
-bgca\_active\_caption=0xFF000000
+bgca_active_caption=0xFF000000
 
-bgcb\_active\_caption=0xFF000000
+bgcb_active_caption=0xFF000000
 
-fgc\_inactive\_caption=0xFF000000
+fgc_inactive_caption=0xFF000000
 
-bgca\_inactive\_caption=0xFFFFFFFF
+bgca_inactive_caption=0xFFFFFFFF
 
-bgcb\_inactive\_caption=0xFFFFFFFF
+bgcb_inactive_caption=0xFFFFFFFF
 
-fgc\_menu=0xFF000000
+fgc_menu=0xFF000000
 
-bgc\_menu=0xFFD8D8D8
+bgc_menu=0xFFD8D8D8
 
-fgc\_msgbox=0xFF000000
+fgc_msgbox=0xFF000000
 
-fgc\_tip=0xFF000000
+fgc_tip=0xFF000000
 
-bgc\_tip=0xFFE7FFFF
+bgc_tip=0xFFE7FFFF
 
-fgc\_active\_border=0xFF000000
+fgc_active_border=0xFF000000
 
-fgc\_inactive\_border=0xFF848284
+fgc_inactive_border=0xFF848284
 
-fgc\_window=0xFF000000
+fgc_window=0xFF000000
 
-bgc\_window=0xFFFFFFFF
+bgc_window=0xFFFFFFFF
 
-fgc\_3dbox=0xFF000000
+fgc_3dbox=0xFF000000
 
-mainc\_3dbox=0xFFFFFFFF
+mainc_3dbox=0xFFFFFFFF
 
-fgc\_selected\_item=0xFFFFFFFF
+fgc_selected_item=0xFFFFFFFF
 
-bgc\_selected\_item=0xFF000000
+bgc_selected_item=0xFF000000
 
-bgc\_selected\_lostfocus=0xFFBDA69C
+bgc_selected_lostfocus=0xFFBDA69C
 
-fgc\_disabled\_item=0xFF848284
+fgc_disabled_item=0xFF848284
 
-bgc\_disabled\_item=0xFF000000
+bgc_disabled_item=0xFF000000
 
-fgc\_hilight\_item=0xFFFFFFFF
+fgc_hilight_item=0xFFFFFFFF
 
-bgc\_hilight\_item=0xFF664E4A
+bgc_hilight_item=0xFF664E4A
 
-fgc\_significant\_item=0xFFFFFFFF
+fgc_significant_item=0xFFFFFFFF
 
-bgc\_significant\_item=0xFF000000
+bgc_significant_item=0xFF000000
 
-bgc\_desktop=0xFFC08000
+bgc_desktop=0xFFC08000
 
-flat\_tab\_normal\_color=0xFFC6D2CF
+flat_tab_normal_color=0xFFC6D2CF
 
-\#}}
+#}}
 
-\#{{ifdef \_MGLF\_RDR\_SKIN
+#{{ifdef _MGLF_RDR_SKIN
 
-\[skin\]
+[skin]
 
-\# Note that max number defined in source code is 5.
+# Note that max number defined in source code is 5.
 
 iconnumber=5
 
@@ -1173,25 +1130,25 @@ icon3=warning.ico
 
 icon4=excalmatory.ico
 
-\# default icons for new OpenFileDialogBox
+# default icons for new OpenFileDialogBox
 
 dir=folder.ico
 
 file=textfile.ico
 
-\# default icons for TreeView control
+# default icons for TreeView control
 
 treefold=fold.ico
 
 treeunfold=unfold.ico
 
-\# background picture, use your favirate photo
+# background picture, use your favirate photo
 
 bgpicture=none
 
 bgpicpos=center
 
-\#window element metrics
+#window element metrics
 
 caption=25
 
@@ -1201,131 +1158,131 @@ border=1
 
 scrollbar=17
 
-fgc\_active\_caption=0xFFFFFFFF
+fgc_active_caption=0xFFFFFFFF
 
-bgca\_active\_caption=0xFFE35400
+bgca_active_caption=0xFFE35400
 
-bgcb\_active\_caption=0xFF686868
+bgcb_active_caption=0xFF686868
 
-fgc\_menu=0xFF000000
+fgc_menu=0xFF000000
 
-bgc\_menu=0xFFD4D6FF
+bgc_menu=0xFFD4D6FF
 
-fgc\_msgbox=0xFF000000
+fgc_msgbox=0xFF000000
 
-fgc\_tip=0xFF000000
+fgc_tip=0xFF000000
 
-bgc\_tip=0xFFFFFFFF
+bgc_tip=0xFFFFFFFF
 
-fgc\_active\_border=0xFFC8D0D4
+fgc_active_border=0xFFC8D0D4
 
-fgc\_inactive\_border=0xFFC8D0D4
+fgc_inactive_border=0xFFC8D0D4
 
-fgc\_inactive\_caption=0xFFF8E4D8
+fgc_inactive_caption=0xFFF8E4D8
 
-bgca\_inactive\_caption=0xFFDF967A
+bgca_inactive_caption=0xFFDF967A
 
-bgcb\_inactive\_caption=0xFF686868
+bgcb_inactive_caption=0xFF686868
 
-fgc\_window=0xFF000000
+fgc_window=0xFF000000
 
-bgc\_window=0xFFFFFFFF
+bgc_window=0xFFFFFFFF
 
-fgc\_3dbox=0xFF000000
+fgc_3dbox=0xFF000000
 
-mainc\_3dbox=0xFFD8E9EC
+mainc_3dbox=0xFFD8E9EC
 
-fgc\_selected\_item=0xFFFFFFFF
+fgc_selected_item=0xFFFFFFFF
 
-bgc\_selected\_item=0xFFC56A31
+bgc_selected_item=0xFFC56A31
 
-bgc\_selected\_lostfocus=0xFFD8E9EC
+bgc_selected_lostfocus=0xFFD8E9EC
 
-fgc\_disabled\_item=0xFF99A8AC
+fgc_disabled_item=0xFF99A8AC
 
-bgc\_disabled\_item=0xFFFFFFFF
+bgc_disabled_item=0xFFFFFFFF
 
-fgc\_hilight\_item=0xFFFFFFFF
+fgc_hilight_item=0xFFFFFFFF
 
-bgc\_hilight\_item=0xFFC56A31
+bgc_hilight_item=0xFFC56A31
 
-fgc\_significant\_item=0xFFFFFFFF
+fgc_significant_item=0xFFFFFFFF
 
-bgc\_significant\_item=0xFFC56A31
+bgc_significant_item=0xFFC56A31
 
-bgc\_desktop=0xFF984E00
+bgc_desktop=0xFF984E00
 
-skin\_bkgnd=skin\_bkgnd.bmp
+skin_bkgnd=skin_bkgnd.bmp
 
-skin\_caption=skin\_caption.gif
+skin_caption=skin_caption.gif
 
-skin\_caption\_btn=skin\_cpn\_btn.gif
+skin_caption_btn=skin_cpn_btn.gif
 
-\#for scrollbar
+#for scrollbar
 
-skin\_scrollbar\_hshaft=skin\_sb\_hshaft.bmp
+skin_scrollbar_hshaft=skin_sb_hshaft.bmp
 
-skin\_scrollbar\_vshaft=skin\_sb\_vshaft.bmp
+skin_scrollbar_vshaft=skin_sb_vshaft.bmp
 
-skin\_scrollbar\_hthumb=skin\_sb\_hthumb.bmp
+skin_scrollbar_hthumb=skin_sb_hthumb.bmp
 
-skin\_scrollbar\_vthumb=skin\_sb\_vthumb.bmp
+skin_scrollbar_vthumb=skin_sb_vthumb.bmp
 
-skin\_scrollbar\_arrows=skin\_sb\_arrows.bmp
+skin_scrollbar_arrows=skin_sb_arrows.bmp
 
-\#for border
+#for border
 
-skin\_tborder=skin\_tborder.bmp
+skin_tborder=skin_tborder.bmp
 
-skin\_bborder=skin\_bborder.bmp
+skin_bborder=skin_bborder.bmp
 
-skin\_lborder=skin\_lborder.bmp
+skin_lborder=skin_lborder.bmp
 
-skin\_rborder=skin\_rborder.bmp
+skin_rborder=skin_rborder.bmp
 
-skin\_arrows=skin\_arrows.gif
+skin_arrows=skin_arrows.gif
 
-skin\_arrows\_shell=skin\_arrows\_shell.bmp
+skin_arrows_shell=skin_arrows_shell.bmp
 
-skin\_pushbtn=skin\_pushbtn.gif
+skin_pushbtn=skin_pushbtn.gif
 
-skin\_radiobtn=skin\_radiobtn.gif
+skin_radiobtn=skin_radiobtn.gif
 
-skin\_checkbtn=skin\_checkbtn.bmp
+skin_checkbtn=skin_checkbtn.bmp
 
-\#for treeview
+#for treeview
 
-skin\_tree=skin\_tree.bmp
+skin_tree=skin_tree.bmp
 
-skin\_header=skin\_header.bmp
+skin_header=skin_header.bmp
 
-skin\_tab=skin\_tab.gif
+skin_tab=skin_tab.gif
 
-\#for trackbar
+#for trackbar
 
-skin\_tbslider\_h=skin\_tbslider\_h.gif
+skin_tbslider_h=skin_tbslider_h.gif
 
-skin\_tbslider\_v=skin\_tbslider\_v.gif
+skin_tbslider_v=skin_tbslider_v.gif
 
-skin\_trackbar\_horz=skin\_tb\_horz.gif
+skin_trackbar_horz=skin_tb_horz.gif
 
-skin\_trackbar\_vert=skin\_tb\_vert.gif
+skin_trackbar_vert=skin_tb_vert.gif
 
-\#for progressbar
+#for progressbar
 
-skin\_progressbar\_htrack=skin\_pb\_htrack.gif
+skin_progressbar_htrack=skin_pb_htrack.gif
 
-skin\_progressbar\_vtrack=skin\_pb\_vtrack.gif
+skin_progressbar_vtrack=skin_pb_vtrack.gif
 
-skin\_progressbar\_hchunk=skin\_pb\_htruck.bmp
+skin_progressbar_hchunk=skin_pb_htruck.bmp
 
-skin\_progressbar\_vchunk=skin\_pb\_vtruck.bmp
+skin_progressbar_vchunk=skin_pb_vtruck.bmp
 
-\#}}
+#}}
 
-\[fashion\]
+[fashion]
 
-\# Note that max number defined in source code is 5.
+# Note that max number defined in source code is 5.
 
 iconnumber=5
 
@@ -1339,31 +1296,31 @@ icon3=warning.ico
 
 icon4=excalmatory.ico
 
-\# default icons for new OpenFileDialogBox
+# default icons for new OpenFileDialogBox
 
 dir=folder.ico
 
 file=textfile.ico
 
-\# default icons for TreeView control
+# default icons for TreeView control
 
 treefold=fold.ico
 
 treeunfold=unfold.ico
 
-\# bitmap used by BUTTON control
+# bitmap used by BUTTON control
 
-radiobutton=fashion\_radio\_btn.bmp
+radiobutton=fashion_radio_btn.bmp
 
-checkbutton=fashion\_check\_btn.bmp
+checkbutton=fashion_check_btn.bmp
 
-\# background picture, use your favirate photo
+# background picture, use your favirate photo
 
 bgpicture=none
 
 bgpicpos=center
 
-\#window element metrics
+#window element metrics
 
 caption=25
 
@@ -1373,91 +1330,91 @@ border=1
 
 scrollbar=17
 
-fgc\_active\_caption=0xFFFFFFFF
+fgc_active_caption=0xFFFFFFFF
 
-bgca\_active\_caption=0xFFE35400
+bgca_active_caption=0xFFE35400
 
-bgcb\_active\_caption=0xFFFF953D
+bgcb_active_caption=0xFFFF953D
 
-fgc\_menu=0xFF000000
+fgc_menu=0xFF000000
 
-bgc\_menu=0xFFFFE4BF
+bgc_menu=0xFFFFE4BF
 
-fgc\_msgbox=0xFF000000
+fgc_msgbox=0xFF000000
 
-fgc\_tip=0xFF000000
+fgc_tip=0xFF000000
 
-bgc\_tip=0xFFFFFFFF
+bgc_tip=0xFFFFFFFF
 
-fgc\_active\_border=0xFFC8D0D4
+fgc_active_border=0xFFC8D0D4
 
-fgc\_inactive\_border=0xFFC8D0D4
+fgc_inactive_border=0xFFC8D0D4
 
-fgc\_inactive\_caption=0xFFF8E4D8
+fgc_inactive_caption=0xFFF8E4D8
 
-bgca\_inactive\_caption=0xFFDF967A
+bgca_inactive_caption=0xFFDF967A
 
-bgcb\_inactive\_caption=0xFFEBB99D
+bgcb_inactive_caption=0xFFEBB99D
 
-fgc\_window=0xFF000000
+fgc_window=0xFF000000
 
-bgc\_window=0xFFEBB99D
+bgc_window=0xFFEBB99D
 
-fgc\_3dbox=0xFF000000
+fgc_3dbox=0xFF000000
 
-mainc\_3dbox=0xFFD8E9EC
+mainc_3dbox=0xFFD8E9EC
 
-fgc\_selected\_item=0xFFFFFFFF
+fgc_selected_item=0xFFFFFFFF
 
-bgc\_selected\_item=0xFFC56A31
+bgc_selected_item=0xFFC56A31
 
-bgc\_selected\_lostfocus=0xFFD8E9EC
+bgc_selected_lostfocus=0xFFD8E9EC
 
-fgc\_disabled\_item=0xFF99A8AC
+fgc_disabled_item=0xFF99A8AC
 
-bgc\_disabled\_item=0xFFFFFFFF
+bgc_disabled_item=0xFFFFFFFF
 
-fgc\_hilight\_item=0xFFFFFFFF
+fgc_hilight_item=0xFFFFFFFF
 
-bgc\_hilight\_item=0xFFC56A31
+bgc_hilight_item=0xFFC56A31
 
-fgc\_significant\_item=0xFFFFFFFF
+fgc_significant_item=0xFFFFFFFF
 
-bgc\_significant\_item=0xFFC56A31
+bgc_significant_item=0xFFC56A31
 
-bgc\_desktop=0xFF984E00
+bgc_desktop=0xFF984E00
 
 3.2 Incore Configuration Options
 --------------------------------
 
-When use incore resources, MiniGUI don’t need the file **MiniGUI.cfg**.
+When use incore resources, MiniGUI don’t need the file `MiniGUI.cfg`.
 The appropriate configuration options are defined in the file
-**src/sysres/mgetc.c**.
+`src/sysres/mgetc.c`.
 
-Similar with the structure in **MiniGUI.cfg**, MiniGUI defines an
-structure ETCSECTION, array **\_etc\_sections** and variable MGETC in
-**mgetc.c**. The array mgetc\_sections is appropriate with section in
-configuration file. MGETC that is ETC\_S type is appropriate with
+Similar with the structure in `MiniGUI.cfg`, MiniGUI defines an
+structure ETCSECTION, array `_etc_sections` and variable MGETC in
+`mgetc.c`. The array mgetc_sections is appropriate with section in
+configuration file. MGETC that is ETC_S type is appropriate with
 configuration file.
 
 ### 3.2.1 Structure ETCSETCTION
 
-The structure **ETCSECTION** is defined in the file named
-‘**minigui.h**’. The following is in detail.
+The structure `ETCSECTION` is defined in the file named
+‘`minigui.h`’. The following is in detail.
 
 /\*\* Etc The current config section information \*/
 
-typedef struct \_ETCSECTION
+typedef struct _ETCSECTION
 
 {
 
 /\*\* Allocated number of keys \*/
 
-int key\_nr\_alloc;
+int key_nr_alloc;
 
 /\*\* Key number in the section \*/
 
-int key\_nr;
+int key_nr;
 
 /\*\* Name of the section \*/
 
@@ -1473,140 +1430,140 @@ char\*\* values;
 
 } ETCSECTION;
 
-The **key\_nr\_alloc** is the interface of other configuration options.
-Its value must be 0 in incore. The **key\_nr** defines the number of the
+The `key_nr_alloc` is the interface of other configuration options.
+Its value must be 0 in incore. The `key_nr` defines the number of the
 key in section. The name defines the name of section. The keys and
 values is the array of key and value. The number of key array and value
-array is corresponded with the number of the **key\_nr**.
+array is corresponded with the number of the `key_nr`.
 
-Below is the definition of \_etc\_sections in the **mgetc.c** file.
+Below is the definition of _etc_sections in the `mgetc.c` file.
 
-static ETCSECTION \_etc\_sections \[\] = {
+static ETCSECTION _etc_sections [] = {
 
-{0, 5, "system", \_system\_keys,\_system\_values },
+{0, 5, "system", _system_keys,_system_values },
 
-{0, 1, "fbcon", \_fbcon\_keys,\_fbcon\_values },
+{0, 1, "fbcon", _fbcon_keys,_fbcon_values },
 
-{0, 2, "qvfb", \_qvfb\_keys,\_qvfb\_values },
+{0, 2, "qvfb", _qvfb_keys,_qvfb_values },
 
-\#ifdef \_MGGAL\_PCXVFB
+#ifdef _MGGAL_PCXVFB
 
-{0, 3, "pc\_xvfb", \_pc\_xvfb\_keys,\_pc\_xvfb\_values },
+{0, 3, "pc_xvfb", _pc_xvfb_keys,_pc_xvfb_values },
 
-\#endif
+#endif
 
-{0, 1, "rtos\_xvfb", \_rtos\_xvfb\_keys,\_rtos\_xvfb\_values },
+{0, 1, "rtos_xvfb", _rtos_xvfb_keys,_rtos_xvfb_values },
 
-\#ifdef \_MGGAL\_SHADOW
+#ifdef _MGGAL_SHADOW
 
-{0, 3, "shadow", \_shadow\_keys,\_shadow\_values },
+{0, 3, "shadow", _shadow_keys,_shadow_values },
 
-\#endif
+#endif
 
-\#ifdef \_MGGAL\_MLSHADOW
+#ifdef _MGGAL_MLSHADOW
 
-{0, 4, "mlshadow", \_mlshadow\_keys,\_mlshadow\_values },
+{0, 4, "mlshadow", _mlshadow_keys,_mlshadow_values },
 
-\#endif
+#endif
 
-{0, 12, "systemfont", \_systemfont\_keys,\_systemfont\_values },
+{0, 12, "systemfont", _systemfont_keys,_systemfont_values },
 
-{0, 1, "rawbitmapfonts", \_rawbitmapfonts\_keys,\_rawbitmapfonts\_values
+{0, 1, "rawbitmapfonts", _rawbitmapfonts_keys,_rawbitmapfonts_values
 },
 
-{0, 1, "varbitmapfonts", \_varbitmapfonts\_keys,\_varbitmapfonts\_values
+{0, 1, "varbitmapfonts", _varbitmapfonts_keys,_varbitmapfonts_values
 },
 
-{0, 1, "upf", \_upf\_keys,\_upf\_values },
+{0, 1, "upf", _upf_keys,_upf_values },
 
-{0, 1, "qpf", \_qpf\_keys,\_qpf\_values },
+{0, 1, "qpf", _qpf_keys,_qpf_values },
 
-{0, 1, "truetypefonts", \_truetypefonts\_keys,\_truetypefonts\_values },
+{0, 1, "truetypefonts", _truetypefonts_keys,_truetypefonts_values },
 
-{0, 1, "mouse", \_mouse\_keys,\_mouse\_values },
+{0, 1, "mouse", _mouse_keys,_mouse_values },
 
-{0, 2, "event", \_event\_keys,\_event\_values },
+{0, 2, "event", _event_keys,_event_values },
 
-{0, 25, "cursorinfo", \_cursorinfo\_keys,\_cursorinfo\_values },
+{0, 25, "cursorinfo", _cursorinfo_keys,_cursorinfo_values },
 
-{0, 1, "resinfo", \_resinfo\_keys,\_resinfo\_values },
+{0, 1, "resinfo", _resinfo_keys,_resinfo_values },
 
-{0, 45, "classic", \_classic\_keys,\_classic\_values },
+{0, 45, "classic", _classic_keys,_classic_values },
 
-\#ifdef \_MGLF\_RDR\_FLAT
+#ifdef _MGLF_RDR_FLAT
 
-{0, 46, "flat", \_flat\_keys,\_flat\_values },
+{0, 46, "flat", _flat_keys,_flat_values },
 
-\#endif
+#endif
 
-\#ifdef \_MGLF\_RDR\_SKIN
+#ifdef _MGLF_RDR_SKIN
 
-{0, 71, "skin", \_skin\_keys,\_skin\_values },
+{0, 71, "skin", _skin_keys,_skin_values },
 
-\#endif
+#endif
 
-{0, 45, "fashion", \_fashion\_keys,\_fashion\_values }
+{0, 45, "fashion", _fashion_keys,_fashion_values }
 
 };
 
-The section in **\_etc\_sections** must be defined (fbcon or qvfb is
+The section in `_etc_sections` must be defined (fbcon or qvfb is
 optional.). Other notation sections are optional. The meaning of
 sections is same as the sections in MiniGUI.cfg. Commonly, you can only
 change the GAL engine, the IAL engine, display mode and the sections of
-system and fbcon: SYSTEM\_VALUES and FBCON\_VALUES defined in the
-**mgetc-xxx.c** file, such as **mgetc-pc.c**.
+system and fbcon: SYSTEM_VALUES and FBCON_VALUES defined in the
+`mgetc-xxx.c` file, such as `mgetc-pc.c`.
 
-The **systemfont** section defines incore font used by system.
+The `systemfont` section defines incore font used by system.
 Currently, MiniGUI 3.0.x supports ISO8859-1, GB2312, RBF, BIG5,
-SHIFT\_JIS, and QPF. MiniGUI doesn’t support the TTF and Type1 font in
+SHIFT_JIS, and QPF. MiniGUI doesn’t support the TTF and Type1 font in
 incore resources.
 
-### 3.2.2 ETC\_S Structure
+### 3.2.2 ETC_S Structure
 
-**ETC\_S** structure was defined in the file minigui.h, the content of
-ETC\_S listed as the follow:
+`ETC_S` structure was defined in the file minigui.h, the content of
+ETC_S listed as the follow:
 
-/\*\* ETC\_S The current config file information\*/
+/\*\* ETC_S The current config file information\*/
 
-typedef struct \_ETC\_S
+typedef struct _ETC_S
 
 {
 
 /\*\* Allocated number of sections \*/
 
-int sect\_nr\_alloc;
+int sect_nr_alloc;
 
 /\*\* Number of sections \*/
 
-int section\_nr;
+int section_nr;
 
 /\*\* Pointer to section arrays \*/
 
 PETCSECTION sections;
 
-} ETC\_S;
+} ETC_S;
 
-Therefore, **sect\_nr\_alloc** is the interface of the other
-configuration options, it’s value must be 0 in incore, **sect\_nr**
+Therefore, `sect_nr_alloc` is the interface of the other
+configuration options, it’s value must be 0 in incore, `sect_nr`
 specify the number of section, sections is ETCSECTION type structure
 array, the number of item is not less than the value, the first item
 specified this value.
 
-The **mgetc\_sections** array was defined as the follow in the
-**mgetc.c** file.
+The `mgetc_sections` array was defined as the follow in the
+`mgetc.c` file.
 
-static ETC\_S \_ETC = {
+static ETC_S _ETC = {
 
 0,
 
-sizeof(\_etc\_sections)/sizeof(ETCSECTION),
+sizeof(_etc_sections)/sizeof(ETCSECTION),
 
-\_etc\_sections
+_etc_sections
 
 };
 
-The number of section is sizeof(\_etc\_sections)/sizeof(ETCSECTION) in
-the MGETC structure; the section array is mgetc\_sections array above.
+The number of section is sizeof(_etc_sections)/sizeof(ETCSECTION) in
+the MGETC structure; the section array is mgetc_sections array above.
 
 ### 3.2.3 Listing of mgetc.c
 
@@ -1626,13 +1583,13 @@ the MGETC structure; the section array is mgetc\_sections array above.
 
 \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*/
 
-\#include &lt;stdio.h&gt;
+#include <stdio.h>
 
-\#include "common.h"
+#include "common.h"
 
-\#include "minigui.h"
+#include "minigui.h"
 
-\#ifdef \_MGINCORE\_RES
+#ifdef _MGINCORE_RES
 
 // This configuration file is for MiniGUI V3.0.x
 
@@ -1680,17 +1637,17 @@ MiniGUI.
 
 // Section: system
 
-static char\* \_system\_keys\[\]={
+static char\* _system_keys[]={
 
 // GAL engine and default options
 
-"gal\_engine",
+"gal_engine",
 
 "defaultmode",
 
 // IAL engine
 
-"ial\_engine",
+"ial_engine",
 
 "mdev",
 
@@ -1698,17 +1655,17 @@ static char\* \_system\_keys\[\]={
 
 };
 
-static char\* \_system\_values\[\]={
+static char\* _system_values[]={
 
 // GAL engine and default options
 
-"pc\_xvfb",
+"pc_xvfb",
 
 "800x600-16bpp",
 
 // IAL engine
 
-"pc\_xvfb",
+"pc_xvfb",
 
 "/dev/input/mice",
 
@@ -1718,13 +1675,13 @@ static char\* \_system\_values\[\]={
 
 // Section: fbcon
 
-static char\* \_fbcon\_keys\[\]={
+static char\* _fbcon_keys[]={
 
 "defaultmode"
 
 };
 
-static char\* \_fbcon\_values\[\]={
+static char\* _fbcon_values[]={
 
 "1024x768-16bpp"
 
@@ -1732,7 +1689,7 @@ static char\* \_fbcon\_values\[\]={
 
 // Section: qvfb
 
-static char\* \_qvfb\_keys\[\]={
+static char\* _qvfb_keys[]={
 
 "defaultmode",
 
@@ -1740,7 +1697,7 @@ static char\* \_qvfb\_keys\[\]={
 
 };
 
-static char\* \_qvfb\_values\[\]={
+static char\* _qvfb_values[]={
 
 "640x480-16bpp",
 
@@ -1748,21 +1705,21 @@ static char\* \_qvfb\_values\[\]={
 
 };
 
-\#ifdef \_MGGAL\_PCXVFB
+#ifdef _MGGAL_PCXVFB
 
-// Section: pc\_xvfb
+// Section: pc_xvfb
 
-static char\* \_pc\_xvfb\_keys\[\]={
+static char\* _pc_xvfb_keys[]={
 
 "defaultmode",
 
-"window\_caption",
+"window_caption",
 
-"exec\_file"
+"exec_file"
 
 };
 
-static char\* \_pc\_xvfb\_values\[\]={
+static char\* _pc_xvfb_values[]={
 
 "800x600-16bpp",
 
@@ -1772,39 +1729,39 @@ static char\* \_pc\_xvfb\_values\[\]={
 
 };
 
-\#endif
+#endif
 
-// Section: rtos\_xvfb
+// Section: rtos_xvfb
 
-static char\* \_rtos\_xvfb\_keys\[\]={
+static char\* _rtos_xvfb_keys[]={
 
 "defaultmode"
 
 };
 
-static char\* \_rtos\_xvfb\_values\[\]={
+static char\* _rtos_xvfb_values[]={
 
 "800x600-16bpp"
 
 };
 
-\#ifdef \_MGGAL\_SHADOW
+#ifdef _MGGAL_SHADOW
 
 // Section: shadow
 
-static char\* \_shadow\_keys\[\]={
+static char\* _shadow_keys[]={
 
-"real\_engine",
+"real_engine",
 
 "defaultmode",
 
-"rotate\_screen"
+"rotate_screen"
 
 };
 
-static char\* \_shadow\_values\[\]={
+static char\* _shadow_values[]={
 
-"pc\_xvfb",
+"pc_xvfb",
 
 "800x600-16bpp",
 
@@ -1812,25 +1769,25 @@ static char\* \_shadow\_values\[\]={
 
 };
 
-\#endif
+#endif
 
-\#ifdef \_MGGAL\_MLSHADOW
+#ifdef _MGGAL_MLSHADOW
 
 // Section: mlshadow
 
-static char\* \_mlshadow\_keys\[\]={
+static char\* _mlshadow_keys[]={
 
-"real\_engine",
+"real_engine",
 
 "defaultmode",
 
-"def\_bgcolor",
+"def_bgcolor",
 
-"double\_buffer"
+"double_buffer"
 
 };
 
-static char\* \_mlshadow\_values\[\]={
+static char\* _mlshadow_values[]={
 
 "qvfb",
 
@@ -1842,15 +1799,15 @@ static char\* \_mlshadow\_values\[\]={
 
 };
 
-\#endif
+#endif
 
 // The first system font must be a logical font using RBF device font.
 
 // Section: systemfont
 
-static char\* \_systemfont\_keys\[\]={
+static char\* _systemfont_keys[]={
 
-"font\_number",
+"font_number",
 
 "font0",
 
@@ -1864,7 +1821,7 @@ static char\* \_systemfont\_keys\[\]={
 
 "default",
 
-"wchar\_def",
+"wchar_def",
 
 "fixed",
 
@@ -1876,7 +1833,7 @@ static char\* \_systemfont\_keys\[\]={
 
 };
 
-static char\* \_systemfont\_values\[\]={
+static char\* _systemfont_values[]={
 
 "5",
 
@@ -1906,13 +1863,13 @@ static char\* \_systemfont\_values\[\]={
 
 // Section: rawbitmapfonts
 
-static char\* \_rawbitmapfonts\_keys\[\]={
+static char\* _rawbitmapfonts_keys[]={
 
-"font\_number"
+"font_number"
 
 };
 
-static char\* \_rawbitmapfonts\_values\[\]={
+static char\* _rawbitmapfonts_values[]={
 
 "0"
 
@@ -1920,13 +1877,13 @@ static char\* \_rawbitmapfonts\_values\[\]={
 
 // Section: varbitmapfonts
 
-static char\* \_varbitmapfonts\_keys\[\]={
+static char\* _varbitmapfonts_keys[]={
 
-"font\_number"
+"font_number"
 
 };
 
-static char\* \_varbitmapfonts\_values\[\]={
+static char\* _varbitmapfonts_values[]={
 
 "0"
 
@@ -1934,13 +1891,13 @@ static char\* \_varbitmapfonts\_values\[\]={
 
 // Section: upf
 
-static char\* \_upf\_keys\[\]={
+static char\* _upf_keys[]={
 
-"font\_number"
+"font_number"
 
 };
 
-static char\* \_upf\_values\[\]={
+static char\* _upf_values[]={
 
 "0"
 
@@ -1948,13 +1905,13 @@ static char\* \_upf\_values\[\]={
 
 // Section: qpf
 
-static char\* \_qpf\_keys\[\]={
+static char\* _qpf_keys[]={
 
-"font\_number"
+"font_number"
 
 };
 
-static char\* \_qpf\_values\[\]={
+static char\* _qpf_values[]={
 
 "0"
 
@@ -1962,13 +1919,13 @@ static char\* \_qpf\_values\[\]={
 
 // Section: truetypefonts
 
-static char\* \_truetypefonts\_keys\[\]={
+static char\* _truetypefonts_keys[]={
 
-"font\_number"
+"font_number"
 
 };
 
-static char\* \_truetypefonts\_values\[\]={
+static char\* _truetypefonts_values[]={
 
 "0"
 
@@ -1976,13 +1933,13 @@ static char\* \_truetypefonts\_values\[\]={
 
 // Section: mouse
 
-static char\* \_mouse\_keys\[\]={
+static char\* _mouse_keys[]={
 
 "dblclicktime"
 
 };
 
-static char\* \_mouse\_values\[\]={
+static char\* _mouse_values[]={
 
 "300"
 
@@ -1990,7 +1947,7 @@ static char\* \_mouse\_values\[\]={
 
 // Section: event
 
-static char\* \_event\_keys\[\]={
+static char\* _event_keys[]={
 
 "timeoutusec",
 
@@ -1998,7 +1955,7 @@ static char\* \_event\_keys\[\]={
 
 };
 
-static char\* \_event\_values\[\]={
+static char\* _event_values[]={
 
 "300000",
 
@@ -2008,7 +1965,7 @@ static char\* \_event\_values\[\]={
 
 // Section: cursorinfo
 
-static char\* \_cursorinfo\_keys\[\]={
+static char\* _cursorinfo_keys[]={
 
 // Edit following line to specify cursor files path
 
@@ -2064,7 +2021,7 @@ static char\* \_cursorinfo\_keys\[\]={
 
 };
 
-static char\* \_cursorinfo\_values\[\]={
+static char\* _cursorinfo_values[]={
 
 // Edit following line to specify cursor files path
 
@@ -2072,63 +2029,63 @@ static char\* \_cursorinfo\_values\[\]={
 
 "23",
 
-"d\_arrow.cur",
+"d_arrow.cur",
 
-"d\_beam.cur",
+"d_beam.cur",
 
-"d\_pencil.cur",
+"d_pencil.cur",
 
-"d\_cross.cur",
+"d_cross.cur",
 
-"d\_move.cur",
+"d_move.cur",
 
-"d\_sizenwse.cur",
+"d_sizenwse.cur",
 
-"d\_sizenesw.cur",
+"d_sizenesw.cur",
 
-"d\_sizewe.cur",
+"d_sizewe.cur",
 
-"d\_sizens.cur",
+"d_sizens.cur",
 
-"d\_uparrow.cur",
+"d_uparrow.cur",
 
-"d\_none.cur",
+"d_none.cur",
 
-"d\_help.cur",
+"d_help.cur",
 
-"d\_busy.cur",
+"d_busy.cur",
 
-"d\_wait.cur",
+"d_wait.cur",
 
-"g\_rarrow.cur",
+"g_rarrow.cur",
 
-"g\_col.cur",
+"g_col.cur",
 
-"g\_row.cur",
+"g_row.cur",
 
-"g\_drag.cur",
+"g_drag.cur",
 
-"g\_nodrop.cur",
+"g_nodrop.cur",
 
-"h\_point.cur",
+"h_point.cur",
 
-"h\_select.cur",
+"h_select.cur",
 
-"ho\_split.cur",
+"ho_split.cur",
 
-"ve\_split.cur"
+"ve_split.cur"
 
 };
 
 // Section: resinfo
 
-static char\* \_resinfo\_keys\[\]={
+static char\* _resinfo_keys[]={
 
 "respath"
 
 };
 
-static char\* \_resinfo\_values\[\]={
+static char\* _resinfo_values[]={
 
 "/usr/local/share/minigui/res/"
 
@@ -2136,7 +2093,7 @@ static char\* \_resinfo\_values\[\]={
 
 // Section: classic
 
-static char\* \_classic\_keys\[\]={
+static char\* _classic_keys[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2206,63 +2163,63 @@ static char\* \_classic\_keys\[\]={
 
 //window element colors
 
-"fgc\_active\_caption",
+"fgc_active_caption",
 
-"bgca\_active\_caption",
+"bgca_active_caption",
 
-"bgcb\_active\_caption",
+"bgcb_active_caption",
 
-"fgc\_menu",
+"fgc_menu",
 
-"bgc\_menu",
+"bgc_menu",
 
-"fgc\_msgbox",
+"fgc_msgbox",
 
-"fgc\_tip",
+"fgc_tip",
 
-"bgc\_tip",
+"bgc_tip",
 
-"fgc\_active\_border",
+"fgc_active_border",
 
-"fgc\_inactive\_border",
+"fgc_inactive_border",
 
-"fgc\_inactive\_caption",
+"fgc_inactive_caption",
 
-"bgca\_inactive\_caption",
+"bgca_inactive_caption",
 
-"bgcb\_inactive\_caption",
+"bgcb_inactive_caption",
 
-"fgc\_window",
+"fgc_window",
 
-"bgc\_window",
+"bgc_window",
 
-"fgc\_3dbox",
+"fgc_3dbox",
 
-"mainc\_3dbox",
+"mainc_3dbox",
 
-"fgc\_selected\_item",
+"fgc_selected_item",
 
-"bgc\_selected\_item",
+"bgc_selected_item",
 
-"bgc\_selected\_lostfocus",
+"bgc_selected_lostfocus",
 
-"fgc\_disabled\_item",
+"fgc_disabled_item",
 
-"bgc\_disabled\_item",
+"bgc_disabled_item",
 
-"fgc\_hilight\_item",
+"fgc_hilight_item",
 
-"bgc\_hilight\_item",
+"bgc_hilight_item",
 
-"fgc\_significant\_item",
+"fgc_significant_item",
 
-"bgc\_significant\_item",
+"bgc_significant_item",
 
-"bgc\_desktop"
+"bgc_desktop"
 
 };
 
-static char\* \_classic\_values\[\]={
+static char\* _classic_values[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2292,9 +2249,9 @@ static char\* \_classic\_values\[\]={
 
 // bitmap used by BUTTON control
 
-"classic\_radio\_button.bmp",
+"classic_radio_button.bmp",
 
-"classic\_check\_button.bmp",
+"classic_check_button.bmp",
 
 // background picture, use your favirate photo
 
@@ -2388,11 +2345,11 @@ static char\* \_classic\_values\[\]={
 
 };
 
-\#ifdef \_MGLF\_RDR\_FLAT
+#ifdef _MGLF_RDR_FLAT
 
 // Section: flat
 
-static char\* \_flat\_keys\[\]={
+static char\* _flat_keys[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2444,65 +2401,65 @@ static char\* \_flat\_keys\[\]={
 
 //window element colors
 
-"fgc\_active\_caption",
+"fgc_active_caption",
 
-"bgca\_active\_caption",
+"bgca_active_caption",
 
-"bgcb\_active\_caption",
+"bgcb_active_caption",
 
-"fgc\_inactive\_caption",
+"fgc_inactive_caption",
 
-"bgca\_inactive\_caption",
+"bgca_inactive_caption",
 
-"bgcb\_inactive\_caption",
+"bgcb_inactive_caption",
 
-"fgc\_menu",
+"fgc_menu",
 
-"bgc\_menu",
+"bgc_menu",
 
-"fgc\_msgbox",
+"fgc_msgbox",
 
-"fgc\_tip",
+"fgc_tip",
 
-"bgc\_tip",
+"bgc_tip",
 
-"fgc\_active\_border",
+"fgc_active_border",
 
-"fgc\_inactive\_border",
+"fgc_inactive_border",
 
-"fgc\_window",
+"fgc_window",
 
-"bgc\_window",
+"bgc_window",
 
-"fgc\_3dbox",
+"fgc_3dbox",
 
-"mainc\_3dbox",
+"mainc_3dbox",
 
-"fgc\_selected\_item",
+"fgc_selected_item",
 
-"bgc\_selected\_item",
+"bgc_selected_item",
 
-"bgc\_selected\_lostfocus",
+"bgc_selected_lostfocus",
 
-"fgc\_disabled\_item",
+"fgc_disabled_item",
 
-"bgc\_disabled\_item",
+"bgc_disabled_item",
 
-"fgc\_hilight\_item",
+"fgc_hilight_item",
 
-"bgc\_hilight\_item",
+"bgc_hilight_item",
 
-"fgc\_significant\_item",
+"fgc_significant_item",
 
-"bgc\_significant\_item",
+"bgc_significant_item",
 
-"bgc\_desktop",
+"bgc_desktop",
 
-"flat\_tab\_normal\_color"
+"flat_tab_normal_color"
 
 };
 
-static char\* \_flat\_values\[\]={
+static char\* _flat_values[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2532,9 +2489,9 @@ static char\* \_flat\_values\[\]={
 
 // bitmap used by BUTTON control
 
-"flat\_radio\_button.bmp",
+"flat_radio_button.bmp",
 
-"flat\_check\_button.bmp",
+"flat_check_button.bmp",
 
 // background picture, use your favirate photo
 
@@ -2612,13 +2569,13 @@ static char\* \_flat\_values\[\]={
 
 };
 
-\#endif
+#endif
 
-\#ifdef \_MGLF\_RDR\_SKIN
+#ifdef _MGLF_RDR_SKIN
 
 // Section: skin
 
-static char\* \_skin\_keys\[\]={
+static char\* _skin_keys[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2662,129 +2619,129 @@ static char\* \_skin\_keys\[\]={
 
 "scrollbar",
 
-"fgc\_active\_caption",
+"fgc_active_caption",
 
-"bgca\_active\_caption",
+"bgca_active_caption",
 
-"bgcb\_active\_caption",
+"bgcb_active_caption",
 
-"fgc\_menu",
+"fgc_menu",
 
-"bgc\_menu",
+"bgc_menu",
 
-"fgc\_msgbox",
+"fgc_msgbox",
 
-"fgc\_tip",
+"fgc_tip",
 
-"bgc\_tip",
+"bgc_tip",
 
-"fgc\_active\_border",
+"fgc_active_border",
 
-"fgc\_inactive\_border",
+"fgc_inactive_border",
 
-"fgc\_inactive\_caption",
+"fgc_inactive_caption",
 
-"bgca\_inactive\_caption",
+"bgca_inactive_caption",
 
-"bgcb\_inactive\_caption",
+"bgcb_inactive_caption",
 
-"fgc\_window",
+"fgc_window",
 
-"bgc\_window",
+"bgc_window",
 
-"fgc\_3dbox",
+"fgc_3dbox",
 
-"mainc\_3dbox",
+"mainc_3dbox",
 
-"fgc\_selected\_item",
+"fgc_selected_item",
 
-"bgc\_selected\_item",
+"bgc_selected_item",
 
-"bgc\_selected\_lostfocus",
+"bgc_selected_lostfocus",
 
-"fgc\_disabled\_item",
+"fgc_disabled_item",
 
-"bgc\_disabled\_item",
+"bgc_disabled_item",
 
-"fgc\_hilight\_item",
+"fgc_hilight_item",
 
-"bgc\_hilight\_item",
+"bgc_hilight_item",
 
-"fgc\_significant\_item",
+"fgc_significant_item",
 
-"bgc\_significant\_item",
+"bgc_significant_item",
 
-"bgc\_desktop",
+"bgc_desktop",
 
-"skin\_bkgnd",
+"skin_bkgnd",
 
-"skin\_caption",
+"skin_caption",
 
-"skin\_caption\_btn",
+"skin_caption_btn",
 
 //for scrollbar
 
-"skin\_scrollbar\_hshaft",
+"skin_scrollbar_hshaft",
 
-"skin\_scrollbar\_vshaft",
+"skin_scrollbar_vshaft",
 
-"skin\_scrollbar\_hthumb",
+"skin_scrollbar_hthumb",
 
-"skin\_scrollbar\_vthumb",
+"skin_scrollbar_vthumb",
 
-"skin\_scrollbar\_arrows",
+"skin_scrollbar_arrows",
 
 //for border
 
-"skin\_tborder",
+"skin_tborder",
 
-"skin\_bborder",
+"skin_bborder",
 
-"skin\_lborder",
+"skin_lborder",
 
-"skin\_rborder",
+"skin_rborder",
 
-"skin\_arrows",
+"skin_arrows",
 
-"skin\_arrows\_shell",
+"skin_arrows_shell",
 
-"skin\_pushbtn",
+"skin_pushbtn",
 
-"skin\_radiobtn",
+"skin_radiobtn",
 
-"skin\_checkbtn",
+"skin_checkbtn",
 
 //for treeview
 
-"skin\_tree",
+"skin_tree",
 
-"skin\_header",
+"skin_header",
 
-"skin\_tab",
+"skin_tab",
 
 //for trackbar
 
-"skin\_tbslider\_h",
+"skin_tbslider_h",
 
-"skin\_tbslider\_v",
+"skin_tbslider_v",
 
-"skin\_trackbar\_horz",
+"skin_trackbar_horz",
 
-"skin\_trackbar\_vert",
+"skin_trackbar_vert",
 
 //for progressbar
 
-"skin\_progressbar\_htrack",
+"skin_progressbar_htrack",
 
-"skin\_progressbar\_vtrack",
+"skin_progressbar_vtrack",
 
-"skin\_progressbar\_hchunk",
+"skin_progressbar_hchunk",
 
-"skin\_progressbar\_vchunk"
+"skin_progressbar_vchunk"
 
 };
 
-static char\* \_skin\_values\[\]={
+static char\* _skin_values[]={
 
 // Note that max number defined in source code is 5.
 
@@ -2882,79 +2839,79 @@ static char\* \_skin\_values\[\]={
 
 "0xFF984E00",
 
-"skin\_bkgnd.bmp",
+"skin_bkgnd.bmp",
 
-"skin\_caption.gif",
+"skin_caption.gif",
 
-"skin\_cpn\_btn.gif",
+"skin_cpn_btn.gif",
 
 //for scrollbar
 
-"skin\_sb\_hshaft.bmp",
+"skin_sb_hshaft.bmp",
 
-"skin\_sb\_vshaft.bmp",
+"skin_sb_vshaft.bmp",
 
-"skin\_sb\_hthumb.bmp",
+"skin_sb_hthumb.bmp",
 
-"skin\_sb\_vthumb.bmp",
+"skin_sb_vthumb.bmp",
 
-"skin\_sb\_arrows.bmp",
+"skin_sb_arrows.bmp",
 
 //for border
 
-"skin\_tborder.bmp",
+"skin_tborder.bmp",
 
-"skin\_bborder.bmp",
+"skin_bborder.bmp",
 
-"skin\_lborder.bmp",
+"skin_lborder.bmp",
 
-"skin\_rborder.bmp",
+"skin_rborder.bmp",
 
-"skin\_arrows.gif",
+"skin_arrows.gif",
 
-"skin\_arrows\_shell.bmp",
+"skin_arrows_shell.bmp",
 
-"skin\_pushbtn.gif",
+"skin_pushbtn.gif",
 
-"skin\_radiobtn.gif",
+"skin_radiobtn.gif",
 
-"skin\_checkbtn.bmp",
+"skin_checkbtn.bmp",
 
 //for treeview
 
-"skin\_tree.bmp",
+"skin_tree.bmp",
 
-"skin\_header.bmp",
+"skin_header.bmp",
 
-"skin\_tab.gif",
+"skin_tab.gif",
 
 //for trackbar
 
-"skin\_tbslider\_h.gif",
+"skin_tbslider_h.gif",
 
-"skin\_tbslider\_v.gif",
+"skin_tbslider_v.gif",
 
-"skin\_tb\_horz.gif",
+"skin_tb_horz.gif",
 
-"skin\_tb\_vert.gif",
+"skin_tb_vert.gif",
 
 //for progressbar
 
-"skin\_pb\_htrack.gif",
+"skin_pb_htrack.gif",
 
-"skin\_pb\_vtrack.gif",
+"skin_pb_vtrack.gif",
 
-"skin\_pb\_htruck.bmp",
+"skin_pb_htruck.bmp",
 
-"skin\_pb\_vtruck.bmp"
+"skin_pb_vtruck.bmp"
 
 };
 
-\#endif
+#endif
 
 // Section: fashion
 
-static char\* \_fashion\_keys\[\]={
+static char\* _fashion_keys[]={
 
 // Note that max number defined in source code is 5.
 
@@ -3004,63 +2961,63 @@ static char\* \_fashion\_keys\[\]={
 
 "scrollbar",
 
-"fgc\_active\_caption",
+"fgc_active_caption",
 
-"bgca\_active\_caption",
+"bgca_active_caption",
 
-"bgcb\_active\_caption",
+"bgcb_active_caption",
 
-"fgc\_menu",
+"fgc_menu",
 
-"bgc\_menu",
+"bgc_menu",
 
-"fgc\_msgbox",
+"fgc_msgbox",
 
-"fgc\_tip",
+"fgc_tip",
 
-"bgc\_tip",
+"bgc_tip",
 
-"fgc\_active\_border",
+"fgc_active_border",
 
-"fgc\_inactive\_border",
+"fgc_inactive_border",
 
-"fgc\_inactive\_caption",
+"fgc_inactive_caption",
 
-"bgca\_inactive\_caption",
+"bgca_inactive_caption",
 
-"bgcb\_inactive\_caption",
+"bgcb_inactive_caption",
 
-"fgc\_window",
+"fgc_window",
 
-"bgc\_window",
+"bgc_window",
 
-"fgc\_3dbox",
+"fgc_3dbox",
 
-"mainc\_3dbox",
+"mainc_3dbox",
 
-"fgc\_selected\_item",
+"fgc_selected_item",
 
-"bgc\_selected\_item",
+"bgc_selected_item",
 
-"bgc\_selected\_lostfocus",
+"bgc_selected_lostfocus",
 
-"fgc\_disabled\_item",
+"fgc_disabled_item",
 
-"bgc\_disabled\_item",
+"bgc_disabled_item",
 
-"fgc\_hilight\_item",
+"fgc_hilight_item",
 
-"bgc\_hilight\_item",
+"bgc_hilight_item",
 
-"fgc\_significant\_item",
+"fgc_significant_item",
 
-"bgc\_significant\_item",
+"bgc_significant_item",
 
-"bgc\_desktop"
+"bgc_desktop"
 
 };
 
-static char\* \_fashion\_values\[\]={
+static char\* _fashion_values[]={
 
 // Note that max number defined in source code is 5.
 
@@ -3070,7 +3027,7 @@ static char\* \_fashion\_values\[\]={
 
 "failed.ico",
 
-"mg\_help.ico",
+"mg_help.ico",
 
 "warning.ico",
 
@@ -3090,9 +3047,9 @@ static char\* \_fashion\_values\[\]={
 
 // bitmap used by BUTTON control
 
-"fashion\_radio\_btn.bmp",
+"fashion_radio_btn.bmp",
 
-"fashion\_check\_btn.bmp",
+"fashion_check_btn.bmp",
 
 // background picture, use your favirate photo
 
@@ -3166,95 +3123,95 @@ static char\* \_fashion\_values\[\]={
 
 };
 
-static ETCSECTION \_etc\_sections \[\] = {
+static ETCSECTION _etc_sections [] = {
 
-{0, 5, "system", \_system\_keys,\_system\_values },
+{0, 5, "system", _system_keys,_system_values },
 
-{0, 1, "fbcon", \_fbcon\_keys,\_fbcon\_values },
+{0, 1, "fbcon", _fbcon_keys,_fbcon_values },
 
-{0, 2, "qvfb", \_qvfb\_keys,\_qvfb\_values },
+{0, 2, "qvfb", _qvfb_keys,_qvfb_values },
 
-\#ifdef \_MGGAL\_PCXVFB
+#ifdef _MGGAL_PCXVFB
 
-{0, 3, "pc\_xvfb", \_pc\_xvfb\_keys,\_pc\_xvfb\_values },
+{0, 3, "pc_xvfb", _pc_xvfb_keys,_pc_xvfb_values },
 
-\#endif
+#endif
 
-{0, 1, "rtos\_xvfb", \_rtos\_xvfb\_keys,\_rtos\_xvfb\_values },
+{0, 1, "rtos_xvfb", _rtos_xvfb_keys,_rtos_xvfb_values },
 
-\#ifdef \_MGGAL\_SHADOW
+#ifdef _MGGAL_SHADOW
 
-{0, 3, "shadow", \_shadow\_keys,\_shadow\_values },
+{0, 3, "shadow", _shadow_keys,_shadow_values },
 
-\#endif
+#endif
 
-\#ifdef \_MGGAL\_MLSHADOW
+#ifdef _MGGAL_MLSHADOW
 
-{0, 4, "mlshadow", \_mlshadow\_keys,\_mlshadow\_values },
+{0, 4, "mlshadow", _mlshadow_keys,_mlshadow_values },
 
-\#endif
+#endif
 
-{0, 12, "systemfont", \_systemfont\_keys,\_systemfont\_values },
+{0, 12, "systemfont", _systemfont_keys,_systemfont_values },
 
-{0, 1, "rawbitmapfonts", \_rawbitmapfonts\_keys,\_rawbitmapfonts\_values
+{0, 1, "rawbitmapfonts", _rawbitmapfonts_keys,_rawbitmapfonts_values
 },
 
-{0, 1, "varbitmapfonts", \_varbitmapfonts\_keys,\_varbitmapfonts\_values
+{0, 1, "varbitmapfonts", _varbitmapfonts_keys,_varbitmapfonts_values
 },
 
-{0, 1, "upf", \_upf\_keys,\_upf\_values },
+{0, 1, "upf", _upf_keys,_upf_values },
 
-{0, 1, "qpf", \_qpf\_keys,\_qpf\_values },
+{0, 1, "qpf", _qpf_keys,_qpf_values },
 
-{0, 1, "truetypefonts", \_truetypefonts\_keys,\_truetypefonts\_values },
+{0, 1, "truetypefonts", _truetypefonts_keys,_truetypefonts_values },
 
-{0, 1, "mouse", \_mouse\_keys,\_mouse\_values },
+{0, 1, "mouse", _mouse_keys,_mouse_values },
 
-{0, 2, "event", \_event\_keys,\_event\_values },
+{0, 2, "event", _event_keys,_event_values },
 
-{0, 25, "cursorinfo", \_cursorinfo\_keys,\_cursorinfo\_values },
+{0, 25, "cursorinfo", _cursorinfo_keys,_cursorinfo_values },
 
-{0, 1, "resinfo", \_resinfo\_keys,\_resinfo\_values },
+{0, 1, "resinfo", _resinfo_keys,_resinfo_values },
 
-{0, 45, "classic", \_classic\_keys,\_classic\_values },
+{0, 45, "classic", _classic_keys,_classic_values },
 
-\#ifdef \_MGLF\_RDR\_FLAT
+#ifdef _MGLF_RDR_FLAT
 
-{0, 46, "flat", \_flat\_keys,\_flat\_values },
+{0, 46, "flat", _flat_keys,_flat_values },
 
-\#endif
+#endif
 
-\#ifdef \_MGLF\_RDR\_SKIN
+#ifdef _MGLF_RDR_SKIN
 
-{0, 71, "skin", \_skin\_keys,\_skin\_values },
+{0, 71, "skin", _skin_keys,_skin_values },
 
-\#endif
+#endif
 
-{0, 45, "fashion", \_fashion\_keys,\_fashion\_values }
+{0, 45, "fashion", _fashion_keys,_fashion_values }
 
 };
 
 ///////////////////////////////////////////////////
 
-static ETC\_S \_ETC = {
+static ETC_S _ETC = {
 
 0,
 
-sizeof(\_etc\_sections)/sizeof(ETCSECTION),
+sizeof(_etc_sections)/sizeof(ETCSECTION),
 
-\_etc\_sections
+_etc_sections
 
 };
 
-GHANDLE \_\_mg\_get\_mgetc (void)
+GHANDLE __mg_get_mgetc (void)
 
 {
 
-return (GHANDLE) &\_ETC;
+return (GHANDLE) &_ETC;
 
 }
 
-\#endif /\* \_MGINCORE\_RES \*/
+#endif /\* _MGINCORE_RES \*/
 
 3.3 Sample of Configuration
 ---------------------------
@@ -3268,17 +3225,17 @@ configuration examples.
 
 #### 1) Configuration File
 
-\# The first system font must be a logical font using RBF device font.
+# The first system font must be a logical font using RBF device font.
 
-\[systemfont\]
+[systemfont]
 
-font\_number=1
+font_number=1
 
 font0=rbf-fixed-rrncnn-8-16-ISO8859-1
 
 default=0
 
-wchar\_def=0
+wchar_def=0
 
 fixed=0
 
@@ -3288,38 +3245,38 @@ menu=0
 
 control=0
 
-\[rawbitmapfonts\]
+[rawbitmapfonts]
 
-font\_number=1
+font_number=1
 
 name0=rbf-fixed-rrncnn-8-16-ISO8859-1
 
 fontfile0=/usr/local/lib/minigui/res/font/8x16-iso8859-1.bin
 
-\[varbitmapfonts\]
+[varbitmapfonts]
 
-font\_number=0
+font_number=0
 
-\[qpf\]
+[qpf]
 
-font\_number=0
+font_number=0
 
-\[truetypefonts\]
+[truetypefonts]
 
-font\_number=0
+font_number=0
 
-\[type1fonts\]
+[type1fonts]
 
-font\_number=0
+font_number=0
 
 #### 2) Incore Configuration Options
 
-static char \*SYSTEMFONT\_KEYS\[\] =
+static char \*SYSTEMFONT_KEYS[] =
 
-{"font\_number", "font0", "default", "wchar\_def", "fixed", "caption",
+{"font_number", "font0", "default", "wchar_def", "fixed", "caption",
 "menu", "control"};
 
-static char \*SYSTEMFONT\_VALUES\[\] =
+static char \*SYSTEMFONT_VALUES[] =
 
 {
 
@@ -3331,25 +3288,43 @@ static char \*SYSTEMFONT\_VALUES\[\] =
 
 #### 1) Configuration File
 
-\[system\]
+```ini
+[system]
+# GAL engine and default options
+gal_engine=commlcd
 
-\# GAL engine and default options
-
-gal\_engine=commlcd
-
-\# IAL engine
-
-ial\_engine=auto
-
+# IAL engine
+ial_engine=auto
 mdev=/dev/ts
-
 mtype=IMPS2
+```
 
 #### 2) Incore Configuration Option
 
-static char \*SYSTEM\_KEYS\[\] = {"gal\_engine", "ial\_engine", "mdev",
-"mtype"};
+```cpp
+static char *SYSTEM_KEYS[] = {"gal_engine", "ial_engine", "mdev", "mtype"};
+static char *SYSTEM_VALUES[] = {"commlcd", "auto", "/dev/ts", "IMPS2"};
+```
 
-static char \*SYSTEM\_VALUES\[\] = {"commlcd", "auto", "/dev/ts",
-"IMPS2"};
+---
 
+[&lt; Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md) | [Table of Contents](README.md) | [Feature List &gt;](MiniGUIUserManualFeatureList.md)
+
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Website]: http://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIDataSheet.md
+[FAQs]: MiniGUIUserManualFAQsEN.md
+
+[Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
