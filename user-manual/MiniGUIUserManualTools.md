@@ -48,3 +48,27 @@ Using the package of MiniGUI for Win32 to develop applications, please
 don’t call Windows special API, which isn’t supported possibility by
 target OS.
 
+---
+
+[&lt;&lt; Runtime Configuration](MiniGUIUserManualRuntimeConfiguration.md) |
+[Table of Contents](README.md) |
+[Feature List &gt;&gt;](MiniGUIUserManualFeatureList.md)
+
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[MiniGUI Official Website]: http://www.minigui.com
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[Quick Start]: MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: MiniGUIUserManualTools.md
+[Feature List]: MiniGUIUserManualFeatureList.md
+[FAQs]: MiniGUIUserManualFAQsEN.md
+
+[Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
