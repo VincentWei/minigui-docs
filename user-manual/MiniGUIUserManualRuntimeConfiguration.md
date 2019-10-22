@@ -293,7 +293,7 @@ The valid keys in the section `systemfont` are listed as follow:
 - `font_number`: The number of system fonts should be created.
 **Note that the maximal number of system logfonts is 6. You should not
 set this key value to be a number larger than 6.**
-- `font<NR>`: The name for the logfont number `<NR>`.
+- `font<NR>`: The name for the logfont numbered `<NR>`.
 - `default`: The system default logfont in the default single-byte character set.
   Its value should be a valid system logfont number.
 - `wchar_def`: The system default logfont in the default multiple-byte character set.
@@ -339,7 +339,124 @@ control=3
 
 ### Section `cursorinfo`
 
+This section specify the cursors used by MiniGUI.
+
+The valid keys in the section `cursorinfo` are listed as follow:
+
+- `cursorpath`: The path in which the cursor files located.
+- `cursornumber`: The number of cursors should be loaded.
+- `cursor<NR>`: The cursor file the cursor numbered `<NR>`.
+
+Note that the cursor numbers should correspond to the system cursor
+indices defined in `minigui/minigui.h` header file:
+
+```cpp
+/** System arrow cursor index. */
+#define IDC_ARROW       0
+/** System beam cursor index. */
+#define IDC_IBEAM       1
+/** System pencil cursor index. */
+#define IDC_PENCIL      2
+/** System cross cursor index. */
+#define IDC_CROSS       3
+/** System move cursor index. */
+#define IDC_MOVE        4
+/** System  size northwest to southeast cursor index. */
+#define IDC_SIZENWSE    5
+/** System size northeast to southwest cursor index. */
+#define IDC_SIZENESW    6
+/** System west to east cursor index. */
+#define IDC_SIZEWE      7
+/** System north to south cursor index. */
+#define IDC_SIZENS      8
+/** System up arrow cursor index. */
+#define IDC_UPARROW     9
+/** System none cursor index. */
+#define IDC_NONE        10
+/** System help cursor index. */
+#define IDC_HELP        11
+/** System busy cursor index. */
+#define IDC_BUSY        12
+/** System wait cursor index. */
+#define IDC_WAIT        13
+/** System right arrow cursor index. */
+#define IDC_RARROW      14
+/** System colomn cursor index. */
+#define IDC_COLOMN      15
+/** System row cursor index. */
+#define IDC_ROW         16
+/** System drag cursor index. */
+#define IDC_DRAG        17
+/** System nodrop cursor index. */
+#define IDC_NODROP      18
+/** System hand point cursor index. */
+#define IDC_HAND_POINT  19
+/** System hand select cursor index. */
+#define IDC_HAND_SELECT 20
+/** System horizontal split cursor index. */
+#define IDC_SPLIT_HORZ  21
+/** System vertical cursor index. */
+#define IDC_SPLIT_VERT  22
+```
+
+The content of this section in the default `MiniGUI.cfg` is as follow:
+
+```ini
+[cursorinfo]
+# Edit following line to specify cursor files path
+cursorpath=/usr/local/share/minigui/res/cursor/
+cursornumber=23
+cursor0=d_arrow.cur
+cursor1=d_beam.cur
+cursor2=d_pencil.cur
+cursor3=d_cross.cur
+cursor4=d_move.cur
+cursor5=d_sizenwse.cur
+cursor6=d_sizenesw.cur
+cursor7=d_sizewe.cur
+cursor8=d_sizens.cur
+cursor9=d_uparrow.cur
+cursor10=d_none.cur
+cursor11=d_help.cur
+cursor12=d_busy.cur
+cursor13=d_wait.cur
+cursor14=g_rarrow.cur
+cursor15=g_col.cur
+cursor16=g_row.cur
+cursor17=g_drag.cur
+cursor18=g_nodrop.cur
+cursor19=h_point.cur
+cursor20=h_select.cur
+cursor21=ho_split.cur
+cursor22=ve_split.cur
+```
+
 ### Section `resinfo`
+
+This section specify the path of the resource files used by MiniGUI.
+
+The valid key in the section `resinfo` is listed as follow:
+
+- `respath`: The path in which the resource files located.
+
+When MiniGUI loads a resource file, it will use the key value
+as the prefix for the ultimate full path of the resource file:
+
+- The icon files should be stored in the sub directory of `icon/` of
+  the resource path specified by the key value.
+- The font files should be stored in the sub directory of `font/` of
+  the resource path specified by the key value.
+- The image files should be stored in the sub directory of `bmp/` of
+  the resource path specified by the key value.
+- The cursor files should be stored in the sub directory of `cursor/` of
+  the resource path specified by the key value.
+
+The content of this section in the default `MiniGUI.cfg` is as follow:
+
+```ini
+[resinfo]
+respath=/usr/local/share/minigui/res/
+```
 
 ### Sections for devfonts
 
