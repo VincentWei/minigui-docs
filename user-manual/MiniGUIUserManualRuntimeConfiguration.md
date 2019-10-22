@@ -253,64 +253,70 @@ seat=seat0
 
 ### Section `systemfont`
 
-The section `systemfont` defines MiniGUI system font and font number,
-and defines system default font, which would be used to render text on
-captions, menus, and controls, as well as the default font of a window.
+The section `systemfont` defines the system fonts. One system
+font will be used to render the text in the window captions,
+menus, and controls in MiniGUI.
 
-System font is the logic font that is created by the function
-`CreateLogFontFromName` based on device fonts, which is defined by
-MiniGUI sections such as `rawbitmapfonts`, `varbitmapfonts`,
-`upf`, `qpf`, and `truetypefonts`
+A system font is a logfont (`logfont` for short) that is created
+by calling the function `CreateLogFontFromName`. MiniGUI creates
+a logfont based on loaded device fonts, which are defined in
+sections such as `rawbitmapfonts`, `varbitmapfonts`, `upf`, `qpf`,
+and `truetypefonts`
 (see [Sections for devfonts](#sections-for-devfonts)).
 
-The content of the section in `MiniGUI.cfg` is as follows:
+A logfont name is a string which has the following form:
 
-    <type>-<facename>-<style>-<width>-<height>-<charset1>
+    <type>-<facename>-<style>-<width>-<height>-<charset>
 
-The definition of each part of a logic font name is as follows:
+The definitions of each part of a logfont name are as follow:
 
-- `<type>` is the desired device font type, if you do not want to
-specify it, use `*`.
-- `<facename>` is to define the font face name, such as courier
-and times etc.
-- `<style>` is the string of six alphabets to define style of a
-logic font, such as italic, bold, underline or strike through etc.
-- `<width>` is to define the width of the logic font. Usually do
-not need to specify, use `*` instead.
-- `<height>` is to define the height of the logic font.
-- `<charset>` is to define charset of the logic font being created.
+- `<type>` specifies the desired device font type. For example, if you
+want to use TrueType fonts for this logfont, use `ttf`.
+If you do not want to specify the font type, use `*`.
+- `<facename>` specifies the font face name, such as `courier`,
+`times`, and so on.
+- `<style>` is a string of six alphabets used to define the style
+of a logfont, such as italic, bold, underline, etc.
+- `<width>` specifies the width of the logfont in pixels.
+Usually do not need to specify the width, so use `*` instead.
+- `<height>` specifies the height of the logfont in pixels.
+- `<charset>` specifies the charset or encoding of the logfont being created.
 
-Furthermore, MiniGUI V2.0.x provides auto-scaling the font glyph. If you
-want to use this function, you only need use ‘S’ in forth character when
-you define logical font styles. Note that you don’t need to use this
-style when you use vector font, such as TrueType, because vector font
-can produce corresponding font glyph according to desired logical font
-size.
+As an example, the logfont name `rbf-FixedSys-rrncnn-8-16-ISO8859-1` will
+create a logfont by using RBF devfonts. The face name of the logfont is
+`FixedSys`, and the height is 16, the charset is `ISO8859-1`.
 
-The definition of the keys in section `systemfont` is as follows:
+For more information about logfont, please refer to [MiniGUI Programming Guide].
 
-- `font_number`: The number of system fonts created.
+The valid keys in the section `systemfont` are listed as follow:
+
+- `font_number`: The number of system fonts should be created.
 **Note that the maximal number of system logfonts is 6. You should not
 set this key value to be a number larger than 6.**
-- `font<NR>`: The number `<NR>` logical font name.
-- `default`: System default font (single character set). Its value is the
-number of logical font.
-- `wchar_def`: Default font used by multiple character set. Its value
-is the number of above logical font.
-- `fixed`: The font used by fixed width character set. Its value is the
-number of above logical font.
-- `caption`: The caption font. Its value is the number of above logical
-font.
-- `menu`: The menu font. Its value is the number of above logical font.
+- `font<NR>`: The name for the logfont number `<NR>`.
+- `default`: The system default logfont in the default single-byte character set.
+  Its value should be a valid system logfont number.
+- `wchar_def`: The system default logfont in the default multiple-byte character set.
+  Its value should be a valid system logfont number.
+- `fixed`: The logfont with fixed width.
+  Its value should be a valid system logfont number.
+- `caption`: The logfont for the text in the window caption.
+  Its value should be a valid system logfont number.
+- `menu`: The logfont for the text in the menu items.
+  Its value should be a valid system logfont number.
+- `control`: The logfont for the text in the controls.
+  Its value should be a valid system logfont number.
 
-You can change the number of system font created. But you must create a
-single character set (for example: `ISO8859-1`) at least. MiniGUI defines
-the system default charsets according to `default`, `wchar_def`
-system fonts, and this would affect the return value of
+You can change the number of system logfonts created. But note that
+the maximal number of system logfonts is 6.
+
+You must create at least one logfont in a single-byte character set
+(e.g., `ISO8859-1`). MiniGUI defines the system default charsets
+according to `default` and `wchar_def` system fonts. And the logfont
+names for `default` and `wchar_def` will affect the return value of
 `GetSysCharset`, `GetSysCharWidth`, `GetSysCCharWidth` and
 `GetSysHeight` functions. Commonly, `default` and `wchar_def`
-must fixed width dot-matrix font, i.e RBF. And the width of multiply
-character set must be twice with the width of single character set.
+should be fixed width bitmap fonts.
 
 The content of this section in the default `MiniGUI.cfg` is as follow:
 
