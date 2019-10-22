@@ -10,9 +10,9 @@
    * [Section `cursorinfo`](#section-cursorinfo)
    * [Section `resinfo`](#section-resinfo)
    * [Sections for devfonts](#sections-for-devfonts)
-   * [Sections for Appearance Renderers](#sections-for-appearance-renderers)
+   * [Sections for appearance renderers](#sections-for-appearance-renderers)
    * [Other sections](#other-sections)
-- [Incore Configuration Options](#incore-configuration-options)
+- [Incore Configuration](#incore-configuration)
    * [Structure `ETCSETCTION`](#structure-etcsetction)
    * [Structure `ETC_S`](#structure-etc_s)
 - [Samples](#samples)
@@ -505,24 +505,36 @@ timeoutusec=300000
 repeatusec=50000
 ```
 
-## Incore Configuration Options
+## Incore Configuration
 
 When use incore resources, MiniGUI don’t need the file `MiniGUI.cfg`.
 The appropriate configuration options are defined in the file
 `src/sysres/mgetc.c`.
 
 Similar with the structure in `MiniGUI.cfg`, MiniGUI defines an
-structure ETCSECTION, array `_etc_sections` and variable MGETC in
-`mgetc.c`. The array mgetc_sections is appropriate with section in
-configuration file. MGETC that is ETC_S type is appropriate with
+structure `ETCSECTION`, array `_etc_sections` and variable MGETC in
+`mgetc.c`. The array `mgetc_sections` is appropriate with section in
+configuration file. MGETC that is `ETC_S` type is appropriate with
 configuration file.
 
-### 3.2.1 Structure ETCSETCTION
+### Structure `ETCSETCTION`
 
 The structure `ETCSECTION` is defined in the file named `minigui.h`’. The following is in detail.
 
 ```cpp
+/** The config section information */
 typedef struct _ETCSECTION
+{
+    /** Allocated number of keys */
+    int key_nr_alloc;
+    /** Key number in the section */
+    int key_nr;
+    /** Name of the section */
+    char *name;
+    /** Array of keys */
+    char** keys;
+    /** Array of values */
+    char** values;
 } ETCSECTION;
 ```
 
@@ -555,6 +567,16 @@ incore resources.
 ETC_S listed as the follow:
 
 ```cpp
+/** The config file information*/
+typedef struct _ETC_S
+{
+    /** Allocated number of sections */
+    int sect_nr_alloc;
+    /** Number of sections */
+    int section_nr;
+    /** Pointer to section arrays */
+    PETCSECTION sections;
+} ETC_S;
 ```
 
 Therefore, `sect_nr_alloc` is the interface of the other
