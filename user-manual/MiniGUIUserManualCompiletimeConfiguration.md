@@ -15,7 +15,7 @@
    * [Control](#control)
    * [Others](#others)
 - [Minimal Configuration Options](#minimal-configuration-options)
-- [Changes in Version 4.0](#changes-in-version-40)
+- [Configuring MiniGUI Components](#configuring-minigui-components)
 
 ## Configuration Options and Macros
 
@@ -841,7 +841,7 @@ library that only supports ISO8859-1 charset:
 - No building the console engine subdriver for old MS serial mouse.
 - No building the console engine subdriver for MS3 mouse.
 - No building the console engine subdriver for GPM daemon.
-- No support for Skin and Flat renderer.
+- No support for Skin and Flat renderers.
 
 Based on the configuration above, you can also delete some functions if
 you want. For example, if you do not use the animation control in your
@@ -849,7 +849,7 @@ application, you can add `--disable-ctrlanimation` option in the
 configuration script above, so there is no GIF animation control in
 your compiled functions library.
 
-## Changes in Version 4.0
+## Configuring MiniGUI Components
 
 ---
 

@@ -1117,7 +1117,7 @@ using cross-compiling toolchain for uClinux. If you work in Linux
 environment, you can execute `make` command directly:
 
 ```
-$ make –f makefile.ng
+$ make -f makefile.ng
 ```
 
 For MiniGUI components, you can use the same way to compile them
