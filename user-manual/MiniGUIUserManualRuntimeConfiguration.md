@@ -91,9 +91,9 @@ this section to specify the mouse device and mouse protocol for
 
 The keys of this section are listed as follow:
 
-- `gal_engine`: The graphics engine used.
+- `gal_engine`: The graphics engine.
 - `defaultmode`: The display mode for the graphics engine.
-- `ial_engine`: The input engine used.
+- `ial_engine`: The input engine.
 - `mdev`: The mouse device file.
 - `mtype`: The mouse protocol type.
 
@@ -141,49 +141,95 @@ $ export MG_MTYPE=ps2
 
 ### Section `pc_xvfb`
 
-The section `pc_xvfb` is only available when you define the
-`gal_engine` in section `system` for `pc_xvfb`. It has been
-supported by Linux(Ubuntu) and Window.
+The section `pc_xvfb` is only effective when you define the key
+`system.gal_engine` having the value `pc_xvfb`.
 
-The definition of the keys in section `pc_xvfb` is as follows:
+The valid keys in the section `pc_xvfb` are listed as follow:
 
-- `defaultmode`: The display mode of graphics engine used, its format is `<width>x<height>-bpp`.
-- `window_caption`: Window caption title of XVFB window.
-- `exec_file`: the path of the execute file.
+- `defaultmode`: The display mode of graphics engine.
+   This value will override the value defined by `system.defaultmode`.
+- `window_caption`: Window caption text of the XVFB window.
+- `exec_file`: the path of the execute file of the XVFB program.
 
-The content of the section in `MiniGUI.cfg` is as follows:
+The content of this section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
-#{{ifdef _MGGAL_PCXVFB
 [pc_xvfb]
 defaultmode=800x600-16bpp
 window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
 exec_file=/usr/local/bin/gvfb
-#}}
 ```
 
 ### Section `fbcon`
 
-The section `fbcon` is only available when you define the
-`gal_engine` in section `system` for fbcon. It define default
-display mode of the `fbcon` engine. When the section is undefined or
-key value is empty, the fbcon engine using the key value of system
-section.
+The section `fbcon` is only effective when you define the key
+`system.gal_engine` having the value `fbcon`.
 
-The definition of the key in section `fbcon` is as follows:
+The valid keys in the section `fbcon` is listed as follow:
 
-`defaultmode`: The display mode of graphics engine used, the format is
-`widthxheight-bpp`.
+- `defaultmode`: The display mode of the graphics engine `fbcon`.
+- `dpi`: The pixel density of the display, in dots (physical pixels) per inch;
+   the default value is 96.
 
-The content of the section in `MiniGUI.cfg` is as follows:
+The key `defaultmode` also defines the default display mode for the
+`fbcon` engine.
+This key value will override the value defined by `system.defaultmode`.
+When the section is undefined or the key value is invalid, the `fbcon`
+engine will use the key value of `system.gal_engine`.
+
+The content of the section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
 [fbcon]
 defaultmode=1024x768-16bpp
+dpi=96
 ```
 
 ### Section `dri`
 
+This section is dedicated to the `dri` engine which runs on Linux DRI/DRM.
+It is available since MiniGUI 4.0.0.
+
+The section `dri` is only effective when you define the key
+`system.gal_engine` having the value `dri`.
+
+The valid keys in the section `fbcon` is listed as follow:
+
+- `defaultmode`: The display mode of the graphics engine `fbcon`.
+- `dpi`: The pixel density of the display, in dots (physical pixels) per inch;
+   the default value is 96.
+- `pixelformat`: The pixel format.
+- `device`: The DRI device.
+
+The key `defaultmode` also defines the default display mode for the `dri`
+engine. This key value will override the value defined by `system.defaultmode`.
+When the section is undefined or the key value is invalid, the `dri`
+engine will use the key value of `system.gal_engine`.
+
+For `dri` engine, we introduce a new key `pixelformat` in order to
+define the pixel format precisely. We use DRM fourcc code (like `XR24`)
+to define the pixel format of the video surface. For more information,
+please see the header file `drm/drm_fourcc.h` of libdrm.
+Note that only 8/16/24/32 bpp RGB formats are supported.
+
+The content of the section in the default `MiniGUI.cfg` is as follow:
+
+```ini
+[dri]
+defaultmode=1024x768-32bpp
+
+# We use DRM fourcc code to defined the pixel format of the video surface.
+# For more information, please see <drm/drm_fourcc.h> header file.
+# Note that only 8/16/24/32 bpp RGB formats are supported.
+pixelformat=XR24
+
+# The DRI device
+device=/dev/dri/card0
+# The resolution of the display
+# It is defined in dots (physical pixels) per inch
+# The default value is 96.
+dpi=96
+```
 ### Section `libinput`
 
 ### Section `systemfont`
