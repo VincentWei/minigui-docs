@@ -554,9 +554,10 @@ the devfont is `Arial`, the styles are represented by a string `rrncnn`,
 the size can be any value (a vector font can be arbitrarily scaled), and
 the charsets/encodings of the devfont are `ISO8859-1` and `UTF-8`.
 
-| ##### Changes in version 4.0 |
-|------------------------------|
-|
+---
+
+##### Changes in version 4.0
+
 Since version 4.0.0, you can specify the aliases for the family name of a devfont:
 
     <fonttype>-<family[,aliase]*>-<styles>-<width>-<height>-<charset[,charset]*>
@@ -567,7 +568,8 @@ For example:
     ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
 
 Note that the length of one devfont name can not exceed 255 bytes.
-|
+
+---
 
 The content of these sections in the default `MiniGUI.cfg` is as follow:
 
