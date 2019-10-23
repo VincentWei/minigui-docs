@@ -54,21 +54,32 @@ target OS.
 [Table of Contents](README.md) |
 [Feature List &gt;&gt;](MiniGUIUserManualFeatureList.md)
 
-[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
-[FMSoft Technologies]: https://www.fmsoft.cn
-[MiniGUI Official Website]: http://www.minigui.com
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
+[FAQs]: /user-manual/MiniGUIUserManualFAQsEN.md
+[常见问题]: /user-manual/MiniGUIUserManualFAQsZH.md
+
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
 [MiniGUI User Manual]: /user-manual/README.md
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI API Reference Manuals]: /api-reference/README.md
 
-[Quick Start]: MiniGUIUserManualQuickStart.md
-[Building MiniGUI]: MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]: MiniGUIUserManualCompiletimeConfiguration.md
-[Runtime Configuration]: MiniGUIUserManualRuntimeConfiguration.md
-[Tools]: MiniGUIUserManualTools.md
-[Feature List]: MiniGUIUserManualFeatureList.md
-[FAQs]: MiniGUIUserManualFAQsEN.md
-
-[Showing Text in Complex or Mixed Scripts]: https://github.com/VincentWei/minigui/wiki/Showing-Text-in-Complex-or-Mixed-Scripts
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
