@@ -292,25 +292,6 @@ As an example, the logfont name `rbf-FixedSys-rrncnn-8-16-ISO8859-1` will
 create a logfont by using RBF devfonts. The face name of the logfont is
 `FixedSys`, the height is 16, and the charset is `ISO8859-1`.
 
----
-
-##### Changes in version 4.0
-
-Since version 4.0.0, you can specify up to 7 family names for a logfont name, for example:
-
-    ttf-Courier,宋体,Naskh,SansSerif-rrncns-U-16-UTF-8
-
-In this way, you can specify a logfont to use multiple devfonts to render a complex text.
-
-Moreover, the previous width field of a logfont name is used for the glyph orientation:
-
-- `U`: Glyphs stand upright (default).
-- `S`: Glyphs are rotated 90 degrees clockwise (sideways).
-- `D`: Glyphs are upside-down.
-- `L`: Glyphs are rotated 90 degrees counter-clockwise (sideways left).
-
----
-
 For more information about logfont, please refer to [MiniGUI Programming Guide].
 
 The valid keys in the section `systemfont` are listed as follow:
@@ -361,6 +342,21 @@ caption=4
 menu=2
 control=3
 ```
+
+#### Changes in version 4.0
+
+Since version 4.0.0, you can specify up to 7 family names for a logfont name, for example:
+
+    ttf-Courier,宋体,Naskh,SansSerif-rrncns-U-16-UTF-8
+
+In this way, you can specify a logfont to use multiple devfonts to render a complex text.
+
+Moreover, the previous width field of a logfont name is used for the glyph orientation:
+
+- `U`: Glyphs stand upright (default).
+- `S`: Glyphs are rotated 90 degrees clockwise (sideways).
+- `D`: Glyphs are upside-down.
+- `L`: Glyphs are rotated 90 degrees counter-clockwise (sideways left).
 
 ### Section `cursorinfo`
 
@@ -554,23 +550,6 @@ the devfont is `Arial`, the styles are represented by a string `rrncnn`,
 the size can be any value (a vector font can be arbitrarily scaled), and
 the charsets/encodings of the devfont are `ISO8859-1` and `UTF-8`.
 
----
-
-##### Changes in version 4.0
-
-Since version 4.0.0, you can specify the aliases for the family name of a devfont:
-
-    <fonttype>-<family[,aliase]*>-<styles>-<width>-<height>-<charset[,charset]*>
-
-For example:
-
-    ttf-Arial,Sans Serif-rrncnn-0-0-ISO8859-1,UTF-8
-    ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
-
-Note that the length of one devfont name can not exceed 255 bytes.
-
----
-
 The content of these sections in the default `MiniGUI.cfg` is as follow:
 
 ```ini
@@ -588,12 +567,20 @@ font_number=0
 
 [truetypefonts]
 font_number=0
-# The devfont now supports multiple font family names since V4.0.0.
-name0=ttf-Source Sans Pro,SansSerif-rrncnn-0-0-ISO8859-1,UTF-8
-# The path of font file can be relative to the current working directory.
-fontfile0=font/SourceSansPro-Regular.ttf
-
 ```
+
+#### Changes in version 4.0
+
+Since version 4.0.0, you can specify the aliases for the family name of a devfont:
+
+    <fonttype>-<family[,aliase]*>-<styles>-<width>-<height>-<charset[,charset]*>
+
+For example:
+
+    ttf-Arial,Sans Serif-rrncnn-0-0-ISO8859-1,UTF-8
+    ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
+
+Note that the length of one devfont name can not exceed 255 bytes.
 
 ### Sections for appearance renderers
 
