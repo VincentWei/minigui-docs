@@ -1,10 +1,5 @@
 # Feature List
 
-This document lists the technology features of MiniGUI (version 3.2 or later)
-in detail. This document intends to give you an overview about MiniGUI
-technology features. Every effort is made to make this document as complete
-as possible.
-
 - [What’s New in MiniGUI 4.0](#whats-new-in-minigui-40)
 - [What’s New in MiniGUI 3.2](#whats-new-in-minigui-32)
 - [Operating Systems Supported](#operating-systems-supported)
@@ -24,6 +19,11 @@ as possible.
 - [Customization of MiniGUI desktop](#customization-of-minigui-desktop)
 - [Other Features of MiniGUI](#other-features-of-minigui)
 - [MiniGUI Components](#minigui-components)
+
+This document lists the technology features of MiniGUI (version 3.2 or later)
+in detail. This document intends to give you an overview about MiniGUI
+technology features. Every effort is made to make this document as complete
+as possible.
 
 ## What’s New in MiniGUI 4.0
 
