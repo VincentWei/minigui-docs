@@ -166,12 +166,13 @@ output graphics to the slave screens.
 
 ##### Table 3: Hardware and Output/Input Devices
 
-| **Device Type**    | **Description**
-|--------------------|--------------------------------------------------------------------------------------------------------------------
-| Architectures      | Intel x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7), MIPS, PowerPC DragonBall, ColdFire, and so on.
-| Typical CPUs/MPUs  | Core i5/i7, Pentium, Allwinner R16, JZ47x0, TI DaVinci, EM86xx, HI35x0, and so on.
-| Output Devices     | VGA, LCD, TV, OSD, and so on. No limit for resolution and color depth.
-| Input Devices      | Keyboard, remote controller, keypad, mouse, touch panel, and so on.
+| **Device Type**        | **Description**                                                                                                    | **Comments**
+|------------------------|--------------------------------------------------------------------------------------------------------------------|-------------
+| Architectures          | Intel x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7), MIPS, PowerPC DragonBall, ColdFire, and so on. |
+| Typical CPUs/MPUs      | Core i5/i7, Pentium, Allwinner R16, JZ47x0, TI DaVinci, EM86xx, HI35x0, and so on.                                 |
+| Output Devices         | VGA, LCD, TV, OSD, and so on. No limit for resolution and color depth.                                             |
+| Input Devices          | Keyboard, remote controller, keypad, mouse, single-touch panel.                                                    |
+| Advanced Input Devices | Multi-touch panel (gesture), joystick, tablet tool, and switch.                                                    | Since 4.0.0
 
 ##### Table 4: Software GAL engines and IAL engines
 
