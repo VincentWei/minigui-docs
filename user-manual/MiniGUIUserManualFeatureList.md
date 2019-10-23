@@ -365,7 +365,7 @@ respond the event of desktop.
    position calibration etc.
 4. Support for universal virtual frame buffer programs.
 
-## MiniGUI components
+## MiniGUI Components
 
 1.  mGUtils is a new MiniGUI component which provides API of common
     dialog boxes, such as ColorSelectionDialogBox, FileOpenDialogBox,
