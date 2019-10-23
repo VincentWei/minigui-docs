@@ -1,5 +1,6 @@
-_How to support modern input devices and use the extra input messages in your MiniGUI apps._
+# Supporting and Using Extra Input Messages
 
+_How to support modern input devices and use the extra input messages in your MiniGUI apps._
 
 Table of Contents
 

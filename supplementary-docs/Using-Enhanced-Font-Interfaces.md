@@ -1,3 +1,5 @@
+# Using Enhanced Font Interfaces
+
 _Understand and use enhanced font intefaces of MiniGUI 4.0._
 
 Table of Contents

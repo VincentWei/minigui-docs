@@ -1,4 +1,4 @@
-_Release notes for MiniGUI 4.0.x._
+# Release Notes for MiniGUI 4.0
 
 Table of Contents
 

@@ -1,3 +1,5 @@
+# Writing MiniGUI Apps for 64-bit Platforms
+
 _Describe the things you need to be aware of when developing MiniGUI apps for 64-bit platforms._
 
 Table of Contents

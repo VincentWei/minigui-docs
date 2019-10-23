@@ -1,3 +1,5 @@
+# Using SyncUpdateDC to Reduce Screen Flicker
+
 _How to use MiniGUI's synchronous update mechanism to reduce screen flicker._
 
 Table of Contents

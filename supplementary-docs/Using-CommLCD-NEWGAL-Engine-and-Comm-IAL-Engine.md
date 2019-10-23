@@ -1,3 +1,5 @@
+# Using CommLCD NEWGAL Engine and Comm IAL Engine
+
 _How to define external stubs to implement your CommLCD engine and
 Comm IAL engine outside MiniGUI Core._
 

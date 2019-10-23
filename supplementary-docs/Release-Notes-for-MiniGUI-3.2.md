@@ -1,4 +1,4 @@
-_Release notes for MiniGUI 3.2.x._
+# Release Notes for MiniGUI 3.2
 
 Table of Contents
 
