@@ -97,8 +97,8 @@ the target name `external`. So you can implement the sub-driver of
 
 For more information, please refer to:
 
-- [Using CommLCD NEWGAL Engine and Comm IAL Engine](https://github.com/VincentWei/minigui/wiki/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine)
-- [Writing DRI Engine Driver for Your GPU](https://github.com/VincentWei/minigui/wiki/Writing-DRI-Engine-Driver-for-Your-GPU)
+- [Using CommLCD NEWGAL Engine and Comm IAL Engine]
+- [Writing DRI Engine Driver for Your GPU]
 
 The following table lists the options and macros related to
 various target boards.
