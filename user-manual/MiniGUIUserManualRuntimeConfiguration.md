@@ -522,8 +522,8 @@ name0=upf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312,BIG5,GBK,UTF-8,UTF-16
 fontfile0=../res/fonts/unifont_160_50.upf
 ```
 
-If you don't need to use a specific type of device font, you can skip
-the configuration by setting `font_number=0`.
+If you don't need to use a specific type of devfont, you can skip
+the configuration section by setting `font_number=0`.
 
 Like logfont, we use a string as the devfont name to specify the
 family name, style, size, and charsets of a devfont object. The format of
@@ -555,6 +555,7 @@ the size can be any value (a vector font can be arbitrarily scaled), and
 the charsets/encodings of the devfont are `ISO8859-1` and `UTF-8`.
 
 ---
+
 ##### Changes in version 4.0
 
 Since version 4.0.0, you can specify the aliases for the family name of a devfont:
@@ -567,6 +568,7 @@ For example:
     ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
 
 Note that the length of one devfont name can not exceed 255 bytes.
+
 ---
 
 The content of these sections in the default `MiniGUI.cfg` is as follow:
