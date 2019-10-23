@@ -272,14 +272,14 @@ defined in sections such as `rawbitmapfonts`, `varbitmapfonts`,
 
 A logfont name is a string which has the following form:
 
-    <type>-<facename>-<style>-<width>-<height>-<charset>
+    <type>-<family>-<style>-<width>-<height>-<charset>
 
 The definitions of each part of a logfont name are as follow:
 
 - `<type>` specifies the desired device font type. For example, if you
 want to use TrueType fonts for this logfont, use `ttf`.
 If you do not want to specify the font type, use `*`.
-- `<facename>` specifies the font face name, such as `courier`,
+- `<family>` specifies the font face name, such as `courier`,
 `times`, and so on.
 - `<style>` is a string of six alphabets used to define the style
 of a logfont, such as italic, bold, underline, etc.
@@ -290,7 +290,26 @@ Usually do not need to specify the width, so use `*` instead.
 
 As an example, the logfont name `rbf-FixedSys-rrncnn-8-16-ISO8859-1` will
 create a logfont by using RBF devfonts. The face name of the logfont is
-`FixedSys`, and the height is 16, the charset is `ISO8859-1`.
+`FixedSys`, the height is 16, and the charset is `ISO8859-1`.
+
+---
+
+##### Changes in version 4.0
+
+Since version 4.0.0, you can specify up to 7 family names for a logfont name, for example:
+
+    ttf-Courier,宋体,Naskh,SansSerif-rrncns-U-16-UTF-8
+
+In this way, you can specify a logfont to use multiple devfonts to render a complex text.
+
+Moreover, the previous width field of a logfont name is used for the glyph orientation:
+
+- `U`: Glyphs stand upright (default).
+- `S`: Glyphs are rotated 90 degrees clockwise (sideways).
+- `D`: Glyphs are upside-down.
+- `L`: Glyphs are rotated 90 degrees counter-clockwise (sideways left).
+
+---
 
 For more information about logfont, please refer to [MiniGUI Programming Guide].
 
@@ -494,27 +513,61 @@ Each of these sections defines the following keys:
 - `name<NR>`: The name of the devfont numbered `<NR>`.
 - `fontfile<NR>`: The font file of the devfont numbered `<NR>`.
 
-The format of device fonts used by MiniGUI is as follow:
+For example, you can define the `upf` section as follow to load one UPF devfont:
 
-    <type>-<facename>-<style>-<width>-<height>-<charset1[,charset2,...]>
-
-The definitions for each part of device `font` are as follow:
-
-- `<type>`: The type of device font, for example, RBF, VBF, QPF,
-TrueType, and Adobe Type1 device font are rbf, vbf, qpf, ttf, and tlf.
-- `<facename>`: The name of device font. Such as courier, Times
-etc.
-- `<style>`: The style of device font, it is grouped into six
-alphabets. Such as bold, italic, underline or strikethrough etc.
-Generally the string is "rrncnn".
-- `<width>`: The width of device font, for var-width fonts set to
-be maximum width; for vector fonts set to be 0.
-- `<height>`: The height of device font, for vector fonts set to
-be 0.
-- `<charset1, charset2>`: The charset of device font supported.
+```ini
+[upf]
+font_number=1
+name0=upf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312,BIG5,GBK,UTF-8,UTF-16LE,UTF-16BE
+fontfile0=../res/fonts/unifont_160_50.upf
+```
 
 If you don't need to use a specific type of device font, you can skip
-the configuration option by set `font_number=0`.
+the configuration by setting `font_number=0`.
+
+Like logfont, we use a string as the devfont name to specify the
+family name, style, size, and charsets of a devfont object. The format of
+a devfont name is as follow:
+
+    <fonttype>-<family>-<styles>-<width>-<height>-<charset1[,charset2,...]>
+
+The definitions for each part of the devfont name are as follow:
+
+- `<fonttype>`: The type of device font, for example, RBF, VBF, QPF,
+TrueType, and Adobe Type1 device font are rbf, vbf, qpf, ttf, and tlf.
+- `<family>`: The name of device font. Such as courier, Times
+etc.
+- `<styles>`: The style of device font, it is grouped into six
+alphabets. Such as bold, italic, underline etc. Generally the string is
+`rrncnn`.
+- `<width>`: The width of device font, for variable width fonts, set it to
+the maximal width; for vector fonts, set it to 0.
+- `<height>`: The height of device font, for vector fonts set it to 0.
+- `<charset1, charset2>`: The charsets supported by the devfont.
+
+For example,
+
+    ttf-Arial-rrncnn-0-0-ISO8859-1,UTF-8
+
+It means that the devfont is a TrueType vector font, the family name of
+the devfont is `Arial`, the styles are represented by a string `rrncnn`,
+the size can be any value (a vector font can be arbitrarily scaled), and
+the charsets/encodings of the devfont are `ISO8859-1` and `UTF-8`.
+
+---
+##### Changes in version 4.0
+
+Since version 4.0.0, you can specify the aliases for the family name of a devfont:
+
+    <fonttype>-<family[,aliase]*>-<styles>-<width>-<height>-<charset[,charset]*>
+
+For example:
+
+    ttf-Arial,Sans Serif-rrncnn-0-0-ISO8859-1,UTF-8
+    ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
+
+Note that the length of one devfont name can not exceed 255 bytes.
+---
 
 The content of these sections in the default `MiniGUI.cfg` is as follow:
 
