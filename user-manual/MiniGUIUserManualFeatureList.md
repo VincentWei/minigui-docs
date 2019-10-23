@@ -5,6 +5,7 @@ in detail. This document intends to give you an overview about MiniGUI
 technology features. Every effort is made to make this document as complete
 as possible.
 
+- [What’s New in MiniGUI 4.0](ewhats-new-in-minigui-4.0)
 - [What’s New in MiniGUI 3.2](#whats-new-in-minigui-3.2)
 - [Operating Systems Supported](#operating-systems-supported)
 - [MiniGUI Runtime Modes](#minigui-runtime-modes)
@@ -28,8 +29,7 @@ as possible.
 
 ## What’s New in MiniGUI 3.2
 
-We introduce the following new features in MiniGUI V3.2.
-
+We introduce the following new features in MiniGUI 3.2:
 1.  The support for 64-bit architectures (MiniGUI core and all
     components). Because of change of some APIs, we recommend that you
     use MiniGUI V3.2.x instead of MiniGUI V3.0.x for new projects.
@@ -95,9 +95,7 @@ matter in which mode, MiniGUI provides for application the furthest API
 compatibility; only a few initialization interfaces are different among
 different modes.
 
-\
-Hardware Support
-================
+## Hardware Support
 
 At present, MiniGUI V3.2 has been proven to be capable of running
 smoothly on the embedded systems with such SoCs/CPUs/MPUs/MCUs as are
@@ -139,31 +137,27 @@ MiniGUI to create main windows and controls and the other devices as the
 slave screens. By using GDI APIs of MiniGUI, you can also render text,
 output graphics to the slave screens.
 
-Table 3: Hardware and Output/Input Devices
+##### Table 3: Hardware and Output/Input Devices
 
-  ------------------- --------------------------------------------------------------------------------------------------------------------
-  **Device Type**     **Description**
-  Architectures       Intel x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7), MIPS, PowerPC DragonBall, ColdFire, and so on.
-  Typical CPUs/MPUs   Core i5/i7, Pentium, Allwinner R16, JZ47x0, TI DaVinci, EM86xx, HI35x0, and so on.
-  Output Devices      VGA, LCD, TV, OSD, and so on. No limit for resolution and color depth.
-  Input Devices       Keyboard, remote controller, keypad, mouse, touch panel, and so on.
-  ------------------- --------------------------------------------------------------------------------------------------------------------
+| **Device Type**    | **Description**
+|--------------------|--------------------------------------------------------------------------------------------------------------------
+| Architectures      | Intel x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7), MIPS, PowerPC DragonBall, ColdFire, and so on.
+| Typical CPUs/MPUs  | Core i5/i7, Pentium, Allwinner R16, JZ47x0, TI DaVinci, EM86xx, HI35x0, and so on.
+| Output Devices     | VGA, LCD, TV, OSD, and so on. No limit for resolution and color depth.
+| Input Devices      | Keyboard, remote controller, keypad, mouse, touch panel, and so on.
 
-Table 4: Software GAL engines and IAL engines
+##### Table 4: Software GAL engines and IAL engines
 
-  --------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------
-  **Engine**            **Description**                                                                                                                                                                                                                                                                                                 **Comment**
-  Dummy GAL Engine      This GAL engine creates a virtual frame buffer in system memory. Therefore, we can run MiniGUI on a system by using Dummy GAL engine when the real video device is not ready.                                                                                                                                   
-  Shadow GAL Engine     This GAL engine creates a virtual frame buffer in system memory, but it will call sub-driver of this engine to update the pixels in the virtual frame buffer to the real video device. We can use this engine to support special video device like one in YUV color space or rotate the screen of the device.   
-  MLShadow GAL Engine   This GAL engine can creates multiple virtual frame buffers in system memory, and blends and updates the pixels in different buffers to the real video device. By using this engine, we can create a transparent or semitransparent surface on the screen.                                                       New feature of MiniGUI V3.0.x
-  Dummy IAL Engine      This IAL engine does not do anything. If you use this engine, your MiniGUI application will not receive any input. Therefore, you can run MiniGUI on a system by using Dummy IAL engine when the real input device is not ready.                                                                                
-  Auto IAL Engine       You can use this IAL engine to generate pre-defined input events, so you can do auto-test of your application.                                                                                                                                                                                                  
-  Random IAL Engine     This engine will generate random input events, so you can use this engine to test your application.                                                                                                                                                                                                             
-  --------------------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------
+| **Engine**            | **Description**                                                                                                                                                                                                                                                                                               | **Comment**
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------
+| Dummy GAL Engine      | This GAL engine creates a virtual frame buffer in system memory. Therefore, we can run MiniGUI on a system by using Dummy GAL engine when the real video device is not ready.                                                                                                                                 |
+| Shadow GAL Engine     | This GAL engine creates a virtual frame buffer in system memory, but it will call sub-driver of this engine to update the pixels in the virtual frame buffer to the real video device. We can use this engine to support special video device like one in YUV color space or rotate the screen of the device. |
+| MLShadow GAL Engine   | This GAL engine can creates multiple virtual frame buffers in system memory, and blends and updates the pixels in different buffers to the real video device. By using this engine, we can create a transparent or semitransparent surface on the screen.                                                     | New feature of MiniGUI V3.0.x
+| Dummy IAL Engine      | This IAL engine does not do anything. If you use this engine, your MiniGUI application will not receive any input. Therefore, you can run MiniGUI on a system by using Dummy IAL engine when the real input device is not ready.                                                                              |
+| Auto IAL Engine       | You can use this IAL engine to generate pre-defined input events, so you can do auto-test of your application.                                                                                                                                                                                                |
+| Random IAL Engine     | This engine will generate random input events, so you can use this engine to test your application.                                                                                                                                                                                                           |
 
-\
-Footprint of MiniGUI
-====================
+## Footprint of MiniGUI
 
 The typical system resources needed by MiniGUI itself are 1024KB of
 static memory (FLASH) and 1024KB of dynamic memory (RAM). Table 5 gives
@@ -172,23 +166,19 @@ operating systems.
 
 Table 5: Footprint of MiniGUI
 
-  ---------------------- ------------------------- -----------------------------
-  **Operating System**   **Minimal (FLASH/RAM)**   **Recommended (FLASH/RAM)**
-  Linux                  1024KB/1024KB             2048KB/4096KB
-  uClinux                700KB/512KB               1024KB/2048KB
-  RTOSes                 700KB/512KB               1024KB/2048KB
-  ---------------------- ------------------------- -----------------------------
+| **Operating System**  | **Minimal (FLASH/RAM)**  | **Recommended (FLASH/RAM)**
+|-----------------------|--------------------------|------------------------------
+| Linux                 | 1024KB/1024KB            | 2048KB/4096KB
+| uClinux               | 700KB/512KB              | 1024KB/2048KB
+| RTOSes                | 700KB/512KB              | 1024KB/2048KB
 
-\
-Graphics Sub-System
-===================
+## Graphics Sub-System
 
 Graphics sub-system is one of the most important sub-systems of MiniGUI.
 This sub-system provides APIs for application to draw graphics, to fill
 images, and to render text etc.
 
-General Features
-----------------
+### General Features
 
 MiniGUI provides support for complete GDI APIs. You can use these APIs
 to do raster operations, create complex regions, draw or fill ellipses,
@@ -196,29 +186,26 @@ arcs, and polygons, etc. There are advanced 2D graphics functions
 available by using C99 math library. By using advanced 2D graphics, you
 can create abstract graphics objects, like pen and brush.
 
-Image Formats
--------------
+### Image Formats
 
 MiniGUI provides support for almost all popular image file types
 including GIF, GIF89a, JPEG, PNG, Win32 BMP, etc.
 
 Table 6: Image Types
 
-  ---------------- ----------------------------------------------------------------------------------------------------- --------------
-  **Image Type**   **Description**                                                                                       **Comments**
-  Windows BMP      This is an image file format defined by Windows.                                                      
-  GIF              This is a popular image file used on INTERNET.                                                        
-  GIF89a           This is an extension of GIF to provide animation.                                                     
-  JPEG[^2]         This is an image file format used widely by hand-held devices such as digital camera, mobile phone.   
-  PNG[^3]          This is a popular image file format intending to replace GIF.                                         
-  ---------------- ----------------------------------------------------------------------------------------------------- --------------
+| **Image Type**  |  **Description**                                                                                    |  **Comments**
+|-----------------|-----------------------------------------------------------------------------------------------------|--------------
+| Windows BMP     |  This is an image file format defined by Windows.                                                   |
+| GIF             |  This is a popular image file used on INTERNET.                                                     |
+| GIF89a          |  This is an extension of GIF to provide animation.                                                  |
+| JPEG[^2]        |  This is an image file format used widely by hand-held devices such as digital camera, mobile phone.|
+| PNG[^3]         |  This is a popular image file format intending to replace GIF.                                      |
 
-Fonts and Char Sets
--------------------
+### Fonts and Charsets
 
 MiniGUI provides support for multiple character sets and multiple fonts.
 Table 7 gives the font types supported by MiniGUI; Table 8 illustrates
-the char sets/encodings supported by MiniGUI.
+the charsets/encodings supported by MiniGUI.
 
 Note that MiniGUI provides support for Arabic and Hebrew text. To
 support these two languages, MiniGUI provides APIs for BIDI
@@ -229,109 +216,92 @@ font), an upgrade of QPF; VBF V3, the upgrade version of VBF V2, BITMAP
 font, the font glyphs can be defined by customized bitmaps, and provides
 APIs for BIDI text processing.
 
-Table 7: Font Types
+##### Table 7: Font Types
 
-  --------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------
-  **Font Type**   **Description**                                                                                                                                                                          **Comment**
-  RBF             This font type can be used to define simple font in which all glyphs have the same width.                                                                                                
-  VBF V3          This font type can be used to define a font in which the glyphs have different width. We have upgraded VBF to version 3, which is more efficient under MiniGUI-Processes runtime mode.   
-  QPF             QPF is the Qt pre-rendered font which is defined by Qt/Embedded.                                                                                                                         
-  UPF             UPF is the UNICODE pre-rendered font which is defined by FMSoft to support UNICODE encoded glyphs.                                                                                       
-  TTF             MiniGUI uses FreeType 1 or FreeType 2 to render TrueType fonts. MiniGUI can also render glyph by using sub-pixel anti-alias technology.                                                  
-  --------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------
+| **Font Type**  | **Description**                                                                                                                                                                         | **Comment**
+| ---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------
+| RBF            | This font type can be used to define simple font in which all glyphs have the same width.                                                                                               |
+| VBF V3         | This font type can be used to define a font in which the glyphs have different width. We have upgraded VBF to version 3, which is more efficient under MiniGUI-Processes runtime mode.  |
+| QPF            | QPF is the Qt pre-rendered font which is defined by Qt/Embedded.                                                                                                                        |
+| UPF            | UPF is the UNICODE pre-rendered font which is defined by FMSoft to support UNICODE encoded glyphs.                                                                                      |
+| TTF            | MiniGUI uses FreeType 1 or FreeType 2 to render TrueType fonts. MiniGUI can also render glyph by using sub-pixel anti-alias technology.                                                 |
 
-Table 8: Char sets/Encodings
+##### Table 8: Char sets/Encodings
 
-  -------------------------------------------- ----------------------------------------------
-  **Char sets/Encodings**                      **Comment**
-  ISO8859-1,2,3,4,5,7,9,10,11,12,13,14,15,16   
-  ISO8859-6                                    Arabic (BIDI)
-  ISO8859-8                                    Hebrew (BIDI)
-  GB2312                                       Simplified Chinese
-  GBK                                          Simplified Chinese and traditional Chinese
-  GB18030-0                                    The char set standard defined by P. R. China
-  BIG5                                         Traditional Chinese
-  UNICODE UTF-8/UTF-16LE/UTF-16BE              Three popular encodings of UNICODE V2.0.
-  Shift-JIS (JISX0201 and JISX0208)            
-  EUC Korean (KSC5636 and KSC5601)             
-  EUC Japanese (JISX0201 and JISX0208)         
-  -------------------------------------------- ----------------------------------------------
+| **Charsets/Encodings**                     | **Comment**
+| --------------------------------------------| ----------------------------------------------
+| ISO8859-1,2,3,4,5,7,9,10,11,12,13,14,15,16  |
+| ISO8859-6                                   | Arabic (BIDI)
+| ISO8859-8                                   | Hebrew (BIDI)
+| GB2312                                      | Simplified Chinese
+| GBK                                         | Simplified Chinese and traditional Chinese
+| GB18030-0                                   | The char set standard defined by P. R. China
+| BIG5                                        | Traditional Chinese
+| UNICODE UTF-8/UTF-16LE/UTF-16BE             | Three popular encodings of UNICODE V2.0.
+| Shift-JIS (JISX0201 and JISX0208)           |
+| EUC Korean (KSC5636 and KSC5601)            |
+| EUC Japanese (JISX0201 and JISX0208)        |
 
-\
-Windowing Sub-System
-====================
+## Windowing Sub-System
 
 Windowing sub-system is another most important sub-system of MiniGUI.
 This sub-system provides APIs for applications to create window,
 control/widget, to update a window, to handle the messages etc.
 
-General Features
-----------------
+### General Features
 
 The windowing sub-system of MiniGUI provides the following general
 features for application:
-
-1)  Mature multi-window mechanism and messaging mechanism.
-
-2)  Support for dialog box and message box.
-
-3)  Other GUI elements, including menu, acceleration key, caret, timer,
-    etc.
-
-4)  Support for non-rectangular windows[^4], such as main window with
-    round corners, irregular window and control.
-
-5)  Support for transparent controls.
-
-6)  Double buffered main window[^5]. When a MiniGUI main window has
+1. Mature multi-window mechanism and messaging mechanism.
+1. Support for dialog box and message box.
+1. Other GUI elements, including menu, acceleration key, caret, timer, etc.
+1. Support for non-rectangular windows[^4], such as main window with
+   round corners, irregular window and control.
+1. Support for transparent controls.
+1.  Double buffered main window[^5]. When a MiniGUI main window has
     double buffer, you can get the rendering result of the main window
     in your own buffer. By using double buffer technology, you can use
     an advance 2D graphics interface (mGPlus) or 3D rendering library
     (OpenGL ES) to get the 3D user experience easily.
 
-Controls/Widgets
-----------------
+### Controls/Widgets
 
 The controls/widgets provided by MiniGUI are listed in Table 9.
 
-Table 9: Controls/Widgets
+##### Table 9: Controls/Widgets
 
-  ---------------------- -------------------------------
-  **Control/Widget**     **Comment**
-  Static                 
-  Button                 
-  Single-line edit box   
-  Multi-line edit box    
-  List box               
-  Combo box              
-  Progress bar           
-  Property sheet         
-  Tool bar               
-  Track bar              
-  Scroll bar             New feature of MiniGUI V3.0.x
-  Tree view              
-  List view              
-  Month calendar         
-  Grid view              
-  Icon view              
-  Animation              
-  ---------------------- -------------------------------
+| **Control/Widget**    | **Comment**
+| ----------------------|--------------------------------
+| Static                |
+| Button                |
+| Single-line edit box  |
+| Multi-line edit box   |
+| List box              |
+| Combo box             |
+| Progress bar          |
+| Property sheet        |
+| Tool bar              |
+| Track bar             |
+| Scroll bar            | Since version 3.0.0.
+| Tree view             |
+| List view             |
+| Month calendar        |
+| Grid view             |
+| Icon view             |
+| Animation             |
 
-Common Dialog Boxes
--------------------
+### Common Dialog Boxes
 
-Common dialogs include Open File Dialog Box, Color Selection Dialog Box,
+Common dialog include Open File Dialog Box, Color Selection Dialog Box,
 and Font Selection Dialog Box.
 
-Input Method
-------------
+### Input Method
 
 MiniGUI provides API for external input method module. You can use
 MiniGUI’s IME API to implement soft-keyboard, hand-writing, and other
 input methods.
 
-Look and Feel[^6]
------------------
+### Look and Feel[^6]
 
 MiniGUI V3.0 introduces a new technology for users to customize the
 appearance of MiniGUI windows and controls. You can customize your own
@@ -342,66 +312,54 @@ customizing the metrics, color, font, and icon of window elements
 MiniGUI includes four built-in LF renderers, which are illustrated in
 Table 10.
 
-Table 10: Built-in Look and Feel Renderer
+##### Table 10: Built-in Look and Feel Renderer
 
-  ----------------- ---------------------------------------------------------------------------------- ----------------------------------------
-  **LF Renderer**   **Description**                                                                    **Comments**
-  FLAT              This renderer can be used to support gray screen.                                  
-  CLASSIC           This renderer gives a look and feel which is similar with Windows 95 appearance.   
-  FASHION           This renderer gives a look and feel which is similar with Windows XP appearance.   Implemented by using mGPlus component.
-  SKIN              This renderer renders MiniGUI windows/controls by using pre-defined images.        
-  ----------------- ---------------------------------------------------------------------------------- ----------------------------------------
+| **LF Renderer**  | **Description**                                                                   | **Comments**
+|------------------|-----------------------------------------------------------------------------------|-----------------------------------------
+| FLAT             | This renderer can be used to support gray screen.                                 |
+| CLASSIC          | This renderer gives a look and feel which is similar with Windows 95 appearance.  |
+| FASHION          | This renderer gives a look and feel which is similar with Windows XP appearance.  | Implemented by using mGPlus component.
+| SKIN             | This renderer renders MiniGUI windows/controls by using pre-defined images.       |
 
-Customization of MiniGUI desktop[^7]
-------------------------------------
+### Customization of MiniGUI desktop[^7]
 
 Users can customize the MiniGUI desktop by user defined icons, and
 respond the event of desktop.
 
-\
-Other Features of MiniGUI
-=========================
+## Other Features of MiniGUI
 
-1)  Support for built-in resources. You can compile the resources
-    > (bitmaps, icons, and fonts) into the library, so it is unnecessary
-    > to read the resources from files. Thus, MiniGUI can be used on
-    > some embedded systems without file systems.
+1. Support for built-in resources. You can compile the resources
+   (bitmaps, icons, and fonts) into the library, so it is unnecessary
+   to read the resources from files. Thus, MiniGUI can be used on
+   some embedded systems without file systems.
+2. Providing API to calibrate touch screen.
+3. Special support for embedded systems, including the common I/O
+   operations, byte-orders related functions, mouse (or touch-panel)
+   position calibration etc.
+4. Support for universal virtual frame buffer programs.
 
-2)  Providing API to calibrate touch screen.
+## MiniGUI components
 
-3)  Special support for embedded systems, including the common I/O
-    > operations, byte-orders related functions, mouse (or touch-panel)
-    > position calibration etc.
-
-4)  Support for universal virtual frame buffer programs.
-
-MiniGUI components
-==================
-
-1)  mGUtils is a new MiniGUI component which provides API of common
+1.  mGUtils is a new MiniGUI component which provides API of common
     dialog boxes, such as ColorSelectionDialogBox, FileOpenDialogBox,
     and so on. It also contains the implementation of old mywins and
     virtual console of MiniGUI older version.
-
-2)  mGPlus is a new MiniGUI component which provides support for
+1.  mGPlus is a new MiniGUI component which provides support for
     advanced vector graphics functions like path, gradient, and color
     combination.
-
-3)  mGEff provides an animation framework for MiniGUI applications.
+1.  mGEff provides an animation framework for MiniGUI applications.
     mGEff provides a lot of stable and efficient effectors, which can be
     used to implement the animations like flipping, zooming, scrolling,
     and so on.
-
-4)  mGNCS is the new control set introduced by miniStudio. mGNCS not
+1.  mGNCS is the new control set introduced by miniStudio. mGNCS not
     only provides more than 30 built-in widgets, but also works as a new
     framework of MiniGUI apps. We strongly encourage and recommend that
     you use mGNCS as the app framework for your new MiniGUI application.
     We also provide the following new extended widget component which is
     compliant to mGNCS and miniStudio:
-
-    a.  mGNCS4Touch: a MiniGUI component which provide some
-        mGNCS-compliant widgets with animations for smart devices with a
-        touch panel.
+1.  mGNCS4Touch: a MiniGUI component which provide some
+    mGNCS-compliant widgets with animations for smart devices with a
+    touch panel.
 
 [^1]: Only providing support for Linux/uClinux at present.
 
