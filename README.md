@@ -2,7 +2,7 @@
 
 We maintains the documents for MiniGUI Core and MiniGUI Components in this project.
 
-## Contents
+## Table of Contents
 
 - [MiniGUI Overview](MiniGUI-Overview.md)
 - [MiniGUI User Manual](user-manual/README.md)
