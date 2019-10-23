@@ -488,7 +488,7 @@ respath=/usr/local/share/minigui/res/
 These sections specify the information of the devfonts which should
 be loaded by MiniGUI.
 
-MiniGUI can load a devfont from the corresponding font file or from
+MiniGUI can load a devfont from a font file or from
 a font data stored in the memory.
 Generally, you specify the devfonts which should be loaded
 at the starting stage of MiniGUI in the runtime configuration.
