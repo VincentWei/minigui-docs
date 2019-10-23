@@ -584,42 +584,58 @@ Note that the length of one devfont name can not exceed 255 bytes.
 
 ### Sections for appearance renderers
 
-MiniGUI 3.0 appearance of the window and the control drawing
-implementation, using a completely different from the previous old
-version of the implementation mechanism. Previous versions had to be
-compiled and configured before compilation, the style was chosen, and
-only one of three styles fashion, classic and flat was chosen. MiniGUI
-3.0 uses Look And Feel renderer technology to draw the appearance of
-windows and controls. MiniGUI support four kinds of renderers, in
-practical applications choose one. The advantage of the renderer
-technology is that the appearance can be modified through the
-MiniGUI.cfg file, and the appearance can also be controlled by API. The
-user can even customize its own renderer, which provides great
-convenience for the application to flexibly customize its own appearance
-based on the actual application environment. For details about MiniGUI
-renderer interface, please refer to MiniGUI Programming Manual.
+Since version 3.0, MiniGUI Core introduced the concept of appearance renderer
+(also called `look and feel renderer`).
+You can change the look and feel of a main window or a basic control
+by specifying an appearance renderer for it.
+An appearance renderer defines a set of operations to draw the window
+elements such as caption, borders, and scrollbars of a window.
+While in previous version, you can only
+choose one style among three pre-defined window styles by using the
+compile-time configuration option.
 
-MiniGUI Look and Feel divide the window and control attribute to some
-parts, and then use the drawing interface definition how to draw,
-forming a complete set of appearance renderer mechanism. MiniGUI 3.0
-provides four kinds of renderer: classic, flat, fashion, skin. classic
-is the default renderer, that is when MiniGUI is initialized, the
-classic renderer is used to draw windows and controls by default. The
-fashion renderer needs support by mGPlus component. MiniGUI itself does
-not provide support for the fashion renderer.
+The appearance renderer provides a very flexible implementation to
+customize the appearance of the main window and controls. You can
+easily customize the sizes and colors of a specific appearance renderer
+by specifying different values to the runtime configuration keys.
+Or you can change the appearance on the fly via MiniGUI APIs.
+You can even write your own appearance renderer to customize the
+look and feel of MiniGUI.
 
-The application can choose to use a particular renderer for a window and
-define the appearance of the window's elements. Applications can also
-define their own renderer to draw.
+The MiniGUI component mGNCS, also uses the concept of appearance renderer
+to customize the look and feel of the mGNCS controls.
 
-The section `classic` defines default window element color used.
-Generally, it is unnecessary changed.
+For more information about appearance renderer, please refer to
+[MiniGUI Programming Guide].
 
-Table 3.1 window element division and name in the configuration file and
-code
+MiniGUI Core defines some attributes to control the rendering
+behaviours for main windows or controls. MiniGUI Core provides
+four appearance renderers:
 
-| Configure Option         | Macro                        | Comments
-| -------------------------|------------------------------|---------
+- `classic` renderer draws the window elements in 3D style like Windows XP.
+- `flat` renderer draws the window elements in flat style, which is suitable
+   to gray screen.
+- `skin` renderer draws the window elements by using bitmaps.
+- `fashion` renderer draws the window elements by fashion style like macOS.
+
+Note that the `classic` renderer is built-in MiniGUI Core library, you
+can not disable this renderer.
+
+Note that MiniGUI Core does not implement the `fashion` renderer. This
+renderer draws the window elements by using 2D vector graphics functions,
+so it is implemented by mGPlus component.
+
+In runtime configuration, MiniGUI uses `classic`, `flat`, `skin`,
+and `fashion` sections to define the options for these four appearance
+renderers.
+
+The following table gives the key names for the options and the corresponding
+macros which referring to the specific window elements in MiniGUI code.
+
+##### Table: Key names for various window elements
+
+| Key name                 | Macro                        | Comments
+|--------------------------|------------------------------|---------
 | `caption`                | `WE_METRICS_CAPTION`         | Caption size
 | `menu`                   | `WE_METRICS_MENU`            | Menu item, height of the menu bar
 | `border`                 | `WE_METRICS_WND_BORDER`      | Window border width
@@ -652,11 +668,76 @@ code
 | `fgc_significant_item`   | `WE_FGC_SIGNIFICANT_ITEM`    | Foreground color of important menu item (list item)
 | `bgc_significant_item`   | `WE_BGC_SIGNIFICANT_ITEM`    | Background color of important menu items (list items)
 | `bgc_desktop`            | `WE_BGC_DESKTOP`             | Desktop background color
-|                          | `WE_FONT_MENU`               | Menu font
-|                          | `WE_FONT_CAPTION`            | Caption fonts
-|                          | `WE_FONT_TOOLTIP`            | Prompt box font
 
-The content of the section in `MiniGUI.cfg` is as follows:
+Except the above keys, one renderer section must include the following keys:
+
+- `iconnumber`: The number of system icons should be loaded.
+   **Note that the maximal number of system icons is 5.**
+- `icon0`: The default application icon (`IDI_APPLICATION`).
+- `icon1`: The hand/stop icon (`IDI_HAND` or `IDI_STOP`).
+- `icon2`: The question icon (`IDI_QUESTION`).
+- `icon3`: The exclamation icon (`IDI_EXCLAMATION`).
+- `icon4`: The information/asterisk icon (`IDI_INFORMATION` or `IDI_ASTERISK`).
+- `dir`: The icon used to represent a directory entry (`OpenFileDialogBox`).
+- `file`: The icon used to represent a file entry (`OpenFileDialogBox`).
+- `treefold`: The icon used to represent a folded tree node.
+- `treeunfold`: The icon used to represent a unfolded tree node.
+- `radiobutton`: The bitmap used by a radio button control.
+- `checkbutton`: The bitmap used by a check button control.
+- `bgpicture`: The desktop background image. Set to `none` if no background image.
+- `bgpicpos`: The position of the background image. Set to one of the following values:
+   + `center`
+   + `upleft`
+   + `downleft`
+   + `upright`
+   + `downright`
+   + `upcenter`
+   + `downcenter`
+   + `vcenterleft`
+   + `vcenterright`
+   + `upleft`
+   + `downleft`
+   + `upright`
+   + `downright`
+   + `upcenter`
+   + `downcenter`
+   + `vcenterleft`
+   + `vcenterright`
+   + `none`
+
+For `skin` appearance renderer, it uses the following extra keys to define
+the bitmaps for various window elements:
+
+- `skin_bkgnd`: The window background.
+- `skin_caption`: The caption background.
+- `skin_caption_btn`: The buttons on caption.
+- `skin_scrollbar_hshaft`: The tray of horizontal scrollbar.
+- `skin_scrollbar_vshaft`: The tray of vertical scrollbar.
+- `skin_scrollbar_hthumb`: The thumb on the horizontal scrollbar.
+- `skin_scrollbar_vthumb`: The thumb on the vertical scrollbar.
+- `skin_scrollbar_arrows`: The arrows on the scrollbar.
+- `skin_tborder`: The top border.
+- `skin_bborder`: The bottom border.
+- `skin_lborder`: The left border.
+- `skin_rborder`: The right border.
+- `skin_arrows`: The arrows on menu item.
+- `skin_arrows_shell`:
+- `skin_pushbtn`: The push button.
+- `skin_radiobtn`: The radio button.
+- `skin_checkbtn`: The check button.
+- `skin_tree`:
+- `skin_header`:
+- `skin_tab`:
+- `skin_tbslider_h`:
+- `skin_tbslider_v`:
+- `skin_trackbar_horz`:
+- `skin_trackbar_vert`:
+- `skin_progressbar_htrack`:
+- `skin_progressbar_vtrack`:
+- `skin_progressbar_hchunk`:
+- `skin_progressbar_vchunk`:
+
+The content of the appearance renderer sections in `MiniGUI.cfg` is as follow:
 
 ```ini
 [classic]
@@ -1003,15 +1084,13 @@ bgc_desktop=0xFF984E00
 
 ### Other sections
 
-The section `mouse` defines the time of mouse `double clicked`. It
-is used to handle with system inner events. Generally, it is unnecessary
-changed.
+The section `mouse` defines some parameters for mouse event.
 
-The definition of the keys in the section is as follows:
+The key in the section is as follow:
 
-- `dblclicktime`: The mouse double clicked time in ms
+- `dblclicktime`: The mouse button double clicked time in milliseconds.
 
-The content of the section in `MiniGUI.cfg` is as follows:
+The content of the section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
 [mouse]
@@ -1019,20 +1098,22 @@ dblclicktime=300
 ```
 
 The section `event` defines event timeout and auto-repeat time used by
-system internal event process. Generally, it is unnecessary changed.
+the internal event process.
 
-The definition of the keys in the section is as follows:
+The keys in the section are as follow:
 
-- `timeoutusec`: Event timeout time in ms
-- `repeatusec`: Event repeat time in ms
+- `timeoutusec`: Event timeout time in microseconds.
+- `repeatusec`: Event repeat time in microseconds.
 
-The content of the section in `MiniGUI.cfg` is as follows:
+The content of the section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
 [event]
 timeoutusec=300000
 repeatusec=50000
 ```
+
+Generally, it is unnecessary to change these sections.
 
 ## Incore Configuration
 
