@@ -1375,17 +1375,6 @@ fontfile0=../res/fonts/SourceHanSans-Normal.ttc
 
 ```
 
-```cpp
-static char *SYSTEMFONT_KEYS[] =
-
-{"font_number", "font0", "default", "wchar_def", "fixed", "caption",
-"menu", "control"};
-
-static char *SYSTEMFONT_VALUES[] =
-{
-    "1","rbf-fixed-rrncnn-8-16-ISO8859-1", "0", "0", "0", "0", "0", "0"
-};
-```
 ---
 
 [&lt;&lt; Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md) |
