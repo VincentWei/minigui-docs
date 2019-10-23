@@ -8,6 +8,7 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
 - [MiniGUI User Manual](user-manual/README.md)
 - [MiniGUI Programming Guide](programming-guide/README.md)
 - [MiniGUI Porting Guide](porting-guide/README.md)
+- [MiniGUI Supplementary Documents](supplementary-docs/README.md)
 - [MiniGUI API Reference Manuals](api-reference/README.md)
    * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
