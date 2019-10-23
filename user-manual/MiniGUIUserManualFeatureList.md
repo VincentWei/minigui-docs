@@ -5,8 +5,8 @@ in detail. This document intends to give you an overview about MiniGUI
 technology features. Every effort is made to make this document as complete
 as possible.
 
-- [What’s New in MiniGUI 4.0](ewhats-new-in-minigui-4.0)
-- [What’s New in MiniGUI 3.2](#whats-new-in-minigui-3.2)
+- [What’s New in MiniGUI 4.0](#whats-new-in-minigui-40)
+- [What’s New in MiniGUI 3.2](#whats-new-in-minigui-32)
 - [Operating Systems Supported](#operating-systems-supported)
 - [MiniGUI Runtime Modes](#minigui-runtime-modes)
 - [Hardware Support](#hardware-support)
@@ -27,27 +27,54 @@ as possible.
 
 ## What’s New in MiniGUI 4.0
 
+In this version, we mainly enhanced and tuned the APIs related to text
+rendering and fonts:
+
+* MiniGUI now provides complete APIs for Unicode characters processing.
+  These APIs conform to Unicode 12.0.
+* MiniGUI also provides new APIs to lay out, shape, and render glyphs
+  from complex and mixed scripts, such as Arabic, Thai, and Indic.
+* We tuned and optimized MiniGUI's logical and device font interfaces to
+  support the new features above.
+* MiniGUI now is enhanced to support input events which may be generated
+  by input devices other than standard mouse (or single-touch panel) and
+  keyboard, such as multi-touch panel (gesture), joystick, tablet tool,
+  table pad, and switch. In MiniGUI 4.0, we introduce `MSG_EXIN_XXX` messages
+  to support the input events from devices other than standard mouse
+  and keyboard. We call these messages as 'extra input messages'.
+* The NEWGAL engine of `dri` to support modern DRI/DRM-driven graphics cards
+  or GPUs on Linux.
+* The IAL engine of `libinput` to support all modern input devices including
+  mouse, keyboard, joystick, switch, multiple touch panel, gesture, tablet tool,
+  and table pad on Linux.
+* We introduced a Slice Memory Allocator for fast concurrent memory chunk
+  allocation.
+* Cleanup and tune code for GCC 7.3.
+
 ## What’s New in MiniGUI 3.2
 
 We introduce the following new features in MiniGUI 3.2:
-1.  The support for 64-bit architectures (MiniGUI core and all
-    components). Because of change of some APIs, we recommend that you
-    use MiniGUI V3.2.x instead of MiniGUI V3.0.x for new projects.
-1.  A new component: mGNCS4Touch. mGNCS4Touch is a MiniGUI component
-    which provide some mGNCS-compliant widgets with animations for smart
-    devices with a touch panel.
-1.  The following legacy components will be not maintained since MiniGUI 3.2:
-   1.   mGp is a printing component of MiniGUI, which provides a
-        printing function to MiniGUI applications. At present, mGp
-        supports Epson, HP and some other printers.
-   1.   mGi is a input component of MiniGUI, which provides the
-        framework of soft-keyboard and hand writing input methods. It
-        also supplies an IME container for users to add self-defined IME
-        to it. On the other hand, you can use self-defined keyboard
-        bitmap for the soft-keyboard and add self-defined translation
-        method to it.
-   1.   mG3d is a 3D rendering component of MiniGUI. Using this
-        component, you can render 3D objects in your applications.
+
+- The support for 64-bit architectures (MiniGUI core and all
+  components). Because of change of some APIs, we recommend that you
+  use MiniGUI V3.2.x instead of MiniGUI V3.0.x for new projects.
+- A new component: mGNCS4Touch. mGNCS4Touch is a MiniGUI component
+  which provide some mGNCS-compliant widgets with animations for smart
+  devices with a touch panel.
+
+The following legacy components will be not maintained since MiniGUI 3.2:
+
+- mGp is a printing component of MiniGUI, which provides a
+  printing function to MiniGUI applications. At present, mGp
+  supports Epson, HP and some other printers.
+- mGi is a input component of MiniGUI, which provides the
+  framework of soft-keyboard and hand writing input methods. It
+  also supplies an IME container for users to add self-defined IME
+  to it. On the other hand, you can use self-defined keyboard
+  bitmap for the soft-keyboard and add self-defined translation
+  method to it.
+- mG3d is a 3D rendering component of MiniGUI. Using this
+  component, you can render 3D objects in your applications.
 
 ## Operating Systems Supported
 
