@@ -1117,23 +1117,95 @@ Generally, it is unnecessary to change these sections.
 
 ## Incore Configuration
 
-When use incore resources, MiniGUI don’t need the file `MiniGUI.cfg`.
-The appropriate configuration options are defined in the file
-`src/sysres/mgetc.c`.
+If you compiled MiniGUI with `--enable-incoreres` option, MiniGUI
+will not use the file `MiniGUI.cfg`. Instead, you specify the runtime
+configuration options in the source file `src/sysres/mgetc.c`, and
+the options be compiled in the MiniGUI Core library.
 
-When we compile MiniGUI with `--enable-incoreres` option, MiniGUI
-application doesn’t need the file `MiniGUI.cfg`. The required options
-are given in the file `src/sysres/mgetc.c`.
+Therefore, except the options can be changed via the environment
+variables, you should change the source file to modify the runtime
+configuration options and rebuild MiniGUI core library after changing
+the file.
 
-Similar with the structure in `MiniGUI.cfg`, MiniGUI defines an
-structure `ETCSECTION`, array `_etc_sections` and variable MGETC in
-`mgetc.c`. The array `mgetc_sections` is appropriate with section in
-configuration file. MGETC that is `ETC_S` type is appropriate with
-configuration file.
+Similar with the structure of `MiniGUI.cfg`, MiniGUI defines an
+structure `ETCSECTION`, an static array `_etc_sections` and a static
+variable `_ETC` in `mgetc.c`. The array `mgetc_sections` corresponds
+to the sections in the configuration file, and `_ETC` which has `ETC_S`
+type corresponds to the whole configuration file.
+
+The following code snippet shows the skeleton of the `mgetc.c` source file:
+
+```cpp
+// Section: system
+static char* _system_keys[]={
+// GAL engine and default options
+    "gal_engine",
+    "defaultmode",
+// IAL engine
+    "ial_engine",
+    "mdev",
+    "mtype"
+};
+static char* _system_values[]={
+// GAL engine and default options
+    "pc_xvfb",
+    "800x600-16bpp",
+// IAL engine
+    "pc_xvfb",
+    "/dev/input/mice",
+    "IMPS2"
+};
+
+// Section: pc_xvfb
+static char* _pc_xvfb_keys[]={
+    "defaultmode",
+    "window_caption",
+    "exec_file"
+};
+static char* _pc_xvfb_values[]={
+    "800x600-16bpp",
+    "XVFB-for-MiniGUI-3.0-(Gtk-Version)",
+    "/usr/local/bin/gvfb"
+};
+
+// Other sections go here...
+...
+
+static ETCSECTION _etc_sections [] = {
+    {0, 5, "system", _system_keys, _system_values },
+    {0, 3, "pc_xvfb", _pc_xvfb_keys,_pc_xvfb_values },
+    // other sections go here...
+    ...
+}
+
+static ETC_S _ETC = {
+    0,
+    sizeof(_etc_sections)/sizeof(ETCSECTION),
+    _etc_sections
+};
+
+GHANDLE __mg_get_mgetc (void)
+{
+    return (GHANDLE) &_ETC;
+}
+
+```
+
+The function `__mg_get_mgetc` returns the pointer to `_ETC` as a `GHANDLE`
+variable to the caller. After got the handle to the ETC object, you can use
+MiniGUI APIs to get the value of a key in a section.
+
+For more information, please refer to [MiniGUI Programming Guide].
+
+You can modify the file `mgetc.c` manually to reflect your
+runtime configuration. However, you can use the tool `mgcfg-trans` to
+generate your `mgetc.c` file based on a `MiniGUI.cfg` file.
+
+For more information, please refer to [Tools].
 
 ### Structure `ETCSETCTION`
 
-The structure `ETCSECTION` is defined in the file named `minigui.h`’. The following is in detail.
+The structure `ETCSECTION` is defined in the header file `minigui/minigui.h`:
 
 ```cpp
 /** The config section information */
@@ -1152,36 +1224,19 @@ typedef struct _ETCSECTION
 } ETCSECTION;
 ```
 
-The `key_nr_alloc` is the interface of other configuration options.
-Its value must be 0 in incore. The `key_nr` defines the number of the
-key in section. The name defines the name of section. The keys and
-values is the array of key and value. The number of key array and value
-array is corresponded with the number of the `key_nr`.
-
-Below is the definition of `_etc_sections` in the `mgetc.c` file.
-
-```cpp
-```
-
-The section in `_etc_sections` must be defined (fbcon or qvfb is
-optional.). Other notation sections are optional. The meaning of
-sections is same as the sections in MiniGUI.cfg. Commonly, you can only
-change the GAL engine, the IAL engine, display mode and the sections of
-system and fbcon: SYSTEM_VALUES and FBCON_VALUES defined in the
-`mgetc-xxx.c` file, such as `mgetc-pc.c`.
-
-The `systemfont` section defines incore font used by system.
-Currently, MiniGUI 3.0.x supports ISO8859-1, GB2312, RBF, BIG5,
-SHIFT_JIS, and QPF. MiniGUI doesn’t support the TTF and Type1 font in
-incore resources.
+The field `key_nr_alloc` is used internally, and must be set to 0.
+The field `key_nr` defines the number of the keys in section.
+The field `name` defines the name of section. The field `keys` and
+the field `values` are the string array of the keys and values.
+The size of the key array and the value array should match the
+number of `key_nr`.
 
 ### Structure `ETC_S`
 
-`ETC_S` structure was defined in the file `minigui.h`, the content of
-ETC_S listed as the follow:
+`ETC_S` structure is also defined in the header file `minigui/minigui.h`:
 
 ```cpp
-/** The config file information*/
+/** The config file information */
 typedef struct _ETC_S
 {
     /** Allocated number of sections */
@@ -1193,49 +1248,110 @@ typedef struct _ETC_S
 } ETC_S;
 ```
 
-Therefore, `sect_nr_alloc` is the interface of the other
-configuration options, it’s value must be 0 in incore, `sect_nr`
-specify the number of section, sections is ETCSECTION type structure
-array, the number of item is not less than the value, the first item
-specified this value.
-
-The `mgetc_sections` array was defined as the follow in the
-`mgetc.c` file.
-
-```cpp
-static ETC_S _ETC = {
-    0,
-    sizeof(_etc_sections)/sizeof(ETCSECTION),
-    _etc_sections
-};
-```
-
-The number of section is `sizeof(_etc_sections)/sizeof(ETCSECTION)` in
-the MGETC structure; the section array is `mgetc_sections` array above.
+The field `sect_nr_alloc` is used internally, and must be set to 0.
+The field `section_nr` specifies the number of the sections, and
+the field `sections` is the pointer to the array of `ETCSECTION`.
 
 ## Samples
 
-Under most circumstances, we modify runtime configuration file, we will
-be limited to several sections. The system section and font related
-several sections are primary sections. In this chapter, we will give two
-configuration examples.
+The following sample runtime configuration comes from
+the `MiniGUI.cfg` used by `mGUXDemo`:
 
 ```ini
-# The first system font must be a logical font using RBF device font.
+[system]
+# GAL engine and default options
+gal_engine=pc_xvfb
+defaultmode=360x480-16bpp
+
+# IAL engine
+ial_engine=pc_xvfb
+mdev=/dev/input/event0
+mtype=IMPS2
+
+[fbcon]
+defaultmode=1024x768-16bpp
+
+[pc_xvfb]
+defaultmode=360x480-32bpp
+skin=etc/gvfb.skin
+window_caption=XVFB-for-MiniGUI-3.0-(Gtk-Version)
+exec_file=/usr/local/bin/gvfb
+
 [systemfont]
-font_number=1
-font0=rbf-fixed-rrncnn-8-16-ISO8859-1
+font_number=5
+font0=rbf-FixedSys-rrncnn-8-16-ISO8859-1
+font1=*-FixedSys-rrncnn-*-16-ISO8859-1
+font2=*-Courier-rrncnn-*-16-ISO8859-1
+font3=*-SansSerif-rrncnn-*-16-ISO8859-1
+font4=*-System-rrncnn-*-16-ISO8859-1
+
 default=0
-wchar_def=0
-fixed=0
-caption=0
-menu=0
-control=0
+wchar_def=4
+fixed=1
+caption=4
+menu=2
+control=3
 
 [rawbitmapfonts]
+font_number=0
+
+[varbitmapfonts]
+font_number=0
+
+[upf]
+font_number=0
+
+[qpf]
+font_number=0
+
+[truetypefonts]
 font_number=1
-name0=rbf-fixed-rrncnn-8-16-ISO8859-1
-fontfile0=/usr/local/lib/minigui/res/font/8x16-iso8859-1.bin
+name0=ttf-helvetica-rrncnn-0-0-ISO8859-1,GB2312-0,UTF-8
+fontfile0=font/Helvetica.ttf
+```
+
+The following sample runtime configuration comes from
+the `MiniGUI.cfg` used by `CBPlusUI` in `mg-demos` package:
+
+```ini
+[system]
+# GAL engine and default options
+gal_engine=pc_xvfb
+defaultmode=240x240-16bpp
+# IAL engine
+ial_engine=pc_xvfb
+mdev=/dev/input/mice
+mtype=IMPS2
+
+[fbcon]
+defaultmode=1024x768-16bpp
+
+[qvfb]
+defaultmode=1024x768-16bpp
+display=0
+
+#{{ifdef _MGGAL_PCXVFB
+[pc_xvfb]
+defaultmode=240x240-16bpp.rgb565
+window_caption=CBPlus
+exec_file=/usr/local/bin/gvfb
+#}}
+
+# The first system font must be a logical font using RBF device font.
+[systemfont]
+font_number=3
+font0=rbf-FixedSys-rrncnn-8-16-ISO8859-1
+font1=upf-unifont-rrncnn-16-16-UTF-8
+font2=ttf-HanSans-srncnn-*-16-UTF-8
+default=0
+wchar_def=1
+fixed=1
+caption=1
+menu=1
+control=2
+
+[rawbitmapfonts]
+font_number=0
 
 [varbitmapfonts]
 font_number=0
@@ -1243,8 +1359,16 @@ font_number=0
 [qpf]
 font_number=0
 
+[upf]
+font_number=1
+name0=upf-unifont-rrncnn-16-16-ISO8859-1,ISO8859-15,GB2312,BIG5,GBK,UTF-8,UTF-16LE,UTF-16BE
+fontfile0=../res/fonts/unifont_160_50.upf
+
 [truetypefonts]
-font_number=0
+font_number=1
+name0=ttf-HanSans-rrncnn-*-*-ISO8859-1,ISO8859-15,GB2312,BIG5,GBK,UTF-8,UTF-16LE,UTF-16BE
+fontfile0=../res/fonts/SourceHanSans-Normal.ttc
+
 ```
 
 ```cpp
