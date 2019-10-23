@@ -253,15 +253,21 @@ seat=seat0
 
 ### Section `systemfont`
 
-The section `systemfont` defines the system fonts. One system
-font will be used to render the text in the window captions,
-menus, and controls in MiniGUI.
+The section `systemfont` defines the system fonts. A system
+font is a logical font which will be used to render the text
+in the window captions, menus, and controls in MiniGUI.
 
-A system font is a logfont (`logfont` for short) that is created
-by calling the function `CreateLogFontFromName`. MiniGUI creates
-a logfont based on loaded device fonts, which are defined in
-sections such as `rawbitmapfonts`, `varbitmapfonts`, `upf`, `qpf`,
-and `truetypefonts`
+A logical font (`logfont` for short) is an object used by
+MiniGUI app to render paragraphs, words, or characters.
+While a device font (`devfont` for short) is a underlying object
+containing the glyphs of all or some characters in a specific
+language or script. Basically, one logfont corresponds to one
+or multiple devfonts.
+
+MiniGUI creates the system fonts by calling the function
+`CreateLogFontFromName` based on loaded device fonts, which are
+defined in sections such as `rawbitmapfonts`, `varbitmapfonts`,
+`upf`, `qpf`, and `truetypefonts`
 (see [Sections for devfonts](#sections-for-devfonts)).
 
 A logfont name is a string which has the following form:
@@ -443,13 +449,13 @@ When MiniGUI loads a resource file, it will use the key value
 as the prefix for the ultimate full path of the resource file:
 
 - The icon files should be stored in the sub directory of `icon/` of
-  the resource path specified by the key value.
+  the resource path specified by the key `resinfo.respath`.
 - The font files should be stored in the sub directory of `font/` of
-  the resource path specified by the key value.
+  the resource path specified by the key `resinfo.respath`.
 - The image files should be stored in the sub directory of `bmp/` of
-  the resource path specified by the key value.
+  the resource path specified by the key `resinfo.respath`.
 - The cursor files should be stored in the sub directory of `cursor/` of
-  the resource path specified by the key value.
+  the resource path specified by the key `resinfo.respath`.
 
 The content of this section in the default `MiniGUI.cfg` is as follow:
 
@@ -460,10 +466,35 @@ respath=/usr/local/share/minigui/res/
 
 ### Sections for devfonts
 
-These sections define information of loading device fonts`,` number of
-fonts, and name and file of fonts.
+These sections specify the information of the devfonts which should
+be loaded by MiniGUI.
 
-The format of device fonts used by MiniGUI is as follows:
+MiniGUI can load a devfont from the corresponding font file or from
+a font data stored in the memory.
+Generally, you specify the devfonts which should be loaded
+at the starting stage of MiniGUI in the runtime configuration.
+
+Note that since MiniGUI 3.0.0, there are some built-in devfonts
+compiled into the MiniGUI Core library by default. Therefore, if you
+does not specify any devfont to load in the runtime configuration,
+MiniGUI can still run.
+
+In the runtime configuration, we use a section for each font type:
+
+- `rawbitmapfonts` for RBF (Raw Bitmap Font) fonts.
+- `varbitmapfonts` for VBF (Variable Bitmap Font) fonts.
+- `upf` for UPF (Unicode Pre-rendered Font) fonts.
+- `qpf` for QPF (Qt Pre-rendered Font) fonts.
+- `truetypefonts` for TrueType fonts. When using FreeType 2, also for
+   OpenType and Adobe Type 1 fonts.
+
+Each of these sections defines the following keys:
+
+- `font_number`: The number of devfonts will be loaded.
+- `name<NR>`: The name of the devfont numbered `<NR>`.
+- `fontfile<NR>`: The font file of the devfont numbered `<NR>`.
+
+The format of device fonts used by MiniGUI is as follow:
 
     <type>-<facename>-<style>-<width>-<height>-<charset1[,charset2,...]>
 
@@ -481,12 +512,6 @@ be maximum width; for vector fonts set to be 0.
 - `<height>`: The height of device font, for vector fonts set to
 be 0.
 - `<charset1, charset2>`: The charset of device font supported.
-
-Each of these sections defines `font_number`, `name<NR>`, and `fontfile<NR>` keys.
-
-- `font_number`: The number of device font loaded.
-- `name<NR>`: The name of device font that number is `<NR>`.
-- `fontfile<NR>`: The font file of device font that number is `<nr>`.
 
 If you don't need to use a specific type of device font, you can skip
 the configuration option by set `font_number=0`.
