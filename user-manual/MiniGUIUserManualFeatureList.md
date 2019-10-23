@@ -1,114 +1,55 @@
-Datasheet for MiniGUI V3.2
+# Feature List
 
-MiniGUI is “a cross-operating-system graphics user interface support
-system for embedded devices”, and “an embedded graphics middleware”. It
-aims to provide a fast, stable, and cross-platform Graphics User
-Interface (GUI) support system, which is especially fit for embedded
-Linux and popular real-time operating systems.
+This document lists the technology features of MiniGUI (version 3.2 or later)
+in detail. This document intends to give you an overview about MiniGUI
+technology features. Every effort is made to make this document as complete
+as possible.
 
-This document lists the technology features of MiniGUI V3.2 in detail.
-MiniGUI V3.2 is the latest releases of the MiniGUI. This document
-intends to give you an overview about MiniGUI technology features. Every
-effort is made to make this document as complete as possible. You can
-also refer to *MiniGUI Technology White Paper* V3.2 for more explanation
-about MiniGUI technology features.
+- [What’s New in MiniGUI 3.2](#whats-new-in-minigui-3.2)
+- [Operating Systems Supported](#operating-systems-supported)
+- [MiniGUI Runtime Modes](#minigui-runtime-modes)
+- [Hardware Support](#hardware-support)
+- [Footprint of MiniGUI](#footprint-of-minigui)
+- [Graphics Sub-System](#graphics-sub-system)
+- [General Features](#general-features)
+- [Image Formats](#image-formats)
+- [Fonts and Charsets](#fonts-and-charsets)
+- [Windowing Sub-System](#windowing-sub-system)
+- [General Features](#general-features-1)
+- [Controls/Widgets](#controlswidgets)
+- [Common Dialog Boxes](#common-dialog-boxes)
+- [Input Method](#input-method)
+- [Look and Feel](#look-and-feel)
+- [Customization of MiniGUI desktop](#customization-of-minigui-desktop)
+- [Other Features of MiniGUI](#other-features-of-minigui)
+- [MiniGUI Components](#minigui-components)
 
-Copyright Claim
-===============
+## What’s New in MiniGUI 4.0
 
-Copyright © 2008\~2018, Beijing FMSoft Technologies Co., Ltd.
-
-**All rights reserved. By whatever means you get the entire or partial
-text or photograph data in this documentation, no matter mechanical or
-electronic, you are only authorized by Beijing FMSoft Technologies Co.,
-Ltd. the reading right. Any format conversion, redistribution,
-dissemination, and copying its entire or partial content, or using text
-or photograph therein for commercial purpose without written permission
-will be regarded as tortuous, and may result in severe civil or criminal
-punishment.**
-
-For additional contact information, please visit MiniGUI website:
-
-[***http://www.minigui.com***](http://www.minigui.com)
-
-\
-Contents {#contents .TOC}
-========
-
-[*Copyright Claim* 1](#copyright-claim)
-
-[*What’s New in MiniGUI 3.2* 4](#whats-new-in-minigui-3.2)
-
-[*Operating Systems Supported* 4](#operating-systems-supported)
-
-[*MiniGUI Runtime Modes* 6](#minigui-runtime-modes)
-
-[*Hardware Support* 8](#hardware-support)
-
-[*Footprint of MiniGUI* 11](#footprint-of-minigui)
-
-[*Graphics Sub-System* 12](#graphics-sub-system)
-
-[*General Features* 12](#general-features)
-
-[*Image Formats* 12](#image-formats)
-
-[*Fonts and Char Sets* 13](#fonts-and-char-sets)
-
-[*Windowing Sub-System* 15](#windowing-sub-system)
-
-[*General Features* 15](#general-features-1)
-
-[*Controls/Widgets* 16](#controlswidgets)
-
-[*Common Dialog Boxes* 17](#common-dialog-boxes)
-
-[*Input Method* 17](#input-method)
-
-[*Look and Feel* 17](#look-and-feel)
-
-[*Customization of MiniGUI desktop*
-18](#customization-of-minigui-desktop)
-
-[*Other Features of MiniGUI* 19](#other-features-of-minigui)
-
-[*MiniGUI components* 19](#minigui-components)
-
-\
-=
-
-What’s New in MiniGUI 3.2
-=========================
+## What’s New in MiniGUI 3.2
 
 We introduce the following new features in MiniGUI V3.2.
 
-1)  The support for 64-bit architectures (MiniGUI core and all
+1.  The support for 64-bit architectures (MiniGUI core and all
     components). Because of change of some APIs, we recommend that you
     use MiniGUI V3.2.x instead of MiniGUI V3.0.x for new projects.
-
-2)  A new component: mGNCS4Touch. mGNCS4Touch is a MiniGUI component
+1.  A new component: mGNCS4Touch. mGNCS4Touch is a MiniGUI component
     which provide some mGNCS-compliant widgets with animations for smart
     devices with a touch panel.
-
-3)  The following legacy components will be maintained since MiniGUI
-    3.2:
-
-    a.  mGp is a printing component of MiniGUI, which provides a
+1.  The following legacy components will be not maintained since MiniGUI 3.2:
+   1.   mGp is a printing component of MiniGUI, which provides a
         printing function to MiniGUI applications. At present, mGp
         supports Epson, HP and some other printers.
-
-    b.  mGi is a input component of MiniGUI, which provides the
+   1.   mGi is a input component of MiniGUI, which provides the
         framework of soft-keyboard and hand writing input methods. It
         also supplies an IME container for users to add self-defined IME
         to it. On the other hand, you can use self-defined keyboard
         bitmap for the soft-keyboard and add self-defined translation
         method to it.
-
-    c.  mG3d is a 3D rendering component of MiniGUI. Using this
+   1.   mG3d is a 3D rendering component of MiniGUI. Using this
         component, you can render 3D objects in your applications.
 
-Operating Systems Supported
-===========================
+## Operating Systems Supported
 
 MiniGUI is a complete and self-contained embedded Graphics User
 Interface (GUI) support system, which is designed and optimized for
@@ -118,24 +59,15 @@ uClinux, eCos, uC/OS-II, VxWorks, pSOS, Nucleus, ThreadX, and OSE. SDK
 for Win32 platform is available also; it can facilitate the development
 and debugging of embedded applications.
 
-Table 1: Supported Operating Systems and Runtime Modes
+##### Table 1: Supported Operating Systems and Runtime Modes
 
-  ----------------------------------------------------------------- -------------------------------
-  **Operating Systems Supported**                                   **Runtime Mode(s) Supported**
+| **Operating Systems Supported**                                  | **Runtime Mode(s) Supported**
+|------------------------------------------------------------------|-------------------------------
+| Linux                                                            | MiniGUI-Processes<BR/>MiniGUI-Threads<BR/>MiniGUI-Standalone
+| uClinux                                                          | MiniGUI-Threads<BR/>MiniGUI-Standalone
+| RTOS (VxWorks, eCos, uC/OS-II, pSOS, Nucleus, ThreadX, and OSE)  | MiniGUI-Threads<BR/>MiniGUI-Standalone
 
-  Linux                                                             MiniGUI-Processes\
-                                                                    MiniGUI-Threads\
-                                                                    MiniGUI-Standalone
-
-  uClinux                                                           MiniGUI-Threads\
-                                                                    MiniGUI-Standalone
-
-  RTOS (VxWorks, eCos, uC/OS-II, pSOS, Nucleus, ThreadX, and OSE)   MiniGUI-Threads
-  ----------------------------------------------------------------- -------------------------------
-
-\
-MiniGUI Runtime Modes
-=====================
+## MiniGUI Runtime Modes
 
 MiniGUI has three runtime modes. Different from the general-purpose
 operating systems like Linux, the traditional embedded operating systems
@@ -146,28 +78,13 @@ runtime environments are entirely different from Linux. We can configure
 and compile MiniGUI into three runtime modes for different operating
 systems: MiniGUI-Threads, MiniGUI-Processes, and MiniGUI-Standalone.
 
-Table 2: MiniGUI Runtime Modes
+##### Table 2: MiniGUI Runtime Modes
 
-  -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------
-  **Runtime modes**    **Description**                                                                                                                                                                                                                                                                                                                    **System Requirements**
-
-  MiniGUI-Threads      A program running on MiniGUI-Threads can create multiple overlapped windows in different threads/tasks, and all windows running in the same address space. MiniGUI-Threads is fit for real-time operating systems such as eCos, uC/OS-II, and VxWorks. By using POSIX Threads, MiniGUI-Threads can run on Linux/uClinux as well.   -   Multiple Tasks/Threads
-                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                          -   Semaphore/Mutex
-                                                                                                                                                                                                                                                                                                                                                          
-
-  MiniGUI-Processes    Every task in MiniGUI-Processes is a single process; multi-windows can be created for each process. At present, a complete multi-processes windowing system has already been implemented. MiniGUI-Processes are suitable for embedded system with full UNIX-like operating system, such as Linux.                                  -   Support for Multi-Process
-                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                          -   Shared Memory
-                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                          -   UNIX domain socket
-                                                                                                                                                                                                                                                                                                                                                          
-                                                                                                                                                                                                                                                                                                                                                          -   Semaphore
-                                                                                                                                                                                                                                                                                                                                                          
-
-  MiniGUI-Standalone   A single-task version of MiniGUI. This mode is useful for some systems, which are lack of stable thread support, like uClinux.                                                                                                                                                                                                     -   Timer
-                                                                                                                                                                                                                                                                                                                                                          
-  -------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------------------------------
+| **Runtime modes**   | **Description**                                                                                                                                                                                                                                                                                                                  | **System Requirements**
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------
+| MiniGUI-Threads     | A program running on MiniGUI-Threads can create multiple overlapped windows in different threads/tasks, and all windows running in the same address space. MiniGUI-Threads is fit for real-time operating systems such as eCos, uC/OS-II, and VxWorks. By using POSIX Threads, MiniGUI-Threads can run on Linux/uClinux as well. | - Multiple Tasks/Threads<BR/> -   Semaphore/Mutex
+| MiniGUI-Processes   | Every task in MiniGUI-Processes is a single process; multi-windows can be created for each process. At present, a complete multi-processes windowing system has already been implemented. MiniGUI-Processes are suitable for embedded system with full UNIX-like operating system, such as Linux.                                | - Support for Multi-Process<BR/> - Shared Memory<BR/> - UNIX domain socket<BR/> - Semaphore
+| MiniGUI-Standalone  | A single-task version of MiniGUI. This mode is useful for some systems, which are lack of stable thread support, like uClinux.     | - Timer
 
 MiniGUI can run on almost all operating systems[^1] under
 MiniGUI-Standalone mode. MiniGUI-Threads is suitable for real-time
