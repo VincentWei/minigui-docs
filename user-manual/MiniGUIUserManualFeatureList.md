@@ -235,8 +235,17 @@ Table 7 gives the font types supported by MiniGUI; Table 8 illustrates
 the charsets/encodings supported by MiniGUI.
 
 Note that MiniGUI provides support for Arabic and Hebrew text. To
-support these two languages, MiniGUI provides APIs for BIDI
-(bi-direction) text processing.
+support these two languages, MiniGUI 3.2 provides simple APIs for BIDI
+(bi-direction) text processing. However, These APIs are deprecate in
+MiniGUI 4.0.
+
+MiniGUI 4.0 now provides complete APIs for Unicode characters processing.
+These APIs conform to Unicode 12.0, including the Unicode Bidirectional
+Algorithm (UAX#9), Unicode Line Breaking Algorithm (UAX#14), Unicode
+Normalization Forms (UAX#15), Unicode Script Property (UAX#24), Unicode
+Text Segmentation (UAX#29), Unicode Vertical Text Layout (UAX#50), and so on.
+**Therefore, in order to support Arabic and Hebrew text, or other text
+in complex scripts or mixed scripts, we recommend that your use MiniGUI 4.0.**
 
 Enhance the font and text render, including UPF (UNICODE pre-rendered
 font), an upgrade of QPF; VBF V3, the upgrade version of VBF V2, BITMAP
@@ -251,23 +260,23 @@ APIs for BIDI text processing.
 | VBF V3         | This font type can be used to define a font in which the glyphs have different width. We have upgraded VBF to version 3, which is more efficient under MiniGUI-Processes runtime mode.  |
 | QPF            | QPF is the Qt pre-rendered font which is defined by Qt/Embedded.                                                                                                                        |
 | UPF            | UPF is the UNICODE pre-rendered font which is defined by FMSoft to support UNICODE encoded glyphs.                                                                                      |
-| TTF            | MiniGUI uses FreeType 1 or FreeType 2 to render TrueType fonts. MiniGUI can also render glyph by using sub-pixel anti-alias technology.                                                 |
+| TTF            | MiniGUI uses FreeType 1 or FreeType 2 to render TrueType fonts. MiniGUI can also render glyph by using sub-pixel anti-alias technology.                                                 | The support FreeType 1 was deprecated in MiniGUI 4.0.
 
 ##### Table 8: Char sets/Encodings
 
-| **Charsets/Encodings**                     | **Comment**
+| **Charsets/Encodings**                      | **Comment**
 | --------------------------------------------| ----------------------------------------------
 | ISO8859-1,2,3,4,5,7,9,10,11,12,13,14,15,16  |
 | ISO8859-6                                   | Arabic (BIDI)
 | ISO8859-8                                   | Hebrew (BIDI)
-| GB2312                                      | Simplified Chinese
+| GB2312                                      | Basic simplified Chinese characters
 | GBK                                         | Simplified Chinese and traditional Chinese
-| GB18030-0                                   | The char set standard defined by P. R. China
+| GB18030-0                                   | The charset standard defined by China
 | BIG5                                        | Traditional Chinese
-| UNICODE UTF-8/UTF-16LE/UTF-16BE             | Three popular encodings of UNICODE V2.0.
 | Shift-JIS (JISX0201 and JISX0208)           |
 | EUC Korean (KSC5636 and KSC5601)            |
 | EUC Japanese (JISX0201 and JISX0208)        |
+| UNICODE UTF-8/UTF-16LE/UTF-16BE             | Three popular encodings of UNICODE; APIs conform to Unicode 12.0 since 4.0.0.
 
 ## Windowing Sub-System
 
