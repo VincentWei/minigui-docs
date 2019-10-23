@@ -1271,7 +1271,7 @@ the field `sections` is the pointer to the array of `ETCSECTION`.
 
 In practice, we often change the section `system`, `systemfont`,
 and devfonts sections for a specific project. Therefore,
-the samples in this section will only gives the changed sections.
+the samples in this section will only give the changed sections.
 
 The following sample runtime configuration comes from
 the `MiniGUI.cfg` used by `mGUXDemo`:
