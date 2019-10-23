@@ -189,7 +189,7 @@ can create abstract graphics objects, like pen and brush.
 ### Image Formats
 
 MiniGUI provides support for almost all popular image file types
-including GIF, GIF89a, JPEG, PNG, Win32 BMP, etc.
+including GIF, GIF89a, JPEG, PNG, Windows BMP, etc.
 
 Table 6: Image Types
 
@@ -198,8 +198,8 @@ Table 6: Image Types
 | Windows BMP     |  This is an image file format defined by Windows.                                                   |
 | GIF             |  This is a popular image file used on INTERNET.                                                     |
 | GIF89a          |  This is an extension of GIF to provide animation.                                                  |
-| JPEG[^2]        |  This is an image file format used widely by hand-held devices such as digital camera, mobile phone.|
-| PNG[^3]         |  This is a popular image file format intending to replace GIF.                                      |
+| JPEG            |  This is an image file format used widely by hand-held devices such as digital camera, mobile phone.| Support for JPEG image format is implemented by using libjpeg.
+| PNG             |  This is a popular image file format intending to replace GIF.                                      | Support for PNG image format is implemented by using libpng.
 
 ### Fonts and Charsets
 
@@ -255,14 +255,14 @@ features for application:
 1. Mature multi-window mechanism and messaging mechanism.
 1. Support for dialog box and message box.
 1. Other GUI elements, including menu, acceleration key, caret, timer, etc.
-1. Support for non-rectangular windows[^4], such as main window with
+1. Support for non-rectangular windows, such as main window with
    round corners, irregular window and control.
 1. Support for transparent controls.
-1.  Double buffered main window[^5]. When a MiniGUI main window has
-    double buffer, you can get the rendering result of the main window
-    in your own buffer. By using double buffer technology, you can use
-    an advance 2D graphics interface (mGPlus) or 3D rendering library
-    (OpenGL ES) to get the 3D user experience easily.
+1. Double buffered main window. When a MiniGUI main window has
+   double buffer, you can get the rendering result of the main window
+   in your own buffer. By using double buffer technology, you can use
+   an advance 2D graphics interface (mGPlus) or 3D rendering library
+   (OpenGL ES) to get the 3D user experience easily.
 
 ### Controls/Widgets
 
@@ -301,7 +301,7 @@ MiniGUI provides API for external input method module. You can use
 MiniGUI’s IME API to implement soft-keyboard, hand-writing, and other
 input methods.
 
-### Look and Feel[^6]
+### Look and Feel
 
 MiniGUI V3.0 introduces a new technology for users to customize the
 appearance of MiniGUI windows and controls. You can customize your own
@@ -321,7 +321,7 @@ Table 10.
 | FASHION          | This renderer gives a look and feel which is similar with Windows XP appearance.  | Implemented by using mGPlus component.
 | SKIN             | This renderer renders MiniGUI windows/controls by using pre-defined images.       |
 
-### Customization of MiniGUI desktop[^7]
+### Customization of MiniGUI desktop
 
 Users can customize the MiniGUI desktop by user defined icons, and
 respond the event of desktop.
@@ -360,21 +360,6 @@ respond the event of desktop.
 1.  mGNCS4Touch: a MiniGUI component which provide some
     mGNCS-compliant widgets with animations for smart devices with a
     touch panel.
-
-[^1]: Only providing support for Linux/uClinux at present.
-
-[^2]: Support for JPEG image format is implemented by using libjpeg.
-
-[^3]: Support for PNG image format is implemented by using libpng.
-
-[^4]: New feature of MiniGUI V3.0.x.
-
-[^5]: New feature of MiniGUI V3.0.x.
-
-[^6]: New feature of MiniGUI V3.0.x
-
-[^7]: New feature of MiniGUI V3.0.x
-
 
 ---
 
