@@ -582,6 +582,21 @@ For example:
 
 Note that the length of one devfont name can not exceed 255 bytes.
 
+The following `truetypefonts` section uses new format for devfont name:
+
+```ini
+# Free Adobe TrueType or OpenType fonts
+# https://github.com/adobe-fonts/
+[truetypefonts]
+font_number=3
+name0=ttf-Source Sans Pro,SansSerif-rrncnn-0-0-ISO8859-1,UTF-8
+fontfile0=font/SourceSansPro-Regular.ttf
+name1=ttf-Source Serif Pro,Serif-rrncnn-0-0-ISO8859-1,UTF-8
+fontfile1=font/SourceSerifPro-Regular.ttf
+name2=ttf-Source Code,Monospace-rrncnn-0-0-ISO8859-1,UTF-8
+fontfile2=font/SourceCodeVariable-Roman.ttf
+```
+
 ### Sections for appearance renderers
 
 Since version 3.0, MiniGUI Core introduced the concept of appearance renderer
