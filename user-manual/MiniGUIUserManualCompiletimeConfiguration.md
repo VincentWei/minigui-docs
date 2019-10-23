@@ -93,9 +93,7 @@ amount of work required to port MiniGUI to a new target board.
 
 Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also supports
 the target name `external`. So you can implement the sub-driver of
-`dri` engine outside MiniGUI Core.
-
-For more information, please refer to:
+`dri` engine outside MiniGUI Core. For more information, please refer to:
 
 - [Using CommLCD NEWGAL Engine and Comm IAL Engine]
 - [Writing DRI Engine Driver for Your GPU]
