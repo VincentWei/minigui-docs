@@ -1254,6 +1254,10 @@ the field `sections` is the pointer to the array of `ETCSECTION`.
 
 ## Samples
 
+In practice, we often change the section `system`, `systemfont`,
+and devfonts sections for a specific project. Therefore,
+the samples in this section will only gives the changed sections.
+
 The following sample runtime configuration comes from
 the `MiniGUI.cfg` used by `mGUXDemo`:
 
@@ -1382,23 +1386,6 @@ static char *SYSTEMFONT_VALUES[] =
     "1","rbf-fixed-rrncnn-8-16-ISO8859-1", "0", "0", "0", "0", "0", "0"
 };
 ```
-
-```ini
-[system]
-# GAL engine and default options
-gal_engine=commlcd
-
-# IAL engine
-ial_engine=auto
-mdev=/dev/ts
-mtype=IMPS2
-```
-
-```cpp
-static char *SYSTEM_KEYS[] = {"gal_engine", "ial_engine", "mdev", "mtype"};
-static char *SYSTEM_VALUES[] = {"commlcd", "auto", "/dev/ts", "IMPS2"};
-```
-
 ---
 
 [&lt;&lt; Compile-time Configuration](MiniGUIUserManualCompiletimeConfiguration.md) |
