@@ -47,7 +47,8 @@ file into a C source file. It is the `mgcfg-trans` tool in `mgcfg-trans/`
 directory.
 
 You can use this tool to convert a `MiniGUI.cfg` file or the runtime
-configuration files of MiniGUI components (mGNCS and mGNCS4Touch).
+configuration files of MiniGUI components (mGNCS and mGNCS4Touch) to
+C source files.
 
 The `mg-inner-res-trans` tool in `inner-res-trans/` directory can convert
 images, fonts, icons used by MiniGUI into C source files in batch.
