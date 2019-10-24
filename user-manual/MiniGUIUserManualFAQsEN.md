@@ -10,8 +10,6 @@ commercial purpose applications, i.e., you do not want to release them
 under terms and conditions of GPL, you then should get a commercial
 license from [FMSoft Technologies].
 
----
-
 Q) What kinds of products that use MiniGUI are successfully launched in
 market?
 
@@ -21,16 +19,12 @@ meters, and so on. For the detailed introduction for some typical
 products, you can visit:
 <http://www.minigui.com/en/introduction/application/>.
 
----
-
 Q) What operating systems does MiniGUI support?
 
 A) By now, MiniGUI provides the support for many popular embedded
 operating systems including Linux/uClinux, VxWorks, ThreadX, FreeRTOS,
 RTEMS, RT-Thread, Nucleus, pSOS, OSE, eCos, and even uC/OS-II.
 MiniGUI can also run on Win32 platform.
-
----
 
 Q) Which CPUs have MiniGUI run on successfully so far? Moreover, what
 is the lowest frequency of CPU MiniGUI needed?
@@ -40,22 +34,16 @@ A) There are successful cases for MiniGUI running in ARM-based CPUs
 MIPS, M68k, FRV. In those CPUs, the one with lowest main frequency is
 about 20 MHz (20 MIPS).
 
----
-
 Q) Would MiniGUI provide support for monochrome LCD?
 
 A) Yes. Actually, MiniGUI can provide support for almost all LCD
 controllers in various modes, such as monochrome, gray, 256-color,
 4096-color, and 65536-color.
 
----
-
 Q) Which resolution of screen can MiniGUI run properly?
 
 A) In theory, the running of MiniGUI is not influenced by the
 resolution of screen.
-
----
 
 Q) During compiling the library, why does the mistake below occur
 sometimes?
@@ -67,8 +55,6 @@ file system. If you compile library being maintained by
 Automake/Autoconf script, you cannot create these links on a non-UNIX
 file system. Please check your file system to make sure if it is a
 FAT32 file system.
-
----
 
 Q) When I use the Open File Dialog Box, why does the mistake below
 occur?
@@ -82,182 +68,103 @@ sure to link mGUtils(`-lmgutils`). In addition, if you run MiniGUI on
 some embedded operating systems, which are lack of the support for file
 system, you can't use the Open File Dialog Box.
 
----
-
 Q) My system does not support 64-bit integer. Is the data type of
-Uint64 in MiniGUI essential?
+`Uint64` in MiniGUI essential?
 
-A) The data type of Uint64 in MiniGUI is used to generate the complex
+A) The data type of `Uint64` in MiniGUI is used to generate the complex
 graphics. If your system does not support 64-bit integer, you can use
 the following configuration option to disable the usage of 64-bit
 integer:
 
---disable-fixedmath
-
-A.5 Questions Related to Input Engines
----------------------------------------
-
-Q) On Linux PC boxes, what kinds of mouse types does MiniGUI support?
-
-A) Currently, the mouse protocols supported by MiniGUI are MS, MS3,
-PS2, and Intelligent PS2 (IMPS2).
-
-Q) On Linux PC boxes, I would like to use the old serials mouse. What
-should I do?
-
-A) MiniGUI can provide support for almost all mouse types via GPM.
-Please configure it as follows:
-
-Run **gpm –k** to kill gpm that is running.
-
-Run **mouse-test** to confirm your mouse device and protocol.
-
-Run **gpm** to set mouse device and protocol as follows.
-
-gpm -R -t &lt;yourmousetype&gt; -m &lt;yourmousedevice&gt;
-
-Edit **MiniGUI.cfg** file, set **mtype** as **gpm**; and set mdev as
-**/dev/gpmdata**:
-
-\[system\]
-
-...
-
-mtype=gpm
-
-mdev=/dev/gpmdata
-
-Then, start up MiniGUI. Please note you can use the option **–R** when
-you set the mouse protocol by **gpm**. **–R** option is used to transfer
-original mouse protocol to GPM defined mouse protocol, and make it shown
-in **/dev/gpmdata** file.
-
-A.6 Runtime Questions
----------------------
+    --disable-fixedmath
 
 Q) On Linux, How would I capture the screen of MiniGUI?
 
 A) When running MiniGUI program, you can capture the screen as a BMP
-file in the current directory by pressing **&lt;PrtSc&gt;** key. The
-file name is **0-&lt;NO&gt;.bmp**, therein **&lt;NO&gt;** is the number
-of times of pressing **&lt;PrtSc&gt;** key. You can save the BMP file of
-the current active main window as **&lt;HWND&gt;-&lt;NO&gt;.bmp**,
-therein **&lt;HWND&gt;** is the handle of the active main window while
-**&lt;NO&gt;** is the number of times of pressing **&lt;Ctrl+PrtSc&gt;**
-key.
-
-Q) Why does the program exit after displaying two dialog boxes when I
-run **mginit** in Mg-samples?
-
-A) The main reason is that MiniGUI being installed does not provide
-support for PNG image files. In some Linux distributions (such as early
-TurboLinux), as the version of their PNG graphics support library
-(libpng) is too old, it would automatically disable the support for PNG
-image when you configure MiniGUI. In this case, **LoadBitmapFromFile**
-function of MiniGUI cannot correctly load PNG image files, while
-Mg-samples **mginit** needs to load two PNG files for running. That is
-why **mginit** exits.
-
-To solve this problem, there are two ways. First, you can download and
-install the latest libpng library from INTERNET. Secondly, modify **nr**
-value in section **\[mginit\]** in **mginit.rc**, and make the value
-less than 8.
-
-Another reason that may cause such error is that you do not start up
-**mginit** in its directory. Please change to the directory, then run
-**mginit**.
+file in the current directory by pressing `PrtScr` key. The
+captured screen will be saved as a BMP file named `0-<NO>.bmp`,
+therein `<NO>` is the number of times of pressing `Ctrl + PrtScr` key.
+You can save the BMP file of the current active main window as `<HWND>-<NO>.bmp`,
+therein `<HWND>` is the handle of the active main window while
+`<NO>` is the number of times of pressing `Ctrl + PrtScr` key.
 
 Q) Under MiniGUI-Processes runtime mode, how would I switch from
 MiniGUI to other console?
 
 A) Under MiniGUI-Processes runtime mode, if you are using the
-**console** input engine, you can switch from MiniGUI to other virtual
-console by pressing **&lt;Right\_Ctrl+F*x*&gt;** key, also, you can quit
-MiniGUI by pressing **&lt;Ctrl+Alt+Backspace&gt;**. Currently,
-MiniGUI-Threads does not provide such functions.
-
-A.7 Common Error Messages
--------------------------
+`console` or `libinput` IAL engine, you can switch from MiniGUI to
+other virtual console by pressing `Right_Ctrl + F<n>` key, also,
+you can quit MiniGUI by pressing `Ctrl + Alt + Backspace` key.
+Currently, MiniGUI-Threads does not provide such functions.
 
 Q) Why is the following message shown when I run programs in
 mg-samples on Linux?
 
-AttachSharedResource: No such file or directory
-
-Error in step 6: Can not attach shared resource!
-
-Initialize minigui failure when using /etc/MiniGUI.cfg as cfg file.
+    AttachSharedResource: No such file or directory
+    Error in step 6: Can not attach shared resource!
+    Initialize minigui failure when using /etc/MiniGUI.cfg as cfg file.
 
 A) If you configure MiniGUI as MiniGUI-Processes or
-MiniGUI-Standalone, you should run **mginit** program first. As
-MiniGUI-Processes or MiniGUI-Standalone adopts a C/S architecture, you
-have to start up the sever program, **mginit,** before running client
-programs. In Mg-samples package, you should run **mginit** in
-**mginit/** directory first, then run demo programs in other
+MiniGUI-Standalone, you should run `mginit` program first. As
+MiniGUI-Processes adopts a Client/Server architecture, you
+have to start up the sever program, `mginit`, before running other client
+programs. In mg-samples package, you should run `mginit` in
+`mginit/` directory first, then run demo programs in other
 directories.
 
 Q) Why do I see the information below when I run MiniGUI?
 
-GAL ENGINE: Error when opening /dev/fb0: Permission denied. Please check
-your kernel config.
+    GAL ENGINE: Error when opening /dev/fb0: Permission denied. Please check your kernel config.
+    GAL: Init GAL engine failure.
+    Error in step 3: Can not initialize graphics engine!
+    Initialize minigui failure when using /usr/local/etc/MiniGUI.cfg as cfg file
 
-GAL: Init GAL engine failure.
-
-Error in step 3: Can not initialize graphics engine!
-
-Initialize minigui failure when using /usr/local/etc/MiniGUI.cfg as cfg
-file
-
-A) The main reason is that you have not activated the FrameBuffer
-driver yet, or the permission of **/dev/fb0** is incorrect.
+A) The main reason is that you have not activated the frame buffer
+driver yet, or the permission of `/dev/fb0` is incorrect.
 
 Q) Under MiniGUI-Processes runtime mode, why does it give error
-information below when I run mginit in mg-samples?
+information below when I run `mginit` in mg-samples?
 
-Error in step 2 : There is already an instance of minigui.
-
-Initialize minigui failure when using /usr/local/etc/MiniGUI.cfg as
-config file.
+    Error in step 2 : There is already an instance of minigui.
+    Initialize minigui failure when using /usr/local/etc/MiniGUI.cfg as config file.
 
 A) Usually, there are two possible reasons. One is that you have
-already run an **mginit** program; other is that you did not exit
-MiniGUI properly when you run **mginit** last time. If it is the second
-reason, you can delete **minigui** file and **mginit** file in
-**/var/tmp/** directory. If it still does not work, please restart your
+already run an `mginit` program; other is that you did not exit
+MiniGUI properly when you run `mginit` last time. If it is the second
+reason, you can delete `minigui` file and `mginit` file in
+`/var/tmp/` directory. If it still does not work, please restart your
 computer.
 
 Q) Why do the following statement show when I run MiniGUI?
 
-NEWGAL: Does not find matched engine: fbcon.
+    NEWGAL: Does not find matched engine: fbcon.
+    Error in step 3: Can not get graphics engine information!
 
-Error in step 3: Can not get graphics engine information!
+A) The possible problem is that `fbcon` NEWGAL engine
+fails when initializing frame buffer device. The main reasons are that
+your kernel does not support frame buffer driver, or does not activate
+frame buffer driver, or you have no proper access permission to open
+`/dev/fb0` device.
 
-A) The possible problem is that **FBCON** engine in NEWGAL interface
-fails when initializing FrameBuffer device. The main reasons are that
-your kernel does not support FrameBuffer driver, or does not activate
-FrameBuffer driver, or you have no proper access permission to open
-**/dev/fb0** device.
+Q) On Linux, what is the meaning of the error information below?
 
-Q22．On Linux, what is the meaning of the error information below?
+    vesafb does not support changing the video mode
 
-vesafb does not support changing the video mode
-
-A) It is a warning that can be ignored. It aims at VESA FrameBuffer
-driver. VESA FrameBuffer driver does not support the display mode switch
+A) It is a warning that can be ignored. The VESA frame buffer driver
+does not support the display mode switching
 during running. It can only set video mode by the boot option for
 kernel. Moreover, once set, it cannot be changed unless you modify the
 boot option and restart your system.
 
 Q) On Linux, what is the meaning of the error information below?
 
-NEWGAL: No video mode large enough for the resolution specified.
-
-NewGAL: Set video mode failure.
+    NEWGAL: No video mode large enough for the resolution specified.
+    NewGAL: Set video mode failure.
 
 A) The main reason is that the display resolution being set in
-**MiniGUI.cfg** is higher than that supported by your FrameBuffer
-driver. Therefore, you can try to set a smaller resolution by modify
-**MiniGUI.cfg** file.
+`MiniGUI.cfg` is higher than that supported by your NEWGAL engine.
+Therefore, you can try to set a smaller resolution by modify
+`MiniGUI.cfg` file.
 
 ----
 
