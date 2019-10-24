@@ -22,35 +22,35 @@ which affects the runtime behavior of MiniGUI. For example, you
 can use the runtime configuration to specify:
 
 - The effective graphics and input engines.
-- The device fonts to load.
+- The fonts device to load.
 - The system fonts for caption, menu, and control.
 - The mouse cursors.
 - The icons, and bitmaps to decorate window.
 
 Generally, the runtime configuration is loaded from `MiniGUI.cfg` file.
-But if you configured MiniGUI with built-in resource in building stage,
+But if you've configured MiniGUI with built-in resources in building stage,
 the runtime configuration will be compiled into the MiniGUI Core library.
 
-In this chapter, we first describe the runtime configuration when
+In this chapter, we first describe the runtime configuration
 using the configuration file, then describe how to specify runtime
-configuration if you configured MiniGUI with incore resource.
+configuration if you've configured MiniGUI with resources in MiniGUI Core .
 For convenience, we call the later situation as `incore configuration`.
 
 ## Configuration File
 
-On Linux, after building and installing MiniGUI by using the default
+On Linux, after building and installing MiniGUI using the default
 configuration, the file `etc/MiniGUI.cfg` in MiniGUI source tree will
-be installed to `/usr/local/etc/` directory. However, you can deploy
+be installed into `/usr/local/etc/` directory. However, you can deploy
 your own version of `MiniGUI.cfg` in your home directory. And this version
-will have a high priority.
+will have a higher priority.
 
-Actually, when MiniGUI starts, it will locate the correct `MiniGUI.cfg`
+Actually, when MiniGUI starts, it tries to locate the correct `MiniGUI.cfg`
 according to the following steps:
 
 1. search `MiniGUI.cfg` in current working directory. If not found,
 1. search `.MiniGUI.cfg` in home directory of the current user. If not found,
 1. search `MiniGUI.cfg` in `/usr/local/etc`. If not found,
-1. search `MiniGUI.cofg` in `/etc/`.
+1. search `MiniGUI.cfg` in `/etc/`.
 
 In other words, if you don't create `MiniGUI.cfg` file in the current
 directory or `.MiniGUI.cfg` file in your home directory either, MiniGUI
@@ -84,10 +84,10 @@ Some important sections are listed as follow.
 
 ### Section `system`
 
-You can use the section `system` to specify the effective NEWGAL
-engine and IAL engine. For historical reasons, you can also use
+You can use the section `system` to specify the effective `NEWGAL`
+engine and `IAL` engine. For historical reasons, you can also use
 this section to specify the mouse device and mouse protocol for
-`console` IAL engine.
+`console` `IAL` engine.
 
 The keys of this section are listed as follow:
 
@@ -128,7 +128,7 @@ The environment variables are listed as follow:
 - `MG_MDEV`: `system.mdev`
 - `MG_MTYPE`: `system.mtype`
 
-For example, if you want to use `fbcon` NEWGAL engine and `console` IAL engine,
+For example, if you want to use `fbcon` `NEWGAL` engine and `console` `IAL `engine,
 you can use the following commands to specify the environment variables:
 
 ```shell
@@ -142,7 +142,7 @@ $ export MG_MTYPE=ps2
 ### Section `pc_xvfb`
 
 The section `pc_xvfb` is only effective when you define the key
-`system.gal_engine` having the value `pc_xvfb`.
+`system.gal_engine` with value `pc_xvfb`.
 
 The valid keys in the section `pc_xvfb` are listed as follow:
 
@@ -163,7 +163,7 @@ exec_file=/usr/local/bin/gvfb
 ### Section `fbcon`
 
 The section `fbcon` is only effective when you define the key
-`system.gal_engine` having the value `fbcon`.
+`system.gal_engine` with value `fbcon`.
 
 The valid keys in the section `fbcon` are listed as follow:
 
@@ -192,7 +192,7 @@ Linux DRI/DRM.
 It is available since MiniGUI 4.0.0.
 
 The section `dri` is only effective when you define the key
-`system.gal_engine` having the value `dri`.
+`system.gal_engine` with value `dri`.
 
 The valid keys in the section `dri` are listed as follow:
 
@@ -204,10 +204,10 @@ The valid keys in the section `dri` are listed as follow:
 
 The key `defaultmode` also defines the default display mode for the `dri`
 engine. This key value will override the value defined by `system.defaultmode`.
-When the section is undefined or the key value is invalid, the `dri`
+If the section is undefined or the key value is invalid, the `dri`
 engine will use the key value of `system.gal_engine`.
 
-For `dri` engine, we introduce a new key `pixelformat` in order to
+For `dri` engine, we introduced a new key `pixelformat` to
 define the pixel format precisely. We use DRM fourcc code (like `XR24`)
 to define the pixel format of the video surface. For more information,
 please see the header file `drm/drm_fourcc.h` of libdrm.
@@ -238,7 +238,7 @@ This section is dedicated to the `libinput` input engine which runs on Linux.
 It is available since MiniGUI 4.0.0.
 
 The section `libinput` is only effective when you define the key
-`system.ial_engine` having the value `libinput`.
+`system.ial_engine` with value `libinput`.
 
 The valid keys in the section `libinput` are listed as follow:
 
@@ -253,7 +253,7 @@ seat=seat0
 
 ### Section `systemfont`
 
-The section `systemfont` defines the system fonts. A system
+The section `systemfont` defines system fonts. A system
 font is a logical font which will be used to render the text
 in the window captions, menus, and controls in MiniGUI.
 
@@ -264,7 +264,7 @@ containing the glyphs of all or some characters in a specific
 language or script. Basically, one logfont corresponds to one
 or multiple devfonts.
 
-MiniGUI creates the system fonts by calling the function
+MiniGUI creates the system font by calling the function
 `CreateLogFontFromName` based on loaded device fonts, which are
 defined in sections such as `rawbitmapfonts`, `varbitmapfonts`,
 `upf`, `qpf`, and `truetypefonts`
@@ -286,7 +286,7 @@ of a logfont, such as italic, bold, underline, etc.
 - `<width>` specifies the width of the logfont in pixels.
 Usually do not need to specify the width, so use `*` instead.
 - `<height>` specifies the height of the logfont in pixels.
-- `<charset>` specifies the charset or encoding of the logfont being created.
+- `<charset>` specifies the charset or encoding of the logfont created.
 
 As an example, the logfont name `rbf-FixedSys-rrncnn-8-16-ISO8859-1` will
 create a logfont by using RBF devfonts. The face name of the logfont is
@@ -296,9 +296,9 @@ For more information about logfont, please refer to [MiniGUI Programming Guide].
 
 The valid keys in the section `systemfont` are listed as follow:
 
-- `font_number`: The number of system fonts should be created.
+- `font_number`: The number of system fonts to be created.
 **Note that the maximal number of system logfonts is 6. You should not
-set this key value to be a number larger than 6.**
+set this key value larger than 6.**
 - `font<NR>`: The name for the logfont numbered `<NR>`.
 - `default`: The system default logfont in the default single-byte character set.
   Its value should be a valid system logfont number.
@@ -319,9 +319,9 @@ the maximal number of system logfonts is 6.
 You must create at least one logfont in a single-byte character set
 (e.g., `ISO8859-1`). MiniGUI defines the system default charsets
 according to `default` and `wchar_def` system fonts. And the logfont
-names for `default` and `wchar_def` will affect the return value of
+names for `default` and `wchar_def` will affect the return value of functions：
 `GetSysCharset`, `GetSysCharWidth`, `GetSysCCharWidth` and
-`GetSysHeight` functions. Commonly, `default` and `wchar_def`
+`GetSysHeight`. Commonly, `default` and `wchar_def`
 should be fixed width bitmap fonts.
 
 The content of this section in the default `MiniGUI.cfg` is as follow:
@@ -343,7 +343,7 @@ menu=2
 control=3
 ```
 
-#### Changes in version 4.0
+#### Changes in MiniGUI 4.0.0
 
 Since version 4.0.0, you can specify up to 7 family names for a logfont name, for example:
 
@@ -360,12 +360,12 @@ Moreover, the previous width field of a logfont name is used for the glyph orien
 
 ### Section `cursorinfo`
 
-This section specify the cursors used by MiniGUI.
+This section specifies the cursors used by MiniGUI.
 
 The valid keys in the section `cursorinfo` are listed as follow:
 
-- `cursorpath`: The path in which the cursor files located.
-- `cursornumber`: The number of cursors should be loaded.
+- `cursorpath`: The path in which the cursor files are located.
+- `cursornumber`: The number of cursors to be loaded.
 - `cursor<NR>`: The cursor file the cursor numbered `<NR>`.
 
 Note that the cursor numbers should correspond to the system cursor
@@ -454,9 +454,9 @@ cursor22=ve_split.cur
 
 ### Section `resinfo`
 
-This section specify the path of the resource files used by MiniGUI.
+This section specifies the path of the resource files used by MiniGUI.
 
-The valid key in the section `resinfo` is listed as follow:
+The valid key in section `resinfo` is listed as follow:
 
 - `respath`: The path in which the resource files located.
 
@@ -481,18 +481,18 @@ respath=/usr/local/share/minigui/res/
 
 ### Sections for devfonts
 
-These sections specify the information of the devfonts which should
-be loaded by MiniGUI.
+These sections specify the information of the devfonts which are
+loaded by MiniGUI.
 
 MiniGUI can load a devfont from a font file or from
-a font data stored in the memory.
+font data stored in memory.
 Generally, you specify the devfonts which should be loaded
 at the starting stage of MiniGUI in the runtime configuration.
 
 Note that since MiniGUI 3.0.0, there are some built-in devfonts
 compiled into the MiniGUI Core library by default. Therefore, if you
-does not specify any devfont to load in the runtime configuration,
-MiniGUI can still run.
+do not specify any devfont to load in the runtime configuration,
+MiniGUI still runs.
 
 In the runtime configuration, we use a section for each font type:
 
@@ -505,7 +505,7 @@ In the runtime configuration, we use a section for each font type:
 
 Each of these sections defines the following keys:
 
-- `font_number`: The number of devfonts will be loaded.
+- `font_number`: The number of devfonts to be loaded.
 - `name<NR>`: The name of the devfont numbered `<NR>`.
 - `fontfile<NR>`: The font file of the devfont numbered `<NR>`.
 
@@ -521,7 +521,7 @@ fontfile0=../res/fonts/unifont_160_50.upf
 If you don't need to use a specific type of devfont, you can skip
 the configuration section by setting `font_number=0`.
 
-Like logfont, we use a string as the devfont name to specify the
+Like logfont, a string is used as the devfont name to specify the
 family name, style, size, and charsets of a devfont object. The format of
 a devfont name is as follow:
 
@@ -530,7 +530,7 @@ a devfont name is as follow:
 The definitions for each part of the devfont name are as follow:
 
 - `<fonttype>`: The type of device font, for example, RBF, VBF, QPF,
-TrueType, and Adobe Type1 device font are rbf, vbf, qpf, ttf, and tlf.
+TrueType, and Adobe Type1 device fonts are rbf, vbf, qpf, ttf, and tlf.
 - `<family>`: The name of device font. Such as courier, Times
 etc.
 - `<styles>`: The style of device font, it is grouped into six
@@ -538,7 +538,7 @@ alphabets. Such as bold, italic, underline etc. Generally the string is
 `rrncnn`.
 - `<width>`: The width of device font, for variable width fonts, set it to
 the maximal width; for vector fonts, set it to 0.
-- `<height>`: The height of device font, for vector fonts set it to 0.
+- `<height>`: The height of device font, for vector fonts, set it to 0.
 - `<charset1, charset2>`: The charsets supported by the devfont.
 
 For example,
@@ -569,7 +569,7 @@ font_number=0
 font_number=0
 ```
 
-#### Changes in version 4.0
+#### Changes in MiniGUI 4.0.0
 
 Since version 4.0.0, you can specify the aliases for the family name of a devfont:
 
@@ -580,7 +580,7 @@ For example:
     ttf-Arial,Sans Serif-rrncnn-0-0-ISO8859-1,UTF-8
     ttf-courier,monospace,serif-rrncnn-0-0-ISO8859-1,UTF-8
 
-Note that the length of one devfont name can not exceed 255 bytes.
+Note that the length of a devfont name can not exceed 255 bytes.
 
 The following `truetypefonts` section uses new format for devfont name:
 
@@ -605,7 +605,7 @@ You can change the look and feel of a main window or a basic control
 by specifying an appearance renderer for it.
 An appearance renderer defines a set of operations to draw the window
 elements such as caption, borders, and scrollbars of a window.
-While in previous version, you can only
+As in the previous version, you can only
 choose one style among three pre-defined window styles by using the
 compile-time configuration option.
 
@@ -618,7 +618,7 @@ You can even write your own appearance renderer to customize the
 look and feel of MiniGUI.
 
 The MiniGUI component mGNCS, also uses the concept of appearance renderer
-to customize the look and feel of the mGNCS controls.
+to customize the look and feel of mGNCS controls.
 
 For more information about appearance renderer, please refer to
 [MiniGUI Programming Guide].
@@ -630,8 +630,8 @@ four appearance renderers:
 - `classic` renderer draws the window elements in 3D style like Windows XP.
 - `flat` renderer draws the window elements in flat style, which is suitable
    to gray screen.
-- `skin` renderer draws the window elements by using bitmaps.
-- `fashion` renderer draws the window elements by fashion style like macOS.
+- `skin` renderer draws the window elements using bitmaps.
+- `fashion` renderer draws the window elements using macOS like style.
 
 Note that the `classic` renderer is built-in MiniGUI Core library, you
 can not disable this renderer.
@@ -684,9 +684,9 @@ macros which referring to the specific window elements in MiniGUI code.
 | `bgc_significant_item`   | `WE_BGC_SIGNIFICANT_ITEM`    | Background color of important menu items (list items)
 | `bgc_desktop`            | `WE_BGC_DESKTOP`             | Desktop background color
 
-Except the above keys, one renderer section must include the following keys:
+In addition to the keys above, one renderer section must include the following keys:
 
-- `iconnumber`: The number of system icons should be loaded.
+- `iconnumber`: The number of system icons to be loaded.
    **Note that the maximal number of system icons is 5.**
 - `icon0`: The default application icon (`IDI_APPLICATION`).
 - `icon1`: The hand/stop icon (`IDI_HAND` or `IDI_STOP`).
@@ -1099,11 +1099,11 @@ bgc_desktop=0xFF984E00
 
 ### Other sections
 
-The section `mouse` defines some parameters for mouse event.
+The section `mouse` defines parameters for mouse event.
 
 The key in the section is as follow:
 
-- `dblclicktime`: The mouse button double clicked time in milliseconds.
+- `dblclicktime`: The mouse button double click time in milliseconds.
 
 The content of the section in the default `MiniGUI.cfg` is as follow:
 
@@ -1135,14 +1135,14 @@ Generally, it is unnecessary to change these sections.
 If you compiled MiniGUI with `--enable-incoreres` option, MiniGUI
 will not use the file `MiniGUI.cfg`. Instead, you specify the runtime
 configuration options in the source file `src/sysres/mgetc.c`, and
-the options be compiled in the MiniGUI Core library.
+the options will be compiled into the MiniGUI Core library.
 
-Therefore, except the options can be changed via the environment
+Therefore, except the options that can be changed via environment
 variables, you should change the source file to modify the runtime
-configuration options and rebuild MiniGUI core library after changing
+configuration options and rebuild MiniGUI Core library after changing
 the file.
 
-Similar with the structure of `MiniGUI.cfg`, MiniGUI defines an
+Similar to the structure of `MiniGUI.cfg`, MiniGUI defines an
 structure `ETCSECTION`, an static array `_etc_sections` and a static
 variable `_ETC` in `mgetc.c`. The array `mgetc_sections` corresponds
 to the sections in the configuration file, and `_ETC` which has `ETC_S`
@@ -1207,7 +1207,7 @@ GHANDLE __mg_get_mgetc (void)
 ```
 
 The function `__mg_get_mgetc` returns the pointer to `_ETC` as a `GHANDLE`
-variable to the caller. After got the handle to the ETC object, you can use
+variable to the caller. After getting the handle to the ETC object, you can use
 MiniGUI APIs to get the value of a key in a section.
 
 For more information, please refer to [MiniGUI Programming Guide].
@@ -1270,7 +1270,7 @@ the field `sections` is the pointer to the array of `ETCSECTION`.
 ## Samples
 
 In practice, we often change the section `system`, `systemfont`,
-and devfonts sections for a specific project. Therefore,
+and `devfonts` sections for a specific project. Therefore,
 the samples in this section will only give the changed sections.
 
 The following sample runtime configuration comes from
@@ -1330,7 +1330,7 @@ fontfile0=font/Helvetica.ttf
 ```
 
 The following sample runtime configuration comes from
-the `MiniGUI.cfg` used by `CBPlusUI` in `mg-demos` package:
+the `MiniGUI.cfg` file used by `CBPlusUI` in `mg-demos` package:
 
 ```ini
 [system]
