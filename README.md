@@ -32,7 +32,7 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
 
 ## 针对中文用户
 
-很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大。
+很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大，
 所以从 MiniGUI 3.2 版本开始，我们选择优先维护英文版本，中文版本就不再维护了。
 这主要出于如下几个方面的因素考虑：
 
