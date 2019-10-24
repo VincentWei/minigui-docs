@@ -68,7 +68,7 @@ https://github.com/VincentWei/cell-phone-ux-demo
 
 ### 是否区分按下状态、弹起状态、使能状态、失能状态等并且分别配置效果
 
-支持。通过使用不同的外观渲染其，或者自定义外观渲染器可定制按钮等控件的这些外观和效果。
+支持。通过使用不同的外观渲染器，或者自定义外观渲染器可定制按钮等控件的这些外观和效果。
 
 可参阅如下示例程序：
 
@@ -142,7 +142,7 @@ https://github.com/VincentWei/mg-demos/tree/master/cbplusui
 
 ### 动态调节显示比例
 
-这个需要应用自己处理，比如可以根据不同分辨率定义控件配置数据，在不同分辨率下使用不同的配置
+这个需要应用自己处理，比如可以根据不同分辨率定义控件配置数据，在不同分辨率下使用不同的配置。
 
 
 ### 鼠标如何配置显示或隐藏
@@ -168,7 +168,7 @@ https://github.com/VincentWei/mg-demos/tree/master/cbplusui
      */
     MG_EXPORT int GUIAPI ShowCursor (BOOL fShow);
 
-### 如何在未连接任何显示设备的情况下，启动MINIGUI
+### 如何在未连接任何显示设备的情况下，启动MiniGUI
 
 正常使用时，要确保显示设备初始化正常后，再启动MiniGUI，比如用一个守护进程确认显示设备正常后，再启动MiniGUI。
 在开发移植阶段，如果需要可以通过修改配置文件 `MiniGUI.cfg` ，配置 dummy 作为GAL engine。
@@ -176,12 +176,11 @@ https://github.com/VincentWei/mg-demos/tree/master/cbplusui
 
 ### 两个显示设备（分辨率不一致），如何做动态的切换方案
 
-这个需要应用自己处理，比如可以根据不同分辨率定义控件配置数据，在不同分辨率下使用不同的配置
+这个需要应用自己处理，比如可以根据不同分辨率定义控件配置数据，在不同分辨率下使用不同的配置。
 
 ### 主界面画的圆弧边缘有锯齿(如图所示)
 
-建议使用 `mGPlus` 进行绘制。mGPlus 是对 MiniGUI 核心库绘制功能的一个补充，其中包含了常见的 2D 矢量绘图
-功能，包括路径、渐变色填充、颜色组合等。
+建议使用 `mGPlus` 进行绘制。mGPlus 是对 MiniGUI 核心库绘制功能的一个补充，其中包含了常见的 2D 矢量绘图功能，包括路径、渐变色填充、颜色组合等。
 
 如果有性能问题，可以使用预先设计的png图片，也可以达到很好的效果。
 
@@ -189,16 +188,16 @@ https://github.com/VincentWei/mg-demos/tree/master/cbplusui
 
 ### 能否直接支持游戏手柄
 
-我们即将在2019年7月份正式发布 MiniGUI 4.0，该版本会提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
+MiniGUI 4.0 版本提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
 
 
 ### 多输入设备的支持
 
-我们即将在2019年7月份正式发布 MiniGUI 4.0，该版本会提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
+MiniGUI 4.0 版本提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
 
 ### 如何在应用层支持多点触控
 
-我们即将在2019年7月份正式发布 MiniGUI 4.0，该版本会提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
+MiniGUI 4.0 版本提供所有输入设备的支持，包括游戏杆、多点触摸屏、手势、平板笔等等。
 
 ## 系统功能
 
@@ -215,7 +214,7 @@ https://github.com/VincentWei/mg-demos/tree/master/cbplusui
 
 ### 丰富字库的支持，包括多国语言的配置及裁剪
 
-MiniGUI 支持多种字库及编码, 多语言支持是通过 UNICODE 来实现的。MiniGUI 4.0 将支持完整 UNICODE 12.0规范。
+MiniGUI 支持多种字库及编码, 多语言支持是通过 Unicode 来实现的。MiniGUI 4.0 将支持完整 Unicode 12.0规范。
 字体推荐使用 TrueType 字体, 如果 TrueType 字体文件太大，可以使用 MiniGUI 自带有转换工具将其转换为点阵字体，但是要注意字体版权问题。
 
 转换工具，请访问：
@@ -225,13 +224,12 @@ MiniGUI 支持多种字库及编码, 多语言支持是通过 UNICODE 来实现�
 
 ### 是否支持文档阅读器，包括常见的PDF、DOC、TXT
 
-TXT文本文件可以直接加载使用, PDF, DOC等复杂格式的解析等操作，建议找第三方进行支持， 比如红樱枫等
+TXT文本文件可以直接加载使用, PDF, DOC等复杂格式的解析等操作，建议找第三方进行支持， 比如红樱枫等。
 
 
 ### 进程间通信有没有标准
-MiniGUI与其它进程间的通讯没有特定的标准，依赖于操作系统平台，如在linux可以使用linux进程通讯相关函数
-MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` 和 `ServerSendReply`来进行，复杂通讯MiniGUI
-提供了经过封装的 UNIX 域套接字。
+MiniGUI与其它进程间的通讯没有特定的标准，依赖于操作系统平台，如在 Linux 上可以使用 Linux 进程通讯相关函数。
+MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` 和 `ServerSendReply`来进行，复杂通讯MiniGUI 提供了经过封装的 UNIX 域套接字。
 
 函数原型如下：
 
@@ -299,7 +297,7 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      * directory.
      */
     MG_EXPORT int serv_listen (const char* name);
-
+    
     /**
      * \fn int serv_accept (int listenfd, pid_t *pidptr, uid_t *uidptr)
      * \brief Waits for a client connection to arrive, and accept it.
@@ -322,7 +320,7 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      * \sa serv_listen, cli_conn
      */
     MG_EXPORT int serv_accept (int listenfd, pid_t *pidptr, uid_t *uidptr);
-
+    
     /**
      * \fn int cli_conn (const char* name, char project)
      * \brief Used by clients to connect to a server.
@@ -344,13 +342,13 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      * \sa serv_listen, serv_accept
      */
     MG_EXPORT int cli_conn (const char* name, char project);
-
+    
     #define SOCKERR_IO          -1
     #define SOCKERR_CLOSED      -2
     #define SOCKERR_INVARG      -3
     #define SOCKERR_TIMEOUT     -4
     #define SOCKERR_OK          0
-
+    
     /**
      * \fn int sock_write_t (int fd, const void* buff,\
                     int count, unsigned int timeout)
@@ -381,7 +379,7 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      */
     MG_EXPORT int sock_write_t (int fd, const void* buff,
                     int count, unsigned int timeout);
-
+    
     /**
      * \fn int sock_read_t (int fd, void* buff, int count, unsigned int timeout)
      * \brief Reads data from socket.
@@ -410,7 +408,7 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      * \sa sock_write_t
      */
     MG_EXPORT int sock_read_t (int fd, void* buff, int count, unsigned int timeout);
-
+    
     /**
      * \def sock_write(fd, buff, count)
      * \brief The blocking version of \a sock_write_t function.
@@ -418,7 +416,7 @@ MiniGUI进程版进程之间的简单通讯可以使用函数 `ClientRequest` �
      * \sa sock_write_t
      */
     #define sock_write(fd, buff, count) sock_write_t(fd, buff, count, 0)
-
+    
     /**
      * \def sock_read(fd, buff, count)
      * \brief The blocking version of \a sock_read_t function.
