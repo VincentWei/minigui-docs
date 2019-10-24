@@ -1,52 +1,74 @@
-4 Developing MiniGUI Application in Windows
-===========================================
+# Tools
 
-Feynman provides two methods for developer, which is accustomed to
-develop application in Window platform.
+- [Font Converter](#font-converter)
+- [Incore Resource Tools](#incore-resource-tools)
+- [miniStudio](#ministudio)
 
-Using the package of MiniGUI for Win32. It is pre-compiled standard
-development package in Win32. It contains wvfb, MiniGUI function library
-(libminigui and libmgext) and header files.
+In this document, we introduce some commonly used tools.
 
-Using MiniGUI SDK for Win32. This is an optional component in MiniGUI.
-It contains the whole source codes and provides users the convenience
-for customizing the package of MiniGUI for Win32.
+## Font Tools
 
-By using the package of MiniGUI for Win32 or the component product of
-MiniGUI SDK for Win32, developer can compile and debug MiniGUI
-application in Windows.
+In `mg-tools` package (<https://github.com/VincentWei/mg-tools>), we
+provides some font converters. You can use these tools to convert
+TrueType fonts to UPF fonts or QPF fonts:
 
-This chapter describes how to use the package of MiniGUI for Win32. User
-can contact Feynman to purchase the component product of MiniGUI SDK for
-Win32.
+- `ttf2upf` converts a TrueType font to a UPF font with a specific size.
+- `ttf2qpf` converts a TrueType font to a UPF font with a specific size.
 
-To develop MiniGUI application in Windows, you must install MS Visual
-Studio 98. First, you decompress arbitrary directory in windows.
-Secondly you open the helloworld project file in VC according to README.
-Figure 4.1 shows it.
+Note that these tools both use FreeType 1 to parse and render glyphs in
+a TrueType font. So you need to install FreeType 1 library first.
 
-After compiling successfully, you should run wvfb first and run
-helloworld. Note that you need copy **helloworld.ext** to directory dll.
-Fig 4.2 shows running result.
+Also note that you should check the license of TrueType fonts you
+want to convert for the rights to use the converted UPF/QPF fonts
+in commercial products.
 
-![](media/image3.png){width="2.830917541557305in"
-height="2.004750656167979in"}\
-Fig 4.1 open MiniGUI helloworld project
+In `font-tools/` directory of the `mg-tools` package, there are some
+tools. You can use the tools to convert a bitmap font to a C source
+file, which can be used as an incore resource file to compile into
+MiniGUI core or your MiniGUI app.
 
-![](media/image4.png){width="3.272584208223972in"
-height="2.7902088801399825in"}\
-Fig 4.2 Compiling and Running MiniGUI Application in Windows
+- `vbf2c` converts a VBF font file into a C source file.
+- `upf2c` converts a UPF font file into a C source file.
 
-Refer to above helloworld, you can create, develop and compile new
-MiniGUI application in VC. But give your attention to the following:
+For a RBF font, you use `bin2c` in `tools/` directory to convert
+it to a C source file. Note that a RBF font does not include format
+information, so the C source file just defines a `unsigned char` array.
 
-Because the package of MiniGUI for Win32 is pre-compiled library, the
-function, compiling configuration options, and running configuration
-options are fixed, and only support MiniGUI-Threads runtime mode.
+There are also other font tools in this directory:
 
-Using the package of MiniGUI for Win32 to develop applications, please
-don’t call Windows special API, which isn’t supported possibility by
-target OS.
+- `bdf2vbf` converts a BDF font file into VBF font file.
+- `qpf2upf` converts a QPF font file into UPF font file.
+- `upfmerge` merges two UPF fonts into a one UPF font file.
+
+## Incore Resource Tools
+
+We provide a convert tool which can convert a MiniGUI runtime configuration
+file into a C source file. It is the `mgcfg-trans` tool in `mgcfg-trans/`
+directory.
+
+You can use this tool to convert a `MiniGUI.cfg` file or the runtime
+configuration files of MiniGUI components (mGNCS and mGNCS4Touch).
+
+The `mg-inner-res-trans` tool in `inner-res-trans/` directory can convert
+images, fonts, icons used by MiniGUI into C source files in one batch.
+For the usage of this tool, you can refer to the README file in the directory.
+
+## miniStudio
+
+miniStudio is an Eclipse-based integrated development environment (IDE) for MiniGUI.
+It provides a WYSIWYG UI designer for developers, and can generate and maintain
+MiniGUI apps easily. You can use miniStudio to edit code, compile, run, and debug
+your MiniGUI apps.
+
+FMSoft now releases miniStudio under GPLv3. Basically, you can download, install,
+and use it for free. You can also modify it under terms and conditions of GPLv3
+for your own needs. You can find the public repositories of miniStudio at:
+
+<https://github.com/FMSoftCN/ministudo-guibuilder>
+
+and
+
+<https://github.com/FMSoftCN/ministudio-eclipse-plugin>
 
 ---
 
