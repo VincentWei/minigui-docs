@@ -4,28 +4,28 @@
 - [Incore Resource Tools](#incore-resource-tools)
 - [miniStudio](#ministudio)
 
-In this document, we introduce some commonly used tools.
+In this chapter, we introduce some tools commonly used.
 
 ## Font Tools
 
-In `mg-tools` package (<https://github.com/VincentWei/mg-tools>), we
-provides some font converters. You can use these tools to convert
+In package `mg-tools` (<https://github.com/VincentWei/mg-tools>), we
+provide some font converters. You can use them to convert
 TrueType fonts to UPF fonts or QPF fonts:
 
 - `ttf2upf` converts a TrueType font to a UPF font with a specific size.
-- `ttf2qpf` converts a TrueType font to a UPF font with a specific size.
+- `ttf2qpf` converts a TrueType font to a QPF font with a specific size.
 
-Note that these tools both use FreeType 1 to parse and render glyphs in
+Note that both tools use FreeType 1 to parse and render glyphs in
 a TrueType font. So you need to install FreeType 1 library first.
 
 Also note that you should check the license of TrueType fonts you
 want to convert for the rights to use the converted UPF/QPF fonts
 in commercial products.
 
-In `font-tools/` directory of the `mg-tools` package, there are some
-tools. You can use the tools to convert a bitmap font to a C source
+In `font-tools/` directory of the `mg-tools` package, there are some 
+tools. You can use them to convert a bitmap font to a C source
 file, which can be used as an incore resource file to compile into
-MiniGUI core or your MiniGUI app.
+MiniGUI Core or your MiniGUI app.
 
 - `vbf2c` converts a VBF font file into a C source file.
 - `upf2c` converts a UPF font file into a C source file.
@@ -42,7 +42,7 @@ There are also other font tools in this directory:
 
 ## Incore Resource Tools
 
-We provide a convert tool which can convert a MiniGUI runtime configuration
+We provide a tool which converts a MiniGUI runtime configuration
 file into a C source file. It is the `mgcfg-trans` tool in `mgcfg-trans/`
 directory.
 
@@ -50,8 +50,8 @@ You can use this tool to convert a `MiniGUI.cfg` file or the runtime
 configuration files of MiniGUI components (mGNCS and mGNCS4Touch).
 
 The `mg-inner-res-trans` tool in `inner-res-trans/` directory can convert
-images, fonts, icons used by MiniGUI into C source files in one batch.
-For the usage of this tool, you can refer to the README file in the directory.
+images, fonts, icons used by MiniGUI into C source files in batch.
+For the usage of this tool, you can refer to the README file in that directory.
 
 ## miniStudio
 
