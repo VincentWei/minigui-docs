@@ -1,29 +1,25 @@
-Appendix A Frequent Ask Questions (FAQs)
-========================================
+# Frequent Ask Questions (FAQs)
 
-A.1 Questions Relevant to GPL Versions
---------------------------------------
+## Questions Relevant to GPL
 
-Q1. Do I need to pay Feynman Software for the license fee if I use GPL
-versions of MiniGUI?
-
-A1. The GPL versions of MiniGUI are available at Feynman Software
-website; you can use them freely if you use MiniGUI under GPL license.
-However, the release of your applications that are based on MiniGUI GPL
-versions should also complies with GPL. If you use MiniGUI to develop
+Q1. Do I need to pay FMSoft Technologies for the license fee if I use MiniGUI?  
+A1. FMSoft releases MiniGUI under GPL; you can use them freely if
+you use MiniGUI under GPL license to develop GPL'd applications.
+However, the release of your applications that are based on MiniGUI
+should also complies with GPL. If you use MiniGUI to develop
 commercial purpose applications, i.e., you do not want to release them
-under GPL terms, you then should pay Feynman Software for the licensing
-fee.
+under terms and conditions of GPL, you then should get a commercial
+license from [FMSoft Technologies].
 
 Q2. When you use MiniGUI GPL versions, what kind of behaviors would
-violate Feynman Software’s legal rights?
+violate FMSoft’s legal rights?
 
-A2. Feynman Software owns the copyright of several free software
+A2. FMSoft owns the copyright of several free software
 projects. We release that software under GPL with the purpose of helping
 users to understand software inner mechanism well and customize them
 freely and easily. However, most users are not familiar with GPL terms;
 they would sometimes act against GPL terms unconsciously. The behaviors
-below would violate Feynman Software’s legal rights:
+below would violate FMSoft’s legal rights:
 
 Pirate part or whole source code to use in other occasions; the worse
 thing is to pirate MiniGUI and sell it as private software. Such
