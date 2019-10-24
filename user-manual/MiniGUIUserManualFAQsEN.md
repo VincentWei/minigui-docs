@@ -1,42 +1,42 @@
 # Frequent Ask Questions (FAQs)
 
-Q) Do I need to pay FMSoft Technologies for the license fee if I use MiniGUI?
+Q) Do I need to pay FMSoft Technologies license fee if I use MiniGUI?
 
 A) FMSoft releases MiniGUI under GPL; you can use them freely if
 you use MiniGUI under GPL license to develop GPL'd applications.
 However, the release of your applications that are based on MiniGUI
 should also complies with GPL. If you use MiniGUI to develop
-commercial purpose applications, i.e., you do not want to release them
+commercial applications, i.e., you do not want to release them
 under terms and conditions of GPL, you then should get a commercial
 license from [FMSoft Technologies].
 
 Q) What kinds of products that use MiniGUI are successfully launched in
 market?
 
-A) MiniGUI is widely used in the products like mobile phones, IPTVs,
+A) MiniGUI is widely used in products like mobile phones, IPTVs,
 digital TVs, industry control systems, information terminals, industrial
-meters, and so on. For the detailed introduction for some typical
+meters, and so on. For detailed introduction for some typical
 products, you can visit:
 <http://www.minigui.com/en/introduction/application/>.
 
-Q) What operating systems does MiniGUI support?
+Q) Which operating systems does MiniGUI support?
 
-A) By now, MiniGUI provides the support for many popular embedded
+A) By now, MiniGUI provides support for many popular embedded
 operating systems including Linux/uClinux, VxWorks, ThreadX, FreeRTOS,
 RTEMS, RT-Thread, Nucleus, pSOS, OSE, eCos, and even uC/OS-II.
 MiniGUI can also run on Win32 platform.
 
-Q) Which CPUs have MiniGUI run on successfully so far? Moreover, what
-is the lowest frequency of CPU MiniGUI needed?
+Q) Which CPUs have MiniGUI running on successfully so far? Moreover, what
+is the lowest frequency of CPU that MiniGUI needs?
 
-A) There are successful cases for MiniGUI running in ARM-based CPUs
+A) There are successful cases for MiniGUI running on ARM-based CPUs
 (such as StongARM, xScale, S3C2410, S3C2440, EM8511, EM8620), PowerPC,
-MIPS, M68k, FRV. In those CPUs, the one with lowest main frequency is
+MIPS, M68k, FRV. On these CPUs, the one with lowest main frequency is
 about 20 MHz (20 MIPS).
 
-Q) Would MiniGUI provide support for monochrome LCD?
+Q) Would MiniGUI support monochrome LCD?
 
-A) Yes. Actually, MiniGUI can provide support for almost all LCD
+A) Yes. Actually, MiniGUI can support almost all LCD
 controllers in various modes, such as monochrome, gray, 256-color,
 4096-color, and 65536-color.
 
@@ -45,42 +45,42 @@ Q) Which resolution of screen can MiniGUI run properly?
 A) In theory, the running of MiniGUI is not influenced by the
 resolution of screen.
 
-Q) During compiling the library, why does the mistake below occur
+Q) During library compilation, why does the mistake below occur
 sometimes?
 
     can not make hard link filename.o to filename.lo.
 
 A) Symbol links and hard links are the specialized file types in UNIX
-file system. If you compile library being maintained by
+file system. If you compile library maintained by
 Automake/Autoconf script, you cannot create these links on a non-UNIX
 file system. Please check your file system to make sure if it is a
 FAT32 file system.
 
-Q) When I use the Open File Dialog Box, why does the mistake below
+Q) When I use Open File Dialog Box, why does the mistake below
 occur?
 
     undefined reference to ShowOpenDialog
 
 A) The function `ShowOpenDialog` is included in the mGUtils component.
-If you want to use this function, you should include the header file:
-`<mgutils/mgutils.h>`;. When you make the executable, please make
+If you need to use this function, you should include the header file:
+`<mgutils/mgutils.h>`. When you make the executable, please make
 sure to link mGUtils(`-lmgutils`). In addition, if you run MiniGUI on
-some embedded operating systems, which are lack of the support for file
+some embedded operating systems, which lacks support for file
 system, you can't use the Open File Dialog Box.
 
 Q) My system does not support 64-bit integer. Is the data type of
 `Uint64` in MiniGUI essential?
 
-A) The data type of `Uint64` in MiniGUI is used to generate the complex
+A) The data type of `Uint64` in MiniGUI is used to generate complex
 graphics. If your system does not support 64-bit integer, you can use
 the following configuration option to disable the usage of 64-bit
 integer:
 
     --disable-fixedmath
 
-Q) On Linux, How would I capture the screen of MiniGUI?
+Q) On Linux, How do I capture the screen of MiniGUI?
 
-A) When running MiniGUI program, you can capture the screen as a BMP
+A) When running MiniGUI program, you can capture the screen to a BMP
 file in the current directory by pressing `PrtScr` key. The
 captured screen will be saved as a BMP file named `0-<NO>.bmp`,
 therein `<NO>` is the number of times of pressing `Ctrl + PrtScr` key.
@@ -91,13 +91,13 @@ therein `<HWND>` is the handle of the active main window while
 Q) Under MiniGUI-Processes runtime mode, how would I switch from
 MiniGUI to other console?
 
-A) Under MiniGUI-Processes runtime mode, if you are using the
+A) Under MiniGUI-Processes runtime mode, if you are using
 `console` or `libinput` IAL engine, you can switch from MiniGUI to
 other virtual console by pressing `Right_Ctrl + F<n>` key, also,
 you can quit MiniGUI by pressing `Ctrl + Alt + Backspace` key.
-Currently, MiniGUI-Threads does not provide such functions.
+Currently, MiniGUI-Threads mode does not provide such functions.
 
-Q) Why is the following message shown when I run programs in
+Q) Why does the following message show when I run programs in
 mg-samples on Linux?
 
     AttachSharedResource: No such file or directory
@@ -106,8 +106,8 @@ mg-samples on Linux?
 
 A) If you configure MiniGUI as MiniGUI-Processes or
 MiniGUI-Standalone, you should run `mginit` program first. As
-MiniGUI-Processes adopts a Client/Server architecture, you
-have to start up the sever program, `mginit`, before running other client
+MiniGUI-Processes mode adopts a Client/Server architecture, you
+have to first start up the sever program, `mginit`, before running other client
 programs. In mg-samples package, you should run `mginit` in
 `mginit/` directory first, then run demo programs in other
 directories.
@@ -129,13 +129,13 @@ information below when I run `mginit` in mg-samples?
     Initialize minigui failure when using /usr/local/etc/MiniGUI.cfg as config file.
 
 A) Usually, there are two possible reasons. One is that you have
-already run an `mginit` program; other is that you did not exit
+already run an `mginit` program; the other is you did not exit
 MiniGUI properly when you run `mginit` last time. If it is the second
 reason, you can delete `minigui` file and `mginit` file in
 `/var/tmp/` directory. If it still does not work, please restart your
 computer.
 
-Q) Why do the following statement show when I run MiniGUI?
+Q) Why do the following statements show when I run MiniGUI?
 
     NEWGAL: Does not find matched engine: fbcon.
     Error in step 3: Can not get graphics engine information!
@@ -146,24 +146,24 @@ your kernel does not support frame buffer driver, or does not activate
 frame buffer driver, or you have no proper access permission to open
 `/dev/fb0` device.
 
-Q) On Linux, what is the meaning of the error information below?
+Q) On Linux, what is the meaning of the error message below?
 
     vesafb does not support changing the video mode
 
 A) It is a warning that can be ignored. The VESA frame buffer driver
-does not support the display mode switching
-during running. It can only set video mode by the boot option for
+does not support display mode switching
+while running. It can only set video mode by the boot option for
 kernel. Moreover, once set, it cannot be changed unless you modify the
 boot option and restart your system.
 
-Q) On Linux, what is the meaning of the error information below?
+Q) On Linux, what is the meaning of the error message below?
 
     NEWGAL: No video mode large enough for the resolution specified.
     NewGAL: Set video mode failure.
 
 A) The main reason is that the display resolution being set in
-`MiniGUI.cfg` is higher than that supported by your NEWGAL engine.
-Therefore, you can try to set a smaller resolution by modify
+`MiniGUI.cfg` is higher than the one supported by your NEWGAL engine.
+Therefore, you can try to set a lower resolution by modify
 `MiniGUI.cfg` file.
 
 ----
