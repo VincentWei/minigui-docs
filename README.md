@@ -1,6 +1,6 @@
 # MiniGUI Documents
 
-We maintains the documents for MiniGUI Core and MiniGUI Components in this repository.
+We maintains the documents for MiniGUI Core and MiniGUI components in this repository.
 
 ## Table of Contents
 
@@ -9,7 +9,7 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this repos
 - [MiniGUI Programming Guide](programming-guide/README.md)
 - [MiniGUI Porting Guide](porting-guide/README.md)
 - [MiniGUI Supplementary Documents](supplementary-docs/README.md)
-- [API Reference Manuals for MiniGUI Core](api-reference/README.md)
+- API Reference Manuals for MiniGUI Core
    * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
@@ -50,9 +50,13 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this repos
 
 We are summarizing and rearranging them from various historical documents:
 
-- Convert the format from TWiki, PDF, or DOC to Markdown.
+- Convert the format from TWiki, PDF, or DOCX to Markdown.
 - Adjust the description according to the latest MiniGUI version.
 - Fix spelling or grammar errors.
 - Use the latest screenshots.
 - Cleanup the document format.
 
+### ChangeLog
+
+- 2019-10-24  
+  MiniGUI User Manual now is ready.
