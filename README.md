@@ -30,6 +30,22 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
    * [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
    * [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
 
+## 针对中文用户
+
+很多中文开发者希望有中文文档。以前我们的确维护有两个文档，但文档的维护工作量实在很大。
+所以从 MiniGUI 3.2 版本开始，我们选择优先维护英文文档，中文文档就不再维护了。
+这主要出于如下几个方面的因素：
+
+- 作为一个面向全球的开源软件，要服务所有国家或地区的开发者，英语是目前最好的语言。
+- 使用英文，可以避免一些由于术语翻译不准确而导致的问题，对开发者理解工作原理会更有帮助。
+- MiniGUI 各文档中使用的英文，不论是词汇还是语法，都相对简单，有一定基础的开发者都可以顺利阅读和理解。
+- 现有的机器翻译工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），能将英文文档
+比较准确地翻译成中文文档，而如果将中文文档翻译成英文，效果还差很多。
+
+另外，我们以前撰写的中文文档，仍保留在老的 MiniGUI Wiki 站点上，供参考：
+
+<http://wiki.minigui.com/twiki/bin/view/Products/WebHome>
+
 ## Current Status
 
 We are summarizing and rearranging them from various historical documents:

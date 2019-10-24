@@ -510,23 +510,6 @@ mg-demos 中的 softkbd 提供了中英文输入法的示例，可以直接使�
 建议在编程时只刷新必要的区域（在调用 InvalidateRect 函数时，传入需要刷新的最小矩形），
 这样也能降低白屏出现的机率。
 
-## 文档
-
-### 希望有中文文档
-
-以前有中英文两种版本，后来考虑工作量问题，就只维护了英文文档；目前在老的 Wiki 站点：
-
-http://wiki.minigui.com/twiki/bin/view/Products/WebHome
-
-仍然可以看到这些文档。但从 MiniGUI 3.2 开始，我们选择只维护英文文档，因为现有的翻译
-工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），能将英文文档
-比较准确地翻译成中文文档，反之则不然，所以我们选择维护英文文档。
-
-## 其它
-
-欢迎致信 `sales@minigui.com` 购买我们的VIP支持服务，解决您在开发 MiniGUI 应用过程中的
-疑难问题。
-
 ----
 
 [&lt;&lt; FAQs](MiniGUIUserManualFAQsEN.md) |
