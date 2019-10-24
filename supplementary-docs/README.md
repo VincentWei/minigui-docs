@@ -56,3 +56,8 @@ We call these documents "MiniGUI Supplementary Documents".
 * [Writing MiniGUI Apps for 64-bit Platforms](Writing-MiniGUI-Apps-for-64-bit-Platforms.md) -
     Describe the things you need to be aware of when developing MiniGUI apps for 64-bit platforms.
 
+## Copying
+
+Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+All rights reserved.
+
