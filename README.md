@@ -40,7 +40,7 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
 - 使用英文，可以避免一些由于术语翻译不准确而导致的问题，对开发者理解工作原理会更有帮助。
 - MiniGUI 各文档中使用的英文，不论是词汇还是语法，都相对简单，有一定基础的开发者都可以顺利阅读和理解。
 - 现有的机器翻译工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），
-将英文文档比较准确地翻译成中文文档，而如果将中文文档翻译成英文，效果还差很多。
+将英文文档比较准确地翻译成中文文档，而如果要将中文文档翻译成英文，效果还差很多。
 
 另外，我们以前撰写的中文文档，仍保留在老的 MiniGUI Wiki 站点上，供参考：
 
@@ -62,3 +62,5 @@ We hope that we can finish this work at the end of the year 2019.
 
 - 2019-10-24  
   MiniGUI User Manual now is ready.
+
+
