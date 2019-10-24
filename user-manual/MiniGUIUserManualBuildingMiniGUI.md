@@ -1125,7 +1125,7 @@ in non-GNU environment; we do not repeat them here.
 
 ---
 
-[&lt;&lt;Quick Start](MiniGUIUserManualQuickStart.md) |
+[&lt;&lt; Quick Start](MiniGUIUserManualQuickStart.md) |
 [Table of Contents](README.md) |
 [Compile-time Configuration &gt;&gt;](MiniGUIUserManualCompiletimeConfiguration.md)
 
