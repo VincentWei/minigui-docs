@@ -144,13 +144,13 @@ of MiniGUI, which will be discussed in detail.
 #include <minigui/gdi.h>
 #include <minigui/window.h>
 
-static LRESULT HelloWinProc (HWND hWnd, LINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT HelloWinProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     HDC hdc;
     switch (message) {
         case MSG_PAINT:
             hdc = BeginPaint (hWnd);
-            TextOut (hdc, 60, 60, "Hello world!");
+            TextOut (hdc, 60, 60, "Hello, world!");
             EndPaint (hWnd, hdc);
             return 0;
 
@@ -216,13 +216,14 @@ region.
 
 ##### Figure 1 The window created by `helloworld` program
 
-![The window created by helloworld program](figures/helloworld.jpg)
+![The window created by helloworld program](figures/helloworld.png)
 
 ### Header Files
 
 The four header files included in the beginning of `helloworld.c`, namely
 `minigui/common.h`, `minigui/minigui.h`, `minigui/gdi.h`, and `minigui/window.h`,
-should be included for all MiniGUI applications.
+should be included for all MiniGUI applications:
+
 - `common.h`: Includes definitions of macros and data types commonly used in
   MiniGUI.
 - `minigui.h`: Includes definitions of global and general interface functions and
@@ -233,6 +234,7 @@ should be included for all MiniGUI applications.
 
 Another header file must be included for MiniGUI applications using predefined
 controls -- `minigui/control.h`:
+
 - `control.h`: Includes interface definitions of all the built-in controls in
   minigui library.
 
@@ -263,7 +265,7 @@ C. So the entrance of each MiniGUI application (no matter server function
 program, which are the number of command line arguments and the string
 array pointer to the arguments, respectively.
 
-### Join a Layer in MiniGUI-Processes
+### Joining a Layer in MiniGUI-Processes
 
 ```cpp
 #ifdef _MGRM_PROCESSES
@@ -464,9 +466,9 @@ message queue, which includes:
   message. Each messages has a corresponding predefined identifier,
   these identifiers are defined in `minigui/window.h` and with `MSG_`
   prefix.
-- wParam: The first message parameter, the meaning and value of
+- `wParam`: The first message parameter, the meaning and value of
   which is different for different message.
-- lParam: The second message parameter, the meaning and value of
+- `lParam`: The second message parameter, the meaning and value of
   which depends on the message.
 - time: The time (tick count) when the message is put into the message
   queue.
@@ -513,7 +515,7 @@ procedure specified in `MAINWINCREATE` structure.
 The window procedure function always has the following prototype:
 
 ```cpp
-static LRESULT HelloWinProc (HWND hWnd, LINT message, WPARAM wParam, LPARAM lParam);
+static LRESULT HelloWinProc (HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 ```
 
 The four arguments of the window procedure are the same as the first four
@@ -644,45 +646,36 @@ For example:
 $ mkdir -p ~/minigui/samples
 ```
 
-__Prompt__ It is presumed that the source code of mg-samples are located in
-the minigui directory of your home directory, which is
-~/minigui/mg-samples-3.2.x, respectively.
+Then make `src/` directory in samples to store the source code of the
+`helloworld` program. Save `helloworld.c` in `samples/src/` directory.
 
-Then make src directory in samples to store the source code of the
-helloworld program. Save helloworld.c into samples/src/ directory, and then
-copy configure.in file from mg-samples-3.2.x.
+__PROMPT__ Saving source files in a separate directory can help us manage
+the source files of a project better. As a rule, source code of a project
+should be saved in the directory `src/`, and global header files should
+be saved in the directory `include/`.
 
-__Prompt__ Saving source files in a single directory can help us manage the
-project files better. As a rule, source code of a project should be saved
-in the directory src/, and global header files should be saved in the
-directory include/.
+First, we create the `configure.ac` file in the top directory of our
+`samples` project as follow:
 
-We will modify the samples project based on mg-samples configuration script
-below. It should be noted that these scripts need Autoconf 2.53 and
-Automake 1.6 or higher version, and using lower version (such as Red Hat
-7.x or lower) Autoconf and Automake will result in error.
-
-First, we modify configure.in file. The modified file is as follow (Note
-the comments in the text. We only modify the commented macros):
-
-```shell
+```
 dnl Process this file with autoconf to produce a configure script.
-AC_PREREQ(2.13)
-
-dnl Specify a source file of the project in the following macro
-AC_INIT(src/helloworld.c)
+AC_PREREQ(2.60)
+AC_INIT(samples,1.0.0)
+AC_CONFIG_SRCDIR(src/helloworld.c)
 
 dnl ========================================================================
-dnl needed for cross-compiling
+dnl Need for cross-compiling
 AC_CANONICAL_SYSTEM
+
+dnl ========================================================================
+dnl Init automake
+AM_INIT_AUTOMAKE
 
 dnl ========================================================================
 dnl Checks for programs.
 AC_PROG_MAKE_SET
 AC_PROG_CC
-
-dnl Specify project name (samples) and project version (1.0) in the following macro
-AM_INIT_AUTOMAKE(samples,1.0)
+AC_PROG_CXX
 
 dnl ========================================================================
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -695,81 +688,43 @@ AC_HEADER_SYS_WAIT
 AC_HEADER_TIME
 AC_CHECK_HEADERS(sys/time.h unistd.h)
 
-dnl ========================================================================
-dnl check for libminigui
-have_libminigui="no"
-AC_CHECK_HEADERS(minigui/common.h, have_libminigui=yes, foo=bar)
+if test "$ac_cv_prog_gcc" = "yes"; then
+    CFLAGS="$CFLAGS -Wstrict-prototypes -pipe"
+fi
 
 dnl ========================================================================
-dnl check for runtime mode of MiniGUI
-dnl ==========================================================
-threads version=”no”
-AC_CHECK_DECLS(_MGRM_THREADS, threads_version="yes", foo=bar, [#include <minigui/common.h>])
-
-procs_version="no"
-AC_CHECK_DECLS(_MGRM_PROCESSES, procs_version="yes", foo=bar, [#include <minigu
-i/common.h>])
-
-standalone_version="no"
-AC_CHECK_DECLS(_MGRM_STANDALONE, standalone_version="yes", foo=bar, [#include <
-minigui/common.h>])
-
+dnl check for installation of MiniGUI
 dnl ========================================================================
-dnl check for newgal or oldgal interface.
-use_newgal="no"
-AC_CHECK_DECLS(_USE_NEWGAL, use_newgal="yes", foo=bar, [#include <minigui/common.h>])
+PKG_CHECK_MODULES([MINIGUI], [minigui >= 3.2.0])
+
+LIBS="$LIBS $MINIGUI_LIBS"
 
 dnl ========================================================================
 dnl Write Output
 
-if test "$ac_cv_prog_gcc" = "yes"; then
-    CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -pipe"
-fi
+AC_CHECK_DECLS(_MGRM_PROCESSES, minigui_runmode="procs", foo=bar, [#include <minigui/common.h>])
+AM_CONDITIONAL(MGRM_PROCESSES, test "x$minigui_runmode" = "xprocs")
 
-if test "x$threads_version" = "xyes"; then
-    CFLAGS="$CFLAGS -D_REENTRANT"
-    LIBS="$LIBS -lminigui_ths -lpthread"
-else
-    if test "x$standalone_version" = "xyes"; then
-        LIBS="$LIBS -lminigui_sa"
-    else
-        LIBS="$LIBS -lminigui_procs"
-fi
-
-AC_CHECK_DECLS(_HAVE_MATH_LIB, LIBS="$LIBS -lm", foo=bar, [#include <minigui/common.h>])
-AC_CHECK_DECLS(_MGIMAGE_PNG, LIBS="$LIBS -lpng", foo=bar, [#include <minigui/common.h>])
-AC_CHECK_DECLS(_MGIMAGE_JPG, LIBS="$LIBS -ljpeg", foo=bar, [#include <minigui/common.h>])
-AC_CHECK_DECLS(_MGFONT_TTF, LIBS="$LIBS -lttf", foo=bar, [#include <minigui/common.h>])
-AC_CHECK_DECLS(_MGFONT_FT2, LIBS="$LIBS -lfreetype", foo=bar, [#include <minigui/common.h>])
-
-dnl First comment the following macro, which will be opened in the future
-dnl AM_CONDITIONAL(MGRM_PROCESSES, test "x$procs_version" = "xyes")
-
-dnl List the Makefile file to be generated in the following macro
 AC_OUTPUT(
-Makefile
-src/Makefile
+    Makefile
+    src/Makefile
 )
-
-if test "x$have_libminigui" = "xyes"; then
-    AC_MSG_WARN([
-       MiniGUI is not properly installed on the system. You need MiniGUI Ver 3.0.2
-       or later for building this package. Please configure and install MiniGUI Ver 3.0.2 first.
-    ])
-fi
 ```
 
+It should be noted that the script need Autoconf 2.60 and
+Automake 1.6 or higher version, and using lower version Autoconf or Automake
+will result in error.
+
 Following works can be done with the configuration script generated by
-configure.in and Makefile file:
+configure.ac and Makefile file:
+
 - Generate the configuration script that appropriate for cross compilation.
-- Check whether MiniGUI has been installed in the system.
-- Check whether the installed MiniGUI in the system is configured to be
-  MiniGUI-Processes, MiniGUI-Threads, or MiniGUI-Standalone, and set
-appropriately the function libraries to be linked into the program.
-- Determine other dependent function libraries to be linked according to
-  the configuration options of MiniGUI.
-- Generate Makefile in the root directory of the project and Makefiles in
-  the src/ subdirectory.  Next, we create Makefile.am file in the root
+- Check whether MiniGUI Core has been installed in the system.
+- Get the dependent function libraries of MiniGUI Core to be linked with
+  the ultimate exectuble.
+- Generate Makefile files in the top directory and `src/` subdirectory.
+
+Next, we create Makefile.am file in the top
 directory of the project, the content of which is as follow:
 
 ```makefile
@@ -795,7 +750,7 @@ content of the file is as follow:
 #!/bin/sh
 
 aclocal
-automake --add-missing
+automake --foreign --add-missing
 autoconf
 ```
 
@@ -820,21 +775,19 @@ and makefiles after `configure.ac` file has been modified.
 
 After having run above commands, you will find many file automatically
 generated in the top directory of the project. It is unnecessary to care
-the purpose of these files. Ignore them, and run the make command:
+the purpose of these files. Ignore them, and run `make` command:
 
 ```
-$ make
+weiym@devpc7:~/minigui/samples$ make
 Making all in src
-make[1]: Entering directory `/home/weiym/minigui/samples/src'
-source='helloworld.c' object='helloworld.o' libtool=no \
-depfile='.deps/helloworld.Po' tmpdepfile='.deps/helloworld.TPo' \
-depmode=gcc3 /bin/sh ../depcomp \
-gcc -DPACKAGE_NAME=\"\" -DPACKAGE_TARNAME=\"\" -DPACKAGE_VERSION=\"\" -DPACKAGE_STRING=\"\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE=\"samples\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_WAIT_H=1 -DTIME_WITH_SYS_TIME=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_SYS_TIME_H=1 -DHAVE_UNISTD_H=1 -DHAVE_MINIGUI_COMMON_H=1 -DHAVE_DECL__MGRM_PROCESSES=1 -DHAVE_DECL__MGRM_THREADS=0 -DHAVE_DECL__MGRM_STANDALONE=0 -DHAVE_DECL__USE_NEWGAL=1  -I. -I.     -g -O2 -Wall -Wstrict-prototypes -pipe -D_REENTRANT -c `test -f 'helloworld.c' || echo './'`helloworld.c
-gcc  -g -O2 -Wall -Wstrict-prototypes -pipe -D_REENTRANT -o helloworld helloworld.o -lpthread -lminigui_ths -ljpeg -lpng -lz -lfreetype
-make[1]: Leaving directory `/home/weiym/minigui/samples/src'
-make[1]: Entering directory `/home/weiym/minigui/samples'
-make[1]: Nothing to be done for `all-am'.
-make[1]: Leaving directory `/home/weiym/minigui/samples'
+make[1]: Entering directory '/home/weiym/minigui/samples/src'
+gcc -DPACKAGE_NAME=\"samples\" -DPACKAGE_TARNAME=\"samples\" -DPACKAGE_VERSION=\"1.0.0\" -DPACKAGE_STRING=\"samples\ 1.0.0\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"samples\" -DVERSION=\"1.0.0\" -DSTDC_HEADERS=1 -DHAVE_SYS_WAIT_H=1 -DTIME_WITH_SYS_TIME=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_SYS_TIME_H=1 -DHAVE_UNISTD_H=1 -DHAVE_DECL__MGRM_PROCESSES=0 -I.     -g -O2 -Wstrict-prototypes -pipe -MT helloworld.o -MD -MP -MF .deps/helloworld.Tpo -c -o helloworld.o helloworld.c
+mv -f .deps/helloworld.Tpo .deps/helloworld.Po
+gcc  -g -O2 -Wstrict-prototypes -pipe   -o helloworld helloworld.o  -L/usr/local/lib -lminigui_ths -lpciaccess -ldrm -ljpeg -lpng16 -lz -linput -lharfbuzzex -lfreetype -ludev -lm -lpthread
+make[1]: Leaving directory '/home/weiym/minigui/samples/src'
+make[1]: Entering directory '/home/weiym/minigui/samples'
+make[1]: Nothing to be done for 'all-am'.
+make[1]: Leaving directory '/home/weiym/minigui/samples'
 ```
 
 If you have a careful look at above output, you can find that make command
@@ -894,9 +847,9 @@ Autoconf/Automake for your reference.
 
 ----
 
-&lt;&lt; [Preface](MiniGUIProgGuidePreface.md) |
+[&lt;&lt; Preface](MiniGUIProgGuidePreface.md) |
 [Table of Contents](README.md) |
-[Window and Message](MiniGUIProgGuidePart1Chapter02.md) &gt;&gt;
+[Window and Message &gt;&gt;](MiniGUIProgGuidePart1Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
