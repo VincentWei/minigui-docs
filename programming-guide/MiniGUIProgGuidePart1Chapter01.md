@@ -721,7 +721,7 @@ configure.ac and Makefile file:
 - Generate the configuration script that appropriate for cross compilation.
 - Check whether MiniGUI Core has been installed in the system.
 - Get the dependent function libraries of MiniGUI Core to be linked with
-  the ultimate exectuble.
+  the ultimate executables.
 - Generate Makefile files in the top directory and `src/` subdirectory.
 
 Next, we create Makefile.am file in the top
@@ -791,14 +791,17 @@ make[1]: Leaving directory '/home/weiym/minigui/samples'
 ```
 
 If you have a careful look at above output, you can find that make command
-enters `src/` subdirectory first, and call gcc to compile `helloworld.c` into
-the object file helloworld.o, and then call gcc again to generate
+enters `src/` subdirectory first, and calls gcc to compile `helloworld.c` into
+the object file `helloworld.o`, and then calls gcc again to generate
 `helloworld` program. Notice that gcc links the functions in the libraries of
-pthread, minigui, jpeg, png etc. (-lpthread -lminigui_ths) when generating
+pthread, minigui_ths, jpeg, png etc. (-lpthread -lminigui_ths) when generating
 helloworld program. The reason is because that the author has configured
 MiniGUI to be MiniGUI-Threads runtime mode, linking pthread library is
 needed for generating MiniGUI-Threads application, and MiniGUI provides the
 support for JPEG and PNG images by using jpeg and png libraries.
+
+__NOTE__ The libraries to link with the ultimate executable vary according
+to the version and the configuration options of your MiniGUI.
 
 If the scale of the helloworld program is very huge, and thus source code
 are placed into different source files, you need only modify the
