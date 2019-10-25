@@ -1,6 +1,5 @@
 # Beginning MiniGUI Programming
 
-
 We describe the basic concepts and foundation knowledge of MiniGUI programming with a simple MiniGUI program in this chapter.
 
 ## Basic Programming Concepts
@@ -48,7 +47,7 @@ The quickest approach to understand the basic programming method of MiniGUI is t
 
 <center>List 1 helloworld.c</center>
 
-```cplusplus
+```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -141,7 +140,7 @@ Another header file must be included for MiniGUI applications using predefined c
 
 Therefore, a MiniGUI program usually includes the following MiniGUI related header files in the beginning:
 
-```cplusplus
+```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -153,7 +152,7 @@ Therefore, a MiniGUI program usually includes the following MiniGUI related head
 
 The entrance of a C program is the main program, while the entrance of a MiniGUI program is MiniGUIMain, and the prototype of the program is as follows:
 
-```cplusplus
+```cpp
 int MiniGUIMain (int argc, const char* argv[]);
 ```
 
@@ -161,7 +160,7 @@ This function is a encapsulated Macro for main (entrypoint function) of ANSI C.S
 
 ### Join a Layer in MiniGUI-Processes
 
-```cplusplus
+```cpp
 #ifdef _MGRM_PROCESSES
     JoinLayer (NAME_DEF_LAYER , "helloworld" , 0 , 0);
 #endif
@@ -171,7 +170,7 @@ JoinLayer is a special function of MiniGUI-Processes, and is therefore included 
 
 If the program is the server of MiniGUI-Processes, you should call ServerStartup instead:
 
-```cplusplus
+```cpp
 if (!ServerStartup (0 , 0 , 0)) {
     fprintf (stderr, "Can not start the server of MiniGUI-Processes: mginit.\n");
     return 1;
@@ -189,55 +188,55 @@ __Note__ MiniGUI defines different macros for three runtime modes:
 
 ### Creating and Showing Main Window
 
-```cplusplus
+```cpp
     hMainWnd = CreateMainWindow (&CreateInfo);
 ```
 
 The initial user interface of each MiniGUI application is usually a main window; you can create a main window by calling CreateMainWindow function.  The argument of CreateMainWindow function is a pointer to MAINWINCREAT structure, which is CreatInfo in this example, and the return value is the handle to the created main window. MAINWINCREAT structure describes the properties of a main window, and you need to set its properties before using CreatInfo to create a main window.
 
-```cplusplus
+```cpp
     CreateInfo.dwStyle = WS_VISIBLE | WS_BORDER | WS_CAPTION;
 ```
 
 The above statement sets the style of the main window, herein the window is set to be visible initially, and to have border and caption bar.
 
-```cplusplus
+```cpp
     CreateInfo.dwExStyle = WS_EX_NONE;
 ```
 
 The above statement sets the extension style of the main window, and the window has no extension style.
 
-```cplusplus
+```cpp
     CreateInfo.spCaption = "HelloWorld";
 ```
 
 This statement sets the caption of the main window to be "HelloWorld".
 
-```cplusplus
+```cpp
     CreateInfo.hMenu = 0;
 ```
 
 This statement sets the main menu of the main window, and the window has no main menu.
 
-```cplusplus
+```cpp
     CreateInfo.hCursor = GetSystemCursor (0);
 ```
 
 This statement sets the cursor of the main window, and the cursor for this window is the default system cursor.
 
-```cplusplus
+```cpp
     CreateInfo.hIcon = 0;
 ```
 
 This statement sets the icon of the main window, and the window has no icon.
 
-```cplusplus
+```cpp
     CreateInfo.MainWindowProc = HelloWinProc;
 ```
 
 This statement sets the window procedure function of the main window to be HelloWinProc, and all the messages sent to the window are handled by this function.
 
-```cplusplus
+```cpp
    CreateInfo.lx = 0;
    CreateInfo.ty = 0;
    CreateInfo.rx = 320;
@@ -246,25 +245,25 @@ This statement sets the window procedure function of the main window to be Hello
 
 The above statements set the position and the size of the main window on the screen, and the upper-left corner and lower-right corner are located in (0, 0) and (320, 240), respectively.
 
-```cplusplus
+```cpp
    CreateInfo.iBkColor = PIXEL_lightwhite;
 ```
 
 This statement sets the background color of the main window to be white, and PIXEL_lightwhite is the pixel value predefined by MiniGUI.
 
-```cplusplus
+```cpp
    CreateInfo.dwAddData = 0;
 ```
 
 This statement sets the additional data of the main window, and the window has no dditional data.
 
-```cplusplus
+```cpp
    CreateInfo.hHosting = HWND_DESKTOP;
 ```
 
 This statement sets the hosting window of the main window to be the desktop window.
 
-```cplusplus
+```cpp
    ShowWindow (hMainWnd, SW_SHOWNORMAL);
 ```
 
@@ -274,7 +273,7 @@ ShowWindow function needs to be called to show the created window on the screen 
 
 The main window will be displayed on the screen when ShowWindow function is called. Like other GUI, it is time to go into the message loop. MiniGUI maintains a message queue for each MiniGUI program. After an event happens, MiniGUI transforms the event into a message, and put the message into the message queue of the target window. Then the task of the application is to execute the following message loop code to get the message from the message queue continuously and handle them.
 
-```cplusplus
+```cpp
     while (GetMessage (&Msg, hMainWnd)) {
         TranslateMessage (&Msg);
         DispatchMessage (&Msg);
@@ -283,7 +282,7 @@ The main window will be displayed on the screen when ShowWindow function is call
 
 The type of Msg variable is a MSG structure, which is defined in minigui/window.h as follows:
 
-```cplusplus
+```cpp
 typedef struct _MSG
 {
     HWND          hwnd;
@@ -300,7 +299,7 @@ typedef MSG* PMSG;
 
 GetMessage function gets a message from the message queue of the application.
 
-```cplusplus
+```cpp
      GetMessage ( &Msg, hMainWnd);
 ```
 
@@ -313,13 +312,13 @@ The second argument of this function is the handle to the main window, and the f
 
 If only the message gotten from the message queue is not MSG_QUIT, GetMessage will return a non-zero value, and the message loop will be continued. MSG_QUIT message makes the GetMessage return zero, and results in the termination of the message loop.
 
-```cplusplus
+```cpp
       TranslateMessage (&Msg);
 ```
 
 TranslateMessage function translates a keystroke message to a MSG_CHAR message, and then sends the message to the window procedure function.
 
-```cplusplus
+```cpp
       DispatchMessage (&Msg);
 ```
 
@@ -333,7 +332,7 @@ The window procedure is the function named as HelloWinProc in helloworld.c progr
 
 The window procedure function always has the following prototype:
 
-```cplusplus
+```cpp
 static LRESULT HelloWinProc (HWND hWnd, LINT message, WPARAM wParam, LPARAM lParam);
 ```
 
@@ -606,12 +605,36 @@ Full demo program package of this guide is mg-samples-3.2.x.tar.gz, which includ
 
 ----
 
-*Previous* [Preface](MiniGUIProgGuidePreface.md) <br/>
-*Next* [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
+&lt;&lt; [Preface](MiniGUIProgGuidePreface.md) |
+[Table of Contents](README.md) |
+[Window and Message](MiniGUIProgGuidePart1Chapter02.md) &gt;&gt;
 
-[Contents](README.md)
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
 
-## Comments
+[MiniGUI Overview]: /MiniGUI-Overview.md
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
-
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
