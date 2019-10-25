@@ -402,7 +402,7 @@ We will modify the samples project based on mg-samples configuration script belo
 
 First, we modify configure.in file. The modified file is as follows (Note the comments in the text. We only modify the commented macros):
 
-```makefile
+```shell
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.13)
 
