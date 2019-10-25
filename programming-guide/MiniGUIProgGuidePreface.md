@@ -167,6 +167,9 @@ Therefore, some samples are described on the assumption that you are using Linux
 and GNU GCC toolchain. However, most of the samples in this guide can run on
 other operating systems.
 
+For the instructions to setup the development environment, you can refer to
+[Quick Start].
+
 ## Copyright and Licensing
 
 FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The original
@@ -191,6 +194,13 @@ text of Apache 2.0 license can be obtained by following means:
 [Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
 [Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
 [Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
 
 [MiniGUI Overview]: /MiniGUI-Overview.md
 [MiniGUI User Manual]: /user-manual/README.md
