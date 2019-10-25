@@ -1,9 +1,10 @@
 # Beginning MiniGUI Programming
 
 We describe the basic concepts and foundation knowledge of MiniGUI programming
-with a simple MiniGUI program in this chapter.
+with a simple MiniGUI program (`Hello, world!`) in this chapter.
 
 ## Basic Programming Concepts
+
 ### Event Driven Programming
 
 MiniGUI is a graphics user interface support system, and general GUI programming
@@ -25,7 +26,7 @@ the same window class.
 Concept of focus and cursor is used for managing the transfer of input devices
 and input events. Mouse cursor is a small bitmap drawn on the screen, which
 indicates the current mouse position. It is the responsibility of the windowing
-system to draw the bitmap in some non-subversive form, but the application can
+system to draw the bitmap of a cursor, but the application can
 control which bitmap to draw and whether the cursor to be shown. The application
 can catch mouse cursor and get cursor event even if the cursor goes beyond the
 display region of the application window. Keyboard input has similar concept of
@@ -46,86 +47,85 @@ MiniGUI-Standalone. We call these the different runtime modes.
 
 - MiniGUI-Threads. Programs run in MiniGUI-Threads can create multiple windows
   in different threads, but all the windows are run in one process or address
-space. This runtime mode is greatly suitable for most of the conventional
-embedded operating systems, for example, uC/OS-II, eCos, VxWorks, pSOS etc.
-Certainly, MiniGUI can be run in the runtime mode of MiniGUI-Threads on Linux
-and uClinux.
+  space. This runtime mode is greatly suitable for most of the conventional
+  embedded operating systems, for example, uC/OS-II, eCos, VxWorks, pSOS etc.
+  Certainly, MiniGUI can be run in the runtime mode of MiniGUI-Threads on Linux
+  and uClinux.
 - MiniGUI-Processes. In opposition to MiniGUI-Threads, a program running on
   MiniGUI-Processes is an independent process, which can also create multiple
-windows. MiniGUI-Processes are fit for full-featured UNIX-like operating
-systems, such as Linux.
-- MiniGUI-Standalone. Under this runtime mode, MiniGUI can be run in independent
-  process form, without support of multiple threads and multiple processes, this
-runtime mode is suitable for applications of single function. For example, in
-some embedded products using uClinux, thread library support is short of because
-of various reasons, at this time, MiniGUI-Standalone can be used to develop
-applications.
+  windows. MiniGUI-Processes are fit for full-featured UNIX-like operating
+  systems, such as Linux.
+- MiniGUI-Standalone. Under this runtime mode, MiniGUI can run in independent
+  process form as a single task program, without support of multiple threads
+  and multiple processes. This
+  runtime mode is suitable for applications which need less system
+  resources but get a better performance than other runtime modes.
 
 Compared to UNIX-like operating systems such as Linux, traditional embedded
-operating systems have some particularity. Say for example, operating systems
+operating systems have some particularities. For example, operating systems
 such as uClinux, uC/OS-II, eCos, VxWorks and the like are generally run on the
 CPU without MMU (memory management unit, used to provide support of virtual
 memory), here there is usually not the concept of process but the concept of
-thread or task, thus, runtime environments of GUI system are quite different.
-Therefore, to be suitable for different operating systems environments, we can
-configure MiniGUI into the above three runtime modes.
+thread or task. Thus, the runtime environments of GUI system are quite
+different. Therefore, to be suitable for different operating systems, we can
+configure MiniGUI into one of the above three runtime modes.
 
 Generally speaking, the runtime mode of MiniGUI-Standalone has the widest
 adaptability, and can support almost all the operating systems, even including
-operating systems similar to DOS; the adaptability of the runtime mode of
-MiniGUI-Threads takes second place, and can real-time embedded operating systems
-with support of multiple tasks, or normal operating systems with complete UNIX
-properties; the adaptability of runtime mode of MiniGUI-Processes is smaller,
-and it is only suitable for normal operating system with complete UNIX
-properties.
+operating systems similar to DOS. The adaptability of the runtime mode of
+MiniGUI-Threads takes second place, it can run on real-time embedded operating
+systems with support of multiple tasks, or general purpose operating systems
+with complete features like Linux or UNIX. The adaptability of runtime mode
+of MiniGUI-Processes is the smallest, and it is only suitable for general purpose
+operating system like Linux or UNIX.
 
 The early version of MiniGUI (namely MiniGUI-Threads) adopts the mechanisms of
-message post based on POSIX thread and window management, which provides maximum
-data share, but also causes weakness in MiniGUI system architecture. The whole
+message post based on POSIX thread (`pthread` for short) and window management,
+which provides maximal data share, but also causes weakness in MiniGUI system
+architecture. The whole
 system will be affected if one thread terminates due to illegal data accessing.
 To solve this problem and make MiniGUI more appropriate for application
 requirements of embedded system based-one Linux, we released MiniGUI-Lite mode
 from version 0.98. The MiniGUI-Lite do not use the thread mechanism and pthread
-library, thus MiniGUI is more stable and on embedded Linux. By using
+library, thus MiniGUI is more stable on embedded Linux. By using
 MiniGUI-Lite, we can run several client processes on the basis of efficient
 client/server architecture, and make use of superior features like address space
 protection. Thus, with MiniGUI-Lite runtime mode, the flexibility, stability,
-and scalability of embedded system based on MiniGUI will improve greatly. For
-example, we can run several MiniGUI client processes on MiniGUI-Lite, and if one
-process terminates abnormally, other processes will still run well. Moreover, on
+and scalability of embedded system based on MiniGUI will be improved greatly.
+For example, we can run several MiniGUI client processes on MiniGUI-Lite,
+and if one process terminates abnormally, other processes will still run well.
+Moreover, on
 MiniGUI-Lite, it is convenient for us to integrate third-party applications.
 Actually, this is why many embedded device developers use Linux as their
 operating systems.
 
 Although MiniGUI-Lite runtime mode provides support for multi-process, it cannot
-manage windows created by different processes at one time. Therefore,
+manage multiple windows created by different processes at one time. Therefore,
 MiniGUI-Lite distinguishes windows in different processes by layers. This method
 fits for the most embedded devices with low-resolution screen, but brings some
 problems for application development.
 
-MiniGUI V2.0.x solves this problem completely. A window created by a client of
+MiniGUI 2.0 solves this problem completely by upgrading MiniGUI-Lite to
+MiniGUI-Processes runtime mode. A window created by a client of
 MiniGUI-Lite is not a global object, i.e., a client does not know the windows
-created by others. However, windows created by MiniGUI-Processes are all global
-objects, and windows created by MiniGUI-Processes can clip each other. Thus,
-MiniGUI-Processes is a successor of MiniGUI-Lite; It offers full-featured
+created by others. However, windows created under MiniGUI-Processes are all
+global objects, and windows created by MiniGUI-Processes can clip each other.
+Thus, MiniGUI-Processes is a successor of MiniGUI-Lite; It offers full-featured
 support for multi-process embedded operating systems, such as Linux.
 
 We can run multiple MiniGUI applications simultaneously with the
-MiniGUI-Processes mode. First, we start up a server program called mginit, and
+MiniGUI-Processes mode. First, we start up a server program called `mginit`,
 then we can start up other MiniGUI applications as clients. Server is not
 affected and can continue to run if the client terminates due to some reason.
 
-__Note__ In this guide, the demo programs assume that the MiniGUI-Processes
-version is configured and installed. Before running these demo applications, you
-should run the mginit program first, which can be a user-defined mginit program
-or an mginit program provided by mg-samples. We have coded carefully to ensure
-that each demo program can be compiled and run on MiniGUI-Processes,
-MiniGUI-Threads, or MiniGUI-Standalone.
+__NOTE__ In this guide, the sample programs assume that the MiniGUI-Processes
+version is configured and installed. Before running these samples, you
+should run the `mginit` program first, which can be a user-defined `mginit`
+program or an `mginit` program provided by `mg-samples` package. We have coded
+carefully to ensure that each sample program can be compiled and run on
+MiniGUI-Processes, MiniGUI-Threads, or MiniGUI-Standalone.
 
-Further more, MiniGUI provides APIs in Win32 style. Readers familiar with Win32
-programming can grasp the basic methods and APIs quickly.
-
-## A Simple MiniGUI Program
+## Hello, world!
 
 The quickest approach to understand the basic programming method of MiniGUI is
 to analyze structure of a simple program. List 1 shows a “Hello World” program
