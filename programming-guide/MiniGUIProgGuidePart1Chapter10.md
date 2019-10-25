@@ -1,22 +1,41 @@
-# 11 Look-and-feel and UI effects
+# Look-and-feel and UI effects
 
-## 11.1 Look and Feel Renderer and attributes of window elements
+## Look and Feel Renderer and attributes of window elements
 
-MiniGUI 3.0 has totally different window and control's look and feel implementation mechanism than previous version. The old version must configure options and select UI style before compile the program, and it can only select one of three styles, fashion, classic and flat. MiniGUI 3.0 has look and feel renderer to draw the look-and-feel of window and control. MiniGUI 3.0 provides four renderers for application, user can select any one when needs a renderer. The advantage of renderer technology is, we can change look and feel of application by modifying MiniGUI configuration file, but also by APIs. Application can even customize its own renderer. It is very convenience for customized UI. The implementation of renderer has two parts as follow:
-- Attributes of window elements, include the information of window elements, such as color, size, font and so on.
+MiniGUI 3.0 has totally different window and control's look and feel
+implementation mechanism than previous version. The old version must configure
+options and select UI style before compile the program, and it can only select
+one of three styles, fashion, classic and flat. MiniGUI 3.0 has look and feel
+renderer to draw the look-and-feel of window and control. MiniGUI 3.0 provides
+four renderers for application, user can select any one when needs a renderer.
+The advantage of renderer technology is, we can change look and feel of
+application by modifying MiniGUI configuration file, but also by APIs.
+Application can even customize its own renderer. It is very convenience for
+customized UI. The implementation of renderer has two parts as follow:
+- Attributes of window elements, include the information of window elements,
+  such as color, size, font and so on.
 - Rendering method of window elements, it defines how to draw window elements. 
 
-MiniGUI renderer creates categories for attributes of each part of window and control, defines drawing interface, so as to get a complete look and feel renderer mechanism. MiniGUI 3.0 has four renderers, classic, flat, fashion and skin. classic is default renderer, that means, application draws window and control's look and feel by using classic renderer when MiniGUI is initializing. Fashion renderer is supported by mGPlus component, MiniGUI doesn't support it.
+MiniGUI renderer creates categories for attributes of each part of window and
+control, defines drawing interface, so as to get a complete look and feel
+renderer mechanism. MiniGUI 3.0 has four renderers, classic, flat, fashion and
+skin. classic is default renderer, that means, application draws window and
+control's look and feel by using classic renderer when MiniGUI is initializing.
+Fashion renderer is supported by mGPlus component, MiniGUI doesn't support it.
 
-Application can select a specified renderer for certain window and define attribute of window element's look and feel. Application can also define its own renderer to draw the UI.
+Application can select a specified renderer for certain window and define
+attribute of window element's look and feel. Application can also define its
+own renderer to draw the UI.
 
-### 11.1.1 Attributes of Window Elements
+### Attributes of Window Elements
 
-According to Windows XP/Windows 2000, MiniGUI has the following window elements:
+According to Windows XP/Windows 2000, MiniGUI has the following window
+elements:
 
-<center>Table 11.1 Window elements and their names in configuration file and codes</center>
+##### Table 1 Window elements and their names in configuration file and codes
 
 | *Name in config file* | *Code Name* | *Meaning* |
+|-----------------------|-------------|-----------|
 |caption   | WE_METRICS_CAPTION     | Window caption size |
 ||WE_FONT_CAPTION|Window caption font|
 |fgc_active_caption    |WE_FGC_ACTIVE_CAPTION| Foreground color of active window caption |
@@ -53,15 +72,23 @@ According to Windows XP/Windows 2000, MiniGUI has the following window elements:
 |bgc_significant_item  |WE_BGC_SIGNIFICANT_ITEM| Background color of significant menu item (list item) |
 |bgc_desktop   |WE_BGC_DESKTOP| Background color of desktop |
 
-Above table introduces all window elements. The name in configuration means this element's name in MiniGUI.cfg (MiniGUI configuration file). User can modify the value of attributes of window element in the configuration file to change window's look and feel. Code name is to specify the window element when modifying the attribute of window element by using function interface. 
+Above table introduces all window elements. The name in configuration means
+this element's name in MiniGUI.cfg (MiniGUI configuration file). User can
+modify the value of attributes of window element in the configuration file to
+change window's look and feel. Code name is to specify the window element when
+modifying the attribute of window element by using function interface. 
 
-### 11.1.2 Attributes of skin renderer's window skin
+### Attributes of skin renderer's window skin
 
-To replace SKIN APIs in MGExt library with renderer, MiniGUI 3.0 uses skin renderer. Skin renderer has not only window attributes of other renderers, but also attributes of window skin. The descriptions of attributes of window skin are as follow:
+To replace SKIN APIs in MGExt library with renderer, MiniGUI 3.0 uses skin
+renderer. Skin renderer has not only window attributes of other renderers, but
+also attributes of window skin. The descriptions of attributes of window skin
+are as follow:
 
-<center>Table 11.2 Attributes of window skin and their names in configuration file and codes</center>
+##### Table 2 Attributes of window skin and their names in configuration file and codes
 
 | *Name in config file* | *Code Name* | *Meaning* |
+|-----------------------|-------------|-----------|
 |skin_bkgnd   |WE_LFSKIN_WND_BKGND| Skin image of desktop background |
 |skin_caption   |WE_LFSKIN_CAPTION| Skin image of window caption |
 |skin_caption_btn   |WE_LFSKIN_CAPTION_BTN| Skin image of window caption button |
@@ -91,11 +118,15 @@ To replace SKIN APIs in MGExt library with renderer, MiniGUI 3.0 uses skin rende
 |skin_progressbar_hchunk  |WE_LFSKIN_PROGRESS_HCHUNK| Skin image of horizontal progress chunk |
 |skin_progressbar_vchunk  |WE_LFSKIN_PROGRESS_VCHUNK| Skin image of vertical progress chunk |
 
-### 11.1.3 Operating function of window attribute
+### Operating function of window attribute
 
-We can change window attribute before execute program and control look and feel of window by changing MiniGUI configuration file. We can also customize look and feel of window in the program by using APIs. To help with operating of window attribute, MiniGUI defines the following API to implement operating of window attribute.
+We can change window attribute before execute program and control look and feel
+of window by changing MiniGUI configuration file. We can also customize look
+and feel of window in the program by using APIs. To help with operating of
+window attribute, MiniGUI defines the following API to implement operating of
+window attribute.
 
-```cplusplus
+```cpp
 MG_EXPORT DWORD GUIAPI GetWindowElementAttr (HWND hwnd, int we_attr_id);
 
 MG_EXPORT DWORD GUIAPI SetWindowElementAttr (HWND hwnd, int we_attr_id,
@@ -108,22 +139,29 @@ MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd,
         const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs);
 ```
 
-we_attr_id in above all functions is attribute ID of window element. This ID must be one of code names in table 11.1 and 11.2.
+we_attr_id in above all functions is attribute ID of window element. This ID
+must be one of code names in table 11.1 and 11.2.
 
-GetWindowElementAttr is to get certain element's attribute ID of specified window. hwnd is window handle and we_attr_id is attribute ID of window element.
+GetWindowElementAttr is to get certain element's attribute ID of specified
+window. hwnd is window handle and we_attr_id is attribute ID of window element.
 
 The following codes are for getting color of 3D body's border and face.
 
-```cplusplus
+```cpp
 DWORD main_c;
 
 main_c = GetWindowElementAttr (hwnd, WE_MAINC_THREED_BODY);
 ```
 
-SetWindowElementAttr is to set certain element's attribute ID of specified window. hwnd is window handle, we_attr_id is attribute ID of window element and we_attr is attribute value.
+SetWindowElementAttr is to set certain element's attribute ID of specified
+window. hwnd is window handle, we_attr_id is attribute ID of window element and
+we_attr is attribute value.
 
-In the following codes, it gets min height of menu first, then compares the height with height of window. Window's min height will be set to menu's if height of menu is greater than window's.
-```cplusplus
+In the following codes, it gets min height of menu first, then compares the
+height with height of window. Window's min height will be set to menu's if
+height of menu is greater than window's.
+
+```cpp
     int menu_height_min;
 
     /** expect menu size of renderer*/
@@ -139,21 +177,25 @@ In the following codes, it gets min height of menu first, then compares the heig
     }
 ```
 
-GetWindowElementPixelEx is to get color value of window element. hwnd is window handle, hdc is DC handle and we_attr_id is attribute ID of window element.
+GetWindowElementPixelEx is to get color value of window element. hwnd is window
+handle, hdc is DC handle and we_attr_id is attribute ID of window element.
 
 The following codes can get gradient start color of window caption background.
 
-```cplusplus
+```cpp
 gal_pixel active_color;
 
 active_color = GetWindowElementPixelEx(hWnd, hdc, WE_BGCA_ACTIVE_CAPTION);
 ```
 
-SetWindowElementRenderer is to set current renderer of window and change attributes of window. hWnd is window handle, werdr_name is renderer's name which will be set, we_attrs is structure array of modified attribute of window. The ID of last element in array is -1, it means, this is the end.
+SetWindowElementRenderer is to set current renderer of window and change
+attributes of window. hWnd is window handle, werdr_name is renderer's name
+which will be set, we_attrs is structure array of modified attribute of window.
+The ID of last element in array is -1, it means, this is the end.
 
-WINDOW_ELEMENT_ATTR structure is as follows:
+WINDOW_ELEMENT_ATTR structure is as follow:
 
-```cplusplus
+```cpp
 typedef struct _WINDOW_ELEMENT_ATTR {
     /** The attribute identifier. */
     int we_attr_id;
@@ -162,26 +204,33 @@ typedef struct _WINDOW_ELEMENT_ATTR {
 } WINDOW_ELEMENT_ATTR;
 ```
 
-The first member in structure is attribute id of window element which needs to be changed, the second one is needed attribute value.
+The first member in structure is attribute id of window element which needs to
+be changed, the second one is needed attribute value.
 
-The following codes set flat as current window renderer and modify some attributes of window.
+The following codes set flat as current window renderer and modify some
+attributes of window.
 
-```cplusplus
+```cpp
 WINDOW_ELEMENT_ATTR my_we_attrs [] = {
         {FGC_WINDOW, 0x00FFFFFF},
         {MWM_BORDER, 2},
         {SYSLOGFONT_CAPTION, (DWORD)my_caption_font},
         {-1, 0}
 
-SetWindowElementRenderer (hWnd, "flat", my_we_atts);
- };
+    SetWindowElementRenderer (hWnd, "flat", my_we_atts);
+};
 ```
 
-### 11.1.4 Renderer Management
+### Renderer Management
 
-Renderer consists of two parts: attribute of window element and matches render method. We have introduced attribute of window and relevant function interfaces, and then we introduce render method and how to use renderer. The structure which is used by renderer is WINDOW_ELEMENT_RENDERER, it consists of renderer name, pointer of render method interface and relevant attribute of window.
+Renderer consists of two parts: attribute of window element and matches render
+method. We have introduced attribute of window and relevant function
+interfaces, and then we introduce render method and how to use renderer. The
+structure which is used by renderer is WINDOW_ELEMENT_RENDERER, it consists of
+renderer name, pointer of render method interface and relevant attribute of
+window.
 
-```cplusplus
+```cpp
 typedef struct _WINDOW_ELEMENT_RENDERER {
     const char name[LEN_RENDERER_NAME+1];
     int (*init) (PWERENDERER renderer);
@@ -225,7 +274,7 @@ typedef struct _WINDOW_ELEMENT_RENDERER {
     void (*draw_custom_hotspot) (HWND hWnd, HDC hdc, int ht_code, int state);
     void (*calc_thumb_area) (HWND hWnd, BOOL vertical,
             LFSCROLLBARINFO* sb_info);
-void (*disabled_text_out) (HWND hWnd, HDC hdc, const char* spText,
+    void (*disabled_text_out) (HWND hWnd, HDC hdc, const char* spText,
                     PRECT rc, DWORD dt_fmt);
     void (*draw_tab) (HWND hWnd, HDC hdc, RECT *rect, char *title,
                 DWORD color, int flag, HICON icon);
@@ -252,9 +301,10 @@ void (*disabled_text_out) (HWND hWnd, HDC hdc, const char* spText,
 
 The following table explains each member in the structure.
 
-<center>Table 11.3 Explanation of renderer structure member</center>
+##### Table 3 Explanation of renderer structure member
 
 | *Member Name* | *Meaning* |
+|---------------|-----------|
 |name| Renderer name, length is LEN_RENDERER_NAME. Macro LEN_RENDERER_NAME is defined as 15 |
 |init| Renderer initialization function pointer. It initializes basic renderer information which are window attribute information and private information, such as size, font and color of window element |
 |deinit| Renderer destroy function pointer. It frees resources that were allocated by renderer |
@@ -303,40 +353,56 @@ The following table explains each member in the structure.
 |private_info| Pointer of renderer's private information |
 
 MiniGUI provides the following API to manage renderer:
-- GetWindowRendererFromName: Get renderer from name. Function prototype is as follows:
-```cplusplus
+
+- GetWindowRendererFromName: Get renderer from name. Function prototype is as
+  follows:
+
+```cpp
 MG_EXPORT const WINDOW_ELEMENT_RENDERER* GUIAPI GetWindowRendererFromName (const char* name);
 ```
 
-- AddWindowElementRenderer: Add renderer to MiniGUI. Function prototype is as follows:
-```cplusplus
+- AddWindowElementRenderer: Add renderer to MiniGUI. Function prototype is as
+  follows:
+
+```cpp
 MG_EXPORT BOOL GUIAPI AddWindowElementRenderer (const char* name, const WINDOW_ELEMENT_RENDERER* we_rdr);
 ```
 
-- RemoveWindowElementRenderer: Remove renderer from MiniGUI. Function prototype is as follows:
-```cplusplus
+- RemoveWindowElementRenderer: Remove renderer from MiniGUI. Function prototype
+  is as follow:
+
+```cpp
 MG_EXPORT BOOL GUIAPI RemoveWindowElementRenderer (const char* name);
 ```
 
-- GetDefaultWindowElementRenderer: Get default renderer. Function prototype is as follows:
-```cplusplus
+- GetDefaultWindowElementRenderer: Get default renderer. Function prototype is
+  as follow:
+
+```cpp
 MG_EXPORT const WINDOW_ELEMENT_RENDERER* GUIAPI GetDefaultWindowElementRenderer (void);
 ```
 
-- SetDefaultWindowElementRenderer: Set default renderer. Function prototype is as follows:
-```cplusplus
+- SetDefaultWindowElementRenderer: Set default renderer. Function prototype is
+  as follow:
+
+```cpp
 MG_EXPORT const char* GUIAPI SetDefaultWindowElementRenderer (const char* name);
 ```
 
-- SetWindowElementRenderer: Specify renderer. Function prototype is as follows:
-```cplusplus
+- SetWindowElementRenderer: Specify renderer. Function prototype is as follow:
+
+```cpp
 MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd, const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs);
 ```
 
-### 11.1.5 Creating main window
-It needs more arguments to create main window after draw a window by using renderer, for API compatible, MiniGUI created a new function, CreateMainWindowEx, and packaged the old creating function. Function prototype is as follows.
+### Creating main window
 
-```cplusplus
+It needs more arguments to create main window after draw a window by using
+renderer, for API compatible, MiniGUI created a new function,
+CreateMainWindowEx, and packaged the old creating function. Function prototype
+is as follow.
+
+```cpp
 MG_EXPORT HWND GUIAPI CreateMainWindowEx (PMAINWINCREATE pCreateInfo,
                         const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
                         const char* window_name, const char* layer_name);
@@ -346,16 +412,22 @@ static inline HWND GUIAPI CreateMainWindow (PMAINWINCREATE pCreateInfo)
     return CreateMainWindowEx (pCreateInfo, NULL, NULL, NULL, NULL);
 }
 ```
-- pCreateInfo  Main window structure, we have introduced it in chapter 3, Window and Message.
+
+- pCreateInfo  Main window structure, we have introduced it in chapter 3,
+  Window and Message.
 - window_name and layer_name are reserved arguments for later version.
-- werdr_name  The name of window element's renderer which will be used. Will use default renderer if it is NULL.
-- we_attrs   Attribute table of window element's look and feel. Will use default attribute table if it is NULL.
+- werdr_name  The name of window element's renderer which will be used. Will
+  use default renderer if it is NULL.
+- we_attrs   Attribute table of window element's look and feel. Will use
+  default attribute table if it is NULL.
 
-### 11.1.6 Creating control
+### Creating control
 
-Similar with main window creating, there is also a new function, CreateWindowEx2, to create control. MiniGUI also packaged old creating function, CreateWindowEx.
+Similar with main window creating, there is also a new function,
+CreateWindowEx2, to create control. MiniGUI also packaged old creating
+function, CreateWindowEx.
 
-```cplusplus
+```cpp
 MG_EXPORT HWND GUIAPI CreateWindowEx2 (const char* spClassName,
         const char* spCaption, DWORD dwStyle, DWORD dwExStyle,
         int id, int x, int y, int w, int h, HWND hParentWnd,
@@ -378,9 +450,11 @@ static inline HWND GUIAPI CreateWindowEx (const char* spClassName,
 ```
 These functions have be introduced in chapter 5, Foundation of Control Programming.
 
-### 11.1.7 Creating dialog box
+### Creating dialog box
+
 - Modal dialog box creating
-```cplusplus
+
+```cpp
 MG_EXPORT int GUIAPI DialogBoxIndirectParamEx (PDLGTEMPLATE pDlgTemplate,
 HWND hOwner, WNDPROC DlgProc, LPARAM lParam,
 const char* werdr_name, WINDOW_ELEMENT_ATTR* we_attrs,
@@ -395,7 +469,8 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 ```
 
 - Modeless dialog box creating
-```cplusplus
+
+```cpp
 MG_EXPORT HWND GUIAPI CreateMainWindowIndirectParamEx (PDLGTEMPLATE pDlgTemplate,
 HWND hOwner, WNDPROC DlgProc, LPARAM lParam,
 const char* werdr_name, WINDOW_ELEMENT_ATTR* we_attrs,
@@ -409,22 +484,31 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 }
 ```
 
-Above functions end in Ex are new added functions. They have been introduced in chapter 4, Foundation of Dialog Box Programming.
+Above functions end in Ex are new added functions. They have been introduced in
+chapter 4, Foundation of Dialog Box Programming.
 
-## 11.2 Double Buffering Main Window
+## Double Buffering Main Window
 
-Double buffering main window mechanism is a window rendering method which is provide by MiniGUI. In this mechanism,  when drawing main window, the window is drawn in matched memory DC first, and then we can calculate the data in DC by using various algorithms to get various special display effects, such as push-pull, scrolling and page turning. Another function of the mechanism is improving the efficient of window drawing and solving blinking issue when doing window drawing.
+Double buffering main window mechanism is a window rendering method which is
+provide by MiniGUI. In this mechanism,  when drawing main window, the window is
+drawn in matched memory DC first, and then we can calculate the data in DC by
+using various algorithms to get various special display effects, such as
+push-pull, scrolling and page turning. Another function of the mechanism is
+improving the efficient of window drawing and solving blinking issue when doing
+window drawing.
 
-### 11.2.1 Extension Style of Double Buffering Main Window
+### Extension Style of Double Buffering Main Window
 
-We can create main window or dialog box with memory DC which matches window DC by using the extension style of double buffering main window. The definition is as follows:
+We can create main window or dialog box with memory DC which matches window DC
+by using the extension style of double buffering main window. The definition is
+as follow:
 
-```cplusplus
+```cpp
 #define WS_EX_AUTOSECONDARYDC     0x00001000L
 ```
 
 The following code is an example for creating main window with double buffer.
-```cplusplus
+```cpp
     HWND hMainWnd;
     MAINWINCREATE CreateInfo;
 
@@ -448,27 +532,42 @@ The following code is an example for creating main window with double buffer.
 
 ### 11.2.2 Functions of double buffering window mechanism
 
-- Double buffers DC creating function, CreateSecondaryDC, creates compatible memory DC and returns according to passed window's size.
-```cplusplus
+- Double buffers DC creating function, CreateSecondaryDC, creates compatible
+  memory DC and returns according to passed window's size.
+
+```cpp
 MG_EXPORT HDC GUIAPI CreateSecondaryDC (HWND hwnd);
 ```
 
-- SetSecondaryDC sets already made memory DC as one of double buffers of target main window. It also copies callback function from double buffer's screen DC.
-```cplusplus
+- SetSecondaryDC sets already made memory DC as one of double buffers of target
+  main window. It also copies callback function from double buffer's screen DC.
+
+```cpp
 typedef int (* ON_UPDATE_SecondaryDC)(HWND hwnd, HDC secondary_dc, HDC real_dc, cont RECT* update_rc, DWORD area_flags);
 
 MG_EXPORT HDC GUIAPI SetSecondaryDC (HWND hwnd, HDC secondary_dc, ON_UPDATE_SECONDARYDC on_update_secondarydc);
 ```
+
 It is necessary to note the following when invoking SetSecondaryDC:
-   - If main window has WS_EX_AUTOSecondaryDC style, it will disable this style and invoke DeleteSecondaryDC to delete exist double buffers and return HDC_SCREEN.
-   - If main window doesn't have WS_EX_AUTOSecondaryDC style, it will return the handle of exist double buffers. The exist double buffers is managed by application.
-   - If HDC_SCREEN is passed, it will cancel double buffering mechanism of window.
-   - If passed ON_UPDATE_SecondaryDC is NULL, MiniGUI will not draw the contents of screen DC to screen automatically, user needs to copy the contents of double buffers to screen DC by using BitBlt function. Otherwise the application takes responsibility of copying double buffers to screen DC to get UI effects.
+- If main window has WS_EX_AUTOSecondaryDC style, it will disable this style
+  and invoke DeleteSecondaryDC to delete exist double buffers and return
+  HDC_SCREEN.
+- If main window doesn't have WS_EX_AUTOSecondaryDC style, it will return
+  the handle of exist double buffers. The exist double buffers is managed by
+  application.
+- If HDC_SCREEN is passed, it will cancel double buffering mechanism of
+  window.
+- If passed ON_UPDATE_SecondaryDC is NULL, MiniGUI will not draw the
+  contents of screen DC to screen automatically, user needs to copy the
+  contents of double buffers to screen DC by using BitBlt function. Otherwise the
+  application takes responsibility of copying double buffers to screen DC to get
+  UI effects.
 
-In the following code, main window is drawn on double buffer after set double buffer of main window.
+In the following code, main window is drawn on double buffer after set double
+buffer of main window.
 
-```cplusplus
-HDC hdc;
+```cpp
+    HDC hdc;
     hdc = GetSecondaryDC (hWnd);
     SetSecondaryDC(hWnd, hdc, DoubleBufferProc);
     UpdateAll (hWnd, TRUE);
@@ -476,39 +575,55 @@ HDC hdc;
 ```
 
 - GetSecondaryDC can get the handle of double buffer.
-```cplusplus
+
+```cpp
 MG_EXPORT HDC GUIAPI GetSecondaryDC (HWND hwnd);
 ```
 
-- GetSecondaryClientDC is to get the DC of double buffering window's client. If the window doesn't support double buffer, it returns the DC of window's client, equal to GetClientDC.
-```cplusplus
+- GetSecondaryClientDC is to get the DC of double buffering window's client. If
+  the window doesn't support double buffer, it returns the DC of window's
+client, equal to GetClientDC.
+
+```cpp
 MG_EXPORT HDC GUIAPI GetSecondaryClientDC (HWND hwnd);
 ```
 
-- ReleaseSecondaryDC releases the DC of double buffer. It will do nothing, it the DC is main window double buffer's DC.
-```cplusplus
+- ReleaseSecondaryDC releases the DC of double buffer. It will do nothing, it
+  the DC is main window double buffer's DC.
+
+```cpp
 MG_EXPORT void GUIAPI ReleaseSecondaryDC (HWND hwnd, HDC hdc);
 ```
 
 - DeleteSecondaryDC deletes the DC created by CreateSecondaryDC.
-```cplusplus
+
+```cpp
 static inline void GUIAPI DeleteSecondaryDC (HWND hwnd);
 ```
 
-- GetSecondarySubDC is only for double buffer, it creates sub-DC based on the DC of private window, so the sub-DC can be the client DC of main window or be regarded to control's DC. Both main window (or its control) with WS_EX_SecondaryDC style is drawing non-client and the return value of BeginPaint should use    GetSecondarySubDC to get sub-DC of double buffer DC, to ensure that all drawings in main window is on double buffer DC.
+- GetSecondarySubDC is only for double buffer, it creates sub-DC based on the
+  DC of private window, so the sub-DC can be the client DC of main window or be
+  regarded to control's DC. Both main window (or its control) with
+  WS_EX_SecondaryDC style is drawing non-client and the return value of
+  BeginPaint should use    GetSecondarySubDC to get sub-DC of double buffer DC,
+  to ensure that all drawings in main window is on double buffer DC.
 
-```cplusplus
+```cpp
 HDC GUIAPI GetSecondarySubDC (HDC secondary_dc, HWND hwnd_main, HWND hwnd_child, BOOL client);
 ```
 
 - ReleaseSecondarySubDC releases sub-DC of private DC.
-```cplusplus
+
+```cpp
 void GUIAPI ReleaseSecondarySubDC (HDC secondary_subdc, HWND hwnd_child);
 ```
 
-### 11.2.3 Sample program of double buffering mechanism
-- Create main window with double buffer, and then add the codes of UI effects before message loop.
-```cplusplus
+### Sample program of double buffering mechanism
+
+- Create main window with double buffer, and then add the codes of UI effects
+  before message loop.
+
+```cpp
     MSG Msg;
     HWND hMainWnd;
     MAINWINCREATE CreateInfo;
@@ -586,7 +701,7 @@ void GUIAPI ReleaseSecondarySubDC (HDC secondary_subdc, HWND hwnd_child);
 ```
    
 - The codes of three UI effects
-```cplusplus
+```cpp
     /fade-in fade-out
 static void ue_1_start (HWND hwnd)
 {
@@ -701,8 +816,9 @@ static void ue_3_start (HWND hwnd)
 
 ```
 
-- Invoke UI effcts codes in window close message
-```cplusplus
+- Invoke UI effects codes in window close message
+
+```cpp
 ......
 case MSG_CLOSE:
          ......
@@ -724,7 +840,8 @@ case MSG_CLOSE:
 ```
 
 - The codes of three UI effects when window is closing
-```cplusplus
+
+```cpp
 //fade-in fade-out
 static void ue_1_term (HWND hwnd)
 {
@@ -812,15 +929,19 @@ static void ue_3_term (HWND hwnd)
 
 ```
 - Three UI effects
+
 <center>     <img src="%ATTACHURLPATH%/dbuff.gif" alt="dbuff.gif"  ALIGN="CENTER" /> </center>
 <center>Fig. 11.1 UI effect of double buffering main window</center>
 
-## 11.3 Customization of Desktop
-MiniGUI provides a set of desktop window customization interfaces as callback functions. Through these interfaces, application can control desktop window to response each message, it is similar to the desktop of Windows.
+## Customization of Desktop
 
-### 11.3.1 Structure of Desktop Customization
+MiniGUI provides a set of desktop window customization interfaces as callback
+functions. Through these interfaces, application can control desktop window to
+response each message, it is similar to the desktop of Windows.
 
-```cplusplus
+### Structure of Desktop Customization
+
+```cpp
 typedef struct _DESKTOPOPS {
 
         /** called when starting a new session, and return a context */
@@ -875,24 +996,34 @@ Members in the structure:
 - desktop_menucmd_handler: Response function of popup menu.
 ```
 
-### 11.3.2 Functions of Desktop Customization
+### Functions of Desktop Customization
+
 - Customize the function which set the interface.
-```cplusplus
+
+```cpp
 /* Set a new desktop operation set, and return the old one */
 DESKTOPS* SetCustomDesktopOperationSet (DESKTOPOPS* dsk_ops);
 ```
-This function is to set assigned desktop customization structure. Desktop window will invoke set function interface to handle the message later.
+
+This function is to set assigned desktop customization structure. Desktop
+window will invoke set function interface to handle the message later.
 
 - Update function of desktop window:
-```cplusplus
+
+```cpp
 void DesktopUpdateAllWindow (void);
 ```
-This function updates all windows on desktop. It is convenience to repaint all windows. 
 
-### 11.3.3 Sample program
-This sample program is in mginit, a directory of mg-samples. Due to limited space, only key codes are listed here. Callback functions of desktop customization interfaces are defined in desktop.c:
+This function updates all windows on desktop. It is convenience to repaint all
+windows. 
 
-```cplusplus
+### Sample program
+
+This sample program is in mginit, a directory of mg-samples. Due to limited
+space, only key codes are listed here. Callback functions of desktop
+customization interfaces are defined in desktop.c:
+
+```cpp
 DESKTOPOPS mg_dsk_ops =
 {
     this_init,
@@ -906,7 +1037,7 @@ DESKTOPOPS mg_dsk_ops =
 ```
 
 Callback functions of desktop customization interfaces are as follow:
-```cplusplus
+```cpp
 
 static void free_dsp_app (void)
 {
@@ -930,8 +1061,8 @@ static BOOL get_dsp_app (void)
     int i;
     DSPITEM* item;
     char section [10];
-	int distance_x = START_X;
-	int distance_y = START_Y;
+    int distance_x = START_X;
+    int distance_y = START_Y;
     SIZE size;
 
     if (GetIntValueFromEtcFile (APP_INFO_FILE, "desktop", "app_nr", &icon_info.nr_apps) = ETC_OK)
@@ -969,10 +1100,10 @@ static BOOL get_dsp_app (void)
         
         item->cdpath = TRUE;
 
-		item->hot_spot_rc.left   = distance_x;
-		item->hot_spot_rc.right  = item->hot_spot_rc.left + DEF_WIDTH;
-		item->hot_spot_rc.top    = distance_y;
-		item->hot_spot_rc.bottom = item->hot_spot_rc.top + DEF_HEIGHT;
+        item->hot_spot_rc.left   = distance_x;
+        item->hot_spot_rc.right  = item->hot_spot_rc.left + DEF_WIDTH;
+        item->hot_spot_rc.top    = distance_y;
+        item->hot_spot_rc.bottom = item->hot_spot_rc.top + DEF_HEIGHT;
 
         GetTextExtent(HDC_SCREEN, item->name, -1, &size);
 
@@ -980,13 +1111,13 @@ static BOOL get_dsp_app (void)
         item->text_rc.left    = (item->hot_spot_rc.right + item->hot_spot_rc.left - size.cx)/2;
         item->text_rc.bottom  = item->text_rc.top + size.cy;
         item->text_rc.right   = item->text_rc.left + size.cx;
-		
+        
         distance_y += SPACE + RECTH(item->hot_spot_rc);
         if(distance_y + DEF_HEIGHT >= g_rcDesktop.bottom)
         {
             distance_y = START_Y;
             distance_x += SPACE + DEF_WIDTH;
-        }	
+        }    
     }
     return TRUE;
 error:
@@ -1052,7 +1183,7 @@ static void this_deinit(void* context)
 
     free_dsp_app ();
 
-	if (context = NULL) free(context);
+    if (context = NULL) free(context);
 
     return;
 
@@ -1062,7 +1193,7 @@ static void this_deinit(void* context)
 static void this_paint_desktop(void* context, HDC dc_desktop, const RECT* inv_rc)
 {
        PBITMAP bg_bmp = NULL;
-	int i = 0;
+    int i = 0;
     DSPITEM* item;
 
     if(((Context *)context)->bg)
@@ -1080,7 +1211,7 @@ static void this_paint_desktop(void* context, HDC dc_desktop, const RECT* inv_rc
     
     item = icon_info.app_items;
     for(i = 0; i < icon_info.nr_apps; i++, item++)
-	{
+    {
         if(i == icon_info.focus)
         {
             SetBrushColor (dc_desktop, PIXEL_darkblue);
@@ -1098,7 +1229,7 @@ static void this_paint_desktop(void* context, HDC dc_desktop, const RECT* inv_rc
         SetBkMode(dc_desktop, BM_TRANSPARENT);
         TextOut(dc_desktop, 
                 item->text_rc.left, item->text_rc.top, item->name);
-	}
+    }
 
 }
 
@@ -1153,7 +1284,7 @@ pid_t exec_app_name (const char* file_name, const char* app_name, const char * a
     }
     else if (pid == 0) {
         if (execl (file_name, app_name, argv, NULL) < 0)
-			fprintf(stderr, "execl error\n");
+            fprintf(stderr, "execl error\n");
         perror ("execl");
         _exit (1);
     }
@@ -1293,22 +1424,22 @@ static void this_desktop_menucmd_handler (void* context, int id)
 #if 0
     else if(id == ID_CB)
     {
- 		NEWFILEDLGDATA file_data;
-		int choise = 0;
-//		file_data.IsSave = FALSE;
-		strcpy(file_data.filepath,".");
-		choise = ShowOpenDialog(HWND_DESKTOP, 50, 50, 300, 200, &file_data);
-		if(choise == IDOK)
-		{
-			if(access(file_data.filefullname, F_OK) < 0)
-			{
-				printf("file not exist!\n");
-			}
-			else
-			{
-				printf("ok!\n");
-			}
-		}
+         NEWFILEDLGDATA file_data;
+        int choise = 0;
+//        file_data.IsSave = FALSE;
+        strcpy(file_data.filepath,".");
+        choise = ShowOpenDialog(HWND_DESKTOP, 50, 50, 300, 200, &file_data);
+        if(choise == IDOK)
+        {
+            if(access(file_data.filefullname, F_OK) < 0)
+            {
+                printf("file not exist!\n");
+            }
+            else
+            {
+                printf("ok!\n");
+            }
+        }
     }
 #endif
     else if(id == ID_AB)
@@ -1355,10 +1486,10 @@ static void this_desktop_menucmd_handler (void* context, int id)
 }
 ```
 
+There is a configuration file, mginit.rc. We can get relative resources of
+desktop by loading this file. The contents of mginit.rc are as follow:
 
-There is a configuration file, mginit.rc. We can get relative resources of desktop by loading this file. The contents of mginit.rc are as follow:
-
-```cplusplus
+```cpp
 [taskbar]
 nr=3
 autostart=0
@@ -1440,8 +1571,10 @@ pictrue=res/thaifont.png
 
 ```
 
-Initialized desktop customization structure in main function is set to MiniGUI. The following code is in mginit.c (please refer to chapter 17):
-```cplusplus
+Initialized desktop customization structure in main function is set to MiniGUI.
+The following code is in mginit.c (please refer to chapter 17):
+
+```cpp
 int MiniGUIMain (int args, const char* arg[])
 {
     struct sigaction siga;
@@ -1480,6 +1613,38 @@ The screenshot of the application.
 <center> <img src="%ATTACHURLPATH%/11.1.png" alt="11.1.png"ALIGN="CENTER" ></center>
 <center>Fig. 11.2 Customization of Desktop</center>
 
+----
 
--- Main.XiaodongLi - 06 Nov 2009
+[&lt;&lt; Icon, Cursor, and Caret](MiniGUIProgGuidePart1Chapter09.md) |
+[Table of Contents](README.md) |
+[Other Programming Topic &gt;&gt;](MiniGUIProgGuidePart1Chapter11.md)
 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
+
+[MiniGUI Overview]: /MiniGUI-Overview.md
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
