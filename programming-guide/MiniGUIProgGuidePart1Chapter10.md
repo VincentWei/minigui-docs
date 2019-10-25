@@ -140,7 +140,7 @@ MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd,
 ```
 
 we_attr_id in above all functions is attribute ID of window element. This ID
-must be one of code names in table 11.1 and 11.2.
+must be one of code names in Table 1 and 2.
 
 GetWindowElementAttr is to get certain element's attribute ID of specified
 window. hwnd is window handle and we_attr_id is attribute ID of window element.
@@ -530,7 +530,7 @@ The following code is an example for creating main window with double buffer.
     hMainWnd = CreateMainWindow (&CreateInfo);
 ```
 
-### 11.2.2 Functions of double buffering window mechanism
+### Functions of double buffering window mechanism
 
 - Double buffers DC creating function, CreateSecondaryDC, creates compatible
   memory DC and returns according to passed window's size.
@@ -931,7 +931,7 @@ static void ue_3_term (HWND hwnd)
 - Three UI effects
 
 <center>     <img src="%ATTACHURLPATH%/dbuff.gif" alt="dbuff.gif"  ALIGN="CENTER" /> </center>
-<center>Fig. 11.1 UI effect of double buffering main window</center>
+<center>Figure 1 UI effect of double buffering main window</center>
 
 ## Customization of Desktop
 
@@ -1611,7 +1611,7 @@ int MiniGUIMain (int args, const char* arg[])
 
 The screenshot of the application.
 <center> <img src="%ATTACHURLPATH%/11.1.png" alt="11.1.png"ALIGN="CENTER" ></center>
-<center>Fig. 11.2 Customization of Desktop</center>
+<center>Figure 2 Customization of Desktop</center>
 
 ----
 
