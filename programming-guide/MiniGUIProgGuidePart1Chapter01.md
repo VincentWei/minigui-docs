@@ -211,7 +211,7 @@ region.
 
 ##### Figure 1 The window created by `helloworld` program
 
-![The window created by helloworld program](figures/1-1-1.png)
+![The window created by helloworld program](figures/helloworld.png)
 
 ### Header Files
 
