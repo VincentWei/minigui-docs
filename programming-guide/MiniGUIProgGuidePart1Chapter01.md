@@ -35,9 +35,7 @@ MiniGUI V2.0.x solves this problem completely. A window created by a client of M
 
 We can run multiple MiniGUI applications simultaneously with the MiniGUI-Processes mode. First, we start up a server program called mginit, and then we can start up other MiniGUI applications as clients. Server is not affected and can continue to run if the client terminates due to some reason.
 
-***
 __Note__ In this guide, the demo programs assume that the MiniGUI-Processes version is configured and installed. Before running these demo applications, you should run the mginit program first, which can be a user-defined mginit program or an mginit program provided by mg-samples. We have coded carefully to ensure that each demo program can be compiled and run on MiniGUI-Processes, MiniGUI-Threads, or MiniGUI-Standalone.
-***
 
 Further more, MiniGUI provides APIs in Win32 style. Readers familiar with Win32 programming can grasp the basic methods and APIs quickly.
 
@@ -179,12 +177,10 @@ if (!ServerStartup (0 , 0 , 0)) {
 
 We will give detailed description on interfaces specific to MiniGUI-Processes in [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md).
 
-***
 __Note__ MiniGUI defines different macros for three runtime modes:
 - MiniGUI-Threads: _MGRM_THREADS;
 - MiniGUI-Processes: _MGRM_PROCESSES and _LITE_VERSION;
 - MiniGUI-Standalone: _MGRM_STANDALONE, _LITE_VERSION, and _STAND_ALONE.
-***
 
 ### Creating and Showing Main Window
 
@@ -378,9 +374,7 @@ $ ./helloworld
 
 Result of running the program is as shown in Figure 1.
 
-***
 __Prompt__ If MiniGUI has already been configured as MiniGUI-Threads, you need not start up mginit programs. One MiniGUI-Threads application can be run directly from the console.
-***
 
 ### Components of MiniGUI
 
@@ -398,15 +392,11 @@ Considering that the project built in this section can also be used for organizi
 $ mkdir -p ~/minigui/samples
 ```
 
-***
 __Prompt__ It is presumed that the source code of mg-samples are located in the minigui directory of your home directory, which is ~/minigui/mg-samples-3.2.x, respectively.
-***
 
 Then make src directory in samples to store the source code of the helloworld program. Save helloworld.c into samples/src/ directory, and then copy configure.in file from mg-samples-3.2.x.
 
-***
 __Prompt__ Saving source files in a single directory can help us manage the project files better. As a rule, source code of a project should be saved in the directory src/, and global header files should be saved in the directory include/.
-***
 
 We will modify the samples project based on mg-samples configuration script below. It should be noted that these scripts need Autoconf 2.53 and Automake 1.6 or higher version, and using lower version (such as Red Hat 7.x or lower) Autoconf and Automake will result in error.
 
@@ -549,9 +539,7 @@ $ ./autogen.sh
 $ ./configure
 ```
 
-***
 __Prompt__ ./autogen.sh command should be run to refresh configure script and makefiles after configure.in file has been modified.
-***
 
 After having run above commands, you will find many file automatically generated in the root directory of the project. It is unnecessary to care the purpose of these files. Ignore them, and run the make command:
 
@@ -580,9 +568,7 @@ noinst_PROGRAMS=helloworld
 helloworld_SOURCES=helloworld.c helloworld.h module1.c module2.c
 ```
 
-***
 __Prompt__ Please list source files and header files on which the program depends behind foo_SOURCES.
-***
 
 Demo programs of other chapters in this guide can be added to this project conveniently. For example, in order to add foo program, we can modify the Makefile.am file as follows:
 
@@ -595,9 +581,7 @@ foo_SOURCES=foo.c
 
 Thus, two program files, which are helloworld and foo respectively, will be generated during compilation.
 
-***
 __Prompt__ Foo is generally used to specify a hypothetical object or name, which should be replaced by the real name in an actual project. Demo programs after this section can all be added into samples project in this way.
-***
 
 Having such a simple project frame and Automake/Autoconf script template, we can enrich these scripts based on our requirements. These scripts can help us perform many works, the most important among which is to configure cross compilation option to help us porting our application into the target system. You can refer to [User Manual for MiniGUI 3.2](MiniGUIUserManualV32) to get knowledge about cross compilation of MiniGUI application.
 
