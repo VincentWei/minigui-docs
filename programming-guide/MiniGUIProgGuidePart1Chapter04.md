@@ -413,7 +413,7 @@ describe all the predefined controls in three aspects: the purpose and usage of
 the control, the styles, messages, and notification codes. We will also give
 the sample code of the controls.
 
-## 5.4 Operations Specific to Control
+## Operations Specific to Control
 
 MiniGUI provides some operation functions specific to control, as show in Table
 2.
