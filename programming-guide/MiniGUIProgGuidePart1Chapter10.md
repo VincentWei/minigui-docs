@@ -930,8 +930,8 @@ static void ue_3_term (HWND hwnd)
 ```
 - Three UI effects
 
-<center>     <img src="%ATTACHURLPATH%/dbuff.gif" alt="dbuff.gif"  ALIGN="CENTER" /> </center>
-<center>Figure 1 UI effect of double buffering main window</center>
+![Double buffering](figures/dbuff.gif)
+##### Figure 1 UI effect of double buffering main window
 
 ## Customization of Desktop
 
@@ -1610,8 +1610,9 @@ int MiniGUIMain (int args, const char* arg[])
 ```
 
 The screenshot of the application.
-<center> <img src="%ATTACHURLPATH%/11.1.png" alt="11.1.png"ALIGN="CENTER" ></center>
-<center>Figure 2 Customization of Desktop</center>
+
+![Customization of Desktop](figures/11.1.png)
+##### Figure 2 Customization of Desktop
 
 ----
 
