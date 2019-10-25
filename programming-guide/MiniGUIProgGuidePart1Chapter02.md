@@ -257,7 +257,7 @@ The following codes show how to create irregular window.
         return -1;
 ```
 
-![An irregular window](/WindowMask.png)
+![An irregular window](figures/WindowMask.png)
 
 ##### Figure 4 An irregular window (transparent color is white)
 
@@ -596,7 +596,8 @@ control class described above, in which “Hello, world! - from my control.”
 is displayed. Please refer to mycontrol.c file in the demo program package
 mg-sample of this guide to get the complete list of this program.
 
-![User-define control](3.4.jpeg)
+![User-define control](figures/3.4.jpeg)
+
 ##### Figure 8 Display “Hello, world!” using the user-defined control
 
 We will describe in detail the foundation knowledge of control programming
