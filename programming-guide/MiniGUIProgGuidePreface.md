@@ -181,7 +181,7 @@ text of Apache 2.0 license can be obtained by following means:
 ----
 
 [Table of Contents](README.md) |
-[Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md) &gt;&gt;
+[Beginning MiniGUI Programming &gt;&gt;](MiniGUIProgGuidePart1Chapter01.md)
 
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
