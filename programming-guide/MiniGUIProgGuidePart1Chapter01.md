@@ -118,17 +118,22 @@ MiniGUI-Processes mode. First, we start up a server program called `mginit`,
 then we can start up other MiniGUI applications as clients. Server is not
 affected and can continue to run if the client terminates due to some reason.
 
-__NOTE__ In this guide, the sample programs assume that the MiniGUI-Processes
-version is configured and installed. Before running these samples, you
-should run the `mginit` program first, which can be a user-defined `mginit`
-program or an `mginit` program provided by `mg-samples` package. We have coded
+__NOTE__ In this guide, the sample programs assume that the MiniGUI-Threads
+version is configured and installed.
+If your MiniGUI is configured MiniGUI-Threads or MiniGUI-Standalone runtime mode,
+you can directly run a sample without running `mginit` first.
+When you configured MiniGUI as
+MiniGUI-Processes, before running these samples, you should run
+the `mginit` program first, which can be a user-defined `mginit`
+program or an `mginit` program provided by `mg-samples` package.
+Exception `mginit`, We have coded
 carefully to ensure that each sample program can be compiled and run on
-MiniGUI-Processes, MiniGUI-Threads, or MiniGUI-Standalone.
+MiniGUI-Processes, MiniGUI-Threads, or MiniGUI-Standalone runtime mode.
 
 ## Hello, world!
 
 The quickest approach to understand the basic programming method of MiniGUI is
-to analyze structure of a simple program. List 1 shows a “Hello World” program
+to analyze structure of a simple program. List 1 shows a "Hello, world!" program
 of MiniGUI, which will be discussed in detail.
 
 ##### List 1 helloworld.c
@@ -170,7 +175,7 @@ int MiniGUIMain (int argc, const char* argv[])
 
     CreateInfo.dwStyle = WS_VISIBLE | WS_BORDER | WS_CAPTION;
     CreateInfo.dwExStyle = WS_EX_NONE;
-    CreateInfo.spCaption = "HelloWorld";
+    CreateInfo.spCaption = "Hello, world!";
     CreateInfo.hMenu = 0;
     CreateInfo.hCursor = GetSystemCursor (0);
     CreateInfo.hIcon = 0;
@@ -245,16 +250,16 @@ header files in the beginning:
 ### Entrance of the Program
 
 The entrance of a C program is the main program, while the entrance of a MiniGUI
-program is MiniGUIMain, and the prototype of the program is as follows:
+program is `MiniGUIMain`, and the prototype of the program is as follow:
 
 ```cpp
 int MiniGUIMain (int argc, const char* argv[]);
 ```
 
-This function is a encapsulated Macro for main (the entry function) of ANSI
-C.So the entrance of each MiniGUI application (no matter server function
-mginit or client application) is the MiniGUIMain function. Arguments of
-argc and argv have the same meaning as that of the main function in C
+This function is a encapsulated macro for `main` (the entry function) of ANSI
+C. So the entrance of each MiniGUI application (no matter server function
+`mginit` or client application) is the `MiniGUIMain` function. Arguments of
+`argc` and `argv` have the same meaning as that of the `main` function in C
 program, which are the number of command line arguments and the string
 array pointer to the arguments, respectively.
 
@@ -266,14 +271,14 @@ array pointer to the arguments, respectively.
 #endif
 ```
 
-JoinLayer is a special function of MiniGUI-Processes, and is therefore
-included in the conditional compilation of _MGRM_PROCESSES. In the runtime
+`JoinLayer` is a special function of MiniGUI-Processes, and is therefore
+included in the conditional compilation of `_MGRM_PROCESSES`. In the runtime
 mode MiniGUI-Processes, each MiniGUI client program must call this function
 to join a layer (or create a new layer) before calling other MiniGUI
 functions.
 
 If the program is the server of MiniGUI-Processes, you should call
-ServerStartup instead:
+`ServerStartup` instead:
 
 ```cpp
 if (!ServerStartup (0 , 0 , 0)) {
@@ -286,10 +291,11 @@ We will give detailed description on interfaces specific to
 MiniGUI-Processes in [Developing Customized MiniGUI-Processes Server
 Program](MiniGUIProgGuidePart5Chapter02.md).
 
-__Note__ MiniGUI defines different macros for three runtime modes:
-- MiniGUI-Threads: _MGRM_THREADS;
-- MiniGUI-Processes: _MGRM_PROCESSES and _LITE_VERSION;
-- MiniGUI-Standalone: _MGRM_STANDALONE, _LITE_VERSION, and _STAND_ALONE.
+__NOTE__ MiniGUI defines different macros for three runtime modes:
+
+- MiniGUI-Threads: `_MGRM_THREADS`;
+- MiniGUI-Processes: `_MGRM_PROCESSES` and `_LITE_VERSION`;
+- MiniGUI-Standalone: `_MGRM_STANDALONE`, `_LITE_VERSION`, and `_STAND_ALONE`.
 
 ### Creating and Showing Main Window
 
@@ -298,12 +304,12 @@ __Note__ MiniGUI defines different macros for three runtime modes:
 ```
 
 The initial user interface of each MiniGUI application is usually a main
-window; you can create a main window by calling CreateMainWindow function.
-The argument of CreateMainWindow function is a pointer to MAINWINCREAT
-structure, which is CreatInfo in this example, and the return value is the
-handle to the created main window. MAINWINCREAT structure describes the
+window; you can create a main window by calling `CreateMainWindow` function.
+The argument of `CreateMainWindow` function is a pointer to `MAINWINCREATE`
+structure, which is `CreatInfo` in this example, and the return value is the
+handle to the created main window. `MAINWINCREAT` structure describes the
 properties of a main window, and you need to set its properties before
-using CreatInfo to create a main window.
+using `CreatInfo` to create a main window.
 
 ```cpp
     CreateInfo.dwStyle = WS_VISIBLE | WS_BORDER | WS_CAPTION;
@@ -316,14 +322,14 @@ set to be visible initially, and to have border and caption bar.
     CreateInfo.dwExStyle = WS_EX_NONE;
 ```
 
-The above statement sets the extension style of the main window, and the
-window has no extension style.
+The above statement sets the extended styles of the main window, and the
+window has no extended style.
 
 ```cpp
-    CreateInfo.spCaption = "HelloWorld";
+    CreateInfo.spCaption = "Hello, world!";
 ```
 
-This statement sets the caption of the main window to be "HelloWorld".
+This statement sets the caption of the main window to be "Hello, world!".
 
 ```cpp
     CreateInfo.hMenu = 0;
@@ -350,7 +356,7 @@ This statement sets the icon of the main window, and the window has no icon.
 ```
 
 This statement sets the window procedure function of the main window to be
-HelloWinProc, and all the messages sent to the window are handled by this
+`HelloWinProc`, and all the messages sent to the window are handled by this
 function.
 
 ```cpp
@@ -361,7 +367,7 @@ function.
 ```
 
 The above statements set the position and the size of the main window on
-the screen, and the upper-left corner and lower-right corner are located in
+the screen, and the upper-left corner and the lower-right corner are located in
 (0, 0) and (320, 240), respectively.
 
 ```cpp
@@ -369,14 +375,14 @@ the screen, and the upper-left corner and lower-right corner are located in
 ```
 
 This statement sets the background color of the main window to be white,
-and PIXEL_lightwhite is the pixel value predefined by MiniGUI.
+and `PIXEL_lightwhite` is the pixel value predefined by MiniGUI.
 
 ```cpp
    CreateInfo.dwAddData = 0;
 ```
 
 This statement sets the additional data of the main window, and the window
-has no dditional data.
+has no additional data.
 
 ```cpp
    CreateInfo.hHosting = HWND_DESKTOP;
@@ -389,15 +395,15 @@ window.
    ShowWindow (hMainWnd, SW_SHOWNORMAL);
 ```
 
-ShowWindow function needs to be called to show the created window on the
-screen after the main window is created. The first argument of ShowWindow
+`ShowWindow` function needs to be called to show the created window on the
+screen after the main window is created. The first argument of `ShowWindow`
 is the handle of the window to be shown, and the second argument specifies
-the style of showing the window (show or hide). SW_SHOWNORMAL means showing
+the action of showing the window (show or hide). `SW_SHOWNORMAL` means showing
 the main window and setting it to be the top-most window.
 
 ### Entering Message Loop
 
-The main window will be displayed on the screen when ShowWindow function is
+The main window will be displayed on the screen when `ShowWindow` function is
 called. Like other GUI, it is time to go into the message loop. MiniGUI
 maintains a message queue for each MiniGUI program. After an event happens,
 MiniGUI transforms the event into a message, and put the message into the
@@ -412,73 +418,84 @@ queue continuously and handle them.
     }
 ```
 
-The type of Msg variable is a MSG structure, which is defined in
-minigui/window.h as follows:
+The type of `Msg` variable is a MSG structure, which is defined in
+`minigui/window.h` as follow:
 
 ```cpp
+/**
+ * The message structure.
+ * \sa GetMessage, PostMessage, msgs
+ */
 typedef struct _MSG
 {
-    HWND          hwnd;
-    LINT          message;
-    WPARAM        wParam;
-    LPARAM        lParam;
-    DWORD         time;
-#ifndef _LITE_VERSION
-    void*         pAdd;
+    /** The handle to the window which receives this message. */
+    HWND            hwnd;
+    /** The message identifier. */
+    UINT            message;
+    /** The first parameter of the message (a unsigned integer with pointer precision). */
+    WPARAM          wParam;
+    /** The second parameter of the message (a unsigned integer with pointer precision). */
+    LPARAM          lParam;
+    /** Time */
+    DWORD           time;
+#ifdef _MGRM_THREADS
+    /** Addtional data*/
+    void*            pAdd;
 #endif
 } MSG;
 typedef MSG* PMSG;
 ```
 
-GetMessage function gets a message from the message queue of the
+`GetMessage` function gets a message from the message queue of the
 application.
 
 ```cpp
-     GetMessage ( &Msg, hMainWnd);
+     GetMessage (&Msg, hMainWnd);
 ```
 
 The second argument of this function is the handle to the main window, and
-the first argument is the pointer to a MSG structure. GetMessage function
+the first argument is the pointer to a MSG structure. `GetMessage` function
 fills the fields of the MSG structure with the message gotten from the
 message queue, which includes:
-- hwnd: The handle of the window to which hwnd message is sent. The value
-  is the same with hMainWnd in the helloworld.c program.
-- message: Message identifier. This is an integer for identifying a
-  message. Each messages has a corresponding predefined identification,
-these identification are defined in minigui/window.h and with `MSG_`
-prefix.
-- wParam: The first 32-bit message parameter, the meaning and value of
+
+- `hwnd`: The handle of the window to which the message is sent. The value
+  is the same with `hMainWnd` in the `helloworld.c` program.
+- `message`: The message identifier. This is an integer for identifying a
+  message. Each messages has a corresponding predefined identifier,
+  these identifiers are defined in `minigui/window.h` and with `MSG_`
+  prefix.
+- wParam: The first message parameter, the meaning and value of
   which is different for different message.
-- lParam: The second 32-bit message parameter, the meaning and value of
+- lParam: The second message parameter, the meaning and value of
   which depends on the message.
 - time: The time (tick count) when the message is put into the message
   queue.
 
-If only the message gotten from the message queue is not MSG_QUIT,
-GetMessage will return a non-zero value, and the message loop will be
-continued. MSG_QUIT message makes the GetMessage return zero, and results
+If only the message gotten from the message queue is not `MSG_QUIT`,
+`GetMessage` will return a non-zero value, and the message loop will be
+continued. `MSG_QUIT` message makes the `GetMessage` return zero, and results
 in the termination of the message loop.
 
 ```cpp
       TranslateMessage (&Msg);
 ```
 
-TranslateMessage function translates a keystroke message to a MSG_CHAR
+`TranslateMessage` function translates a keystroke message to a `MSG_CHAR`
 message, and then sends the message to the window procedure function.
 
 ```cpp
       DispatchMessage (&Msg);
 ```
 
-DispatchMessage function will finally send the message to the window
+`DispatchMessage` function will finally send the message to the window
 procedure of the target window, and let it handle the message. In this
-example, the window procedure is HelloWinProc. That is to say, MiniGUI
+example, the window procedure is `HelloWinProc`. That is to say, MiniGUI
 calls the window procedure function (callback function) of the main window
-in the DispatchMessage function to handle the messages sent to this main
+in the `DispatchMessage` function to handle the messages sent to this main
 window. After handling the messages, the window procedure function of the
-application would return to DispatchMessage function, while DispatchMessage
+application would return to `DispatchMessage` function, while `DispatchMessage`
 function will return to the application code in the end, and the
-application begins a new message loop by calling the next GetMessage
+application begins a new message loop by calling the next `GetMessage`
 function.
 
 ### Window Procedure Function
@@ -488,10 +505,10 @@ work of an application happens in the window procedure function actually,
 because the main task of GUI program is to receive and handle various
 messages received by the window.
 
-The window procedure is the function named as HelloWinProc in helloworld.c
+The window procedure is the function named as `HelloWinProc` in `helloworld.c`
 program. Programs may name the window procedure function arbitrarily.
-CreateMainWindow function creates the main window according to the window
-procedure specified in MAINWINCREATE structure.
+`CreateMainWindow` function creates the main window according to the window
+procedure specified in `MAINWINCREATE` structure.
 
 The window procedure function always has the following prototype:
 
@@ -500,9 +517,9 @@ static LRESULT HelloWinProc (HWND hWnd, LINT message, WPARAM wParam, LPARAM lPar
 ```
 
 The four arguments of the window procedure are the same as the first four
-fields of MSG structure. The first argument hWnd is the handle of the
+fields of MSG structure. The first argument `hWnd` is the handle of the
 window to receive messages, which is the same with the return value of
-CreateMainWindow function and indicates the specific window to receive the
+`CreateMainWindow` function and indicates the specific window to receive the
 message. The second argument is the same as the message field of MSG
 structure, which is an integer value indicating the received message. The
 last two arguments are both message parameters (two integers with pointer
@@ -511,35 +528,35 @@ window procedure function is usually not called by the program directly,
 but is called by MiniGUI, that is, it is a callback function.
 
 The messages, which are not handled by the window procedure function,
-should be passed to DefaultMainWinProc function to perform default
-handling, the return value of DefaultMainWinProc must be returned by the
+should be passed to `DefaultMainWinProc` function to perform default
+handling, the return value of `DefaultMainWinProc` must be returned by the
 window procedure.
 
 ### Screen Output
 
-The program executes screen output when responding to the MSG_PAINT
+The program executes screen output when responding to the `MSG_PAINT`
 message. The application gets the device context handle first by calling
-BeginPaint function, and uses it to call GDI functions to execute drawing
-operations. Herein, the program uses TextOut function to display a “Hello
-world!” string centered at the client region of the window. The application
-calls EndPaint function to release the device context handle after the
-drawing is completed.
+`BeginPaint` function, and uses it to call GDI functions to execute drawing
+operations. Herein, the program uses `TextOut` function to display the
+"Hello, world!" string centered at the client region of the window.
+The application calls `EndPaint` function to release the device context
+handle after the drawing is completed.
 
 We will give detailed description on MiniGUI graphics device interfaces in
-Part II of this guide.
+Part III of this guide.
 
 ### Exit of the Program
 
-The window procedure function will receive a MSG_CLOSE message when the
+The window procedure function will receive a `MSG_CLOSE` message when the
 user clicks the close button on the upper-right corner of the window.
-Helloworld program calls DestroyMainWindow function to destroy the main
-window when it receives the MSG_CLOSE message, and calls PostQuitMessage
-function to throw a MSG_QUIT message into the message queue. GetMessage
-function will return 0 when receiving the message MSG_QUIT, and finally
+The `helloworld` program calls `DestroyMainWindow` function to destroy the main
+window when it receives the `MSG_CLOSE` message, and calls `PostQuitMessage`
+function to throw a `MSG_QUIT` message into the message queue. `GetMessage`
+function will return 0 when receiving the message `MSG_QUIT`, and finally
 results in exit of the program from the message loop.
 
-The program calls MainWindowThreadCleanup to clean the system resource such
-as message queue used by the main window and returns from !MiniGUIMain
+The program calls `MainWindowThreadCleanup` to clean the system resource such
+as message queue used by the main window and returns from `MiniGUIMain`
 finally.
 
 ## Compiling, Linking and Running
@@ -547,38 +564,41 @@ finally.
 ### Compiling MiniGUI Program
 
 You can input the following command in the command line to compile
-helloworld.c, and link it to generate the executive file helloworld:
-
-```shell
-$ gcc -o helloworld helloworld.c -lminigui_procs -ljpeg -lpng -lz
-```
-
-Following compiling options are needed if MiniGUI is configured to be
-MiniGUI-Threads:
+`helloworld.c`, and link it to generate the executive file `helloworld`:
 
 ```shell
 $ gcc -o helloworld helloworld.c -lpthread -lminigui_ths -ljpeg -lpng -lz
 ```
 
-Here, -o option tells gcc the target file name to be generated, which is
-herein helloworld; -l option specifies the library needed to be linked when
-generating helloworld, which is herein minigui library and pthread library
-will be linked if MiniGUI is configured to be MiniGUI-Threads. Libpthread
-is the library to provide POSIX compatible thread support, which must be
-linked when compiling a MiniGUI-Threads program; The program compiled here
-only uses the functions in MiniGUI core library libminigui, and does not
-use the functions provided by other MiniGUI libraries (such as libmgext or
-libvcongui), therefore only minigui library is needed to be linked and the
-linking option is -lminigui; other function libraries such as jpeg, png, z
+Following compiling options are needed if MiniGUI is configured to be
+MiniGUI-Processes:
+
+```shell
+$ gcc -o helloworld helloworld.c -lminigui_procs -ljpeg -lpng -lz
+```
+
+Here, `-o` option tells the C compiler (`gcc`) the target file name to
+be generated, which is
+herein `helloworld`; `-l` option specifies one library needed to be linked when
+generating `helloworld`, which is herein `minigui_ths` library and `pthread`
+library will be linked if MiniGUI is configured to be MiniGUI-Threads.
+`Libpthread`
+is the library to provide support for POSIX compatible thread, which must be
+linked when compiling a MiniGUI-Threads program. The program compiled here
+only uses the functions in MiniGUI core library `libminigui_ths`, and does not
+use the functions provided by other MiniGUI components (such as mGUtils or
+mGNCS), therefore only `libminigui_procs` or `libminigui_ths` library is
+needed to be linked and the linking option is `-lminigui_ths`.
+Other function libraries such as jpeg, png, z
 and so on are the function libraries which are relied on by MiniGUI
 internally (herein we presume that you have enabled JPEG and PNG image
 support when configuring MiniGUI).
 
-Provided that you configure MiniGUI to be MiniGUI-Processes, you must first
-ensure the server program mginit of MiniGUI have been started up before
-running helloworld program. For example, you can start up mginit program in
-mg-samples, and then enter the directory where helloworld file exists, and
-input ./helloworld in the command line to start up the helloworld program.
+If you configured MiniGUI to MiniGUI-Processes, you must first
+ensure the server program `mginit` of MiniGUI have been started up before
+running `helloworld` program. For example, you can start up `mginit` program in
+`mg-samples`, and then enter the directory where `helloworld` file exists, and
+input `./helloworld` in the command line to start up the `helloworld` program.
 
 ```shell
 $ ./helloworld
@@ -586,14 +606,16 @@ $ ./helloworld
 
 Result of running the program is as shown in Figure 1.
 
-__Prompt__ If MiniGUI has already been configured as MiniGUI-Threads, you
-need not start up mginit programs. One MiniGUI-Threads application can be
+__PROMPT__ If MiniGUI has already been configured as MiniGUI-Threads, you
+need not start `mginit` programs. One MiniGUI-Threads application can be
 run directly from the console.
 
 ### Components of MiniGUI
 
-Besides core library libminigui, MiniGUI also includes five other
-components (libraries): mGUtils, mGPlus, mGEff, and mGNCS. If you use
+Besides core library `libminigui_procs`, `libminigui_ths`, or `libminigui_sa`,
+MiniGUI also includes five other
+components (libraries): mGUtils, mGPlus, mGEff, mGNCS, and mGNCS4Touch.
+If you use
 functions provided by these components in your program, you may need to
 include the corresponding header files in your program and link the
 corresponding libraries when compiling the application.
@@ -640,7 +662,7 @@ below. It should be noted that these scripts need Autoconf 2.53 and
 Automake 1.6 or higher version, and using lower version (such as Red Hat
 7.x or lower) Autoconf and Automake will result in error.
 
-First, we modify configure.in file. The modified file is as follows (Note
+First, we modify configure.in file. The modified file is as follow (Note
 the comments in the text. We only modify the commented macros):
 
 ```shell
@@ -748,15 +770,15 @@ appropriately the function libraries to be linked into the program.
   the configuration options of MiniGUI.
 - Generate Makefile in the root directory of the project and Makefiles in
   the src/ subdirectory.  Next, we create Makefile.am file in the root
-directory of the project, the content of which is as follows:
+directory of the project, the content of which is as follow:
 
 ```makefile
 SUBDIRS = src
 ```
 
-Above file content tells Automake to enter src/ directory to handle
-sequentially. Then we create Makefile.am file in the src/ subdirectory, and
-the content of the file is as follows:
+Above file content tells Automake to enter `src/` directory to handle
+sequentially. Then we create Makefile.am file in the `src/` subdirectory, and
+the content of the file is as follow:
 
 ```makefile
 noinst_PROGRAMS=helloworld
@@ -765,9 +787,9 @@ helloworld_SOURCES=helloworld.c
 ```
 
 The file content above tells Automake to generate a Makefile, which can be
-used to create helloworld program from helloworld.c. Finally, we return to
-the root directory of the project and create an autogen.sh file, and the
-content of the file is as follows:
+used to create `helloworld` program from `helloworld.c`. Finally, we return to
+the root directory of the project and create an `autogen.sh` file, and the
+content of the file is as follow:
 
 ```shell
 #!/bin/sh
@@ -777,15 +799,15 @@ automake --add-missing
 autoconf
 ```
 
-This file is a shell script, which calls aclocal, automake, and autoconf
-command successively. Note that after the file being created, chmod command
+This file is a shell script, which calls `aclocal`, `automake`, and `autoconf`
+command successively. Note that after the file being created, `chmod` command
 should be run to make it into an executable.
 
 ```
 $ chmod +x autogen.sh
 ```
 
-Up to now, we can run the following command to generate the Makefile file
+Up to now, we can run the following command to generate the Makefile files
 required by the project:
 
 ```
@@ -793,11 +815,11 @@ $ ./autogen.sh
 $ ./configure
 ```
 
-__Prompt__ ./autogen.sh command should be run to refresh configure script
-and makefiles after configure.in file has been modified.
+__PROMPT__ `./autogen.sh` script should be run to refresh configure script
+and makefiles after `configure.ac` file has been modified.
 
 After having run above commands, you will find many file automatically
-generated in the root directory of the project. It is unnecessary to care
+generated in the top directory of the project. It is unnecessary to care
 the purpose of these files. Ignore them, and run the make command:
 
 ```
@@ -816,19 +838,19 @@ make[1]: Leaving directory `/home/weiym/minigui/samples'
 ```
 
 If you have a careful look at above output, you can find that make command
-enters src/ subdirectory first, and call gcc to compile helloworld.c into
+enters `src/` subdirectory first, and call gcc to compile `helloworld.c` into
 the object file helloworld.o, and then call gcc again to generate
-helloworld program. Notice that gcc links the functions in the libraries of
-pthread, minigui, jpeg, png etc. (-lpthread -lminigui) when generating
+`helloworld` program. Notice that gcc links the functions in the libraries of
+pthread, minigui, jpeg, png etc. (-lpthread -lminigui_ths) when generating
 helloworld program. The reason is because that the author has configured
 MiniGUI to be MiniGUI-Threads runtime mode, linking pthread library is
 needed for generating MiniGUI-Threads application, and MiniGUI provides the
-support for JPEG and PNG picture by using jpeg and png libraries.
+support for JPEG and PNG images by using jpeg and png libraries.
 
 If the scale of the helloworld program is very huge, and thus source code
 are placed into different source files, you need only modify the
-Makefile.am file in src/, append the names of these source files to the
-helloworld_SOURCES, and then run make command again in the root directory
+`Makefile.am` file in `src/`, append the names of these source files to the
+`helloworld_SOURCES`, and then run make command again in the top directory
 of the project. For example:
 
 ```makefile
@@ -837,12 +859,12 @@ noinst_PROGRAMS=helloworld
 helloworld_SOURCES=helloworld.c helloworld.h module1.c module2.c
 ```
 
-__Prompt__ Please list source files and header files on which the program
-depends behind foo_SOURCES.
+__PROMPT__ Please list source files and header files on which the program
+depends behind `foo_SOURCES`.
 
-Demo programs of other chapters in this guide can be added to this project
-conveniently. For example, in order to add foo program, we can modify the
-Makefile.am file as follows:
+Sample programs of other chapters in this guide can be added to this project
+conveniently. For example, in order to add `foo` program, we can modify the
+Makefile.am file as follow:
 
 ```makefile
 noinst_PROGRAMS=helloworld foo
@@ -851,12 +873,12 @@ helloworld_SOURCES=helloworld.c
 foo_SOURCES=foo.c
 ```
 
-Thus, two program files, which are helloworld and foo respectively, will be
+Thus, two program files, which are `helloworld` and `foo` respectively, will be
 generated during compilation.
 
-__Prompt__ `Foo` is generally used to specify a hypothetical object or
-name, which should be replaced by the real name in an actual project. Demo
-programs after this section can all be added into samples project in this
+__PROMPT__ `Foo` is generally used to specify a hypothetical object or
+name, which should be replaced by the real name in an actual project. Sample
+programs after this section can all be added into the samples project in this
 way.
 
 Having such a simple project frame and Automake/Autoconf script template,
@@ -864,10 +886,10 @@ we can enrich these scripts based on our requirements. These scripts can
 help us perform many works, the most important among which is to configure
 cross compilation option to help us porting our application into the target
 system. You can refer to [MiniGUI User Manual] to get knowledge about cross
-compilation of MiniGUI application.
+compilation of MiniGUI and MiniGUI application.
 
-Full demo program package of this guide is mg-samples-3.2.x.tar.gz, which
-includes all the demo programs of this guide and includes complete
+Full sample program package of this guide is `mg-samples`, which
+includes all the sample programs of this guide and includes complete
 Autoconf/Automake for your reference.
 
 ----
