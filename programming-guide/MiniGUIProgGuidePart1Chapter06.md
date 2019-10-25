@@ -119,7 +119,7 @@ after the function is called.
     TrackPopupMenu (hMenuFloat, TPM_CENTERALIGN, 40, 151, hWnd);
 ```
 
-### 7.2.3 MENUITEMINFO Structure
+### MENUITEMINFO Structure
 
 MENUITEMINFO structure is the core data structure for operating a menu item, and its definition is as follows:
 
@@ -171,7 +171,7 @@ These macros are used to define which items of the menu item GetMenuItemInfo and
 
 When the menu item is MFT_BITMAP type, the member typedata will be the pointer to the normal BITMAP object, the member uncheckedbmp will be the pointer to the highlighted BITMAP object, and the member checkedbmp will be the pointer to the checked BITMAP object. When the menu item is MFT_BMPSTRING type, the member typedata will be the pointer to the text string, the member uncheckedbmp will be the pointer to the normal BITMAP object, and the member checkedbmp will be the pointer to the checked BITMAP object.
 
-### 7.2.4 Operating on Menu Item
+### Operating on Menu Item
 
 You can get the menu item properties of interest by GetMenuItemInfo function, and can also set the menu item properties of interest by SetMenuItemInfo function:
 
@@ -188,14 +188,14 @@ When set or get properties of menu, you should set the mask of MENUITEMINFO. You
 
 MiniGUI also provides some other functions to get or set the menu item properties, and all these functions use the above methods to locate a menu item. These functions include GetSubMenu, SetMenuItemBitmaps, GetMenuItemID, EnableMenuItem, etc. Functions of all these can actually be implemented by the above two functions, and we will not describe them once more.
 
-### 7.2.5 Deleting and Destroying Menu or Menu Item
+### Deleting and Destroying Menu or Menu Item
 
 MiniGUI provides the following function to delete menu items from a menu or destroy a menu:
 - RemoveMenu: This function deletes a specified menu item from a menu. If the menu item includes submenu, this function detaches the submenu from the specified menu item, but does not delete the submenu.
 - DeleteMenu: This function deletes a specified item from a menu. If the menu item includes submenu, the function will destroy the submenu simultaneously.
 - DestroyMenu: This function destroys the whole menu.
 
-### 7.2.6 MSG_ACTIVEMENU Message
+### MSG_ACTIVEMENU Message
 
 When the user activates a popup menu in the menu bar, MiniGUI will send MSG_ACTIVEMENU message to the window procedure in which the menu bar lies. The first parameter of this message is the position of the activated submenu, and the second parameter is the handle of the activated submenu. The application can use this message to handle the menu, for example, change the selection state of some menu items according to the running state of the program. The following code is from libvcongui of MiniGUI, and it sets the selection state of the menu item correspondingly according to the user’s selections (the size of the virtual terminal and the character set):
 
@@ -214,7 +214,7 @@ case MSG_ACTIVEMENU:
 
 Note that in the above code, calling CheckMenuRadioItem function twice sets the size of current terminal and the character set, respectively.
 
-## 7.3 Sample Program
+## Sample Program
 
 List 1 is a fragment of code illustrating normal menu operations. This example is a part of notebook in MDE. For the length consideration, here we only give the part about the menu. The effect of the menu created by this program is shown in Figure 1
 <center>List 1 Sample of operating normal menu</center>
