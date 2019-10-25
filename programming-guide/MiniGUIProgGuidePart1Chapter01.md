@@ -1,28 +1,18 @@
 # Beginning MiniGUI Programming
 
 - [Basic Programming Concepts](#basic-programming-concepts)
-   [Event Driven Programming](#event-driven-programming)
-   [Three Runtime Modes of MiniGUI](#three-runtime-modes-of-minigui)
+   + [Event Driven Programming](#event-driven-programming)
+   + [Three Runtime Modes of MiniGUI](#three-runtime-modes-of-minigui)
 - [Hello, world!](#hello-world)
-   [Header Files](#header-files)
-   [Entrance of the Program](#entrance-of-the-program)
-   [Joining a Layer in MiniGUI-Processes](#joining-a-layer-in-minigui-processes)
-   [Creating and Showing Main Window](#creating-and-showing-main-window)
-   [Window Procedure Function](#window-procedure-function)
-   [Screen Output](#screen-output)
-   [Exit of the Program](#exit-of-the-program)
+   + [Header Files](#header-files)
+   + [Entrance of the Program](#entrance-of-the-program)
+   + [Joining a Layer in MiniGUI-Processes](#joining-a-layer-in-minigui-processes)
+   + [Creating and Showing Main Window](#creating-and-showing-main-window)
+   + [Window Procedure Function](#window-procedure-function)
+   + [Screen Output](#screen-output)
+   + [Exit of the Program](#exit-of-the-program)
 - [Compiling, Linking and Running](#compiling-linking-and-running)
 - [Writing Autotools Scripts for MiniGUI Application](#writing-autotools-scripts-for-minigui-application)
-
-
-- [Introduction](#introduction)
-   * [MiniGUI Releases](#minigui-releases)
-   * [Source Tarballs and Repos](#source-tarballs-and-repos)
-   * [Documents](#documents)
-- [First Run](#first-run)
-   * [Recommended development environment](#recommended-development-environment)
-   * [Building MiniGUI 4.0](#building-minigui-40)
-   * [Building MiniGUI 3.2](#building-minigui-32)
 
 We describe the basic concepts and foundation knowledge of MiniGUI programming
 with a simple MiniGUI program (`Hello, world!`) in this chapter.
