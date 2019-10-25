@@ -1,41 +1,72 @@
 # Preface
 
 
-MiniGUI is a mature cross-platform windowing system and a GUI (Graphics User Interface) support system for embedded systems and smart IoT devices. MiniGUI aims to provide a fast, stable, full-featured, and cross-platform windowing and GUI support system, which is especially fit for embedded systems or smart IoT devices based-on Linux/uClinux, eCos, and other traditional RTOSes, such as VxWorks, ThreadX, Nucleus, pSOS, uC/OS-II, and OSE.
+MiniGUI is a mature cross-platform windowing system and a GUI
+(Graphics User Interface) support system for embedded systems and
+smart IoT devices.
 
-At present, the latest stable version of MiniGUI is 3.2. This handbook is the programming guide for the MiniGUI version 3.2, which describes how to develop applications based on MiniGUI core and the following MiniGUI components:
+MiniGUI aims to provide a fast, stable, full-featured, tailorable,
+and cross-platform windowing and GUI support system, which is especially
+fit for embedded systems or smart IoT devices based-on Linux/uClinux,
+eCos, and other traditional RTOSes, such as ThreadX, FreeRTOS, RTEMS,
+RT-Thread, VxWorks, Nucleus, pSOS, uC/OS-II, and OSE.
 
-- mGUtils: This component contains miscellaneous utilities like ColorSelectionDialogBox, FileOpenDialogBox, and so on.
+This handbook is the programming guide for the MiniGUI version 3.2 or later.
+It describes how to develop applications based on MiniGUI core and the following
+MiniGUI components:
 
-- mGPlus: This component provides support for vector graphics functions like path, gradient, anti-aliase stretch, and color combination.
+- mGUtils: This component contains miscellaneous utilities like
+  `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
+- mGPlus: This component provides support for 2D vector graphics functions like
+  path, gradient, anti-aliased stretch, and color combination.
+- mGEff: This component provides an animation framework for MiniGUI app.
+  It also provides some popular UI/UE special effects.
+- mGNCS: This component provides a new control set for MiniGUI app, and a new
+  framework for MiniGUI apps as well. By using mGNCS, you can use miniStudio to
+  develop MiniGUI app in WYSIWYG way.
+- mGNCS4Touch: This component provides some new controls, which are
+  compliant to the new control API spec of mGNCS, for devices with
+  touch screens.
 
-- mGEff: This component provides an animation framework for MiniGUI app. It also provides some popular UI/UE special effects.
-
-- mGNCS: This component provides a new control set for MiniGUI app, and a new framework for MiniGUI apps as well. By using mGNCS, you can use miniStudio to develop MiniGUI app in WYSIWYG way.
-
-This handbook is a complete guide on MiniGUI 3.2 programming, which describes the foundation knowledge of MiniGUI 3.2 programming and various programming methods and skills, and detailed describes the main API functions. Though the handbook tries to detailed describe various aspects of MiniGUI programming, it is not a complete reference manual about MiniGUI APIs; please refer to MiniGUI API Reference for relevant information.
+This handbook is a complete guide on MiniGUI programming, which describes the
+foundation knowledge of MiniGUI programming and various programming methods and
+skills, and describes the main API functions in detail. Though the handbook
+tries to describe various aspects of MiniGUI programming at length, it is not
+a complete reference manual about MiniGUI APIs; please refer to
+[MiniGUI API Reference Manuals] for relevant information.
 
 ## Related Documents
 
 The documents related to this guide:
 
-- [Technology White Paper (PDF)](http://www.minigui.com/docs/MiniGUITechWhitePaper-3.2.pdf) - The goals, features, advantages, and road map of MiniGUI V3.2.
-- [Datasheet (PDF)](http://www.minigui.com/docs/MINIGUI-DATASHEET-3.2.pdf) - The feature list of MiniGUI V3.2.
-- [User Manual](MiniGUIUserManualV32) - How to configure, install, and run MiniGUI V3.2.
-- [Release Notes](MiniGUIReleaseNotesV32) - Release notes of the official MiniGUI V3.2 releases.
-
-- API References:
-   - [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
-   - [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
-   - [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
-   - [mGUtils 1.2 API Reference](http://www.minigui.com/api_ref/mgutils-1.2.0/procs/index.html) - The API reference for mGUtils V1.2.
-   - [mGPlus 1.4 API Reference](http://www.minigui.com/api_ref/mgplus-1.4.0/procs/index.html) - The API reference for mGUtils V1.4.
-   - [mGEff 1.2 API Reference](http://www.minigui.com/api_ref/mgeff-1.4.0/procs/index.html) - The API reference for mGEff V1.2.
-   - [mGNCS 1.2 API Reference](http://www.minigui.com/api_ref/mgncs-1.2.0/procs/index.html) - The API reference for mGNCS V1.2.
+- [MiniGUI Overview] - The goals, features, advantages, and road map of MiniGUI.
+- [MiniGUI User Manual] - How to configure, install, and run MiniGUI.
+- [MiniGUI Supplementary Documents] - Supplementary documents about new features.
+- API Reference Manuals for MiniGUI Core:
+   * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
+   * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
+   * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
+   * [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
+   * [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
+   * [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
+- API Reference for MiniGUI Components:
+   * [mGUtils 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgutils-1.2.2/html/index.html) - The API reference for mGUtils V1.2.
+   * [mGPlus 1.4 API Reference](http://www.minigui.com/doc-api-ref-mgplus-1.4.0/html/index.html) - The API reference for mGUtils V1.4.
+   * [mGEff 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgeff-1.2.2/html/index.html) - The API reference for mGEff V1.2.
+   * [mGNCS 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgncs-1.2.4/html/index.html) - The API reference for mGNCS V1.2.
+   * [mGNCS4Touch 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgncs4touch-1.2.2/html/index.html) - The API reference for mGNCS4Touch V1.2.
+- Links to Release Notes:
+   * [MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
+   * [mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
+   * [mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
+   * [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
+   * [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
+   * [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
 
 ## Organization of this Guide
 
-Except this preface, this text is divided into four parts with thirty-nine chapters in total:
+Except this preface, the text is divided into six parts (dozens chapters)
+and an appendix in total:
 
 - Part I: Foundation of MiniGUI Programming. We describe the foundation concepts of MiniGUI programming in this part.
    - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
@@ -133,10 +164,29 @@ FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The origi
 
 ----
 
-*Next* [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
+[Table of Contents](README.md) |
+[Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md) &gt;&gt;
 
-[Contents](MiniGUIProgGuideV32)
 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
-## Comments
+[MiniGUI Overview]: /MiniGUI-Overview.md
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

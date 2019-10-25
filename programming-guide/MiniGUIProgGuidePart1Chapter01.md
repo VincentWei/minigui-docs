@@ -609,7 +609,7 @@ Full demo program package of this guide is mg-samples-3.2.x.tar.gz, which includ
 *Previous* [Preface](MiniGUIProgGuidePreface.md) <br/>
 *Next* [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
 
-[Contents](MiniGUIProgGuideV32)
+[Contents](README.md)
 
 
 ## Comments
