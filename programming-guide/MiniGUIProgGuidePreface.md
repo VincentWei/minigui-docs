@@ -68,7 +68,8 @@ The documents related to this guide:
 Except this preface, the text is divided into six parts (dozens chapters)
 and an appendix in total:
 
-- Part I: Foundation of MiniGUI Programming. We describe the foundation concepts of MiniGUI programming in this part.
+- Part I: Foundation of MiniGUI Programming.
+  We describe the foundation concepts of MiniGUI programming in this part.
    - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
    - [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
    - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03.md)
@@ -81,8 +82,8 @@ and an appendix in total:
    - [Look-and-feel and UI effects](MiniGUIProgGuidePart1Chapter10.md)
    - [Other Programming Topics](MiniGUIProgGuidePart1Chapter11.md)
    - [Using mGUtils](MiniGUIProgGuidePart1Chapter12.md)
-
-- Part II: Using mGNCS. We describe the concepts and the use of main APIs of mGNCS in this part.
+- Part II: Using mGNCS.
+  We describe the concepts and the use of main APIs of mGNCS in this part.
    - [Brief Introduction to mGNCS](MiniGUIProgGuidePart2Chapter01.md)
    - [Getting Started](MiniGUIProgGuidePart2Chapter02.md)
    - [Renderer and Resources Management](MiniGUIProgGuidePart2Chapter03.md)
@@ -100,24 +101,26 @@ and an appendix in total:
    - [Other Advanced Control Class](MiniGUIProgGuidePart2Chapter15.md)
    - [Invisible Control Class](MiniGUIProgGuidePart2Chapter16.md)
    - [Other Class](MiniGUIProgGuidePart2Chapter17.md)
-
-- Part III: MiniGUI Graphics Programming. We describe the use and concepts of MiniGUI graphics related APIs in this part.
+- Part III: MiniGUI Graphics Programming.
+  We describe the use and concepts of MiniGUI graphics related APIs in this part.
    - [Graphics Device Interfaces](MiniGUIProgGuidePart3Chapter01.md)
    - [Handling and Rendering of Text](MiniGUIProgGuidePart3Chapter02.md)
    - [Advanced GDI Functions](MiniGUIProgGuidePart3Chapter03.md)
    - [Using mGPlus for Vector Graphics](MiniGUIProgGuidePart3Chapter04.md)
-- Part IV: Visual Effects and Animations. We describe how to program for visual effects and animations in this part.
+- Part IV: Visual Effects and Animations.
+  We describe how to program for visual effects and animations in this part.
    - [Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01.md)
    - [Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02.md)
-   - [Using OpenGL ES and/or OpenVG with MiniGUI](MiniGUIProgGuidePart4Chapter03.md)
-
-- Part V: MiniGUI Advanced Programming Topics. We describe the concepts of MiniGUI-Processes related advanced programming and the development of customizing GAL and IAL engine in this part.
+   - [Integrating OpenGL ES and/or OpenVG with MiniGUI](MiniGUIProgGuidePart4Chapter03.md)
+- Part V: MiniGUI Advanced Programming Topics.
+  We describe the concepts of MiniGUI-Processes related advanced programming
+  and the development of customizing GAL and IAL engine in this part.
    - [Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01.md)
    - [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md)
    - [GAL and IAL Engines](MiniGUIProgGuidePart5Chapter03.md)
    - [Universal Startup API for RTOSes](MiniGUIProgGuidePart5Chapter04.md)
-
-- Part VI: Using MiniGUI Inherent Controsl. We describe the use of various controls provided by MiniGUI core in this part.
+- Part VI: Using MiniGUI Inherent Controls.
+  We describe the use of various controls provided by MiniGUI core in this part.
    - [Static Control](MiniGUIProgGuidePart6Chapter01.md)
    - [Button Control](MiniGUIProgGuidePart6Chapter02.md)
    - [List Box Control](MiniGUIProgGuidePart6Chapter03.md)
@@ -139,28 +142,38 @@ and an appendix in total:
    - [GridView Control](MiniGUIProgGuidePart6Chapter19.md)
    - [IconView Control](MiniGUIProgGuidePart6Chapter20.md)
    - [Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21.md)
-
-- Appendix: Specifications for MiniGUI Developers. We provide some information for MiniGUI developers in this appendix.
+- Appendix: Specifications for MiniGUI Developers.
+  We provide some information for MiniGUI developers in this appendix.
    - [Code Style and Project Specification](MiniGUIProgGuideAppendixA.md)
    - [Specification for the Picture Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md)
    - [Specification for the mGNCS-compliant Widget Components](MiniGUIProgGuideAppendixD.md)
 
 ## Obtaining Samples of the Guide
 
-We organize the sample programs in this guide into a complete Autoconf/Automake project package called mg-samples. You can download this source tarball from the download zone of MiniGUI website:
+We organize the sample programs in this guide into a complete Autoconf/Automake
+project package called `mg-samples`. You can download this source tarball from
+the download zone of MiniGUI website:
 
-http://www.minigui.com/en/download
+<http://www.minigui.com/en/download>
+
+or fetch the source code from the public repository:
+
+<https://github.com/VincentWei/mg-samples>
 
 ## Compiling and Running Environment of the Samples
 
-This guide assumes that you run MiniGUI 3.2 on Linux operating system. Therefore, some samples are described on the assumption that you are using Linux and GNU toolchain. However, most of the samples in this guide can run on other operating systems. 
+This guide assumes that you run MiniGUI 3.2 or later on Linux operating system.
+Therefore, some samples are described on the assumption that you are using Linux
+and GNU GCC toolchain. However, most of the samples in this guide can run on
+other operating systems.
 
 ## Copyright and Licensing
 
-FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The original text of Apache 2.0 license can be obtained by following means:
+FMSoft releases the sample code (mg-samples) under Apache 2.0 license. The original
+text of Apache 2.0 license can be obtained by following means:
 
-- LICENSE file in mg-samples software packages
-- http://www.apache.org/licenses/LICENSE-2.0.html
+- LICENSE file in `mg-samples` software package
+- <http://www.apache.org/licenses/LICENSE-2.0.html>
 
 ----
 
