@@ -1,5 +1,29 @@
 # Beginning MiniGUI Programming
 
+- [Basic Programming Concepts](#basic-programming-concepts)
+   [Event Driven Programming](#event-driven-programming)
+   [Three Runtime Modes of MiniGUI](#three-runtime-modes-of-minigui)
+- [Hello, world!](#hello-world)
+   [Header Files](#header-files)
+   [Entrance of the Program](#entrance-of-the-program)
+   [Joining a Layer in MiniGUI-Processes](#joining-a-layer-in-minigui-processes)
+   [Creating and Showing Main Window](#creating-and-showing-main-window)
+   [Window Procedure Function](#window-procedure-function)
+   [Screen Output](#screen-output)
+   [Exit of the Program](#exit-of-the-program)
+- [Compiling, Linking and Running](#compiling-linking-and-running)
+- [Writing Autotools Scripts for MiniGUI Application](#writing-autotools-scripts-for-minigui-application)
+
+
+- [Introduction](#introduction)
+   * [MiniGUI Releases](#minigui-releases)
+   * [Source Tarballs and Repos](#source-tarballs-and-repos)
+   * [Documents](#documents)
+- [First Run](#first-run)
+   * [Recommended development environment](#recommended-development-environment)
+   * [Building MiniGUI 4.0](#building-minigui-40)
+   * [Building MiniGUI 3.2](#building-minigui-32)
+
 We describe the basic concepts and foundation knowledge of MiniGUI programming
 with a simple MiniGUI program (`Hello, world!`) in this chapter.
 
@@ -563,8 +587,6 @@ finally.
 
 ## Compiling, Linking and Running
 
-### Compiling MiniGUI Program
-
 You can input the following command in the command line to compile
 `helloworld.c`, and link it to generate the executive file `helloworld`:
 
@@ -612,8 +634,6 @@ __PROMPT__ If MiniGUI has already been configured as MiniGUI-Threads, you
 need not start `mginit` programs. One MiniGUI-Threads application can be
 run directly from the console.
 
-### Components of MiniGUI
-
 Besides core library `libminigui_procs`, `libminigui_ths`, or `libminigui_sa`,
 MiniGUI also includes five other
 components (libraries): mGUtils, mGPlus, mGEff, mGNCS, and mGNCS4Touch.
@@ -622,16 +642,17 @@ functions provided by these components in your program, you may need to
 include the corresponding header files in your program and link the
 corresponding libraries when compiling the application.
 
-## Writing Automake/Autoconf Scripts for MiniGUI Application
+## Writing Autotools Scripts for MiniGUI Application
 
-We have already known that Autoconf/Automake is the best tool for
+We have already known that Autoconf/Automake (collectively called Autotools)
+is the best tool for
 maintaining a software project in UNIX system, which can help us be
 disengaged from work of inputting repeated command lines and maintain a
 project, and can even help us complete cross compiling of programs.
-mg-samples, which is released together with MiniGUI, is such a software
+`mg-samples`, which is released together with MiniGUI, is such a software
 project organized with Autoconf/Automake.
 
-We will build project script for helloworld referring to Autoconf/Automake
+We will build project script for `helloworld` referring to Autoconf/Automake
 script of mg-samples. We will not describe in detail on working mechanism
 of Autoconf/Automake, and relevant information can be obtained referring to
 books about Linux programming or the info pages of these two programs.
