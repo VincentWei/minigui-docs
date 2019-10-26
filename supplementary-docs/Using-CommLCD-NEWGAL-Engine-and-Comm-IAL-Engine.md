@@ -28,11 +28,10 @@ Table of Contents
 Since MiniGUI 3.2.2, you can use MiniGUI's built-in CommLCD NEWGAL engine
 and Comm IAL engine to support your video output device and input device.
 By using these two engines, you do not need to change the source code of
-MiniGUI core. Instead, you implement the engines outside the MiniGUI core
+MiniGUI core. Instead, you implement the engines outside the MiniGUI Core
 by defining some external functions.
 
-In this document, we describe the usage and the interfaces about these
-two engines.
+In this document, we describe the usage and interfaces of these two engines.
 
 ## Key Points
 
@@ -40,12 +39,12 @@ two engines.
 * Enable the engines when configuring MiniGUI:
    * `--enable-videocommlcd`: enable CommLCD NEWGAL engine.
    * `--enable-commial`: enable Comm IAL engine.
-   * `--with-targetname=external`: define target name to be `external`.
+   * `--with-targetname=external`: define target name as `external`.
 * Implement the external stubs in your app side:
    * `#include <minigui/exstubs.h>`
 * Specify the following runtime configuration options:
   * `gal_engine=commlcd`: use CommLCD NEWGAL engine.
-  * `ial_engine=comm`: use comm IAL engine.
+  * `ial_engine=comm`: use Comm IAL engine.
 * Sample code: [`comm-engines` in `mg-tests`](https://github.com/VincentWei/mg-tests/tree/master/comm-engines)
 
 ## Functions to be Implemented
@@ -53,7 +52,7 @@ two engines.
 In MiniGUI header file `<minigui/exstubs.h>`, we declare the function
 prototypes you need to implement for these two engines. You must
 include this header in your C source file(s), and implement all
-of the functions correctly.
+the functions correctly.
 
 In the `comm-engines` directory of `mg-tests` repository, the file `commlcd_ops.c`
 implements the functions for CommLCD NEWGAL engine, and the file `comminput_ops.c`
@@ -64,8 +63,8 @@ implements the functions for Comm IAL engine:
 
 The former implementation does not connect to any real device; it creates
 an anonymous memory map and returns the address of the memory map as
-the frame buffer to MiniGUI. However, when there is a update, this engine
-will save the whole frame buffer content to a Windows bitmap file. So you
+the frame buffer for MiniGUI. However, when there is a update, this engine
+will save the whole frame buffer content to a MS Windows bitmap file. So you
 can observe the behaviors of the engine.
 
 The latter implementation gives you a sample which gets input events
@@ -74,9 +73,9 @@ have no such device, the engine will fails to initialize.
 
 ### CommLCD NEWGAL engine
 
-#### Initializing the engine
+#### Initialize the engine
 
-`__commlcd_drv_init` will be called when initializing your
+`__commlcd_drv_init` will be called when initialize your
 CommLCD engine implementation. In the `comm-engines` sample, it does nothing
 and just returns zero:
 
@@ -92,10 +91,10 @@ Note that, all external methods for CommLCD engine should return zero for succes
 #### Setting video mode
 
 `__commlcd_drv_getinfo` will be called when MiniGUI tries to set the video
-mode according to your settings in the MiniGUI runtime configuration, e.g.,
+mode according to settings in the MiniGUI runtime configuration, e.g.,
 `defaultmode=240x320-32bpp`.
 
-In our sample, it creates an anonymous memory map by calling `mmap` system
+In the sample, it creates an anonymous memory map by calling `mmap` system
 call and returns the video information via `struct commlcd_info* li`:
 
 ```cpp
@@ -118,8 +117,7 @@ int __commlcd_drv_getinfo (struct commlcd_info *li, int width, int height, int d
 }
 ```
 
-You need to fill the all fields of `struct commlcd_info* li` with the correct
-values:
+You need to fill all the fields of `struct commlcd_info* li` with correct values:
 
 * `type`: The video mode type. Currently, CommLCD supports the following modes:
   - `COMMLCD_PSEUDO_RGB332`: 256-color video mode.
@@ -133,7 +131,7 @@ values:
 * `width`: The horizontal resolution in pixels.
 * `bpp`: The color depth in bits per pixels. Actually, this field is a redundancy,
     because the type already contains the depth information.
-* `pitch`: The length in bytes of one scan line. Generally, it should be a
+* `pitch`: The length in bytes of one scan line. Generally, it should be
     times of 4, i.e., the address of each scan line should be 4-byte aligned.
 * `update_method`: The update method when there is a dirty rectangle, can be
     one of the following values:
@@ -142,12 +140,12 @@ values:
     - `COMMLCD_UPDATE_ASYNC`: call `__commlcd_drv_update` asynchronously.
 * `fb`: The address of the frame buffer.
 
-#### Setting palette
+#### Set the palette
 
 If the color depth of the video mode is 8 (`COMMLCD_PSEUDO_RGB332`),
 `__commlcd_drv_setclut` function will be called to set the palette.
 
-In our sample, this method does nothing and returns zero:
+In the sample, this method does nothing and returns zero:
 
 ```cpp
 int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
@@ -157,13 +155,13 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 ```
 
 In practice, you should set the hardware palette (color look up table) in this
-method if the color depth of your video device is only 256-color.
+method if the color depth of your video device is 256-color only.
 
 The arguments of this function have the following meanings:
 
 * `firstcolor`: The first color index (the palette entry index) should be set.
 * `ncolors`: The number of palette entries should be set.
-* `colors`: The array of `GAL_Color` which define the RGB triples for each
+* `colors`: The array of `GAL_Color` which defines the RGB triples for each
     palette entries will be set.
 
 `GAL_Color` is a structure defined in MiniGUI header:
@@ -193,7 +191,7 @@ typedef struct _GAL_Color
 #### Update method
 
 If you specify the `update_method` to be `COMMLCD_UPDATE_SYNC` or
-`COMMLCD_UPDATE_ASYNC`, the update method `__commlcd_drv_update` will
+`COMMLCD_UPDATE_ASYNC`, the update method `__commlcd_drv_update()` will
 be called frequently or periodically.
 
 In our sample, this method saves the whole frame buffer content to Windows
@@ -227,11 +225,11 @@ int __commlcd_drv_update (const RECT* rc_dirty)
 }
 ```
 
-Note that, you can not call MiniGUI GDI functions here to draw something to
+Note that, you can not call MiniGUI GDI functions here to draw anything to
 screen.
 
 In practice, you may need to send an `ioctl` command to your video device driver
-to update the content in our frame buffer to the real LCD controller.
+to update the content in the frame buffer to the real LCD controller.
 
 For example, if you use SPI
 to connect a LCD screen, you may create an off-screen frame buffer in memory,
@@ -246,14 +244,14 @@ in a different thread, about 20 times per second.
 
 If you set `update_mothod` to be `COMMLCD_UPDATE_SYNC`, this update method
 will be called synchronously when there is any update of the frame buffer.
-For example, you call the MiniGUI function `SetPixel` to draw just one pixel
+For example, you call the MiniGUI function `SetPixel()` to draw just one pixel
 on the screen. Therefore, this will reduce the refresh performance of the
 entire system. However, if you use MiniGUI's
 [Synchronous Update Mechanism](https://github.com/VincentWei/minigui/wiki/Sync-Update),
 it will be better to set `update_mothod` to be `COMMLCD_UPDATE_SYNC`.
 
 If you can access the LCD frame buffer directly, and your LCD screen
-do not need a refresh/update operation, you do not need to implement
+does not need a refresh/update operation, you do not need to implement
 the update method, and the function can just return zero:
 
 ```cpp
@@ -264,14 +262,14 @@ int __commlcd_drv_update (const RECT* rc_dirty)
 ```
 
 If you specify the `update_mothod` to be `COMMLCD_UPDATE_NONE` in
-`__commlcd_drv_init` method, this function will be never called.
+`__commlcd_drv_init()` method, this function will never be called.
 
-#### Releasing the engine
+#### Release the engine
 
-When MiniGUI quits, it will call `__commlcd_drv_release` to release
+When MiniGUI quits, it will call `__commlcd_drv_release()` to release
 the resource allocated or created by the engine.
 
-In our sample, it destroys the anonymous memory map and returns zero:
+In the sample, it destroys the anonymous memory map and returns zero:
 
 ```cpp
 int __commlcd_drv_release (void)
@@ -283,10 +281,10 @@ int __commlcd_drv_release (void)
 
 ### Comm IAL engine
 
-#### Initializing the engine
+#### Initialize the engine
 
 When you specify MiniGUI runtime configuration option `system.ial_engine=comm`,
-MiniGUI will call `__comminput_init` function to initialize the engine.
+MiniGUI will call `__comminput_init()` function to initialize the engine.
 
 You can open your input devices in the function:
 
@@ -324,7 +322,7 @@ int __comminput_init (void)
 }
 ```
 
-In `comm-engines` sample, the engine opens three Linux input devices:
+In the sample`comm-engines`, the engine opens three Linux input devices:
 
 - `/dev/input/event0`: A power key.
 - `/dev/input/event1`: Some buttons on the devices.
@@ -345,13 +343,13 @@ MiniGUI input messages:
 - Other buttons: Some standard keyboard keys with scan code
   `SCANCODE_ESCAPE` or others.
 
-#### Waiting for an event
+#### Wait for an event
 
 After MiniGUI starts up, your MiniGUI app will enter an event loop and call
-`GetMessage` function continually. Eventually, MiniGUI calls
-`__comminput_wait_for_input` function if you were using the Comm IAL engine.
+function `GetMessage()` continually. Eventually, MiniGUI calls function
+`__comminput_wait_for_input()` if you were using the Comm IAL engine.
 
-As the name implies, `__comminput_wait_for_input` will give the engine a chance
+As the name implies, `__comminput_wait_for_input()` will give the engine a chance
 to wait for a new event, but in a specified time interval. If there is no input
 event in the time interval, the function should return 0 for timeout, and -1
 for error.
@@ -359,9 +357,9 @@ for error.
 Indeed, Comm IAL engine is a simplified implementation of a typical IAL engine.
 When there is an event, you should return an integer with `COMM_KBINPUT`
 and/or `COMM_MOUSEINPUT` set, in order to tell MiniGUI there is a mouse event
-and/or a keyboard event. The sample implementation of `__comminput_wait_for_input`
-uses the system call `select` to check the file descriptors opened by
-`__comminput_init`, and return a suitable value to MiniGUI:
+and/or a keyboard event. The sample implementation of `__comminput_wait_for_input()`
+uses the system call `select()` to check the file descriptors opened by
+`__comminput_init()`, and return a suitable value to MiniGUI:
 
 ```cpp
 int __comminput_wait_for_input (struct timeval *timeout)
@@ -400,10 +398,10 @@ int __comminput_wait_for_input (struct timeval *timeout)
 }
 ```
 
-#### Getting mouse/touch event
+#### Get mouse/touch event
 
-If there is a keyboard event (the return value of `__comminput_wait_for_input`
-has the bit `COMM_KBINPUT` set), MiniGUI will call `__comminput_kb_getdata`
+If there is a keyboard event (the return value of `__comminput_wait_for_input()`
+has the bit `COMM_KBINPUT` set), MiniGUI will call `__comminput_kb_getdata()`
 immediately to get the real keyboard event data:
 
 ```cpp
@@ -421,10 +419,10 @@ For the detailed implementation, please refer to:
 
 <https://github.com/VincentWei/mg-tests/blob/master/comm-engines/comminput_ops.c>
 
-#### Getting keyboard event
+#### Get keyboard event
 
-If there is a mouse event (the return value of `__comminput_wait_for_input`
-has the bit `COMM_MOUSEINPUT` set), MiniGUI will call `__comminput_ts_getdata`
+If there is a mouse event (the return value of `__comminput_wait_for_input()`
+has the bit `COMM_MOUSEINPUT` set), MiniGUI will call `__comminput_ts_getdata()`
 immediately to get the real keyboard event data:
 
 ```cpp
@@ -442,12 +440,12 @@ For the detailed implementation, please refer to:
 
 <https://github.com/VincentWei/mg-tests/blob/master/comm-engines/comminput_ops.c>
 
-#### Terminating the engine
+#### Terminate the engine
 
-When MiniGUI quits, it will call `__comminput_deinit` to release
+When MiniGUI quits, it will call `__comminput_deinit()` to release
 the resource allocated or created by the Comm IAL engine.
 
-In our sample, it just closes the file descriptors:
+In the sample, it just closes the file descriptors:
 
 ```cpp
 void __comminput_deinit (void)
@@ -461,11 +459,11 @@ void __comminput_deinit (void)
 ## Restrictions
 
 As we pointed out, these two engines are simplified implementations of
-typical NEWGAL engine and IAL engine. Therefore, there are some restrictions
+typical NEWGAL engine and IAL engine. Therefore, there are some restrictions that
 can not be implemented by these two engines:
 
-- You can not implement the hardware-accelerated operations by using CommLCD engine.
-- You can not implement the extra input events introduced by MiniGUI 4.0.
+- You can not implement the hardware-accelerating operations using CommLCD engine.
+- You can not implement extra input events introduced by MiniGUI 4.0.
 
 ## References
 

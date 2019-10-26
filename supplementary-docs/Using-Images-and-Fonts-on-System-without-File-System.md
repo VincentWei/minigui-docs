@@ -1,6 +1,6 @@
 # Using Images and Fonts on System without File System
 
-_How to build source for incore images and fonts, and load them for your MiniGUI apps._
+_Build source for incore images and fonts, and load them for your MiniGUI apps._
 
 Table of Contents
 
@@ -11,16 +11,16 @@ Table of Contents
 
 ## Overview
 
-We often want to embed the raw data of images and/or fonts into the final executable
-of a MiniGUI app:
+We often need to embed raw data of images and/or fonts into the final executable
+of a MiniGUI app, for example:
 
 - The operating system does not provide support for file system.
-- You want to protect your digital intellectual properties such as icons.
+- You need to protect your digital intellectual properties such as icons.
 
-For this purpose, MiniGUI provides a set of APIs and tools to embed the arbitrary
+For such purpose, MiniGUI provides a set of APIs and tools to embed arbitrary
 data into the final executable.
 
-Note that, in MiniGUI term, we often call the embedded data as `incore data`,
+Note that, in MiniGUI terms, we often call the embedded data as `incore data`,
 `incore resource`, or `inner resource`.
 
 For a complete sample, please refer to:
@@ -29,10 +29,10 @@ For a complete sample, please refer to:
 
 ## Tools for Generating Incore Data
 
-We provide some tools in [mg-tools](https://github.com/VincentWei/mg-tools)
-to generate the source file for your incore data:
+We provide tools in [mg-tools](https://github.com/VincentWei/mg-tools)
+to generate source files for your incore data:
 
-- `bin2c`: this is a general tool for generating any binary file to a
+- `bin2c`: a general tool for converting a binary file to a
    C source file. This tool generates a `unsigned char` array for your
    program.
 - `vbf2c`: this tool generates a `VBFINFO` struct from a MiniGUI VBF font
@@ -48,7 +48,7 @@ To generate an incore source file for a UPF file, you can call `upf2c`:
  $ upf2c res/unifont_160_50.upf unifont_160_50
 ```
 
-This command will generate a source file named `unifont_160_50.c`:
+This command generates a source file named `unifont_160_50.c`:
 
 ```cpp
 /*
@@ -103,7 +103,7 @@ To generate the source file for incore images or RBF fonts, you can use
 $ bin2c -o png_pics.inc res/*.png
 ```
 
-This command will generate a large C source file which defines
+This command generates a large C source file which defines
 some `unsigned char` arrays for the PNG files in `res/` subdirectory,
 one array for each file:
 
@@ -118,12 +118,12 @@ static const unsigned char _png__mguxdemo_11_data[] = {
 
 ```
 
-The variable name for one file is consisted with the file name and
+The variable name for one file is consisted of the file name and
 the `_png__` prefix and `_data` suffix.
 
 ## APIs for Managing Incore Data
 
-For fonts and images, MiniGUI provides the basic API to load them from
+For fonts and images, MiniGUI provides basic APIs to load them from
 incore data:
 
 ```cpp
@@ -136,7 +136,7 @@ int GUIAPI LoadBitmapFromMem (HDC hdc, PBITMAP pBitmap,
 void GUIAPI UnloadBitmap (PBITMAP pBitmap);
 ```
 
-For fonts, you should load an incore font before using the font,
+For fonts, you should load an incore font before using it,
 generally before creating any main window, and destroy the font
 before exiting MiniGUI:
 
@@ -163,19 +163,19 @@ static DEVFONT* devfont_unifont_160_50;
 
 For incore images, you can use the basic functions (`LoadBitmapFromMem`
 and `UnloadBitmap`) to load and destroy the BITMAP object. Or you can
-use the MiniGUI resource manager to manage the objects by using the
+use the MiniGUI resource manager to manage the objects using the
 reference count mechanism.
 
 By using the MiniGUI resource manager, you can use the original
 file name to load a resource from incore resource. If there is
-an incore resource for the specific file name, the resource manager
+an incore resource for a specific file name, the resource manager
 will load it from the incore resource, otherwise it will try to
-load if from the file. On the other hand, the resource manager
+load it from the file. On the other hand, the resource manager
 will maintain a reference count for every loaded resource,
-and really release the object only if the reference count reached 0.
+and really release the object only if the reference count reaches 0.
 In this way, you can avoid some bugs about object life cycle.
 
-The sample uses the resource manager to maintain the incore images:
+The following sample uses the resource manager to maintain the incore images:
 
 ```cpp
 #include "png_pics.inc"

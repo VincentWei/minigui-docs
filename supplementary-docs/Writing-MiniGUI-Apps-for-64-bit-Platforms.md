@@ -16,7 +16,7 @@ Table of Contents
     + [Window callback procedure](#window-callback-procedure)
     + [Notification callback procedure](#notification-callback-procedure)
     + [Time and timer](#time-and-timer)
-- [Writing Portable Code](#writing-portable-code)
+- [Write Portable Code](#write-portable-code)
   * [Use correct data types](#use-correct-data-types)
   * [Invalid pointer values](#invalid-pointer-values)
 
@@ -26,13 +26,12 @@ In MiniGUI 3.2.0, we enhanced MiniGUI to support 64-bit platforms.
 
 Although many embedded devices or IoT devices are still using 32-bit
 processors, we often need to develope MiniGUI apps on a desktop computer
-(almost all desktop computer are now using 64-bit CPU), and then build
-the code for the target system through a cross compiler. Therefore,
+(almost all desktop computer are now using 64-bit CPUs), and then build
+the code for the target system through cross compilation. Therefore,
 the code of a MiniGUI App needs to be portable, regardless of whether
-the target system is 32-bit or 64-bit, or even a big-endian or
-little-endian system.
+the target system is 32-bit or 64-bit, or even big-endian or little-endian.
 
-This document focuses on some of the changes that MiniGUI introduces to
+This document focuses on some of the changes that MiniGUI introduced to
 support 64-bit systems and what you need to be aware of when writing
 portable code.
 
@@ -52,7 +51,7 @@ the size of `DWORD` will be 4 bytes on 32-bit platform, and 8 bytes on
 
 Similarly, `WPARAM` and `LPARAM` now have pointer precision.
 
-`WORD` and `SWORD` has a half of pointer precision. The size of these
+`WORD` and `SWORD` have a half of pointer precision. The size of these
 two types is 2 bytes on 32-bit platform, and 4 bytes on 64-bit platform.
 
 `RGBCOLOR` now is defined as an alias of `DWORD32` (see below).
@@ -62,16 +61,16 @@ Note that the type of `BYTE` always has the size of 8-bit on both
 
 ### New integer types
 
-We introduce `DWORD32` and `SDWORD32` types,
+We introduced `DWORD32` and `SDWORD32` types,
 which have the size of 4 bytes on both 32-bit and 64-bit platforms.
 You should use these types when reading/writing 32-bit integers from
-a binary files for the portability. Of course, you can also use
+binary files for the portability. Of course, you can also use
 `Uint32` or `Sint32` types.
 
-Similarly, we introduce `WORD16` and `SWORD16` types,
+Similarly, we introduced `WORD16` and `SWORD16` types,
 which have the size of 2 bytes on both 32-bit and 64-bit platforms.
 You should use these types when reading/writing 16-bit integers from
-a binary file for the portability. Of course, you can also use
+binary files for portability. Of course, you can also use
 `Uint16` or `SUint16` types.
 
 `LRESULT` is defined for window callback procedure, and it has
@@ -79,16 +78,16 @@ pointer precision.
 
 `LINT` is a new integer type with pointer precision.
 
-`QDWORD` is a new integer type for a quauter of DWORD. This type is
+`QDWORD` is a new integer type for a quarter of DWORD. This type is
 16-bit long on 64-bit architecture, and 8-bit long on 32-bit.
 
 ## API changes
 
 ### Integer macros
 
-`MAKEWPARAM`: this new macro makes a WPARAM value by using four bytes.
+`MAKEWPARAM`: this new macro makes a WPARAM value using four bytes.
 On the contrary, `FIRSTBYTE`, `SECONDBYTE`, `THIRDBYTE`, and `FOURTH`
-macros get the four bytes from a `WPARAM` or a `Uint32` value.
+macros get four bytes from a `WPARAM` or a `Uint32` value.
 
 `MAKEWORD16`: this new macro makes a 16-bit word by using two bytes.
 Meanwhile, `MAKEWORD` makes a 16-bit word on 32-bit platform, and a 32-bit
@@ -103,7 +102,7 @@ get red, green, blue, and alpha components from a `DWORD32` integer
 respectively.
 
 New macros for QDWORD:
- * `MAKEDWORD`: Make a DWROD from four QDWORDs.
+ * `MAKEDWORD`: make a DWROD from four QDWORDs.
  * `FIRST_QDWORD`: get the first (LSB) QDWORD from a DWORD.
  * `SECOND_QDWORD`: get the second (LSB) QDWORD from a DWORD.
  * `THIRD_QDWORD`: get the third (LSB) QDWORD from a DWORD.
@@ -116,11 +115,11 @@ The main changes in structure and functions:
  * We now use a `UINT` instead of an `int` integer for the message identifier.
 
  * We now use a `DWORD` integer for the time tick count. Meanwhile, you can
-    create 64 timers on 64-bit platform.
+    create 64 timers on 64-bit platforms.
 
  * We now use a `LRESULT` integer for the return value of a window callback
     procedure. Now it is safe to return a pointer from the callback procedure
-    on 64-bit platform. This is a very important change, and it will break the
+    on 64-bit platforms. This is a very important change, and it will break
     source compatibilty of your code. You should check the source code (use
     gcc option `-Wall`) carefully.
 
@@ -134,7 +133,7 @@ The main changes in structure and functions:
 
 #### Message
 
-The strcuture `MSG` and all message-related functions changed.
+The strcuture `MSG` and all message-related functions have changed.
 For example, the prototype of `SendMessage` changed from
 
 ```cpp
@@ -165,7 +164,7 @@ unsigned char ch_buff [3] = FOURTHBYTE(wParam);
 #### Window callback procedure
 
 Furthermore, the structure and functions to register window class,
-create main window, and create dialog box changed. For example, the prototype
+create main window, and create dialog box have changed. For example, the prototype
 of `WNDPROC` changed from
 
 ```cpp
@@ -201,7 +200,7 @@ platform, unless you know what your are doing.
 
 #### Notification callback procedure
 
-The type of notification callback changes from:
+The type of notification callback changed from:
 
 ```cpp
 typedef void (* NOTIFPROC) (HWND hwnd, int id, int nc, DWORD add_data);
@@ -217,7 +216,7 @@ _IMPORTANT NOTE_
 
 If you use `MSG_COMMAND` message to handle the notification sent from children
 controls, you should make sure the identifier is small enough on 64-bit
-platform. Because MiniGUI packs the identifier and the notification code
+platforms. Because MiniGUI packs the identifier and the notification code
 in the `WPARAM` parameter:
 
 ```cpp
@@ -232,7 +231,7 @@ of the control.
 
 Therefore, we recommend strongly that you use a `NOTIFYPOROC` callback to
 handle the notification sent from controls. To do this, please call
-`SetNotificationCallback` function to set the notification callback function.
+`SetNotificationCallback()` function to set the notification callback function.
 
 #### Time and timer
 
@@ -260,7 +259,7 @@ to
 typedef BOOL (* TIMERPROC)(HWND, LINT, DWORD)
 ```
 
-## Writing Portable Code
+## Write Portable Code
 
 In this section, we give some tips to write portable code.
 
@@ -282,7 +281,7 @@ file header to a file:
 
 We often use `NULL` for an invalid pointer type value. However, we may
 also use `0xFFFFFFFF` for this purpose. This works on 32-bit architecture,
-but not 64-bit.
+but not on 64-bit.
 
 Instead, we sugguest to use `(-1)` instead of `0xFFFFFFFF` for the invalid
 integer or pointer type value for good portability:

@@ -22,7 +22,7 @@ Table of Contents
 
 ## Version 3.2.2
 
-MiniGUI 3.2.2 was released in April 16, 2019.
+MiniGUI 3.2.2 was released on April 16, 2019.
 
 ### What's new in this version
 
@@ -39,7 +39,7 @@ MiniGUI 3.2.2 was released in April 16, 2019.
   1. Use different colors for the output of `_DBG_PRINTF` and `_ERR_PRINTF`.
   1. Add `__mg_save_jpg` function for storing MYBITMAP as JPEG file (10km).
   1. Modified logic for checking JPEG format (10km).
-  1. Support BIDI for UNICODE charsets and cleanup the implementation.
+  1. Support BIDI for Unicode charsets and cleanup the implementation.
     * New API: `GetGlyphBIDIType` to get the glyph type in BIDI.
     * New DC attribute: BIDI flag.
   1. Add a new key `dpi` for NEWGAL engine to define the DPI of the screen.
@@ -47,12 +47,12 @@ MiniGUI 3.2.2 was released in April 16, 2019.
   1. Add an item for `GetGDCapability` to return DPI of the DC.
   1. New API `InitSlaveScreenEx` to specify the DPI of slave screen.
      Define `InitSlaveScreen` as an inline function calling `InitSlaveScreenEx`.
-  1. Enhance commlcd engint to support more pixel type and synchronously update.
+  1. Enhance commlcd engine to support more pixel type and synchronously update.
   1. New USVFB IAL engine and NEWGAL engine for web display server.
-  1. New type: `QDWORD` for a quauter of DWORD. This type is 16-bit long on
-    64-bit architecture, and 8-bit long on 32-bit.
+  1. New type `QDWORD` for a quauter of DWORD. This type is 16-bit long on
+    64-bit architecture, and 8-bit long on 32-bit architecture.
   1. New macros for QDWORD:
-    * `MAKEDWORD`: Make a DWROD from four QDWORDs.
+    * `MAKEDWORD`: make a DWROD from four QDWORDs.
     * `FIRST_QDWORD`: get the first (LSB) QDWORD from a DWORD.
     * `SECOND_QDWORD`: get the second (LSB) QDWORD from a DWORD.
     * `THIRD_QDWORD`: get the third (LSB) QDWORD from a DWORD.
@@ -63,17 +63,17 @@ MiniGUI 3.2.2 was released in April 16, 2019.
 * BUGFIXING:
   1. handle `PNG_COLOR_TYPE_GRAY_ALPHA` color type of PNG files.
   1. Fix a bug to free a null pointer (ReleaseDC).
-  1. No need to make the pitch of FT2 monobitmap is single-byte aligned.
+  1. No need to make the pitch of FT2 monobitmap single-byte aligned.
      This bug may generate dirty dots for monobitmap glyph from TTF.
   1. Skip null pixels for SUBPIXEL glyphs. This bug will always show background
      pixels of one SUBPIXEL glyph.
-  1. Fix the bug of wrong bounding box handling for SUBPIXEL rendering of glyph.
+  1. Fix the bug of wrong bounding box handling for SUBPIXEL rendering of a glyph.
   1. Tune cache implementation of FreeType2 font engine.
     * Enable cache for rotated LOGFONT.
 
 ## Version 3.2.0
 
-MiniGUI 3.2.0 was released in July 12, 2018.
+MiniGUI 3.2.0 was released on July 12, 2018.
 
 ### What's new in this version
 
@@ -97,7 +97,7 @@ the size of `DWORD` will be 4 bytes on 32-bit platform, and 8 bytes on
 
 Similarly, `WPARAM` and `LPARAM` now have pointer precision.
 
-`WORD` and `SWORD` has a half of pointer precision. The size of these
+`WORD` and `SWORD` has half of pointer precision. The size of these
 two types is 2 bytes on 32-bit platform, and 4 bytes on 64-bit platform.
 
 `RGBCOLOR` now is defined as an alias of `DWORD32` (see below).
@@ -107,13 +107,13 @@ Note that the type of `BYTE` always has the size of 8-bit on both
 
 #### New integer types
 
-We introduce `DWORD32` and `SDWORD32` types,
+We introduced `DWORD32` and `SDWORD32` types,
 which have the size of 4 bytes on both 32-bit and 64-bit platforms.
 You should use these types when reading/writing 32-bit integers from
-a binary files for the portability. Of course, you can also use
+a binary files for portability. Of course, you can also use
 `Uint32` or `Sint32` types.
 
-Similarly, we introduce `WORD16` and `SWORD16` types,
+Similarly, we introduced `WORD16` and `SWORD16` types,
 which have the size of 2 bytes on both 32-bit and 64-bit platforms.
 You should use these types when reading/writing 16-bit integers from
 a binary file for the portability. Of course, you can also use
@@ -128,11 +128,11 @@ pointer precision.
 
 #### Integer macros
 
-`MAKEWPARAM`: this new macro makes a WPARAM value by using four bytes.
+`MAKEWPARAM`: this new macro makes a WPARAM value using four bytes.
 On the contrary, `FIRSTBYTE`, `SECONDBYTE`, `THIRDBYTE`, and `FOURTH`
-macros get the four bytes from a `WPARAM` or a `Uint32` value.
+macros get four bytes from a `WPARAM` or a `Uint32` value.
 
-`MAKEWORD16`: this new macro makes a 16-bit word by using two bytes.
+`MAKEWORD16`: this new macro makes a 16-bit word using two bytes.
 Meanwhile, `MAKEWORD` makes a 16-bit word on 32-bit platform, and a 32-bit
 word on 64-bit platform.
 
@@ -147,9 +147,9 @@ respectively.
 Note that you should use `(-1)` instead of `0xFFFFFFFF` for the invalid
 integer or pointer type value for good portability.
 
-#### Structure and functions
+#### Structures and functions
 
-The main changes in structure and functions:
+The main changes in structures and functions are:
 
  * We now use a `UINT` instead of an `int` integer for the message identifier.
 
@@ -170,7 +170,7 @@ The main changes in structure and functions:
     menu item. So you can pass a pointer as the identifier of the timer on
     64-bit platform. mGNCS works in this manner.
 
-##### Message
+##### Messages
 
 The strcuture `MSG` and all message-related functions changed.
 For example, the prototype of `SendMessage` changed from
@@ -196,8 +196,8 @@ parameter of a `MSG_CHAR` message:
 
 ##### Window callback procedure
 
-Furthermore, the structure and functions to register window class,
-create main window, and create dialog box changed. For example, the prototype
+Furthermore, the structures and functions to register window class,
+create main window, and create dialog box have changed. For example, the prototype
 of `WNDPROC` changed from
 
     typedef int (* WNDPROC)(HWND, int, WPARAM, LPARAM)
@@ -248,7 +248,7 @@ in the `WPARAM` parameter:
 The code above will not work on 64-bit if you use a pointer as the identifier
 of the control.
 
-Therefore, we recommend strongly that you use a `NOTIFYPOROC` callback to
+Therefore, we strongly recommend that you use a `NOTIFYPOROC` callback to
 handle the notification sent from controls. To do this, please call
 `SetNotificationCallback` function to set the notification callback function.
 
@@ -272,23 +272,23 @@ to
 
 ##### Miscellaneous
 
-In addition, we correct the bad or wrong definitions of some APIs:
+In addition, we corrected the bad or wrong definitions of some APIs:
 
-  * `DWORD2PIXEL` to `DWORD2Pixel`. The old one has a bad name.
-  * `GetWindowRendererFromName`: The return type changes from
+  * `DWORD2PIXEL` to `DWORD2Pixel`. The old one had a bad name.
+  * `GetWindowRendererFromName`: The return type changed from
     `const WINDOW_ELEMENT_RENDERER*` to `WINDOW_ELEMENT_RENDERER*`.
     So you can overload some methods directly of a renderer.
-  * `GetDefaultWindowElementRenderer`: The return type changes from
+  * `GetDefaultWindowElementRenderer`: The return type changed from
     `const WINDOW_ELEMENT_RENDERER*` to `WINDOW_ELEMENT_RENDERER*`.
     So you can overload some methods directly of the default renderer.
 
 ### Configuration option changes
 
-We add some new options for autoconf script (`configure`):
+We added some new options for autoconf script (`configure`):
 
   * `--with-runmode`: Now you can use this option to specify the runtime
     mode of MiniGUI. The old enable options for runmode were removed.
-    Note that MiniGUI-Processes now is the default runmode.
+    Note that MiniGUI-Processes now is the default runtime mode.
 
   * `--enable-develmode`: You should use this option to define `_DEBUG` macro,
     enable `-Wall -Werror` option, and enable all features of MiniGUI,
