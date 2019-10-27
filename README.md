@@ -1,6 +1,6 @@
 # MiniGUI Documents
 
-We maintains the documents for MiniGUI Core and MiniGUI Components in this project.
+We maintains the documents for MiniGUI Core and MiniGUI components in this repository.
 
 ## Table of Contents
 
@@ -9,7 +9,7 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
 - [MiniGUI Programming Guide](programming-guide/README.md)
 - [MiniGUI Porting Guide](porting-guide/README.md)
 - [MiniGUI Supplementary Documents](supplementary-docs/README.md)
-- [API Reference Manuals for MiniGUI Core](api-reference/README.md)
+- API Reference Manuals for MiniGUI Core
    * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
@@ -32,15 +32,15 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
 
 ## 针对中文用户
 
-很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大。
+很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大，
 所以从 MiniGUI 3.2 版本开始，我们选择优先维护英文版本，中文版本就不再维护了。
 这主要出于如下几个方面的因素考虑：
 
 - 作为一个面向全球的开源软件，要服务所有国家或地区的开发者，英语是目前最好的语言。
 - 使用英文，可以避免一些由于术语翻译不准确而导致的问题，对开发者理解工作原理会更有帮助。
 - MiniGUI 各文档中使用的英文，不论是词汇还是语法，都相对简单，有一定基础的开发者都可以顺利阅读和理解。
-- 现有的机器翻译工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），能将英文文档
-比较准确地翻译成中文文档，而如果将中文文档翻译成英文，效果还差很多。
+- 现有的机器翻译工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），
+可以将英文文档比较准确地翻译成中文文档，而如果要将中文文档翻译成英文，效果还差很多。
 
 另外，我们以前撰写的中文文档，仍保留在老的 MiniGUI Wiki 站点上，供参考：
 
@@ -50,9 +50,17 @@ We maintains the documents for MiniGUI Core and MiniGUI Components in this proje
 
 We are summarizing and rearranging them from various historical documents:
 
-- Convert the format from TWiki, PDF, or DOC to Markdown.
+- Convert the format from TWiki, PDF, or DOCX to Markdown.
 - Adjust the description according to the latest MiniGUI version.
 - Fix spelling or grammar errors.
 - Use the latest screenshots.
 - Cleanup the document format.
+
+We hope that we can finish this work at the end of the year 2019.
+
+### ChangeLog
+
+- 2019-10-24  
+  MiniGUI User Manual now is ready.
+
 

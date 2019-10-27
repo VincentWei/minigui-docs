@@ -3,7 +3,7 @@
 This manual mainly describes the compile-time configuration options and
 the runtime configuration options of MiniGUI version 3.2 or later.
 
-## Contents
+## Table of Contents
 
 - [Quick Start](MiniGUIUserManualQuickStart.md)
 - [Building MiniGUI](MiniGUIUserManualBuildingMiniGUI.md)

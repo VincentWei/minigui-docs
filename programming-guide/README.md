@@ -1,19 +1,8 @@
-# Programming Guide of MiniGUI V3.2
+# MiniGUI Programming Guide
 
-MiniGUI is a windowing system and a graphics user interface for embedded systems and/or smart IoT devices. It aims to provide a fast, stable, and cross-platform Graphics User Interface (GUI) support system, which is especially fit for embedded Linux and popular real-time operating systems.
+This document introduces the concepts and the main APIs to program MiniGUI apps in detail.
 
-This document introduces the concepts and the main APIs to program MiniGUI v3.2 apps in detail.
-
-For more information, please visit MiniGUI website:
-
-http://www.minigui.com
-
-## Copying
-
-Copyright (C) 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.
-All rights reserved.
-
-*No matter you obtain all or part of the literal or image materials of this guide in any way, no matter they are common printed matters or electronic files, Beijing FMSoft Technologies Co., Ltd. only grants you the right to read. Format conversion, re-release, spreading and reproduction of all or part of its content or using the literals and images for commercial purpose without written permission are regarded as infringement acts and may cause serious civil or criminal punishment.*
+## Table of Contents
 
 - [Preface](MiniGUIProgGuidePreface.md)
 - Part I Foundation of MiniGUI Programming
@@ -87,3 +76,9 @@ All rights reserved.
    - [Code Style and Project Specification](MiniGUIProgGuideAppendixA.md)
    - [Specification for the Picture Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md)
    - [Specification for the mGNCS-compliant Widget Components](MiniGUIProgGuideAppendixD.md)
+
+## Copying
+
+Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+All rights reserved.
+

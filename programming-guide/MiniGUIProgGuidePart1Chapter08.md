@@ -1,24 +1,37 @@
-# 9 Keyboard and Mouse
+# Input Messages
 
-The application receives the user’s input from keyboard and mouse (or other pointing device, such as touch-screen). Application of MiniGUI receives keyboard and mouse input by handling messages sent to window. We will describe generation of keyboard and mouse message, and how application receives and handles messages of keyboard and mouse in this chapter.
+The application receives the user’s input from keyboard and mouse (or other
+pointing device, such as touch-screen). Application of MiniGUI receives
+keyboard and mouse input by handling messages sent to window. We will describe
+generation of keyboard and mouse message, and how application receives and
+handles messages of keyboard and mouse in this chapter.
 
-## 9.1 Keyboard
-### 9.1.1 Keyboard Input
+## Keyboard
 
-Fig. 9.1 illustrates the process of handling keyboard input in MiniGUI. 
-<center>
-<img src="%ATTACHURLPATH%/9.1_T.jpeg" alt="9.1_T.jpeg"  ALIGN="CENTER" /> <br>
-Fig. 9.1 Keyboard input in MiniGUI
-</center>
+### Keyboard Input
 
-MiniGUI receives original input event or data from keyboard through keyboard device driver, and transforms it into MiniGUI abstract keyboard event and data. Related handling procedures of bottom layer event transform these keyboard events into key press/release messages of top layer and put them in the message queue. Application gets these messages through message loop, and dispatches them to window procedure for handling. MiniGUI can support 255 keys, and each key corresponds to a unique “scan code”, scan code less than 129 is used to define keys on PC keyboard. The following is the definition of some scan codes in minigui/common.h:
+Figure 1 illustrates the process of handling keyboard input in MiniGUI.
 
-```cplusplus
+![Keyboard input in MiniGUI](figures/9.1_T.jpeg)
+
+##### Figure 1 Keyboard input in MiniGUI
+
+MiniGUI receives original input event or data from keyboard through keyboard
+device driver, and transforms it into MiniGUI abstract keyboard event and data.
+Related handling procedures of bottom layer event transform these keyboard
+events into key press/release messages of top layer and put them in the message
+queue. Application gets these messages through message loop, and dispatches
+them to window procedure for handling. MiniGUI can support 255 keys, and each
+key corresponds to a unique “scan code”, scan code less than 129 is used to
+define keys on PC keyboard. The following is the definition of some scan codes
+in minigui/common.h:
+
+```cpp
 #define MGUI_NR_KEYS                    255
-#define NR_KEYS                          128
+#define NR_KEYS                         128
 #define SCANCODE_USER                   (NR_KEYS + 1)
 
-#define SCANCODE_ESCAPE                1
+#define SCANCODE_ESCAPE                 1
 
 #define SCANCODE_1                      2
 #define SCANCODE_2                      3
@@ -31,46 +44,86 @@ MiniGUI receives original input event or data from keyboard through keyboard dev
 #define SCANCODE_9                      10
 #define SCANCODE_0                      11
 
-#define SCANCODE_MINUS                 12
-#define SCANCODE_EQUAL                 13
+#define SCANCODE_MINUS                  12
+#define SCANCODE_EQUAL                  13
 
-#define SCANCODE_BACKSPACE            14
-#define SCANCODE_TAB                   15
+#define SCANCODE_BACKSPACE              14
+#define SCANCODE_TAB                    15
 ...
+
 ```
 
-### 9.1.2 Key Stroke Message
+### Key Stroke Message
 
-When a key is pressed down, application will receive a message MSG_KEYDOWN or MGS_SYSKEYDOWN; and releasing a key will generate a message MSG_KEYUP or MGS_SYSKEYUP.
+When a key is pressed down, application will receive a message MSG_KEYDOWN or
+MGS_SYSKEYDOWN; and releasing a key will generate a message MSG_KEYUP or
+MGS_SYSKEYUP.
 
-Pressing key and releasing key messages are usually appear in pairs; while the user presses a key and does not release it, auto repeating characteristic of the keyboard will be started up after a period of time, and the system will generate a series of messages MSG_KEYDOWN or MGS_SYSKEYDOWN; and a message MSG_KEYUP or MSG_SYSKEYUP will not be generated till the user releases this key.
+Pressing key and releasing key messages are usually appear in pairs; while the
+user presses a key and does not release it, auto repeating characteristic of
+the keyboard will be started up after a period of time, and the system will
+generate a series of messages MSG_KEYDOWN or MGS_SYSKEYDOWN; and a message
+MSG_KEYUP or MSG_SYSKEYUP will not be generated till the user releases this
+key.
 
-In MiniGUI, when the user presses one key as ALT being pressed down, system keystroke messages MSG_SYSKEYDOWN and MSG_SYSKEYUP will be generated. Non-system keystroke generates non-system keystroke messages MSG_KEYDOWN and MSG_KEYUP. System keystroke messages are used to control the activation of menu in MiniGUI, and non-system keystroke messages are mainly used in application. If a system keystroke message is handled by application, this message should be transferred to the function DefaultMainWinProc for handling furthermore. Otherwise, system operation will be disabled.
+In MiniGUI, when the user presses one key as ALT being pressed down, system
+keystroke messages MSG_SYSKEYDOWN and MSG_SYSKEYUP will be generated.
+Non-system keystroke generates non-system keystroke messages MSG_KEYDOWN and
+MSG_KEYUP. System keystroke messages are used to control the activation of menu
+in MiniGUI, and non-system keystroke messages are mainly used in application.
+If a system keystroke message is handled by application, this message should be
+transferred to the function DefaultMainWinProc for handling furthermore.
+Otherwise, system operation will be disabled.
 
-Keystroke messages’ wParam parameter presents the scan code of the key, and lParam parameter includes the status flags of special keys such as SHIFT, ALT, CTRL, etc.
+Keystroke messages’ wParam parameter presents the scan code of the key, and
+lParam parameter includes the status flags of special keys such as SHIFT, ALT,
+CTRL, etc.
 
-### 9.1.3 Character Message
+### Character Message
 
-Usually, a typical window procedure does not handle directly the key stroke messages of character keys, but handles character message MSG_CHAR of the character key, and wParam parameter of message MSG_CHAR presents the encode value of this character.
+Usually, a typical window procedure does not handle directly the key stroke
+messages of character keys, but handles character message MSG_CHAR of the
+character key, and wParam parameter of message MSG_CHAR presents the encode
+value of this character.
 
-MSG_CHAR is usually generated by TranslateMessage function, which checks the scan code and the status of the corresponding key when receiving messages MSG_KEYDOWN and MSG_SYSKEYDOWN. If it can be transformed to a character, MSG_CHAR or MSG_SYSCHAR message of the corresponding character will be generated, and will be sent to the target window of the keystroke message. The application generally calls TranslateMessage function before DispatchMessage in a message loop is as follows:
+MSG_CHAR is usually generated by TranslateMessage function, which checks the
+scan code and the status of the corresponding key when receiving messages
+MSG_KEYDOWN and MSG_SYSKEYDOWN. If it can be transformed to a character,
+MSG_CHAR or MSG_SYSCHAR message of the corresponding character will be
+generated, and will be sent to the target window of the keystroke message. The
+application generally calls TranslateMessage function before DispatchMessage in
+a message loop is as follows:
 
-```cplusplus
+```cpp
     while (GetMessage(&Msg, hMainWnd)) {
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
     }
 ```
 
-Because TranslateMessage function handles messages MSG_KEYDOWN and MSG_SYSKEYDOWN before dispatching message, generates character message, and transfers it directly to window procedure, window procedure will receive the character message of character key first and then receive keystroke message.
+Because TranslateMessage function handles messages MSG_KEYDOWN and
+MSG_SYSKEYDOWN before dispatching message, generates character message, and
+transfers it directly to window procedure, window procedure will receive the
+character message of character key first and then receive keystroke message.
 
-Usually, parameter wParam of character message includes the ISO8859-1 encode of the character, and the content of parameter lParam is the same as the parameter of keystroke message generating the character message.
+Usually, parameter wParam of character message includes the ISO8859-1 encode of
+the character, and the content of parameter lParam is the same as the parameter
+of keystroke message generating the character message.
 
-The basic rule for handling key stroke message and character message is: You can handle message MSG_CHAR if you want to get keyboard character input into window; and you can handle message MSG_KEYDOWN when you want to get cursor keys, function keys, Del, Ins, Shift, Ctrl and Alt key strokes.
+The basic rule for handling key stroke message and character message is: You
+can handle message MSG_CHAR if you want to get keyboard character input into
+window; and you can handle message MSG_KEYDOWN when you want to get cursor
+keys, function keys, Del, Ins, Shift, Ctrl and Alt key strokes.
 
 ### 9.1.4 Key Status
 
-Meanwhile handling keyboard messages, application need determine the current status of special shift keys (Shift, Ctrl and Alt) or switch keys (CapsLock, NumLock, and ScrollLock). Parameter lParam includes the status flags of special keys, and application can determine the status of a certain key by using AND operation of specific macro with this parameter. For example, if (lParam & KS_LEFTCTRL) is TRUE, left CTRL key is pressed down. Key status macros defined by MiniGUI include:
+Meanwhile handling keyboard messages, application need determine the current
+status of special shift keys (Shift, Ctrl and Alt) or switch keys (CapsLock,
+NumLock, and ScrollLock). Parameter lParam includes the status flags of special
+keys, and application can determine the status of a certain key by using AND
+operation of specific macro with this parameter. For example, if (lParam &
+KS_LEFTCTRL) is TRUE, left CTRL key is pressed down. Key status macros defined
+by MiniGUI include:
 
 ```
 KS_CAPSLOCK          CapsLock key is locked
@@ -89,51 +142,70 @@ KS_MIDDLBUTTON       Middle mouse button is preesed down
 KS_CAPTURED          Mouse is captured by the target window
 ```
 
-Except KS_CAPTURED can only be used for mouse message, other macros can be used both for handling keystroke messages and mouse messages.
+Except KS_CAPTURED can only be used for mouse message, other macros can be used
+both for handling keystroke messages and mouse messages.
 
 Application can get key status value through GetShiftKeyStatus function:
 
-```cplusplus
+```cpp
 DWORD GUIAPI GetShiftKeyStatus (void);\
 ```
 
-The return value of this function includes the status of all above keys. Application can determine a certain key status by using AND operation of specific macro with the return value. For example, using GetShiftKeyStatus() & KS_CTRL to determine whether the left or right Ctrl key is pressed, if it is the value of expression above is TRUE.
+The return value of this function includes the status of all above keys.
+Application can determine a certain key status by using AND operation of
+specific macro with the return value. For example, using GetShiftKeyStatus() &
+KS_CTRL to determine whether the left or right Ctrl key is pressed, if it is
+the value of expression above is TRUE.
 
-Application can also get the status of a certain key on the keyboard through GetKeyStatus function:
+Application can also get the status of a certain key on the keyboard through
+GetKeyStatus function:
 
-```cplusplus
+```cpp
 BOOL GUIAPI GetKeyStatus (UINT uKey);
 ```
 
-Parameter uKey presents the scan code of the key to be required. If this key is pressed down, GetKeyStatus returns TRUE, otherwise returns FALSE.
+Parameter uKey presents the scan code of the key to be required. If this key is
+pressed down, GetKeyStatus returns TRUE, otherwise returns FALSE.
 
-### 9.1.5 Input Focus
+### Input Focus
 
-System sends keyboard messages to the message queue of the window currently having input focus. Window with input focus can receive keyboard input, such windows are usually active main window, child window of active main window or grandchild window of active main window, etc. Child window usually indicates to have input focus by displaying a blinking caret. Please refer to Chapter 10 “Icon, Cursor, and Caret” for information about caret.
+System sends keyboard messages to the message queue of the window currently
+having input focus. Window with input focus can receive keyboard input, such
+windows are usually active main window, child window of active main window or
+grandchild window of active main window, etc. Child window usually indicates to
+have input focus by displaying a blinking caret. Please refer to Chapter 10
+“Icon, Cursor, and Caret” for information about caret.
 
-Input focus is a property of window, and system can make keyboard shared to all the windows displayed on the screen through changing the input focus among these windows. The user can move input focus from one window to another. If input focus is moved from one window to another, system sends message MSG_KILLFOCUS to the window losing focus, and sends message MSG_SETFOCUS to the window gaining focus.
+Input focus is a property of window, and system can make keyboard shared to all
+the windows displayed on the screen through changing the input focus among
+these windows. The user can move input focus from one window to another. If
+input focus is moved from one window to another, system sends message
+MSG_KILLFOCUS to the window losing focus, and sends message MSG_SETFOCUS to the
+window gaining focus.
 
-Application can get the handle of the child window having input focus of a certain window by calling GetFocusChild function:
+Application can get the handle of the child window having input focus of a
+certain window by calling GetFocusChild function:
 
-```cplusplus
+```cpp
 #define GetFocus GetFocusChild
 HWND GUIAPI GetFocusChild (HWND hWnd);
 ```
+Parent window can put input focus to any one of its child windows by calling
+SetFocusChild function:
 
-Parent window can put input focus to any one of its child windows by calling SetFocusChild function:
-
-```cplusplus
+```cpp
 #define SetFocus SetFocusChild
 HWND GUIAPI SetFocusChild (HWND hWnd);
 ```
+### Sample Program
 
-### 9.1.6 Sample Program
+The code in List 1 illustrates simple concept of keyboard input. The complete
+code of this program is included in simplekey.c of sample program package
+mg-samples for this guide.
 
-The code in List 9.1 illustrates simple concept of keyboard input. The complete code of this program is included in simplekey.c of sample program package mg-samples for this guide.
+<center>List 1 simplekey.c</center>
 
-<center>List 9.1 simplekey.c</center>
-
-```cplusplus
+```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -175,11 +247,11 @@ Window procedure of above program prints the parameter wParam of each message MS
 ## 9.2 Mouse
 ---++++ 9.2.1 Mouse Input
 
-The handling for mouse is similar to that for keyboard in MiniGUI, as shown in Fig. 9.2.
+The handling for mouse is similar to that for keyboard in MiniGUI, as shown in Figure 2.
 
 <center>
 <img src="%ATTACHURLPATH%/9.2_T.jpeg" alt="9.2_T.jpeg"  ALIGN="CENTER" /> <br>
-Fig. 9.2 Mouse input in MiniGUI
+Figure 2 Mouse input in MiniGUI
 </center>
 
 MiniGUI receives original input event or data through mouse device driver, and transforms it into MiniGUI abstract mouse event and data. Related bottom event handling procedures transform these mouse events into mouse messages of top layer and put them into the message queue. Application gets these messages through message loop, and dispatches them to window procedure for handling.
@@ -194,7 +266,7 @@ Mouse messages can be divided into tow group: client area messages and non-clien
 
 If mouse cursor is in client area of the window when mouse event occurs, the window will receive a client area mouse message. If the user moves mouse in client area, system posts a message MSG_MOUSEMOVE to the window. When cursor is in client area, the following message is sent if the user presses down or releases a mouse button:
 
-```cplusplus
+```cpp
 MSG_LBUTTONDOWN         left mouse button is pressed down
 MSG_LBUTTONUP           left mouse button is released
 MSG_RBUTTONDOWN         right mouse button is pressed down
@@ -222,7 +294,7 @@ Usually, application need not handle non-client area mouse messages, but leaves 
 
 Parameter lParam of non-client area mouse message includes x-coordinate at low word and y-coordinate at high word, which are both window coordinate. Parameter wParam of non-client area mouse message indicates the position of non-client area when moving or clicking mouse button, which is one of the identifiers beginning with HT defined in minigui/window.h:
 
-```cplusplus
+```cpp
     #define HT_UNKNOWN            0x00
     #define HT_OUT                0x01
     #define HT_MENUBAR            0x02
@@ -249,33 +321,62 @@ Parameter lParam of non-client area mouse message includes x-coordinate at low w
     #define HT_VSCROLL            0x19
 ```
 
-Above identifiers are called hit-testing code, and the hotspot position identified includes caption bar, menu bar, and client area etc.
+Above identifiers are called hit-testing code, and the hotspot position
+identified includes caption bar, menu bar, and client area etc.
 
-If a mouse event occurs, system will send a MSG_HITTEST (MSG_NCHITTEST) message to the window having cursor hotspot or the window capturing the mouse, and MiniGUI determines whether send the mouse message to the client area or non-client area.
+If a mouse event occurs, system will send a MSG_HITTEST (MSG_NCHITTEST) message
+to the window having cursor hotspot or the window capturing the mouse, and
+MiniGUI determines whether send the mouse message to the client area or
+non-client area.
 
-WParam parameter of MSG_HITTEST message is the x-coordinate of the cursor hotspot, and lParam parameter is the y-coordinate of the cursor hotspot. The default mouse message procedure in MiniGUI handles MSG_HITTEST message, checks the pair of coordinate and returns a hit-testing code of the cursor hotspot. If the cursor hotspot is in the client area of the window, the hit-testing code of HT_CLIENT is returned, and MiniGUI switched the screen coordinate into client area coordinate, and then post client area mouse messages to corresponding window process. If the cursor hotspot is in the non-client area of the window, other hit-testing codes are returned, and MiniGUI post non-client area mouse messages to window procedure, and place the hit-testing code into wParam parameter, and place the cursor coordinate into lParam paramter.
+WParam parameter of MSG_HITTEST message is the x-coordinate of the cursor
+hotspot, and lParam parameter is the y-coordinate of the cursor hotspot. The
+default mouse message procedure in MiniGUI handles MSG_HITTEST message, checks
+the pair of coordinate and returns a hit-testing code of the cursor hotspot. If
+the cursor hotspot is in the client area of the window, the hit-testing code of
+HT_CLIENT is returned, and MiniGUI switched the screen coordinate into client
+area coordinate, and then post client area mouse messages to corresponding
+window process. If the cursor hotspot is in the non-client area of the window,
+other hit-testing codes are returned, and MiniGUI post non-client area mouse
+messages to window procedure, and place the hit-testing code into wParam
+parameter, and place the cursor coordinate into lParam paramter.
 
-### 9.2.3 Capture of Mouse
+### Capture of Mouse
 
-The window procedure usually received mouse messages only when the mouse cursor is in the client area or non-client area, i.e., the system only sends mouse messages to a window under the cursor hotspot. While in some cases the application may need to receive mouse messages, even if the cursor hotspot is outside its window area. In this case, we can use SetCapture function to make a certain window capture the mouse, so that this window will receive all mouse messages before the application calls ReleaseCapture to recover normal mouse handling mode:
+The window procedure usually received mouse messages only when the mouse cursor
+is in the client area or non-client area, i.e., the system only sends mouse
+messages to a window under the cursor hotspot. While in some cases the
+application may need to receive mouse messages, even if the cursor hotspot is
+outside its window area. In this case, we can use SetCapture function to make a
+certain window capture the mouse, so that this window will receive all mouse
+messages before the application calls ReleaseCapture to recover normal mouse
+handling mode:
 
 The following are the function definitions about capture of mouse:
 
-```cplusplus
+```cpp
 HWND GUIAPI SetCapture(HWND hWnd);
 void GUIAPI ReleaseCapture(void);
 HWND GUIAPI GetCapture(void);
 ```
 
-At a certain time, only one window can capture the mouse, and the application can use GetCapture function to determine which window has captured the mouse at present.
+At a certain time, only one window can capture the mouse, and the application
+can use GetCapture function to determine which window has captured the mouse at
+present.
 
-Generally speaking, the mouse is only captured when the mouse button is pressed down in the client area, and releases the mouse capture when the mouse button is released.
+Generally speaking, the mouse is only captured when the mouse button is pressed
+down in the client area, and releases the mouse capture when the mouse button
+is released.
 
-The code in List 9.2 creates a simple button-like control, and its response to the mouse action is like a button and can demonstrate the necessity of the mouse capture, although it can do nothing and does not look like a button very much. The complete code is available in program capture.c in the example program package mg-samples for this guide.
+The code in List 2 creates a simple button-like control, and its response to
+the mouse action is like a button and can demonstrate the necessity of the
+mouse capture, although it can do nothing and does not look like a button very
+much. The complete code is available in program capture.c in the example
+program package mg-samples for this guide.
 
-<center>List 9.2  capture.c</center>
+##### List 2 capture.c
 
-```cplusplus
+```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -374,17 +475,27 @@ static int CaptureWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 /* the code below for creating the main window are omitted */
 ```
 
-### 9.2.4 Tracking Mouse Cursor
+### Tracking Mouse Cursor
 
-Tracking the position of the mouse cursor is one of the tasks the GUI application usually needs to do. For example, the position of the mouse cursor needs to be tracked when the painting program performs painting operation, so that the user can paint in the client area of the window by dragging the mouse.
+Tracking the position of the mouse cursor is one of the tasks the GUI
+application usually needs to do. For example, the position of the mouse cursor
+needs to be tracked when the painting program performs painting operation, so
+that the user can paint in the client area of the window by dragging the mouse.
 
-MSG_LBUTTONDOWN, MSG_LBUTTONUP, and MSG_MOUSEMOVE messages need to be handled for tracking the mouse cursor. Generally, the window procedure begins to track the mouse cursor when MSG_LBUTTONDOWN message occurs, determines the current position of the cursor through handling MSG_MOUSEMOVE message, and ends tracking the mouse cursor when MSG_LBUTTONUP occurs.
+MSG_LBUTTONDOWN, MSG_LBUTTONUP, and MSG_MOUSEMOVE messages need to be handled
+for tracking the mouse cursor. Generally, the window procedure begins to track
+the mouse cursor when MSG_LBUTTONDOWN message occurs, determines the current
+position of the cursor through handling MSG_MOUSEMOVE message, and ends
+tracking the mouse cursor when MSG_LBUTTONUP occurs.
 
-The code in List 9.3 is a simple painting program, which allows you to paint arbitrarily in the client area of the window, and clear the screen when the user clicks the right button. The complete code of this program is available in program painter.c in the example program package mg-samples for this guide.
+The code in List 3 is a simple painting program, which allows you to paint
+arbitrarily in the client area of the window, and clear the screen when the
+user clicks the right button. The complete code of this program is available in
+program painter.c in the example program package mg-samples for this guide.
 
-<center>List 9.3  painter.c</center>
+##### List 3  painter.c
 
-```cplusplus
+```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -464,39 +575,65 @@ static int PainterWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 /* the code below for creating main window are omitted */
 ```
 
-<center>
-<img src="%ATTACHURLPATH%/9.3.jpeg" alt="9.3.jpeg"  ALIGN="CENTER" /> <br>
-Fig. 9.3 A simple painting program
-</center>
+![A simple painting program](figures/9.3.jpeg)
 
-The painting flag is set to be TRUE when painter handles MSG_LBUTTONDOWN message, so that the program can paint when receiving MSG_MOUSEMOVE message. In order to prevent the mouse from being released in other window and prevent the window procedure from receiving MSG_LBUTTONUP message, painter calls SetCapture function to capture the mouse when MSG_LBUTTONDOWN message occurs.
+##### Figure 3 A simple painting program
 
-The program performs painting in MSG_MOUSEMOVE message, ends painting when receiving MSG_LBUTTONUP, and calls ReleaseCapture to release the mouse capture.
+The painting flag is set to be TRUE when painter handles MSG_LBUTTONDOWN
+message, so that the program can paint when receiving MSG_MOUSEMOVE message. In
+order to prevent the mouse from being released in other window and prevent the
+window procedure from receiving MSG_LBUTTONUP message, painter calls SetCapture
+function to capture the mouse when MSG_LBUTTONDOWN message occurs.
 
-The program calls InvalidateRect function to clear the content in the client region when receiving MSG_RBUTTONDOWN.
+The program performs painting in MSG_MOUSEMOVE message, ends painting when
+receiving MSG_LBUTTONUP, and calls ReleaseCapture to release the mouse capture.
 
-## 9.3 Event Hook
+The program calls InvalidateRect function to clear the content in the client
+region when receiving MSG_RBUTTONDOWN.
 
-In common cases, keyboard events and mouse events are transferred from the bottom layer device to the application window procedure in a normal approach for handling. MiniGUI provides a kind of mechanism so that we can capture these events before they are transformed to corresponding message queue and transferred to specific windows. Then there are two choices available: Let the event transferred in the normal approach; or cancel the normal event handling process. This is the hook mechanism. The hook is a callback function in nature, and if the application registers a hook, the system will call this callback function in the midway of transferring messages, and then determine whether to continue to transfer the message according to the return value of the callback function.
+## Event Hook
 
-The prototype of the hook callback function defined for MiniGUI-Threads and MiniGUI-Standalone is as follows:
+In common cases, keyboard events and mouse events are transferred from the
+bottom layer device to the application window procedure in a normal approach
+for handling. MiniGUI provides a kind of mechanism so that we can capture these
+events before they are transformed to corresponding message queue and
+transferred to specific windows. Then there are two choices available: Let the
+event transferred in the normal approach; or cancel the normal event handling
+process. This is the hook mechanism. The hook is a callback function in nature,
+and if the application registers a hook, the system will call this callback
+function in the midway of transferring messages, and then determine whether to
+continue to transfer the message according to the return value of the callback
+function.
 
-```cplusplus
+The prototype of the hook callback function defined for MiniGUI-Threads and
+MiniGUI-Standalone is as follows:
+
+```cpp
 typedef int (* MSGHOOK)(void* context, HWND dst_wnd, int msg, WPARAM wparam, LPARAM lparam);
 ```
 
-Wherein context is a context data passed in when registering the hook, which may be a pointer; dst_wnd is the target main window of this message; msg is the message identifier; wparam and lparam are the two parameters of the message. The returned value of the hook function determines whether the system continues to transfer the event: continues to transfer the event when returning HOOK_GOON; and stops transferring the event when returning HOOK_STOP.
+Wherein context is a context data passed in when registering the hook, which
+may be a pointer; dst_wnd is the target main window of this message; msg is the
+message identifier; wparam and lparam are the two parameters of the message.
+The returned value of the hook function determines whether the system continues
+to transfer the event: continues to transfer the event when returning
+HOOK_GOON; and stops transferring the event when returning HOOK_STOP.
 
-The application may call the following two functions to register the hook function of the keyboard and the mouse events for MiniGUI-Threads and MiniGUI-Standalone, respectively:
+The application may call the following two functions to register the hook
+function of the keyboard and the mouse events for MiniGUI-Threads and
+MiniGUI-Standalone, respectively:
 
-```cplusplus
+```cpp
 MSGHOOK GUIAPI RegisterKeyMsgHook (void* context, MSGHOOK hook);
 MSGHOOK GUIAPI RegisterMouseMsgHook (void* context, MSGHOOK hook);
 ```
 
-You need only pass the context information and the pointer of the hook callback function when calling these two functions. If you want to unregister the hook function previously registered, you need only transfer NULL in, as described below:
+You need only pass the context information and the pointer of the hook callback
+function when calling these two functions. If you want to unregister the hook
+function previously registered, you need only transfer NULL in, as described
+below:
 
-```cplusplus
+```cpp
 int my_hook (void* context, HWND dst_wnd, int msg, WPARAM wParam, LPARAM lparam)
 {
     if (...)
@@ -513,47 +650,100 @@ MSGHOOK old_hook = RegisterKeyMsgHook (my_context, my_hook);
 RegisterKeyMsgHook (0, old_hook);
 ```
 
-Event hook mechanism is very import to some applications, for example, you can use keyboard hook when the application needs to capture some global keys.
+Event hook mechanism is very import to some applications, for example, you can
+use keyboard hook when the application needs to capture some global keys.
 
-When you handle the event hook under MiniGUI-Threads, the following fact must be noted:
+When you handle the event hook under MiniGUI-Threads, the following fact must
+be noted:
 
-***
-[NOTE] The hook callback function is called by the desktop thread, i.e., the hook callback function is executed in the desktop thread, therefore, you can not send messages to other threads through SendMessage in the hook callback function, which may cause the occurrence of a possible deadlock.
-***
+__NOTE__ The hook callback function is called by the desktop thread, i.e., the
+hook callback function is executed in the desktop thread, therefore, you can
+not send messages to other threads through SendMessage in the hook callback
+function, which may cause the occurrence of a possible deadlock.
 
-Besides the hook mechanism for MiniGUI-Threads and MiniGUI-Standalone described above, MiniGUI provides a different hook mechanism for MiniGUI-Processes.
+Besides the hook mechanism for MiniGUI-Threads and MiniGUI-Standalone described
+above, MiniGUI provides a different hook mechanism for MiniGUI-Processes.
 
-For a client of MiniGUI-Processes, you can use the following functions to register a hook window:
+For a client of MiniGUI-Processes, you can use the following functions to
+register a hook window:
 
-```cplusplus
+```cpp
 HWND GUIAPI RegisterKeyHookWindow (HWND hwnd, DWORD flag);
 HWND GUIAPI RegisterMouseHookWindow (HWND hwnd, DWORD flag);
 ```
 
-Wherein hwnd is the handle to a window of a client, flag indicates whether stop or continue handling the hooked messages: HOOK_GOON to continue and HOOK_STOP to stop.
+Wherein hwnd is the handle to a window of a client, flag indicates whether stop
+or continue handling the hooked messages: HOOK_GOON to continue and HOOK_STOP
+to stop.
 
-After registering a key/mouse hook window, the server of MiniGUI-Processes will post the key/mouse messages to the window of the client first. It will determine whether stop handling the messages or continue the normal handling by the flag of the hook.
+After registering a key/mouse hook window, the server of MiniGUI-Processes will
+post the key/mouse messages to the window of the client first. It will
+determine whether stop handling the messages or continue the normal handling by
+the flag of the hook.
 
-MiniGUI provides another hook mechanism for the server of MiniGUI-Processes. The event can be received in the sever process, captured before it is transferred to its desktop window or a certain client for further handling. On the event-transferring path, the position of this hook is earlier than that of the hook mentioned above.
+MiniGUI provides another hook mechanism for the server of MiniGUI-Processes.
+The event can be received in the sever process, captured before it is
+transferred to its desktop window or a certain client for further handling. On
+the event-transferring path, the position of this hook is earlier than that of
+the hook mentioned above.
 
-The prototype of the hook callback function prepared for the sever process of MiniGUI-Processes is:
+The prototype of the hook callback function prepared for the sever process of
+MiniGUI-Processes is:
 
-```cplusplus
+```cpp
 typedef int (* SRVEVTHOOK) (PMSG pMsg);
 ```
 
-Here, pMsg is the pointer to the message structure to be transferred. The server can modify arbitrarily the value in the message structure, which this pointer points to. The sever process will continue the normal handling of the event when the callback function returns HOOK_GOON, and cancels the handling when HOOK_STOP is returned.
+Here, pMsg is the pointer to the message structure to be transferred. The
+server can modify arbitrarily the value in the message structure, which this
+pointer points to. The sever process will continue the normal handling of the
+event when the callback function returns HOOK_GOON, and cancels the handling
+when HOOK_STOP is returned.
 
-mginit program can register hook function in the system through the following function:
+mginit program can register hook function in the system through the following
+function:
 
-```cplusplus
+```cpp
 SRVEVTHOOK GUIAPI SetServerEventHook (SRVEVTHOOK SrvEvtHook);
 ```
 
 This function returns the old hook function.
 
-By using the hook function, we can monitor the idle of the system, and start up the screen saver when the system idle time is up to the specified value.
+By using the hook function, we can monitor the idle of the system, and start up
+the screen saver when the system idle time is up to the specified value.
 
+----
 
--- Main.XiaodongLi - 05 Nov 2009
+[&lt;&lt; Scrollbar](MiniGUIProgGuidePart1Chapter07.md) |
+[Table of Contents](README.md) |
+[Icon, Cursor, and Caret &gt;&gt;](MiniGUIProgGuidePart1Chapter09.md)
 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
+
+[MiniGUI Overview]: /MiniGUI-Overview.md
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
