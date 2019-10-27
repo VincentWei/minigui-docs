@@ -434,7 +434,7 @@ queue continuously and handle them.
     }
 ```
 
-The type of `Msg` variable is a MSG structure, which is defined in
+The type of `Msg` variable is MSG structure, which is defined in
 `minigui/window.h` as follow:
 
 ```cpp
