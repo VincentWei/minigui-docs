@@ -12,16 +12,17 @@ The advantage of renderer technology is, we can change look and feel of
 application by modifying MiniGUI configuration file, but also by APIs.
 Application can even customize its own renderer. It is very convenience for
 customized UI. The implementation of renderer has two parts as follow:
+
 - Attributes of window elements, include the information of window elements,
   such as color, size, font and so on.
-- Rendering method of window elements, it defines how to draw window elements. 
+- Rendering method of window elements, it defines how to draw window elements.
 
 MiniGUI renderer creates categories for attributes of each part of window and
 control, defines drawing interface, so as to get a complete look and feel
 renderer mechanism. MiniGUI 3.0 has four renderers, classic, flat, fashion and
-skin. classic is default renderer, that means, application draws window and
+skin. `Classic` is default renderer, that means, application draws window and
 control's look and feel by using classic renderer when MiniGUI is initializing.
-Fashion renderer is supported by mGPlus component, MiniGUI doesn't support it.
+Fashion renderer is supported by mGPlus component.
 
 Application can select a specified renderer for certain window and define
 attribute of window element's look and feel. Application can also define its
@@ -29,8 +30,7 @@ own renderer to draw the UI.
 
 ### Attributes of Window Elements
 
-According to Windows XP/Windows 2000, MiniGUI has the following window
-elements:
+MiniGUI defines the following window elements:
 
 ##### Table 1 Window elements and their names in configuration file and codes
 
@@ -931,6 +931,7 @@ static void ue_3_term (HWND hwnd)
 - Three UI effects
 
 ![Double buffering](figures/dbuff.gif)
+
 ##### Figure 1 UI effect of double buffering main window
 
 ## Customization of Desktop
@@ -1067,13 +1068,13 @@ static BOOL get_dsp_app (void)
 
     if (GetIntValueFromEtcFile (APP_INFO_FILE, "desktop", "app_nr", &icon_info.nr_apps) = ETC_OK)
         return FALSE;
-    
+
     if (icon_info.nr_apps <= 0)
         return FALSE;
-    
+
     if (GetValueFromEtcFile (APP_INFO_FILE, "desktop", "bg_pic", icon_info.bg_path, PATH_MAX) = ETC_OK)
         return FALSE;
-    
+
     if ((icon_info.app_items = (DSPITEM*)calloc (icon_info.nr_apps, sizeof (DSPITEM))) == NULL) {
         return FALSE;
     }
@@ -1089,15 +1090,14 @@ static BOOL get_dsp_app (void)
         if (GetValueFromEtcFile (APP_INFO_FILE, section, "layer", item->layer, LEN_LAYER_NAME) = ETC_OK)
             goto error;
 
-        if (GetValueFromEtcFile (APP_INFO_FILE, section, "pictrue", item->bmp_path, PATH_MAX + NAME_MAX) = ETC_OK
-)
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "pictrue", item->bmp_path, PATH_MAX + NAME_MAX) = ETC_OK)
             goto error;
 
         if (LoadBitmap (HDC_SCREEN, &item->bmp, item->bmp_path) = ERR_BMP_OK) {
             fprintf (stderr, "desktop load resource:%s error. \n", item->bmp_path);
             goto error;
         }
-        
+
         item->cdpath = TRUE;
 
         item->hot_spot_rc.left   = distance_x;
@@ -1365,7 +1365,7 @@ static void this_mouse_handler(void* context, int message,  WPARAM wParam, LPARA
                     if (i == icon_info.focus ) 
                     {
                         GetBoundRect(&rc, &item->text_rc, &item->hot_spot_rc);
-                        
+
                         item->hot_spot_rc.left      += x - old_x;
                         item->hot_spot_rc.right     += x - old_x;
                         item->hot_spot_rc.top       += y - old_y;
@@ -1375,7 +1375,7 @@ static void this_mouse_handler(void* context, int message,  WPARAM wParam, LPARA
                         item->text_rc.right     += x - old_x;
                         item->text_rc.top       += y - old_y;
                         item->text_rc.bottom    += y - old_y;
-                        
+
                         old_x = x;
                         old_y = y;
                         GetBoundRect(&rc, &rc, &item->hot_spot_rc);
@@ -1414,7 +1414,7 @@ static void this_mouse_handler(void* context, int message,  WPARAM wParam, LPARA
 //
 static void this_desktop_menucmd_handler (void* context, int id)
 {
-   
+
     if(!context)
         return;
     if(id == ID_UP)
