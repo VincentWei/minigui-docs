@@ -1,6 +1,6 @@
 # Using SyncUpdateDC to Reduce Screen Flicker
 
-_How to use MiniGUI's synchronous update mechanism to reduce screen flicker._
+_Use MiniGUI's synchronous update mechanism to reduce screen flicker._
 
 Table of Contents
 
@@ -33,7 +33,7 @@ Generally, we can use one of the following ways to eliminate this flicker:
 1. Create a memory DC and draw content to the memory DC first, then
    call `BitBlt` to blit the content to screen.
 1. Use MiniGUI's double buffer main window. This is essentially the
-   same as the first method.
+   same method as the first one.
 1. Use the new synchronous update mechanism introduced in MiniGUI 3.2.x.
 
 This documents describes how to use the new synchronous update mechanism
@@ -62,6 +62,8 @@ In other words, we can improve the maintainability of the code as well.
 
 ## Sample
 
+To be added.
+
 ## Restrictions
 
 The synchronous update mechanism provides an easy way to reduce
@@ -74,5 +76,5 @@ the screen flicker. However, it has the following restrictions:
 
 Therefore, for modern graphics stack (system shipped with a GPU),
 the better way is using off-screen surface and exploiting the
-hardware acceleration as far as possible.
+hardware acceleration as much as possible.
 

@@ -15,16 +15,16 @@ Table of Contents
 
 ## Version 4.0.0
 
-MiniGUI 4.0.0 was released in July 15, 2019.
+MiniGUI 4.0.0 was released on July 15, 2019.
 
 ### Overview
 
 In this version, we mainly enhanced and tuned the APIs related to text
-rendering in order that MiniGUI can handle complex writing systems
+rendering in order that MiniGUI can handle complex font systems
 (scripts) like Arabic and Indic:
 
-* MiniGUI now provides complete APIs for Unicode characters processing.
-  These APIs conform to Unicode 12.0, including the Unicode
+* MiniGUI now provides complete APIs for Unicode character processing.
+  These APIs conform to Unicode 12.0, including Unicode
   Bidirectional Algorithm (UAX#9), Unicode Line Breaking Algorithm
   (UAX#14), Unicode Normalization Forms (UAX#15), Unicode Script Property
   (UAX#24), Unicode Text Segmentation (UAX#29), Unicode Vertical
@@ -38,25 +38,25 @@ rendering in order that MiniGUI can handle complex writing systems
 * We tuned and optimized MiniGUI's logical and device font interfaces to
   support the new features above.
 
-* MiniGUI now is enhanced to support input events which may be generated
+* MiniGUI now has been enhanced to support input events which may be generated
   by input devices other than standard mouse (or single-touch panel) and
   keyboard, such as multi-touch panel (gesture), joystick, tablet tool,
-  and switch. In MiniGUI 4.0, we introduce `MSG_EXIN_XXX` messages to support
+  and switch. In MiniGUI 4.0, we introduced `MSG_EXIN_XXX` messages to support
   the input events from devices other than standard mouse and keyboard. We
   call these messages as 'extra input messages'.
 
-Another important features of this version are the new following engines:
+Other important features of this version are the following new engines:
 
-* The NEWGAL engine of `dri` to support modern DRM-driven graphics cards. By using
-  `dri` engine, one MiniGUI app can now use the hardware-accelerated graphics
+* The NEWGAL engine of `dri` supporting modern DRM-driven graphics cards. Using
+  `dri` engine, a MiniGUI app can now use the hardware-accelerating graphics
   rendering for 2D/3D graphics.
-* The IAL engine of `libinput` to support all modern input devices including
+* The IAL engine of `libinput` supporting all modern input devices including
   mouse, keyboard, joystick, switch, multi-touch panel, gesture, tablet tool,
   and table pad.
-* The enhanced IAL engine of `random` to generate extra input messages
+* The enhanced IAL engine of `random` generating extra input messages
   automatically for testing.
 
-At last, we introduced a Slice Memory Allocator for fast concurrent memory
+Lastly, we introduced a Slice Memory Allocator for fast concurrent memory
 chunk allocation.
 
 The following sections will describe these new features in detail.
@@ -66,14 +66,14 @@ The following sections will describe these new features in detail.
 * New types:
     1. `Uchar32`: the Unicode code point value of a Unicode character.
     1. `Achar32`: the abstract character index value under a certain
-        charset/encoding. Under Unicode charset or encodings, the
+        charset/encoding. With Unicode charset or encodings, the
         abstract character index value will be identical to the Unicode
         code point, i.e., Achar32 is equivalent to Uchar32 under this
         situation.
     1. `Glyph32`: the glyph index value in a device font. Note that
         a Glyph32 value is always bound to a specific logfont object.
 
-* New functions to determine the Unicode character properties:
+* New functions to determine Unicode character properties:
     1. `UCharGetCategory` for getting the general category of
         a Unicode character.
     1. `UCharGetBreakType` for getting the breaking type of
@@ -105,8 +105,8 @@ The following sections will describe these new features in detail.
         character.
 
 MiniGUI also provides some utilities/helpers for Unicode character
-conversion, such as from lower case to upper case, single width to
-full width. Please see MiniGUI API reference document for the detailed
+conversion, for example, from lower case to upper case, single width to
+full width. Please see MiniGUI API reference documents for detailed
 description.
 
 ### New APIs for complex or mixed scripts
@@ -151,33 +151,33 @@ to get the line rectangle, or call `CalcLayoutBoundingRect` to get
 the bounding rectangle of one paragraph.
 
 These new APIs provide a very flexible implementation for your apps
-to process the complex scripts. The implementation is derived from
-LGPL'd Pango, but we optimize and simplify the original implementation
+to process the complex scripts. The implementation was derived from
+LGPL'd Pango, but we optimized and simplified the original implementation
 in the following respects:
 
-* We split the layout process into two stages. We get the text runs
+* Split the layout process into two stages. We get the text runs
   (Pango items) in the first stage, and the text runs will keep as
   constants for subsequent different layouts. In the second stage,
   we create a layout object for a set of specific layout parameters,
   and generates the lines one by one for the caller. This is useful
   for an app like browser, it can reuse the text runs if the output
-  width or height changed, and it is no need to re-generate the text
-  runs because of the size change of the output rectangle.
+  width or height have changed, and no need to re-generate the text
+  runs because of the output rectangle size change.
 
-* We use MiniGUI's fontname for the font attributes of text, and leave
+* Use MiniGUI's fontname for the font attributes of text, and leave
   the font selection and the glyph generating to MiniGUI's logfont
   module. In this way, we simplify the layout process greatly.
 
-* We always use Uchar32 string for the whole layout process. So the
+* Always use Uchar32 string for the whole layout process. So the
   code and the structures are clearer than original implementation.
 
-* We provide two shaping engines for rendering the text. One is a
+* Provide two shaping engines for rendering the text. One is a
   basic shaping engine and other is the complex shaping engine based
   on HarfBuzz. The former can be used for some simple applications.
 
 ### Enhanced logical font APIs
 
-The styles of LOGFONT changed.
+The styles of LOGFONT have changed.
 
 * Add new rendering style:
   1. `FS_RENDER_ANY`: Not specified.
@@ -207,22 +207,22 @@ The styles of LOGFONT changed.
   1. `FONT_DECORATE_US`: Both `FONT_DECORATE_UNDERLINE`
 and `FONT_DECORATE_STRUCKOUT`.
   1. `FONT_DECORATE_OUTLINE`: Outline (hollow) glyphs.
-  1. `FONT_DECORATE_REVERSE`: Reserved for future. Glyphs have their
-foreground and background reversed.
-* The following style are deprecated:
+  1. `FONT_DECORATE_REVERSE`: Reserved for future use. Glyphs'
+foreground and background are reversed.
+* The following styles are deprecated:
   1. `FONT_OTHER_LCDPORTRAIT`
   1. `FONT_OTHER_LCDPORTRAITKERN`
 
 For a new app, you should use the new function `CreateLogFontEx` to
 create a LOGFONT, and specify the weight and rendering method of the glyph.
 
-For the back-compatibility, you can still use `CreateLogFont` to create a new
-LOGFONT. However, `FS_WEIGHT_BOOK` will be treated `FS_WEIGHT_REGULAR` and
-`FS_RENDER_GREY`, while `FS_WEIGHT_SUBPIXEL` will be treated
+For backward compatibility, you can still use `CreateLogFont` to create a new
+LOGFONT. However, `FS_WEIGHT_BOOK` will be treated with `FS_WEIGHT_REGULAR` and
+`FS_RENDER_GREY`, while `FS_WEIGHT_SUBPIXEL` will be treated with 
 `FS_WEIGHT_REGULAR` and `FS_RENDER_SUBPIXEL`.
 
 You can still use `CreateLogFontByName` to create a new LOGFONT.
-But the style string in the font name changed from
+But the style string in the font name has changed from
 
     <weight><slant><flipping><other><underline><struckout>
 
@@ -230,8 +230,8 @@ to
 
     <weight><slant><flipping><other><decoration><rendering>
 
-Note that `<underline>` and `<struckout>` are merged to `<decoration>`
-in order to keep the style string is still 6-character long.
+Note that `<underline>` and `<struckout>` are merged into `<decoration>`
+in order to keep the style string 6-character long.
 
 Consequently, if you want to use the rendering method SUPIXEL for a TTF font,
 please define the logical font name in the following way:
@@ -261,7 +261,7 @@ often designed for a particular language/script or a few similar
 languages/scripts.
 
 Since 4.0.0, the previous width field of a logfont name is used for
-the glyph orientation:
+glyph orientation:
 
 - 'U': Glyphs stand upright (default).
 - 'S': Glyphs are rotated 90 degrees clockwise (sideways).
@@ -271,7 +271,7 @@ the glyph orientation:
 ### Support for Linux DRI/DRM
 
 In order to support modern graphics card or GPU, we introduced a
-new NEWGAL engine of `dri`. The developer can use this engine to
+new NEWGAL engine `dri`. Developers can use this engine to
 run MiniGUI apps on a Linux box on which the DRI
 (Direct Rendering Infrastructure) is enabled.
 
@@ -279,21 +279,21 @@ The `dri` engine uses `libdrm` developed by Free Desktop project:
 
 https://dri.freedesktop.org/wiki/
 
-Libdrm is a user-space library implements the Direct Rendering Manager.
-MiniGUI mainly uses this library to support the dumb frame buffer
+Libdrm is a user-space library that implements the Direct Rendering Manager.
+MiniGUI mainly uses this library to support dumb frame buffer
 (no hardware acceleration). However, you can write a driver for your
-graphics card or GPU to implement the hardware accelerated features.
+graphics card or GPU to implement the hardware accelerating features.
 
 To avoid modifying the MiniGUI source code when supporting a new GPU,
 the `dri` engine has adopted a scalable design:
 
 * You can directly use the `dri` engine to run MiniGUI on a GPU
 which supports dumb frame buffer.
-* When you want to take advantage of the hardware acceleration of
+* If you want to take advantage of hardware acceleration of
 your GPU, you can write some code for your GPU as a sub driver
 of `dri` engine outside MiniGUI.
 
-In this situation, you need to configure MiniGUI with the following
+Under this situation, you need to configure MiniGUI with the following
 option:
 
     --with-targetname=external
@@ -303,7 +303,7 @@ and implement the sub driver in your MiniGUI apps.
 The header file `<minigui/exstubs.h>` defines the operations (a set of
 callback functions) you need to implement for your GPU externally.
 
-As an example, we implement the sub driver for `i915` graphics chard
+As an example, we implement the sub driver for `i915` graphics card
 in `mg-tests/dri-engine/`. Please refer to `mg-tests` repository.
 
 To exploit the GPU's accelerated rendering capabilities, a MiniGUI app
@@ -311,7 +311,7 @@ can use `cairo` and/or `OpenGL ES` to assist in rendering 2D/3D graphics
 when using the `dri` engine. We will provide some samples in `mg-tests`
 or `mg-samples` for this purpose.
 
-Note that for `dri` engine, we introduce a new section in MiniGUI runtime
+Note that for `dri` engine, we introduced a new section in MiniGUI runtime
 configuration:
 
 ```
@@ -325,7 +325,7 @@ dpi=96
 You can use the key `dri.device` to specify your DRI device.
 
 You can use the key `dri.pixelformat` to specify the DRM pixel format for the
-screen. We use DRM fourcc code to defined the pixel format of the screen
+screen. We use DRM fourcc code to define the pixel format of the screen
 surface. For more information, please see `<drm/drm_fourcc.h>` header file.
 Note that only 8/16/24/32 bpp RGB formats are supported. For example, `XR24`
 means `X8R8G8B8` pixel format.
@@ -346,24 +346,24 @@ input devices including multiple touch panel, gesture, tablet tool, and
 table pad.
 
 The extra input messages have the prefix `MSG_EXIN_`. If a MiniGUI app
-want to handle these extra input events such as gestures, you need
+needs to handle these extra input events such as gestures, you need
 to handle the `MSG_EXIN_XXX` messages in the app. For examples, please
 refer to `mg-tests/extra-input/`.
 
-Currently, there are two built-in IAL engines which can generates
-the extra input messages:
+Currently, there are two built-in IAL engines which can generate
+extra input messages:
 
 * The IAL engine of `libinput` to support all modern input devices on a
-Linux box. This engine runs on `libinput` introduced by Free Desktop project.
+Linux system. This engine runs on `libinput` introduced by Free Desktop project.
 
 * The enhanced IAL engine of `random` to generate extra input messages
   automatically for testing.
 
 You can also write your own IAL engines to generate the extra messages.
 Please see the implementation of `libinput` and `random` engines for
-the details.
+details.
 
-For `libinput` engine, we introduce a new section in MiniGUI runtime
+For `libinput` engine, we introduced a new section in MiniGUI runtime
 configuration:
 
 ```
@@ -374,7 +374,7 @@ seat=seat0
 The key `libinput.seat` specifies the seat identifier, the default
 is `seat0`.
 
-For `random` engine, we introduce a new section in MiniGUI runtime
+For `random` engine, we introduced a new section in MiniGUI runtime
 configuration:
 
 ```
@@ -392,7 +392,7 @@ the log file which will store the input events generated by this engine.
 If MiniGUI failed to open the log file, the log feature will be disabled.
 
 The MiniGUI runtime configuration key `random.eventtypes` specifies
-the input event types which will be generated by this IAL engine,
+the input event types which are generated by this IAL engine,
 in the following pattern:
 
     <event-type>[-<event-type>]*
@@ -432,7 +432,7 @@ Linux kernel) respectively.
 
 This engine maintains a state machine for each input event type, and
 generates a reasonable event sequence for each type. If and only if
-an event sequence finished or cancelled, the engine switch to another
+an event sequence is finished or cancelled, the engine switches to another
 event type randomly.
 
 Note that currently, the following event types (in `random` engine)
@@ -493,7 +493,7 @@ the following environment variable to tell the allocator always uses
 ### Backward compatibility issues
 
 In MiniGUI 4.0.0, we changed some unreasonable APIs which were introduced
-in early versions. There are also other changes broke the backward
+in early versions. There are also other changes breaking the backward
 compatibility. This section gives you a summary about these changes.
 
 * Rename `UChar32` to `Uchar32` and `UChar16` to `Uchar16` in order to
@@ -506,7 +506,7 @@ compatibility. This section gives you a summary about these changes.
 In early versions, we did not significantly distinguish between
 characters and glyphs. This will lead to some confusion. Therefore,
 we introduce a new type called `Achar32`, which is the character's
-index value under a certain charset/encoding. While the type `Glyph32`
+index value in a certain charset/encoding. While the type `Glyph32`
 is the index value of a glyph in a font.
 
 In order to reflect the correct character and glyph concepts,
@@ -533,7 +533,7 @@ the new Unicode version instead:
   * BIDIGetTextRangesLog2Vis
   * BIDIGetLogicalEmbedLevelsEx
 
-The following functions are deprecated:
+The following function is deprecated:
 
   * GetGlyphBitmap, use GetGlyphInfo instead.
 
@@ -541,7 +541,7 @@ The fields `height` and `descent` have been removed from GLYPHINFO structure.
 You should get the font metrics information by calling `GetFontMetrics` function
 if you want to get the height and descent data of one font.
 
-The the basic glyph type and break type have been removed from GLYPHINFO
+The basic glyph type and break type have been removed from GLYPHINFO
 structure. You should use `GetACharType` instead.
 
 ### Deprecated features

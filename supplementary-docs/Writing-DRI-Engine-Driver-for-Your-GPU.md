@@ -9,24 +9,24 @@ Table of Contents
 - [Run-time Configuration](#run-time-configuration)
 - [Implement DRI driver](#implementing-dri-driver)
 - [Restrictions](#restrictions)
-- [Example](#example)
+- [Examples](#examples)
 - [Future Feature](#future-feature)
 
 ## Overview
 
-In order to support modern graphics card or GPU, we introduced a
-new NEWGAL engine of `dri`. The developer can use this engine to
-run MiniGUI apps on a Linux box on which the DRI
+In order to support modern graphics cards or GPUs, we introduced a
+new NEWGAL engine of `dri`. Developers can use this engine to
+run MiniGUI apps on a Linux system on which the DRI
 (Direct Rendering Infrastructure) is enabled.
 
 The `dri` engine uses `libdrm` developed by Free Desktop project:
 
 <https://dri.freedesktop.org/wiki/>
 
-Libdrm is a user-space library implements the Direct Rendering Manager.
+Libdrm is a user-space library which implements the Direct Rendering Manager.
 MiniGUI mainly uses this library to support the dumb frame buffer
 (no hardware acceleration). However, you can write a driver for your
-graphics card or GPU to implement the hardware accelerated features.
+graphics cards or GPUs to implement the hardware accelerated features.
 
 To avoid modifying the MiniGUI source code when supporting a new GPU,
 the `dri` engine has adopted a scalable design:
@@ -38,7 +38,7 @@ your GPU, you can write some code for your GPU as a sub driver
 of `dri` engine outside MiniGUI.
 
 This document describes how to enable `dri` engine and write a
-hardware-accelerated driver for your own GPU.
+hardware-accelerating driver for your own GPU.
 
 Note that, generally, the driver will be implemented by the GPU
 or SoC vendors. The MiniGUI app developers do not need to
@@ -53,13 +53,13 @@ There are two configure options related to the `dri` engine:
   available on Linux, and you need to install the `libdrm` 2.4 or later
   first.
 * `--with-targetname=external`. When you configure MiniGUI with this
-  option, MiniGUI will use the external function `__dri_ex_driver_get`
+  option, MiniGUI will use the external function `__dri_ex_driver_get()`
   to initialize the DRI driver. If you do not implement this function,
   the link will fail.
 
 ## Run-time Configuration
 
-For `dri` engine, we introduce a new section in MiniGUI runtime
+For `dri` engine, we introduced a new section in MiniGUI runtime
 configuration:
 
 ```
@@ -109,7 +109,7 @@ your implementation can support multiple GPUs.
 If the external stub returns NULL, MiniGUI will use the dumb frame buffer
 instead.
 
-The `DriDriverOps` is a struct type consisted by a set of operations
+The `DriDriverOps` is a struct type consisting of a set of operations
 (callbacks):
 
 ```cpp
@@ -248,13 +248,13 @@ typedef struct _DriDriverOps {
 } DriDriverOps;
 ```
 
-If the external stub `__dri_ex_driver_get` returns a valid pointer
+If the external stub `__dri_ex_driver_get()` returns a valid pointer
 of `DriDriverOps`, MiniGUI will call the operation `create_driver`
 to initialize the DRI driver. The operation will return a pointer
 to the type of `DriDriver`. All other operations of `DriDriverOps`
 need this pointer as the context of your DRI driver.
 
-Note that MiniGUI does not defined the detailed structure of
+Note that MiniGUI does not define the detailed structure of
 `DriDriver`, it is up to your implementation:
 
 ```cpp
@@ -274,12 +274,12 @@ In version 4.0.0, the `dri` NEWGAL engine does not provide support for
 MiniGUI-Processes run-time mode. We will enhance this in the subsequent
 version of MiniGUI.
 
-Also note that when you use the hardware accelerated driver, MiniGUI app
+Also note that when you use the hardware accelerating driver, MiniGUI app
 may need the root privilege to call `drmSetMaster` to set the video mode.
 However, under MiniGUI-Processes run-time mode, only the server (`mginit`) will
 need this privilege when you use the future `dri` engine.
 
-## Example
+## Examples
 
 As an example, we implement the DRI driver for `i915` graphics chard
 in `mg-tests/dri-engine/`. Please refer to `mg-tests` repository:
