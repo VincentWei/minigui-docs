@@ -53,7 +53,7 @@ There are two configure options related to the `dri` engine:
   available on Linux, and you need to install the `libdrm` 2.4 or later
   first.
 * `--with-targetname=external`. When you configure MiniGUI with this
-  option, MiniGUI will use the external function `__dri_ex_driver_get()`
+  option, MiniGUI will use the external function `__dri_ex_driver_get`
   to initialize the DRI driver. If you do not implement this function,
   the link will fail.
 
@@ -248,7 +248,7 @@ typedef struct _DriDriverOps {
 } DriDriverOps;
 ```
 
-If the external stub `__dri_ex_driver_get()` returns a valid pointer
+If the external stub `__dri_ex_driver_get` returns a valid pointer
 of `DriDriverOps`, MiniGUI will call the operation `create_driver`
 to initialize the DRI driver. The operation will return a pointer
 to the type of `DriDriver`. All other operations of `DriDriverOps`

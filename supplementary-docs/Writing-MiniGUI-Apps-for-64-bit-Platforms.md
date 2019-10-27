@@ -231,7 +231,7 @@ of the control.
 
 Therefore, we recommend strongly that you use a `NOTIFYPOROC` callback to
 handle the notification sent from controls. To do this, please call
-`SetNotificationCallback()` function to set the notification callback function.
+`SetNotificationCallback` function to set the notification callback function.
 
 #### Time and timer
 

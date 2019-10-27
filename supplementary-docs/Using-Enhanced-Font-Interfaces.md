@@ -98,7 +98,7 @@ Note that the length of one devfont name can not exceed 255 bytes.
 
 ### Logfont name
 
-When we create a logfont object, we generally call function `CreateLogFontByName()`.
+When we create a logfont object, we generally call function `CreateLogFontByName`.
 The logfont name uses the similar format as devfont name:
 
 ```
@@ -190,7 +190,7 @@ ttf-Courier-rrncns-*-16-UTF-8
 
 ## API Enhancements
 
-For a new app, you should use the new function `CreateLogFontEx()` to
+For a new app, you should use the new function `CreateLogFontEx` to
 create a logfont, and specify the weight and rendering method of the glyph:
 
 ```cpp
@@ -203,23 +203,23 @@ m_btnFont = CreateLogFontEx ("ttf", "helvetica", "UTF-8",
         SETTING_OK_BTN_TEXT_H, 0);
 ```
 
-For backward compatibility, you can still use `CreateLogFont()` to create a new
+For backward compatibility, you can still use `CreateLogFont` to create a new
 logfont. However, `FS_WEIGHT_BOOK` will be treated as `FS_WEIGHT_REGULAR` and
 `FS_RENDER_GREY`, while `FS_WEIGHT_SUBPIXEL` will be treated as
 `FS_WEIGHT_REGULAR` and `FS_RENDER_SUBPIXEL`.
 
-You can still use `CreateLogFontByName()` to create a new logfont. But you should
+You can still use `CreateLogFontByName` to create a new logfont. But you should
 make sure to define the new logfont name in new format.
 
 We also introduced the following new functions in version 4.0.0:
 
-- `CreateLogFontIndirectEx()`: to create a new logfont object by using the properties
+- `CreateLogFontIndirectEx`: to create a new logfont object by using the properties
    of an existing logfont object, but with a new rotation argument. This function is
-   a supplementary of `CreateLogFontIndirect()`.
-- `CreateLogFontForMChar2UChar()`: to create a logfont in order to convert a multi-byte
+   a supplementary of `CreateLogFontIndirect`.
+- `CreateLogFontForMChar2UChar`: to create a logfont in order to convert a multi-byte
    character string to `Uchar32` string.
-- `LoadDevFontFromIncoreData()`: to load a devfont from a file. This function is
-   a supplementary of `LoadDevFontFromFile()`.
+- `LoadDevFontFromIncoreData`: to load a devfont from a file. This function is
+   a supplementary of `LoadDevFontFromFile`.
 
 ## Examples
 

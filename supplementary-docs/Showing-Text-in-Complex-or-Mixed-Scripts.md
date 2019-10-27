@@ -121,11 +121,11 @@ The following functions are deprecated:
   * GetGlyphBitmap, use GetGlyphInfo instead.
 
 The fields `height` and `descent` have been removed from GLYPHINFO structure.
-You should get the font metrics information by calling function `GetFontMetrics()` 
+You should get the font metrics information by calling function `GetFontMetrics` 
 if you want to get the height and descent data of one font.
 
 The basic glyph type and break type have been removed from GLYPHINFO
-structure. You should use `GetACharType()` instead.
+structure. You should use `GetACharType` instead.
 
 ### New APIs Conforming to Unicode 12.0
 
@@ -193,7 +193,7 @@ opportunity before or after each character.
 Moreover, all of the above processing needs to be done with the Unicode
 character set.
 
-Therefore, you call `GetUCharsUntilParagraphBoundary()` function to convert
+Therefore, you call `GetUCharsUntilParagraphBoundary` function to convert
 a multi-byte string to a Unicode string under the specified white space
 rule. For example, you can convert a general C string in `UTF-8` or
 `GB18030` charset to a `Uchar32` string by calling this function.
@@ -234,24 +234,24 @@ while (left_len_text > 0) {
 DestroyLogFont(lf);
 ```
 
-In the code above, we call `CreateLogFontForMChar2UChar()` function to create
+In the code above, we call `CreateLogFontForMChar2UChar` function to create
 a dummy logfont object only for converting C-string in UTF-8 to Uchar32 string.
-The logfont object created by `CreateLogFontForMChar2UChar()` will expense
+The logfont object created by `CreateLogFontForMChar2UChar` will expense
 a minimal memory. But note that if you use the logfont object returned by this
 function to show a text, you will see nothing.
 
 Obviously, the original text has two paragraphs. So we use a `while` loop
 to deal with a paragraph in one loop.
 
-Next, you should call `UStrGetBreaks()` to get the breaking opportunities of
+Next, you should call `UStrGetBreaks` to get the breaking opportunities of
 each characters in the paragraph. This information is very important to the
 layout algorithm.
 
 If the text is in a standard script, like Latin or Chinese, you can call
-function `GetGlyphsExtentFromUChars()` to lay out the paragraph to a line.
+function `GetGlyphsExtentFromUChars` to lay out the paragraph to a line.
 This function returns a glyph string which can fit in a line with the
 specified maximal extent and rendering flags. After this, you call
-`DrawGlyphStringEx()` function to draw the glyph string to the
+`DrawGlyphStringEx` function to draw the glyph string to the
 specific position of a DC.
 
 If there are characters left to lay out, you can call this function again,
@@ -263,7 +263,7 @@ For a complete sample, please refer to:
 
 If the text is in complex and/or mixed scripts, like Arabic, Thai,
 and Indic, you should create a TEXTRUNS object first by calling
-`CreateTextRuns()` function, then initialize the shaping engine for
+`CreateTextRuns` function, then initialize the shaping engine for
 laying out the text.
 
 For the usage sample of TEXTRUNS object, please refer to:
@@ -271,9 +271,9 @@ For the usage sample of TEXTRUNS object, please refer to:
 <https://github.com/VincentWei/mg-tests/blob/master/4.0/createtextruns.c>
 
 MiniGUI provides two types of shaping engine. One is the basic
-shaping engine. The corresponding function is `InitBasicShapingEngine()`.
+shaping engine. The corresponding function is `InitBasicShapingEngine`.
 The other is called complex shaping engine, which is based on HarfBuzz.
-The corresponding function is `InitComplexShapingEngine()`. The latter
+The corresponding function is `InitComplexShapingEngine`. The latter
 one can give you a better shaping result.
 
 For the sample of the basic shaping engine, please refer to:
@@ -289,17 +289,17 @@ For the sample of the complex shaping engine, please refer to:
 
 <https://github.com/VincentWei/mg-tests/blob/master/4.0/complexshapingengine.c>
 
-After this, you should call `CreateLayout()` to create a LAYOUT object
-for laying out the text, then call `LayoutNextLine()` to lay out the lines
+After this, you should call `CreateLayout` to create a LAYOUT object
+for laying out the text, then call `LayoutNextLine` to lay out the lines
 one by one.
 
-You can render the laid out lines by calling `DrawLayoutLine()` function.
+You can render the laid out lines by calling `DrawLayoutLine` function.
 
-Finally, you call `DestroyLayout()` and `DestroyTextRuns()` to destroy
+Finally, you call `DestroyLayout` and `DestroyTextRuns()` to destroy
 the layout object and text runs object.
 
-Before rendering the glyphs laid out, you can also call `GetLayoutLineRect()`
-to get the line rectangle, or call `CalcLayoutBoundingRect()` to get
+Before rendering the glyphs laid out, you can also call `GetLayoutLineRect`
+to get the line rectangle, or call `CalcLayoutBoundingRect` to get
 the bounding rectangle of one paragraph.
 
 For the sample for layout object, please refer to:

@@ -191,7 +191,7 @@ typedef struct _GAL_Color
 #### Update method
 
 If you specify the `update_method` to be `COMMLCD_UPDATE_SYNC` or
-`COMMLCD_UPDATE_ASYNC`, the update method `__commlcd_drv_update()` will
+`COMMLCD_UPDATE_ASYNC`, the update method `__commlcd_drv_update` will
 be called frequently or periodically.
 
 In our sample, this method saves the whole frame buffer content to Windows
@@ -244,7 +244,7 @@ in a different thread, about 20 times per second.
 
 If you set `update_mothod` to be `COMMLCD_UPDATE_SYNC`, this update method
 will be called synchronously when there is any update of the frame buffer.
-For example, you call the MiniGUI function `SetPixel()` to draw just one pixel
+For example, you call the MiniGUI function `SetPixel` to draw just one pixel
 on the screen. Therefore, this will reduce the refresh performance of the
 entire system. However, if you use MiniGUI's
 [Synchronous Update Mechanism](https://github.com/VincentWei/minigui/wiki/Sync-Update),
@@ -262,11 +262,11 @@ int __commlcd_drv_update (const RECT* rc_dirty)
 ```
 
 If you specify the `update_mothod` to be `COMMLCD_UPDATE_NONE` in
-`__commlcd_drv_init()` method, this function will never be called.
+`__commlcd_drv_init` method, this function will never be called.
 
 #### Release the engine
 
-When MiniGUI quits, it will call `__commlcd_drv_release()` to release
+When MiniGUI quits, it will call `__commlcd_drv_release` to release
 the resource allocated or created by the engine.
 
 In the sample, it destroys the anonymous memory map and returns zero:
@@ -284,7 +284,7 @@ int __commlcd_drv_release (void)
 #### Initialize the engine
 
 When you specify MiniGUI runtime configuration option `system.ial_engine=comm`,
-MiniGUI will call `__comminput_init()` function to initialize the engine.
+MiniGUI will call `__comminput_init` function to initialize the engine.
 
 You can open your input devices in the function:
 
@@ -346,10 +346,10 @@ MiniGUI input messages:
 #### Wait for an event
 
 After MiniGUI starts up, your MiniGUI app will enter an event loop and call
-function `GetMessage()` continually. Eventually, MiniGUI calls function
-`__comminput_wait_for_input()` if you were using the Comm IAL engine.
+function `GetMessage` continually. Eventually, MiniGUI calls function
+`__comminput_wait_for_input` if you were using the Comm IAL engine.
 
-As the name implies, `__comminput_wait_for_input()` will give the engine a chance
+As the name implies, `__comminput_wait_for_input` will give the engine a chance
 to wait for a new event, but in a specified time interval. If there is no input
 event in the time interval, the function should return 0 for timeout, and -1
 for error.
@@ -357,9 +357,9 @@ for error.
 Indeed, Comm IAL engine is a simplified implementation of a typical IAL engine.
 When there is an event, you should return an integer with `COMM_KBINPUT`
 and/or `COMM_MOUSEINPUT` set, in order to tell MiniGUI there is a mouse event
-and/or a keyboard event. The sample implementation of `__comminput_wait_for_input()`
-uses the system call `select()` to check the file descriptors opened by
-`__comminput_init()`, and return a suitable value to MiniGUI:
+and/or a keyboard event. The sample implementation of `__comminput_wait_for_input`
+uses the system call `select` to check the file descriptors opened by
+`__comminput_init`, and return a suitable value to MiniGUI:
 
 ```cpp
 int __comminput_wait_for_input (struct timeval *timeout)
@@ -400,8 +400,8 @@ int __comminput_wait_for_input (struct timeval *timeout)
 
 #### Get mouse/touch event
 
-If there is a keyboard event (the return value of `__comminput_wait_for_input()`
-has the bit `COMM_KBINPUT` set), MiniGUI will call `__comminput_kb_getdata()`
+If there is a keyboard event (the return value of `__comminput_wait_for_input`
+has the bit `COMM_KBINPUT` set), MiniGUI will call `__comminput_kb_getdata`
 immediately to get the real keyboard event data:
 
 ```cpp
@@ -421,8 +421,8 @@ For the detailed implementation, please refer to:
 
 #### Get keyboard event
 
-If there is a mouse event (the return value of `__comminput_wait_for_input()`
-has the bit `COMM_MOUSEINPUT` set), MiniGUI will call `__comminput_ts_getdata()`
+If there is a mouse event (the return value of `__comminput_wait_for_input`
+has the bit `COMM_MOUSEINPUT` set), MiniGUI will call `__comminput_ts_getdata`
 immediately to get the real keyboard event data:
 
 ```cpp
@@ -442,7 +442,7 @@ For the detailed implementation, please refer to:
 
 #### Terminate the engine
 
-When MiniGUI quits, it will call `__comminput_deinit()` to release
+When MiniGUI quits, it will call `__comminput_deinit` to release
 the resource allocated or created by the Comm IAL engine.
 
 In the sample, it just closes the file descriptors:
