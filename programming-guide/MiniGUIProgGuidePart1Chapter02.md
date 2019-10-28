@@ -26,6 +26,7 @@ Computers with graphics user interface manage the display on the screen of
 an application by the window system. The components of a graphics user
 interface usually have the relationship as shown in Figure 1.
 
+![Components of graphics user interface](figures/3.1.jpeg)
 
 ##### Figure 1: Components of graphics user interface
 
@@ -99,6 +100,7 @@ usually prompts the user to perform input operation within a dialog box.
 Message box is built-in dialog box used to display some prompt or warning
 for the user.
 
+![Typical main windows (classic style) of MiniGUI](figures/3.2.jpeg)
 
 ##### Figure 2 Typical main windows (classic style) of MiniGUI
 
@@ -107,6 +109,7 @@ configuring MiniGUI. Figure 2 and Figure 3 illustrate the display effect in
 different styles. Please refer to [MiniGUI User Manual] for related information
 about MiniGUI appearance styles.
 
+![A typical dialog box (flat style) of MiniGUI](figures/3.3.jpeg)
 
 ##### Figure 3 Typical main windows (classic style) of MiniGUI
 
@@ -132,7 +135,6 @@ CreateInfo.by    absolute x-coordinate of lower-right corner of window relative 
 CreateInfo.iBkColor    the background pixel value of the window
 CreateInfo.dwAddData    a 32-bit additional value attached to the window
 CreateInfo.hHosting    the handle of the hosting window of the window
-```
 ```
 Wherein the following members need to be illustrated specially:
 
@@ -169,7 +171,6 @@ one is `CreateMainWindow`, another is `CreateMainWindowEx`.
 ```cpp
 HWND GUIAPI CreateMainWindow (PMAINWINCREATE pCreateInfo)
 ```
-```
 We can create a main window if passes a given assigned `pCreateInfo`, a
 pointer to structure.
 
@@ -179,7 +180,6 @@ pointer to structure.
 HWND GUIAPI CreateMainWindowEx (PMAINWINCREATE pCreateInfo,
                         const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
                         const char* window_name, const char* layer_name);
-```
 ```
 
 All other arguments' value can be `NULL` except the pointer to the structure,
@@ -238,7 +238,6 @@ window or control is created.
 ```cpp
 BOOL GUIAPI SetWindowMask (HWND hWnd, const MYBITMAP* new_mask)
 ```
-```
 
 `new_mask` argement is a `MYBITMAP` structure, application should use the
 transparency in `MYBITMAP` structure to indicate the mask. It means
@@ -261,8 +260,8 @@ The following codes show how to create irregular window.
     if (hMainWnd == HWND_INVALID)
         return -1;
 ```
-```
 
+![An irregular window](figures/WindowMask.png)
 
 ##### Figure 4 An irregular window (transparent color is white)
 
@@ -287,10 +286,11 @@ The following codes show how to create irregular control:
                 return -1;
             SetWindowBkColor(btn1, PIXEL_red); 
 ```
-```
 
+![A multi-line EditBox control which background color is red](figures/EditMask.png)
 
-##### Figure 5 A multi-line `EditBox` control which background color is red
+##### Figure 5 A multi-line `EditBox` control which background color is
+red</center> 
 
 For creating irregular window or control, you can also call the following
 functions to change existing window or color's visible area besides above
@@ -298,7 +298,6 @@ method.
 
 ```cpp
 HWND GUIAPI SetWindowRegion (HWND hwnd, const REGION* region);
-```
 ```
 
 Example:
@@ -324,8 +323,8 @@ Example:
     EmptyClipRgn (&circle_rgn);
     DestroyFreeClipRectList (&cliprc_heap);
 ```
-```
 
+![Circle button](figures/RoundBtn.png)
 
 ##### Figure 6 Circle button
 
@@ -376,7 +375,7 @@ int MiniGUIMain (int argc, const char* argv[])
     return 0;
 }
 ```
-```
+![rounded-corner window](figures/RoundWindow.png)
 ##### Figure 7 Rounded-corner window
 
 ### Destroying Main Window
@@ -397,7 +396,6 @@ case MSG_CLOSE:
     PostQuitMessage(hWnd);
     return 0;
 ```
-```
 
 `DetroyMainWindow` destroys a main window, but does not destroy the message
 queue used by the main window and the window object itself. So, the
@@ -417,7 +415,6 @@ A dialog box is a special main window, which is usually created by
 int  GUIAPI DialogBoxIndirectParam (PDLGTEMPLATE pDlgTemplate,
                     HWND hOwner, WNDPROC DlgProc, LPARAM lParam);
 ```
-```
 
 The dialog box created by this function is called as model dialog box.
 Users need to prepare dialog box template and window procedure function of
@@ -436,7 +433,6 @@ static inline int GUIAPI DialogBoxIndirectParam (PDLGTEMPLATE pDlgTemplate,
     return DialogBoxIndirectParamEx (pDlgTemplate, hOwner, DlgProc, lParam,
                                     NULL, NULL, NULL, NULL);
 }
-```
 ```
 
 `DialogBoxIndirectParamEx` is a more powerful dialog box create function, it
@@ -485,7 +481,6 @@ typedef struct _WNDCLASS
 } WNDCLASS;
 typedef WNDCLASS* PWNDCLASS;
 ```
-```
 
 The main elements of control class are as follow:
 - Class name `spClassName`: class name different from other control classes.
@@ -509,13 +504,11 @@ Functions related to control class operation in MiniGUI are as follow:
 ```cpp
 BOOL GUIAPI RegisterWindowClass (PWNDCLASS pWndClass);
 ```
-```
 
 This function registers a control class.
 
 ```cpp
 BOOL GUIAPI UnregisterWindowClass (const char *szClassName);
-```
 ```
 
 This function unregisters a control class.
@@ -523,20 +516,17 @@ This function unregisters a control class.
 ```cpp
 const char* GUIAPI GetClassName (HWND hWnd);
 ```
-```
 
 This function retrieves the class name of a specific control.
 
 ```cpp
 BOOL GUIAPI GetWindowClassInfo (PWNDCLASS pWndClass);
 ```
-```
 
 This function retrieves the class information of a specific control class.
 
 ```cpp
 BOOL GUIAPI SetWindowClassInfo (const WNDCLASS *pWndClass);
-```
 ```
 
 This function sets the class information of a specific control class.
@@ -585,7 +575,6 @@ static void UnregisterMyControl (void)
     UnregisterWindowClass (MY_CTRL_NAME);
 }
 ```
-```
 
 The control class created above only implements a task, namely displaying
 “Hello, world!” after creating a control instance. The general process of
@@ -606,13 +595,13 @@ hwnd = CreateWindow (MY_CTRL_NAME, “”, WS_VISIBLE, IDC_STATIC, 0, 0, 200, 20
 DestroyWindow (hwnd);
 UnregisterMyControl();
 ```
-```
 
 The window shown in Figure 8 creates an instance of the user-defined
 control class described above, in which “Hello, world! - from my control.”
 is displayed. Please refer to mycontrol.c file in the demo program package
 mg-sample of this guide to get the complete list of this program.
 
+![User-define control](figures/3.4.jpeg)
 
 ##### Figure 8 Display “Hello, world!” using the user-defined control
 
@@ -677,7 +666,6 @@ typedef struct _MSG
 } MSG;
 typedef MSG* PMSG;
 ```
-```
 
 Members of `MSG` message structure include the window that the message
 belonging to (hwnd), message identifier (message), `WPARAM` type parameter
@@ -705,7 +693,6 @@ application can define its own messages as follow:
 ```cpp
 #define MSG_MYMESSAGE1    (MSG_USER + 1)
 #define MSG_MYMESSAGE2    (MSG_USER + 2)
-```
 ```
 
 You can use the user-defined message in your programs, and transfer data by
@@ -753,7 +740,6 @@ gotten out.
 int GUIAPI GetMessage (PMSG pMsg, HWND hWnd);
 BOOL GUIAPI HavePendingMessage (HWND hMainWnd);
 ```
-```
 
 Messages that don’t queue up are sent to the window procedure of the target
 window directly without trough message queue. System generally completes
@@ -788,7 +774,6 @@ while (GetMessage (&Msg, hMainWnd)) {
        DispatchMessage (&Msg);
 }
 ```
-```
 
 As shown above, an application starts a message loop after creating the
 main window. `GetMessage` function gets a message from the message queue to
@@ -821,7 +806,6 @@ example:
             DispatchMessage (&Msg);
         }
     } while (TRUE);
-```
 ```
 
 When the program above cannot get any message or get a `MSG_QUIT` message, it
@@ -857,7 +841,6 @@ the return value of the function:
 ```cpp
 int PreDefMainWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
-```
 
 Most window procedures only handle messages of several types, and other
 messages are handled by system through `DefaultMainWinProc`.
@@ -868,14 +851,12 @@ The default message handling of dialog boxes is completed by
 ```cpp
 int PreDefDialogProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
-```
 
 The default message handling of a control is completed by
 `DefaultcontrolProc` (PreDefControlProc as default) function:
 
 ```cpp
 int PreDefControlProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
-```
 ```
 
 ### Sending and Posting Message
@@ -925,13 +906,11 @@ The following are some other message handling functions:
 ```cpp
 int GUIAPI BroadcastMessage ( int iMsg, WPARAM wParam, LPARAM lParam );
 ```
-```
 
 This function broadcasts a message to all main windows on the desktop.
 
 ```cpp
 int GUIAPI ThrowAwayMessages (  HWND pMainWnd );
-```
 ```
 
 This function removes all the messages in the message queue associated with
@@ -939,7 +918,6 @@ a window, and returns the number of removed messages.
 
 ```cpp
 BOOL GUIAPI WaitMessage ( PMSG pMsg, HWND hMainWnd );
-```
 ```
 
 This function waits for the message in the message queue of the main
@@ -955,7 +933,6 @@ MiniGUI-Processes server program to other client programs.
 
 ```cpp
 int GUIAPI Send2Client ( MSG * msg,  int cli );
-```
 ```
 Send2Client function sends a message to a specified client. The function is
 defined for MiniGUI-Processes and can only be called by the server program
@@ -975,7 +952,6 @@ layer.CLIENTS_ALL: All clients. Return values:
 ```cpp
 BOOL GUIAPI Send2TopMostClients (  int iMsg, WPARAM wParam, LPARAM lParam );
 ```
-```
 
 Send2TopMostClients sends a message to all clients in the topmost layer.
 The function is defined for MiniGUI-Processes and can only be called by the
@@ -984,7 +960,6 @@ server program mginit.
 ```cpp
 BOOL GUIAPI Send2ActiveWindow (const MG_Layer* layer,
                  int iMsg, WPARAM wParam, LPARAM lParam); 
-```
 ```
 
 Send2ActiveWindow function sends a message to the current active window in
@@ -1030,7 +1005,6 @@ case MSG_NCCREATE:
         return -1;
     break;
 ```
-```
 
 ### `MSG_SIZECHANGING`
 
@@ -1044,7 +1018,6 @@ is as follows:
 case MSG_SIZECHANGING:
     memcpy ((PRECT)lParam, (PRECT)wParam, sizeof (RECT));
     return 0;
-```
 ```
 
 You can catch the message handling to let the window to be created locate
@@ -1064,7 +1037,6 @@ case MSG_SIZECHANGING:
     return 0;
 }
 
-```
 ```
 
 ### `MSG_SIZECHANGED` and `MSG_CSIZECHANGED`
@@ -1089,7 +1061,6 @@ case MSG_SIZECHANGED:
     rcClient->bottom = rcClient->top +  _HEIGHT;
     return 0;
 }
-```
 ```
 
 `MSG_CSIZECHANGED` message is a notification message sent to the window after
@@ -1119,7 +1090,6 @@ be handled as follows:
 case MSG_FONTCHANGING:
     return -1;
 
-```
 ```
 
 `SetWindowFont` function will terminate handling and return after application
@@ -1151,7 +1121,6 @@ case MSG_FONTCHANGED: {
     return 0;
 }
 ```
-```
 
 ### `MSG_ERASEBKGND`
 
@@ -1168,7 +1137,6 @@ ignore the handling of the message in this case:
 MSG_EARSEBKGND:
     return 0;
 
-```
 ```
 
 There are also some windows, which expect to fill the background with a
@@ -1200,12 +1168,12 @@ MSG_EARSEBKGND:
         ReleaseDC (hdc);
     return 0;
 ```
-```
 
 Please refer to bmpbkgnd.c program in the sample package of this guide for
 the complete implementation of filling the window background with a bitmap,
 the effect of the program is as shown in Figure 9.
 
+![Using image as window background](figures/3.5.jpeg)
 
 ##### Figure 9 Using image as window background
 
@@ -1234,7 +1202,6 @@ case MSG_PAINT:
     EndPaint (hWnd, hdc);
     return 0;
 }
-```
 ```
 
 It should be noted that, application should return directly after handling
@@ -1283,7 +1250,6 @@ case MSG_DESTROY:
             return 0;
 
 ```
-```
 
 - `DestroyMainWindow` and `MainWindowCleanup` functions should be called when
 the hosted main window responds to `MSG_CLOSE` message:
@@ -1294,7 +1260,6 @@ case MSG_CLOSE:
             MainWindowCleanup (hWnd);
         return 0;
 
-```
 ```
 
 - Handle `MSG_CLOSE` message and call `DestroyMainWindow` function in the
@@ -1370,55 +1335,7 @@ particular note.
 
 [&lt;&lt; Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md) |
 [Table of Contents](README.md) |
-[Foundation of Dialog Box Programming
-&gt;&gt;](MiniGUIProgGuidePart1Chapter03.md) 
-
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
-
-[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
-[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
-[Tools]: /user-manual/MiniGUIUserManualTools.md
-[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
-
-[MiniGUI Overview]: /MiniGUI-Overview.md
-[MiniGUI User Manual]: /user-manual/README.md
-[MiniGUI Programming Guide]: /programming-guide/README.md
-[MiniGUI Porting Guide]: /porting-guide/README.md
-[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
-
-[MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
-[FMSoft Technologies]: https://www.fmsoft.cn
-[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
-
-----
-
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
-[Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Foundation of Dialog Box Programming &gt;&gt;](MiniGUIProgGuidePart1Chapter03.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
