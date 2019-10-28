@@ -1,4 +1,4 @@
-# Static Box Series Control Classes
+# Static Box and Derived Control Classes
 
 ## Brief Introduction of Static Box Series
 
@@ -658,17 +658,11 @@ lines to the users
 %INCLUDE{"%ATTACHURL%/separator.c.txt"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C3][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C5)
-
-
--- Main.XiaodongLi - 24 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Introduction to the Foundation Classes](MiniGUIProgGuidePart2Chapter04.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Button and Derived Control Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter06.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

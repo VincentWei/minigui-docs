@@ -1,9 +1,7 @@
-# 第二部分 第十二章 编辑框系列控件
-# Chapter 12 of Part 2 Edit Box Series Control
+# Edit Box and Derived Control
 
+## Brief Introduction to Edit Box Control
 
-## 编辑框控件简介
-## Brief Introduction of Edit Box Control
 编辑框控件（Edit）是GUI系统中不可或缺的的重要控件之一，主要用于接受用户的字符输入，实现用户交互和文本编辑的功能。实现上分为单行编辑框（Single
 Line Edit）和多行编辑框（Multiline
 Edit），单行编辑框用来接受用户内容相对简单的单行文本输入，与之相对，多行文本用来接受复杂的、大量的文本的输入。 
@@ -544,20 +542,11 @@ It is inherited from the method of [ `mEdit`
 ```cpp
 %INCLUDE{"%ATTACHURL%/edit.c.txt" pattern="^.*?//START_OF_MLEDIT_TEMPLATE(.*?)//END_OF_MLEDIT_TEMPLATE.*"}%
 ```
-
-[Next](MStudioMGNCSV1dot0PGP2C11][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C13) 
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Property Sheet Control Class](MiniGUIProgGuidePart2Chapter12.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Animation Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter14.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

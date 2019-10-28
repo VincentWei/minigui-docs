@@ -1,9 +1,7 @@
-# 第二部分第十三章 动画控件类
-# Chapter 13 of Part 2 Animation Control Class
+# Animation Control Class
 
+## Brief Introduction to Animation Control
 
-## 动画控件简介
-## Brief Introduction of Animation Control
 动画控件通过对图片组和gif动态图片的绘制和显示，为用户提供了丰富的视觉体验。 `mGNCS中的动画控件源于Minigui`
 3.0的animation控件，在其基础上增加了对图片组播放和gif图片播放控制的支持。 同时， 用户可以通过设置图片播放间隔时间， 来控制播放速度。
 
@@ -221,20 +219,11 @@ code:[animation.c](%ATTACHURL%/animation.c.txt)
 %INCLUDE{"%ATTACHURL%/animation" pattern="^.*?//START_OF_TMPL(.*?)//END_OF_TMPL.*"}%
 ```
 
-
-[Next](MStudioMGNCSV1dot0PGP2C12][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C14) 
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Edit Box and Derived Control Classes](MiniGUIProgGuidePart2Chapter13.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Other Advanced Control Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter15.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

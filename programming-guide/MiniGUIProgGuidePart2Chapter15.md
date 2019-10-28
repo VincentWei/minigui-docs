@@ -1,9 +1,6 @@
-# 其他高级控件类
-# Chapter 14 of Part 2 Other Advanced Control Classes
+# Other Advanced Control Classes
 
-
-## 其他高级控件类简介
-## Brief Introduction of Other Advanced Control Classes
+## Brief Introduction to Other Advanced Control Classes
 
 该类控件主要是视图系列控件，多用于显示各种不同类型的列表项信息。
 
@@ -1815,9 +1812,9 @@ node.
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Animation Control Class](MiniGUIProgGuidePart2Chapter14.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Invisible Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter16.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

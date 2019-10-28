@@ -1,4 +1,4 @@
-# Chapter 5 of Part 2 Button Series Control Class
+# Button and Derived Control Classes
 
 ## Brief Introduction of Button Series Control
 
@@ -29,8 +29,7 @@ buttons, thus buttons can be used more flexibly.
 * [ `mButton` ](MiniGUIProgGuidePart2Chapter06#mButton.md)
 * [ `mCheckButton` ](MiniGUIProgGuidePart2Chapter06#m_CheckButton.md)
 * [ `mRadioButton` ](MiniGUIProgGuidePart2Chapter06#m_RadioButton.md)
-* [ `mMenuButton` ](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) 
-(mPopMenuMgr is used)
+* [ `mMenuButton` ](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) (mPopMenuMgr is used)
 * [ `mColorButton` ](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
 
 - Control creating method
@@ -581,14 +580,9 @@ enum mButtonCheckState{
 };
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C4][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C6)
-
-
-----
-
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Static Box and Derived Control Classes](MiniGUIProgGuidePart2Chapter05.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Panel and Derived Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter07.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

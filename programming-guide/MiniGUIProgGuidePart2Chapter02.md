@@ -1,4 +1,4 @@
-# Chapter 1 of Part 2 Quick Start
+# Quick Start
 
 ## helloworld Program of mGNCS
 
@@ -755,18 +755,11 @@ can be obtained through visual design in miniStudio. Undoubtedly, using mGNCS
 matched with miniStudio, development efficiency of embedded graphic interface
 applications will be greatly enhanced.
 
-[Next](MStudioMGNCSV1dot0PGENP1C2][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C2)
-
-
-
--- Main.XiaodongLi - 24 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Brief Introduction](MiniGUIProgGuidePart2Chapter01.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Renderer and Resources Management &gt;&gt;](MiniGUIProgGuidePart2Chapter03.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

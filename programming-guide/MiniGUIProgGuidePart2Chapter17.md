@@ -1,8 +1,4 @@
-# 其他相关类
-# Chapter 16 of Part 2 Other Related Classes
-
-
-本章介绍一些被mGNCS非控件类。它们是被设计出来提供给控件类使用。
+# Other Classes
 
 This chapter introduces some mGNCS non control classes. They are designed to
 provide for the control class to use.
@@ -466,29 +462,21 @@ int ncsToolItem_getCheck(void *self);
 for other `ToolItem`, unchecked status will be returned forever
 
 - Pop up menu for `MenuToolItem`
+
 ```cpp
  BOOL ncsToolItem_showMenu(void*self, mObject *owner);
 ```
-- 仅针对menu Tool item, owner为一个mWidgt*对象
 
 - Only aim at menu Tool item, owner is a `mWidgt*` object
 
 ### `mToolItem示例`
 ### Example of `mToolItem`
 
-
-
-[Index](MStudioMGNCSV1dot0PGP2C15][Previous]] < [[MStudioMGNCSV1dot0PG) > 
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Invisible Control Class](MiniGUIProgGuidePart2Chapter16.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Graphics Device Interfaces &gt;&gt;](MiniGUIProgGuidePart3Chapter01.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

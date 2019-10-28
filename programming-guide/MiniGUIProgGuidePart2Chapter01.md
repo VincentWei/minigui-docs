@@ -1,4 +1,4 @@
-# Chapter 1 of Part 1 Brief Introduction
+# Brief Introduction to mGNCS
 
 ## Introduction of the New Control Set
 
@@ -118,15 +118,11 @@ References etc.
 
 [Next](MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP1C2)
 
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Using mGUtils](MiniGUIProgGuidePart1Chapter12.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Quick Start &gt;&gt;](MiniGUIProgGuidePart2Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

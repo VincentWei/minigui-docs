@@ -1,5 +1,4 @@
-# Chapter 7 of Part 2 Container and Its Derived Class
-
+# Container and Derived Classes
 
 ## Brief Introduction of Container Class Control
 
@@ -189,23 +188,19 @@ It is inherited from renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
 ### Style of `mContainer`
 
-It is inherited from the style of <a href="#Style of `m_ScrollWidget">style` of
-`mScrollWidget</a>`. 
+It is inherited from the style of style of `mScrollWidget`.
 
 ### Property of `mContainer`
 
-It is inherited from the <a href="#Property of `m_ScrollWidget">property` of
-`mScrollWidget</a>`. 
+It is inherited from the property of `mScrollWidget`.
 
 ### Event of `mContainer`
 
-It is inherited from the <a href="#Event of `m_ScrollWidget">event` of
-`mScrollWidget</a>`. 
+It is inherited from the event of `mScrollWidget`.
 
 ### Method of `mContainer`
 
-It is inherited from the <a href="#Method of `m_ScrollWidget">method` of
-`mScrollWidget</a>`. 
+It is inherited from the method of `mScrollWidget`.
 
 #### Method of Adding Controls
 
@@ -260,8 +255,7 @@ void adjustContent(mContainer *self);
 
 ### Renderer of `mContainer`
 
-It is inherited from the <a href="#Renderer of `m_ScrollWidget">renderer` of
-`mScrollWidget</a>`. 
+It is inherited from the renderer of `mScrollWidget`. 
 
 `mContainer` does not have newly added renderer method.
 
@@ -272,7 +266,7 @@ multiple controls exceeding the window size to the users.
 
 ![alt](figures/container_demo.png)
 
-Figure p2c6-1 Output of Container Program
+##### Figure 1 Output of Container Program
 
 ##### List 1 container.c
 
@@ -289,47 +283,33 @@ information and window content.
 
 ### Style of `mPage`
 
-It is inherited from <a href="#Style of `mContainer">style` of 
-`mContainer</a>`. 
+It is inherited from style of `mContainer`.
 
 ### Property of `mPage`
 
-It is inherited from <a href="#Property of `mContainer">propertyof`
-`mContainer</a>`. 
+It is inherited from property of `mContainer`.
 
 ### Event of `mPage`
 
-It is inherited from <a href="#Event of `mContainer">event` of 
-`mContainer</a>`. 
+It is inherited from event of `mContainer`.
 
 ### Method pf `mPage`
 
-It is inherited from <a href="#Method of `mContainer">methodof` 
-`mContainer</a>`. 
+It is inherited from method of `mContainer`.
 
 ### Renderer of `mPage`
 
-It is inherited from <a href="#Renderer of `mContainer">renderer` of
-`mContainer</a>`. 
+It is inherited from renderer of `mContainer`.
 
 `mPage` does not have newly added renderer method
 
 ### Example of `mPage`
 
-
-[Next](MStudioMGNCSV1dot0PGENP2C6][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C8)
-
-
-
-
--- Main.XiaodongLi - 28 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Panel and Derived Classes](MiniGUIProgGuidePart2Chapter07.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Slider Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter09.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

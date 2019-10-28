@@ -1,4 +1,4 @@
-# Panel and Its Derived Class
+# Panel and Derived Classes
 
 ## Brief Introduction of Panel Class Control
 
@@ -278,9 +278,9 @@ Specification for the Image Resource Used by Skin Renderer
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Button and Derived Classes](MiniGUIProgGuidePart2Chapter06.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Container and Derived Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter08.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

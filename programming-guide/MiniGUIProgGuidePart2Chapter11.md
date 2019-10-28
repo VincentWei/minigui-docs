@@ -1,9 +1,6 @@
-# 第二部分 第十章 进度条控件
-# Chapter 10 of Part 2 Progress Bar Control
+# Progress Bar Control Class
 
-
-## 进度条控件简介
-## Brief Introduction of Progress Bar Control
+## Brief Introduction to Progress Bar Control
 
 进度条控件（ProgressBar）是GUI系统中不可或缺的的重要控件之一，可以直观的表示出某项的进度，在进行文件复制、软件安装、文件传输时经常用到。mGNCS中的进度条控件基于MiniGUI 
 3.0中内置的进度条控件进行了增强和重构，增加了渲染器的设置，使其更加易用，更加绚丽。 
@@ -209,22 +206,11 @@ Specification]] in Specification for Image Resource Used by Skin Renderer
 %INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_SET_PROPERTY(.*?)//END_OF_SET_PROPERTY.*"}%
 ```
 
-
-[Next](MStudioMGNCSV1dot0PGP2C9][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C11) 
-
-
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Spinner Control Class](MiniGUIProgGuidePart2Chapter10.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Property Sheet Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter12.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

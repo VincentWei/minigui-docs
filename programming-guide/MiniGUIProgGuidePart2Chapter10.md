@@ -1,9 +1,7 @@
-# 旋钮类控件
-# Spinner Class Control
+# Spinner Control Class
 
 
-## 旋钮类控件简介
-## Brief Introduction of Spinner Class Controls
+## Brief Introduction to Spinner Control Class
 
 旋钮类控件通常由一组箭头按钮（上下或者左右），通常表示一个范围，通过箭头控制，可以一步一步的改变值。
 
@@ -414,19 +412,11 @@ Schematic diagram: <br />
 %INCLUDE{"%ATTACHURL%/spinbox.c.txt" pattern="^.*?//START_SPINBOX(.*?)//END_SPINBOX.*"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGP2C8][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C10)
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Slider Control Class](MiniGUIProgGuidePart2Chapter09.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Progress Bar Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter11.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

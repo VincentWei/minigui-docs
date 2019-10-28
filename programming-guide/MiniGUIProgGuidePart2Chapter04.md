@@ -1,4 +1,4 @@
-# Chapter 3 of Part 2 Introduction of the Foundation Class
+# Introduction to the Foundation Classes
 
 ## `mObject`
 
@@ -386,12 +386,14 @@ mComponentClass * ncsGetComponentClass(const char* class_name, BOOL check);
 | `NCSS_NOTIFY` | Notify | Decide if the control generates Notification event |
 
 ### Property of `mWidget`
+
 | *Property name* |*Property name of miniStudio* | *Type* | *RW* | *Explanation* |
-| `NCSP_WIDGET_RDR` | Renderer |const char* | W | Set current renderer of the control |
-| `NCSP_WIDGET_TEXT` | Text |const char* | W | Set text content of the current control |
-| `NCSP_WIDGET_BKIMAGE` | `BkImage` |PBITMAP | `RW` | Set or get current background image |
+|-----------------|------------------------------|--------|------|---------------|
+| `NCSP_WIDGET_RDR` | Renderer | `const char*` | W | Set current renderer of the control |
+| `NCSP_WIDGET_TEXT` | Text | `const char*` | W | Set text content of the current control |
+| `NCSP_WIDGET_BKIMAGE` | `BkImage` | `PBITMAP` | `RW` | Set or get current background image |
 | `NCSP_WIDGET_BKIMAGE_MODE`| `BkImageMode` | [ImageDrawMode](MStudioMGNCSV1dot0PGAppC#ImageDrawModeValues) | Set or get current background image drawing mode |
-| `NCSP_WIDGET_BKIMAGE_FILE` | - |const char* | Set current background image, and automatically load from the file name |
+| `NCSP_WIDGET_BKIMAGE_FILE` | - | `const char*` | Set current background image, and automatically load from the file name |
 
 ### Method of `mWidget`
 None
@@ -429,6 +431,7 @@ window sentence handle as the parameter cannot be called
 ### Operation Function of `mWidget`
 
 - Functions that create controls
+
 ```cpp
 /**
  * A struct wrap the NCS_CREATE_INFO
@@ -616,6 +619,7 @@ mWidget* ncsCreateMainWindowIndirect(const NCS_MAINWND_TEMPLATE* tmpl, HWND hHos
 ```
 
 - Direct associated operation of object pointer and window sentence handle
+
 ```cpp
 /**
  * \fn static inline mWidget* ncsObjFromHandle(HWND hwnd);
@@ -667,18 +671,11 @@ static inline mWidget* ncsGetParentObj(HWND hwnd)
 
 `mWidget` cannot be used directly
 
-
-
-[Next](MStudioMGNCSV1dot0PGENP1C2][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C4)
-
-
--- Main.XiaodongLi - 24 Feb 2010
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Renderer and Resources Management](MiniGUIProgGuidePart2Chapter03.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Static Box and Derived Control Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter05.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

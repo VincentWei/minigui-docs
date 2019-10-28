@@ -1,5 +1,4 @@
-# Chapter 2 of Part 2 Renderer and Resources Management
-
+# Renderer and Resources Management
 
 ## Look and Feel Renderer
 
@@ -299,18 +298,16 @@ buttons are the look and feel effects of skin and flat renderer respectively.
 ```
 
 ##### List 3 resmgr.c
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/resmgr.c.txt"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C1][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C3)
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Quick Start](MiniGUIProgGuidePart2Chapter02.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Introduction to the Foundation Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter04.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

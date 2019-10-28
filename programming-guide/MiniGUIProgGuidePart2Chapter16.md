@@ -1,9 +1,6 @@
-# 第二部分第十五章 不可见控件
-# Chapter 15 of Part 2 Invisible Control
+# Invisible Control Class
 
-
-## 不可见控件简介
-## Brief Introduction of Invisible Control
+## Brief Introduction to Invisible Control Class
 
 不可见控件是指那些不能在窗口上显示，但是却具有一定功能的组件。
 
@@ -316,19 +313,11 @@ operation effect drawing is as below:<br />
 
 For complete codes, refer to [timer.c](%ATTACHURL%/timer.c.txt)
 
-[Next](MStudioMGNCSV1dot0PGP2C14][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C16)
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Other Advanced Control Classes](MiniGUIProgGuidePart2Chapter15.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Other Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter17.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

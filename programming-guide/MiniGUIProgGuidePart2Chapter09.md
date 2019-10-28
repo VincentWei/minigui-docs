@@ -1,7 +1,7 @@
-# Chapter 8 of Part 2 Slider Control Class
-
+# Slider Control Class
 
 ## Brief Introduction of Slider Control
+
 The slider control is mainly visual realization to the adjustment logic of a
 value. Through dragging and sliding the control, occasions of the users
 adjusting the brightness and volume and operation of adjusting the value of a
@@ -247,15 +247,11 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 ```cpp
 %INCLUDE{"%ATTACHURL%/scrollbar.c.txt"}%
 ```
-
-[Next](MStudioMGNCSV1dot0PGENP2C7][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C9)
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Container and Derived Classes](MiniGUIProgGuidePart2Chapter08.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Spinner Control Class &gt;&gt;](MiniGUIProgGuidePart2Chapter10.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

@@ -1,9 +1,6 @@
-# 属性表控件类
-# Chapter 11 of Part 2 Property Sheet Control Class
+# Property Sheet Control Class
 
-
-## 属性表控件类简介
-## Brief Introduction of Property Sheet Control Class
+## Brief Introduction to Property Sheet Control Class
 
 属性表控件类由一个个的独立的属性页组成，每个属性页有一个凸舌，我们可以单击凸舌，在不同的属性页之间切换，这里的属性页就是可以容纳其他控件的页控件（Page
 控件）。我们通常使用类似建立对话框的方法，即定义对话框模板的方法向属性表中添加属性页。 
@@ -109,7 +106,7 @@ It is inherited from [the property of `mWidget`
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | 活动属性页已改变 |
 
 
-It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
+It is inherited from [the event of mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 | *Event ID* | *Parameter* | *Explanation* |
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | The active property page has changed |
@@ -120,8 +117,7 @@ It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
 继承自[mWidget的方法](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-It is inherited from [the method of 
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
+It is inherited from [the method of mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 #### 添加属性页
 #### Add property page
@@ -277,7 +273,7 @@ int broadCastMsg(mPropSheet *self, DWORD param1, DWORD param2);
 
 继承自[mWidget 渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-It is inherited from [the renderer of `mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget`)
+It is inherited from [the renderer of `mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 ### Instance of `mPropSheet`
 
@@ -296,15 +292,11 @@ etc.
 ```cpp
 %INCLUDE{"%ATTACHURL%/propsheet.c.txt"}%
 ```
-
-[Next](MStudioMGNCSV1dot0PGP2C10][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C12)
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Progress Bar Control Class](MiniGUIProgGuidePart2Chapter11.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Edit Box and Derived Classes &gt;&gt;](MiniGUIProgGuidePart2Chapter13.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
