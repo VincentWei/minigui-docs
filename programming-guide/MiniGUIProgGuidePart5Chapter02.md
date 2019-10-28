@@ -52,7 +52,7 @@ mginit. `ServerStartup` function will create listening socket, prepare to
 accept the connection requests from clients. So far the server initialization
 has finished. Let’s analyze the above process in details.
 
-<b>1. Listen events coming from clients and layers</b>
+#### 1. Listen events coming from clients and layers
 
 The global variables `OnNewDelClient` and `OnChangeLayer` are only available 
 for MiniGUI-Processes server program. They are two function pointer variables.
@@ -227,7 +227,7 @@ static void on_change_layer (int op, MG_Layer* layer, MG_Client* client)
 }
 ```
 
-<b>2. `ServerStartup` function</b>
+#### 2. `ServerStartup` function
 
 This function initializes the server, i.e. mginit. It creates the shared
 resource, the listening socket, the default layer, and other internal objects.

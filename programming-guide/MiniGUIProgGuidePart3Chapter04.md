@@ -5,7 +5,7 @@
 
 mGPlus is a MiniGUI component which provides support for advanced graphics
 functions like path, gradient, anti-aliase stretch, and color combination.
-mGPlus is like `GDI`+ of Win32 or Cario.mGPlus will provide a series of
+mGPlus is like `GDI`+ of Win32 or Cario. mGPlus will provide a series of
 interfaces to implement
 these functions. The library allows applications to draw graphics that do not
 need to be associated with device handles, that is, applications can create
@@ -2532,25 +2532,26 @@ MP_LINEAR_GRADIENT_MODE_HORIZONTAL);
 
 ![alt](figures/MP_LINEAR_GRADIENT_MODE_HORIZONTAL.png)
 
-<center>MP_LINEAR_GRADIENT_MODE_HORIZONTAL.</center>
+##### Figure `MP_LINEAR_GRADIENT_MODE_HORIZONTAL`
+
 The following is a demonstration of other modes:
 Set brush to `MP_LINEAR_GRADIENT_MODE_VERTICAL` mode
 
 ![alt](figures/MP_LINEAR_GRADIENT_MODE_VERTICAL.png)
 
-<center>MP_LINEAR_GRADIENT_MODE_VERTICAL</center>
+##### Figure `MP_LINEAR_GRADIENT_MODE_VERTICAL`
 
 Set brush to `MP_LINEAR_GRADIENT_MODE_FORWARDDIAGONAL` mode
 
 ![alt](figures/MP_LINEAR_GRADIENT_MODE_FORWARDDIAGONAL.png)
 
-<center>MP_LINEAR_GRADIENT_MODE_FORWARDDIAGONAL</center>
+##### Figure `MP_LINEAR_GRADIENT_MODE_FORWARDDIAGONAL`
 
 Set the brush to `MP_LINEAR_GRADIENT_MODE_BACKWARDDIAGONAL` mode
 
 ![alt](figures/MP_LINEAR_GRADIENT_MODE_BACKWARDDIAGONAL.png)
 
-<center>MP_LINEAR_GRADIENT_MODE_BACKWARDDIAGONAL </center>
+##### Figure `MP_LINEAR_GRADIENT_MODE_BACKWARDDIAGONAL`
 
 ### Fill graphic
 
