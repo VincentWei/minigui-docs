@@ -11,7 +11,20 @@ the timer. `SetTimerEx` and `ResetTimerEx` are provided since MiniGUI version
 2.0.4/1.6.10; they support timer callback procedure. The prototypes are as
 follow:
 
-```
+```cpp
+typedef BOOL (* TIMERPROC)(HWND, int, DWORD);
+
+BOOL GUIAPI ResetTimerEx (HWND hWnd, int id, unsigned int speed,
+                TIMERPROC timer_proc);
+
+BOOL GUIAPI SetTimerEx (HWND hWnd, int id, unsigned int speed,
+                TIMERPROC timer_proc);
+
+#define SetTimer(hwnd, id, speed) \
+                SetTimerEx(hwnd, id, speed, NULL)
+
+#define ResetTimer(hwnd, id, speed) \
+                ResetTimerEx(hwnd, id, speed, (TIMERPROC)0xFFFFFFFF)
 ```
 
 The meaning of each parameter in `TIMERPROC` is as follows：
@@ -60,7 +73,60 @@ Finally, program will delete the timer while closing window.
 
 ##### List 1 Use of Timer
 
-```
+```cpp
+#define _ID_TIMER 100
+#define _ID_TIME_STATIC 100
+
+static char* mk_time (char* buff)
+{
+    time_t t;
+    struct tm * tm;
+
+    time (&t);
+    tm = localtime (&t);
+    sprintf (buff, "%02d:%02d:%02d", tm->tm_hour, tm->tm_min, tm->tm_sec);
+
+    return buff;
+}
+
+static int TaskBarWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    char buff [20];
+
+    switch (message) {
+    case MSG_CREATE:
+    {
+        CreateWindow (CTRL_STATIC, mk_time (buff), 
+                    WS_CHILD | WS_BORDER | WS_VISIBLE | SS_CENTER,
+                    _ID_TIME_STATIC, g_rcExcluded.right - _WIDTH_TIME - _MARGIN, _MARGIN,
+                    _WIDTH_TIME, _HEIGHT_CTRL, hWnd, 0);
+
+        /* Create a timer with interval being one second.
+         * Its identifier is _ID_TIMER, target window is hWnd.
+         */
+        SetTimer (hWnd, _ID_TIMER, 100);
+        break;
+
+    case MSG_TIMER:
+    {
+        /* Received a message of MSG_TIMER。
+         * Application should determine whether wParam is _ID_TIMER.
+         */
+        SetDlgItemText (hWnd, _ID_TIME_STATIC, mk_time (buff));
+        break;
+    }
+
+    case MSG_CLOSE: 
+        /* Delete the timer */
+        KillTimer (hWnd, _ID_TIMER);
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc (hWnd, message, wParam, lParam);
+}
 ```
 
 It is necessary to explain that the third argument of `SetTimer` is used to
@@ -107,7 +173,8 @@ can
 not be same as the name of existing clipboards (system defined or user
 defined):
 
-```
+```cpp
+int GUIAPI CreateClipBoard (const char* cb_name, size_t size);
 ```
 
 Argument `cb_name` specifies the name of a clipboard; argument size specifies
@@ -120,14 +187,16 @@ function returns `CBERR_OK`; if the name is reduplicate, the function returns
 The `DestroyClipBoard` function destroys a user defined clipboard created by
 `CreateClipBoard` function:
 
-```
+```cpp
+int GUIAPI DestroyClipBoard (const char* cb_name);
 ```
 
 ### Transferring Data to Clipboard
 
 `SetClipBoardData` function transfers data to a specified clipboard.
 
-```
+```cpp
+int GUIAPI SetClipBoardData (const char* cb_name, void* data, size_t n, int cbop);
 ```
 
 Here, the argument `cb_name` specifies the name of clipboard; data is the
@@ -143,13 +212,15 @@ existing data on the clipboard
 
 `GetClipBoardDataLen` function is used to get the size of data on clipboard.
 
-```
+```cpp
+size_t GUIAPI GetClipBoardDataLen (const char* cb_name);
 ```
 
 `GetClipBoardData` function is used to copy the data on clipboard to the
 specified data buffer:
 
-```
+```cpp
+size_t GUIAPI GetClipBoardData (const char* cb_name, void* data, size_t n);
 ```
 
 Here the argument `cb_name` specifies the name of the clipboard; data is the
@@ -165,7 +236,8 @@ you can specify an appropriate data buffer to save data.
 of 
 data on clipboard.
 
-```
+```cpp
+int GUIAPI GetClipBoardByte (const char* cb_name, int index, unsigned char* byte);
 ```
 
 Here the argument index specifies the index position of specified data; byte is
@@ -177,7 +249,14 @@ The configuration file of MiniGUI (default as /usr/local/etc/MiniGUI.cfg file)
 uses Windows `INI-like` file format. This format is very simple, seen as
 follows: 
 
-```
+```cpp
+[section-name1]
+key-name1=key-value1
+key-name2=key-value2
+
+[section-name2]
+key-name3=key-value3
+key-name4=key-value4
 ```
 
 The information of such configuration file is grouped by section, then uses
@@ -185,7 +264,46 @@ key=value format to appoint parameter and its value. Application can also use
 this format to store some configuration information. So, MiniGUI provides
 following functions (minigui/minigui.h):
 
-```
+```cpp
+int GUIAPI GetValueFromEtcFile (const char* pEtcFile, const char* pSection,
+const char* pKey, char* pValue, int iLen);
+
+int GUIAPI GetIntValueFromEtcFile (const char* pEtcFile, const char* pSection,
+const char* pKey, int* value);
+
+int GUIAPI SetValueToEtcFile (const char* pEtcFile, const char* pSection,
+const char* pKey, char* pValue);
+
+GHANDLE GUIAPI LoadEtcFile (const char* pEtcFile);
+
+int GUIAPI UnloadEtcFile (GHANDLE hEtc);
+
+int GUIAPI GetValueFromEtc (GHANDLE hEtc, const char* pSection, 
+const char* pKey, char* pValue, int iLen);
+
+int GUIAPI GetIntValueFromEtc (GHANDLE hEtc, const char* pSection, 
+const char* pKey, int *value);
+
+int GUIAPI SetValueToEtc (GHANDLE hEtc, const char* pSection,
+const char* pKey, char* pValue);
+
+int GUIAPI RemoveSectionInEtcFile (const char* pEtcFile, const char* pSection);
+
+int GUIAPI GetValueFromEtcSec (GHANDLE hSect, 
+  const char* pKey, char* pValue, int iLen);
+
+int GUIAPI GetIntValueFromEtcSec (GHANDLE hSect, 
+     const char* pKey, int* pValue);
+
+int GUIAPI SetValueToEtcSec (GHANDLE hSect, 
+const char* pKey, char* pValue);
+
+int GUIAPI SaveEtcToFile (GHANDLE hEtc, const char* file_name);
+
+GHANDLE GUIAPI FindSectionInEtc (GHANDLE hEtc, 
+   const char* pSection, BOOL bCreateNew);
+
+int GUIAPI RemoveSectionInEtc (GHANDLE hEtc, const char* pSection);
 ```
 
 The use of first three functions is as follows:
@@ -248,7 +366,31 @@ to get key value. When there is no need to visit configuration information, use
 Assuming that certain configuration file records some application information,
 and has the following formats:
 
-```
+```cpp
+[mginit]
+nr=8
+autostart=0
+
+[app0]
+path=../tools/
+name=vcongui
+layer=
+tip=Virtual&console&on&MiniGUI
+icon=res/konsole.gif
+
+[app1]
+path=../bomb/
+name=bomb
+layer=
+tip=Game&of&Minesweaper
+icon=res/kmines.gif
+
+[app2]
+path=../controlpanel/
+name=controlpanel
+layer=
+tip=Control&Panel
+icon=res/kcmx.gif
 ```
 
 The section [mginit] records the number of applications and its
@@ -260,14 +402,82 @@ mg-samples).
 
 ##### List 2 Using MiniGUI configuration file functions to get information
 
-```
+```cpp
+#define APP_INFO_FILE “mginit.rc”
+
+static BOOL get_app_info (void)
+{
+    int i;
+    APPITEM* item;
+
+    /* Get information of the number of programs */
+    if (GetIntValueFromEtcFile (APP_INFO_FILE, "mginit", "nr", &app_info.nr_apps) = ETC_OK)
+        return FALSE;
+
+    if (app_info.nr_apps <= 0)
+        return FALSE;
+
+    /* Get index of autostarting application */
+    GetIntValueFromEtcFile (APP_INFO_FILE, "mginit", "autostart", &app_info.autostart);
+
+    if (app_info.autostart >= app_info.nr_apps || app_info.autostart < 0)
+        app_info.autostart = 0;
+
+    /* Calloc inforamtion structure of application */
+    if ((app_info.app_items = (APPITEM*)calloc (app_info.nr_apps, sizeof (APPITEM))) == NULL) {
+        return FALSE;
+    }
+    /* Get information of each application such as path, name and icon*/
+    item = app_info.app_items;
+    for (i = 0; i < app_info.nr_apps; i++, item++) {
+        char section [10];
+
+        sprintf (section, "app%d", i);
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "path", 
+                    item->path, PATH_MAX) = ETC_OK)
+            goto error;
+
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "name", 
+                    item->name, NAME_MAX) = ETC_OK)
+            goto error;
+
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "layer", 
+                    item->layer, LEN_LAYER_NAME) = ETC_OK)
+            goto error;
+
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "tip", 
+                    item->tip, TIP_MAX) = ETC_OK)
+            goto error;
+
+        strsubchr (item->tip, '&', ' ');
+
+        if (GetValueFromEtcFile (APP_INFO_FILE, section, "icon", 
+                     item->bmp_path, PATH_MAX + NAME_MAX) = ETC_OK)
+            goto error;
+
+        if (LoadBitmap (HDC_SCREEN, &item->bmp, item->bmp_path) = ERR_BMP_OK)
+            goto error;
+
+        item->cdpath = TRUE;
+    }
+    return TRUE;
+error:
+    free_app_info ();
+    return FALSE;
+}
 ```
 
 If using `LoadEtcFile`, `GetValueFromEtc`, and `UnloadEtcFile` to implement
 above 
 example, the code will be as follows:
 
-```
+```cpp
+GHANDLE hAppInfo;
+HAppInfo = LoadEtcFile (APP_INFO_FILE);
+//…
+get_app_info ();
+//…
+UnloadEtcFile (hAppInfo);
 ```
 
 We also need change `GetValueFromEtcFile` of function `get_app_info` to
@@ -318,7 +528,17 @@ categories:
 The first category is used to convert the 16-bit, 32-bit, or 64-bit integer
 into system native byte from certain byte order. For example:
 
-```
+```cpp
+int fd, len_header;
+
+...
+
+    if (read (fd, &len_header, sizeof (int)) == -1)
+        goto error;
+#if MGUI_BYTEORDER == MGUI_BIG_ENDIAN
+    len_header = ArchSwap32 (len_header);    // If it is big-endian system, swap the order
+#endif
+...
 ```
 
 The above code first uses read system call to read an integer value from the a
@@ -362,7 +582,12 @@ integer value after converting integer value from system native byte order to
 little endian; whereas use `MGUI_WriteBE16` and `MGUI_WriteBE32`. The following
 code explains the above functions:
 
-```
+```cpp
+FILE* out;
+    int count;
+...
+    MGUI_WriteLE32 (out, count);  // Write count to the file in little endian
+...
 ```
 
 ### Using Condition Compilation to Write Portable Code
@@ -376,7 +601,77 @@ MiniGUI src/kernel/sharedres.c).
 
 List 3 The usage of conditional compilation
 
-```
+```cpp
+/* If system does not support memory share, define _USE_MMAP */
+#undef  _USE_MMAP 
+/* #define _USE_MMAP 1 */
+
+void *LoadSharedResource (void)
+{
+#ifndef _USE_MMAP
+    key_t shm_key;
+    void *memptr;
+    int shmid;
+#endif
+
+    /* Load share resource*/
+    ...
+
+#ifndef _USE_MMAP /* Get object of share memory*/
+    if ((shm_key = get_shm_key ()) == -1) {
+        goto error;
+    }
+    shmid = shmget (shm_key, mgSizeRes, SHM_PARAM | IPC_CREAT | IPC_EXCL); 
+    if (shmid == -1) { 
+        goto error;
+    } 
+
+    // Attach to the share memory. 
+    memptr = shmat (shmid, 0, 0);
+    if (memptr == (char*)-1) 
+        goto error;
+    else {
+        memcpy (memptr, mgSharedRes, mgSizeRes);
+        free (mgSharedRes);
+    }
+
+    if (shmctl (shmid, IPC_RMID, NULL) < 0) 
+        goto error;
+#endif
+
+    /* Open a file */
+    if ((lockfd = open (LOCKFILE, O_WRONLY | O_CREAT | O_TRUNC, 0644)) == -1)
+        goto error;
+
+#ifdef _USE_MMAP
+    /* If use mmap, write share resource into the file*/
+    if (write (lockfd, mgSharedRes, mgSizeRes) < mgSizeRes)
+        goto error;
+    else
+    {
+        free(mgSharedRes);
+        mgSharedRes = mmap( 0, mgSizeRes, PROT_READ|PROT_WRITE, MAP_SHARED, lockfd, 0);
+    }
+#else
+    /* otherwise write the object ID of share memory into the file*/
+    if (write (lockfd, &shmid, sizeof (shmid)) < sizeof (shmid))
+        goto error;
+#endif
+
+    close (lockfd);
+
+#ifndef _USE_MMAP
+    mgSharedRes = memptr;
+    SHAREDRES_SHMID = shmid;
+#endif
+    SHAREDRES_SEMID = semid;
+
+    return mgSharedRes; 
+
+error:
+    perror ("LoadSharedResource"); 
+    return NULL;
+}
 ```
 
 The MiniGUI-Processes server program to load sharing resource uses the above
@@ -394,7 +689,39 @@ Code of clients can be seen in List 4.
 
 List 4 The usage of conditional compilation (cont.)
 
-```
+```cpp
+void* AttachSharedResource (void)
+{
+#ifndef _USE_MMAP
+    int shmid;
+#endif
+    int lockfd;
+    void* memptr;
+
+    if ((lockfd = open (LOCKFILE, O_RDONLY)) == -1)
+        goto error;
+
+#ifdef _USE_MMAP
+    /* Use mmap to image share resource to process address space */
+    mgSizeRes = lseek (lockfd, 0, SEEK_END );
+    memptr = mmap( 0, mgSizeRes, PROT_READ, MAP_SHARED, lockfd, 0);
+#else
+    /* Otherwise get ID of the object of share memroy, and associate the share memory */
+    if (read (lockfd, &shmid, sizeof (shmid)) < sizeof (shmid))
+        goto error;
+    close (lockfd);
+
+
+    memptr = shmat (shmid, 0, SHM_RDONLY);
+#endif
+    if (memptr == (char*)-1) 
+        goto error;
+    return memptr;
+
+error:
+    perror ("AttachSharedResource"); 
+    return NULL;
+}
 ```
 
 ## Fixed-Point Computing
@@ -426,7 +753,18 @@ plane rectangular coordinates to screen coordinates.
 
 ##### List 5 fixed-point computing
 
-```
+```cpp
+void scale_to_window (const double * in_x, const double * in_y, double * out_x, double * out_y)
+    {
+        fixed  f_x0 = ftofix (get_x0());
+        fixed  f_y0 = ftofix (get_y0());
+        fixed  f_in_x = ftofix (*in_x);
+        fixed  f_in_y = ftofix (*in_y);
+        fixed  f_p = ftofix (get_pixel_length());
+
+        *out_x = fixtof(fixmul(fixsub(f_in_x, f_x0), f_p));
+        *out_y = -fixtof(fixmul(fixsub(f_in_y, f_y0), f_p));
+    }
 ```
 
 The calculation of above program is very simple. The steps are as follow:
@@ -441,31 +779,20 @@ The calculation of above program is very simple. The steps are as follow:
 [Table of Contents](README.md) |
 [Using mGUtils &gt;&gt;](MiniGUIProgGuidePart1Chapter12.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -475,9 +802,9 @@ The calculation of above program is very simple. The steps are as follow:
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

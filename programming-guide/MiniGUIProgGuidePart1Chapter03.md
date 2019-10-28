@@ -35,7 +35,54 @@ input.
 In MiniGUI, two structures are used to denote the dialog box template
 (minigui/window.h), shown as follows:
 
-```
+```cpp
+typedef struct _CTRLDATA
+{
+    /** Class name of the control */
+    const char* class_name;
+    /** Control style */
+    DWORD       dwStyle;
+    /** Control position in dialog */
+    int         x, y, w, h;
+    /** Control identifier */
+    int         id;
+    /** Control caption */
+    const char* caption;
+    /** Additional data */
+    DWORD       dwAddData;
+    /** Control extended style */
+    DWORD       dwExStyle;
+
+    /** window element renderer name */
+    const char* werdr_name;
+
+    /** table of we_attrs */
+    const WINDOW_ELEMENT_ATTR* we_attrs;
+} CTRLDATA;
+typedef CTRLDATA* PCTRLDATA;
+
+typedef struct _DLGTEMPLATE
+{
+    /** Dialog box style */
+    DWORD       dwStyle;
+    /** Dialog box extended style */
+    DWORD       dwExStyle;
+    /** Dialog box position */
+    int         x, y, w, h;
+    /** Dialog box caption */
+    const char* caption;
+    /** Dialog box icon */
+    HICON       hIcon;
+    /** Dialog box menu */
+    HMENU       hMenu;
+    /** Number of controls */
+    int         controlnr;
+    /** Poiter to control array */
+    PCTRLDATA   controls;
+    /** Addtional data, must be zero */
+    DWORD       dwAddData;
+} DLGTEMPLATE;
+typedef DLGTEMPLATE* PDLGTEMPLATE;
 ```
 
 The structure `CTRLDATA` is used to define controls, and `DLGTEMPLATE` is used
@@ -60,7 +107,45 @@ defined as static variable or global variable.
 
 ##### List 1 Definition of dialog box template
 
-```
+```cpp
+static DLGTEMPLATE DlgInitProgress =
+{
+    WS_BORDER | WS_CAPTION, 
+    WS_EX_NONE,
+    120, 150, 400, 130, 
+    "VAM-CNC is initializing",
+    0, 0,
+    3, NULL,
+    0
+};
+
+static CTRLDATA CtrlInitProgress [] =
+{ 
+    {
+        "static",
+        WS_VISIBLE | SS_SIMPLE,
+        10, 10, 380, 16, 
+        IDC_PROMPTINFO, 
+        "Initializing...",
+        0
+    },
+    {
+        "progressbar",
+        WS_VISIBLE,
+        10, 40, 380, 20,
+        IDC_PROGRESS,
+        NULL,
+        0
+    },
+    {
+        "button",
+        WS_TABSTOP | WS_VISIBLE | BS_DEFPUSHBUTTON, 
+        170, 70, 60, 25,
+        IDOK, 
+        "OK",
+        0
+    }
+};
 ```
 
 __NOTE__ Data variables for defining the dialog box template in the program
@@ -80,15 +165,53 @@ in Figure 1. Please refer to dialogbox.c of the sample program package
 ##### List 2 Defining the callback function of a dialog box and creating the
 dialog box
 
-```
+```cpp
+/* Define the dialog box callback function */
+static int InitDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+{
+   switch (message) {
+   case MSG_INITDIALOG:
+       return 1;
+   case MSG_COMMAND:
+       switch (wParam) {
+       case IDOK:
+       case IDCANCEL:
+          EndDialog (hDlg, wParam);
+          break;
+       }
+       break;
+   }
+   return DefaultDialogProc (hDlg, message, wParam, lParam);
+}
+static void InitDialogBox (HWND hWnd)
+{
+   /* Assoiciate the dialog with the control structure array */
+   DlgInitProgress.controls = CtrlInitProgress;
+   DialogBoxIndirectParam (&DlgInitProgress, hWnd, InitDialogBoxProc, 0L);
+}
 ```
 
+![The dialog box created by program in List 2](figures/4.2.jpeg)
 ##### Figure 1 The dialog box created by program in List 2
 
 The prototypes of `DialogBoxIndirectParam` and related functions are listed as
 follow:
 
-```
+```cpp
+int GUIAPI DialogBoxIndirectParamEx (PDLGTEMPLATE pDlgTemplate,
+        HWND hOwner, WNDPROC DlgProc, LPARAM lParam,
+        const char* werdr_name, WINDOW_ELEMENT_ATTR* we_attrs,
+        const char* window_name, const char* layer_name);
+
+static inline int GUIAPI DialogBoxIndirectParam (PDLGTEMPLATE pDlgTemplate,
+        HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
+{
+    return DialogBoxIndirectParamEx (pDlgTemplate, hOwner, DlgProc, lParam,
+                                    NULL, NULL, NULL, NULL);
+}
+
+BOOL GUIAPI EndDialog (HWND hDlg, int endCode);
+void GUIAPI DestroyAllControls (HWND hDlg);
 ```
 
 When calling `DialogBoxIndirectParam`, you should specify the dialog box
@@ -131,7 +254,48 @@ window whenever needed.
 
 ##### List 3 Handling of `MSG_INITDIALOG` message
 
-```
+```cpp
+static int DepInfoBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+{
+    struct _DepInfo *info;
+
+    switch(message) {
+    case MSG_INITDIALOG:
+    {
+        /* Get lParam parameter passed to this dialog box, and assign it 
+         * to the first additional data assoiciated with the dialog box
+         * for future use. */
+
+        info = (struct _DepInfo*)lParam;
+
+        /* Use the data in the info structure to initialize the dialog box */
+        ......
+
+        SetWindowAdditionalData (hDlg, (DWORD)lParam);
+        break;
+    }
+
+    case MSG_COMMAND:
+    {
+        /* Get the parameter from the first additional data 
+         * assoiciated with the dialog box */
+
+        info = (struct _DepInfo*) GetWindowAdditionalData (hDlg);
+
+        switch(wParam) {
+        case IDOK:
+            /* Use the data in the info structure. */
+            ......
+
+        case IDCANCEL:
+            EndDialog(hDlg,wParam);
+            break;
+        }
+    }
+    }
+
+    return DefaultDialogProc (hDlg, message, wParam, lParam);
+}
 ```
 
 Generally, the parameter passed to the dialog box callback function is a
@@ -162,7 +326,24 @@ in MiniGUI, i.e. the modeless dialog box. Here we use
 function. The following is the prototypes of this function and its related
 functions (minigui/window.h):
 
-```
+```cpp
+MG_EXPORT HWND GUIAPI CreateMainWindowIndirectParamEx (PDLGTEMPLATE pDlgTemplate,
+        HWND hOwner, WNDPROC WndProc, LPARAM lParam,
+        const char* werdr_name, WINDOW_ELEMENT_ATTR* we_attrs,
+        const char* window_name, const char* layer_name);
+
+static inline HWND GUIAPI
+CreateMainWindowIndirectParam (PDLGTEMPLATE pDlgTemplate,
+        HWND hOwner, WNDPROC WndProc, LPARAM lParam)
+{
+    return CreateMainWindowIndirectParamEx (pDlgTemplate, hOwner,
+            WndProc, lParam, NULL, NULL, NULL, NULL);
+}
+
+#define CreateMainWindowIndirect(pDlgTemplate, hOwner, WndProc) \
+            CreateMainWindowIndirectParam(pDlgTemplate, hOwner, WndProc, 0)
+
+BOOL GUIAPI DestroyMainWindowIndirect (HWND hMainWin);
 ```
 
 In `MIniGUI` 3.0, `CreateMainWindowIndirect` and 
@@ -191,7 +372,45 @@ List 1
 
 ##### List 4 Creating a main window with a dialog box template
 
-```
+```cpp
+/* Define the window callback function */
+static int InitWindowProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) {
+    case MSG_COMMAND:
+        switch (wParam) {
+        case IDOK:
+        case IDCANCEL:
+            DestroyMainWindowIndirect (hWnd);
+            break;
+        }
+        break;
+
+    }
+
+    return DefaultWindowProc (hDlg, message, wParam, lParam);
+}
+
+    ...
+
+{
+    HWND hwnd;
+    MSG  Msg;
+
+    /* Assocate the dialog box template with control array */
+    DlgInitProgress.controls = CtrlInitProgress;
+
+    /* Create the main window */
+    hwnd = CreateMianWindowIndirect (&DlgInitProgress, HWND_DESKTOP, InitWindowProc);
+
+    if (hwnd == HWND_INVALID)
+        return -1;
+
+    while (GetMessage (&Msg, hwnd)) {
+       TranslateMessage (&Msg);
+       DispatchMessage (&Msg);
+    }
+}
 ```
 
 The program in List 4 will create a main window, which is completely the same
@@ -243,31 +462,20 @@ known.
 [Table of Contents](README.md) |
 [Foundation of Control Programming &gt;&gt;](MiniGUIProgGuidePart1Chapter04.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -277,9 +485,9 @@ known.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

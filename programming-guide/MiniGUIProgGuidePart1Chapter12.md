@@ -73,12 +73,21 @@ the initialization structure specified when the dialog was created in
 
 Code:
 
-```
+```cpp
+extern DLGTEMPLATE DefFileDlg;
+extern DLGTEMPLATE DefSimpleFileDlg;
+
+extern LRESULT DefFileDialogProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+extern LRESULT DefColorDialogProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+extern LRESULT DegFontDialogProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+extern LRESULT DefInfoDialogProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
+
 ```
 
 ### Common Dialog Box
 
-```
+```cpp
+BOOL ShowCommonDialog (PDLGTEMPLATE dlg_template, HWND hwnd, WNDPROC proc, void* private_data);
 ```
 
 ### Open and Save As Dialog Boxes
@@ -90,15 +99,59 @@ to save.
 
 - `FileOpenSaveDialog`
 
-```
+```cpp
+#define MGU_FOSD_MODEPC 0x00
+#define MGU_FOSD_MODESIMPLE 0x01
+
+typedef struct _FILEDLGDATA {
+    /** Indicates to create a Save File or an Open File dialog box. */
+    BOOL is_save;
+    /** The full path name of the file returned. */
+    char filefullname[MY_NAMEMAX + MY_PATHMAX + 1];
+    /** The name of the file to be opened. */
+    char filename[MY_NAMEMAX + 1];
+    /** The initial path of the dialog box. */
+    char filepath[MY_PATHMAX + 1];
+    /** * The filter string, for example: * All file (*.*)|Text file (*.txt;*.TXT)
+    */
+    char filter[MAX_FILTER_LEN + 1];
+    /** The initial index of the filter*/
+    int filterindex;
+    WNDPROC hook;
+} FILEDLGDATA;
+
+/** Data type of pointer to a NEWFILEDLGDATA */*
+*typedef FILEDLGDATA* PFILEDLGDATA;
+BOOL FileOpenSaveDialog (PDLGTEMPLATE dlg_template, HWND hwnd, WNDPROC proc,
+    PFILEDLGDATA pfdd) {
+    ...
+    return ShowCommonDialog (dlg_template, hwnd, proc, pfdd);
+}
+
+LRESULT DefFileDialogProc (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+...
+switch (message){
+    case MSG_INITDIALOG:{
+        PFILEDLGDATA pfdd = (PFILEDLGDATA)lParam;
+        ...
+        if (pfdd->hook){
+            return pfdd->hook (hDlg, message, wParam, lParam);
+        }
+            return 1;
+        }
+        ...
+    }
+}
 ```
 
 In mGUtils, at least we need provide two optional file dialog: Open file and
 save file Dialog.
 
+![Open File Dialog](figures/mgutils-template-openfile.png)
 
 ##### Figure 1 Open File Dialog
 
+![Save File Dialog](figures/mgutils-template-savefile.png)
 
 ##### Figure 2 Open File Dialog
 
@@ -123,14 +176,35 @@ choose a specific color value.
 
 - `ColorSelectDialog`
 
-```
+```cpp
+typedef struct _COLORDLGDATA {
+    /** The value of the color returned. */
+    gal_pixel pixel;
+    /** The R, G, B value of the color returned. */
+    Uint8 r, g, b;
+    /** The H value of the color returned. */
+    Uint16 h;
+    /** The S, V value of the color returned. */
+    Uint8 s, v;
+    WNDPROC hook;
+}COLORDLGDATA, *PCOLORDLGDATA;
+
+BOOL ColorSelectDialog (PDLGTEMPLATE dlg_template, HWND hwnd, WNDPROC proc,
+PCOLORDLGDATA pcdd)
+{
+    ... 
+    return ShowCommonDialog (dlg_template, hwnd, proc, pcdd);
+    ...
+}
 ```
 
 Illustration:
 
+![Color Select Dialog](figures/mgutils-template-colorselect.png)
 
 ##### Figure 3 Color Select Dialog
 
+![Small Color Select Dialog](figures/mgutils-template-colorselect-small.png)
 
 ##### Figure 4 Small Color Select Dialog
 
@@ -202,7 +276,23 @@ character set.
 
 - `FontSelectDialog`
 
-```
+```cpp
+typedef struct _FONTDLGDATA {
+    /* The font minimize size. */
+    int min_size;
+    /* The font maximize size. */
+    int max_size;
+    /* The font color. */
+    RGB color;
+    PLOGFONT logfont;
+    WNDPROC hook;
+} FONTDLGDATA, *PFONTDLGDATA;
+
+BOOL FontSelectDialog (PDLGTEMPLATE dlg_template, HWND hwnd, WNDPROC proc,
+    PFONTDLGLDATA pfsd) {
+    ... ...
+    return ShowCommonDialog (dlg_template, hwnd, proc, pfsd);
+}
 ```
 
 - Font style:
@@ -211,6 +301,7 @@ character set.
 
 Illustration:
 
+![Font Select Dialog](figures/mgutils-template-fontselect.png)
 
 ##### Figure 5 Small Color Select Dialog
 
@@ -243,11 +334,27 @@ The Info dialog box displays user-defined information.
 
 - `InfoShowDialog`
 
-```
+```cpp
+typedef struct _INFODLGDATA {
+const char* msg;
+const char* format;
+int nr_lines;
+int vis_lines;
+int start_line;
+RECT rc;
+WNDPROC hook;
+} INFODLGDATA, *PINFODLGDATA;
+
+BOOL InfoShowDialog (PDLGTEMPLATE dlg_template, HWND hwnd, WNDPROC proc,
+PINFODLGDATA pidd) {
+ ... ...
+return ShowCommonDialog (dlg_template, hwnd, proc, pidd);
+}
 ```
 
 Illustration:
 
+![Information Dialog](figures/mgutils-template-info.png)
 
 ##### Figure 6 Small Color Select Dialog
 
@@ -266,9 +373,12 @@ printf-like arguments to format a string. return Identifier of the button which
 closes the message box.
 
 
-```
+```cpp
+MGUTILS_EXPORT int myMessageBox (HWND hwnd, DWORD dwStyle, const char* title,
+                const char* text, ...);
 ```
 
+![Message Box](figures/mgutils-messagebox.png)
 
 ##### Figure 7 Small Color Select Dialog
 
@@ -278,9 +388,12 @@ creates a main window within a progress bar and returns the
 handle. Note that you can use `SendDlgItemMessage` to send a message to the
 progress bar in the main window in order to update the progress bar.
 
-```
+```cpp
+MGUTILS_EXPORT HWND createProgressWin (HWND hParentWnd, const char* title,
+                const char* label, int id, int range);
 ```
 
+![Progress Box](figures/mgutils-progressbar.png)
 
 ##### Figure 8 Progress Box
 
@@ -296,7 +409,30 @@ buttons in it
 box with checkable item.
 - `myWinEntries`: Creates a entry main window for the user to enter something
 
-```
+```cpp
+MGUTILS_EXPORT HWND createStatusWin (HWND hParentWnd, int width, int height,
+                const char* title, const char* text, ...);
+
+MGUTILS_EXPORT void errorWindow (HWND hwnd, const char* str, const char* title);
+
+MGUTILS_EXPORT int myWinTernary (HWND hwnd, const char* title,
+                const char* button1, const char* button2, const char* button3,
+                const char* text, ...);
+
+MGUTILS_EXPORT int myWinChoice (HWND hwnd, const char* title,
+                const char* button1, const char* button2,
+                const char* text, ...);
+
+MGUTILS_EXPORT int myWinMessage (HWND hwnd, const char* title,
+                const char* button1, const char* text, ...);
+
+MGUTILS_EXPORT int myWinMenu (HWND hParentWnd, const char* title,
+                const char* label, int width, int listboxheight,
+                char ** items, int * listItem, myWINBUTTON* buttons);
+
+MGUTILS_EXPORT int myWinEntries (HWND hParentWnd, const char* title,
+                const char* label, int width, int editboxwidth,
+                BOOL fIME, myWINENTRY* items, myWINBUTTON* buttons);
 ```
 
 - Using Sample
@@ -304,7 +440,53 @@ box with checkable item.
 How to using message box and progress bar, you should enable
 `--enable-ctrlpgbar` first before you use an progress bar dialog.
 
-```
+```cpp
+static void my_notif_proc (HWND hwnd, LINT id, int nc, DWORD add_data)
+{
+    if (nc == BN_CLICKED) {
+        switch (id) {
+            case IDC_MMB:
+                myMessageBox(GetParent (hwnd) , MB_OK , "myMessageBox:" , "NOTE: \n %s \n" , prompts [id - IDC_MMB]);
+                break;
+            case IDC_PROMPT:
+                PostMessage(GetParent (hwnd) , MSG_PROGRESS , IDC_PROGRESS , 0);
+                break;
+        }
+    }
+}
+
+static LRESULT DialogBoxProc2 (HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+...
+    int ppos = 5;
+    switch (message) {
+        case MSG_PROGRESS:
+#ifdef _MGCTRL_PROGRESSBAR
+            if (!prohwnd) {
+                prohwnd = createProgressWin(hDlg , "Progress" , "setup...." , IDC_PROGRESS , 100);
+                SetTimer(hDlg , 100  , 100); 
+                SendDlgItemMessage(prohwnd , IDC_PROGRESS , PBM_SETSTEP , 10 , 0);
+            }
+#endif
+            break;
+        case MSG_TIMER:
+        {
+#ifdef _MGCTRL_PROGRESSBAR
+                if (wParam == 100 && prohwnd){
+                    if (ppos < 10) {
+                        SendDlgItemMessage(prohwnd , IDC_PROGRESS , PBM_SETPOS, 10*ppos , 0);
+                        ppos++;
+                    }
+                    else {
+                        KillTimer(hDlg , 100);
+                        destroyProgressWin(prohwnd);
+                        prohwnd = 0;
+                        ppos = 0;
+                    }
+                }
+#endif
+        }
+}
 ```
 
 ## Message
@@ -378,31 +560,20 @@ rejects the specified logical font and remains open.
 [Table of Contents](README.md) |
 [Brief Introduction to mGNCS &gt;&gt;](MiniGUIProgGuidePart2Chapter01.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -412,9 +583,9 @@ rejects the specified logical font and remains open.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

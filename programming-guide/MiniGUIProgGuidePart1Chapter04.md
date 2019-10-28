@@ -99,7 +99,26 @@ classes in Table 1, or a user-defined control class. Following are the
 prototypes of several functions related to `CreateWindow` function
 (minigui/window.h):
 
-```
+```cpp
+HWND GUIAPI CreateWindowEx2 (const char* spClassName,
+        const char* spCaption, DWORD dwStyle, DWORD dwExStyle,
+        int id, int x, int y, int w, int h, HWND hParentWnd,
+        const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
+        DWORD dwAddData);
+
+static inline HWND GUIAPI CreateWindowEx (const char* spClassName,
+        const char* spCaption, DWORD dwStyle, DWORD dwExStyle,
+        int id, int x, int y, int w, int h, HWND hParentWnd,
+        DWORD dwAddData)
+{
+    return CreateWindowEx2 (spClassName, spCaption, dwStyle, dwExStyle,
+                id, x, y, w, h, hParentWnd, NULL, NULL, dwAddData);
+}
+
+#define CreateWindow(class_name, caption, style, id, x, y, w, h, parent, add_data) \
+        CreateWindowEx(class_name, caption, style, 0, id, x, y, w, h, parent, add_data)
+
+BOOL GUIAPI DestroyWindow (HWND hWnd);
 ```
 
 The `CreateWindow` function creates a child window, i.e. a control. It 
@@ -138,7 +157,54 @@ control of `hStaicWnd2`, and is the grandchild control of `hStaticWnd1`.
 
 ##### List 1 Creating controls using the predefined control classes
 
-```
+```cpp
+#define IDC_STATIC1     100
+#define IDC_STATIC2     150
+#define IDC_BUTTON1     110
+#define IDC_BUTTON2     120
+#define IDC_EDIT1       130
+#define IDC_EDIT2       140
+
+      /* Create a static control */
+      hStaticWnd1 = CreateWindow (CTRL_STATIC, 
+                    "This is a static control", 
+                    WS_CHILD | SS_NOTIFY | SS_SIMPLE | WS_VISIBLE | WS_BORDER,
+                    IDC_STATIC1, 
+                    10, 10, 180, 300, hWnd, 0);
+
+      /* Create two button controls in hStaticWnd1 */
+      hButton1  = CreateWindow (CTRL_BUTTON,
+                    "Button1", 
+                    WS_CHILD | BS_PUSHBUTTON | WS_VISIBLE, 
+                    IDC_BUTTON1, 
+                    20, 20, 80, 20, hStaticWnd1, 0);
+      hButton2  = CreateWindow (CTRL_BUTTON,
+                    "Button2", 
+                    WS_CHILD | BS_PUSHBUTTON | WS_VISIBLE, 
+                    IDC_BUTTON2, 
+                    20, 50, 80, 20, hStaticWnd1, 0);
+
+      /* Create one edit control in hStaticWnd1 */
+      hEdit1   = CreateWindow (CTRL_EDIT,
+                    "Edit Box 1", 
+                    WS_CHILD | WS_VISIBLE | WS_BORDER, 
+                    IDC_EDIT1, 
+                    20, 80, 100, 24, hStaticWnd1, 0);
+
+      /* Create a static control in hStaticWnd1 */
+      hStaticWnd2 = CreateWindow (CTRL_STATIC, 
+                    "This is child static control", 
+                    WS_CHILD | SS_NOTIFY | SS_SIMPLE | WS_VISIBLE | WS_BORDER,
+                    IDC_STATIC1, 
+                    20, 110, 100, 50, hStaticWnd1, 0);
+
+      /* Create an edit box hEdit2 in hStaticWnd2, 
+       * thus hEdit2 is the grandchild window of hStaticWnd1 */
+      hEdit2   = CreateWindow (CTRL_EDIT,
+                    "Edit Box 2", 
+                    WS_CHILD | WS_VISIBLE | WS_BORDER, 
+                    IDC_EDIT2, 
+                    0, 20, 100, 24, hStaticWnd2, 0);
 ```
 
 ## Topics Involved in Control Programming
@@ -166,7 +232,19 @@ to the parent window. If the window procedure of the parent window needs to
 know this change, the notification message should be handled in the window
 procedure of the parent window as follows:
 
-```
+```cpp
+switch (message) {
+        case MSG_COMMAND:
+        {
+            int id = LOWORD(wParam);
+            int nc = HIWORD(wParam);
+            if (id == ID_MYEDIT && nc == EN_CHANGE) {
+                /* The user has changed the content of ID_MYEDIT edit box 
+                * of the child window, and further handling is being done now. */
+            }
+        }
+        break;
+    }
 ```
 
 - MiniGUI V1.2.6 introduces `SetNotificationCallback` function for the
@@ -186,13 +264,161 @@ function calling the dialog box when the user select “OK” button.
 
 ##### List 2 Realizing a simple input dialog box using the predefined controls
 
-```
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+/* Define dialog box template */
+static DLGTEMPLATE DlgBoxInputLen =
+{
+    WS_BORDER | WS_CAPTION, 
+    WS_EX_NONE,
+    120, 150, 400, 160, 
+    "请输入长度",
+    0, 0,
+    4, NULL,
+    0
+};
+
+#define IDC_SIZE_MM     100
+#define IDC_SIZE_INCH   110
+
+/* 
+ * The dialog includes four controls in total, which are used to 
+ * display prompt information, input value, display the 
+ * transformed length value, and show a “OK” button to close the program
+ */
+static CTRLDATA CtrlInputLen [] =
+{ 
+    {
+        CTRL_STATIC,
+        WS_VISIBLE | SS_SIMPLE,
+        10, 10, 380, 18, 
+        IDC_STATIC, 
+        "请输入长度（单位：毫米）",
+        0
+    },
+    {
+        CTRL_EDIT,
+        WS_VISIBLE | WS_TABSTOP | WS_BORDER,
+        10, 40, 380, 24,
+        IDC_SIZE_MM,
+        NULL,
+        0
+    },
+    {
+        CTRL_STATIC,
+        WS_VISIBLE | SS_SIMPLE,
+        10, 70, 380, 18, 
+        IDC_SIZE_INCH, 
+        "相当于 0.00 英寸",
+        0
+    },
+    {
+        CTRL_BUTTON,
+        WS_TABSTOP | WS_VISIBLE | BS_DEFPUSHBUTTON, 
+        170, 100, 60, 25,
+        IDOK, 
+        "确定",
+        0
+    }
+};
+
+/* This is the notification callback funciton of the input box. */
+static void my_notif_proc (HWND hwnd, int id, int nc, DWORD add_data)
+{
+    /* When the value in the input box is changed, 
+     * get the value, transform it into inch,and display it in the inch box
+     */
+    if (id == IDC_SIZE_MM && nc == EN_CHANGE) {
+        char buff [60];
+        double len;
+
+        GetWindowText (hwnd, buff, 32);
+        len = atof (buff);
+        len = len / 25.4;
+
+        sprintf (buff, "相当于 %.5f 英寸", len);
+        SetDlgItemText (GetParent (hwnd), IDC_SIZE_INCH, buff);
+    }
+}
+
+/* The dialog box callback function */
+static int InputLenDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) {
+    case MSG_INITDIALOG:
+        /* 
+         * Save the pointer passed by the last parameter of DialogBoxIndirectParam
+         * in the form of window additonal data for future use.
+         */
+        SetWindowAdditionalData (hDlg, lParam);
+        /* Set the notification callback function for the edit box.
+         */
+        SetNotificationCallback (GetDlgItem (hDlg, IDC_SIZE_MM), my_notif_proc);
+        return 1;
+
+    case MSG_COMMAND:
+        switch (wParam) {
+        case IDOK:
+        {
+            char buff [40];
+            /* Get data from the input box, and save it in the pointer passed in.
+             */
+            double* length = (double*) GetWindowAdditionalData (hDlg);
+            GetWindowText (GetDlgItem (hDlg, IDC_SIZE_MM), buff, 32);
+            *length = atof (buff);
+        }
+        case IDCANCEL:
+            EndDialog (hDlg, wParam);
+            break;
+        }
+        break;
+    }
+
+    return DefaultDialogProc (hDlg, message, wParam, lParam);
+}
+
+static void InputLenDialogBox (HWND hWnd, double* length)
+{
+    DlgBoxInputLen.controls = CtrlInputLen;
+
+    DialogBoxIndirectParam (&DlgBoxInputLen, hWnd, InputLenDialogBoxProc, (LPARAM)length);
+}
+
+int MiniGUIMain (int argc, const char* argv[])
+{
+    double length;
+
+#ifdef _MGRM_PROCESSES
+    JoinLayer(NAME_DEF_LAYER , "input" , 0 , 0);
+#endif
+
+    InputLenDialogBox (HWND_DESKTOP, &length);
+
+    /* Print the value input by the user in the dialog box to the terminal
+     */
+    printf ("The length is %.5f mm.\n", length);
+
+    return 0;
+}
+
+#ifndef _MGRM_PROCESSES
+#include <minigui/dti.c>
+#endif
 ```
 
 The running effect of the program in List 2 is shown in Figure 1. Please refer
 to the input.c file of the sample program package for this guide to get the
 complete source code of the program.
 
+![A simple input dialog box](figures/5.1.jpeg)
 Figure 1 A simple input dialog box
 
 In the Part `IV`, we will introduce the predefined controls of MiniGUI. We will
@@ -215,36 +441,24 @@ MiniGUI provides some operation functions specific to control, as show in Table
 
 ----
 
-[&lt;&lt; Foundation of Dialog Box
-Programming](MiniGUIProgGuidePart1Chapter02.md) |
+[&lt;&lt; Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter02.md) |
 [Table of Contents](README.md) |
 [Advanced Programming of Control &gt;&gt;](MiniGUIProgGuidePart1Chapter05.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -254,9 +468,9 @@ Programming](MiniGUIProgGuidePart1Chapter02.md) |
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

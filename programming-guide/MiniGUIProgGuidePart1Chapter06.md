@@ -25,20 +25,45 @@ First, we call `CreateMenu` to create an empty menu, and then call
 `InsertMenuItem` 
 function to add menu items to the empty menu, as shown in the following:
 
-```
+```cpp
+    HMENU hmnu;
+    MENUITEMINFO mii;
+
+    hmnu = CreateMenu();
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING ;
+    mii.state       = 0;
+    mii.id          = IDM_ABOUT_THIS;
+    mii.typedata    = (DWORD);
+    InsertMenuItem(hmnu, 0, TRUE, &mii);
 ```
 
 If this menu item has its submenu, you can specify the submenu of this menu
 item by setting hsubmenu variable of this menu item.
 
-```
+```cpp
+    mii.hsubmenu    = create_file_menu();
 ```
 
 The method to create a submenu is similar to the procedure to create a menu
 bar, but you should call `CreatePopupMenu` function when creating an empty
 submenu, as shown in the following:
 
-```
+```cpp
+    HMENU hmnu;
+    MENUITEMINFO mii;
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.id          = 0;
+    mii.typedata    = (DWORD)NB_STR_FILE;
+    hmnu = CreatePopupMenu (&mii);
+
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.state       = 0;
+    mii.id          = IDM_NEW;
+    mii.typedata    = (DWORD)NB_STR_NEW;
+    InsertMenuItem(hmnu, 0, TRUE, &mii);
 ```
 
 Hmnu handle in the above code can be used as the handle of the submenu of the
@@ -54,7 +79,8 @@ The method to create a popup menu is same as the method to create a submenu.
 You need to call `CreatePopupMenu` function. To display this popup menu,
 `TrackPopupMenu` function should be called:
 
-```
+```cpp
+int GUIAPI TrackPopupMenu (HMENU hmnu, UINT uFlags, int x, int y, HWND hwnd);
 ```
 
 X and y arguments are the screen coordinates of popup menu, its detail meaning
@@ -80,7 +106,20 @@ popup menu of MiniGUI. The header of a popup menu is similar to the caption bar
 of a main window, and the head information of a popup menu will be striped
 after the function is called.
 
-```
+```cpp
+    HMENU hNewMenu;
+    MENUITEMINFO mii;
+    HMENU hMenuFloat;
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.id          = 0;
+    mii.typedata    = (DWORD)"File";
+
+    hNewMenu = CreatePopupMenu (&mii);
+
+    hMenuFloat = StripPopupHead(hNewMenu);
+
+    TrackPopupMenu (hMenuFloat, TPM_CENTERALIGN, 40, 151, hWnd);
 ```
 
 ### `MENUITEMINFO` Structure
@@ -88,7 +127,20 @@ after the function is called.
 `MENUITEMINFO` structure is the core data structure for operating a menu item,
 and its definition is as follows:
 
-```
+```cpp
+typedef struct _MENUITEMINFO {
+     UINT                mask;
+     UINT                type;
+     UINT                state;
+     int                 id;
+     HMENU               hsubmenu;
+     PBITMAP             uncheckedbmp;
+     PBITMAP             checkedbmp;
+     DWORD               itemdata; 
+     DWORD               typedata;
+     UINT                cch;
+} MENUITEMINFO;
+typedef MENUITEMINFO* PMENUITEMINFO;
 ```
 
 Illustrations for these members are as follow:
@@ -143,7 +195,9 @@ You can get the menu item properties of interest by `GetMenuItemInfo` function,
 and can also set the menu item properties of interest by `SetMenuItemInfo`
 function: 
 
-```
+```cpp
+int GUIAPI GetMenuItemInfo (HMENU hmnu, int item, BOOL flag, PMENUITEMINFO pmii);
+int GUIAPI SetMenuItemInfo (HMENU hmnu, int item, BOOL flag, PMENUITEMINFO pmii);
 ```
 
 These two functions are used to get or set the properties of a menu item in 
@@ -190,7 +244,17 @@ program. The following code is from libvcongui of MiniGUI, and it sets the
 selection state of the menu item correspondingly according to the user’s
 selections (the size of the virtual terminal and the character set):
 
-```
+```cpp
+case MSG_ACTIVEMENU:
+            if (wParam == 2) {
+                CheckMenuRadioItem ((HMENU)lParam,
+                    IDM_40X15, IDM_CUSTOMIZE,
+                    pConInfo->termType, MF_BYCOMMAND);
+                CheckMenuRadioItem ((HMENU)lParam, 
+                    IDM_DEFAULT, IDM_BIG5,
+                    pConInfo->termCharset, MF_BYCOMMAND);
+            }
+        break;
 ```
 
 Note that in the above code, calling `CheckMenuRadioItem` function twice sets
@@ -205,20 +269,148 @@ shown in Figure 1
 
 List 1 Sample of operating normal menu
 
-```
+```cpp
+/* Create a “file” menu */
+static HMENU createpmenufile (void)
+{
+    HMENU hmnu;
+    MENUITEMINFO mii;
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.id          = 100;
+    mii.typedata    = (DWORD)NB_STR_FILE;
+    mii.hsubmenu    = createpmenufile ();
+
+    InsertMenuItem(hmnu, 0, TRUE, &mii);
+
+    mii.type        = MFT_STRING;
+    mii.id          = 110;
+    mii.typedata    = (DWORD)NB_STR_EDIT;
+    mii.hsubmenu    = createpmenuedit ();
+    InsertMenuItem(hmnu, 1, TRUE, &mii);
+
+    mii.type        = MFT_STRING;
+    mii.id          = 120;
+    mii.typedata    = (DWORD)NB_STR_VIEW;
+    mii.hsubmenu    = createpmenuview ();
+    InsertMenuItem(hmnu, 2, TRUE, &mii);
+
+    mii.type        = MFT_STRING;
+    mii.id          = 130;
+    mii.typedata    = (DWORD)NB_STR_SEARCH;
+    mii.hsubmenu    = createpmenusearch ();
+    InsertMenuItem(hmnu, 3, TRUE, &mii);
+
+    mii.type        = MFT_STRING;
+    mii.id          = 140;
+    mii.typedata    = (DWORD)NB_STR_HELP;
+    mii.hsubmenu    = createpmenuabout ();
+    InsertMenuItem(hmnu, 4, TRUE, &mii);
+
+    return hmnu;
+}
+
+/* Create menu bar */
+static HMENU createmenu (void)
+{
+    HMENU hmnu;
+    MENUITEMINFO mii;
+
+    hmnu = CreateMenu();
+
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.id          = 100;
+    mii.typedata    = (DWORD)NB_STR_FILE;
+    mii.hsubmenu    = createpmenufile ();
+
+    InsertMenuItem(hmnu, 0, TRUE, &mii);
+
+    ...
+
+    return hmnu;
+}
+
+    /* Handle MSG_ACTIVEMENU to ensure to set the selection state of menu items correctly */
+    case MSG_ACTIVEMENU:
+        if (wParam == 2) {
+                /* Set the checked state of the menu items by CheckMenuRadioItem */
+                CheckMenuRadioItem ((HMENU)lParam,
+                    IDM_40X15, IDM_CUSTOMIZE,
+                    pNoteInfo->winType, MF_BYCOMMAND);
+                CheckMenuRadioItem ((HMENU)lParam,
+                    IDM_DEFAULT, IDM_BIG5,
+                    pNoteInfo->editCharset, MF_BYCOMMAND);
+        }
+        break;
+
+    /* Handle MSG_COMMAND message to handle the commands of each menu item */
+    case MSG_COMMAND:
+        switch (wParam) {
+        case IDM_NEW:
+            break;
+
+        case IDM_OPEN:
+            break;
+
+        case IDM_SAVE:
+            break;
+
+        case IDM_SAVEAS:
+            break;
+        };
 ```
 
+![Menu created by the notebook program](figures/7.1.jpeg)
 ##### Figure 1 Menu created by the notebook program
 
 List 2 illustrates the sample program for the popup menu.
 
 ##### List 2 Sample program of popup menu</center>
 
-```
+```cpp
+static HMENU CreateQuickMenu (void)
+{
+    int i;
+    HMENU hNewMenu;
+    MENUITEMINFO mii;
+    HMENU hMenuFloat;
+
+    char *msg[] = {
+        "A",
+        "F",
+        "H",
+        "L",
+        "P",
+        "S",
+        "X"
+    };
+
+    memset (&mii, 0, sizeof(MENUITEMINFO));
+    mii.type        = MFT_STRING;
+    mii.id          = 0;
+    mii.typedata    = (DWORD)"File";
+
+    hNewMenu = CreatePopupMenu (&mii);
+
+    for ( i = 0; i <7; i ++ ) {
+        memset ( &mii, 0, sizeof (MENUITEMINFO) );
+        mii.type = MFT_STRING;
+        mii.id = 100+ i;
+        mii.state = 0;
+        mii.typedata= (DWORD) msg[i]; 
+    InsertMenuItem ( hNewMenu, i, TRUE, &mii );
+    }
+
+    hMenuFloat = StripPopupHead(hNewMenu);
+
+    TrackPopupMenu (hMenuFloat, TPM_CENTERALIGN | TPM_LEFTBUTTON , 40, 151, hWnd);
+}
 ```
 
 The pop up menu created by the program in List 2 is as shown in Figure 2.
 
+![Popup menu](figures/7.2.jpeg)
 
 ##### Figure 2 Popup menu
 
@@ -228,31 +420,20 @@ The pop up menu created by the program in List 2 is as shown in Figure 2.
 [Table of Contents](README.md) |
 [Scrollbar &gt;&gt;](MiniGUIProgGuidePart1Chapter07.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -262,10 +443,10 @@ The pop up menu created by the program in List 2 is as shown in Figure 2.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
 

@@ -12,6 +12,7 @@ handles messages of keyboard and mouse in this chapter.
 
 Figure 1 illustrates the process of handling keyboard input in MiniGUI.
 
+![Keyboard input in MiniGUI](figures/9.1_T.jpeg)
 
 ##### Figure 1 Keyboard input in MiniGUI
 
@@ -26,7 +27,31 @@ define keys on `PC` keyboard. The following is the definition of some scan
 codes 
 in `minigui/common.h`:
 
-```
+```cpp
+#define MGUI_NR_KEYS                    255
+#define NR_KEYS                         128
+#define SCANCODE_USER                   (NR_KEYS + 1)
+
+#define SCANCODE_ESCAPE                 1
+
+#define SCANCODE_1                      2
+#define SCANCODE_2                      3
+#define SCANCODE_3                      4
+#define SCANCODE_4                      5
+#define SCANCODE_5                      6
+#define SCANCODE_6                      7
+#define SCANCODE_7                      8
+#define SCANCODE_8                      9
+#define SCANCODE_9                      10
+#define SCANCODE_0                      11
+
+#define SCANCODE_MINUS                  12
+#define SCANCODE_EQUAL                  13
+
+#define SCANCODE_BACKSPACE              14
+#define SCANCODE_TAB                    15
+...
+
 ```
 
 ### Key Stroke Message
@@ -74,7 +99,11 @@ application generally calls `TranslateMessage` function before
 `DispatchMessage` in
 a message loop is as follows:
 
-```
+```cpp
+    while (GetMessage(&Msg, hMainWnd)) {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
 ```
 
 Because `TranslateMessage` function handles messages `MSG_KEYDOWN` and
@@ -106,6 +135,20 @@ defined
 by MiniGUI include:
 
 ```
+KS_CAPSLOCK          CapsLock key is locked
+KS_NUMLOCK           NumLock key is locked
+KS_SCROLLLOCK        ScrollLock key is locked
+KS_LEFTCTRL          Left Ctrl key is pressed down
+KS_RIGHTCTRL         Right Ctrl key is pressed down
+KS_CTRL              One of Ctrl keys is pressed
+KS_LEFTSHIFT         Left Shift key is pressed down
+KS_RIGHTSHIFT        Right Shift key is pressed down
+KS_SHIFT             One of Shift keys is pressed down
+KS_IMEPOST           The message is posted by IME window
+KS_LEFTBUTTON        Left mouse button is preesed down
+KS_RIGHTBUTTON       Right mouse button is preesed down
+KS_MIDDLBUTTON       Middle mouse button is preesed down
+KS_CAPTURED          Mouse is captured by the target window
 ```
 
 Except `KS_CAPTURED` can only be used for mouse message, other macros can be
@@ -114,7 +157,8 @@ both for handling keystroke messages and mouse messages.
 
 Application can get key status value through `GetShiftKeyStatus` function:
 
-```
+```cpp
+DWORD GUIAPI GetShiftKeyStatus (void);\
 ```
 
 The return value of this function includes the status of all above keys.
@@ -127,7 +171,8 @@ the value of expression above is `TRUE`.
 Application can also get the status of a certain key on the keyboard through
 `GetKeyStatus` function:
 
-```
+```cpp
+BOOL GUIAPI GetKeyStatus (UINT uKey);
 ```
 
 Parameter `uKey` presents the scan code of the key to be required. If this key
@@ -154,12 +199,16 @@ window gaining focus.
 Application can get the handle of the child window having input focus of a
 certain window by calling `GetFocusChild` function:
 
-```
+```cpp
+#define GetFocus GetFocusChild
+HWND GUIAPI GetFocusChild (HWND hWnd);
 ```
 Parent window can put input focus to any one of its child windows by calling
 `SetFocusChild` function:
 
-```
+```cpp
+#define SetFocus SetFocusChild
+HWND GUIAPI SetFocusChild (HWND hWnd);
 ```
 ### Sample Program
 
@@ -170,7 +219,41 @@ code of this program is included in simplekey.c of sample program package
 
 List 1 simplekey.c
 
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+static int SimplekeyWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) {
+    case MSG_KEYDOWN:
+        /* Print the scan code of the key pressed */
+        printf ("MGS_KEYDOWN: key %d\n", LOWORD(wParam));
+        break;
+
+    case MSG_KEYUP:
+        /* Print the scan code of the key released */
+        printf ("MGS_KEYUP: key %d\n", LOWORD(wParam));
+        break;
+
+    case MSG_CHAR:
+        /* Print the encode of the translated character */
+        printf ("MGS_CHAR: char %d\n", wParam);
+        break;
+
+    case MSG_CLOSE:
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the below code for creating main window are omitted */
 ```
 
 Window procedure of above program prints the parameter `wParam` of each message
@@ -224,7 +307,13 @@ client area, system posts a message `MSG_MOUSEMOVE` to the window. When cursor
 is in client area, the following message is sent if the user presses down or
 releases a mouse button:
 
-```
+```cpp
+MSG_LBUTTONDOWN         left mouse button is pressed down
+MSG_LBUTTONUP           left mouse button is released
+MSG_RBUTTONDOWN         right mouse button is pressed down
+MSG_RBUTTONUP           right mouse button is released
+MSG_LBUTTONDBLCLK       left mouse button is double clicked
+MSG_RBUTTONDBLCLK       right mouse button is double clicked
 ```
 
 Parameter `lParam` of mouse messages in client area indicates the position of
@@ -246,6 +335,12 @@ bar, menu and window scrollbar, the window will receive a mouse message of
 non-client area, which includes:
 
 ```
+MSG_NCLBUTTONDOWN         left mouse button is pressed down
+MSG_NCLBUTTONUP           left mouse button is released
+MSG_NCRBUTTONDOWN         right mouse button is pressed down
+MSG_NCRBUTTONUP           right mouse button is released
+MSG_NCLBUTTONDBLCLK       left mouse button is double clicked
+MSG_NCRBUTTONDBLCLK       right mouse button is double clicked
 ```
 
 Usually, application need not handle non-client area mouse messages, but leaves
@@ -258,7 +353,31 @@ Parameter `wParam` of non-client area mouse message indicates the position of
 non-client area when moving or clicking mouse button, which is one of the
 identifiers beginning with `HT` defined in `minigui/window.h`:
 
-```
+```cpp
+    #define HT_UNKNOWN            0x00
+    #define HT_OUT                0x01
+    #define HT_MENUBAR            0x02
+    #define HT_TRANSPARENT        0x03
+    #define HT_BORDER_TOP         0x04
+    #define HT_BORDER_BOTTOM      0x05
+    #define HT_BORDER_LEFT        0x06
+    #define HT_BORDER_RIGHT       0x07
+    #define HT_CORNER_TL          0x08
+    #define HT_CORNER_TR          0x09
+    #define HT_CORNER_BL          0x0A
+    #define HT_CORNER_BR          0x0B
+    #define HT_CLIENT             0x0C
+
+    #define HT_NEEDCAPTURE        0x10
+    #define HT_BORDER             0x11
+    #define HT_NCLIENT            0x12
+    #define HT_CAPTION            0x13
+    #define HT_ICON               0x14
+    #define HT_CLOSEBUTTON        0x15
+    #define HT_MAXBUTTON          0x16
+    #define HT_MINBUTTON          0x17
+    #define HT_HSCROLL            0x18
+    #define HT_VSCROLL            0x19
 ```
 
 Above identifiers are called hit-testing code, and the hotspot position
@@ -297,7 +416,10 @@ handling mode:
 
 The following are the function definitions about capture of mouse:
 
-```
+```cpp
+HWND GUIAPI SetCapture(HWND hWnd);
+void GUIAPI ReleaseCapture(void);
+HWND GUIAPI GetCapture(void);
 ```
 
 At a certain time, only one window can capture the mouse, and the application
@@ -317,7 +439,103 @@ program package `mg-samples` for this guide.
 
 ##### List 2 capture.c
 
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+#define IDC_MYBUTTON    100
+
+/* the callback function of the simple button control class  */
+static int MybuttonWindowProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HDC hdc;
+    /* 
+     * used to save the button status.
+     * Noet: you should not use a static variable to save
+     * the information of a control instance.
+     */
+    static int status = 0;
+
+    switch (message) {
+    case MSG_LBUTTONDOWN:
+        /* set the pressed status */
+        status = 1;
+        /* capture the mouse */
+        SetCapture (hWnd);
+        /* invalidate the control, causing to repaint the button */
+        InvalidateRect (hWnd, NULL, TRUE);
+    break;
+
+    case MSG_LBUTTONUP:
+        if (GetCapture() = hWnd)
+            break;
+        /* set the released status */
+        status = 0;
+        /* release the mouse */
+        ReleaseCapture ();
+        /* invalidate the control, causing to repaint the button */
+        InvalidateRect (hWnd, NULL, TRUE);
+    break;
+
+    case MSG_PAINT:
+        hdc = BeginPaint (hWnd);
+        /* perform different repainting according to the pressed or released status */
+        if (status) {
+            SetBkMode(hdc, BM_TRANSPARENT);
+            TextOut(hdc, 0, 0, "pressed");
+        }
+        EndPaint(hWnd, hdc);
+        return 0;
+
+    case MSG_DESTROY:
+        return 0;
+    }
+
+    return DefaultControlProc (hWnd, message, wParam, lParam);
+}
+
+/* this function registers simple button control class */
+BOOL RegisterMybutton (void)
+{
+    WNDCLASS WndClass;
+
+    WndClass.spClassName = "mybutton";
+    WndClass.dwStyle     = 0;
+    WndClass.dwExStyle   = 0;
+    WndClass.hCursor     = GetSystemCursor(0);
+    WndClass.iBkColor    = PIXEL_lightgray;
+    WndClass.WinProc     = MybuttonWindowProc;
+
+    return RegisterWindowClass (&WndClass);
+}
+
+/* main windoww proc */
+static int CaptureWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) {
+    case MSG_CREATE:
+        /* register the simple button control class */
+        RegisterMybutton();
+        /* creates an instance of the simple button cotrol class */
+        CreateWindow ("mybutton", "", WS_VISIBLE | WS_CHILD, IDC_MYBUTTON, 
+                30, 50, 60, 20, hWnd, 0);
+        break;
+
+    case MSG_CLOSE:
+        /* destroys the control and the main window */
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating the main window are omitted */
 ```
 
 ### Tracking Mouse Cursor
@@ -341,9 +559,87 @@ program painter.c in the example program package `mg-samples` for this guide.
 
 ##### List 3 painter.c
 
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+static int PainterWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HDC hdc;
+    /* Use static variables to save the running status 
+     * and the position where the mouse is pressed
+     */
+    static BOOL bdraw = FALSE;
+    static int pre_x, pre_y;
+
+    switch (message) {
+    case MSG_LBUTTONDOWN:
+       /* enter painting status; capture the mouse and write the position 
+        * where the mouse is pressed
+        */
+        bdraw = TRUE;
+        SetCapture(hWnd);
+        pre_x = LOWORD (lParam);
+        pre_y = HIWORD (lParam);
+        break;
+
+    case MSG_MOUSEMOVE:
+    {
+        int x = LOWORD (lParam);
+        int y = HIWORD (lParam);
+
+        if (bdraw) {
+            /* if it is in painting status, the moused is indicated to be captured, 
+             * and therefore the mouse coordinates need to be converted from 
+             * screen coordinate to client coordinate
+             */
+            ScreenToClient(hWnd, &x, &y);
+
+            /* get the graphics device context of the client area and begin to paint */
+            hdc = GetClientDC(hWnd);
+            SetPenColor(hdc, PIXEL_red);
+
+            /* paint a straight line from the previous position
+             * to the current mouse position
+             */
+            MoveTo(hdc, pre_x, pre_y);
+            LineTo(hdc, x, y);
+            ReleaseDC(hdc);
+            /* update the previous position with the current mouse position */
+            pre_x = x;
+            pre_y = y;
+        }
+        break;
+    }
+
+    case MSG_LBUTTONUP:
+        /* quit painting status and release the mouse */
+        bdraw = FALSE;
+        ReleaseCapture();
+        break;
+
+    case MSG_RBUTTONDOWN:
+        /* click the right buttion of the mouse to clear the window */
+        InvalidateRect(hWnd, NULL, TRUE);
+        break;
+
+    case MSG_CLOSE:
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc (hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating main window are omitted */
 ```
 
+![A simple painting program](figures/9.3.jpeg)
 
 ##### Figure 3 A simple painting program
 
@@ -379,7 +675,8 @@ function.
 The prototype of the hook callback function defined for MiniGUI-Threads and
 MiniGUI-Standalone is as follows:
 
-```
+```cpp
+typedef int (* MSGHOOK)(void* context, HWND dst_wnd, int msg, WPARAM wparam, LPARAM lparam);
 ```
 
 Wherein context is a context data passed in when registering the hook, which
@@ -394,7 +691,9 @@ The application may call the following two functions to register the hook
 function of the keyboard and the mouse events for MiniGUI-Threads and
 MiniGUI-Standalone, respectively:
 
-```
+```cpp
+MSGHOOK GUIAPI RegisterKeyMsgHook (void* context, MSGHOOK hook);
+MSGHOOK GUIAPI RegisterMouseMsgHook (void* context, MSGHOOK hook);
 ```
 
 You need only pass the context information and the pointer of the hook callback
@@ -402,7 +701,21 @@ function when calling these two functions. If you want to unregister the hook
 function previously registered, you need only transfer `NULL` in, as described
 below:
 
-```
+```cpp
+int my_hook (void* context, HWND dst_wnd, int msg, WPARAM wParam, LPARAM lparam)
+{
+    if (...)
+        return HOOK_GOON;
+    else
+        return HOOK_STOP;
+}
+
+MSGHOOK old_hook = RegisterKeyMsgHook (my_context, my_hook);
+
+...
+
+/* Restore old hook */
+RegisterKeyMsgHook (0, old_hook);
 ```
 
 Event hook mechanism is very import to some applications, for example, you can
@@ -422,7 +735,9 @@ above, MiniGUI provides a different hook mechanism for MiniGUI-Processes.
 For a client of MiniGUI-Processes, you can use the following functions to
 register a hook window:
 
-```
+```cpp
+HWND GUIAPI RegisterKeyHookWindow (HWND hwnd, DWORD flag);
+HWND GUIAPI RegisterMouseHookWindow (HWND hwnd, DWORD flag);
 ```
 
 Wherein hwnd is the handle to a window of a client, flag indicates whether stop
@@ -444,7 +759,8 @@ the hook mentioned above.
 The prototype of the hook callback function prepared for the sever process of
 MiniGUI-Processes is:
 
-```
+```cpp
+typedef int (* SRVEVTHOOK) (PMSG pMsg);
 ```
 
 Here, `pMsg` is the pointer to the message structure to be transferred. The
@@ -456,7 +772,8 @@ when `HOOK_STOP` is returned.
 `mginit` program can register hook function in the system through the following
 function:
 
-```
+```cpp
+SRVEVTHOOK GUIAPI SetServerEventHook (SRVEVTHOOK SrvEvtHook);
 ```
 
 This function returns the old hook function.
@@ -470,31 +787,20 @@ the screen saver when the system idle time is up to the specified value.
 [Table of Contents](README.md) |
 [Icon, Cursor, and Caret &gt;&gt;](MiniGUIProgGuidePart1Chapter09.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -504,9 +810,9 @@ the screen saver when the system idle time is up to the specified value.
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/

@@ -18,7 +18,8 @@ The application can use the `LoadIconFromFile` function to load an icon file,
 and 
 the prototype of the `LoadIconFromFile` function is as follows:
 
-```
+```cpp
+HICON GUIAPI LoadIconFromFile (HDC hdc, const char* filename, int which);
 ```
 
 The argument meanings are as follow:
@@ -39,7 +40,8 @@ loaded icon object.
 You can also load an icon from a memory area by `LoadIconFromMem` function, the
 prototype of which is as follows:
 
-```
+```cpp
+HICON GUIAPI LoadIconFromMem (HDC hdc, const void* area, int which);
 ```
 The memory area pointed to by area must have the same layout as a Windows `ICO`
 file.
@@ -50,7 +52,8 @@ an
 icon object in a rectangle region. The prototype of `DrawIcon` function is as
 follows:
 
-```
+```cpp
+void GUIAPI DrawIcon (HDC hdc, int x, int y, int w, int h, HICON hicon);
 ```
 
 The argument meanings are as follow:
@@ -70,11 +73,59 @@ program can be referred to program drawicon.c in sample program package
 
 ##### List 1 Loading and drawing an icon
 
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+static int DrawiconWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    static HICON myicon_small, myicon_large;
+    HDC hdc;
+
+    switch (message) {
+    case MSG_CREATE:
+        /* call LoadIconFromFile function to load two icons with different size 
+         * from myicon.ico file.
+         */
+        myicon_small = LoadIconFromFile(HDC_SCREEN, "myicon.ico", 0);
+        if (myicon_small == 0)
+            fprintf (stderr, "Load icon file failure!");
+        myicon_large = LoadIconFromFile(HDC_SCREEN, "myicon.ico", 1);
+        if (myicon_large == 0)
+            fprintf (stderr, "Load icon file failure!");
+        break;
+
+    case MSG_PAINT:
+        /* display two icons in diffent positions of the window */
+        hdc = BeginPaint(hWnd);
+        if (myicon_small = 0)
+            DrawIcon(hdc, 10, 10, 0, 0, myicon_small);
+        if (myicon_large = 0)
+            DrawIcon(hdc, 60, 60, 0, 0, myicon_large);
+        EndPaint(hWnd, hdc);
+        return 0;
+
+    case MSG_CLOSE:
+        /* destroys the icon and the main window itself */
+        DestroyIcon(myicon_small);
+        DestroyIcon(myicon_large);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating main window are omitted */
 ```
 
 The output of the program is as shown in Figure 1.
 
+![Drawing icon](figures/10.1.jpeg)
 
 ##### Figure 1 Drawing icon
 
@@ -102,7 +153,8 @@ icon
 handle, and releases the memory it used. This function’s prototype is as
 follows:
 
-```
+```cpp
+BOOL GUIAPI DestroyIcon(HICON hicon);
 ```
 
 `DestroyIcon` function has only one parameter hicon, which specify the icon
@@ -119,12 +171,24 @@ created
 by this function also needs to be destroyed by calling `DestroyIcon` function.
 The prototype of `CreateIcon` function is as follows:
 
-```
+```cpp
+MG_EXPORT HICON GUIAPI CreateIconEx (HDC hdc, int w, int h,
+                const BYTE* AndBits, const BYTE* XorBits, int colornum,
+                const RGB* pal);
+
+
+#define CreateIcon(hdc, w, h, AndBits, XorBits, colornum) \
+        CreateIconEx(hdc, w, h, AndBits, XorBits, colornum, NULL)
 ```
 
 The argument meanings are as follow:
 
-```
+```cpp
+hdc: The device context.
+w, h: The width and height of the icon, respectively.
+pAndBits: The pointer to the AND bits of the icon.
+pXorBits: The pointer to the XOR bits of the icon.
+colornum: The bit-per-pixel of XOR bits.
 ```
 `CreateIcon` creates an icon according to the specified data such as icon size,
 color and the bit-mask bitmap image. The icon width and height specified by
@@ -148,10 +212,106 @@ available in program createicon.c in the example program package mg-samples.
 
 ##### List 2 Creating an icon
 
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+/* define the AND mask data and XOR mask data of the icon */
+static BYTE ANDmaskIcon[] = {
+    0xff, 0x9f, 0x00, 0x00, 
+    0xff, 0x1f, 0x00, 0x00, 
+    0xfc, 0x1f, 0x00, 0x00, 
+    0xf0, 0x1f, 0x00, 0x00, 
+    0xe0, 0x0f, 0x00, 0x00, 
+    0xc0, 0x07, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 
+    0xc0, 0x07, 0x00, 0x00, 
+    0xf0, 0x1f, 0x00, 0x00
+};
+
+static BYTE XORmaskIcon[] = {
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x8f, 0xff, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x8f, 0xff, 0xff, 0x00, 0x00, 0x00, 
+    0x00, 0x08, 0xff, 0xf8, 0xff, 0xf8, 0x00, 0x00, 
+    0x00, 0xff, 0xff, 0x80, 0x8f, 0xff, 0xf0, 0x00, 
+    0x00, 0xff, 0xff, 0xf8, 0xff, 0xff, 0xf0, 0x00, 
+    0x0f, 0xff, 0xff, 0xf0, 0xff, 0xff, 0xff, 0x00, 
+    0x0f, 0xff, 0xff, 0xf0, 0x0f, 0xff, 0xff, 0x00, 
+    0x0f, 0xff, 0xff, 0xf8, 0x00, 0xff, 0xff, 0x00, 
+    0x0f, 0xff, 0xf0, 0x0f, 0x00, 0xff, 0xff, 0x00, 
+    0x00, 0xff, 0xf8, 0x00, 0x08, 0xff, 0xf0, 0x00, 
+    0x00, 0x8f, 0xff, 0x80, 0x8f, 0xff, 0xf0, 0x00, 
+    0x00, 0x00, 0x8f, 0xff, 0xff, 0xf0, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
+    0xff, 0x9f, 0x00, 0x00, 0xff, 0x1f, 0x00, 0x00, 
+    0xfc, 0x1f, 0x00, 0x00, 0xf0, 0x1f, 0x00, 0x00, 
+    0xe0, 0x0f, 0x00, 0x00, 0xc0, 0x07, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 0x80, 0x03, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+    0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 
+    0x80, 0x03, 0x00, 0x00, 0x80, 0x03, 0x00, 0x00, 
+    0xc0, 0x07, 0x00, 0x00, 0xf0, 0x1f, 0x00, 0x00, 
+    0x26, 0x00, 0x00, 0x00, 0xf4, 0xd9, 0x04, 0x08, 
+    0xa8, 0xf8, 0xff, 0xbf, 0xc0, 0xf7, 0xff, 0xbf, 
+    0x20, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 
+    0xc0, 0x00, 0x00, 0x00, 0x0e, 0x03, 0x00, 0x00, 
+    0x28, 0x01, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 
+    0x10, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 
+    0xf0, 0x10, 0x04, 0x00, 0x70, 0xe1, 0x04, 0x08, 
+    0xd8, 0xf8, 0xff, 0xbf, 0x41, 0x90, 0x04, 0x08
+};
+
+static int CreateiconWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    static HICON new_icon;
+    HDC hdc;
+
+    switch (message) {
+    case MSG_CREATE:
+        /* create an icon using the user-difined data */
+        new_icon = CreateIcon(HDC_SCREEN, 16, 16, ANDmaskIcon, XORmaskIcon, 4);
+        break;
+
+        case MSG_PAINT:
+        hdc = BeginPaint(hWnd);
+        if (new_icon = 0) {
+           /* display the icon with its actual size */
+            DrawIcon(hdc, 0, 0, 0, 0, new_icon);
+           /* display the scaled icon */
+            DrawIcon(hdc, 50, 50, 64, 64, new_icon);
+        }
+        EndPaint(hWnd, hdc);
+        return 0;
+
+        case MSG_CLOSE:
+            /* destroy the icon and the main window */
+            DestroyIcon(new_icon);
+            DestroyMainWindow (hWnd);
+            PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating main window are omitted */
 ```
 The output of the program is as shown in Figure 2.
 
+![Creating and drawing icon](figures/10.2.jpeg)
 ##### Figure 2 Creating and drawing icon
 
 The code in List 2 creates a user-defined icon `new_icon` by calling 
@@ -171,7 +331,15 @@ defines
 the icons which are used and provided by the system. The icons of Classic
 renderer are shown as follow:
 
-```
+```cpp
+[classic]
+# Note that max number defined in source code is 5.
+iconnumber=5
+icon0=form.ico
+icon1=failed.ico
+icon2=help.ico
+icon3=warning.ico
+icon4=excalmatory.ico
 ```
 __NOTE__ The maximum number of the icon files the system uses is 5, which is
 defined in the source code of MiniGUI. Therefore, if you modify the iconnumber
@@ -189,7 +357,9 @@ renderer. The application can get the built-in system icons through
 of 
 these two functions are as follow:
 
-```
+```cpp
+HICON GUIAPI GetLargeSystemIcon (int id);
+HICON GUIAPI GetSmallSystemIcon (int id);
 ```
 
 `GetLargeSystemIcon` is used to get a large system icon with 32x32 pixels, and
@@ -199,12 +369,24 @@ two functions return the handle of the built-in system icon object. The
 obtained icon is one of the seven system icons, which is specified by id. Id is
 an integer value, and may be one of the following values:
 
-```
+```cpp
+IDI_APPLICATION                        Application icon
+IDI_STOP / IDI_HAND                    Stoping icon
+IDI_QUESTION                            Question icon
+IDI_EXCLAMATION                        Exclamation icon
+IDI_INFORMATION / IDI_ASTERISK            Information icon
 ```
 
 These identifiers are defined in `minigui/window.h` as follow:
 
-```
+```cpp
+#define IDI_APPLICATION         0
+#define IDI_HAND                1
+#define IDI_STOP                IDI_HAND
+#define IDI_QUESTION            2
+#define IDI_EXCLAMATION         3
+#define IDI_ASTERISK            4
+#define IDI_INFORMATION         IDI_ASTERISK
 ```
 It can be seen that they present the five icon files with sequence number from
 0 to 4 in `MiniGUI.cfg`. The icon files with index numbers 5 and 6 are used by
@@ -220,7 +402,8 @@ required icon directly from the icon file defined in `MiniGUI.cfg`
 configuration 
 file:
 
-```
+```cpp
+HICON GUIAPI LoadSystemIcon (const char* szItemName, int which);
 ```
 Here `szItemName` argument specifies the symbol name of the icon file defined 
 in 
@@ -259,7 +442,8 @@ moving mono- and 16-color cursors. Currently, MiniGUI does not support
 The application may use `LoadCursorFromFile` function to load a cursor form a
 Windows cursor file. The prototype of this function is as follows:
 
-```
+```cpp
+HCURSOR GUIAPI LoadCursorFromFile (const char* filename);
 ```
 `LoadCursorFromFile` function reads in information of the size of the cursor,
 the 
@@ -269,7 +453,8 @@ object.
 
 `LoadCursorFromMem` function loads a cursor from memory:
 
-```
+```cpp
+HCURSOR GUIAPI LoadCursorFromMem (const void* area);
 ```
 
 This function loads a cursor from a specified memory area, the cursor memory
@@ -280,12 +465,19 @@ The application may also create dynamically a cursor by calling `CreateCursor`
 function during run time. The prototype of `CreateCursor` function is as
 follows: 
 
-```
+```cpp
+HCURSOR GUIAPI CreateCursor (int xhotspot, int yhotspot, int w, int h,
+                     const BYTE* pANDBits, const BYTE* pXORBits, int colornum);
 ```
 
 The argument meanings are as follow:
 
-```
+```cpp
+xhotspot, yhotspot: the horizontal and vertical positions of the cursor hotspot
+w, h: the width and height of the cursor
+pAndBits: The pointer to the AND bits of the cursor.
+pXorBits: The pointer to the XOR bits of the cursor.
+colornum: The bit-per-pixel of XOR bits.
 ```
 
 Similar to the method of creating an icon by `CreateIcon` function, 
@@ -316,7 +508,8 @@ and
 `CreateCursor` functions, and release the memory used by the cursor object. The
 prototype of this function is as follows:
 
-```
+```cpp
+BOOL GUIAPI DestroyCursor (HCURSOR hcsr);
 ```
 The argument hcursor of `DestroyCursor` function specifies the cursor object to
 be destroyed.
@@ -329,14 +522,18 @@ repaint the cursor. The application can get the current screen position of the
 cursor by calling `GetCursorPos` function, and move the cursor to the specified
 position on the screen by calling `SetCursorPos` function.
 
-```
+```cpp
+void GUIAPI GetCursorPos (POINT* ppt);
+void GUIAPI SetCursorPos (int x, int y);
 ```
 
 The application can get the current cursor handle by calling `GetCurrentCursor`
 function, and set the current cursor by calling `SetCursorEx` function. The
 prototypes of these two functions are as follow:
 
-```
+```cpp
+HCURSOR GUIAPI GetCurrentCursor (void);
+HCURSOR GUIAPI SetCursorEx (HCURSOR hcsr, BOOL set_def);
 ```
 `SetCursorEx` function sets the cursor specified by hcsr as the current cursor.
 If `set_def` is `TRUE`, `SetCursorEx` will further set this cursor as the
@@ -348,7 +545,9 @@ cursor and
 does not change the default cursor; and `SetDefaultCursor` sets the specified
 cursor as the current cursor and the default cursor.
 
-```
+```cpp
+#define SetCursor(hcsr) SetCursorEx (hcsr, FALSE);
+#define SetDefaultCursor(hcsr) SetCursorEx (hcsr, TRUE);
 ```
 
 MiniGUI will send `MSG_SETCURSOR` to the window under the cursor when the user
@@ -365,7 +564,9 @@ these controls. The application can get the current cursor of the specified
 window through `GetWindowCursor`, and sets a new window cursor through
 `SetWindowCursor`.
 
-```
+```cpp
+HCURSOR GUIAPI GetWindowCursor (HWND hWnd);
+HCURSOR GUIAPI SetWindowCursor (HWND hWnd, HCURSOR hNewCursor);
 ```
 
 The code below is from listview.c in the MiniGUI source code, which illustrates
@@ -373,7 +574,17 @@ how to assign a cursor handle to `hCursor` member of the `WNDCLASS` structure
 to 
 specify the class cursor for a control class.
 
-```
+```cpp
+WNDCLASS WndClass;
+
+WndClass.spClassName = CTRL_LISTVIEW;
+WndClass.dwStyle = WS_NONE;
+WndClass.dwExStyle = WS_EX_NONE;
+WndClass.hCursor = GetSystemCursor (0);
+WndClass.iBkColor = PIXEL_lightwhite;
+WndClass.WinProc = sListViewProc;
+
+return RegisterWindowClass (&WndClass);
 ```
 
 The class cursor in the code above is the system default cursor gotten by
@@ -382,7 +593,8 @@ The class cursor in the code above is the system default cursor gotten by
 
 The application can show or hide the cursor by calling `ShowCursor` function.
 
-```
+```cpp
+int GUIAPI ShowCursor (BOOL fShow);
 ```
 
 `ShowCursor` function hides the cursor when parameter `fShow` is `FALSE`, and
@@ -402,7 +614,8 @@ certain
 rectangle area, which is usually used to correspond to an event in a certain
 clipping rectangle. The prototype of this function is as follows:
 
-```
+```cpp
+void GUIAPI ClipCursor (const RECT* prc);
 ```
 
 The specified clipping rectangle is pointed by parameter prc. If prc is `NULL`,
@@ -415,7 +628,8 @@ used to save the original clipping rectangle before setting a new clipping
 rectangle and use it to restore the original area when required. The prototype
 of this function is as follows:
 
-```
+```cpp
+void GUIAPI GetClipCursor (RECT* prc);
 ```
 
 ### Using System Cursors
@@ -423,7 +637,34 @@ of this function is as follows:
 The cursorinfo section in the configuration file of MiniGUI, `MiniGUI.cfg`,
 defines all the cursors provide by the system, as shown below:
 
-```
+```cpp
+[cursorinfo]
+# Edit following line to specify cursor files path
+cursorpath=/usr/local/lib/minigui/res/cursor/
+cursornumber=23
+cursor0=d_arrow.cur
+cursor1=d_beam.cur
+cursor2=d_pencil.cur
+cursor3=d_cross.cur
+cursor4=d_move.cur
+cursor5=d_sizenesw.cur
+cursor6=d_sizens.cur
+cursor7=d_sizenwse.cur
+cursor8=d_sizewe.cur
+cursor9=d_uparrow.cur
+cursor10=d_none.cur
+cursor11=d_help.cur
+cursor12=d_busy.cur
+cursor13=d_wait.cur
+cursor14=g_rarrow.cur
+cursor15=g_col.cur
+cursor16=g_row.cur
+cursor17=g_drag.cur
+cursor18=g_nodrop.cur
+cursor19=h_point.cur
+cursor20=h_select.cur
+cursor21=ho_split.cur
+cursor22=ve_split.cur
 ```
 The maximum number of the cursors used by the system defined in MiniGUI is
 (MAX_SYSCURSORINDEX + 1). `MAX_SYSCURSORINDEX` is the maximum system cursor
@@ -437,7 +678,8 @@ when initializing the system. The application can get the built-in system
 cursor through `GetSystemCursor` function. The prototype of this function is as
 follows:
 
-```
+```cpp
+HCURSOR GUIAPI GetSystemCursor (int csrid);
 ```
 
 `GetSystemCursor` function returns the handle to the cursor object in memory.
@@ -446,11 +688,58 @@ obtained cursor is one of the possible 23 system system-predefined cursors, and
 is specified by identifier csrid. Parameter csrid is an integer value, and may
 be one of the following values:
 
-```
+```cpp
+IDC_ARROW             System default arrow cursor
+IDC_IBEAM             ‘I’ shaped cursor, indicating an input filed
+IDC_PENCIL            Pencil-shape cursor
+IDC_CROSS             Cross cursor
+IDC_MOVE              Moving cursor
+IDC_SIZENWSE          Sizing cursor, along north-west and south-east
+IDC_SIZENESW          Sizing cursor, along north-east and south-west
+IDC_SIZEWE            Sizing cursor, along west and east
+IDC_SIZENS            Sizing cursor, along north and south
+IDC_UPARROW           Up arrow cursor
+IDC_NONE              None cursor
+IDC_HELP              Arrow with question
+IDC_BUSY              Busy cursor
+IDC_WAIT              Wait cursor
+IDC_RARROW            Right arrow cursor
+IDC_COLOMN            Cursor indicates column
+IDC_ROW               Cursor indicates row
+IDC_DRAG              Draging cursor
+IDC_NODROP            No droping cursor, used in dragging operation
+IDC_HAND_POINT        Hand point cursor
+IDC_HAND_SELECT       Hand selection cursor
+IDC_SPLIT_HORZ        Horizontal splitting cursor
+IDC_SPLIT_VERT        Vertical splitting cursor
 ```
 The definitions of these cursor index values are as follow:
 
-```
+```cpp
+/* System cursor index. */
+#define IDC_ARROW       0
+#define IDC_IBEAM       1
+#define IDC_PENCIL      2
+#define IDC_CROSS       3
+#define IDC_MOVE        4
+#define IDC_SIZENWSE    5
+#define IDC_SIZENESW    6
+#define IDC_SIZEWE      7
+#define IDC_SIZENS      8
+#define IDC_UPARROW     9
+#define IDC_NONE        10
+#define IDC_HELP        11
+#define IDC_BUSY        12
+#define IDC_WAIT        13
+#define IDC_RARROW      14
+#define IDC_COLOMN      15
+#define IDC_ROW         16
+#define IDC_DRAG        17
+#define IDC_NODROP      18
+#define IDC_HAND_POINT  19
+#define IDC_HAND_SELECT 20
+#define IDC_SPLIT_HORZ  21
+#define IDC_SPLIT_VERT  22
 ```
 They present the 23 system-predefined cursors with sequence number from 0 to 22
 in MiniGUI, respectively.
@@ -467,9 +756,103 @@ package mg-samples.
 
 
 List 3 Using cursor
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+#define IDC_TRAP    100
+
+static HWND hTrapWin, hMainWnd;
+static RECT rcMain, rc;
+
+/* window procedure of “trap” control class */
+static int TrapwindowProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    static BOOL bTrapped = FALSE;
+
+    switch (message) {
+    case MSG_MOUSEMOVE:
+        /* further clipping in the range of the control
+         * when the mouse enters the range of this control 
+         */
+        if (!bTrapped) {
+            GetWindowRect(hWnd, &rc);
+            ClientToScreen(hMainWnd, &rc.left, &rc.top);
+            ClientToScreen(hMainWnd, &rc.right, &rc.bottom);
+            ClipCursor(&rc);
+            bTrapped = TRUE;
+        }
+        break;
+
+    case MSG_DESTROY:
+        return 0;
+    }
+
+    return DefaultControlProc(hWnd, message, wParam, lParam);
+}
+
+/* register “trap” control class */
+BOOL RegisterTrapwindow (void)
+{
+    WNDCLASS WndClass;
+
+    WndClass.spClassName = "trap";
+    WndClass.dwStyle     = 0;
+    WndClass.dwExStyle   = 0;
+    WndClass.hCursor     = GetSystemCursor(IDC_HAND_POINT);
+    WndClass.iBkColor    = PIXEL_black;
+    WndClass.WinProc     = TrapwindowProc;
+
+    return RegisterWindowClass (&WndClass);
+}
+
+static int CursordemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message) {
+    case MSG_CREATE:
+        /* register “trap” control class */
+        RegisterTrapwindow();
+        /* create an instance of “trap” control class */
+        hTrapWin = CreateWindow("trap", "", WS_VISIBLE | WS_CHILD, IDC_TRAP, 
+                10, 10, 100, 100, hWnd, 0);
+        break;
+
+    case MSG_LBUTTONDOWN:
+        /* Clip the cursor to the main window when the user click the left mouse button. */
+        GetWindowRect(hWnd, &rcMain);
+        ClipCursor(&rcMain);
+        /* hide the mouse cursor */
+        ShowCursor(FALSE);
+        break;
+
+    case MSG_RBUTTONDOWN:
+        /* show the mouse cursor when the right mouse button clicked */
+        ShowCursor(TRUE);
+        break;
+
+    case MSG_SETCURSOR:
+        /* set the mouse cursor shape to be “I” shape */
+        SetCursor (GetSystemCursor (IDC_IBEAM));
+        return 0;
+
+    case MSG_CLOSE:
+        /* destroy the control and the main window itself  */
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating main window are omitted */
 ```
 
+![Using cursor](figures/10.3.jpeg)
 
 ##### Figure 3 Using cursor
 
@@ -511,12 +894,17 @@ showing, hiding, positioning the caret, and changing the caret blinking time.
 
 `CreateCaret` function creates a caret and assigns it to a specified window.
 
-```
+```cpp
+BOOL GUIAPI CreateCaret (HWND hWnd, PBITMAP pBitmap, int nWidth, int nHeight);
 ```
 
 The argument meanings are as follow:
 
 ```
+hWnd: The owner of the caret.
+pBitmap: The bitmap shape of the caret.
+nWidth: The width of the caret.
+nHeight: The height of the caret.
 ```
 
 If `pBitmap` is not `NULL`, `CreateCaret` function will create a caret 
@@ -536,7 +924,8 @@ calling
 and 
 its prototype is as follows:
 
-```
+```cpp
+BOOL GUIAPI DestroyCaret (HWND hWnd);
 ```
 `DestroyCaret` function destroys the caret of a window, and deletes it from the
 screen.
@@ -561,7 +950,9 @@ the system sends a `MSG_KILLFOCUS` message to this window, and the application
 should hides the caret by calling `HideCaret` function when handling this
 message. The prototypes of these two functions are as follow:
 
-```
+```cpp
+BOOL GUIAPI ShowCaret (HWND hWnd);
+BOOL GUIAPI HideCaret (HWND hWnd);
 ```
 
 `ShowCaret` function shows the caret of a given window, and the caret will
@@ -584,7 +975,9 @@ The application uses `GetCaretPos` function to get the position of the caret,
 and 
 uses `SetCaretPos` function to move the caret within a window.
 
-```
+```cpp
+BOOL GUIAPI GetCaretPos (HWND hWnd, PPOINT pPt);
+BOOL GUIAPI SetCaretPos (HWND hWnd, int x, int y);
 ```
 
 The function `GetCaretPos` copies the position of the window caret, in client
@@ -603,7 +996,9 @@ You can use `SetCaretBlinkTime` function to change the blink time of the caret.
 The blink time of the caret cannot be less than 100 milliseconds. The
 definitions of these two functions are as follow:
 
-```
+```cpp
+UINT GUIAPI GetCaretBlinkTime (HWND hWnd);
+BOOL GUIAPI SetCaretBlinkTime (HWND hWnd, UINT uTime);
 ```
 
 ### Sample Program
@@ -617,9 +1012,180 @@ available in program caretdemo.c in the sample program package mg-samples.
 
 ##### List 4 Using caret
 
-```
+```cpp
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+#define IDC_MYEDIT    100
+
+/* the window procedure of a simple edit box control class */
+static int MyeditWindowProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    /* use a static variable to save the information of the control.
+     * in a real control, you should not use static variables to save these informations, 
+     * because a control class may have many control instances at the same time 
+     */
+    static char *pBuffer = NULL;
+    static int pos = 0, len = 0;
+    HDC hdc;
+
+    switch (message) {
+    case MSG_CREATE:
+        /* set the control font to be the system default font */
+        SetWindowFont(hWnd, GetSystemFont(SYSLOGFONT_WCHAR_DEF));
+        /* create the caret */
+        if (!CreateCaret (hWnd, NULL, 1, GetSysCharHeight())) {
+            return -1;
+        }
+        /* allocate the edit buffur  */
+        pBuffer = (char *) malloc(10);
+        *pBuffer = 0;
+    break;
+
+    case MSG_SETFOCUS:
+        /* set the caret postion when getting the input focus */
+        SetCaretPos(hWnd, pos*GetSysCharWidth(), 0);
+        /* showing the caret */
+        ShowCaret(hWnd);
+    break;
+
+    case MSG_KILLFOCUS:
+        /* hiding the caret when losing the focus */
+        HideCaret(hWnd);
+        break;
+
+    case MSG_CHAR:
+        switch (wParam) {
+        case '\t':
+        case '\b':
+        case '\n':
+        {
+             /* change the blink time of the caret when inputting these characters */
+             SetCaretBlinkTime(hWnd, GetCaretBlinkTime(hWnd)-100);
+        }
+        break;
+
+        default:
+        {
+             /* insert characters in the buffer area  */
+            char ch, buf[10];
+            char *tmp;
+            ch = wParam;
+            if (len == 10)
+                break;
+            tmp = pBuffer+pos;
+            if (*tmp = 0) {
+                strcpy(buf, tmp);
+                strcpy (tmp+1, buf);
+            }
+            *tmp = ch;
+            pos++;
+            len++;
+            break;
+        }
+        break;
+        }
+        break;
+
+    case MSG_KEYDOWN:
+        switch (wParam) {
+            case SCANCODE_CURSORBLOCKLEFT:
+                /* move the caret to the left */
+                pos = MAX(pos-1, 0);
+                break;
+            case SCANCODE_CURSORBLOCKRIGHT:
+                /* move the caret to the right */
+                pos = MIN(pos+1, len);
+                break;
+            case SCANCODE_BACKSPACE:
+            {
+                /* delete the character where the caret is */
+                char buf[10];
+                char *tmp;
+                if (len == 0 || pos == 0)
+                    break;
+                tmp = pBuffer+pos;
+                strcpy(buf, tmp);
+                strcpy(tmp-1, buf);
+                pos--;
+                len--;
+            }
+            break;
+        }
+        /* update the caret positon and repaint the window */
+        SetCaretPos(hWnd, pos*GetSysCharWidth(), 0);
+        InvalidateRect(hWnd, NULL, TRUE);
+        break;
+
+    case MSG_PAINT:
+        hdc = BeginPaint(hWnd);
+        /* output text */
+        TextOut(hdc, 0, 0, pBuffer);
+        EndPaint(hWnd, hdc);
+        return 0;
+
+    case MSG_DESTROY:
+        /* destroy the caret and release the buffer */
+        DestroyCaret (hWnd);
+        if (pBuffer)
+            free(pBuffer);
+        return 0;
+    }
+
+    return DefaultControlProc(hWnd, message, wParam, lParam);
+}
+
+/* register a simple edit box control */
+BOOL RegisterMyedit(void)
+{
+    WNDCLASS WndClass;
+
+    WndClass.spClassName = "myedit";
+    WndClass.dwStyle     = 0;
+    WndClass.dwExStyle     = 0;
+    WndClass.hCursor     = GetSystemCursor(IDC_IBEAM);
+    WndClass.iBkColor    = PIXEL_lightwhite;
+    WndClass.WinProc     = MyeditWindowProc;
+
+    return RegisterWindowClass (&WndClass);
+}
+
+/* main windoww proc */
+static int CaretdemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HWND hMyedit;
+
+    switch (message) {
+    case MSG_CREATE:
+        /* register simple edit box control class and create an instance  */
+        RegisterMyedit();
+        hMyedit = CreateWindow("myedit", "", WS_VISIBLE | WS_CHILD, IDC_MYEDIT, 
+                30, 50, 100, 20, hWnd, 0);
+        SetFocus(hMyedit);
+        break;
+
+    case MSG_CLOSE:
+        /* destroy the control and the main window itself  */
+        DestroyAllControls (hWnd);
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* the code below for creating main window are omitted */
 ```
 
+![A simple edit box](figures/10.4.jpeg)
 
 ##### Figure 4 A simple edit box
 
@@ -656,31 +1222,20 @@ in
 [Table of Contents](README.md) |
 [Look-and-feel and UI Effects &gt;&gt;](MiniGUIProgGuidePart1Chapter10.md)
 
-[Release Notes for MiniGUI 3.2]:
-/supplementary-docs/Release-Notes-for-MiniGUI-3.2.md 
-[Release Notes for MiniGUI 4.0]:
-/supplementary-docs/Release-Notes-for-MiniGUI-4.0.md 
-[Showing Text in Complex or Mixed Scripts]:
-/supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md 
-[Supporting and Using Extra Input Messages]:
-/supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md 
-[Using `CommLCD` `NEWGAL` Engine and Comm `IAL` Engine]:
-/supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md 
-[Using Enhanced Font Interfaces]:
-/supplementary-docs/Using-Enhanced-Font-Interfaces.md 
-[Using Images and Fonts on System without File System]:
-/supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md 
-[Using `SyncUpdateDC` to Reduce Screen Flicker]:
-/supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md 
-[Writing `DRI` Engine Driver for Your `GPU]`:
-/supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md 
-[Writing MiniGUI Apps for 64-bit Platforms]:
-/supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md 
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
-[Building `MiniGUI]`: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
-[Compile-time Configuration]:
-/user-manual/MiniGUIUserManualCompiletimeConfiguration.md 
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
 [Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
 [Tools]: /user-manual/MiniGUIUserManualTools.md
 [Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
@@ -690,9 +1245,9 @@ in
 [MiniGUI Programming Guide]: /programming-guide/README.md
 [MiniGUI Porting Guide]: /porting-guide/README.md
 [MiniGUI Supplementary Documents]: /supplementary-docs/README.md
-[MiniGUI `API` Reference Manuals]: /api-reference/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
 
 [MiniGUI Official Website]: http://www.minigui.com
-[Beijing `FMSoft` Technologies Co., Ltd.]: https://www.fmsoft.cn
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
