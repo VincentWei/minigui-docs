@@ -1,14 +1,19 @@
-# 36 Animation Control
+# Animation Control
 
-Animation control is one control, which can be used to display animations; it is very simple and easy to use.
+Animation control is one control, which can be used to display animations; it 
+is very simple and easy to use.
 
-You can create an animation control by calling CreateWindow function with CTRL_ANIMATION as the control class name.
+You can create an animation control by calling `CreateWindow` function with
+`CTRL_ANIMATION` as the control class name.
 
-## 36.1 ANIMATION Object
+## `ANIMATION` Object
 
-Before creating an animation control, you must create an object of ANIMATION. This object is actually a linked list structure, and each node of the linked list represents a frame of the animation object. An object of ANIMATION is represented by the following two structures:
+Before creating an animation control, you must create an object of `ANIMATION`.
+This object is actually a linked list structure, and each node of the linked
+list represents a frame of the animation object. An object of `ANIMATION` is
+represented by the following two structures:
 
-```cplusplus
+```cpp
 /** Animation frame structure. */
 typedef struct _ANIMATIONFRAME
 {
@@ -72,26 +77,46 @@ typedef struct _ANIMATION
 } ANIMATION;
 ```
 
-What the ANIMATION structure describes are the global properties of objects of animation, and includes the width and height of an animation, number of frames, time scale used for indicating delaying (1 means 10ms), and the header pointer to the linked list of animation frames.
+What the `ANIMATION` structure describes are the global properties of objects 
+of animation, and includes the width and height of an animation, number of
+frames, time scale used for indicating delaying (1 means 10ms), and the header
+pointer to the linked list of animation frames.
 
-ANIMATIONFRAME structure presents a single animation frame, and includes the following information:
-- Offset of the current animation frame in the global animation, and the width and height of the frame. Since an animation frame may only change partial image information, so including only the changed part in the frame structure will significantly reduce the amount of data for frames.
-- Delay time of the current frame. Calculate the display time of the current frame with time_unit in the ANIMATION object as the scale.
-- Image information of the current frame. When you use NEWGAL interface, the image is represented by a memory DC; otherwise a BITMAP object represents the image.
+`ANIMATIONFRAME` structure presents a single animation frame, and includes the
+following information:
+- Offset of the current animation frame in the global animation, and the width
+and height of the frame. Since an animation frame may only change partial image
+information, so including only the changed part in the frame structure will
+significantly reduce the amount of data for frames.
+- Delay time of the current frame. Calculate the display time of the current
+frame with `time_unit` in the `ANIMATION` object as the scale.
+- Image information of the current frame. When you use `NEWGAL` interface, the
+image is represented by a memory `DC`; otherwise a `BITMAP` object represents
+the image.
 
-An application can construct an ANIMATION object itself, and can also call the following function to directly create an ANIMATION object from an image file in GIF98a format. 
+An application can construct an `ANIMATION` object itself, and can also call 
+the following function to directly create an `ANIMATION` object from an image
+file in `GIF98a` format.
 
-```cplusplus
+```cpp
 ANIMATION* CreateAnimationFromGIF89a (HDC hdc, MG_RWops* area);
 ANIMATION* CreateAnimationFromGIF89aFile (HDC hdc, const char* file);
 ANIMATION* CreateAnimationFromGIF89aMem (HDC hdc, const void* mem, int size);
 ```
 
-The above-mentioned function will read the image information of the animation GIF from the data area in GIF98a format, and then create an ANIMATION object.
+The above-mentioned function will read the image information of the animation
+`GIF` from the data area in `GIF98a` format, and then create an `ANIMATION`
+object. 
 
-After an application creates an ANIMATION object, and can both display it, also can create an animation control to display the animation. When you call CreateWindow function to create an animation control, you can pass the created ANIMATION object to the animation control and the animation control will use the ANIMATION object to display the animation automatically. For example, an ANIMATION object is created from a GIF file in the following code fragment, and then using the object creates an animation control:
+After an application creates an `ANIMATION` object, and can both display it,
+also can create an animation control to display the animation. When you call
+`CreateWindow` function to create an animation control, you can pass the 
+created `ANIMATION` object to the animation control and the animation control
+will use the `ANIMATION` object to display the animation automatically. For
+example, an `ANIMATION` object is created from a `GIF` file in the following
+code fragment, and then using the object creates an animation control:
 
-```cplusplus
+```cpp
  ANIMATION* anim = CreateAnimationFromGIF89aFile (HDC_SCREEN, "banner.gif");
         if (anim == NULL)
             return 1;
@@ -103,31 +128,46 @@ After an application creates an ANIMATION object, and can both display it, also 
                           10, 10, 300, 200, hWnd, (DWORD)anim);
 ```
 
-It should be noted that you could pass the pointer to the ANIMATION object into an animation control through dwAddData argument when calling CreateWindow function.
+It should be noted that you could pass the pointer to the `ANIMATION` object
+into an animation control through `dwAddData` argument when calling 
+`CreateWindow` function.
 
-## 36.2 Styles of Animation Control
+## Styles of Animation Control
 
 At present, there are three styles for an animation control:
-- ANS_AUTOLOOP: An animation control will display the animation circularly after the style is used.
-- ANS_SCALED: The display image can be scaled.
-- ANS_FITTOANI: Fit the control size follows the animation. 
+- `ANS_AUTOLOOP`: An animation control will display the animation circularly
+after the style is used.
+- `ANS_SCALED`: The display image can be scaled.
+- `ANS_FITTOANI`: Fit the control size follows the animation.
 
-## 36.3 Messages of Animation Control
+## Messages of Animation Control
 
-Messages of animation controls are very simple. There are the following several message currently, which can be used to control the display action of an animation control.
-- ANM_SETANIMATION: Set an ANIMATION object.
-- ANM_GETANIMATION: Get the current ANIMATION object.
-- ANM_STARTPLAY: Start playing the animation. Before sending ANM_STARTPLAY to an animation control, the animation control will only display the first frame image of the ANIMATION object; and only after ANM_STARTPLAY message is sent, the animation control can display an animation according to the information in ANIMATION object.
-- ANM_PAUSE_RESUME: Pause/Resume playing. This message is used to pause the play of an animation (during playing), or used to resume the play of an animation (when the animation has been paused).
-- ANM_STOPPLAY: Stop the play of an animation. The animation control displays the first frame of the ANIAMTION.
+Messages of animation controls are very simple. There are the following several
+message currently, which can be used to control the display action of an
+animation control.
+- `ANM_SETANIMATION`: Set an `ANIMATION` object.
+- `ANM_GETANIMATION`: Get the current `ANIMATION` object.
+- `ANM_STARTPLAY`: Start playing the animation. Before sending `ANM_STARTPLAY`
+to an animation control, the animation control will only display the first 
+frame image of the `ANIMATION` object; and only after `ANM_STARTPLAY` message 
+is sent, the animation control can display an animation according to the
+information in `ANIMATION` object.
+- `ANM_PAUSE_RESUME`: Pause/Resume playing. This message is used to pause the
+play of an animation (during playing), or used to resume the play of an
+animation (when the animation has been paused).
+- `ANM_STOPPLAY`: Stop the play of an animation. The animation control displays
+the first frame of the `ANIAMTION`.
 
-## 36.4 Sample Program
+## Sample Program
 
-Code in List 36.1 illustrates the use of an animation control. Please refer to animation.c file of the demo program package mg-samples of this guide for complete source code.
+Code in List 1 illustrates the use of an animation control. Please refer to
+animation.c file of the demo program package `mg-samples` of this guide for
+complete source code.
 
-<center>List 36.1 Use of animation control</center>
 
-```cplusplus
+List 1 Use of animation control
+
+```cpp
 static int AnimationWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 {
     switch (message) {
@@ -174,12 +214,57 @@ static int AnimationWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
 /* Following codes to create the main window are omitted */
 ```
 
-<center>
-<img src="%ATTACHURLPATH%/36.1.jpeg" alt="36.1.jpeg"  ALIGN="CENTER" /> <br>
-Fig. 36.1 Use of an animation control
-</center>
 
-In the program within List 36.1, banner.gif file in the current directory is loaded when the main window is created, and the corresponding ANIMATION object is created. Then two animation controls are created. The first animation control start playing the animation immediately after created, and the second animation control won’t play until the user clicks the window. Fig. 36.1 shows the running effect of the sample program, in which what the first animation control displays is the second frame of banner.gif file, and the second animation control displays the first frame.
+
+![alt](figures/36.1.jpeg)
+
+Figure 1 Use of an animation control
+
+
+In the program within List 1, banner.gif file in the current directory is 
+loaded when the main window is created, and the corresponding `ANIMATION` 
+object is created. Then two animation controls are created. The first animation
+control start playing the animation immediately after created, and the second
+animation control won’t play until the user clicks the window. Figure 1 shows
+the running effect of the sample program, in which what the first animation
+control displays is the second frame of banner.gif file, and the second
+animation control displays the first frame.
 
 -- Main.XiaodongLi - 26 Oct 2009
 
+
+----
+
+[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[Table of Contents](README.md) |
+[ &gt;&gt;](MiniGUIProgGuidePart.md)
+
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
+
+[MiniGUI Overview]: /MiniGUI-Overview.md
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI Supplementary Documents]: /supplementary-docs/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
