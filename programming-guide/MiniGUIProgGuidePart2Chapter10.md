@@ -18,7 +18,7 @@ Spinner class control is usually composed of a group of arrow buttons (up and
 down, or left and right), which usually represent a range. Through arrow
 control, value can be changed step by step.
 
-mGNCS provides two kinds of buttons, `mSpinner` and `mSpinbox,` and their
+mGNCS provides two kinds of buttons, `mSpinner` and `mSpinbox`, and their
 inheritance relation is as follows
 
 - [mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
@@ -93,9 +93,9 @@ It is inherited from [the property of `mWidget`
 | `NCSN_SPNR_REACHMAX` | int 当前属性值 | 当前值到达最大值 |
 | `NCSN_SPNR_REACHMIN` | int 当前属性值 | 当前值到达最小值 |
 
-It is inherited from [the event if `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)`
+It is inherited from [the event if `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_SPNR_CHANGED` | int current property value | Current value changes |
 | `NCSN_SPNR_REACHMAX` | int current property value | The current value reaches the maximum value |
 | `NCSN_SPNR_REACHMIN` | int current property value | The current value reaches the minimum value |
@@ -108,7 +108,7 @@ It is inherited from [the event if `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)`
 该类没有新增方法
 
 It is inherited from [the method of 
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)` 
+`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
 
 The class does not have newly added method
 
@@ -121,19 +121,19 @@ The class does not have newly added method
 非客户区查看[mWidget的classic渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 | *属性名* | *说明* | *miniStudio属性名* | *类型* | *示意图*|
-| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | |
-| `NCS_FGC_3DBODY` | 前景箭头的颜色 | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
-| `NCS_BGC_DISABLED_ITEM` | 无效时的背景颜色 | `ColorBgDisable` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
-| `NCS_FGC_DISABLED_ITEM` | 无效时的箭头颜色 | `ColorFgDisable` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-fg3ddisable.png" alt="spinner-classic-fg3ddisable.png" width='36' height='37' /> |
+| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | |
+| `NCS_FGC_3DBODY` | 前景箭头的颜色 | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
+| `NCS_BGC_DISABLED_ITEM` | 无效时的背景颜色 | `ColorBgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
+| `NCS_FGC_DISABLED_ITEM` | 无效时的箭头颜色 | `ColorFgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-fg3ddisable.png" alt="spinner-classic-fg3ddisable.png" width='36' height='37' /> |
 
 For the non client area, refer to [classic renderer of
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)` 
+`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
 
 | *Property name* | *Explanation* | *miniStudio property name* | *Type* | *Schematic diagram*|
-| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | |
-| `NCS_FGC_3DBODY` | Color of the foreground arrow | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
-| `NCS_BGC_DISABLED_ITEM` | Background color when it is invalid | `ColorBgDisable` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
-| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when it is invalid | `ColorFgDisable` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-classic-fg3ddisable.png" alt="spinner-classic-fg3ddisable.png" width='36' height='37' /> |
+| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | |
+| `NCS_FGC_3DBODY` | Color of the foreground arrow | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
+| `NCS_BGC_DISABLED_ITEM` | Background color when it is invalid | `ColorBgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
+| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when it is invalid | `ColorFgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-fg3ddisable.png" alt="spinner-classic-fg3ddisable.png" width='36' height='37' /> |
 
 ---++++ `mSpinner` Skin渲染器
 ---++++ `mSpinner` Skin Renderer
@@ -147,18 +147,18 @@ Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner)
 ---++++ `mSpinner` Fashion Renderer
 
 | *属性名* | *说明* | *miniStudio属性名* | *类型* | *示意图* |
-| `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB)` | 同Classic渲染器 |
-| `NCS_FGC_DISABLED_ITEM` | 窗口无效时按钮前景色 | `ColorFgDisable` | `DWORD(ARGB)` | 同Classic渲染器 |
-| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB)` | 同Classic渲染器 |
-| `NCS_BGC_DISABLED_ITEM` | 窗口无效时文本背景色 | `ColorBgDisable` | `DWORD(ARGB)` | 同Classic渲染器 |
+| `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB`) | 同Classic渲染器 |
+| `NCS_FGC_DISABLED_ITEM` | 窗口无效时按钮前景色 | `ColorFgDisable` | `DWORD(ARGB`) | 同Classic渲染器 |
+| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB`) | 同Classic渲染器 |
+| `NCS_BGC_DISABLED_ITEM` | 窗口无效时文本背景色 | `ColorBgDisable` | `DWORD(ARGB`) | 同Classic渲染器 |
 | `NCS_MODE_BGC` | 渐变填充方式 | `GradientMode` | [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) | <img src="%ATTACHURLPATH%/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
 
 
 | *Property name* | *Explanation* | *miniStudio property name* | *Type* | *Schematic diagram* |
-| `NCS_FGC_3DBODY` | Button foreground color | `ColorFg3DBody` | `DWORD(ARGB)` | Same as Classic renderer |
-| `NCS_FGC_DISABLED_ITEM` | Button foreground color when the window is invalid | `ColorFgDisable` | `DWORD(ARGB)` | Same as Classic renderer |
-| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB)` | Same as Classic renderer |
-| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `ColorBgDisable` | `DWORD(ARGB)` | Same as Classic renderer |
+| `NCS_FGC_3DBODY` | Button foreground color | `ColorFg3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
+| `NCS_FGC_DISABLED_ITEM` | Button foreground color when the window is invalid | `ColorFgDisable` | `DWORD(ARGB`) | Same as Classic renderer |
+| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
+| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `ColorBgDisable` | `DWORD(ARGB`) | Same as Classic renderer |
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) | <img src="%ATTACHURLPATH%/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
 
 
@@ -166,12 +166,12 @@ Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner)
 ---++++ `mSpinner` Flat Renderer
 
 | *属性名* | *说明* | *miniStudio属性名* | *类型* | *示意图* |
-| `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' /> |
-| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
+| `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' /> |
+| `NCS_BGC_3DBODY` | 背景颜色 | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
 
 | *Property name* | *Explanation* | *miniStudio property name* | *Type* | *Schematic diagram* |
-| `NCS_FGC_3DBODY` | Button foreground color | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' /> |
-| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
+| `NCS_FGC_3DBODY` | Button foreground color | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' /> |
+| `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
 
 
 ### `mSpinner示例`
@@ -187,7 +187,7 @@ Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner)
 
 
 The example below (for the screen shot, see the schematic diagram of 
-`mSpinner)` demonstrates that Spinner is associated with a Static control. 
+`mSpinner`) demonstrates that Spinner is associated with a Static control. 
 After pos of Spinner changes, Static will change correspondingly.
 - Properties mainly involved are
 - `NCSP_SPN_MAXPOS`
@@ -210,18 +210,30 @@ For convenience, we mainly realize through the method of data binding
 - In the template definition file of the window, set properties of spinner
 
 
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/spinner.c.txt"
-pattern="^.*?//START_SET_PROPS(.*?)//END_SET_PROPS.*"}% 
+```cpp
+%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_SET_PROPS(.*?)//END_SET_PROPS.*"}%
 ```
+
+- 在主窗口的MSG_CREATE消息中，建立和static的连接
+- 获取窗口对象
+
+- In `MSG_CREATE` message of the main window, establish connection with static
+- Get window object
+
+```cpp
+%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_GET_CTRLS(.*?)//END_GET_CTRLS.*"}%
 ```
 - 连接窗口属性
 
 - Property of the connection window
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/spinner.c.txt"
-pattern="^.*?//START_CONNECT_PROPS(.*?)//END_CONNECT_PROPS.*"}% 
+```cpp
+%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_CONNECT_PROPS(.*?)//END_CONNECT_PROPS.*"}%
 ```
+- 更新当前的信息到Static中
+
+- Update the current information into Static
+```cpp
+%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_UPDATE_CTRLS(.*?)//END_UPDATE_CTRLS.*"}%
 ```
 
 ## `mSpinbox`
@@ -248,7 +260,7 @@ control the content in the edit box through arrow button
 
 | * 风格ID *| *miniStudio名* | * 说明 *|
 | `NCSS_SPNBOX_NUMBER` | `ContentType->Number` |显示数值，可以通过相应的属性指定显示格式 |
-| `NCSS_SPNBOX_STRING` | `ContentType->String|` 显示字符串 |
+| `NCSS_SPNBOX_STRING` | `ContentType->String`| 显示字符串 |
 | `NCSS_SPNBOX_SORT` | Sort | 字符串自动排序 |
 | `NCSS_SPNBOX_EDITNOBORDER` | `EditBorder` | 编辑框没有边框 |
 | `NCSS_SPNBOX_EDITBASELINE` | `EditBaseLine` | 编辑框显示带下划线字符 |
@@ -258,11 +270,11 @@ control the content in the edit box through arrow button
 | `NCSS_SPNBOX_AUTOFOCUS` | `AutoFocus` | 控件获取焦点自动转给编辑框 |
 
 It is inherited from <a href="#the style of `mSpinner">the` style of
-`mSpinner</a>` 
+`mSpinner</a`> 
 
 | * Style `ID` *| *miniStudio name* | * Explanation *|
 | `NCSS_SPNBOX_NUMBER` | `ContentType->Number` |Display numerical value, display format can be appointed through corresponding properties |
-| `NCSS_SPNBOX_STRING` | `ContentType->String|` Display character string |
+| `NCSS_SPNBOX_STRING` | `ContentType->String`| Display character string |
 | `NCSS_SPNBOX_SORT` | Sort | Character string automatic sorting |
 | `NCSS_SPNBOX_EDITNOBORDER` | `EditBorder` | The edit box does not have border |
 | `NCSS_SPNBOX_EDITBASELINE` | `EditBaseLine` | The edit box displays the underlined characters|
@@ -277,7 +289,7 @@ It is inherited from <a href="#the style of `mSpinner">the` style of
 继承自<a href="#mSpinner%E5%B1%9E%E6%80%A7">mSpinner的属性</a>
 
 It is inherited from <a href="#mSpinner%E5%B1%9E%E6%80%A7">the property of
-`mSpinner</a>` 
+`mSpinner</a`> 
 
 
 ### `mSpinbox事件`
@@ -287,16 +299,16 @@ It is inherited from <a href="#mSpinner%E5%B1%9E%E6%80%A7">the property of
 继承自<a href="#mSpinner事件">mSpinner的事件</a>
 
 It is inherited from <a href="#the event of `mSpinner">the` event of
-`mSpinner</a>` 
+`mSpinner</a`> 
 
 ### `mSpinbox方法`
 ### Method of `mSpinbox`
 
 
-继承自<a href="#mSpinner%E6%96%B9%E6%B3%95" > `mSpinner的方法</a>`
+继承自<a href="#mSpinner%E6%96%B9%E6%B3%95" > `mSpinner的方法</a`>
 
 It is inherited from <a href="#mSpinner%E6%96%B9%E6%B3%95" > the method of
-`mSpinner</a>` 
+`mSpinner</a`> 
 
 *以下的函数只有在spinbox包含NCSS_SPNBOX_STRING风格时有效*
 
@@ -306,24 +318,52 @@ It is inherited from <a href="#mSpinner%E6%96%B9%E6%B3%95" > the method of
 style* 
 
 - `addItem` adds a new item
-%CODE{cpp}%
-`BOOL` (*addItem)(clsName *self, char *item);
+```cpp
+BOOL (*addItem)(clsName *self, char *item);
 ```
+- 增加一个字符串到spinbox中
+- 参数：
+* item : 添加的字符串
+- 返回值： 成功 - `TRUE`; 失败 - `FALSE`;
+
+- Add a character string into spinbox
+- Parameter:
+* item : added character string
+- Returned value: successful- `TRUE`; failed- `FALSE`;
+
+- remove Item
+```cpp
+BOOL (*removeItem)(clsName *self, int index);
 ```
 - 删除一个item
 - 参数：
 * index 要删除item的索引
-- 返回值：成功 - `TRUE;` 失败 - `FALSE;`
+- 返回值：成功 - `TRUE`; 失败 - `FALSE`;
 
 - Remove an item
 - Parameter:
 * index: the index of removing item 要删除item的索引
-- Returned: successful- `TRUE;` failed- `FALSE;`
+- Returned: successful- `TRUE`; failed- `FALSE`;
 
 - `setItem`
-%CODE{cpp}%
-`BOOL` (*setItem)(clsName *self, int index, char *item);
+```cpp
+BOOL (*setItem)(clsName *self, int index, char *item);
 ```
+- 设置一个item的字符串内容
+- 参数：
+* index 要设置的索引
+* item 新的item内容
+- 返回值：成功 - `TRUE`; 失败 - `FALSE`;
+
+- Set character string content of an item
+- Parameter:
+* index Index to set
+* Item content of new item
+- Returned value: successful- `TRUE`; failed- `FALSE`;
+
+- `getItem`
+```cpp
+char* (*getItem)(clsName *self, int index);
 ```
 - 获取item的字符串内容
 - 参数：
@@ -333,7 +373,7 @@ style*
 - Get character string content of item
 - Parameter
 * index of the index item
-- Returned value: `NULL-` failed; valid character string pointer.
+- Returned value: `NULL`- failed; valid character string pointer.
 
 
 ### `mSpinbox渲染器`
@@ -370,9 +410,17 @@ Schematic diagram: <br />
 - Source Code[spinbox.c](%ATTACHURL%/spinbox.c.txt)
 
 - The main codes are as below:
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/spinbox.c.txt"
-pattern="^.*?//START_SPINBOX(.*?)//END_SPINBOX.*"}% 
+```cpp
+%INCLUDE{"%ATTACHURL%/spinbox.c.txt" pattern="^.*?//START_SPINBOX(.*?)//END_SPINBOX.*"}%
+```
+
+[Next](MStudioMGNCSV1dot0PGP2C8][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C10)
+
+
+
+
+-- Main.XiaodongLi - 22 Feb 2010
+
 
 ----
 

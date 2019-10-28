@@ -6,7 +6,6 @@ BEGIN { in_code = 0 }
     }
     else {
         in_code = 0
-        print $0
     }
 }
 
@@ -25,16 +24,21 @@ function is_proper_name(name)
     line = ""
 
     if (in_code) {
-#        if ($1 == "```cplusplus")
-#            print "```cpp"
-#        else
-#            print $0
+        if ($1 == "```cplusplus")
+            print "```cpp"
+        else
+            print $0
     }
     else {
         if (match ($0, /^!\[/)) {
+            print $0
             next
         }
-        if (match ($0, /^<br \/>/)) {
+        if (match ($0, /^\[/)) {
+            print $0
+            next
+        }
+        else if (match ($0, /^<br \/>/)) {
             print ""
             next
         }

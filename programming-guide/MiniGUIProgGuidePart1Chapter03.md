@@ -162,8 +162,7 @@ as shown in List 2. The running effect of the created dialog box is as shown
 in Figure 1. Please refer to dialogbox.c of the sample program package
 `mg-samples` for this guide to get the complete source code of this program.
 
-##### List 2 Defining the callback function of a dialog box and creating the
-dialog box
+##### List 2 Defining the callback function of a dialog box and creating the dialog box
 
 ```cpp
 /* Define the dialog box callback function */
@@ -422,7 +421,7 @@ Some general window styles are only valid for child controls in the dialog box;
 Table 1 summarizes these styles. The default window procedure of the dialog
 box will handle control with these styles.
 
-##### Table 1 Some styles used only for the controls in a dialog box<br>
+##### Table 1 Some styles used only for the controls in a dialog box
 
 | *Style Identifier* | *Purpose* | *Comment* |
 | --------------------|-----------|-----------|

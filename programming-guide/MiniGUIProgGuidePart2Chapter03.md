@@ -25,17 +25,17 @@ different interfaces. It falls into the category of control renderer.
 ### Common properties of the Renderer
 
 | *Property* | *Type* | *Explanation* |
-| `RDR_3DBODY_FGCLR` | `DWORD(MakeRGBA)` | 3D object foreground color |
-| `RDR_3DBODY_BGCLR` | `DWORD(MakeRGBA)` | 3D object background color |
+| `RDR_3DBODY_FGCLR` | `DWORD(MakeRGBA`) | 3D object foreground color |
+| `RDR_3DBODY_BGCLR` | `DWORD(MakeRGBA`) | 3D object background color |
 | `RDR_CLIENT_FGCLR` | `DWORD(MakeRGBA` | Window client area foreground color |
 | `RDR_CLIENT_BGCLR` | `DWORD(MakeRGBA` | Window client area background color |
-| `RDR_SELECTED_FGCLR` | `DWORD(MakeRGBA)` | Foreground color of the selected object |
-| `RDR_SELECTED_BGCLR` | `DWORD(MakeRGBA)` | Background color of the selected object |
-| `RDR_SELECTED_LOSTFOCUS_CLR` | `DWORD(MakeRGBA)` | Color of the object losing focus |
-| `RDR_DISABLE_FGCLR` | `DWORD(MakeRGBA)` | Foreground color of disabled object |
-| `RDR_DISABLE_BGCLR` | `DWORD(MakeRGBA)` | Background color of disabled object |
-| `RDR_HIGHLIGHT_FGCLR` | `DWORD(MakeRGBA)` | Foreground color of the hilight object |
-| `RDR_HIGHLIGHT_BGCLR` | `DWORD(MakeRGBA)` | Background color of the hilight object |
+| `RDR_SELECTED_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of the selected object |
+| `RDR_SELECTED_BGCLR` | `DWORD(MakeRGBA`) | Background color of the selected object |
+| `RDR_SELECTED_LOSTFOCUS_CLR` | `DWORD(MakeRGBA`) | Color of the object losing focus |
+| `RDR_DISABLE_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of disabled object |
+| `RDR_DISABLE_BGCLR` | `DWORD(MakeRGBA`) | Background color of disabled object |
+| `RDR_HIGHLIGHT_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of the hilight object |
+| `RDR_HIGHLIGHT_BGCLR` | `DWORD(MakeRGBA`) | Background color of the hilight object |
 | `RDR_METRICS_BORDER` | int | Border Size |
 | `RDR_FONT` | `PLOGFONT` | Logic font used by the window |
 | `RDR_BKIMAGE` | `PBITMAP` | Window background image |
@@ -60,7 +60,7 @@ Before understanding resources management, it is necessary to understand the
 following two basic concepts:
 - *Resource package* : Set of resources, resource set of any kind and any
 number, which is the minimum unit of resource replacement.
-- *Resource `ID*` : Unique identifier for accessing certain resource in the
+- *Resource `ID`* : Unique identifier for accessing certain resource in the
 resource package.
 
 Compared to MiniGUI intrinsic control set, resources management module provided
@@ -77,9 +77,9 @@ package containing all kinds of resources.
 Resources management of mGNCS mainly implements all kinds of management and
 accessing to resources surrounding the resource package. If you want to access
 certain resource correctly, you only need to know the resource package where it
-is and corresponding resource `ID.` The overall accessing process is normally:
+is and corresponding resource `ID`. The overall accessing process is normally:
 1. Load the specified resource package.
-1. Get resource through resource `ID.`
+1. Get resource through resource `ID`.
 1. Use resource, for certain resources, it is necessary to release the resource
 after use.
 1. Unload resource package
@@ -104,7 +104,10 @@ and then access the internal resource, and finally unload the resource package
 correctly after the system exits,. When accessing non built-in resource 
 package, it is necessary to use the following interfaces:
 
-```
+```cpp
+HPACKAGE ncsLoadResPackageFromFile (const char* fileName);
+#define ncsLoadResPackage  ncsLoadResPackageFromFile
+void ncsUnloadResPackage (HPACKAGE package);
 ```
 
 `ncsLoadResPackage` is responsible for loading resource package, and
@@ -122,24 +125,41 @@ conversion tool, which is generated when using the built-in tool to convert the
 specified resource package file to built-in resource, and application does not
 need to care about its realization.
 
-```
+```cpp
+extern BOOL ncsGetIncoreResPackInfo(char **addr, int *size);
+HPACKAGE ncsLoadResPackageFromMem (const void* mem, int size);
 ```
 
 These are the example codes of loading resource package file:
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?//
-`START_OF_LOADRESPKG(.*?)//` `END_OF_LOADRESPKG`.
+```cpp
+%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_LOADRESPKG(.*?)// END_OF_LOADRESPKG.*"}%
 ```
+
+These are the example codes of unloading resource package file:
+```cpp
+%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_UNLOADPKG(.*?)// END_OF_UNLOADPKG.*"}%
 ```
 
 ---++++ Get and Set Locale
 
 To set and get locale conveniently, resource management module provides the
 following two interfaces:
-%CODE{cpp}%
-const char* `ncsSetDefaultLocale` (char* language, char* country);
-const char* `ncsGetDefaultLocale(void);`
+```cpp
+const char* ncsSetDefaultLocale (char* language, char* country);
+const char* ncsGetDefaultLocale(void);
 ```
+
+The setting interface is only valid to the resource got through the resource
+package after setting, and the two parameters represent the language code and
+country code:
+- language code is represented by two English lower case letters.
+- country code needs to be represented by two to three English lower case
+letters. 
+
+If setting American English as default locale, it can be implemented through 
+the following statement:
+```cpp
+ncsSetDefaultLocale("en", "US");
 ```
 
 The getting interface returns current locale information, and format of the
@@ -157,69 +177,137 @@ When the resource package is used, the creating main window interface provided
 by mGNCS is more simple compared to creating main window of MiniGUI. 
 Description of the look and feel information of the main window is stored in 
 the resource package, and the interface can start the interface through window
-resource `ID.`
+resource `ID`.
 - owner parameter refers to the hosting window;
-- For `hIcon` and `hMenu,` 0 by default;
+- For `hIcon` and `hMenu`, 0 by default;
 - handlers and connects are the event listening and connection associated with
 the window resource `ID` defined by the user;
 - `user_data` is additional data, 0 by default.
 
-%CODE{cpp}%
-`mMainWnd*` `ncsCreateMainWindowIndirectFromID` (HPACKAGE package,
-Uint32 `wndId,` `HWND` owner, `HICON` `hIcon,`
-`HMENU` `hMenu,` `NCS_EVENT_HANDLER_INFO*` handlers,
-`NCS_EVENT_CONNECT_INFO` *connects,
-`DWORD` `user_data);`
+```cpp
+mMainWnd* ncsCreateMainWindowIndirectFromID (HPACKAGE package,
+                    Uint32 wndId, HWND owner, HICON hIcon,
+                    HMENU hMenu, NCS_EVENT_HANDLER_INFO* handlers,
+                    NCS_EVENT_CONNECT_INFO *connects,
+                    DWORD user_data);
 ```
+
+The method of creating dialog box through window resource `ID` is similar to 
+the main window. Creating interface through resource `ID`, the parameter 
+meaning is also similar to the interface of the main window created above:
+
+```cpp
+int ncsCreateModalDialogFromID (HPACKAGE package, Uint32 dlgId,
+                    HWND owner, HICON hIcon, HMENU hMenu,
+                    NCS_EVENT_HANDLER_INFO* handlers, NCS_EVENT_CONNECT_INFO *connects);
 ```
 
 Create example codes of UI main window through the resource package:
 
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/resmgr.c.txt" pattern="^.*?// `START_OF_UIWINDOW(.*?)//`
-`END_OF_UIWINDOW`. 
+```cpp
+%INCLUDE{"%ATTACHURL%/resmgr.c.txt" pattern="^.*?// START_OF_UIWINDOW(.*?)// END_OF_UIWINDOW.*"}%
 ```
+
+---++++ Get Character String
+
+The method of getting string through resource package is very simple. It is 
+only necessary to transfer the resource `ID` to interface `ncsGetString`, and
+the management module will return the default locale string to the application
+according to the current locale information.
+
+```cpp
+const char* ncsGetString (HPACKAGE package, Uint32 resId);
 ```
 
 Get example codes of string through resource package:
 
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?//
-`START_OF_GETSTRING(.*?)//` `END_OF_GETSTRING`.
+```cpp
+%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_GETSTRING(.*?)// END_OF_GETSTRING.*"}%
 ```
+
+- Note: mGNCS reserves the `ID` value from `NCSRM_SYSSTR_BASEID` to
+`NCSRM_SYSSTR_MAXID` as the system `ID`, and public definitions can be 
+returned, such as default renderer: `NCSRM_SYSSTR_DEFRDR`
+
+---++++ Get Bitmap
+
+Resources management module provides the function of getting corresponding file
+name through bitmap `ID`, making it convenient for the upper layer applications
+to directly use the bitmap provided by MiniGUI to load related interface
+operation bitmap after getting the file name:
+
+```cpp
+const char* ncsGetImageFileName (HPACKAGE package, Uint32 resId);
 ```
 
 Besides using MiniGUI related interface to access the bitmap, mGNCS also
-provides the interface to get bitmap object directly through resource `ID.`
+provides the interface to get bitmap object directly through resource `ID`.
 After the upper layer applications use the bitmap resource provided by the
 interface, it is necessary to release the bitmap object through corresponding
 release interface. This is valid for setting independent bitmap and setting
 dependant bitmap.
 
-%CODE{cpp}%
+```cpp
 //Set dependant bitmap interface
-int `ncsGetBitmap(HDC` hdc, `HPACKAGE` package, Uint32 `resId,` `PBITMAP`
-`pBitmap);` 
-void `ncsReleaseBitmap` (PBITMAP `pBitmap);`
+int ncsGetBitmap(HDC hdc, HPACKAGE package, Uint32 resId,  PBITMAP pBitmap);
+void ncsReleaseBitmap (PBITMAP pBitmap);
 
 //Set independant bitmap interface
-int `ncsGetMyBitmap(HPACKAGE` package, Uint32 `resId,`
-`PMYBITMAP` `myBmp,` `RGB*` pal);
-void `ncsReleaseMyBitmap` (PMYBITMAP `myBmp);`
+int ncsGetMyBitmap(HPACKAGE package, Uint32 resId,
+        PMYBITMAP myBmp, RGB* pal);
+void ncsReleaseMyBitmap (PMYBITMAP myBmp);
 ```
+
+---++++ Set Renderer
+
+Through renderer `ID` contained in the resource pack, specified window can be
+set, making it has the window element look and feel property under the renderer
+configuration. But only the renderer used in the current window by the 
+interface has the same name as the newly set renderer, and it can be valid only
+when the window class is the child class of the new renderer affiliated control
+class, otherwise failure will be returned, and the setting is not successful.
+
+```cpp
+BOOL ncsSetWinRdr(HWND hWnd, HPACKAGE package, Uint32 rdrId);
 ```
 
 In addition, certain renderer set can be configured as default system renderer
 through renderer set resource setting.
 
-%CODE{cpp}%
-`BOOL` `ncsSetSysRdr(HPACKAGE` package, Uint32 `rdrSetId);`
-```cplusplus
-```cplusplus
+```cpp
+BOOL ncsSetSysRdr(HPACKAGE package, Uint32 rdrSetId);
+```
+
+
+### Example
+
+This instance demonstrates how to use resources management part interface to 
+get resources to the users. This part of codes is automatically generated by
+miniStudio tool.
+<p align=center>
+
+![alt](figures/helloworld.png)
+
+Fig. p2c2-1 Output of resmgr Program
+</p>
+
+The program creates a 300x250 dialog box containing two buttons on the screen.
+The main window is the look and feel effect of classic renderer, and the two
+buttons are the look and feel effects of skin and flat renderer respectively.
+
+<p align=center>List p2c2-2 `resmgr_main.c</p>`
+
+```cpp
 %INCLUDE{"%ATTACHURL%/resmgr_main.c.txt"}%
-```cplusplus
-```cplusplus
+```
+
+<p align=center>List p2c2-3 resmgr.c</p>
+```cpp
 %INCLUDE{"%ATTACHURL%/resmgr.c.txt"}%
+```
+
+[Next](MStudioMGNCSV1dot0PGENP2C1][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C3)
+
 
 ----
 

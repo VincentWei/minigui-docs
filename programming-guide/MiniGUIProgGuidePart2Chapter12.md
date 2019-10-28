@@ -82,9 +82,9 @@ It is inherited from [the style of `mWidget`
 | * 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | `NCSP_PRPSHT_MINTABWIDTH` | `TabMinWidth` | int | `RW` | 凸舌最小宽度 |
 | `NCSP_PRPSHT_TABMARGIN` | `TabMargin` | int | `RW` | 凸舌边界值，通常情况下，该值加上文字所占宽度为凸舌宽度 |
-| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage*` | `RW` | 当前活动页指针 |
+| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage`* | `RW` | 当前活动页指针 |
 | `NCSP_PRPSHT_ACTIVEPAGEIDX` | `ActivePageIndex` | int | `RW` | 当前活动页索引 |
-| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage*` | `RO` | 当前第一个可见页指针 |
+| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage`* | `RO` | 当前第一个可见页指针 |
 | `NCSP_PRPSHT_FIRSTVIEWPAGEIDX` | - | int | `RO` | 当前第一个可见页索引 |
 | `NCSP_PRPSHT_PAGECOUNT` | - | int | `RO` | 当前属性页数 |
 
@@ -94,9 +94,9 @@ It is inherited from [the property of `mWidget`
 | * Property `ID` *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | `NCSP_PRPSHT_MINTABWIDTH` | `TabMinWidth` | int | `RW` | Minimum width of the tongue |
 | `NCSP_PRPSHT_TABMARGIN` | `TabMargin` | int | `RW` | Tongue boundary value. Under normal condition, the value plus the literal width is the tongue width |
-| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage*` | `RW` | Pointer of the current active page |
+| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage`* | `RW` | Pointer of the current active page |
 | `NCSP_PRPSHT_ACTIVEPAGEIDX` | `ActivePageIndex` | int | `RW` | Index of the current active page |
-| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage*` | `RO` | Pointer of the currently first visible page |
+| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage`* | `RO` | Pointer of the currently first visible page |
 | `NCSP_PRPSHT_FIRSTVIEWPAGEIDX` | - | int | `RO` | Index of the currently first visible page |
 | `NCSP_PRPSHT_PAGECOUNT` | - | int | `RO` | Current property page number |
 
@@ -109,9 +109,9 @@ It is inherited from [the property of `mWidget`
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | 活动属性页已改变 |
 
 
-It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)`
+It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | The active property page has changed |
 
 
@@ -121,7 +121,7 @@ It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)`
 继承自[mWidget的方法](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 It is inherited from [the method of 
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)` 
+`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
 
 ---++++ 添加属性页
 ---++++ Add property page
@@ -134,7 +134,10 @@ property sheet through `addPage` method. `dlgTemplate` of the method is used to
 transfer dialog box template, and handlers is used to transfer event callback
 handling function of the property page. Prototype of the function is as below:
 
-```
+```cpp
+mPage* addPage(mPropSheet *self, \
+                              PDLGTEMPLATE dlgTemplate,  \
+                              const NCS_EVENT_HANDLER* handlers);
 ```
 
 如示例程序利用下面代码向属性表控件中添加了多个属性页：
@@ -142,14 +145,16 @@ handling function of the property page. Prototype of the function is as below:
 As shown in the Instance program, the codes below are utilized to add multiple
 property pages to the property sheet control:
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/propsheet.c.txt" pattern="^.*?// START_OF_ADDPAGES(.*?)// END_OF_ADDPAGES.*"}%
 ```
 
 其中各属性页的事件处理为：
 
 Events of the property pages are handled as:
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/propsheet.c.txt" pattern="^.*?// START_OF_PAGEHANDLERS(.*?)// END_OF_PAGEHANDLERS.*"}%
 ```
 
 ---++++ 删除属性页
@@ -170,7 +175,9 @@ page through property page index.
 
 Prototype of the function is as below:
 
-```
+```cpp
+BOOL removePageByIndex(mPropSheet *self, int pageIndex);
+BOOL removePage(mPropSheet *self, mPage* page);
 ```
 
 如要删除属性表中的第一个属性页可执行如下操作：
@@ -178,7 +185,8 @@ Prototype of the function is as below:
 If you want to remove the first property page in the property sheet, you can
 implement the following operation:
 
-```
+```cpp
+_c(propsheet)->removePageByIndex(propsheet, 0);
 ```
 
 ---++++ 索引属性页
@@ -192,14 +200,19 @@ call `getPageByIndex` method of property sheet control; while to get index of
 certain appointed property page, it is only necessary to call `getPageIndex`
 method of property sheet control. Prototype of the function is as below:
 
-```
+```cpp
+int getPageIndex(mPropSheet *self, mPage* page);
+mPage* getPageByIndex(mPropSheet *self, int pageIndex);
 ```
 
 如获取指定属性页的索引：
 
 Such as get index of the appointed property page:
 
-```
+```cpp
+mPage *page;
+... ...
+_c(propsheet)->getPageIndex(propsheet, page);
 ```
 
 或者是获取第一个属性页的类指针，再通过[page](MStudioMGNCSV1dot0PGP2C7#mPage) 控件的方法来操作属性页：
@@ -208,7 +221,10 @@ Or get the class pointer of the first property page, and then operate the
 property page through the method of [page](MStudioMGNCSV1dot0PGP2C7#mPage)
 control: 
 
-```
+```cpp
+mPage *page = _c(propsheet)->getPageByIndex(propsheet, 0);
+HWND hPanel = _c(page)->getPanel(page);
+... ...
 ```
 
 ---++++ 遍历属性页
@@ -223,11 +239,19 @@ pages can be realized through `getNextPage` and `getPrevPage` method.
 page towards the back; `getPrevPage` is used to traverse the property pages 
 from the appointed property page towards the front.
 
-``` 
+```cpp
+mPage* getNextPage(mPropSheet *self, mPage* page);
+mPage* getPrevPage(mPropSheet *self, mPage* page);
 ```
 
 如：
-``` 
+```cpp
+mPage *page = _c(propsheet)->getNextPage(propsheet, NULL);
+
+while (page) {
+    ... ...
+    page = _c(propsheet)->getNextPage(propsheet, page);
+}
 ```
 
 ---++++ 广播消息
@@ -244,7 +268,8 @@ property sheet will plus one for the index value of the property page with
 message broadcasting interrupted. Through this method, function operations such
 as invalid input processing etc. can be realized.
 
-```
+```cpp
+int broadCastMsg(mPropSheet *self, DWORD param1, DWORD param2);
 ```
 
 ### `mPropSheet` 渲染器
@@ -253,7 +278,7 @@ as invalid input processing etc. can be realized.
 继承自[mWidget 渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 It is inherited from [the renderer of 
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)` 
+`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
 
 
 ### `mPropSheet` 实例
@@ -276,11 +301,11 @@ Figure p2c11-1 Output of propsheet Program
 
 <p align=center>清单 p2c11-1 propsheet.c</p>
 <p align=center>List p2c11-1 propsheet.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/propsheet.c.txt"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGP2C10][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] 
-> [[MStudioMGNCSV1dot0PGP2C12)
+[Next](MStudioMGNCSV1dot0PGP2C10][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C12)
 
 
 

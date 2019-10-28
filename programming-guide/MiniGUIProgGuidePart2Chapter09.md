@@ -51,7 +51,7 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 ### Event of `mSlider`
 It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_SLD_CHANGED` | -- | Slide block location changes |
 | `NCSN_SLD_REACHMAX` | -- | The slide block reaches the maximum value |
 | `NCSN_SLD_REACHMIN` | -- | The slide block reaches the minimum value |
@@ -93,7 +93,7 @@ It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Event of `mTrackBar`
 It is inherited from the event of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_TRKBAR_CHANGED` | -- | Slide block location changes |
 | `NCSN_TRKBAR_REACHMAX` | -- | The slide block reaches the maximum value |
 | `NCSN_TRKBAR_REACHMIN` | -- | The slide block reaches the minimum value |
@@ -107,9 +107,9 @@ It is inherited from the method of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 For the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
-| `NCS_BGC_3DBODY` | Color of slide block and slide rail | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/trackbar-classic-bg3dcolor.png" alt="trackbar-classic-bg3dcolor.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/trackbar-classic-bgdisable.png" alt="trackbar-classic-bgdisable.png"/>| |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
+| `NCS_BGC_3DBODY` | Color of slide block and slide rail | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/trackbar-classic-bg3dcolor.png" alt="trackbar-classic-bg3dcolor.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/trackbar-classic-bgdisable.png" alt="trackbar-classic-bgdisable.png"/>| |
 
 ---++++ `mTrackBar` Skin Renderer
 
@@ -121,10 +121,10 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar)
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
-| `NCS_BGC_3DBODY` | Color of the slide block | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/trackbar-fashion-bg3dcolor.png" alt="trackbar-fashion-bg3dcolor.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/trackbar-fashion-bgdisable.png" alt="trackbar-fashion-bgdisable.png"/>| |
-| `NCS_BGC_TRKBAR_SLIDER` | Color of the slide rail | `SliderColor` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/trackbar-fashion-slider.png" alt="trackbar-fashion-slider.png" />| |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
+| `NCS_BGC_3DBODY` | Color of the slide block | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/trackbar-fashion-bg3dcolor.png" alt="trackbar-fashion-bg3dcolor.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/trackbar-fashion-bgdisable.png" alt="trackbar-fashion-bgdisable.png"/>| |
+| `NCS_BGC_TRKBAR_SLIDER` | Color of the slide rail | `SliderColor` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/trackbar-fashion-slider.png" alt="trackbar-fashion-slider.png" />| |
 | `NCS_METRICS_3DBODY_ROUNDX` | Round corner X radius of the slide block | `ThumbRoundX` | int | | 0 ~ 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Round corner Y radius of the slide block | `ThumbRoundY` | int| | 0 ~ 1/2 of the window height |
 
@@ -132,9 +132,9 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 For the drawing of non client area, please refer to the drawing of Flat 
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Color of the slide block side | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/trackbar-flat-fgc.png" alt="trackbar-flat-fgc.png"/> | |
-| `NCS_BGC_3DBODY` | Color of the slide block | `ColorBg3DBody` | `DWORD(ARGB)` | Same as Classic renderer | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Color of the slide block side | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/trackbar-flat-fgc.png" alt="trackbar-flat-fgc.png"/> | |
+| `NCS_BGC_3DBODY` | Color of the slide block | `ColorBg3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
 
 ### Example of `mTrackBar`
 
@@ -146,7 +146,8 @@ Figure p2c8-1 Example of trackbar
 </p>
 
 <p align=center>List p2c8-1 trackbar.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/trackbar.c.txt"}%
 ```
 
 ---++mScrollBar
@@ -167,10 +168,10 @@ It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 | `NCSS_SCRLBR_HORIZONTAL` | -- | Create horizontal scrollbar control (default) |
 | `NCSS_SCRLBR_VERTICAL` | -- | Create vertical scrollbar control |
 | `NCSS_SCRLBR_ARROWS` | `HaveArrows` | Mark if a scroll bar has arrow |
-| `NCSS_SCRLBR_LEFTDBLARROWS` | `DoubleArrows` -> Left | Mark if a scroll bar has left double arrows (mutually exclude with `NCSS_SCROLLBAR_RIGHTDBLARROWS)` |
-| `NCSS_SCRLBR_RIGHTDBLARROWS` | `DoubleArrows` -> Right | Mark if a scroll bar has right double arrows (mutually exclude with `NCSS_SCROLLBAR_LEFTDBLARROW)` |
-| `NCSS_SCRLBR_UPDBLARROWS` | `DoubleArrows` -> Up | Mark if a scroll bar has up arrow (mutually exclude with `NCSS_SCROLLBAR_DOWNDBLAROWS)|`
-| `NCSS_SCRLBR_DOWNDBLAROWS` | `DoubleArrows` -> Down |Mark if a scroll bar has down arrow (mutually exclude with `NCSS_SCROLLBAR_DUPDBLAROWS)|`
+| `NCSS_SCRLBR_LEFTDBLARROWS` | `DoubleArrows` -> Left | Mark if a scroll bar has left double arrows (mutually exclude with `NCSS_SCROLLBAR_RIGHTDBLARROWS`) |
+| `NCSS_SCRLBR_RIGHTDBLARROWS` | `DoubleArrows` -> Right | Mark if a scroll bar has right double arrows (mutually exclude with `NCSS_SCROLLBAR_LEFTDBLARROW`) |
+| `NCSS_SCRLBR_UPDBLARROWS` | `DoubleArrows` -> Up | Mark if a scroll bar has up arrow (mutually exclude with `NCSS_SCROLLBAR_DOWNDBLAROWS)`|
+| `NCSS_SCRLBR_DOWNDBLAROWS` | `DoubleArrows` -> Down |Mark if a scroll bar has down arrow (mutually exclude with `NCSS_SCROLLBAR_DUPDBLAROWS)`|
 
 
 ### Property of `mScrollBar`
@@ -184,7 +185,7 @@ It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Event of `mScrollBar`
 It is inherited from the event of [mSlider](MStudioMGNCSV1dot0PGP2C8)
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_SCRLBR_CHANGED` | -- | Slide block location changed |
 | `NCSN_SCRLBR_REACHMAX` | -- | The slide block reaches the maximum value |
 | `NCSN_SCRLBR_REACHMIN` | -- | The slide block reaches the minimum value |
@@ -200,11 +201,11 @@ It is inherited from the method of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 For the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
-| `NCS_BGC_3DBODY` | Background color of the control | `BgColor` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-classic-bg3dcolor.png" alt="scrollbar-classic-bg3dcolor.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | Color of the slide block and arrow button when the control is invalid | `ColorBgDisable` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/scrollbar-classic-bgdisable.png" alt="scrollbar-classic-bgdisable.png"/>| |
-| `NCS_FGC_3DBODY` | Color of the button up arrow | `ArrowColor` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-classic-fg3dcolor.png" alt="scrollbar-classic-fg3dcolor.png"/>| |
-| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-classic-fgdisable.png" alt="scrollbar-classic-fgdisable.png"/>| |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
+| `NCS_BGC_3DBODY` | Background color of the control | `BgColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-classic-bg3dcolor.png" alt="scrollbar-classic-bg3dcolor.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | Color of the slide block and arrow button when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/scrollbar-classic-bgdisable.png" alt="scrollbar-classic-bgdisable.png"/>| |
+| `NCS_FGC_3DBODY` | Color of the button up arrow | `ArrowColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-classic-fg3dcolor.png" alt="scrollbar-classic-fg3dcolor.png"/>| |
+| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-classic-fgdisable.png" alt="scrollbar-classic-fgdisable.png"/>| |
 
 ---++++ `mScrollBar` Skin Renderer
 
@@ -216,11 +217,11 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar)
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
-| `NCS_BGC_3DBODY` | Color of the slide block and button | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | Color of the slide block and arrow button when the control is invalid | `ColorBgDisable` | `DWORD(ARGB)` | Same as Classic renderer | |
-| `NCS_BGC_WINDOW` | Color of the slide rail | `ColorBgWindow` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-fashion-slider.png" alt="scrollbar-fashion-slider.png" /> | |
-| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB)` | Same as Classic renderer | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
+| `NCS_BGC_3DBODY` | Color of the slide block and button | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | Color of the slide block and arrow button when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) | Same as Classic renderer | |
+| `NCS_BGC_WINDOW` | Color of the slide rail | `ColorBgWindow` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-fashion-slider.png" alt="scrollbar-fashion-slider.png" /> | |
+| `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_METRICS_3DBODY_ROUNDX` | Round corner X radius of the slide block | `RoundX` | int | | 0 ~ 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Round corner Y radius of the slide block | `RoundY` | int| | 0 ~ 1/2 of the window height |
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="%ATTACHURLPATH%/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
@@ -230,9 +231,9 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 For the drawing of non client area, please reefer to the drawing of Flat
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Color of the slide block and button side | `ColorFg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-flat-fgc.png" alt="scrollbar-flat-fgc.png"/> | |
-| `NCS_BGC_3DBODY` | Background color of the control | `ColorBg3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/scrollbar-flat-bgc.png" alt="scrollbar-flat-bgc.png"/> | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Color of the slide block and button side | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-flat-fgc.png" alt="scrollbar-flat-fgc.png"/> | |
+| `NCS_BGC_3DBODY` | Background color of the control | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-flat-bgc.png" alt="scrollbar-flat-bgc.png"/> | |
 
 ### Example of `mScrollbar`
 
@@ -246,11 +247,11 @@ Figure p2c8-2 Example of scrollbar
 
 <p align=center>List p2c8-2 scrollbar.c</p>
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/scrollbar.c.txt"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C7][Previous]] <
-[[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C9)
+[Next](MStudioMGNCSV1dot0PGENP2C7][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C9)
 
 
 ----

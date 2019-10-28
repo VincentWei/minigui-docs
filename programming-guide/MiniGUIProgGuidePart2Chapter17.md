@@ -40,10 +40,64 @@ The class is mainly used on some non control classes, such as the class of
 
 - Quote related ports, and there are two:
 
-%CODE{cpp}%
-int `addRef(mReferencedObj*` self);
-int release(mReferencedObj* self);
+```cpp
+   int addRef(mReferencedObj* self);
+   int release(mReferencedObj* self);
 ```
+`addRef自动给计数加1,并返回新的计数`。
+release将自动给计数减1,并返回新计数；如果计数为0,自动调用destroy方法，删除该对象，包括该对象的内存。 
+*mReferenceObj及其派生类需要调用 ==NEW== 或者 ==NEWEX== 宏来创建* ，因为release方法会调用 ==DELETE==
+宏来释放创建的对象。 派生类可以通过覆盖release方法，来改变对象的释放方式。
+
+`addRef` automatically adds 1 to the counting, and returns new counting. 
+release will automatically reduce 1 for the counting, and returns new counting;
+if the counting is 0, automatically call destroy method, delete the object,
+including memory of the object. `mReferenceObj` and its derived class need to
+call `NEW` or `NEWEX` macro to create, because release method will call 
+`DELETE` macro to release the created object. The derived class can change the
+release mode of the object through covering release method.
+
+### `mReferencedObj示例`
+### Example of `mReferencedObj`
+%RED%该类为抽象类，不能直接使用%ENDCOLOR%
+
+%RED%The class is abstract class, and cannot be used directly%ENDCOLOR%
+
+## `mPopMenuMgr`
+
+`mPopMenuMgr保存了PropMenu的信息，它能够`：
+- 随时创建一个PopMenu供使用
+- 可以取得部分MenuItem的信息，填充到MENUITEMINFO结构中，提供给MiniGUI的相关函数使用
+
+`mPopMenuMgr` stores the information of `PropMenu`, and it can:
+- Create a `PopMenu` at any time for use
+- Partial `MenuItem` information can be obtained to fill into `MENUITEMINFO`
+structure, and provide for the related functions of MiniGUI to use
+
+- 继承关系
+
+- Inheritance relation
+
+- `mObject`
+* <a href="#m_ReferencedObj">mReferencedObj</a>
+* `mPopMenuMgr`
+
+### `mPopMenuMgr方法`
+### Method of `mPopMenuMgr`
+
+- 向mPopMenuMgr添加一个MenuItem的方法
+
+- Method of adding a `MenuItem` to `mPopMenuMgr`
+
+```cpp
+BOOL addItem(mPropMenuMgr *self , \
+                          int type, \
+                          const char * str, \
+                          PBITMAP bmp, \
+                          int id, \
+                          int state,  \
+                          mPopMenuMgr *subMenu, \
+                          DWORD add_data);
 ```
 - 参数
 * type - 菜单项类型，同MiniGUI `MENUITEMINFO的定义`
@@ -89,11 +143,18 @@ int release(mReferencedObj* self);
 * `add_data` – additional data of the user
 - return : `TRUE/FALSE`
 
-- Create a `PopMenu,` return the sentence handle of the Menu
+- Create a `PopMenu`, return the sentence handle of the Menu
 
-%CODE{cpp}%
-`HMENU` `createMenu(mPopMenuMgr` *self);
+```cpp
+HMENU createMenu(mPopMenuMgr *self);
 ```
+
+- 自动创建并弹出一个PopMenu
+
+- Automatically create and pop up a Pop Menu
+
+```cpp
+void popMenu(mPopMenuMgr *self, mObject *owner);
 ```
 - params:
 * owner 指出PopMenu 相关关联的对象， 它必须是一个mWidget或者其子类。*PopMenu将发送MSG_COMMAND给owner*
@@ -108,9 +169,16 @@ child class, *PopMenu will send `MSG_COMMAND` to owner*
 
 - Add a segmentation bar to `MenuItem`
 
-%CODE{cpp}%
-`BOOL` `addSeparator(mPopMenuMgr` * self);
+```cpp
+BOOL addSeparator(mPopMenuMgr * self);
 ```
+
+- 获取指定MenuItem的信息
+
+- Get information of appointed `MenuItem`
+
+```cpp
+ BOOL getMenuItem(mPopMenuMgr * self, int idx, MENUITEMINFO *pmii, BOOL byCommand);
 ```
 - 将指定MenuItem的信息填充到MENUITEMINFO中去
 - params:
@@ -137,7 +205,7 @@ href="MStudioMGNCSV1dot0PGP2C5#m_MenuButton">mMenuButton</a>
 ## `mToolImage`
 `mToolImage是为mToolItem提供图片的类。该类封装了各种类型的图片，以方便用户选用`
 
-`mToolImage` is the class providing images to `mToolItem.` The class
+`mToolImage` is the class providing images to `mToolItem`. The class
 encapsulates all types of images for the convenience of the users to select
 
 - 继承关系
@@ -159,18 +227,46 @@ called directly
 - 从一个图片对象创建新的mToolImage对象
 
 - Create new `mToolImage` object from an image object
-%CODE{cpp}%
-`mToolImage` * `ncsNewToolImage(PBITMAP` pbmp, int `cell_count,` `BOOL`
-`autoUnload,` `BOOL` `bVert);`
+```cpp
+mToolImage * ncsNewToolImage(PBITMAP pbmp, int cell_count, BOOL autoUnload, BOOL bVert);
 ```
+- params
+* pbmp : 图像的源
+* `cell_count:` pbmp包含的小图像的个数
+* `autoUnload` : 自动调用UnloadBitmap删除该图像
+* `bVert` : 小图像的排列是否是垂直的
+- return : `mToolImage指针`
+
+- 从一个图片文件创建mToolImage对象
+
+- params
+* pbmp : source of image
+* `cell_count:` number of small images that pbmp contains
+* `autoUnload` : automatically call `UnloadBitmap` to delete the image
+* `bVert` : if arrangement of small images is vertical
+- return : `mToolImage` pointer
+
+- Create `mToolImage` object from an image file
+
+```cpp
+mToolImage * ncsNewToolImageFromFile(const char *fileName, \
+                                                                       int cell_count, \
+                                                                       BOOL autoUnload, \
+                                                                       BOOL bVert);
 ```
 
 - 释放一个mToolImage对象
 
 - Release a `mToolImage` object
-%CODE{cpp}%
-void `ncsFreeToolImage(mToolImage` *mti);
+```cpp
+void ncsFreeToolImage(mToolImage *mti);
 ```
+
+- 绘制mToolImage管理的指定位置的图片
+
+- Draw image of appointed position managed by `mToolImage`
+```cpp
+  BOOL ncsDrawToolImageCell(mToolImage *mti, HDC hdc, int idx, const RECT *prc);
 ```
 - params:
 * mti : `mToolImage指针`
@@ -197,9 +293,9 @@ draw function is used by `ToolItem`
 
 ## `mToolItem`
 
-`mToolItem是mToolbar的item的基类。这个类以及它的派生类是不公开的。用户只需要通过对外提供的API，自动创建即可。`
+`mToolItem是mToolbar的item的基类。这个类以及它的派生类是不公开的。用户只需要通过对外提供的API，自动创建即可`。
 
-`mToolItem` is the basic class of item of `mToolbar.` The class and its derived
+`mToolItem` is the basic class of item of `mToolbar`. The class and its derived
 class are not public. Users only need to automatically create through `API`
 provided externally.
 
@@ -209,49 +305,91 @@ provided externally.
 
 ### `mToolItem的类型`
 ### Type of `mToolItem`
-`mToolItem有很多子类，对外接口上，表现为各种类型，这些定义如下：`
+`mToolItem有很多子类，对外接口上，表现为各种类型，这些定义如下`：
 
 `mToolItem` has many child classes. In external interface, it is manifested as
 all kinds of types, and these definitions are as below:
 
-%CODE{cpp}%
-enum `mToolItemType{`
-`NCS_UNKNOWNTOOLITEM` = 0,
-`NCS_PUSHTOOLITEM`,
-`NCS_MENUTOOLITEM`,
-`NCS_WIDGETTOOLITEM`,
-`NCS_SEPARATORTOOLITEM`
+```cpp
+enum mToolItemType{
+    NCS_UNKNOWNTOOLITEM = 0,
+    NCS_PUSHTOOLITEM,
+    NCS_MENUTOOLITEM,
+    NCS_WIDGETTOOLITEM,
+    NCS_SEPARATORTOOLITEM
 };
 ```
+可以通过以下函数来检测一个ToolItem的类型
+
+Type of a `ToolItem` can be detected through the function below
+
+- int `ncsGetToolItemType(void` *toolitem);
+- 获取ToolItem的类型
+
+- int `ncsGetToolItemType(void` *toolitem);
+- Get the type of `ToolItem`
+
+以下函数可以快速检测一个item的类型
+
+The function below can rapidly detect the type of an item
+
+- `BOOL` `ncsIsPushToolItem(void` *toolitem);
+- `BOOL` `ncsIsMenuToolItem(void` *toolitem);
+- `BOOL` `ncsIsSeparatorToolItem(void` *toolitem);
+- `BOOL` `ncsIsWidgetToolItem(void` *toolitem);
+
+### `mToolItem创建和删除`
+### Creation and Deletion of `mToolItem`
+
+- 创建一个PushToolItem
+
+- Create a `PushToolItem`
+
+```cpp
+ void * ncsCreatePushToolItem(int id, mToolImage * img, const char * str, UINT flags);
 ```
 - params:
 * img : `mToolImage` 指针,可以为NULL
 * str : 文字指针，可以为NULL, 但，*img和str中必须有一个不为NULL*
 * flags: 定义image和str的关系
-* `NCS_TOOLITEM_FLAG_TEXT_LEFT/NCS_TOOLITEM_FLAG_TEXT_UP,` 文本在左或者上，默认为右或者下
+* `NCS_TOOLITEM_FLAG_TEXT_LEFT/NCS_TOOLITEM_FLAG_TEXT_UP`, 文本在左或者上，默认为右或者下
 * `NCS_TOOLITEM_FLAG_VERT`, image和str垂直排列，默认是水平排列
 - return : item 指针
 - 创建一个Menu Tool Item
 
 - params:
 * img : `mToolImage` pointer, can be `NULL`
-* str : literal pointer, can be `NULL,` but either *img or str must not be 
-`NULL*` 
+* str : literal pointer, can be `NULL`, but either *img or str must not be 
+`NULL`* 
 * flags: define the relation between image and str
-* `NCS_TOOLITEM_FLAG_TEXT_LEFT/NCS_TOOLITEM_FLAG_TEXT_UP,` the text is on the
+* `NCS_TOOLITEM_FLAG_TEXT_LEFT/NCS_TOOLITEM_FLAG_TEXT_UP`, the text is on the
 left or top, default is right or bottom
 * `NCS_TOOLITEM_FLAG_VERT`, image and str are vertically arranged, and it is
 horizontal arrangement by default
 - return : item pointer
 - Create a Menu Tool Item
 
-%CODE{cpp}%
-void * `ncsCreateMenuToolItem(int` id, \
-`mToolImage` * img, \
-const char * str, \
-`UINT` flags, \
-`mPopMenuMgr` * menu);
+```cpp
+void * ncsCreateMenuToolItem(int id, \
+                                                     mToolImage * img, \
+                                                     const char * str, \
+                                                     UINT flags, \
+                                                     mPopMenuMgr * menu);
 ```
+- 创建一个MenuToolItem, 参数menu为一个<a href="#m_PopMenuMgr">mPopMenuMgr</a>, 其他参数同上
+
+- 创建一个Check Tool Item
+
+- Create a `MenuToolItem`, parameter menu is a `mPopMenuMgr`, and other
+parameters are as above
+
+- Create a Check Tool Item
+```cpp
+void * ncsCreateCheckToolItem(int id, \
+                                                      mToolImage * img, \
+                                                      const char * str, \
+                                                      UINT flags, \
+                                                      int state);
 ```
 - 参数同ncsCreatePushToolItem
 
@@ -260,10 +398,21 @@ const char * str, \
 - Parameter is same as `ncsCreatePushToolItem`
 
 - Create a radio Tool Item
-%CODE{cpp}%
-void * `ncsCreateRadioToolItem(int` id, `mToolImage` * img, const char * str,
-`UINT` flags);
+```cpp
+void * ncsCreateRadioToolItem(int id, mToolImage * img, const char * str, UINT flags);
 ```
+- 参数同ncsCreatePushToolItem。
+*RadioToolItem是自动分组的，从第一个或者上一个分割符开始到最后一个或者下个分割符结束直接的所有RadioToolItem是互斥的* 
+
+- 创建一个包含mWidget指针的ToolItem
+
+- Parameter is same as `ncsCreatePushToolItem`. *RadioToolItem is automatically
+grouped, starting from the first or previous separator and ending to the final
+or next separator, direct all `RadioToolItem` are mutually excluding*
+
+- Create a `ToolItem` containing `mWidget` pointer
+```cpp
+void * ncsCreateWidgetToolItem(mWidget * widget);
 ```
 - params
 * widget : `mWidget对象指针`
@@ -276,9 +425,26 @@ void * `ncsCreateRadioToolItem(int` id, `mToolImage` * img, const char * str,
 - return : item pointer
 
 - Create a separator
-%CODE{cpp}%
-void * `ncsCreateSeparatorItem(void);`
+```cpp
+void * ncsCreateSeparatorItem(void);
 ```
+- return item指针
+
+- return item pointer
+
+### 其他mToolItem函数
+### Other `mToolItem` Functions
+`mToolItem还提供一些其他的函数，用于对ToolItem进行操作`
+
+`mToolItem` provides some other functions, used to operate `ToolItem`
+
+- 获取或者设置ToolItem的ID
+
+- Get or set `ID` of `ToolItem`
+```cpp
+int ncsToolItem_getId(void *self)
+
+int ncsToolItem_setId(void *self, int id);
 ```
 - 如果不能设置或者不能获取，则返回-1
 
@@ -288,21 +454,31 @@ void * `ncsCreateSeparatorItem(void);`
 
 - Get or set Check status of `CheckToolItem`
 
-%CODE{cpp}%
-`BOOL` `ncsToolItem_setCheck(void` *self, int `check_state);`
-int `ncsToolItem_getCheck(void` *self);
+```cpp
+BOOL ncsToolItem_setCheck(void *self, int check_state);
+int ncsToolItem_getCheck(void *self);
 ```
+- 只针对Check/RadioToolItem起效。当对其他ToolItem调用ncsToolItem_getCheck时，将永远返回unchecked状态
+
+- 对MenuToolItem弹出菜单
+
+- Only valid aiming at Check/RadioToolItem. When calling `ncsToolItem_getCheck`
+for other `ToolItem`, unchecked status will be returned forever
+
+- Pop up menu for `MenuToolItem`
+```cpp
+ BOOL ncsToolItem_showMenu(void*self, mObject *owner);
 ```
 - 仅针对menu Tool item, owner为一个mWidgt*对象
 
-- Only aim at menu Tool item, owner is a `mWidgt*` object
+- Only aim at menu Tool item, owner is a `mWidgt`* object
 
 ### `mToolItem示例`
 ### Example of `mToolItem`
 
 
 
-[Index](MStudioMGNCSV1dot0PGP2C15][Previous]] < [[MStudioMGNCSV1dot0PG) >
+[Index](MStudioMGNCSV1dot0PGP2C15][Previous]] < [[MStudioMGNCSV1dot0PG) > 
 
 
 

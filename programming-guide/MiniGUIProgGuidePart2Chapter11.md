@@ -51,7 +51,7 @@ software installation and file transmission.
 | `NCSS_PRGBAR_SHOWPERCENT` | `ShowPercent` | 显示当前进度值（百分比)| <img src="%ATTACHURLPATH%/prog_per.png" alt="prog_per.png" width='111' height='30' /> |
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Style `ID*` | *miniStudio property * | *Explanation* ||
+| *Style `ID`* | *miniStudio property * | *Explanation* ||
 | `NCSS_PRGBAR_HORIZONTAL` | -- | In miniStudio, the two styles are divided into two controls to use, respectively corresponding to| Horz `ProgressBar` |
 | `NCSS_PRGBAR_VERTICAL` | -- | ^ | Vert `ProgressBar` |
 | `NCSS_PRGBAR_BLOCKS` | `BlockChunk->TRUE` | Block progress | <img src="%ATTACHURLPATH%/prog_block.png" alt="prog_block.png" width='111' height='30' /> |
@@ -90,15 +90,50 @@ It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 
 ---++++ increase
-%CODE{cpp}%
+```cpp
 int increase (mProgressBar *self, int delta);
 ```
+- 参数：
+- self ：控件对象指针
+- delta ：增加幅度
+- 说明 ： 用户可以使用改函数控制进度值的增加，delta用来指定增加的量，一般用来控制非匀速的增长效果
+- 示例 ：
+
+- Parameter:
+- self ：control object pointer
+- delta ：increase amplitude
+- Explanation: users can use the function to control increase of the progress
+value; delta is used to appoint the increase amount, which is generally used to
+control the increase effect of non even speed
+- Example:
+
+```cpp
+_c(pb)->increase (pb, 5);    //进度值增加5 //The progress value increases 5
 ```
 
 ---++++ `stepIncrease`
-%CODE{cpp}%
-int `stepIncrease` (mProgressBar *_this);
+```cpp
+int stepIncrease (mProgressBar *_this);
 ```
+- 参数：
+- self ：控件对象指针
+- 说明：该函数可以步进增加进度值，每调用一次增加一个步长值，可以实现匀速的增长效果，步长值的设定通过相应的属性来完成
+- 示例 ：
+
+- Parameter:
+- self ：control object pointer
+- Explanation: the function can increase the progress value by step; calling
+once, a step length value is increased, and even-speed increase effect can be
+realized; setting of step length value is completed through corresponding
+properties 
+- Example:
+
+```cpp
+//设置ProgressBar的步进长度
+// Set step length of ProgressBar
+_c(pb)->setProperty(pb, NCSP_PROG_LINESTEP, 5);
+......
+_c(pb)->stepIncrease (pb);
 ```
 
 ### `mProgressBar渲染器`
@@ -107,33 +142,33 @@ int `stepIncrease` (mProgressBar *_this);
 ---++++ Classic Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的classic渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
-| `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | 进度条的chunk部分的颜色，本渲染器使用高亮item的颜色绘制 |
+| `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | 进度条的chunk部分的颜色，本渲染器使用高亮item的颜色绘制 |
 
 It is inherited from the classic renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR> 
 | *Property name* |*miniStudio property * | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | Color of chunk part of the progress bar, and this renderer uses the color of highlight item to draw |
+| `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | Color of chunk part of the progress bar, and this renderer uses the color of highlight item to draw |
 
 ---++++ fashion渲染器
 ---++++ Fashion Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的fashion渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
-| `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | 进度条的chunk部分的基础颜色，渲染器会根据这个颜色进行减淡、加深，来绘制渐变效果的进度条 |
+| `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | 进度条的chunk部分的基础颜色，渲染器会根据这个颜色进行减淡、加深，来绘制渐变效果的进度条 |
 
 It is inherited from the fashion renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR> 
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | Foundation color of chunk part of the progress bar, and the renderer will lighten or darken according to this color to draw progress bar of gradual change effect |
+| `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | Foundation color of chunk part of the progress bar, and the renderer will lighten or darken according to this color to draw progress bar of gradual change effect |
 
 ---++++ flat渲染器
 ---++++ Flat Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的flat渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
-| `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | 进度条的chunk部分的颜色,这里使用窗口前景色 |
+| `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | 进度条的chunk部分的颜色,这里使用窗口前景色 |
 
 It is inherited from flat renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB）` | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | Color of chunk part of the progress bar, here window foreground color is used |
+| `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | Color of chunk part of the progress bar, here window foreground color is used |
 
 ---++++ skin渲染器
 ---++++ Skin Renderer
@@ -155,18 +190,34 @@ Specification]] in Specification for Image Resource Used by Skin Renderer
 
 - `ProgressBar` template
 
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/progressbar.c.txt"
-pattern="^.*?//START_OF_TEMPLATE(.*?)//END_OF_TEMPLATE.*"}% 
+```cpp
+%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_TEMPLATE(.*?)//END_OF_TEMPLATE.*"}%
 ```
+
+- 初始化ProgressBar属性
+
+- Initialize the property of `ProgressBar`
+```cpp
+%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_INITIAL_PROPS(.*?)//END_OF_INITIAL_PROPS.*"}%
 ```
 
 - 在Timer消息中，改变ProgressBar的属性值
 
 - In Timer message, change the property value of `ProgressBar`
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/progressbar.c.txt"
-pattern="^.*?//START_OF_SET_PROPERTY(.*?)//END_OF_SET_PROPERTY.*"}% 
+```cpp
+%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_SET_PROPERTY(.*?)//END_OF_SET_PROPERTY.*"}%
+```
+
+
+[Next](MStudioMGNCSV1dot0PGP2C9][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C11) 
+
+
+
+
+
+
+-- Main.XiaodongLi - 22 Feb 2010
+
 
 ----
 

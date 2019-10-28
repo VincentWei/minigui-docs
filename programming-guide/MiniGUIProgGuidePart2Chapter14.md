@@ -103,21 +103,77 @@ For the drawing of non client area, please refer to the renderer of
 ---+++Method of `mAnimate`
 
 ---++++ncsAnimateStart
-%CODE{cpp}%
-`BOOL` `ncsAnimateStart(mAnimate*` self);
+```cpp
+BOOL ncsAnimateStart(mAnimate* self);
 ```
+- 参数：<BR>
+- self -- 需要操作的动画控件指针
+- 说明： <BR>
+开始播放self对应的动画控件， 如果动画控件已经在播放， 则回到动画起始处开始播放。
+- 示例：<BR>
+
+- Parameter: <BR>
+- self -- animation control pointer that needs operation
+- Explanation: <BR>
+Start to play the animation control that self corresponds to. If the animation
+control is being played, then return to the animation starting point to begin
+playing. 
+- Example: <BR>
+```cpp
+//播放anim动画
+
+// Play anim animation
+    mAnimate *anim = (mAnimate *)ncsGetChildObj(hwnd, IDC_ANI);
+    ncsAnimateStart(anim);    
 ```
 
 ---++++ncsAnimatePauseResume
-%CODE{cpp}%
-`BOOL` `ncsAnimatePauseResume(mAnimate*` self);
+```cpp
+BOOL ncsAnimatePauseResume(mAnimate* self);
 ```
+- 参数：<BR>
+- self -- 需要操作的动画控件指针
+- 说明： <BR>
+如果当前动画为暂停，此方法会继续播放动画， 如果动画为播放中， 此方法会暂停动画。
+- 示例：<BR>
+
+- Parameter: <BR>
+- self -- animation control pointer that needs operation
+- Explanation: <BR>
+If the current animation is paused, this method will continue to play the
+animation. If the animation is in play, this method will pause to the 
+animation. 
+- Example: <BR>
+```cpp
+//暂停anim动画
+
+// Pause anim animation
+    mAnimate *anim = (mAnimate *)ncsGetChildObj(hwnd, IDC_ANI);
+    ncsAnimateStart(anim);
+    ncsAnimatePauseResume(anim);    
 ```
 
 ---++++ncsAnimateStop
-%CODE{cpp}%
-`BOOL` `ncsAnimateStop(mAnimate*` self);
+```cpp
+BOOL ncsAnimateStop(mAnimate* self);
 ```
+- 参数：<BR>
+- self -- 需要操作的动画控件指针
+- 说明： <BR>
+停止动画， 并将动画重置回第一帧。
+- 示例：<BR>
+
+- Parameter: <BR>
+- self -- animation control pointer that needs operation
+- Explanation: <BR>
+Stop the animation, and reset the animation back to the first frame.
+- Example: <BR>
+```cpp
+//暂停anim动画
+
+// Pause anim animation
+    mAnimate *anim = (mAnimate *)ncsGetChildObj(hwnd, IDC_ANI);
+    ncsAnimateStop(anim);
 ```
 
 
@@ -148,23 +204,25 @@ href="%ATTACHURL%/animation.c.txt">animation.c</a></p>
 - 设置加载图片
 
 - Set loading image
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/animation" pattern="^.*?//START_OF_PIC(.*?)//END_OF_PIC.*"}%
 ```
 
 - 设置按键消息
 - Set key information
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/animation" pattern="^.*?//START_OF_KEY_EVENT(.*?)//END_OF_KEY_EVENT.*"}%
 ```
 
 
 - 设置显示界面模板
 - Set display interface template
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/animation" pattern="^.*?//START_OF_TMPL(.*?)//END_OF_TMPL.*"}%
 ```
 
 
-[Next](MStudioMGNCSV1dot0PGP2C12][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] 
-> [[MStudioMGNCSV1dot0PGP2C14)
+[Next](MStudioMGNCSV1dot0PGP2C12][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C14) 
 
 
 

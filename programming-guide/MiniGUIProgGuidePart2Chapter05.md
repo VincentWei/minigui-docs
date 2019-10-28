@@ -9,13 +9,13 @@ control row of static box series does not need to conduct dynamic response to
 input of the users, that is to say, it is not necessary to receive any input
 (such as keyboard and mouse etc.), and there is no event of itself.
 
-| *Control Name* | *Control name (miniStudio display name)* | *Purpose* | *NCS class name* | *Control window class `ID*` |
+| *Control Name* | *Control name (miniStudio display name)* | *Purpose* | *NCS class name* | *Control window class `ID`* |
 | Static box | Label | Display single row or multiple rows of texts | `mStatic` | `NCSCTRL_STATIC` |
 | Image box | Image | Display image | `mImage` | `NCSCTRL_IMAGE` |
 | Rectangle box | Rectangle | Draw rectangles | `mRect` | `NCSCTRL_RECTANGLE` |
 | Group box | Group Box| Region control that can contain other controls | `mGroupbox` | `NCSCTRL_GROUPBOX` |
-| Button group | Button Group| Manage `RadioButton,` realize single selection function | `mButtonGroup` | `NCSCTRL_BUTTONGROUP` |
-| `LED` label | `LEDLabel|` Display `LED` characters | `mLEDLabel` | `NCSCTRL_LEDLABEL` |
+| Button group | Button Group| Manage `RadioButton`, realize single selection function | `mButtonGroup` | `NCSCTRL_BUTTONGROUP` |
+| `LED` label | `LEDLabel`| Display `LED` characters | `mLEDLabel` | `NCSCTRL_LEDLABEL` |
 | Separator | Horz/Vert Separator | Separation line, realize regional division visually | `mSeparator` | `NCSCTRL_SEPARATOR` |
 
 The inheritance relations of static box series controls are as follows:
@@ -71,7 +71,48 @@ wrap mode
 
 
 Developers can set the property of `mStatic` through the following methods
-```
+```cpp
+//static control property configuration
+static NCS_PROP_ENTRY static1_props [] = {
+    { NCSP_STATIC_ALIGN, NCS_ALIGN_CENTER },    // Alignment mode
+    {0, 0}
+};
+    ...
+static NCS_PROP_ENTRY static4_props [] = {
+    { NCSP_STATIC_VALIGN, NCS_VALIGN_TOP },
+    {0, 0}
+};
+    ...
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_STATIC,                      //Control name
+        IDC_STATIC1+0,
+        10, 10, 160, 30,                      //Control location, size
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "Default Text",                  //Text content within the control
+        NULL, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    {
+        NCSCTRL_STATIC, 
+        IDC_STATIC1+1,
+        10, 50, 160, 30,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "Center Text",
+        static1_props, //props, set property
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    ...
 ```
 
 ### Event of `mStatic`
@@ -94,7 +135,8 @@ users. <br/>
 ![alt](figures/static.png)
 
 <p align=center>List p2c4-1 static.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/static.c.txt"}%
 ```
 
 ## `mImage`
@@ -117,14 +159,58 @@ users. <br/>
 - `NCSP_IMAGE_DRAWMODE：set` image drawing mode, and there are three modes.
 - `NCS_DM_NORMAL：display` image according to the original condition, and 
 default value of the drawing mode – 0
-- `NCS_DM_SCALED：stretch,` stretch the image to cover the whole static box-1
-- `NCS_DM_TILED：tile,` display the image repeatedly in the whole static box-2
+- `NCS_DM_SCALED：stretch`, stretch the image to cover the whole static box-1
+- `NCS_DM_TILED：tile`, display the image repeatedly in the whole static box-2
 - `NCSP_STATIC_ALIGN：refer` to `mStatic`
 - `NCSP_STATIC_VALIGN：refer` to `mStatic`
 
 The following codes demonstrate how to set properties such as drawing mode etc.
 
-```
+```cpp
+static BITMAP icon;
+static BITMAP bitmap;
+
+static void set_icon_info(mWidget* self, int id, PBITMAP pbmp, int align_id, int align)
+{
+    mImage *img;
+    img = (mImage *)ncsGetChildObj(self->hwnd, id);
+
+    if(img){
+        _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)pbmp);
+        _c(img)->setProperty(img, align_id, align);
+    }
+}
+
+
+static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
+{
+    //TODO : initialize
+    mImage *img;
+    LoadBitmapFromFile(HDC_SCREEN, &bitmap, "image_test.jpg");
+
+    LoadBitmapFromFile(HDC_SCREEN, &icon, "icon.png");
+
+    set_icon_info(self, IDC_IMAGE1, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_LEFT);
+    set_icon_info(self, IDC_IMAGE2, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_CENTER);
+    set_icon_info(self, IDC_IMAGE3, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_RIGHT);
+    set_icon_info(self, IDC_IMAGE4, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_TOP);
+    set_icon_info(self, IDC_IMAGE5, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_CENTER);
+    set_icon_info(self, IDC_IMAGE6, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_BOTTOM);
+
+    img = (mImage *)ncsGetChildObj(self->hwnd, IDC_IMAGE7);
+    if(img){
+        _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)&bitmap);
+        _c(img)->setProperty(img, NCSP_IMAGE_DRAWMODE, NCS_DM_SCALED);
+    }
+
+    img = (mImage *)ncsGetChildObj(self->hwnd, IDC_IMAGE8);
+    if(img){
+        _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)&bitmap);
+        _c(img)->setProperty(img, NCSP_IMAGE_DRAWMODE, NCS_DM_TILED);
+    }
+
+    return TRUE;
+}
 ```
 
 ### Event of `mImage`
@@ -142,7 +228,8 @@ different drawing modes to the users<br/>
 ![alt](figures/image.png)
 
 <p align=center>List p2c4-2 image.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/image.c.txt"}%
 ```
 
 ## `mRect`
@@ -173,7 +260,100 @@ fill color, round corner and border etc. can be drawn conveniently and rapidly
 | `NCSP_RECT_BRDCLR_ALPHA` | | | |
 
 The following codes demonstrate how to set the properties of rectangles
-```
+```cpp
+//Propties for
+static NCS_PROP_ENTRY rect1_props [] = {
+    {NCSP_RECTANGLE_BORDERSIZE, 3},
+    {NCSP_RECTANGLE_BORDERCOLOR, 0xFFFF0000},
+    {NCSP_RECTANGLE_FILLCOLOR, 0x00000000},
+    {0, 0}
+};
+
+static NCS_PROP_ENTRY rect2_props [] = {
+    {NCSP_RECTANGLE_BORDERSIZE, 2},
+    {NCSP_RECTANGLE_BORDERCOLOR, 0xFFFFFFF},
+    {NCSP_RECTANGLE_FILLCOLOR, 0xFF0F0F0F},
+    {0, 0}
+};
+
+static NCS_PROP_ENTRY rect3_props [] = {
+    {NCSP_RECTANGLE_BORDERSIZE, 0},
+    {NCSP_RECTANGLE_BORDERCOLOR, 0xFF0C0000},
+    {NCSP_RECTANGLE_FILLCOLOR, 0xFF00FFFF},
+    {0, 0}
+};
+
+static NCS_PROP_ENTRY rect4_props [] = {
+    {NCSP_RECTANGLE_BORDERSIZE, 5},
+    {NCSP_RECTANGLE_BORDERCOLOR, 0xFF0000FF},
+    {NCSP_RECTANGLE_FILLCOLOR, 0xFF00FF00},
+    {NCSP_RECTANGLE_XRADIUS, 4},
+    {NCSP_RECTANGLE_YRADIUS, 4},
+    {0, 0}
+};
+//Controls
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    ...
+    {
+        NCSCTRL_RECTANGLE,
+        ID_RECT1,
+        110, 10, 80, 40,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        rect1_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    ...
+    {
+        NCSCTRL_RECTANGLE,
+        ID_RECT2,
+        110, 60, 80, 40,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        rect2_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    ...
+    {
+        NCSCTRL_RECTANGLE,
+        ID_RECT3,
+        110, 110, 80, 40,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        rect3_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    ...
+    {
+        NCSCTRL_RECTANGLE,
+        ID_RECT4,
+        110, 160, 80, 40,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        rect4_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+};
 ```
 
 ### Event of `mRect`
@@ -189,7 +369,8 @@ This example demonstrate how to draw all kinds of rectangles to the users<br/>
 ![alt](figures/rect.png)
 
 <p align=center>List p2c4-3 rectangle.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/rectangle.c.txt"}%
 ```
 
 ## `mGroupbox`
@@ -223,7 +404,32 @@ None
 
 Users can set classic, fit and fashion renderers as shown in the figure above
 for group box conveniently, and for the concrete method, see the codes below,
-```
+```cpp
+    ...
+static NCS_RDR_INFO grp_rdr_info[] = {
+    {"fashion", "fashion", NULL}
+//    {"flat", "flat", NULL}
+//    {"classic", "classic", NULL}
+};
+
+//Controls
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_GROUPBOX ,
+        ID_GROUP,
+        10, 10, 280, 180,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "groupbox",
+        NULL, //props,
+        grp_rdr_info, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+};
+    ...
 ```
 ### Example of `mGroupbox`
 
@@ -232,13 +438,14 @@ for group box conveniently, and for the concrete method, see the codes below,
 
 This example demonstrate how to generate group box with renderers to the users
 <p align=center>List p2c4-4 groupbox.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/groupbox.c.txt"}%
 ```
 ## `mButtonGroup`
 
 ![alt](figures/buttongroup_show.png)
 
-- Function: this control is used to manage a group of `radioButton,` enabling
+- Function: this control is used to manage a group of `radioButton`, enabling
 the group of `RadioButton` to mutually exclude, thus realizing single selection
 function. 
 - Inherited from `mGroupbox`
@@ -249,17 +456,19 @@ function.
 | *Property Name* | *Type* | *Permission* | *Property explanation* |
 | `NCSP_BTNGRP_SELID` | int | `RW` | Currently selected `radioButton` `ID` number |
 | `NCSP_BTNGRP_SELIDX` | idx | `RW` | Currently selected `radioButton` index number |
-| `NCSP_BTNGRP_SELOBJ` | `mWidget*` | `RW` | Currently selected `radioButton` pointer |
+| `NCSP_BTNGRP_SELOBJ` | `mWidget`* | `RW` | Currently selected `radioButton` pointer |
 
 
 ### Method of `mButtonGroup`
 
-```
+```cpp
+BOOL (*addButton)(clsName *group, mWidget *radio);
 ```
 - Function: add a `radioButton`
 - Returned value: `BOOL`
 
-```
+```cpp
+BOOL (*checkBtn)(clsName *group, mWidget *btn_to_check);
 ```
 - Function: select a `radioButton`
 - Returned value: `BOOL`
@@ -289,7 +498,72 @@ fields such as industrial control etc.
 | `NCSP_LEDLBL_HEIGHT` | int | `RW` | Set the height of `LED` font |
 
 Users can use the following method to set the properties:
-```
+```cpp
+//Propties for
+static NCS_PROP_ENTRY static1_props [] = {
+    { NCSP_LEDLBL_COLOR, 0xFF0000FF},
+    { NCSP_LEDLBL_WIDTH, 10},
+    { NCSP_LEDLBL_HEIGHT, 15},
+    { NCSP_STATIC_ALIGN, NCS_ALIGN_RIGHT },
+    { NCSP_STATIC_AUTOWRAP, 0 },
+    {0, 0}
+};
+
+static NCS_PROP_ENTRY static2_props [] = {
+    { NCSP_LEDLBL_COLOR, 0xFF0000FF},
+    { NCSP_LEDLBL_WIDTH, 60},
+    { NCSP_LEDLBL_HEIGHT, 90},
+    { NCSP_STATIC_VALIGN, NCS_VALIGN_CENTER },
+    { NCSP_STATIC_ALIGN, NCS_ALIGN_CENTER },
+    {0, 0}
+};
+
+//Controls
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_LEDLABEL , 
+        IDC_LEDLBL1+0,
+        10, 10, 160, 50,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "ABC 123",
+        NULL, //props, take the default property
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    {
+        NCSCTRL_LEDLABEL , 
+        IDC_LEDLBL1+2,
+        10, 70, 160, 30,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "2 4 6 8 0 ",
+        static1_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+    {
+        NCSCTRL_LEDLABEL , 
+        IDC_LEDLBL1+5,
+        180, 10, 100, 100,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "4",
+        static2_props, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+
+};
 ```
 
 ### Style of `mLEDLabel`
@@ -310,7 +584,8 @@ None
 ![alt](figures/ledlabel.png)
 
 This example demonstrates how to display `LED` characters to the users
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/ledlabel.c.txt"}%
 ```
 
 ## `mSeparator`
@@ -332,7 +607,26 @@ None
 | `NCSS_SPRTR_VERT` | Set as vertical separation line, default by default |
 
 Users can use the following method to set the style:
-```
+```cpp
+    ...
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    ...,
+    {
+        NCSCTRL_SEPARATOR , 
+        ID_GROUP,
+        100, 20, 5, 200,
+        WS_VISIBLE|NCSS_SPRTR_VERT,   //Set vertical style
+        WS_EX_NONE,
+        "groupbox",
+        NULL, //props,
+        NULL, //rdr_info
+        NULL, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
+};
+
 ```
 
 ### Event of `mSeparator`
@@ -354,11 +648,11 @@ None
 
 This example demonstrates how to generate horizontal and vertical separation
 lines to the users
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/separator.c.txt"}%
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C3][Previous]] <
-[[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C5)
+[Next](MStudioMGNCSV1dot0PGENP2C3][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C5)
 
 
 -- Main.XiaodongLi - 24 Feb 2010

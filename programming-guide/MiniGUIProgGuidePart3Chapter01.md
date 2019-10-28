@@ -1,9 +1,9 @@
 # Graphics Device Interfaces
 Graphics Device Interfaces (`GDI`) is an important part of a GUI system. 
-Through `GDI,` the GUI application can execute graphics output on the screen or
+Through `GDI`, the GUI application can execute graphics output on the screen or
 other display devices, including basic painting and text output. In this 
 chapter and the two sequent chapters, we will describe in detail the important
-concepts of `GDI,` the methods of graphics programming and the main `GDI`
+concepts of `GDI`, the methods of graphics programming and the main `GDI`
 functions of MiniGUI, and will illustrate the use of important functions with
 example. 
 
@@ -16,30 +16,30 @@ defines a group of abstract interfaces, which do not depend on any special
 hardware, and all the top layer graphics operation are based on these abstract
 interfaces. The bottom layer code used to realize this abstract interface is
 called “graphics engine”, similar to the driver in an operating system. Using
-`GAL,` MiniGUI can run on may existed graphics function libraries, and can be
+`GAL`, MiniGUI can run on may existed graphics function libraries, and can be
 readily port to other `POSIX` systems, only requiring to realize the new
 graphics engine according to our abstract layer interfaces. For example, in a
 system based on Linux, we can create general MiniGUI graphics engine based on
 Linux `FrameBuffer` driver. In fact, the native graphics engine included in
-MiniGUI 1.0.00 version is the graphics engine based on Linux `FrameBuffer.`
+MiniGUI 1.0.00 version is the graphics engine based on Linux `FrameBuffer`.
 Generally speaking, all the embedded systems based on Linux will provide
 `FrameBuffer` support so that the native graphics engine can be run on either a
 common `PC` or a special embedded system.
 
 ### New `GAL`
-MiniGUI version 1.1.0 makes much improvement to `GAL` and `GDI,` introducing 
+MiniGUI version 1.1.0 makes much improvement to `GAL` and `GDI`, introducing 
 new `GAL` and `GDI` interfaces and functions.
 
 In the old `GAL` and `GDI` design, `GAL` can be considered as the graphics
-driver of `GDI,` and many graphics operations, for example drawing point,
+driver of `GDI`, and many graphics operations, for example drawing point,
 drawing line, filling rectangle, and bitmap operations, etc., are implemented
-through the corresponding function of `GAL.` The biggest problem of this design
+through the corresponding function of `GAL`. The biggest problem of this design
 is `GDI` cannot be extended. For example, in order to add the ellipse drawing
 function, it is needed to realize the ellipse painting function in each engine.
 Moreover, it is the clipping region, which `GDI` manages, while `GAL` engine is
 based on clipping rectangle. This method also causes that `GDI` function cannot
 optimize the painting. Therefore, in the interface design of new `GAL` and 
-`GDI,` we make restriction to `GAL` interface, and make many graphics input
+`GDI`, we make restriction to `GAL` interface, and make many graphics input
 functions which are previous completed by `GAL` engine to be completed in top
 layer `GDI` functions. The function partition of New `GAL` (`NEWGAL`) and new
 `GDI` (`NEWGDI`) are as follow:
@@ -77,7 +77,7 @@ other hand.
 When top layer `NEWGDI` interface is creating a memory `DC` device, it will
 allocate memory from video memory, and will consider to use the system memory
 when if it is not successful. Thus, if `NEWGAL` engine provides hardware
-acceleration function, blitting operation (i.e., `GDI` function `BitBlt)` will
+acceleration function, blitting operation (i.e., `GDI` function `BitBlt`) will
 be run in the fastest speed between two different `DC` devices. Further, if the
 hardware supports transparent or alpha blending function, the transparent or
 alpha blending blitting operation will also be run in the fastest speed. 
@@ -90,8 +90,8 @@ etc. Certainly, if the hardware does not support these acceleration functions,
 video cards which provide above hardware acceleration function through `NEWGAL`
 and `FrameBuffer` include: Matrox, and 3DFX, etc.
 
-`GDI` interface based on `NEWGAL` are partially compatible with old `GDI,` but
-we provide some advanced functions based on `NEWGAL.` We will describe advanced
+`GDI` interface based on `NEWGAL` are partially compatible with old `GDI`, but
+we provide some advanced functions based on `NEWGAL`. We will describe advanced
 `GDI` interfaces based on `NEWGAL` in Chapter 15.
 
 ## Painting and Updating of a Window
@@ -120,7 +120,7 @@ other time.
 ### `MSG_PAINT` Message
 Usually, the application executes the window painting when receiving 
 `MSG_PAINT` message. If the change of the window influences the content in the
-client area, or the invalid region of the window is not `NULL,` MiniGUI will
+client area, or the invalid region of the window is not `NULL`, MiniGUI will
 send a `MSG_PAINT` message to the corresponding window procedure.
 
 When receiving `MSG_PAINT` message, the application should call `BeginPaint`
@@ -163,11 +163,15 @@ region.
 The application can use `InvalidateRect` function to invalidate a certain
 rectangular region of the window. The prototype of this function is as follows:
 
-```
+```cpp
+BOOL GUIAPI InvalidateRect (HWND hWnd, const RECT* prc, BOOL bEraseBkgnd)
 ```
 The meaning of the arguments is as follows:
 
-```
+```cpp
+hWnd        the handle of the window needed to be updated
+prc          pointer to invalid rectangle
+bEraseBkgnd  whether to clear the window background
 ```
 
 `InvalidateRect` function adds the specified rectangle to the updating region.
@@ -175,10 +179,10 @@ This function combines the specified rectangle and the previous updating region
 of the application window, and then posts a `MSG_PAINT` message to the message
 queue of this window.
 
-If `bEraseBkgnd` is `TRUE,` the application window will receive a 
+If `bEraseBkgnd` is `TRUE`, the application window will receive a 
 `MSG_ERASEBKGND` message, and the window procedure can handle this message and
 automatically clear the window background. If the application does not handle
-`MSG_ERASEBKGND` message, but passes it to `DefaultMainWinProc,` the default
+`MSG_ERASEBKGND` message, but passes it to `DefaultMainWinProc`, the default
 handling of `MSG_ERASEBKGND` by MiniGUI is to erase the background with the
 background color of the window.
 
@@ -245,7 +249,7 @@ the following contents:
 depth, and layout of video memory, etc.);
 - Information of the window presented by this device context and the clipping
 region of this window by other windows (called “global clipping region” in
-`MiniGUI);` 
+`MiniGUI)`; 
 - Basic operation functions of this context (point, line, polygon, filling,
 block operations, etc.), and its context information;
 - Local information set by the program (painting property, mapping 
@@ -264,7 +268,7 @@ want to change on of these properties, you can call a function which can change
 the device context property, and `GDI` function calling for this device context
 will use the changed property.
 
-The device context is actually a data structure managed internally in `GDI.` 
+The device context is actually a data structure managed internally in `GDI`. 
 The device context is related to the specified displaying device. Some values 
 in the device context are graphics properties. These properties define some
 special contents of the working status of some `GDI` painting functions. For
@@ -290,20 +294,28 @@ One of the commonly used methods for getting and releasing the device context
 is through `BeginPaint` and `EndPaint` functions. The prototypes of these two
 functions are as follow (minigui/window.h):
 
-```
+```cpp
+HDC GUIAPI BeginPaint(HWND hWnd);
+void GUIAPI EndPaint(HWND hWnd, HDC hdc);
 ```
 It should be noted that these two functions can only be called when handling
 `MSG_PAINT` message. Then handling of `MSG_PAINT` message has usually the
 following form:
 
-```
+```cpp
+MSG_PAINT:
+    HDC hdc = BeginPaint (hWnd);
+    /* use GDI functions to piant */
+    EndPaint (hWnd, hdc);
+    return 0;
+}
 ```
 
 `BeginPaint` takes the window handle `hWnd` according to the window procedure
 function as its argument, and returns a device context handle. Then `GDI`
 function can use this device context handle for graphics operations.
 
-In a typical graphics user interface environment (including `MiniGUI),` the
+In a typical graphics user interface environment (including `MiniGUI)`, the
 application is usually paint text and graphics in the client area of the 
 window. However, the graphics system does not ensure the painting content in 
 the client area be kept all the time. If the client area of this program window
@@ -346,7 +358,20 @@ some necessary optimizations. For example, if a certain program wants fill some
 rectangles in the window client area; it can handle as follows in `MSG_PAINT`
 function: 
 
-```
+```cpp
+MSG_PAINT:
+{
+    HDC hdc = BeginPaint (hWnd);
+
+    for (j = 0; j < 10; j ++) {
+        if (RectVisible  (hdc, rcs + j)) {
+            FillBox (hdc, rcs[j].left, rcs[j].top, rcs [j].right, rcs [j].bottom);
+        }
+    }
+
+    EndPaint (hWnd, hdc);
+    return 0;
+}
 ```
 Thereby unnecessary redrawing operation can be avoided, and the painting
 efficiency is improved.
@@ -359,27 +384,36 @@ origin is located in upper-left corner of the window, and its output is clipped
 within the window area. For the device context gotten by the latter function,
 its origin is located in upper-left corner of the window client area, and its
 output is limited within the range of the window client area. `GetSubDC`
-function can get the son `DC` of pointed `DC,` and the son `DC` includes only a
-limited area of the pointed `DC.` Following are the prototypes of these four
+function can get the son `DC` of pointed `DC`, and the son `DC` includes only a
+limited area of the pointed `DC`. Following are the prototypes of these four
 functions (minigui/gdi.h):
 
+```cpp
+HDC GUIAPI GetDC (HWND hwnd);
+HDC GUIAPI GetSubDC (HDC hdc, int off_x, int off_y, int width, int height);
+ HDC GUIAPI GetClientDC (HWND hwnd);
+ void GUIAPI ReleaseDC (HDC hdc);
 ```
-```
-`GetDC,` `GetSubDC` and `GetClientDC` get a currently unused device context 
+`GetDC`, `GetSubDC` and `GetClientDC` get a currently unused device context 
 form some `DCs` reserved by the system. Therefore, the following two points
 should be noted:
-- After finishing using a device context gotten by `GetDC,` `GetSubDC` or
-`GetClientDC,` you should release it as soon as possible by calling 
-`ReleaseDC.` 
+- After finishing using a device context gotten by `GetDC`, `GetSubDC` or
+`GetClientDC`, you should release it as soon as possible by calling 
+`ReleaseDC`. 
 - Avoid using multiple device contexts at the same time, and avoid calling
-`GetDC,` `GetSubDC` and `GetClientDC` in a recursive function.
+`GetDC`, `GetSubDC` and `GetClientDC` in a recursive function.
 
 For programming convenience and improving the painting efficiency, MiniGUI also
 provides functions to set up private device context. The private device context
 is valid in the whole life cycle of the window, thereby avoiding the getting 
 and releasing process. The prototypes of these functions are as follow:
 
-```
+```cpp
+ HDC GUIAPI CreatePrivateDC (HWND hwnd);
+ HDC GUIAPI CreatePrivateSubDC(HDC hdc, int off_x, int off_y, int width, int height);
+ HDC GUIAPI CreatePrivateClientDC (HWND hwnd);
+ HDC GUIAPI GetPrivateClientDC (HWND hwnd);
+ void GUIAPI DeletePrivateDC (HDC hdc);
 ```
 
 When creating a main window, if `WS_EX_USEPRIVATEDC` style is specified in the
@@ -396,7 +430,9 @@ function when destroy the window.
 The device context can be saved and restored through `SaveDC` and `RestoreDC`
 function. The prototypes of these two functions are as follow (minigui/gdi.h):
 
-```
+```cpp
+int GUIAPI SaveDC (HDC hdc);
+BOOL GUIAPI RestoreDC (HDC hdc, int saved_dc);
 ```
 
 ### Device Context in Memory
@@ -409,7 +445,12 @@ blinking phenomenon caused by direct operation on the video memory, etc. The
 prototypes of the function used to create and destroy the memory device context
 are as follow (minigui/gdi.h):
 
-```
+```cpp
+HDC GUIAPI CreateCompatibleDCEx (HDC hdc, int width, int height);
+#define CreateCompatibleDC(hdc) CreateCompatibleDCEx(hdc, 0, 0)
+
+void GUIAPI DeleteMemDC (HDC mem_dc);
+#define DeleteCompatibleDC(hdc) DeleteMemDC(hdc)
 ```
 
 In order to realize the special effects like Apple, MiniGUI add a dual buffer
@@ -419,10 +460,16 @@ main window is pointing `WS_EX_AUTOSECONDARYDC` style, MiniGUI will call
 window, then set memory `DC` into main window by `SetSecondaryDC` function to
 realize types of UI special effects. When the main window with
 `WS_EX_AUTOSECONDARYDC` style is being distroyed, `DeleteSecondaryDC` function
-will be called to release memory `DC.` The prototypes of the functions are as
+will be called to release memory `DC`. The prototypes of the functions are as
 following: 
 
-```
+```cpp
+HDC GUIAPI CreateSecondaryDC (HWND hwnd);
+HDC GUIAPI SetSecondaryDC (HWND hwnd, HDC secondary_dc, ON_UPDATE_SECONDARYDC on_update_secondarydc);
+HDC GUIAPI GetSecondaryDC (HWND hwnd);
+HDC GUIAPI GetSecondaryClientDC (HWND hwnd);
+void GUIAPI ReleaseSecondaryDC (HWND hwnd, HDC hdc);
+void GUIAPI DeleteSecondaryDC (HWND hwnd);
 ```
 Above functions will be descripted in chapter 11, and not descripted here.
 
@@ -432,7 +479,7 @@ for the whole screen, and has no predefined clipping region. In some
 applications, you can use directly this device context to paint, which may
 increase the paint efficiency remarkably. In MiniGUI, the screen device context
 is identified by `HDC_SCREEN`, and need no getting and releasing operations for
-this `DC.`
+this `DC`.
 
 ## Mapping Mode and Coordinate Space
 ### Mapping Mode
@@ -477,13 +524,18 @@ Changing mapping mode helps us to avoid scaling by ourselves; it is very
 convenient in some conditions. You can use `SetMapMode` function to set your
 mapping mode:
 
-```
+```cpp
+Uint32 GUIAPI SetDCAttr (HDC hdc, int attr, Uint32 value);
+
+#define SetMapMode(hdc, mapmode)        \
+                SetDCAttr (hdc, DC_ATTR_MAP_MODE, (DWORD)mapmode)
 ```
 
 The argument mapmode is one of the two mapping modes above. You can also use
 `GetMapMode` function to get current mapping mode:
 
-```
+```cpp
+mapmode = GetMapMode (hdc);
 ```
 
 ### Viewport and Window
@@ -499,19 +551,21 @@ logical-based.
 The following formulas can be used to convert between page space (window)
 coordinates and device space (viewport) coordinates:
 
+```cpp
+xViewport = ((xWindow - xWinOrg) * xViewExt / xWinExt) + xViewOrg
+      yViewport = ((yWindow - yWinOrg) * yViewExt / yWinExt) + yViewOrg
 ```
-```
-- `xViewport,` `yViewPort` the x value, y value in device unit
-- `xWindow,` `yWindow` the x value, y value in logical unit (page space unit)
-- `xWinOrg,` `yWinOrg` window x origin, window y origin
-- `xViewOrg,` `yViewOrg` viewport x origin, viewport y origin
-- `xWinExt,` `yWinExt` window x extent, window y extent
-- `xViewExt,` `yViewExt` viewport x extent, viewport y extent
+- `xViewport`, `yViewPort` the x value, y value in device unit
+- `xWindow`, `yWindow` the x value, y value in logical unit (page space unit)
+- `xWinOrg`, `yWinOrg` window x origin, window y origin
+- `xViewOrg`, `yViewOrg` viewport x origin, viewport y origin
+- `xWinExt`, `yWinExt` window x extent, window y extent
+- `xViewExt`, `yViewExt` viewport x extent, viewport y extent
 
 The transfer principal of above formulas is: the scale of certain distance 
 value in device space and extent value of coordinates should be equal to the
-scale of page space, in other words, the logical origin (xWinOrg, `yWinOrg)` is
-always mapped as device origin (xViewOrg, `yViewOrg).`
+scale of page space, in other words, the logical origin (xWinOrg, `yWinOrg`) is
+always mapped as device origin (xViewOrg, `yViewOrg)`.
 
 These two formulas use the origin and extent of both window and viewport. We 
 can see from this that the scale between the extent of viewport and the extent
@@ -522,23 +576,60 @@ coordinates and logical coordinates. `LPtoDP` is used to convert from logical
 coordinates to device coordinates, while `DPtoLP` is used to convert from 
 device coordinates to logical coordinates:
 
-```
+```cpp
+void GUIAPI DPtoLP (HDC hdc, POINT* pPt);
+void GUIAPI LPtoDP (HDC hdc, POINT* pPt);
 ```
 This conversion relies on the mapping mode of device context hdc as well as the
 origin and extent of the window and the viewport. Those x and y coordinates
 included in the structure `POINT` `pPt` will be converted into other 
 coordinates in another coordinate system.
 
-In the `MiniGUI’s` source codes (src/newgdi/coor.c), the conversion between
+In the `MiniGUI`’s source codes (src/newgdi/coor.c), the conversion between
 `LPtoDP` and `DPtoLP` are implemented as follow. It can be seen that the
 coordinate conversion between them is based on the formulas mentioned above.
 
-```
+```cpp
+void GUIAPI LPtoDP(HDC hdc, POINT* pPt)
+{
+    PDC pdc;
+
+    pdc = dc_HDC2PDC(hdc);
+
+    if (pdc->mapmode = MM_TEXT) {
+        pPt->x = (pPt->x - pdc->WindowOrig.x)
+             * pdc->ViewExtent.x / pdc->WindowExtent.x
+             + pdc->ViewOrig.x;
+
+        pPt->y = (pPt->y - pdc->WindowOrig.y)
+             * pdc->ViewExtent.y / pdc->WindowExtent.y
+             + pdc->ViewOrig.y;
+    }
+}
+
+void GUIAPI DPtoLP (HDC hdc, POINT* pPt)
+{
+    PDC pdc;
+
+    pdc = dc_HDC2PDC (hdc);
+
+    if (pdc->mapmode = MM_TEXT) {
+        pPt->x = (pPt->x - pdc->ViewOrig.x)
+             * pdc->WindowExtent.x / pdc->ViewExtent.x
+             + pdc->WindowOrig.x;
+
+        pPt->y = (pPt->y - pdc->ViewOrig.y)
+             * pdc->WindowExtent.y / pdc->ViewExtent.y
+             + pdc->WindowOrig.y;
+    }
+}
 ```
 In addition, the function `LPtoSP` and function `SPtoLP` can be used to convert
 between logical coordinates and screen coordinates:
 
-```
+```cpp
+void GUIAPI SPtoLP(HDC hdc, POINT* pPt);
+void GUIAPI LPtoSP(HDC hdc, POINT* pPt);
 ```
 
 ### Conversion of Device Coordinates
@@ -554,19 +645,19 @@ The (0, 0) point in screen coordinates is on the upper-left corner of the whole
 screen. When we need to use the entire screen, we can do it according to the
 screen coordinates. Screen coordinates are usually used in the functions that
 are irrelevant to window or functions that are tightly related to the screen,
-such as `GetCursorPos` and `SetCursorPos.` If the device context used by `GDI`
+such as `GetCursorPos` and `SetCursorPos`. If the device context used by `GDI`
 functions is `HDC_SCREEN`, the logical coordinates will be mapped as screen
 coordinates. 
 
 The coordinates in the window coordinates are based on entire window, including
 window border, caption bar, menu bar and scroll bar, in which the origin of
 window coordinates is the upper-left corner of the window. While using the
-device context handle returned by `GetDC,` the logical coordinates passed to 
+device context handle returned by `GetDC`, the logical coordinates passed to 
 `GDI` functions will be converted into window coordinates.
 
 The point (0, 0) of the client area coordinates is the upper-left corner of 
 this area. When we use the device context handle returned `GetClientDC` or
-`BeginPaint,` the logical coordinates passed to `GDI` functions will be
+`BeginPaint`, the logical coordinates passed to `GDI` functions will be
 converted to the client area coordinates.
 
 When programming we need to know on which coordinate system the coordinates or
@@ -575,7 +666,11 @@ situation. Some time we need get the coordinates in another coordinate system.
 MiniGUI provides functions that realize the conversion among those three device
 coordinate systems:
 
-```
+```cpp
+void GUIAPI WindowToScreen (HWND hWnd, int* x, int* y);
+void GUIAPI ScreenToWindow (HWND hWnd, int* x, int* y);
+void GUIAPI ClientToScreen (HWND hWnd, int* x, int* y);
+void GUIAPI ScreenToClient (HWND hWnd, int* x, int* y);
 ```
 `WindowToScreen` converts window coordinates into screen coordinates, while
 `ScreenToWindow` converts screen coordinates to window coordinates. The
@@ -587,10 +682,18 @@ screen coordinates to client coordinates.
 MiniGUI provides a set of functions that can be used to realize the deviation,
 zoom of the coordinate system. The prototypes of these functions are as follow:
 
-```
+```cpp
+void GUIAPI GetViewportExt(HDC hdc, POINT* pPt);
+void GUIAPI GetViewportOrg(HDC hdc, POINT* pPt);
+void GUIAPI GetWindowExt(HDC hdc, POINT* pPt);
+void GUIAPI GetWindowOrg(HDC hdc, POINT* pPt);
+void GUIAPI SetViewportExt(HDC hdc, POINT* pPt);
+void GUIAPI SetViewportOrg(HDC hdc, POINT* pPt);
+void GUIAPI SetWindowExt(HDC hdc, POINT* pPt);
+void GUIAPI SetWindowOrg(HDC hdc, POINT* pPt);
 ```
 Get-functions are used to get the origin and extent of the window and/or the
-viewport, the value is stored in `POINT` structure `pPt;` Set-functions use the
+viewport, the value is stored in `POINT` structure `pPt`; Set-functions use the
 value of `pPt` to set the origin and the extent of the window and/or the
 viewport. 
 
@@ -598,16 +701,24 @@ viewport.
 ### Rectangle Operations
 Rectangle usually refers to a rectangular region on the screen. It is defined 
 in MiniGUI as follows:
-```
+```cpp
+typedef struct _RECT
+{
+    int left;
+    int top;
+    int right;
+    int bottom;
+} RECT;
 ```
 In short, rectangle is a data structure used to represent a rectangular region
 on the screen. It defines the x coordinate and y coordinate of the upper-left
 corner of the rectangle (left and top), as well as the x coordinate and y
 coordinate of the lower-bottom corner of the rectangle. It is necessary to
-notice that the right and bottom borders are not included by `MiniGUI’s`
+notice that the right and bottom borders are not included by `MiniGUI`’s
 rectangle. For example, if we want to figure a scan line on the screen, we
 should use
-```
+```cpp
+RECT rc = {x, y, x + w , y + 1};
 ```
 to represent it. In that x is the jumping-off point while y is the vertical
 place of that scan line, and w is the width of that scan line.
@@ -625,15 +736,15 @@ normalize any rectangle.
 - `EqualRect` determines if two `RECT` objects are equal, that is, if the all
 parameters are equal.
 - `IntersectRect` gets the intersection of two `RECT` objects. If there is no
-intersection between those two rectangles, the function will return to `FALSE.`
+intersection between those two rectangles, the function will return to `FALSE`.
 - `DoesIntersect` determines if the two rectangles are intersected.
 - `IsCovered` determines if `RECT` A completely overlay `RECT` B, that is, if
 `RECT` B is the true subset of `RECT` A.
 - `UnionRect` gets the union of two rectangles. If there is no union, the
-function will return `FALSE;` any point included in the union should also 
+function will return `FALSE`; any point included in the union should also 
 belong to either of the rectangles.
 - `GetBoundRect` gets the union of two rectangles. If there is no union, the
-function will return `FALSE;` any point included in the union should also 
+function will return `FALSE`; any point included in the union should also 
 belong to either of the rectangles.
 - `SubstractRect` subtracts one rectangle from another one. Such subtraction 
 may result in four non-intersected rectangles. This function will return the
@@ -645,12 +756,12 @@ inflated rectangle will be twice of the given inflation value.
 - `PtInRect` determines if the given point lies in the given `RECT` object.
 
 MiniGUI also provides two groups of macro to get the width and height of `RECT`
-object. one macro is for inputting pointers of `RECT,` and the other is for
-inputing variables of `RECT.`
-- #define `RECTWP(prc)` ((prc)->right - (prc)->left)
-- #define `RECTHP(prc)` ((prc)->bottom - (prc)->top)
-- #define `RECTW(rc)` ((rc).right - (rc).left)
-- #define `RECTH(rc)` ((rc).bottom - (rc).top)
+object. one macro is for inputting pointers of `RECT`, and the other is for
+inputing variables of `RECT`.
+- #define `RECTWP(prc`) ((prc)->right - (prc)->left)
+- #define `RECTHP(prc`) ((prc)->bottom - (prc)->top)
+- #define `RECTW(rc`) ((rc).right - (rc).left)
+- #define `RECTH(rc`) ((rc).bottom - (rc).top)
 
 ### Region Operations
 Region is a scope on the screen, which is defined as a collection of
@@ -659,7 +770,28 @@ to represent the clipped region, invalid region, and visible region. In
 MiniGUI, the definition of region equals to the definition of clipped region,
 which is defined as follows (minigui/gdi.h):
 
-```
+```cpp
+typedef struct _CLIPRECT
+{
+    RECT rc;
+    struct _CLIPRECT* next;
+#ifdef _USE_NEWGAL
+    struct _CLIPRECT* prev;
+#endif
+} CLIPRECT;
+typedef CLIPRECT* PCLIPRECT;
+
+typedef struct _CLIPRGN
+{
+#ifdef _USE_NEWGAL
+    BYTE            type;        /* type of region */
+    BYTE            reserved[3];
+#endif
+    RECT            rcBound;
+    PCLIPRECT       head;
+    PCLIPRECT       tail;
+    PBLOCKHEAP      heap;
+} CLIPRGN;
 ```
 
 Each clipped region has one `BLOCKHEAP` member, which is the private heap of
@@ -667,7 +799,15 @@ Each clipped region has one `BLOCKHEAP` member, which is the private heap of
 should firstly build up a `BLOCKHEAP` object, and then initialize the region
 object. Showed as follows:
 
-```
+```cpp
+static BLOCKHEAP sg_MyFreeClipRectList;
+
+...
+
+    CLIPRGN my_region
+
+    InitFreeClipRectList (&sg_MyFreeClipRectList, 20);
+    InitClipRgn (&my_regioni, &sg_MyFreeClipRectList);
 ```
 When being actually used, multiple regions can share one `BLOCKHEAP` object.
 
@@ -713,29 +853,51 @@ will discuss the functions in Chapter 15.
 
 ### Basic Drawing Functions
 In MiniGUI, basic drawing functions include such basic functions such as
-`SetPixel,` `LineTo,` Circle, and so on. The prototypes are defined as follow:
+`SetPixel`, `LineTo`, Circle, and so on. The prototypes are defined as follow:
 
-```
+```cpp
+void GUIAPI SetPixel (HDC hdc, int x, int y, gal_pixel c);
+  void GUIAPI SetPixelRGB (HDC hdc, int x, int y, int r, int g, int b);
+  gal_pixel GUIAPI GetPixel (HDC hdc, int x, int y);
+  void GUIAPI GetPixelRGB (HDC hdc, int x, int y, int* r, int* g, int* b);
+  gal_pixel GUIAPI RGB2Pixel (HDC hdc, int r, int g, int b);
+  
+  void GUIAPI LineTo (HDC hdc, int x, int y);
+  void GUIAPI MoveTo (HDC hdc, int x, int y);
+  
+  void GUIAPI Circle (HDC hdc, int x, int y, int r);
+  void GUIAPI Rectangle (HDC hdc, int x0, int y0, int x1, int y1);
 ```
 We need to differentiate two basic conceptions: pixel value and `RGB` value. 
 `RGB` is a way to represent color according to the different proportion of
 tricolor. Usually, the red, blue and green can get any value between 0 and 255,
 so there are 256x256x256 different colors. However, in video memory, the color
-displayed on the screen is not represented by `RGB;` it is represented by pixel
+displayed on the screen is not represented by `RGB`; it is represented by pixel
 value. The scope of pixel value varies according to the difference of video
 mode. In 16-color mode, the scope is in [0, 15]; while in 256-color mode, the
 scope is [0, 255]; in 16bit-color mode, the scope is [0, 2^16 - 1]. Here the
 number of bits of one mode refers to the number of bits per pixel.
 
 When setting the color of a pixel in MiniGUI, you can directly use pixel value
-(SetPixel) or `SetPixelRGB.` The function `RGB2Pixel` can convert `RGB` value
+(SetPixel) or `SetPixelRGB`. The function `RGB2Pixel` can convert `RGB` value
 into pixel value.
 
 ### Clipping Region Operations
 Clipping can be done when using device context to draw. MiniGUI provides
 following functions to clip the given device context (minigui/gdi.h):
 
-```
+```cpp
+ // Clipping support
+  void GUIAPI ExcludeClipRect (HDC hdc, int left, int top, 
+                              int right, int bottom);
+  void GUIAPI IncludeClipRect (HDC hdc, int left, int top, 
+                                int right, int bottom);
+  void GUIAPI ClipRectIntersect (HDC hdc, const RECT* prc);
+  void GUIAPI SelectClipRect (HDC hdc, const RECT* prc);
+  void GUIAPI SelectClipRegion (HDC hdc, const CLIPRGN* pRgn);
+  void GUIAPI GetBoundsRect (HDC hdc, RECT* pRect);
+  BOOL GUIAPI PtVisible (HDC hdc, const POINT* pPt);
+  BOOL GUIAPI RectVisible (HDC hdc, const RECT* pRect);
 ```
 `ExcludeClipRect` is used to exclude the given rectangle region from current
 visible region, then the visible region will be reduced; `IncludeClipRect` adds
@@ -752,7 +914,7 @@ included in the visible region.
 ## Text and Font
 It is necessary for any GUI system to provide the support for font and charset.
 However, different GUI has its different way to implement the multi-font and
-multi-charset. For example, `QT/Embedded` uses `UNICODE,` which is a popular
+multi-charset. For example, `QT/Embedded` uses `UNICODE`, which is a popular
 solution for most general operating systems. However, it is not acceptable for
 some embedded systems as the conversion between `UNICODE` and other charsets
 will increase the size of GUI system.
@@ -766,13 +928,13 @@ module; also can be used to analysis multi-bytes string. When adding support
 for a new charset (encoding), the only thing need to do is to provide an
 interface to the charset (encoding). So far MiniGUI has been able to support
 `ISO8859-x` single byte charsets, and some multi-bytes charsets, including
-`GB2312,` `GBK,` `GB18030,` `BIG5,` `EUCKR,` Shift-JIS, `EUCJP,` Unicode and so
+`GB2312`, `GBK`, `GB18030`, `BIG5`, `EUCKR`, Shift-JIS, `EUCJP`, Unicode and so
 on. 
 
 Similar to charset, MiniGUI also defines a series of abstract interfaces to
 font. When adding support for a new font type, we just need to realize the
 interface of such type of font. So far MiniGUI has got the support of `RBF` and
-`VBF,` `QPF,` `TrueType` and Adobe Type1.
+`VBF`, `QPF`, `TrueType` and Adobe Type1.
 
 Based on the abstract interface of multi-font and multi-charset, MiniGUI
 provides a consistent interface to applications through logical font.
@@ -786,7 +948,17 @@ operations, for example, the text output functions.
 
 The main bitmap operations of MiniGUI are listed below (minigui/gdi.h):
 
-```
+```cpp
+void GUIAPI FillBox (HDC hdc, int x, int y, int w, int h);
+    void GUIAPI FillBoxWithBitmap (HDC hdc, int x, int y, int w, int h,
+                                PBITMAP pBitmap);
+    void GUIAPI FillBoxWithBitmapPart (HDC hdc, int x, int y, int w, int h,
+                                int bw, int bh, PBITMAP pBitmap, int xo, int yo);
+  
+    void GUIAPI BitBlt (HDC hsdc, int sx, int sy, int sw, int sh, 
+                     HDC hddc, int dx, int dy, DWORD dwRop);
+    void GUIAPI StretchBlt (HDC hsdc, int sx, int sy, int sw, int sh, 
+                         HDC hddc, int dx, int dy, int dw, int dh, DWORD dwRop);
 ```
 
 ### Concept of Bitmap
@@ -828,15 +1000,15 @@ color.
 
 Two of the important display hardware in `PC` is video adapter and monitor. The
 video adapter is a circuitry board inserted in the main board, which consists 
-of registers, memory (RAM, `ROM` and `BIOS),` and control circuitry. Most
+of registers, memory (RAM, `ROM` and `BIOS)`, and control circuitry. Most
 graphics video adapters are based on `VGA` model. For most embedded devices, 
 the display hardware is always `LCD` and its `LCD` controller.
 
 Both `PC` display adapter and `LCD` controller have a video `RAM` (`VRAM`) to
 represent image on the screen. `VRAM` have to be big enough to manage all 
 pixels on the screen. The programrs change the screen display by directly or
-indirectly fetch the data stored in `VRAM.` Most video hardware provides the
-ability of visiting `VRAM` from `CPU` address and data `BUS.` It equals to map
+indirectly fetch the data stored in `VRAM`. Most video hardware provides the
+ability of visiting `VRAM` from `CPU` address and data `BUS`. It equals to map
 `VRAM` to `CPU` address space, and increase the visiting speed.
 
 `PC` monitor and `LCD` are all raster operation devices. Each point on the
@@ -896,7 +1068,153 @@ mode of a given device context, not the bitmap that is independent to video
 device. In MiniGUI, these two bitmap types are represented respectively by
 `BITMAP` and `MYBITMAP` data structures, showed as follow (minigui/gdi.h):
 
-```
+```cpp
+#ifdef _USE_NEWGAL
+
+#define BMP_TYPE_NORMAL         0x00
+#define BMP_TYPE_RLE            0x01
+#define BMP_TYPE_ALPHA          0x02
+#define BMP_TYPE_ALPHACHANNEL   0x04
+#define BMP_TYPE_COLORKEY       0x10
+#define BMP_TYPE_PRIV_PIXEL     0x20
+
+/** Expanded device-dependent bitmap structure. */
+struct _BITMAP
+{
+    /**
+     * Bitmap types, can be OR'ed by the following values:
+     *  - BMP_TYPE_NORMAL\n
+     *    A nomal bitmap, without alpha and color key.
+     *  - BMP_TYPE_RLE\n
+     *    A RLE encoded bitmap, not used so far.
+     *  - BMP_TYPE_ALPHA\n
+     *    Per-pixel alpha in the bitmap.
+     *  - BMP_TYPE_ALPHACHANNEL\n
+     *    The \a bmAlpha is a valid alpha channel value.
+     *  - BMP_TYPE_COLORKEY\n
+     *    The \a bmColorKey is a valid color key value.
+     *  - BMP_TYPE_PRIV_PIXEL\n
+     *    The bitmap have a private pixel format.
+     */
+    Uint8   bmType;
+    /** The bits per piexel. */
+    Uint8   bmBitsPerPixel;
+    /** The bytes per piexel. */
+    Uint8   bmBytesPerPixel;
+    /** The alpha channel value. */
+    Uint8   bmAlpha;
+    /** The color key value. */
+    Uint32  bmColorKey;
+
+    /** The width of the bitmap */
+    Uint32  bmWidth;
+    /** The height of the bitmap */
+    Uint32  bmHeight;
+    /** The pitch of the bitmap */
+    Uint32  bmPitch;
+    /** The bits of the bitmap */
+    Uint8*  bmBits;
+
+    /** The private pixel format */
+    void*   bmAlphaPixelFormat;
+};
+
+#else
+
+/* expanded bitmap struct */
+struct _BITMAP
+{
+    Uint8   bmType;
+    Uint8   bmBitsPerPixel;
+    Uint8   bmBytesPerPixel;
+    Uint8   bmReserved;
+
+    Uint32  bmColorKey;
+
+    Uint32  bmWidth;
+    Uint32  bmHeight;
+    Uint32  bmPitch;
+
+    void*   bmBits;
+};
+
+#endif /* _USE_NEWGAL */
+
+#define MYBMP_TYPE_NORMAL       0x00000000
+#define MYBMP_TYPE_RLE4         0x00000001
+#define MYBMP_TYPE_RLE8         0x00000002
+#define MYBMP_TYPE_RGB          0x00000003
+#define MYBMP_TYPE_BGR          0x00000004
+#define MYBMP_TYPE_RGBA         0x00000005
+#define MYBMP_TYPE_MASK         0x0000000F
+
+#define MYBMP_FLOW_DOWN         0x00000010
+#define MYBMP_FLOW_UP           0x00000020
+#define MYBMP_FLOW_MASK         0x000000F0
+
+#define MYBMP_TRANSPARENT       0x00000100
+#define MYBMP_ALPHACHANNEL      0x00000200
+#define MYBMP_ALPHA             0x00000400
+
+#define MYBMP_RGBSIZE_3         0x00001000
+#define MYBMP_RGBSIZE_4         0x00002000
+
+#define MYBMP_LOAD_GRAYSCALE    0x00010000
+#define MYBMP_LOAD_NONE         0x00000000
+
+/** Device-independent bitmap structure. */
+struct _MYBITMAP
+{
+    /**
+     * Flags of the bitmap, can be OR'ed by the following values:
+     *  - MYBMP_TYPE_NORMAL\n
+     *    A normal palette bitmap.
+     *  - MYBMP_TYPE_RGB\n
+     *    A RGB bitmap.
+     *  - MYBMP_TYPE_BGR\n
+     *    A BGR bitmap.
+     *  - MYBMP_TYPE_RGBA\n
+     *    A RGBA bitmap.
+     *  - MYBMP_FLOW_DOWN\n
+     *    The scanline flows from top to bottom.
+     *  - MYBMP_FLOW_UP\n
+     *    The scanline flows from bottom to top.
+     *  - MYBMP_TRANSPARENT\n
+     *    Have a trasparent value.
+     *  - MYBMP_ALPHACHANNEL\n
+     *    Have a alpha channel.
+     *  - MYBMP_ALPHA\n
+     *    Have a per-pixel alpha value.
+     *  - MYBMP_RGBSIZE_3\n
+     *    Size of each RGB triple is 3 bytes.
+     *  - MYBMP_RGBSIZE_4\n
+     *    Size of each RGB triple is 4 bytes.
+     *  - MYBMP_LOAD_GRAYSCALE\n
+     *    Tell bitmap loader to load a grayscale bitmap.
+     */
+    DWORD flags;
+    /** The number of the frames. */
+    int   frames;
+    /** The pixel depth. */
+    Uint8 depth;
+    /** The alpha channel value. */
+    Uint8 alpha;
+    Uint8 reserved [2];
+    /** The transparent pixel. */
+    Uint32 transparent;
+
+    /** The width of the bitmap. */
+    Uint32 w;
+    /** The height of the bitmap. */
+    Uint32 h;
+    /** The pitch of the bitmap. */
+    Uint32 pitch;
+    /** The size of the bits of the bitmap. */
+    Uint32 size;
+
+    /** The pointer to the bits of the bitmap. */
+    BYTE* bits;
+};
 ```
 
 ### Loading a Bitmap from File
@@ -907,12 +1225,38 @@ be used to load different format of bitmap file, including Windows `BMP` file,
 group can be used to load bitmap file as device-independent bitmap objects. The
 related function prototypes are as follow (minigui/gdi.h):
 
-```
+```cpp
+int GUIAPI LoadBitmapEx (HDC hdc, PBITMAP pBitmap, MG_RWops* area, const char* ext);
+int GUIAPI LoadBitmapFromFile (HDC hdc, PBITMAP pBitmap, const char* spFileName);
+int GUIAPI LoadBitmapFromMemory (HDC hdc, PBITMAP pBitmap, 
+                      void* mem, int size, const char* ext);
+
+#define LoadBitmap  LoadBitmapFromFile
+
+void GUIAPI UnloadBitmap (PBITMAP pBitmap);
+
+int GUIAPI LoadMyBitmapEx (PMYBITMAP my_bmp, RGB* pal, MG_RWops* area, const char* ext);
+int GUIAPI LoadMyBitmapFromFile (PMYBITMAP my_bmp, RGB* pal, const char* file_name);
+int GUIAPI LoadMyBitmapFromMemory (PMYBITMAP my_bmp, RGB* pal, 
+                      void* mem, int size, const char* ext);
+
+void* GUIAPI InitMyBitmapSL (MG_RWops* area, const char* ext, MYBITMAP* my_bmp, RGB* pal);
+int   GUIAPI LoadMyBitmapSL (MG_RWops* area, void* load_info, MYBITMAP* my_bmp,CB_ONE_SCANLINE cb, void* context);
+int   GUIAPI CleanupMyBitmapSL (MYBITMAP* my_bmp, void* load_info);
+
+BOOL  GUIAPI PaintImageEx (HDC hdc, int x, int y, MG_RWops* area, const char *ext);
+int   GUIAPI PaintImageFromFile (HDC hdc, int x, int y, const char *file_name);
+int   GUIAPI PaintImageFromMem (HDC hdc, int x, int y, const void* mem, int size, const char *ext);
+
+void GUIAPI UnloadMyBitmap (PMYBITMAP my_bmp);
+
+int GUIAPI ExpandMyBitmap (HDC hdc, PBITMAP bmp, const MYBITMAP* my_bmp, 
+                     const RGB* pal, int frame);
 ```
 In order to decrease the memory usage, `LoadBitmapEx` can load the scan line of
 the bitmap object one by one into a bitmap object independent to device. In 
 this process, `InitMyBitmapSL` initializes for the loading of the
-`LoadMyBitmapSL;` after loading every scan line, `LoadMyBitmapSL` calls the 
+`LoadMyBitmapSL`; after loading every scan line, `LoadMyBitmapSL` calls the 
 user defined callback function cb. In this way, application can deal with the
 loaded scan line, such as transforming to a scan line of the `BITMAP` 
 structure, or output to the window client region. Finally, after 
@@ -925,29 +1269,33 @@ mentioned below are all implemented based on `LoadMyBitmapSL` function group.
 For more information about MiniGUI curve generators, please refer to segment
 15.6. 
 
-A group of functions, such as `PaintImageEx,` `PaintImageFromFile` and
-`PaintImageFromMem` are added for `NEWGAL.` This group of functions can draw 
+A group of functions, such as `PaintImageEx`, `PaintImageFromFile` and
+`PaintImageFromMem` are added for `NEWGAL`. This group of functions can draw 
 the image specified by the parameters on the `DC` directly without loading into
 a `BITMAP` object to decrease the memory usage. And it needs to be noted that
 this group of functions cannot scale the image.
 
 `ExpandMyBitmap` can convert `MYBITMAP` into bitmap object dependent to a
-certain device context. After the applications get `BITMAP,` they can call some
+certain device context. After the applications get `BITMAP`, they can call some
 functions (that will be mentioned in the next section) to fill bitmap in some
-place of `DC.`
+place of `DC`.
 
 需要注意的是，在从文件中装载位图时，MiniGUI 通过文件的后缀名判断位图文件的类型。MiniGUI 库中内建有对 Windows `BMP` 和 
 `GIF` 格式的支持，而对 `JPEG` 以及 `PNG` 等位图格式的支持，是通过 libjpeg 和 libpng 库实现的。
 
 ### Filling Block
 The function used to fill block in MiniGUI is `FillBoxWithBitmap` and
-`FillBoxWithBitmapPart.` `FillBoxWithBitmap` uses a device-dependent bitmap
+`FillBoxWithBitmapPart`. `FillBoxWithBitmap` uses a device-dependent bitmap
 object to fill a rectangle box, while `FillBoxWithBitmapPart` uses a part of
 device-dependent bitmap object to fill a rectangle box. Both 
 `FillBoxWithBitmap` and `FillBoxWithBitmapPart` can be used to scale the 
 bitmap. 
 
-```
+```cpp
+ void GUIAPI FillBoxWithBitmap (HDC hdc, int x, int y, int w, int h,
+                                 PBITMAP pBitmap);
+    void GUIAPI FillBoxWithBitmapPart (HDC hdc, int x, int y, int w, int h,
+                                 int bw, int bh, PBITMAP pBitmap, int xo, int yo);
 ```
 The program in List 1 loads a bitmap from a file and displays it on the screen
 (please refers to Figure 1). The complete code of this program can be seen from
@@ -955,11 +1303,46 @@ loadbmp.c included in `mg-samples` program package for this guide.
 
 
 List 1 Loading and showing a bitmap
-```
+```cpp
+ case MSG_CREATE:
+            if (LoadBitmap (HDC_SCREEN, &bmp, "bkgnd.jpg"))
+                return -1;
+            return 0;
+
+        case MSG_PAINT:
+            hdc = BeginPaint (hWnd);
+
+            /* Show the bitmap scaled on the position of (0,0,100,100) in the window*/
+            FillBoxWithBitmap (hdc, 0, 0, 100, 100, &bmp);
+            Rectangle (hdc, 0, 0, 100, 100);
+
+            /* 
+             * Show the bitmap scaled on the position of (100,0,200,200) in the window。
+             * The bitmap displayed is twice the above bitmap in size。
+             */
+            FillBoxWithBitmap (hdc, 100, 0, 200, 200, &bmp);
+            Rectangle (hdc, 100, 0, 300, 200);
+
+            /* 
+             * Display the bitmap by actual size, but take a part of bitmap located 
+            * in (10, 10, 410, 210)and
+             * display it on the position of (0, 200, 400, 200) in screeen 
+             */
+            FillBoxWithBitmapPart (hdc, 0, 200, 400, 200, 0, 0, &bmp, 10, 10);
+            Rectangle (hdc, 0, 200, 400, 400);
+
+            EndPaint (hWnd, hdc);
+            return 0;
+
+        case MSG_CLOSE:
+            UnloadBitmap (&bmp);
+            DestroyMainWindow (hWnd);
+            PostQuitMessage (hWnd);
+            return 0;
 ```
 
 
-<img src="%ATTACHURLPATH%/13.1.jpeg" alt="13.1.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/13.1.jpeg" alt="13.1.jpeg" `ALIGN="CENTER`" />
 
 Fig 13.1 Loading and showing a bitmap
 
@@ -969,17 +1352,19 @@ video `RAM` to another memory or display region. Bit blitting usually is a
 high-speed image transfer process.
 
 The function to perform this operation (bit blitting) is `BitBlt` and
-`StretchBlt.` `BitBlt` is used to copy the display memory between two device
-contexts, while `StretchBlt` performs stretch operation based on `BitBlt.`
+`StretchBlt`. `BitBlt` is used to copy the display memory between two device
+contexts, while `StretchBlt` performs stretch operation based on `BitBlt`.
 
 The prototype of `BitBlt` function is as follows:
 
-```
+```cpp
+ void GUIAPI BitBlt (HDC hsdc, int sx, int sy, int sw, int sh, 
+                     HDC hddc, int dx, int dy, DWORD dwRop);
 ```
 
 `BitBlt` is used to transfer the image (pixel data) of a certain rectangle in
 the source device context to a same-size rectangle in the destination device
-context. In the `GDI` interface based on the original `GAL,` two device 
+context. In the `GDI` interface based on the original `GAL`, two device 
 contexts operated by the function must be compatible, that is, the two device
 contexts have same color format (the `GDI` interface based on `NEWGAL` is
 without such limitation). Source device context can equal to target device
@@ -992,7 +1377,7 @@ context;
 - hddc: the destination device context
 - dx,dy: the upper-left coordinates of the rectangle in the destination device
 context 
-- `dwRop:` raster operation, currently ignored
+- `dwRop`: raster operation, currently ignored
 
 The program in List 2 first fills in a round shape then uses `BitBlt` to copy 
 it and fill out whole client area. The complete code of this program can be 
@@ -1000,18 +1385,53 @@ seen from program bitblt.c included in `mg-samples` program package.
 
 
 List 2 Using `BitBlt` function
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+static int BitbltWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HDC hdc;
+    int x, y;
+
+    switch (message) {
+    case MSG_PAINT:
+        hdc = BeginPaint (hWnd);
+        SetBrushColor (hdc, PIXEL_blue);
+        /* Draw a circle in client area of  window*/
+        FillCircle (hdc, 10, 10, 8);
+        for (y = 0; y < 240; y += 20) {
+            for (x = 0; x < 320; x += 20) {
+              /* Copy the circle in other posititon of client area by BitBlt function */
+              BitBlt (hdc, 0, 0, 20, 20, hdc, x, y, 0);
+            }
+        }
+        EndPaint (hWnd, hdc);
+        return 0;
+
+    case MSG_CLOSE:
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc (hWnd, message, wParam, lParam);
+}
+
+/* Following codes to create the main window are omitted */
 ```
 The output of the above code can be seen from Figure 2.
 
 
-<img src="%ATTACHURLPATH%/13.2.jpeg" alt="13.2.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/13.2.jpeg" alt="13.2.jpeg" `ALIGN="CENTER`" />
 
 Figure 2 Presentation of `BitBlt` operation
 
 In program bitblt.c, the source device context and target device context of
 `BitBlt` operation are client area of window; the handle of device context is
-obtained from function `BeginPaint.`
+obtained from function `BeginPaint`.
 
 This program first draws a filled circle on the upper-left corner of the client
 area of the window. The coordinates of the circle center are (10, 10). The
@@ -1023,24 +1443,57 @@ area.
 In this program, `BitBlt` copies certain date in the video memory to another
 place of the video memory.
 
-Another bit blitting function is `StretchBlt,` which is different from `BitBlt`
+Another bit blitting function is `StretchBlt`, which is different from `BitBlt`
 as it can stretch the image while copying. The prototype of `StretchBlt` is as
 follows: 
 
+```cpp
+void GUIAPI StretchBlt (HDC hsdc, int sx, int sy, int sw, int sh, 
+                         HDC hddc, int dx, int dy, int dw, int dh, DWORD dwRop);
 ```
-```
-Compared with `BitBlt,` function `StretchBlt` adds two more arguments, which
+Compared with `BitBlt`, function `StretchBlt` adds two more arguments, which
 point out the width and height of the destination rectangle. The program in 
-List 3 shows the usage of function `StretchBlt.`
+List 3 shows the usage of function `StretchBlt`.
 
 
 List 3 Using `StretchBlt` function
-```
+```cpp
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+static int StretchbltWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
+{
+    HDC hdc;
+
+    switch (message) {
+    case MSG_PAINT:
+        hdc = BeginPaint(hWnd);
+        SetBrushColor(hdc, PIXEL_blue);
+        /* Draw a circle in client area of window */
+        FillCircle(hdc, 10, 10, 8);
+        /* Enlarge and Copy the circle above another position by StretchBlt function*/
+        StretchBlt(hdc, 0, 0, 20, 20, hdc, 20, 20, 180, 180, 0);
+        EndPaint(hWnd, hdc);
+        return 0;
+
+    case MSG_CLOSE:
+        DestroyMainWindow (hWnd);
+        PostQuitMessage (hWnd);
+        return 0;
+    }
+
+    return DefaultMainWinProc(hWnd, message, wParam, lParam);
+}
+
+/* Following codes to create the main window are omitted */
 ```
 The output of program is as shown in Figure 3.
 
 
-<img src="%ATTACHURLPATH%/13.3.jpeg" alt="13.3.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/13.3.jpeg" alt="13.3.jpeg" `ALIGN="CENTER`" />
 
 Figure 3 The presentation of `StretchBlt` operation
 
@@ -1058,8 +1511,8 @@ then software interface. The cathode ray tube has 3 electronic guns, each of
 which is respectively responsible for red, green and blue. Each electronic gun
 can be adjusted to different degree of light. The combination of tricolor with
 different light degree forms kinds of color variations on the screen. The
-physical memory (video `RAM)` on the video card is usually called 
-`FrameBuffer.` All display screen operations use read or write the frame buffer
+physical memory (video `RAM`) on the video card is usually called 
+`FrameBuffer`. All display screen operations use read or write the frame buffer
 to plot. Such block of video memory may have different organizing format under
 different color mode. For example, under monochrome mode each bit represents 
 one pixel, in other words, each byte represents eight pixels. We call the value
@@ -1072,14 +1525,32 @@ linear list, and in which each entry represents a `RGB` value of corresponding
 pixel. For example, in 4-bit pattern (each pixel is represented by 2 bits),
 palette can be set as:
 
-```
+```cpp
+struct palette {
+    unsigned char r, g, b;
+} [4] =
+{
+    {0, 0, 0},
+    {128, 128, 128},
+    {192, 192, 192},
+    {255, 255, 255}
+};
 ```
 
 Now, the four possible pixel value (0, 1, 2, 3) may be corresponding to black,
 deep gray, gray, and white respectively; the following palette can adjust the
 four possible pixel value to red, green, blue, and white.
 
-```
+```cpp
+struct palette {
+    unsigned char r, g, b;
+} [4] =
+{
+    {255, 0, 0},
+    {0, 255, 0},
+    {0, 0, 255},
+    {255, 255, 255}
+};
 ```
 For other display modes lower than 256-color, the structure of palette is
 basically consistent.
@@ -1095,7 +1566,14 @@ maximum scope of color.
 
 New interfaces are added to the new `GDI` for the manuplation of palette:
 
-```
+```cpp
+HPALETTE GUIAPI CreatePalette (GAL_Palette* pal);
+HPALETTE GUIAPI GetDefaultPalette (void);
+int GUIAPI GetPaletteEntries (HPALETTE hpal, int start, int len, GAL_Color* cmap);
+int GUIAPI SetPaletteEntries (HPALETTE hpal, int start, int len, GAL_Color* cmap);
+BOOL GUIAPI ResizePalette (HPALETTE hpal, int len);
+UINT GUIAPI GetNearestPaletteIndex(HPALETTE hpal, Uint8 red, Uint8 green, Uint8 blue);
+RGBCOLOR GUIAPI GetNearestColor (HDC hdc, Uint8 red, Uint8 green, Uint8 blue);
 ```
 `CreatePalette` function creats a new palette and `GetDefaultPalette` gets the
 default palette. `SetPaletteEntries` function and `GetPaletteEntries` function

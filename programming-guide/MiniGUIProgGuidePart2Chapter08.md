@@ -33,7 +33,7 @@ It is inherited from the style of
 It is inherited from the property of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property `ID*` | *miniStudio name* | *Type* | *Permission* | *Explanation* |
+| *Property `ID`* | *miniStudio name* | *Type* | *Permission* | *Explanation* |
 | `NCSP_SWGT_CONTWIDTH` | - | unsigned int | `RW` | Content width |
 | `NCSP_SWGT_CONTHEIGHT` | - | unsigned int | `RW` | Content height |
 | `NCSP_SWGT_CONTX` | `ContentX` | int | `RW` | Offset value of the content in horizontal direction |
@@ -55,7 +55,7 @@ It is inherited from the event of
 It is inherited from the method of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-All the methods of `ScrollWidget?` are provided for the child class to use,
+All the methods of `ScrollWidget`? are provided for the child class to use,
 please avoid using the class interface in the concrete control application.
 
 ---++++ Coordinate Transformation Related Method
@@ -90,7 +90,14 @@ Relation schematic diagram of the three kinds of coordinates:
 
 Corresponding interface of transformation between the three kinds of 
 coordinates are:
-```
+```cpp
+void contentToViewport(mScrollWidget *self, int *x, int *y); 
+void viewportToWindow(mScrollWidget *self, int *x, int *y);
+void contentToWindow(mScrollWidget *self, int *x, int *y);
+
+void windowToViewport(mScrollWidget *self, int *x, int *y);
+void viewportToContent(mScrollWidget *self, int *x, int *y);
+void windowToContent(mScrollWidget *self, int *x, int *y);
 ```
 
 ---++++ Initialization Related Method
@@ -100,13 +107,15 @@ the child class based on the control class needs to be configured with margin
 different from the parent class, `initMargins` method can be used in 
 constructor function to configure again.
 
-```
+```cpp
+void initMargins(mScrollWidget *self, int l, int t, int r, int b);
 ```
 
 Iconview control class in construct method uses the following codes to
 initialize the margin of top, bottom, left and right, and the values are all 5.
 
-```
+```cpp
+    _c(self)->initMargins(self, 5, 5, 5, 5);
 ```
 
 ---++++ Refreshment Related Method
@@ -117,7 +126,9 @@ order to meet processing need of different controls, two callbacks are provided
 for the convenience of upper layer control processing. At the same time,
 `ScrollWidget` also provides realization of default processing:
 
-```
+```cpp
+void moveContent(mScrollWidget *self);
+void refreshRect(mScrollWidget *self, const RECT *rc);
 ```
 
 - `moveContent` is mainly used for the update after scrolling content, such as
@@ -134,7 +145,9 @@ drawing, the content needs to be drawn in the appointed visible region.
 `getVisRect` method provides convenience for getting the maximum range of
 permissible drawing.
 
-```
+```cpp
+BOOL (*isVisible)(mScrollWidget *self, int x, int y);
+void (*getVisRect)(mScrollWidget *self, RECT *rcVis);
 ```
 
 - `isVisible` is used to judge if the appointed content position is currently 
@@ -147,7 +160,10 @@ in the visible region.
 to different information when the window size changes or the content changes,
 therefore `ScrollWidget` provides the following methods:
 
-```
+```cpp
+void resetViewPort(mScrollWidget *self, unsigned int visW,unsigned int visH);
+void setScrollInfo(mScrollWidget *self, BOOL reDraw);
+BOOL makePosVisible(mScrollWidget *self, int x, int y);
 ```
 
 - `resetViewport` is used to readjust the size of the visible region. When the
@@ -174,22 +190,22 @@ It is inherited from renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 ### Style of `mContainer`
 
 It is inherited from the style of <a href="#Style of `m_ScrollWidget">style` of
-`mScrollWidget</a>.` 
+`mScrollWidget</a>`. 
 
 ### Property of `mContainer`
 
 It is inherited from the <a href="#Property of `m_ScrollWidget">property` of
-`mScrollWidget</a>.` 
+`mScrollWidget</a>`. 
 
 ### Event of `mContainer`
 
 It is inherited from the <a href="#Event of `m_ScrollWidget">event` of
-`mScrollWidget</a>.` 
+`mScrollWidget</a>`. 
 
 ### Method of `mContainer`
 
 It is inherited from the <a href="#Method of `m_ScrollWidget">method` of
-`mScrollWidget</a>.` 
+`mScrollWidget</a>`. 
 
 ---++++ Method of Adding Controls
 
@@ -197,20 +213,24 @@ Container provides support to mGNCS control and MiniGUI intrinsic control. If
 it is necessary to add a group of mGNCS controls to Container, `addChildren`
 method inherited from `mWidget` class can be used.
 
-```
+```cpp
+BOOL addChildren(mContainer *self, NCS_WND_TEMPLATE* children, int count); 
 ```
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/container.c.txt" pattern="^.*?// START_OF_NCSCTRLS(.*?)// END_OF_NCSCTRLS.*"}%
 ```
 
 To add a group of MiniGUI intrinsic controls to Container, 
 `addintrinsicControls` method can be used:
 
-```
+```cpp
+BOOL addIntrinsicControls(mContainer *self, const PCTRLDATA pCtrl, int nCount);
 ```
 
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/container.c.txt" pattern="^.*?// START_OF_INTRINSICCTRLS(.*?)// END_OF_INTRINSICCTRLS.*"}%
 ```
 
 ---++++ Focus Related Method
@@ -218,10 +238,12 @@ To add a group of MiniGUI intrinsic controls to Container,
 In Container, it is often necessary to set and get the current focus control,
 the two methods below are provided for this:
 
-```
+```cpp
+HWND setFocus(mContainer *self, int id);
+HWND getFocus(mContainer *self);
 ```
 
-- `setFocus` sets focus control through control `ID.`
+- `setFocus` sets focus control through control `ID`.
 - `getFocus` gets the sentence handle of the current focus control.
 
 ---++++ Other Methods
@@ -231,13 +253,15 @@ the function of adjusting its own size through its content instead of
 displaying range through Container control control. `getPanel` method can get
 the hosting window sentence handle of the current Container content.
 
-```
+```cpp
+HWND getPanel(mContainer *self);
+void adjustContent(mContainer *self);
 ```
 
 ### Renderer of `mContainer`
 
 It is inherited from the <a href="#Renderer of `m_ScrollWidget">renderer` of
-`mScrollWidget</a>.` 
+`mScrollWidget</a>`. 
 
 `mContainer` does not have newly added renderer method.
 
@@ -254,7 +278,8 @@ Figure p2c6-1 Output of Container Program
 </p>
 
 <p align=center>List p2c7-1 container.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/container.c.txt"}%
 ```
 
 ## `mPage`
@@ -267,35 +292,34 @@ information and window content.
 ### Style of `mPage`
 
 It is inherited from <a href="#Style of `mContainer">style` of 
-`mContainer</a>.` 
+`mContainer</a>`. 
 
 ### Property of `mPage`
 
 It is inherited from <a href="#Property of `mContainer">propertyof`
-`mContainer</a>.` 
+`mContainer</a>`. 
 
 ### Event of `mPage`
 
 It is inherited from <a href="#Event of `mContainer">event` of 
-`mContainer</a>.` 
+`mContainer</a>`. 
 
 ### Method pf `mPage`
 
 It is inherited from <a href="#Method of `mContainer">methodof` 
-`mContainer</a>.` 
+`mContainer</a>`. 
 
 ### Renderer of `mPage`
 
 It is inherited from <a href="#Renderer of `mContainer">renderer` of
-`mContainer</a>.` 
+`mContainer</a>`. 
 
 `mPage` does not have newly added renderer method
 
 ### Example of `mPage`
 
 
-[Next](MStudioMGNCSV1dot0PGENP2C6][Previous]] <
-[[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C8)
+[Next](MStudioMGNCSV1dot0PGENP2C6][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C8)
 
 
 

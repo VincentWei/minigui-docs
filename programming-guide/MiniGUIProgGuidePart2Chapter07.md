@@ -27,7 +27,7 @@ panel control, a group of controls can be conveniently displayed or hidden.
 ![alt](figures/panel.png)
 
 
-Panel must exist in `MainWnd,` `DialogBox,` another Panel control or other
+Panel must exist in `MainWnd`, `DialogBox`, another Panel control or other
 controls. Besides other controls, it can contain content such as texts and
 images etc.
 
@@ -73,7 +73,8 @@ Figure p2c6-1 Output of panel Program
 </p>
 
 <p align=center>List p2c6-1 panel.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/panel.c.txt"}%
 ```
 
 ## `mCombobox`
@@ -113,7 +114,7 @@ It is inherited from the property of
 | `NCSP_COMB_DROPDOWNHEIGHT` | `DropDownHeight` | int | `RW` | Height of the dropdown list |
 | `NCSP_COMB_ITEMHEIGHT` | `ItemHeight` | int | `RW` | Height of the list item |
 | `NCSP_COMB_ITEMCOUNT` | `ItemCount` | int | `RO` | Number of the list items |
-| `NCSP_COMB_TEXTLIMIT|` `TextLimit` | int | `RW` | Limit of the edit box |
+| `NCSP_COMB_TEXTLIMIT`| `TextLimit` | int | `RW` | Limit of the edit box |
 | `NCSP_COMB_SELECT` | -- | int | `RW` | Selection items index |
 
 ### Event of `mCombobox`
@@ -121,7 +122,7 @@ It is inherited from the property of
 It is inherited from the event of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
-| *Event `ID*` | *Parameter* | *Explanation* |
+| *Event `ID`* | *Parameter* | *Explanation* |
 | `NCSN_CMBOX_SELCHANGE` | -- | The selected item changes |
 | `NCSN_CMBOX_SETFOCUS` | -- | Get focus |
 | `NCSN_CMBOX_KILLFOCUS` | -- | Lose focus |
@@ -138,42 +139,105 @@ It is inherited from the method of
 
 ---++++ `addItem`
 
-%CODE{cpp}%
-`BOOL` `addItem(mCombobox` *self, const char *item, `DWORD` `addData);`
+```cpp
+BOOL addItem(mCombobox *self, const char *item, DWORD addData);
 ```
+- Parameter:<BR>
+- item – add the content of selected item
+- `addData` – additional data of the item
+- Explanation:<BR>
+Add selected items to the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+char *items = {
+    "first item --- Chinese",
+    "second item --- German",
+    "third item -- English"
+};
+//Add three items to the dropdown list
+for (i = 0; i < 3; i++)
+{
+    _c(combo)->addItem(combo, items[i]， 0);
+}
 ```
 
 ---++++ `removeItem`
 
-%CODE{cpp}%
-`BOOL` `removeItem(mCombobox` *self, int index);
+```cpp
+ BOOL removeItem(mCombobox *self, int index);
 ```
+- Parameter:<BR>
+- index – index of the items to be deleted
+- Explanation:<BR>
+Delete certain selected item from the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+//Delete the first item of the dropdown list
+_c(combo)->removeItem(combo, 0);
 ```
 
 ---++++ `setItem`
 
-%CODE{cpp}%
-`BOOL` `setItem(mCombobox` *self, int index, const char *item);
+```cpp
+BOOL setItem(mCombobox *self, int index, const char *item); 
 ```
+- Parameter:<BR>
+- index – index of the items to be modified
+- Explanation:<BR>
+Modify content of certain selected item in the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+//Modify the content of the first item in the dropdown list to "new content"
+_c(combo)->setItem(combo, 0, "new content");
 ```
 
 ---++++ `getItem`
 
-%CODE{cpp}%
-const char* `getItem(mCombobox` *self, int index);
+```cpp
+const char* getItem(mCombobox *self, int index); 
 ```
+- Parameter:<BR>
+- index – index of the items to get
+- Explanation:<BR>
+Get content of certain selected item in the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+const char *item_1 = _c(combo)->getItem(combo, 0);
 ```
 
 ---++++ `setAddData`
-%CODE{cpp}%
-void* `setAddData(mCombobox` *self, int index, `DWORD` `addData);`
+```cpp
+void* setAddData(mCombobox *self, int index, DWORD addData); 
 ```
+- Parameter:<BR>
+- index – index of the items to set additional data
+- `addData` – information of additional data
+- Explanation:<BR>
+Set additional data of certain selected item in the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+PBITMAP pbmp;
+LoadBitmap (......);
+_c(combo)->setAddData(combo, 0, (DWORD)pbmp);
 ```
 
 ---++++ `getAddData`
-%CODE{cpp}%
-`DWORD` `getAddData(mCombobox` *self, int index);
+```cpp
+DWORD getAddData(mCombobox *self, int index); 
 ```
+- Parameter:<BR>
+- index – index of the items to get additional data
+- Explanation:<BR>
+Get additional data of certain selected item in the dropdown list of combobox
+- Example:<BR>
+
+```cpp
+DWORD add = _c(combo)->getAddData(combo, 0);
 ```
 
 ### Renderers of `mCombobox`
@@ -184,14 +248,14 @@ They are inherited from the renderers of
 ---++++ `mCombobox` Classic Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB)` | | Draw color of the dropdown button |
-| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB)` | | Draw color of the arrow of the dropdown button |
+| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
+| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 
 ---++++ `mCombobox` Fashion Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB)` | | Draw color of the dropdown button |
-| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB)` | | Draw color of the arrow of the dropdown button |
+| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
+| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 | `NCS_METRICS_3DBODY_ROUNDX` | `RoundX` | int | | Round corner x radius of the dropdown button |
 | `NCS_METRICS_3DBODY_ROUNDY` | `RoundY` | int | | Round corner y radius of the dropdown button |
 | `NCS_MODE_BGC` | `GradientMode` | int | | Drawing mode of the gradual change effect (horizontal gradual change or vertical gradual change) |
@@ -205,8 +269,8 @@ Specification for the Image Resource Used by Skin Renderer
 ---++++ `mCombobox` Flat Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
-| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB)` | | Draw color of the dropdown button |
-| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB)` | | Draw color of the arrow of the dropdown button |
+| `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
+| `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 
 ### Example of `mCombobox`
 
@@ -215,12 +279,12 @@ Specification for the Image Resource Used by Skin Renderer
 
 
 <p align=center>List p2c6-1 combobox.c</p>
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/combobox"}%
 ```
 
 
-[Next](MStudioMGNCSV1dot0PGENP2C5][Previous]] <
-[[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C7)
+[Next](MStudioMGNCSV1dot0PGENP2C5][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C7)
 
 
 -- Main.XiaodongLi - 28 Feb 2010

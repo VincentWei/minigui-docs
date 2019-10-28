@@ -23,7 +23,7 @@ languages. The well-known standard `GB2312-80` is the simplified Chinese
 charset standard defined by China government. `GB2312-80` includes 682 symbols
 and 6763 Chinese words. It has 87 divisions, each of which has 94 characters.
 There are other standards, such as `ISO8859` used for the single-byte charsets,
-`JISX0201,` `JISX0208` charset defined by Japan, `BIG5` traditional Chinese
+`JISX0201`, `JISX0208` charset defined by Japan, `BIG5` traditional Chinese
 charset, and so on.
 
 One charset can have different encoding format. Usually we use `EUC` encode
@@ -49,7 +49,7 @@ code-set in October 1991. At present, `UNICODE` 2.0 version includes 6811
 characters, 20902 Chinese characters, 11172 Korean characters, 6400 make-up
 divisions and 20249 reserved characters, totally 65534 characters. `UNICODE`
 charset has multiple encoding formats, the most popular one is using 16-bit
-double bytes to express one character; it is also called `USC2;` another is 
+double bytes to express one character; it is also called `USC2`; another is 
 `UTF8` encoding format, which can be compatible with `ASCII` and `ISO8859-1`
 charset. The byte-count used to represent a character is variable.
 
@@ -61,7 +61,7 @@ countries and regions do not recognize `UNICODE` charset. For example, China
 government asks all OS software products must support `GB18030` charset, not 
 the `UNICODE` charset. The reason is that `GB18030` is compatible with `GB2312`
 and `GBK` charset popularly used in China main land areas, but not compatible
-with `UNICODE.`
+with `UNICODE`.
 
 `UNICODE` provides a way to solve charset compatibility problem for
 general-purpose operating systems. However, it is not the best way for the
@@ -70,7 +70,7 @@ with the default code of that charset to represent. Then, the abstract
 interfaces provide an universal analysis interface to text in any charset. This
 interface can be used to analyze both of the font module and the multi-byte
 character string. So far MiniGUI can support `ISO8859-x` (single-byte 
-charsets), `GB2312,` `GBK,` `GB18030,` `BIG5,` `EUCKR,` Shift-JIS, and `EUCJP`
+charsets), `GB2312`, `GBK`, `GB18030`, `BIG5`, `EUCKR`, Shift-JIS, and `EUCJP`
 (multi-byte charsets). MiniGUI also support `UTF-8` and `UTF-16` encode of
 `UNICODE` charset through the abstract interface of charset.
 
@@ -101,7 +101,7 @@ stores the frame information of each character and can be zoomed by certain
 algorithms. The popular types of vector font are `TrueType` and Adobe Type1.
 
 Similar to charset, MiniGUI defines a series of abstract interfaces for font.
-Now MiniGUI can support `RBF,` `VBF` (two `MiniGUI-defined` dot-matrix font
+Now MiniGUI can support `RBF`, `VBF` (two `MiniGUI-defined` dot-matrix font
 formats), `TrueType` and Adobe Type1 fonts. MiniGUI can also support `QPF` (Qt
 Pre-rendered Fonts) font. MiniGUI can enlarge dot-matrix (bitmap) font
 automatically and provide Anti-aliased feature for `TV` or other specified
@@ -118,7 +118,7 @@ system, and the number of glyph in one `VBF` font can be greater than 255.
 
 `UPF` font is an enhancement version of `QPF` font, it is convenience for
 MiniGUI uses the font by memory mapping. It reduces memory usage when using 
-`QPF` font in `MiniGUI-Processes` mode. It supports `BIDI` text, such as Arabic
+`QPF` font in MiniGUI-Processes mode. It supports `BIDI` text, such as Arabic
 and Hebrew.
 
 <noscript>
@@ -156,14 +156,24 @@ display text.
 The following functions provide the support for loading and destroying
 dynamically font (ttf or qpf) :
 
-```
+```cpp
+BOOL GUIAPI LoadDevFontFromFile(const char *devfont_name, 
+const char *file_name, DEVFONT** devfont);
+
+void GUIAPI DestroyDynamicDevFont (DEVFONT **devfont);
 ```
 
 ### Bitmap device font
 Bitmap device font is different than other device fonts which can be configured
-in `MiniGUI.cfg,` it is created in application. The followings are related
+in `MiniGUI.cfg`, it is created in application. The followings are related
 functions. 
-```
+```cpp
+DEVFONT *CreateBMPDevFont (const char *bmpfont_name, const BITMAP* glyph_bmp,
+        const char* start_mchar, int nr_glyphs, int glyph_width);
+BOOL AddGlyphsToBMPFont (DEVFONT* dev_font, BITMAP* glyph_bmp,
+        const char* start_mchar, int nr_glyphs, int glyph_width)
+
+void DestroyBMPFont (DEVFONT* dev_font)
 ```
 - `CreateBMPDevFont` It creates bitmap device font and insert the device font
 which is successfully created into device font list. The arguments need to be
@@ -175,14 +185,55 @@ and have the same width.
 - `AddGlyphsToBMPFont` It adds characters in bitmap device font which already
 has been created. So bitmap font can display more characters. The first 
 argument is device font pointer, other arguments are as same as
-`CreateBMPDevFont.` 
+`CreateBMPDevFont`. 
 - `DestroyBMPFont` It destroys bitmap device font.
 
 In the following codes, it creates bitmap device font which can display '0' to
 '9' firstly, then adds 'ABCDEFG' and '+' into device font. Finally, it creates
 logical font with 'led' style.
 
-```
+```cpp
+#define BMP_FILE_DIGIT    "digits1.png"
+#define BMP_FILE_LETTER   "digits2.png"
+#define BMP_FILE_SYMBOL   "digits3.png"
+#define BMP_FILE_DDOT     "digits4.png"
+
+static LOGFONT *logfont, *old ;
+static DEVFONT *dev_font;
+
+
+            if (LoadBitmap (HDC_SCREEN, &digit_bmp, BMP_FILE_DIGIT)) {
+                fprintf (stderr, "Fail to load bitmap. \n");
+                return 1;
+            }
+
+            if (LoadBitmap (HDC_SCREEN, &letter_bmp, BMP_FILE_LETTER)) {
+                fprintf (stderr, "Fail to load bitmap. \n");
+                return 1;
+            }
+
+            if (LoadBitmap (HDC_SCREEN, &symbol_bmp, BMP_FILE_SYMBOL)) {
+                fprintf (stderr, "Fail to load bitmap. \n");
+                return 1;
+            }
+
+            if (LoadBitmap (HDC_SCREEN, &ddot_bmp, BMP_FILE_DDOT)) {
+                fprintf (stderr, "Fail to load bitmap. \n");
+                return 1;
+            }
+            
+            dev_font = CreateBMPDevFont ("bmp-led-rrncnn-10-15-ISO8859-1",
+                           &letter_bmp, "A", 6, 10);
+            AddGlyphsToBMPFont (dev_font, &digit_bmp, "0", 10, 10);
+            AddGlyphsToBMPFont (dev_font, &symbol_bmp, "+", 4, 10);
+            AddGlyphsToBMPFont (dev_font, &ddot_bmp, ":", 1, 10);
+
+            logfont = CreateLogFont (FONT_TYPE_NAME_BITMAP_BMP, "led",
+                          "ISO8859-1",
+                          FONT_WEIGHT_REGULAR, FONT_SLANT_ROMAN,
+                          FONT_SETWIDTH_NORMAL, FONT_SPACING_CHARCELL,
+                          FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE,
+                          10, 0);
 ```
 The following images are used in above codes.<br />
 
@@ -214,18 +265,46 @@ render text, but also to analyze the text string. This is very useful in most
 text edition applications. Before using its logical font, you need firstly 
 build it and choose it to the device context, which will use this logical font
 to output text. The default logical font of each device context is the default
-system-defined font in `MiniGUI.cfg.` You can establish the logical font by
-calling `CreateLogFont,` `CreateLogFontByName,` and `CreateLogFontIndirect.` 
+system-defined font in `MiniGUI.cfg`. You can establish the logical font by
+calling `CreateLogFont`, `CreateLogFontByName`, and `CreateLogFontIndirect`. 
 You can also use function `SelectFont` to select a logical font to a device
 context. It is `DestroyLogFont` that is used to destroy logical font. However,
 you cannot destroy the selected logical font. The prototypes of these functions
 are as follow (minigui/gdi.h):
 
-```
+```cpp
+PLOGFONT GUIAPI CreateLogFont (const char* type, const char* family, 
+          const char* charset, char weight, char slant, char flip, 
+          char other, char underline, char struckout, 
+          int size, int rotation);
+  PLOGFONT GUIAPI CreateLogFontByName (const char* font_name);
+  PLOGFONT GUIAPI CreateLogFontIndirect (LOGFONT* logfont);
+  void GUIAPI DestroyLogFont (PLOGFONT log_font);
+  
+  void GUIAPI GetLogFontInfo (HDC hdc, LOGFONT* log_font);
+  
+  PLOGFONT GUIAPI GetSystemFont (int font_id);
+  
+  PLOGFONT GUIAPI GetCurFont (HDC hdc);
+  PLOGFONT GUIAPI SelectFont (HDC hdc, PLOGFONT log_font);
 ```
 
 The following code fragment creates multiple logical fonts:
-```
+```cpp
+ static LOGFONT  *logfont, *logfontgb12, *logfontbig24;
+
+    logfont = CreateLogFont (NULL, "SansSerif", "ISO8859-1", 
+                FONT_WEIGHT_REGULAR, FONT_SLANT_ITALIC, FONT_FLIP_NIL,
+                FONT_OTHER_NIL, FONT_UNDERLINE_NONE, FONT_STRUCKOUT_LINE, 
+                16, 0);
+    logfontgb12 = CreateLogFont (NULL, "song", "GB2312", 
+                FONT_WEIGHT_REGULAR, FONT_SLANT_ROMAN, FONT_FLIP_NIL,
+                FONT_OTHER_NIL, FONT_UNDERLINE_LINE, FONT_STRUCKOUT_LINE, 
+                12, 0);
+    logfontbig24 = CreateLogFont (NULL, "ming", "BIG5", 
+                FONT_WEIGHT_REGULAR, FONT_SLANT_ROMAN, FONT_FLIP_NIL,
+                FONT_OTHER_AUTOSCALE, FONT_UNDERLINE_LINE, FONT_STRUCKOUT_NONE, 
+                24, 0);
 ```
 The first font, logfont, belongs to `ISO8859-1` charset and uses `SansSerif`
 with the height of 16 pixels; logfontgb12 belongs to `GB2312` charset and uses
@@ -237,15 +316,15 @@ desired font size.
 
 We can also call `GetSystemFont` function to return a system logical font, the
 argument `font_id` in that can be one of the following values:
-- `SYSLOGFONT_DEFAULT:` System default font, it has to be a single-byte charset
+- `SYSLOGFONT_DEFAULT`: System default font, it has to be a single-byte charset
 logical font and must be formed by `RBF` device font.
-- `SYSLOGFONT_WCHAR_DEF:` System default multi-byte charset font. It is usually
+- `SYSLOGFONT_WCHAR_DEF`: System default multi-byte charset font. It is usually
 formed by `RBF` device font. Its width is twice of the `SYSLOGFONT_DEFAULT`
 logical font.
-- `SYSLOGFONT_FIXED:` System font with fixed width.
-- `SYSLOGFONT_CAPTION:` The logical font used to display text on caption bar.
-- `SYSLOGFONT_MENU:` The logical font used to display menu text.
-- `SYSLOGFONT_CONTROL:` The default logical font used by controls.
+- `SYSLOGFONT_FIXED`: System font with fixed width.
+- `SYSLOGFONT_CAPTION`: The logical font used to display text on caption bar.
+- `SYSLOGFONT_MENU`: The logical font used to display menu text.
+- `SYSLOGFONT_CONTROL`: The default logical font used by controls.
 
 The system logical fonts above are created corresponding to definition of
 `MiniGUI.cfg` when MiniGUI is initialized.
@@ -260,11 +339,19 @@ cannot call `DestroyLogFont` to destroy a system logical font.
 After establishing logical font, the application program can use logical font 
 to analyze multi-language-mixed text. Here the multi-language-mixed text means
 the character string formed by two non-intersected charset texts, such as 
-`GB2312` and `ISO8859-1,` or `BIG5` and `ISO8859-2.` You can use the following
+`GB2312` and `ISO8859-1`, or `BIG5` and `ISO8859-2`. You can use the following
 functions to analyze the text constitutes of multi-language-mixed text
 (minigui/gdi.h): 
 
-```
+```cpp
+// Text parse support
+  int GUIAPI GetTextMCharInfo (PLOGFONT log_font, const char* mstr, int len, 
+                  int* pos_chars);
+  int GUIAPI GetTextWordInfo (PLOGFONT log_font, const char* mstr, int len, 
+                  int* pos_words, WORDINFO* info_words);
+  int GUIAPI GetFirstMCharLen (PLOGFONT log_font, const char* mstr, int len);
+  int GUIAPI GetFirstWord (PLOGFONT log_font, const char* mstr, int len,
+                  WORDINFO* word_info);
 ```
 `GetTextMCharInfo` returns the byte address of each character of the
 multi-language-mixed text. For example, for the string “ABC汉语”, this function
@@ -280,26 +367,63 @@ multi-byte charset text, the word uses single-byte character as the delimiter.
 MiniGUI provides the functions of converting multibyte charset text to wide
 charset text in `UCS` or wide charset text in `UCS` to multibyte charset text.
 
+```cpp
+typedef unsigned short  UChar16;
+typedef signed int    UChar32;
+
+int GUIAPI MB2WCEx (PLOGFONT log_font, void* dest, BOOL wc32, 
+const unsigned char* mstr, int n);
+#define MB2WC(log_font, dest, mstr, n) \
+                   MB2WCEx (log_font, dest, sizeof(wchar_t) == 4, mstr, n)
+
+int GUIAPI WC2MBEx (PLOGFONT log_font, unsigned char *s, UChar32 wc);
+#define WC2MB(log_font, s, wc) \
+                  WC2MBEx (log_font, s, (UChar32)wc);
+
+int GUIAPI MBS2WCSEx (PLOGFONT log_font, void* dest, BOOL wc32, 
+const unsigned char* mstr, int mstr_len, int n,
+int* conved_mstr_len);
+
+#define MBS2WCS(log_font, dest, mstr, mstr_len, n) \
+                 MBS2WCSEx(log_font, dest, sizeof (wchar_t) == 4, mstr, \
+mstr_len, n, NULL)
+
+int GUIAPI WCS2MBSEx (PLOGFONT log_font, unsigned char* dest,  
+const void *wcs, int wcs_len, BOOL wc32, int n,
+int* conved_wcs_len);
+
+#define WCS2MBS(log_font, dest, wcs, wcs_len, n) \
+                 WCS2MBSEx (log_font, dest, wcs, wcs_len, sizeof (wchar_t) == 4, \
+n, NULL)
 ```
-```
-`MB2WCEx` is used to convert a multibyte character (GB2312, `ISO8859,` `UTF-8,`
-`GBK,` `BIG5,` etc) to a wide character in `UCS` according to the
+`MB2WCEx` is used to convert a multibyte character (GB2312, `ISO8859`, `UTF-8`,
+`GBK`, `BIG5`, etc) to a wide character in `UCS` according to the
 charset/encoding of the logical font. And `MBS2WCSEx` is used to convert a
-multibyte string (GB2312, `ISO8859,` `UTF-8,` `GBK,` `BIG5,` etc) to a wide
+multibyte string (GB2312, `ISO8859`, `UTF-8`, `GBK`, `BIG5`, etc) to a wide
 string in `UCS` according to the charset/encoding of the logical font.
 
 `WC2MBEx` is used to convert a wide character in `UCS` to a multibyte character
-(GB2312, `ISO8859,` `UTF-8,` `GBK,` `BIG5,` etc) according to the
+(GB2312, `ISO8859`, `UTF-8`, `GBK`, `BIG5`, etc) according to the
 charset/encoding of the logical font. And `WCS2MBSEx` is used to convert a wide
-string in `UCS` to a multibyte string (GB2312, `ISO8859,` `UTF-8,` `GBK,` 
-`BIG5,` etc) according to the charset/encoding of the logical font.
+string in `UCS` to a multibyte string (GB2312, `ISO8859`, `UTF-8`, `GBK`, 
+`BIG5`, etc) according to the charset/encoding of the logical font.
 
 ## Text Output
 
 The following functions can be used to calculate the output length and width of
 text (minigui/gdi.h):
 
-```
+```cpp
+int GUIAPI GetTextExtentPoint (HDC hdc, const char* text, int len, int max_extent, 
+                  int* fit_chars, int* pos_chars, int* dx_chars, SIZE* size);
+int GUIAPI GetTabbedTextExtentPoint (HDC hdc, const char *text, int len, int max_extent, 
+                  int *fit_chars, int *pos_chars, int *dx_chars, SIZE *size);
+  
+  // Text output support
+  int GUIAPI GetFontHeight (HDC hdc);
+  int GUIAPI GetMaxFontWidth (HDC hdc);
+  void GUIAPI GetTextExtent (HDC hdc, const char* spText, int len, SIZE* pSize);
+  void GUIAPI GetTabbedTextExtent (HDC hdc, const char* spText, int len, SIZE* pSize);
 ```
 `GetTextExtentPoint` is used to calculate the maximal number of the characters
 can be output, the byte place of each character, the output place of each
@@ -320,7 +444,24 @@ font. `GetTextExtent` calculates the output width and height of text.
 string. 
 
 The following function is used to output text (minigui/gdi.h):
-```
+```cpp
+ int GUIAPI TextOutLen (HDC hdc, int x, int y, const char* spText, int len);
+  int GUIAPI TabbedTextOutLen (HDC hdc, int x, int y, const char* spText, int len); 
+  int GUIAPI TabbedTextOutEx (HDC hdc, int x, int y, const char* spText, int nCount,
+              int nTabPositions, int *pTabPositions, int nTabOrigin);
+  void GUIAPI GetLastTextOutPos (HDC hdc, POINT* pt);
+  
+  // Compatiblity definitions
+  #define TextOut(hdc, x, y, text)    TextOutLen (hdc, x, y, text, -1)
+  #define TabbedTextOut(hdc, x, y, text)  TabbedTextOutLen (hdc, x, y, text, -1)
+
+  # #define DrawText(hdc, text, n, rc, format)   DrawTextEx2 (hdc, text, n, rc, 0, format, NULL) 
+
+  #define DrawTextEx(hdc, text, n, rc, indent, format)   DrawTextEx2 (hdc, text, n, rc, indent, format, NULL)
+ ...
+
+  int GUIAPI DrawTextEx2 (HDC hdc, const char *pText, int nCount, RECT *pRect, int nIndent, 
+                                         UINT nFormat, DTFIRSTLINE *firstline);
 ```
 `TextOutLen` is used to output a certain text with appropriate length at given
 position. If length is -1, the character string must terminate with '\0'.
@@ -328,17 +469,17 @@ position. If length is -1, the character string must terminate with '\0'.
 is used to output formatted character string, but also can specify the position
 of each `TAB` character in the text string.
 
-Figure 1 is the output of `TextOut,` `TabbedTextOut,` and `TabbedTextOutEx`
+Figure 1 is the output of `TextOut`, `TabbedTextOut`, and `TabbedTextOutEx`
 functions. 
 
 
-<img src="%ATTACHURLPATH%/14.1.jpeg" alt="14.1.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/14.1.jpeg" alt="14.1.jpeg" `ALIGN="CENTER`" />
 
-Figure 1 Output of `TextOut,` `TabbedTextOut,` and `TabbedTextOutEx` functions
+Figure 1 Output of `TextOut`, `TabbedTextOut`, and `TabbedTextOutEx` functions
 `DrawText` is the most complicated text output function, which can use 
 different ways to output text in a given rectangle.
 
-On the basis of `DrawText,` `DrawTextEx` can configure the number of characters
+On the basis of `DrawText`, `DrawTextEx` can configure the number of characters
 of text-indent.
 
 On the basis of first two functions, `DrawTextEx2` can calculate the number of
@@ -349,7 +490,7 @@ one in second line can be known. The argument, firstline, includes the number
 of characters in first line and display it.
 
 Now, `DrawText` doesn’t support `UTF-16` text. Table 1 lists the formats
-supported by `DrawText.`
+supported by `DrawText`.
 
 
 Table 1 Output formats of `DrawText` function
@@ -366,7 +507,7 @@ Table 1 Output formats of `DrawText` function
 | `DT_CHARBREAK` | Lines are automatically broken between characters if a character would extend past the edge of the rectangle specified by the `pRect` parameter. | |
 | `DT_SINGLELINE` | Displays text on the single line only. Carriage returns and linefeeds do not break the line. | The vertical align flag will be ignored when there is not this flag |
 | `DT_EXPANDTABS` | Expands `TAB` characters. | |
-| `DT_TABSTOP` | Sets tab stops. Bits 15-8 (high-order byte of the low-order word) of the `uFormat` parameter specify the number of characters for each `TAB.` | |
+| `DT_TABSTOP` | Sets tab stops. Bits 15-8 (high-order byte of the low-order word) of the `uFormat` parameter specify the number of characters for each `TAB`. | |
 | `DT_NOCLIP` | Draws without clipping. Output will be clipped to the specified rectangle by default. | |
 | `DT_CALCRECT` | Do not output actually, only calculate the size of output rectangle. | |
 
@@ -379,11 +520,54 @@ the output effect of the program.
 
 
 List 1 Using `DrawText` function
-```
+```cpp
+void OnModeDrawText (HDC hdc)
+{
+    RECT rc1, rc2, rc3, rc4;
+    const char* szBuff1 = "This is a good day. \n"
+            "这是利用 DrawText 绘制的文本, 使用字体 GB2312 Song 12. "
+            "文本垂直靠上, 水平居中";
+    const char* szBuff2 = "This is a good day. \n"
+            "这是利用 DrawText 绘制的文本, 使用字体 GB2312 Song 16. "
+            "文本垂直靠上, 水平靠右";
+    const char* szBuff3 = "单行文本垂直居中, 水平居中";
+    const char* szBuff4 = 
+            "这是利用 DrawTextEx 绘制的文本, 使用字体 GB2312 Song 16. "
+            "首行缩进值为 32. 文本垂直靠上, 水平靠左";
+
+    rc1.left = 1; rc1.top  = 1; rc1.right = 401; rc1.bottom = 101;
+    rc2.left = 0; rc2.top  = 110; rc2.right = 401; rc2.bottom = 351;
+    rc3.left = 0; rc3.top  = 361; rc3.right = 401; rc3.bottom = 451;
+    rc4.left = 0; rc4.top  = 461; rc4.right = 401; rc4.bottom = 551;
+
+    SetBkColor (hdc, COLOR_lightwhite);
+
+    Rectangle (hdc, rc1.left, rc1.top, rc1.right, rc1.bottom);
+    Rectangle (hdc, rc2.left, rc2.top, rc2.right, rc2.bottom);
+    Rectangle (hdc, rc3.left, rc3.top, rc3.right, rc3.bottom);
+    Rectangle (hdc, rc4.left, rc4.top, rc4.right, rc4.bottom);
+
+    InflateRect (&rc1, -1, -1);
+    InflateRect (&rc2, -1, -1);
+    InflateRect (&rc3, -1, -1);
+    InflateRect (&rc4, -1, -1);
+
+    SelectFont (hdc, logfontgb12);
+    DrawText (hdc, szBuff1, -1, &rc1, DT_NOCLIP | DT_CENTER | DT_WORDBREAK);
+
+    SelectFont (hdc, logfontgb16);
+    DrawText (hdc, szBuff2, -1, &rc2, DT_NOCLIP | DT_RIGHT | DT_WORDBREAK);
+
+    SelectFont (hdc, logfontgb24);
+    DrawText (hdc, szBuff3, -1, &rc3, DT_NOCLIP | DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+
+    SelectFont (hdc, logfontgb16);
+    DrawTextEx (hdc, szBuff4, -1, &rc4, 32, DT_NOCLIP | DT_LEFT | DT_WORDBREAK);
+}
 ```
 
 
-<img src="%ATTACHURLPATH%/14.2.jpeg" alt="14.2.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/14.2.jpeg" alt="14.2.jpeg" `ALIGN="CENTER`" />
 
 Figure 2 The output of `DrawText` function
 
@@ -418,11 +602,24 @@ and/or horizontally, and to scale the glyph to meet the desired logical font
 size when using bitmap font. In version 2.0.4/1.6.10/3.0, MiniGUI provides
 `FreeType2` support, and it makes that user can choose sub-pixel render using
 `FreeType2` or MiniGUI; Before using sub-pixel render, please confirm that you
-have opened `FT_CONFIG_OPTION_SUBPIXEL_RENDERING` macro in `FreeType2.`
+have opened `FT_CONFIG_OPTION_SUBPIXEL_RENDERING` macro in `FreeType2`.
 
 
 List 2 Using sub-pixel render
-```
+```cpp
+ LOGFONT* mg_font;
+  mg_font = CreateLogFont (FONT_TYPE_NAME_SCALE_TTF, "times", "ISO8859-1",
+                FONT_WEIGHT_SUBPIXEL, FONT_SLANT_ROMAN, FONT_FLIP_NIL,
+                FONT_OTHER_NIL, FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE,
+                15, 0);
+  ...........
+  SelectFont(hdc, mg_font);
+  ft2SetLcdFilter (mg_font, MG_SMOOTH_NONE);
+  TextOut(hdc, 0,0, "text with MiniGUI sub-pixels smooth");
+
+  ......
+  ft2SetLcdFilter (mg_font, MG_SMOOTH_DEFAULT);
+  TextOut(hdc, 0,0, "text with FreeType2 sub-pixels smooth");
 ```
 
 The render effects are specified through the logical font style when you create
@@ -474,13 +671,17 @@ fonts. The following is the example for Arabic font:
 default 
 - Configure vbf font in MiniGUI configuration file
 
-```
+```cpp
+[varbitmapfonts]
+font_number=1
+name0=vbf-naskhi-rrncnn-18-21-ISO8859-6
+fontfile0=/usr/local/share/minigui/res/font/naskhi-18-21-iso8859-6.vbf
 ```
 
 Arabic demo is shown as below:
 
 
-<img src="%ATTACHURLPATH%/14.3.jpeg" alt="14.3.jpeg" `ALIGN="CENTER"` />
+<img src="%ATTACHURLPATH%/14.3.jpeg" alt="14.3.jpeg" `ALIGN="CENTER`" />
 
 Figure 3 Arabic font demo
 

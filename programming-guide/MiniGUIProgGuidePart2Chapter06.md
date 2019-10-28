@@ -17,7 +17,7 @@ generate notification message, and applications can send messages to the
 buttons to change the status of the buttons. Each button type corresponds to 
 one class, which contains style, property, event, method and renderer. 
 Functions of the controls provided in mGNCS are usually stronger than the
-functions of the controls used on `PC,` providing more configurable 
+functions of the controls used on `PC`, providing more configurable 
 information, and renderer editing is added.
 
 In this document, button class and the properties in it will be introduced in
@@ -87,11 +87,11 @@ by default. Buttons of all other types are derived from it.
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
-| *Style `ID*` | *miniStudio property name* | *Explanation* |
-| `NCSS_BUTTON_CHECKABLE` | Checkable | Set if the button can carry out `CHECKED` status conversion; if `FALSE,` `CHECK` status conversion is not carried out, and autocheck and `ThreeDCheck` are invalid |
+| *Style `ID`* | *miniStudio property name* | *Explanation* |
+| `NCSS_BUTTON_CHECKABLE` | Checkable | Set if the button can carry out `CHECKED` status conversion; if `FALSE`, `CHECK` status conversion is not carried out, and autocheck and `ThreeDCheck` are invalid |
 | `NCSS_BUTTON_AUTOCHECK` | Autocheck | When `CHECKED` status conversion can be carried out, set if clicking can be carried out to automatically switch `CHECK` status |
 | `NCSS_BUTTON_3DCHECK` | `ThreeDCheck` | Set button `CHECK` status as three status (unchecked-halfchecked-checked) or two status (unchecked-checked) switch |
-| `NCSS_BUTTON_IMAGE` | `LabelType->Image|` Image button style, the button is label literal mode in `LabelType` by default |
+| `NCSS_BUTTON_IMAGE` | `LabelType->Image`| Image button style, the button is label literal mode in `LabelType` by default |
 | `NCSS_BUTTON_IMAGELABEL` | `LabelType->ImageLabel` | Button of horizontally arranged image text |
 | `NCSS_BUTTON_VERTIMAGELABEL` | `LabelType->VertImageLabel` | Button of vertically arranged image text |
 
@@ -102,12 +102,12 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 | *Property `ID` name* | *miniStudio property name* | *Type* | *Permission* | *Explanation* |
 | `NCSP_BUTTON_ALIGN` | Align | [Alignment enumeration value](MStudioMGNCSV1dot0PGENAppC#AlignValues) | `RW` | Content on the button (image or literal) is aligned with the button according to the set mode in horizontal direction |
 | `NCSP_BUTTON_VALIGN` | `VAlign` | [Alignment enumeration value](MStudioMGNCSV1dot0PGENAppC#AlignValues) | `RW` | Content on the button (image or literal) is aligned with the button according to the set mode in vertical direction, and the alignment value is top – 0, bottom – 1, center – 2 |
-| `NCSP_BUTTON_WORDWRAP` | Wordwrap | int | `RW` | Automatic wrap property of the literals on the button, when the single line length of the literal content is bigger than the control width, automatic wrap can be selected. `TRUE:` automatic wrap `FALSE:` single line, and the exceeding part is not displayed |
+| `NCSP_BUTTON_WORDWRAP` | Wordwrap | int | `RW` | Automatic wrap property of the literals on the button, when the single line length of the literal content is bigger than the control width, automatic wrap can be selected. `TRUE`: automatic wrap `FALSE`: single line, and the exceeding part is not displayed |
 | `NCSP_BUTTON_IMAGE` | Image | `PBITMAP` | `RW` | Image, corresponding to button property pbmp, which is image pointer, it must be valid when `NCSS_BUTTON_IMAGE` or `NCSS_BUTTON_IMAGELABEL` or `NCSS_BUTTON_VERTIMAGELABEL` is set |
-| `NCSP_BUTTON_CHECKSTATE|` 无 | [mButtonCheckState](MStudioMGNCSV1dot0PGP2C5#ButtonCheckState)| `RW` | Set or get check status, valid when `NCSS_BUTTON_CHECKABLE` is set, `NCS_BUTTON_HALFCHECKED` is regarded as valid value when `NCSS_BUTTON_3DCHECK` is set |
-| `NCSP_BUTTON_IMAGE_SIZE_PERCENT|` `ImageSizePercent` | int | `RW` | Under the style of coexistence of image and text, set proportion of image on the control (take value 15~85, representing 15% to 85%), and the remaining is occupied by the text |
-| `NCSP_BUTTON_GROUPID|` `GroupID` | int | `RW` | When there is `NCSS_BUTTON_CHECKABLE` style, `ID` of a `mButtonGroup` can be set to the window, it will automatically get a corresponding `mButtonGroup` object and set |
-| `NCSP_BUTTON_GROUP|` 无 | `mButtonGroup` *|RW| When there is `NCSS_BUTTON_CHECKABLE` style, set a `mButtonGroup` object pointer, and all the buttons adding to the group has the automatic switching ability of Radio style |
+| `NCSP_BUTTON_CHECKSTATE`| 无 | [mButtonCheckState](MStudioMGNCSV1dot0PGP2C5#ButtonCheckState)| `RW` | Set or get check status, valid when `NCSS_BUTTON_CHECKABLE` is set, `NCS_BUTTON_HALFCHECKED` is regarded as valid value when `NCSS_BUTTON_3DCHECK` is set |
+| `NCSP_BUTTON_IMAGE_SIZE_PERCENT`| `ImageSizePercent` | int | `RW` | Under the style of coexistence of image and text, set proportion of image on the control (take value 15~85, representing 15% to 85%), and the remaining is occupied by the text |
+| `NCSP_BUTTON_GROUPID`| `GroupID` | int | `RW` | When there is `NCSS_BUTTON_CHECKABLE` style, `ID` of a `mButtonGroup` can be set to the window, it will automatically get a corresponding `mButtonGroup` object and set |
+| `NCSP_BUTTON_GROUP`| 无 | `mButtonGroup` *|RW| When there is `NCSS_BUTTON_CHECKABLE` style, set a `mButtonGroup` object pointer, and all the buttons adding to the group has the automatic switching ability of Radio style |
 
 ### Event of `mButton`
 
@@ -132,11 +132,11 @@ Drawing of `mButton` Classic renderer is as below: for the drawing of non
 client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
-| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/push-button-classic-bgdisable.png" alt="push-button-classic-bgdisable.png"/>| |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
+| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-classic-bgdisable.png" alt="push-button-classic-bgdisable.png"/>| |
 
 
 - High light effect: through enhancing the brightness of the background color
@@ -160,17 +160,17 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` | Same as Classic renderer | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD(ARGB)` | Same as Classic renderer | |
-| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
-| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB)` |<img src="%ATTACHURLPATH%/push-button-fashion-bgdisalbe.png" alt="push-button-fashion-bgdisalbe.png"/>| |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
+| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
+| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-fashion-bgdisalbe.png" alt="push-button-fashion-bgdisalbe.png"/>| |
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="%ATTACHURLPATH%/push-button-fashion-gradientmode.png" alt="push-button-fashion-gradientmode.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
 | `NCS_METRICS_3DBODY_ROUNDX` | Window rectangle round corner X radius | `RoundX` | int | | 0 to 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
 
 - Gradual change color: the gradual change color gives different brightness
-factor from the ground color (NCS_BGC_3DBODY or `NCS_BGC_DISABLED_ITEM),` and
+factor from the ground color (NCS_BGC_3DBODY or `NCS_BGC_DISABLED_ITEM)`, and
 calculates the two objective colors. Gradually change from the center (ground
 color) to the two sides or top and bottom (highlighted color achieved through
 calculation) 
@@ -192,10 +192,10 @@ Schematic diagram: <br />
 For the drawing of non client area, please refer to the drawing of Flat 
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` | Same as Classic renderer | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB)` | Same as Classic renderer | |
-| `NCS_BGC_3DBODY` | background color | `BgColor3DBody` | `DWORD(ARGB)` | Same as Classic renderer |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
+| `NCS_BGC_3DBODY` | background color | `BgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
 | `NCS_METRICS_3DBODY_ROUNDX` | Window rectangle round corner X radius | `RoundX` | int | | 0 to 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
 
@@ -226,23 +226,28 @@ status button.
 <p align=center>List p2c5-1 <a href="%ATTACHURL%/button.c.txt">button.c</a></p>
 
 - Define common button
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/button.c.txt" pattern="^.*?//START_DCL_DEF_PUSHBUTTON(.*?)//END_DCL_DEF_PUSHBUTTON.*"}%
 ```
 
 - Define Image button, generally it is handled in `onCreate` event of the main
 window 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/button.c.txt" pattern="^.*?//START_DCL_IMAGEBUTTON(.*?)//END_DCL_IMAGEBUTTON.*"}%
 ```
 - Load and set Image
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/button.c.txt" pattern="^.*?//START_SET_IMAGE(.*?)//END_STE_IMAGE.*"}%
 ```
 
 - Define button of Autocheck style
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/button.c.txt" pattern="^.*?//START_DCL_AUTOCHECKBTN(.*?)//END_DCL_AUTOCHECKBTN.*"}%
 ```
 
 - Define button of three status check style
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/button.c.txt" pattern="^.*?//START_DCL_3DAUTOCHECKBTN(.*?)//END_DCL_3DAUTOCHECKBTN.*"}%
 ```
 
 ## `mCheckButton`
@@ -256,10 +261,10 @@ occasion. The common pattern is a box, and the user checks or unchecks the box.
 
 ### Property of `mCheckButton`
 It is inherited from the property of <a href="#Property of
-`mButton"/>mButton</a>.` 
+`mButton"/>mButton</a>`. 
 
 ### Event of `mCheckButton`
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>.`
+It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 
 ### Renderers of `mCheckButton`
 - For the usage of renderers, see [look and feel
@@ -271,9 +276,9 @@ renderer](MStudioMGNCSV1dot0PGENP2C2)
 for the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
 
 - Classic renderer of Check box fills and draws through loading image resource.
 (image resource is minigui-res by default, and installed in
@@ -301,9 +306,9 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton)
 drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
 
 - Fashion renderer of Check box fills and draws through loading image resource.
 (Note: the image resource is minigui-res by default, and installed in
@@ -327,9 +332,9 @@ size will be adopted to draw
 below: for the drawing of non area region, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property `ID*` | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
-| `NCS_BGC_3DBODY|` Background color | `BgColor3DBody` | `DWORD(ARGB)` | <img src="%ATTACHURLPATH%/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
+| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
 
 ### Programming Example of `mCheckbutton`
 
@@ -339,10 +344,109 @@ below: for the drawing of non area region, please refer to the renderer of
 
 
 - Check box example code: [checkbutton.c](%ATTACHURL%/checkbutton.c.txt)
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/checkbutton.c.txt" pattern="^.*?//
-`START_OF_TEMPLATE(.*?)//` `END_OF_TEMPLATE`.
+```cpp
+%INCLUDE{"%ATTACHURL%/checkbutton.c.txt" pattern="^.*?// START_OF_TEMPLATE(.*?)// END_OF_TEMPLATE.*"}%
 ```
+
+## `mRadioButton`
+- *Control window class*: `NCSCTRL_RADIOBUTTON`
+- *Control English name*: `RadioButton`
+- *Brief introduction*: Single selection button, matched with `mButtonGroup`.
+`mButtonGroup` concludes multiple single selection buttons into one group. 
+Among the buttons in the group, only one is in the selected status. After a
+button is selected, the originally selected button will cancel the selection.
+When the single selection button is used independently, its behavior is similar
+to that of a <a ref="#m_Checkbutton">mCheckbutton</a>.
+
+![alt](figures/radio_button.PNG)
+
+
+### Property of `mRadiobutton`
+It is inherited from the property of <a href="#Property of
+`mButton"/>mButton</a>`. 
+
+### Event of `mRadiobutton`
+
+It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
+
+### Renderers of `mRadiobutton`
+
+- For the usage of renderers, see [look and feel
+renderer](MStudioMGNCSV1dot0PGENP2C2) 
+
+---++++ `mRadiobutton` Classic Renderer
+- For the drawing of `mRadiobutton` Classic non client area, please refer to 
+the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobutton_classic_fgc.png" alt="radiobutton_classic_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobutton_classic_textdisable.png" alt="radiobutton_classic_textdisable.png"/> | |
+
+- Classic renderer of Check Box of Radiobutton fills and draws through loading
+image resource. (the image resource is minigui-res by default, and installed in
+/usr/local/share/minigui/res/bmp/classic_radio_button.bmp by default)
+- Specification of the image: the image is composed of eight parts from left to
+right, and each part is a square (13x13), corresponding to eight statuses of
+checkbutton: 
+* 0~3: common, highlight, pressed down and banned status when not selected
+* 4~7: common, highlight, pressed down and banned status when selected
+- If the image is bigger than the drawing region, the image will be reduced to
+draw; when the image is smaller than or equal to the drawing region, the image
+actual size is adopted to draw
+- Example%BR%
+
+![alt](figures/classic_radio_button.bmp)
+
+
+---++++ `mRadiobutton` Skin Renderer
+
+Refer to [Appendix B : Specification for the Image Resource Used by Skin
+Renderer](MStudioMGNCSV1dot0PGENAppB#mButton). 
+
+---++++ `mRadiobutton` Fashion Renderer
+- For the drawing of `mRadiobutton` Fashion non client area, please refer to 
+the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_fashion_fgc.png" alt="radiobtn_fashion_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_fashion_disable.png" alt="radiobtn_fashion_disable.png"/> | |
+
+- Fashion renderer of Check Box of Radiobutton fills and draws through loading
+image resource. (The image resource is minigui-res by default, and installed in
+/usr/local/share/minigui/res/bmp/fashion_radio_btn.bmp by default)
+- Specification of the image: the image is composed of eight parts from top to
+bottom, and each part is a square (13x13), corresponding to eight statuses of
+checkbutton: 
+* 0~3: common, highlight, pressed down and banned status when not selected
+* 4~7: common, highlight, pressed down and banned status when selected
+- If the image is bigger than the drawing region, the image will be reduced to
+draw; when the image is smaller than or equal to the drawing region, the image
+actual size is adopted to draw
+- Example%BR%
+
+![alt](figures/fashion_radio_btn.bmp)
+
+
+---++++ `mRadiobutton` Flat Renderer
+- For the drawing of `mRadiobutton` Flat non client area, please refer to the
+renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+
+| *Property `ID`* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_flat_fgc.png" alt="radiobtn_flat_fgc.png"/> | |
+| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_flat_bgc.png" alt="radiobtn_flat_bgc.png"/> | |
+
+### Programming Example of `mRadiobutton`
+
+- Operation screen shot: <br />
+
+![alt](figures/radiobutton.png)
+
+
+- Single selection button example code:
+[radiogroup.c](%ATTACHURL%/radiogroup.c.txt) 
+
+```cpp
+%INCLUDE{"%ATTACHURL%/radiogroup.c.txt" pattern="^.*?// START_OF_TEMPLATE(.*?)// END_OF_TEMPLATE.*"}%
 ```
 
 ## `mMenuButton`
@@ -361,19 +465,19 @@ will display on the button.
 ### Property of `mMenuButton`
 
 It is inherited from the property of <a href="#Property of
-`mButton"/>mButton</a>.` 
+`mButton"/>mButton</a>`. 
 
 | *Property name* | *Type* | *Permission* | *Explanation* |
-| `NCSP_MNUBTN_POPMENU` | `mPopMenuMgr*` | `RW` | Set `PopMenu` object pointer |
+| `NCSP_MNUBTN_POPMENU` | `mPopMenuMgr`* | `RW` | Set `PopMenu` object pointer |
 | `NCSP_MNUBTN_CURITEM` | int | `RW` | Get or set the currently selected id of Menu Item |
 
 
 ### Event of `mMenuButton`
 
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>.`
+It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 
 | *Event notification code* | *Explanation* | *Parameter* |
-| `NCSN_MNUBTN_ITEMCHANGED|` When `MenuItem` changes | id value of the new Item |
+| `NCSN_MNUBTN_ITEMCHANGED`| When `MenuItem` changes | id value of the new Item |
 
 ### Programming Example of `mMenuButton`
 
@@ -390,7 +494,8 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>.`
 
 - Menu button example code: [menubutton.c](%ATTACHURL%/menubutton.c.txt)
 
-```
+```cpp
+%INCLUDE{"%ATTACHURL%/menubutton.c.txt"}%
 ```
 
 ## `mColorButton`
@@ -410,17 +515,17 @@ selected color displays in the middle box.
 ### Property of `mColorButton`
 
 It is inherited from the property of <a href="#Property of
-`mColorButton"/>mButton</a>.` 
+`mColorButton"/>mButton</a>`. 
 
 | *Property name* | *Type* | *Permission* | *Explanation* |
-| `NCSP_CLRBTN_CURCOLOR|` `DWORD(ARGB)` | `RW` | Set or get Color value |
+| `NCSP_CLRBTN_CURCOLOR`| `DWORD(ARGB`) | `RW` | Set or get Color value |
 
 ### Event of `mColorButton`
 
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>.`
+It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 
 | *Event notification code* | *Explanation* | *Parameter* |
-| `NCSN_CLRBTN_COLORCHANGED` | Update after being selected by the user | `DWORD(ARGB)` |
+| `NCSN_CLRBTN_COLORCHANGED` | Update after being selected by the user | `DWORD(ARGB`) |
 
 ### Programming Example of `mColorButton`
 
@@ -432,19 +537,22 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>.`
 - Color button example code: [colorbutton.c](%ATTACHURL%/colorbutton.c.txt)
 
 - Definition processing function
-%CODE{cpp}%
-%INCLUDE{"%ATTACHURL%/colorbutton.c.txt" pattern="^.*?//
-`START_OF_HANDLERS(.*?)//` `END_OF_HANDLERS`.
+```cpp
+%INCLUDE{"%ATTACHURL%/colorbutton.c.txt" pattern="^.*?// START_OF_HANDLERS(.*?)// END_OF_HANDLERS.*"}%
 ```
+
+- Define the window template
+```cpp
+%INCLUDE{"%ATTACHURL%/colorbutton.c.txt" pattern="^.*?// START_OF_TEMPLATE(.*?)// END_OF_TEMPLATE.*"}%
 ```
 
 ## Appendix:A
 
 ### `GrandientMode`
 It must be one of the values below:
-- `MP_LINEAR_GRADIENT_MODE_HORIZONTAL:` horizontal gradual change, gradual
+- `MP_LINEAR_GRADIENT_MODE_HORIZONTAL`: horizontal gradual change, gradual
 change from the center to the left and right
-- `MP_LINEAR_GRADIENT_MODE_VERTICAL:` vertical gradual change, gradual change
+- `MP_LINEAR_GRADIENT_MODE_VERTICAL`: vertical gradual change, gradual change
 from the center to the top and bottom
 The two values are defined in mGPlus (<mgplus/mgplus.h>). Although mGPlus
 defines other gradual change modes as well, it is not supported in NCS.
@@ -461,11 +569,21 @@ definition of `ButtonCheckState` status below.
 
 
 ### `ButtonCheckState`
-```
+```cpp
+/* Button CHECK status subdivided definition */
+enum mButtonCheckState{
+        /* Button CHECK status subdivided definition */
+        NCS_BUTTON_UNCHECKED = 0,  
+
+        /* Under three status condition, the status is valid, which can be understood as the middle transition status */
+        NCS_BUTTON_HALFCHECKED,      
+
+        /* Represent pressed down status */
+        NCS_BUTTON_CHECKED               
+};
 ```
 
-[Next](MStudioMGNCSV1dot0PGENP2C4][Previous]] <
-[[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C6)
+[Next](MStudioMGNCSV1dot0PGENP2C4][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C6)
 
 
 ----
