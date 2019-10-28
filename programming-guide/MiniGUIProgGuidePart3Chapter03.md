@@ -562,7 +562,7 @@ examples of protruding polygon, concave polygon, and vertical monotonous
 polygon. 
 
 
-<img src="%ATTACHURLPATH%/15.1_T.jpeg" alt="15.1_T.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.1_T.jpeg)
 
 Figure 1 Polygons
 
@@ -909,7 +909,7 @@ static void GDIDemo_Region (HWND hWnd, HDC hdc)
 ```
 
 
-<img src="%ATTACHURLPATH%/15.2.jpeg" alt="15.2.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.2.jpeg)
 
 Figure 2 The output effect of special regions
 
@@ -985,7 +985,7 @@ segments are drawn in the brush color if the brush type is `BT_SOLID`, or in
 the brush color masked by the stipple if the brush type is `BT_STIPPLED`.
 
 
-<img src="%ATTACHURLPATH%/15.3.jpeg" alt="15.3.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.3.jpeg)
 
 Figure 3 Pen types
 
@@ -1003,7 +1003,7 @@ diameter equal to the line width and centered at the end point.
 extending half the width of the line beyond the end point.
 
 
-<img src="%ATTACHURLPATH%/15.4.jpeg" alt="15,4.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15,4.jpeg)
 
 Figure 4 Cap styles of pen
 - The join style of pen。The joining style of pen determines the way of the
@@ -1015,7 +1015,7 @@ following styles:
 which makes an equal angle with each line.
 
 
-<img src="%ATTACHURLPATH%/15.5.jpeg" alt="15.5.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.5.jpeg)
 
 Figure 5 The join styles of pen
 
@@ -1047,7 +1047,7 @@ can be seen in Figure 6. It should be noted that draw solid line segment itself
 is affected by other properties of painting pen, such as cap style of pen.
 
 
-<img src="%ATTACHURLPATH%/15.6.jpeg" alt="15.6.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.6.jpeg)
 
 Figure 6 Dash lines
 
@@ -1294,7 +1294,7 @@ void GDIDemo_Adv2DAPI (HWND hWnd, HDC hdc)
 ```
 
 
-<img src="%ATTACHURLPATH%/15.7.jpeg" alt="15.7.jpeg" `ALIGN="CENTER`" />
+![alt](figures/15.7.jpeg)
 
 Figure 7 The output of advanced two-dimension `GDI` functions
 

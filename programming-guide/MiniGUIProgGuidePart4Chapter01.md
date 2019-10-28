@@ -416,8 +416,7 @@ mGEff there are dozens of preset power curves that can be used to implement
 different interpolation speeds to produce animated effects.
 
 
-<img align="CENTER" alt="mgeff-curve.png" src="%ATTACHURLPATH%/mgeff-curve.png"
-/> 
+![alt](figures/mgeff-curve.png)
 
 mGEff support curve type
 
@@ -714,8 +713,7 @@ mGEffStr2Key(MGEFF_MINOR_mgplus_flip)        /*< mGPlus flip */
 ```
 
 
-<img align="CENTER" alt="mgeff-effctor.png"
-src="%ATTACHURLPATH%/mgeff-effctor.png" />
+![alt](figures/mgeff-effctor.png)
 
 mGEff Effector suppport
 

@@ -588,7 +588,7 @@ return 0;
 ```
 
 <center>
-<img src="%ATTACHURLPATH%/22.2.jpeg" alt="22.2.jpeg"  ALIGN="CENTER" /> <br>
+![alt](figures/22.2.jpeg)
 Fig. 22.2 Effect of running the edit box example program
 </center>
 

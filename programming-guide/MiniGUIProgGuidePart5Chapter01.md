@@ -142,7 +142,7 @@ in the server is set to `TRUE`; the other MiniGUI applications are clients,
 seen as Figure 1.
 
 
-<img src="%ATTACHURLPATH%/16.1.jpeg" alt="16.1.jpeg" `ALIGN="CENTER`" />
+![alt](figures/16.1.jpeg)
 
 Figure 1 Multi-process model of MiniGUI-Processes
 The current program structure allows each process to have its own (virtual)

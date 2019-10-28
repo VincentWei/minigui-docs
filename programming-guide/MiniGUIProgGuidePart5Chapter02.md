@@ -249,15 +249,15 @@ layer.
 - `def_nr_normals` The maximal number of normal z-order nodes in the new layer.
 It is also the default number of normal z-order nodes of a new layer.
 
-<noscript>
 ### Displaying Copyright Information
+
 Then, `mginit` calls two functions to respectively display the copyright
 information of MiniGUI and `MDE`:
+
 ```cpp
 AboutMiniGUI ();
     AboutMDE ();
 ```
-</noscript>
 
 ### Creating Taskbar
 As mentioned above, `mginit` uses taskbar and buttons on the taskbar to
@@ -269,7 +269,7 @@ be started.
 the top-most layer.
 
 
-<img src="%ATTACHURLPATH%/17.1.jpeg" alt="17.1.jpeg" `ALIGN="CENTER`" />
+![alt](figures/17.1.jpeg)
 
 Figure 1 Taskbar created by `mginit` in `mg-samples`
 
@@ -517,7 +517,6 @@ $ gcc –o mginit mginit.c –lminigui
 ```
 As this `mginit` program need startup helloworld program when starting up, so,
 we have to make sure that there is helloworld program in the current directory.
-<noscript>
 Certainly, we can also add this program into the sample program package in this
 guide. As `mginit` program can only be compiled under MiniGUI-Processes
 environment, we need to modify the file configure.in and the file Makefile.am 
@@ -557,7 +556,6 @@ modifying these scripts, you should run the script ./autogen.sh to recreate
 configure file, then run the script ./configure to create new makefiles for the
 `mg-samples` project. If MiniGUI is configured as MiniGUI-Threads, the command
 make will not compile `mginit` program and scrnsaver program.
-</noscript>
 
 ## Functions Specific to Clients of MiniGUI-Processes
 As you know, a client of MiniGUI-Processes should call `JoinLayer` to join

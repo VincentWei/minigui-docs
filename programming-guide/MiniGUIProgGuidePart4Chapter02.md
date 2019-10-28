@@ -416,9 +416,7 @@ status: on or off, it has supuport an switch status animation.
 | `NCSP_SWB_STATUS`| - | int | `RW` | switch status | `NCS_SWB_OFF/NCS_SWB_ON` |
 
 
-
-<img align="CENTER" alt="mgncs4touch-mswitchbutton.png"
-src="%ATTACHURLPATH%/mgncs4touch-mswitchbutton.png" />
+![alt](figures/mgncs4touch-mswitchbutton.png)
 
 `mSwitchButton` control
 
@@ -483,8 +481,7 @@ no new property, it include all `mTrackBar` property.
 | `NCSP_TRKBAR_PAGESTEP`| - | int | `RW` | The page step length|Pixel|
 
 
-<img align="CENTER" alt="mgncs4touch-mtrackbar.png"
-src="%ATTACHURLPATH%/mgncs4touch-mtrackbar.png" />
+![alt](figures/mgncs4touch-mtrackbar.png)
 
 `mNewTrackBar` control
 
@@ -516,8 +513,7 @@ setting ui like `iOS`.
 
 
 
-<img align="CENTER" alt="mgncs4touch-mitembar.png"
-src="%ATTACHURLPATH%/mgncs4touch-mitembar.png" />
+![alt](figures/mgncs4touch-mitembar.png)
 
 `mItemBar` control
 
@@ -602,8 +598,7 @@ _c(self)->setProperty (self, NCSP_ICONFLOW_SPAN, 120);
 ```
 
 
-<img align="CENTER" alt="mgncs4touch-miconflow.png"
-src="%ATTACHURLPATH%/mgncs4touch-miconflow.png" />
+![alt](figures/mgncs4touch-miconflow.png)
 
 iconflow control
 
@@ -993,17 +988,9 @@ END_MINI_CLASS
 ```
 
 
-<img align="CENTER" alt="mgncs4touch-mtableview.png"
-src="%ATTACHURLPATH%/mgncs4touch-mtableview.png" />
+![alt](figures/mgncs4touch-mtableview.png)
 
 `mSimpleTableViewPiece` piece
-
-
-
-## Comments
-
-
-
 
 ----
 

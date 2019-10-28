@@ -37,7 +37,8 @@ splendid.
 - *Brief introduction*: Used to show progress, often used in file copying,
 software installation and file transmission.
 - *Schematic diagram*:
-<img src="%ATTACHURLPATH%/prog.png" />
+
+![alt](figures/prog.png)
 
 ### `mProgressBar风格`
 ### Style of `mProgressBar`

@@ -50,8 +50,7 @@ from the "down" through the path, then the point is in the path, otherwise,
 the store No longer in the path.
 
 
-<img align="CENTER" alt="path.jpeg" src="%ATTACHURLPATH%/path.jpeg"
-title="path.jpeg" />
+![alt](figures/path.jpeg)
 
 1 Even-odd rule: points A, D, F are in the path, and points B, C, E, G are
 not in the path
@@ -140,8 +139,7 @@ class.
 
 - `MGPlus` rebuild framework:
 
-<img align="CENTER" alt="mgplus_framework.jpeg"
-src="%ATTACHURLPATH%/mgplus_framework.jpeg" title="mgplus_framework.jpeg"/>
+![alt](figures/mgplus_framework.jpeg)
 
 ## `API` Applications
 
@@ -505,7 +503,7 @@ Int MiniGUIMain (int argc, const char* argv[])
 ```
 
 
-<img align="CENTER" alt="composite.png" src="%ATTACHURLPATH%/composite.png" />
+![alt](figures/composite.png)
 
 color combination
 
@@ -567,13 +565,13 @@ Value);
 
 Add the effect of the path before anti-aliasing
 
-<img align="CENTER" alt="path1.png" src="%ATTACHURLPATH%/path1.png"/>
+![alt](figures/path1.png)
 
 Adding the anti-aliasing effect of the path
 
 Added anti-aliasing effect of the path
 
-<img align="CENTER" alt="path2.png" src="%ATTACHURLPATH%/path2.png"/>
+![alt](figures/path2.png)
 
 Adding anti-aliasing effect to the path
 
@@ -616,13 +614,13 @@ Value);
 
 Add text before antialiasing
 
-<img align="CENTER" alt="text2.png" src="%ATTACHURLPATH%/text2.png"/>
+![alt](figures/text2.png)
 
 Add text anti-aliasing effect
 
 Added text anti-aliasing effect
 
-<img align="CENTER" alt="text1.png" src="%ATTACHURLPATH%/text1.png"/>
+![alt](figures/text1.png)
 
 Add text anti-aliasing effect
 
@@ -748,8 +746,7 @@ rotation)
 ```
 
 
-<img align="CENTER" alt="worldtransform.png"
-src="%ATTACHURLPATH%/worldtransform.png" />
+![alt](figures/worldtransform.png)
 
 Conversion of world coordinate system
 
@@ -906,7 +903,7 @@ The font rotation sample code is as follows:
 ```
 
 
-<img align="CENTER" alt="3.png" src="%ATTACHURLPATH%/3.png" />
+![alt](figures/3.png)
 
 font rotation
 
@@ -1011,7 +1008,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ```
 
 
-<img align="CENTER" alt="lines.png" src="%ATTACHURLPATH%/lines.png" />
+![alt](figures/lines.png)
 
 Drawing Effective Results
 
@@ -1059,7 +1056,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="arc.png" src="%ATTACHURLPATH%/arc.png" />
+![alt](figures/arc.png)
 
 ####+ Add Bezier Curve
 
@@ -1106,7 +1103,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 // Destroy.... releases memory
 ```
 
-<img align="CENTER" alt="bezier.png" src="%ATTACHURLPATH%/bezier.png" />
+![alt](figures/bezier.png)
 
 ####+ Add a rectangle
 
@@ -1489,7 +1486,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 // Destroy.... releases memory
 ```
 
-<img align="CENTER" alt="Move.png" src="%ATTACHURLPATH%/Moveto.png" />
+![alt](figures/Move.png)
 
 #### Get path
 
@@ -1563,8 +1560,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="GetPathPoints.png"
-src="%ATTACHURLPATH%/GetPathPoints.png" />
+![alt](figures/GetPathPoints.png)
 
 ### path conversion
 
@@ -1695,8 +1691,7 @@ For the usage of path conversion, please refer to the following example:
 ```
 
 
-<img align="CENTER" alt="PathTransform.png"
-src="%ATTACHURLPATH%/PathTransform.png" />
+![alt](figures/PathTransform.png)
 
 path conversion
 
@@ -1749,7 +1744,8 @@ MPStatus MGPlusPenSetWidth (HPEN pen, int width)
 
 Width rendering
 
-<img align="CENTER" alt="width.png" src="%ATTACHURLPATH%/width.png" />
+![alt](figures/width.png)
+
 Effect of <center> width</center>
 Note: The width of the lines is 1, 10 and 30 in order.
 
@@ -1818,19 +1814,19 @@ MPStatus MGPlusPenSetJoinStyle (HPEN pen, LINE_JOIN_E line_join);
 
 Set the mode to the effect of `JOIN_MITER`
 
-<img align="CENTER" alt="join1.png" src="%ATTACHURLPATH%/join1.png" />
+![alt](figures/join1.png)
 
 mode is `JOIN_MITER`
 
 The set mode is `JOIN_ROUND`
 
-<img align="CENTER" alt="join2.png" src="%ATTACHURLPATH%/join2.png" />
+![alt](figures/join2.png)
 
 mode is `JOIN_ROUND`
 
 Set the pattern to the effect of `JOIN_BEVEL`
 
-<img align="CENTER" alt="join3.png" src="%ATTACHURLPATH%/join3.png"/>
+![alt](figures/join3.png)
 
 mode is `JOIN_BEVEL`
 
@@ -1863,19 +1859,19 @@ MPStatus MGPlusPenSetCapStyle (HPEN pen, LINE_CAP_E line_cap);
 
 Set the mode to `CAP_BUTT` renderings
 
-<img align="CENTER" alt="cap1.png" src="%ATTACHURLPATH%/cap1.png" />
+![alt](figures/cap1.png)
 
 mode is `CAP_BUTT`
 
 Set the mode to `CAP_ROUND` renderings
 
-<img align="CENTER" alt="cap2.png" src="%ATTACHURLPATH%/cap2.png" />
+![alt](figures/cap2.png)
 
 mode is `CAP_ROUND`
 
 Effect mode for setting the mode to `CAP_SQUARE`
 
-<img align="CENTER" alt="cap3.png" src="%ATTACHURLPATH%/cap3.png" />
+![alt](figures/cap3.png)
 
 mode is `CAP_SQUARE`
 
@@ -2056,7 +2052,7 @@ MGPlusDrawLine (graphics, pen, 200, 100, 100, 100);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawLine.png" src="%ATTACHURLPATH%/DrawLine.png" />
+![alt](figures/DrawLine.png)
 
 #### Drawing Arcs
 
@@ -2090,7 +2086,7 @@ MGPlusDrawArc (graphics, pen, 100, 100, 50, 25, 90, 345);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawArc.png" src="%ATTACHURLPATH%/DrawArc.png" />
+![alt](figures/DrawArc.png)
 
 #### Drawing Bezier Curves
 
@@ -2127,8 +2123,7 @@ MGPlusDrawBezier (graphics, pen, 11, 11, 88, 333, 99, 0, 222, 111);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawBezier.png" src="%ATTACHURLPATH%/DrawBezier.png" 
-/> 
+![alt](figures/DrawBezier.png)
 
 #### draw a rectangle
 
@@ -2161,8 +2156,7 @@ MGPlusDrawRectangle (graphics, pen, 100, 175, 100, 100);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawRectangle.png"
-src="%ATTACHURLPATH%/DrawRectangle.png" />
+![alt](figures/DrawRectangle.png)
 
 #### Drawing Rounded Rectangle
 
@@ -2196,8 +2190,7 @@ MGPlusDrawRoundRectEx (graphics, pen, 100, 375, 100, 100, 10, 10);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawRoundRect.png"
-src="%ATTACHURLPATH%/DrawRoundRect.png" />
+![alt](figures/DrawRoundRect.png)
 
 #### Draw an ellipse
 
@@ -2227,8 +2220,7 @@ MGPlusDrawEllipse (graphics, pen, 100, 100, 50, 25);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawEllipse.png" src="%ATTACHURLPATH%/DrawEllipse.png"
-/> 
+![alt](figures/DrawEllipse.png)
 
 #### Load image
 
@@ -2278,7 +2270,7 @@ MGPlusDrawImage (graphics, 0, 100, 100, 200, 200);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawImage.png" src="%ATTACHURLPATH%/DrawImage.png" />
+![alt](figures/DrawImage.png)
 
 ```cpp
 //n_index Picture index value, point A set of vertices, count number of
@@ -2320,8 +2312,7 @@ MPPOINT points [4];
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawImagePoints.png"
-src="%ATTACHURLPATH%/DrawImagePoints.png" />
+![alt](figures/DrawImagePoints.png)
 
 ```cpp
 //n_index Picture index value, path target path.
@@ -2348,8 +2339,7 @@ MGPlusDrawImageWithPath (graphics, 0, path);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="DrawImageWithPath.png"
-src="%ATTACHURLPATH%/DrawImageWithPath.png" />
+![alt](figures/DrawImageWithPath.png)
 
 ## Brush
 ### Brush Management
@@ -2390,10 +2380,10 @@ MPStatus MGPlusBrushDelete (HBRUSH brush);
 #### Solid Brush Setting
 
 Set the color of a single brush
+
 ```cpp
 MPStatus MGPlusSetSolidBrushColor (HBRUSH brush, RGBA* rgba);
 ```
-<noscript>
 Shadow Brush Hatch brush settings
 Set the color of the Hatch brush
 ```cpp
@@ -2408,11 +2398,11 @@ Back_rgba);
 ```
 
 Texture Brushes texture brush settings.
+
 ```cpp
 MPStatus MGPlusSetTextureBrushImage (HBRUSH brush, BITMAP* bitmap);
 ```
 
-</noscript>
 #### `GradientBrush` `GradientBrush` Settings
 
 ####+ Path Gradient Brush `PathGradientBrush` Settings
@@ -2474,8 +2464,7 @@ SurroundColors, 3);
 
 ```
 
-<img align="CENTER" alt="PathGradientBrush.png"
-src="%ATTACHURLPATH%/PathGradientBrush.png" />
+![alt](figures/PathGradientBrush.png)
 
 ####+ Linear `GradientBrush` `LinearGradientBrus` Settings
 
@@ -2541,8 +2530,8 @@ MP_LINEAR_GRADIENT_MODE_HORIZONTAL);
 ```
 
 
-<img align="CENTER" alt="MP_LINEAR_GRADIENT_MODE_HORIZONTAL.png"
-src="%ATTACHURLPATH%/MP_LINEAR_GRADIENT_MODE_HORIZONTAL.png" />
+![alt](figures/MP_LINEAR_GRADIENT_MODE_HORIZONTAL.png)
+
 <center>MP_LINEAR_GRADIENT_MODE_HORIZONTAL.</center>
 The following is a demonstration of other modes:
 Set brush to `MP_LINEAR_GRADIENT_MODE_VERTICAL` mode
@@ -2599,7 +2588,7 @@ MGPlusFillArc (graphics, brush, 100, 100, 50, 50, 90, 180);
 ```
 
 
-<img align="CENTER" alt="FillArc.png" src="%ATTACHURLPATH%/FillArc.png" />
+![alt](figures/FillArc.png)
 
 #### Fill Bezier Curve
 
@@ -2633,8 +2622,7 @@ MGPlusFillBezier (graphics, brush, 11,11, 88,333, 99,0, 222,111);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="FillBezier.png" src="%ATTACHURLPATH%/FillBezier.png" 
-/> 
+![alt](figures/FillBezier.png)
 
 #### Fill rectangle
 
@@ -2666,8 +2654,7 @@ MGPlusFillRectangleI (graphics, brush, 100, 175, 100, 100);
 ```
 
 
-<img align="CENTER" alt="FillBezier.png" src="%ATTACHURLPATH%/FillBezier.png" 
-/> 
+![alt](figures/FillBezier.png)
 
 #### Fill rounded rectangle
 
@@ -2700,8 +2687,7 @@ MGPlusFillRoundRectIEx ( graphics, brush, 100, 375, 100, 100, 10, 10);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="FillRoundRect.png"
-src="%ATTACHURLPATH%/FillRoundRect.png" />
+![alt](figures/FillRoundRect.png)
 
 #### Fill ellipse
 
@@ -2730,12 +2716,7 @@ MGPlusFillEllipse (graphics, brush, 100, 100, 50, 25);
 // Destroy....Frees memory
 ```
 
-<img align="CENTER" alt="FillEllipse.png" src="%ATTACHURLPATH%/FillEllipse.png"
-/> 
-
-
-
-
+![alt](figures/FillEllipse.png)
 
 ----
 

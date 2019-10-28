@@ -35,7 +35,6 @@ indirect access to `FrameBuffer`, etc.
 support all kinds of display modes of `QVFB` and all packed-pixel modes of
 `FrameBuffer` console.
 
-<noscript>
 Shadow engine uses the conception of sub-driver. MiniGUI uses the name of 
 target board to determine which sub-driver to be included. Only one sub-driver
 can be included at one time, which is determined by the configuration option
@@ -51,7 +50,7 @@ display modes.
 - Without target (__TARGET_UNKNOWN__): The default sub-driver. This sub-driver
 operates similarly to the Dummy `GAL` engine. You can modify this sub-driver to
 implement operations on the underlayer graphics device.
-</noscript>
+
 When configure rotating screen, Shadow engine can be configured in 
 `MiniGUI.cfg` as follow:
 
@@ -203,7 +202,6 @@ This engine provides the support for direct access to `LCD` `FrameBuffer`
 Nucleus, uC/OS-II, and `eCos`. The `LCD`’s pixel format should be above 8-bpp
 (bits-per-pixel), and in packed-pixel mode.
 
-<noscript>
 `CommLCD` engine also uses the conception of sub-driver. The sub-drivers 
 already implemented in `CommLCD` engine include:
 - --with-targetname= vxi386/vxppc (__TARGET_VXi386__ and __TARGET_VXPPC__): The
@@ -217,7 +215,6 @@ sub-driver. Otherwise, you should define the sub-driver by yourself. For more
 information, please see src/newgal/commlcd/unknown.c. There is a default
 implementation for uC/OS-II in rtos/ucos2_startup.c and it is similar to dummy
 graphics engine.
-</noscript>
 
 In every sub-drive of `CommLCD`, we need to implement the following interfaces
 according to the operating system and lower-level `API`.

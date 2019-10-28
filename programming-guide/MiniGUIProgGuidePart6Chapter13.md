@@ -336,10 +336,8 @@ static `CTRLDATA` `CtrlBook[`] =
 };
 ```
 
-<center>
-<img src="%ATTACHURLPATH%/31.1.jpeg" alt="31.1.jpeg"  ALIGN="CENTER" /> <br>
-Fig. 31.1 Tree view formed by book content
-</center>
+![alt](figures/31.1.jpeg)
+Figure 1 Tree view formed by book content
 
 The treeview.c program uses a tree view control to display the book contents structure. The program specifies dwAddData of the tree view control data structure CTRLDATA to be &bookInfo when creating the dialog box with the dialog box template. BookInfo is a structure of TVITEMINFO type, where the title of the node is “MiniGUI Programming Guide”, so the title of the root node of this tree view is "MiniGUI Programming Guide".
 

@@ -121,10 +121,10 @@ MiniGUI uses the font by memory mapping. It reduces memory usage when using
 `QPF` font in MiniGUI-Processes mode. It supports `BIDI` text, such as Arabic
 and Hebrew.
 
-<noscript>
 We can enable or disable any device font in MiniGUI by changing configuration
 options for configure script. The followings are the options for each device
 font: 
+
 - --enable-rbfsupport It is the option for `RBF` font. MiniGUI supports it by
 default. If you don't want to support it, please use --disable-rbfsupport to
 disable it.
@@ -144,7 +144,6 @@ version and use --with-ttfsupport=ft2 to support 2.0. MiniGUI doesn't support
 vector font in default, so you must use ft1 or ft2 to enable vector font
 support. It is important to note, you must install freetype library before
 enable vector font support. Otherwise, you can not enable it.
-</noscript>
 
 When initializing MiniGUI, it is needed to read `MiniGUI.cfg` and load certain
 font files. The loaded font is internally called device font. Device font
@@ -473,7 +472,7 @@ Figure 1 is the output of `TextOut`, `TabbedTextOut`, and `TabbedTextOutEx`
 functions. 
 
 
-<img src="%ATTACHURLPATH%/14.1.jpeg" alt="14.1.jpeg" `ALIGN="CENTER`" />
+![alt](figures/14.1.jpeg)
 
 Figure 1 Output of `TextOut`, `TabbedTextOut`, and `TabbedTextOutEx` functions
 `DrawText` is the most complicated text output function, which can use 
@@ -567,7 +566,7 @@ void OnModeDrawText (HDC hdc)
 ```
 
 
-<img src="%ATTACHURLPATH%/14.2.jpeg" alt="14.2.jpeg" `ALIGN="CENTER`" />
+![alt](figures/14.2.jpeg)
 
 Figure 2 The output of `DrawText` function
 
@@ -681,7 +680,7 @@ fontfile0=/usr/local/share/minigui/res/font/naskhi-18-21-iso8859-6.vbf
 Arabic demo is shown as below:
 
 
-<img src="%ATTACHURLPATH%/14.3.jpeg" alt="14.3.jpeg" `ALIGN="CENTER`" />
+![alt](figures/14.3.jpeg)
 
 Figure 3 Arabic font demo
 

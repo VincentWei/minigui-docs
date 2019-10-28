@@ -1342,7 +1342,7 @@ List 1 Loading and showing a bitmap
 ```
 
 
-<img src="%ATTACHURLPATH%/13.1.jpeg" alt="13.1.jpeg" `ALIGN="CENTER`" />
+![alt](figures/13.1.jpeg)
 
 Fig 13.1 Loading and showing a bitmap
 
@@ -1425,7 +1425,7 @@ static int BitbltWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 The output of the above code can be seen from Figure 2.
 
 
-<img src="%ATTACHURLPATH%/13.2.jpeg" alt="13.2.jpeg" `ALIGN="CENTER`" />
+![alt](figures/13.2.jpeg)
 
 Figure 2 Presentation of `BitBlt` operation
 
@@ -1493,7 +1493,7 @@ static int StretchbltWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 The output of program is as shown in Figure 3.
 
 
-<img src="%ATTACHURLPATH%/13.3.jpeg" alt="13.3.jpeg" `ALIGN="CENTER`" />
+![alt](figures/13.3.jpeg)
 
 Figure 3 The presentation of `StretchBlt` operation
 
