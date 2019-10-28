@@ -86,7 +86,7 @@ by default. Buttons of all other types are derived from it.
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
-| *Style ID | *miniStudio property name* | *Explanation* |
+| *Style ID* | *miniStudio property name* | *Explanation* |
 | `NCSS_BUTTON_CHECKABLE` | Checkable | Set if the button can carry out `CHECKED` status conversion; if `FALSE`, `CHECK` status conversion is not carried out, and autocheck and `ThreeDCheck` are invalid |
 | `NCSS_BUTTON_AUTOCHECK` | Autocheck | When `CHECKED` status conversion can be carried out, set if clicking can be carried out to automatically switch `CHECK` status |
 | `NCSS_BUTTON_3DCHECK` | `ThreeDCheck` | Set button `CHECK` status as three status (unchecked-halfchecked-checked) or two status (unchecked-checked) switch |
@@ -131,7 +131,7 @@ Drawing of `mButton` Classic renderer is as below: for the drawing of non
 client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
 | `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
@@ -159,7 +159,7 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
@@ -191,7 +191,7 @@ Schematic diagram: <br />
 For the drawing of non client area, please refer to the drawing of Flat 
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_BGC_3DBODY` | background color | `BgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
@@ -222,9 +222,7 @@ status button.
 - Complete example code of common button: [button.c](%ATTACHURL%/button.c.txt)
 
 
-##### List 1 <a href="%ATTACHURL%/button.c.txt">button.c</a>
-##### List 1 <a href="%ATTACHURL%/button.c.txt">button.c</a>
-<p align=center>List p2c5-1 <a href="%ATTACHURL%/button.c.txt">button.c</a></p>
+##### List 1 button.c
 
 - Define common button
 ```cpp
@@ -277,7 +275,7 @@ renderer](MStudioMGNCSV1dot0PGENP2C2)
 for the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
 
@@ -307,7 +305,7 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton)
 drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
 
@@ -333,7 +331,7 @@ size will be adopted to draw
 below: for the drawing of non area region, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
 | `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
 
@@ -379,7 +377,7 @@ renderer](MStudioMGNCSV1dot0PGENP2C2)
 - For the drawing of `mRadiobutton` Classic non client area, please refer to 
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobutton_classic_fgc.png" alt="radiobutton_classic_fgc.png"/> | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobutton_classic_textdisable.png" alt="radiobutton_classic_textdisable.png"/> | |
 
@@ -408,7 +406,7 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 - For the drawing of `mRadiobutton` Fashion non client area, please refer to 
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_fashion_fgc.png" alt="radiobtn_fashion_fgc.png"/> | |
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_fashion_disable.png" alt="radiobtn_fashion_disable.png"/> | |
 
@@ -432,7 +430,7 @@ actual size is adopted to draw
 - For the drawing of `mRadiobutton` Flat non client area, please refer to the
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_flat_fgc.png" alt="radiobtn_flat_fgc.png"/> | |
 | `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/radiobtn_flat_bgc.png" alt="radiobtn_flat_bgc.png"/> | |
 

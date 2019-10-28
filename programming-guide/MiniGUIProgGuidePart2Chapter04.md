@@ -382,7 +382,7 @@ mComponentClass * ncsGetComponentClass(const char* class_name, BOOL check);
 
 ### Style of `mWidget`
 
-| *Style ID | *Property Name of miniStudio* | *Explanation* ||
+| *Style ID* | *Property Name of miniStudio* | *Explanation* ||
 | `NCSS_NOTIFY` | Notify | Decide if the control generates Notification event |
 
 ### Property of `mWidget`

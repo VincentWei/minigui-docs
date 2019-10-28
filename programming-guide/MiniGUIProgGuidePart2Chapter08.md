@@ -33,7 +33,7 @@ It is inherited from the style of
 It is inherited from the property of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-| *Property ID | *miniStudio name* | *Type* | *Permission* | *Explanation* |
+| *Property ID* | *miniStudio name* | *Type* | *Permission* | *Explanation* |
 | `NCSP_SWGT_CONTWIDTH` | - | unsigned int | `RW` | Content width |
 | `NCSP_SWGT_CONTHEIGHT` | - | unsigned int | `RW` | Content height |
 | `NCSP_SWGT_CONTX` | `ContentX` | int | `RW` | Offset value of the content in horizontal direction |
@@ -270,16 +270,12 @@ It is inherited from the <a href="#Renderer of `m_ScrollWidget">renderer` of
 This example demonstrates how to use Container to realize jumping between
 multiple controls exceeding the window size to the users.
 
-<p align=center>
-
 ![alt](figures/container_demo.png)
 
 Figure p2c6-1 Output of Container Program
-</p>
 
 ##### List 1 container.c
-##### List 1 container.c
-<p align=center>List p2c7-1 container.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/container.c.txt"}%
 ```

@@ -63,8 +63,7 @@ users.
 Figure p2c6-1 Output of panel Program
 
 ##### List 1 panel.c
-##### List 1 panel.c
-<p align=center>List p2c6-1 panel.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/panel.c.txt"}%
 ```
@@ -112,7 +111,7 @@ It is inherited from the property of
 It is inherited from the event of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
-| *Event ID | *Parameter* | *Explanation* |
+| *Event ID* | *Parameter* | *Explanation* |
 | `NCSN_CMBOX_SELCHANGE` | -- | The selected item changes |
 | `NCSN_CMBOX_SETFOCUS` | -- | Get focus |
 | `NCSN_CMBOX_KILLFOCUS` | -- | Lose focus |
@@ -269,18 +268,13 @@ Specification for the Image Resource Used by Skin Renderer
 
 
 ##### List 1 combobox.c
-##### List 1 combobox.c
-<p align=center>List p2c6-1 combobox.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/combobox"}%
 ```
 
 
 [Next](MStudioMGNCSV1dot0PGENP2C5][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C7)
-
-
--- Main.XiaodongLi - 28 Feb 2010
-
 
 ----
 

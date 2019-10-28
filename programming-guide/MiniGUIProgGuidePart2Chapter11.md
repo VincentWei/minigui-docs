@@ -51,7 +51,7 @@ software installation and file transmission.
 | `NCSS_PRGBAR_SHOWPERCENT` | `ShowPercent` | 显示当前进度值（百分比)| <img src="%ATTACHURLPATH%/prog_per.png" alt="prog_per.png" width='111' height='30' /> |
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Style ID | *miniStudio property * | *Explanation* ||
+| *Style ID* | *miniStudio property * | *Explanation* ||
 | `NCSS_PRGBAR_HORIZONTAL` | -- | In miniStudio, the two styles are divided into two controls to use, respectively corresponding to| Horz `ProgressBar` |
 | `NCSS_PRGBAR_VERTICAL` | -- | ^ | Vert `ProgressBar` |
 | `NCSS_PRGBAR_BLOCKS` | `BlockChunk->TRUE` | Block progress | <img src="%ATTACHURLPATH%/prog_block.png" alt="prog_block.png" width='111' height='30' /> |

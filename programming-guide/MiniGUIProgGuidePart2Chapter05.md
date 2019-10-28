@@ -136,8 +136,7 @@ users. <br/>
 ![alt](figures/static.png)
 
 ##### List 1 static.c
-##### List 1 static.c
-<p align=center>List p2c4-1 static.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/static.c.txt"}%
 ```
@@ -231,8 +230,7 @@ different drawing modes to the users<br/>
 ![alt](figures/image.png)
 
 ##### List 2 image.c
-##### List 2 image.c
-<p align=center>List p2c4-2 image.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/image.c.txt"}%
 ```
@@ -374,8 +372,7 @@ This example demonstrate how to draw all kinds of rectangles to the users<br/>
 ![alt](figures/rect.png)
 
 ##### List 3 rectangle.c
-##### List 3 rectangle.c
-<p align=center>List p2c4-3 rectangle.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/rectangle.c.txt"}%
 ```
@@ -446,8 +443,6 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 This example demonstrate how to generate group box with renderers to the users.
 
 ##### List 4 groupbox.c
-##### List 4 groupbox.c
-<p align=center>List p2c4-4 groupbox.c</p>
 
 ```cpp
 %INCLUDE{"%ATTACHURL%/groupbox.c.txt"}%

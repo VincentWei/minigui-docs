@@ -111,7 +111,7 @@ It is inherited from [the property of `mWidget`
 
 It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-| *Event ID | *Parameter* | *Explanation* |
+| *Event ID* | *Parameter* | *Explanation* |
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | The active property page has changed |
 
 
@@ -299,20 +299,13 @@ etc.
 Figure p2c11-1 Output of propsheet Program
 </p>
 
-<p align=center>清单 p2c11-1 propsheet.c</p>
 ##### List 1 propsheet.c
-##### List 1 propsheet.c
-<p align=center>List p2c11-1 propsheet.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/propsheet.c.txt"}%
 ```
 
 [Next](MStudioMGNCSV1dot0PGP2C10][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C12)
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
 
 
 ----

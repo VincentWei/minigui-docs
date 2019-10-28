@@ -95,7 +95,7 @@ It is inherited from [the property of `mWidget`
 
 It is inherited from [the event if `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-| *Event ID | *Parameter* | *Explanation* |
+| *Event ID* | *Parameter* | *Explanation* |
 | `NCSN_SPNR_CHANGED` | int current property value | Current value changes |
 | `NCSN_SPNR_REACHMAX` | int current property value | The current value reaches the maximum value |
 | `NCSN_SPNR_REACHMIN` | int current property value | The current value reaches the minimum value |
