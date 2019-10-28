@@ -33,9 +33,8 @@ Tree view control with `TVS_SORT` style will automatically sort the items.
 Tree view control with `TVS_NOTIFY` style will generate corresponding
 notification messages when responding to the user’s operation.
 
-***
-[Note] In MiniGUI 3.0, TreeView Control with TVS_ICONFORSELECT style is removed, and there is no effect for TreeView control to use this style. 
-***
+__NOTE__ In MiniGUI 3.0, TreeView Control with TVS_ICONFORSELECT style is
+removed, and there is no effect for TreeView control to use this style. 
 
 ## Messages of Tree View Control
 ### Creating and Deleting Node Item
@@ -105,244 +104,277 @@ item.
 
 `TVM_GETITEMINFO` message is used to get the properties of a node item:
 
-`CODE{"cpp"}`%
-`TVITEMINFO` tvii;
-`GHANDLE` item;
-`SendMessage` (hTrvWnd, `TVM_GETITEMINFO`, (WPARAM)item, (LPARAM)&tvii);
+```cpp
+TVITEMINFO tvii;
+GHANDLE item;
+SendMessage (hTrvWnd, TVM_GETITEMINFO, (WPARAM)item, (LPARAM)&tvii);
 ```
 
-Here, item is the handle of the node item the information of which we want to get, tvii structure is used to save the properties of the item. It should be noted that, the buffer to which text points in tvii structure should be big enough.
+Here, item is the handle of the node item the information of which we want to
+get, tvii structure is used to save the properties of the item. It should be
+noted that, the buffer to which text points in tvii structure should be big
+enough. 
 
-TVM_SETITEMINFO is used to set the properties of a node item:
+`TVM_SETITEMINFO` is used to set the properties of a node item:
 
-```cplusplus
-`TVITEMINFO` tvii;
-`GHANDLE` item;
-`SendMessage` (hTrvWnd, `TVM_SETITEMINFO`, (WPARAM)item, (LPARAM)&tvii);
+```cpp
+TVITEMINFO tvii;
+GHANDLE item;
+SendMessage (hTrvWnd, TVM_SETITEMINFO, (WPARAM)item, (LPARAM)&tvii);
 ```
 
-Here, item is the handle of the node item to be set, and tvii structure includes the information of the node item to be set.
+Here, item is the handle of the node item to be set, and tvii structure 
+includes the information of the node item to be set.
 
-TVM_GETITEMTEXT message gets the text title of a node item:
+`TVM_GETITEMTEXT` message gets the text title of a node item:
 
-```cplusplus
+```cpp
 char *buffer;
-`SendMessage` (hTrvWnd, `TVM_GETITEMTEXT`, (WPARAM)item, (LPARAM)buffer);
+SendMessage (hTrvWnd, TVM_GETITEMTEXT, (WPARAM)item, (LPARAM)buffer);
 ```
 
 The buffer should be big enough to save the text title of the node item.
 
-The length of the text title of a node item can be gotten with TVM_GETITEMTEXTLEN message:
+The length of the text title of a node item can be gotten with
+`TVM_GETITEMTEXTLEN` message:
 
-```cplusplus
+```cpp
 int len;
-len = `SendMessage` (hTrvWnd, `TVM_GETITEMTEXTLEN`, (WPARAM)item, 0);
+len = SendMessage (hTrvWnd, TVM_GETITEMTEXTLEN, (WPARAM)item, 0);
 ```
 
-### 31.2.3 Selecting and Searching a Node Item
+### Selecting and Searching a Node Item
 
-TVM_SETSELITEM message is used to select a node item:
+`TVM_SETSELITEM` message is used to select a node item:
 
-```cplusplus
-`GHANDLE` item;
-`SendMessage` (hTrvWnd, `TVM_SETSELITEM`, (WPARAM)item, 0);
+```cpp
+GHANDLE item;
+SendMessage (hTrvWnd, TVM_SETSELITEM, (WPARAM)item, 0);
 ```
 
 Here, item is the handle of the node item to be selected.
 
-TVM_GETSELITEM message gets the current selected node item:
+`TVM_GETSELITEM` message gets the current selected node item:
 
-```cplusplus
-`GHANDLE` item;
-item = `SendMessage` (hTrvWnd, `TVM_GETSELITEM`, 0, 0);
+```cpp
+GHANDLE item;
+item = SendMessage (hTrvWnd, TVM_GETSELITEM, 0, 0);
 ```
 
-After SendMessage returns, item is the handle of the current selected node item.
+After `SendMessage` returns, item is the handle of the current selected node
+item. 
 
-TVM_GETROOT message is used to get the root node of a tree view control:
+`TVM_GETROOT` message is used to get the root node of a tree view control:
 
-```cplusplus
-`GHANDLE` `rootItem`;
-`rootItem` = `SendMessage` (hTrvWnd, `TVM_GETROOT`, 0, 0);
+```cpp
+GHANDLE rootItem;
+rootItem = SendMessage (hTrvWnd, TVM_GETROOT,  0, 0);
 ```
 
-TVM_GETRELATEDITEM message is used to get the related node items of a certain node item:
+`TVM_GETRELATEDITEM` message is used to get the related node items of a certain
+node item:
 
-```cplusplus
-`GHANDLE` item;
+```cpp
+GHANDLE item;
 int related;
-`GHANDLE` `relItem`;
-`relItem` = `SendMessage` (hTrvWnd, `TVM_GETRELATEDITEM`, related,
-(LPARAM)item); 
+GHANDLE relItem;
+relItem = SendMessage (hTrvWnd, TVM_GETRELATEDITEM,  related, (LPARAM)item);
 ```
 
-Here item is the specified node, and related can be one of the following values:
-- TVIR_PARENT: To get the parent node of item
-- TVIR_FIRSTCHILD: To get the first sub item of item
-- TVIR_NEXTSIBLING: To get the next sibling node of item
-- TVIR_PREVSIBLING: To get the previous sibling node of item
+Here item is the specified node, and related can be one of the following 
+values: 
+- `TVIR_PARENT`: To get the parent node of item
+- `TVIR_FIRSTCHILD`: To get the first sub item of item
+- `TVIR_NEXTSIBLING`: To get the next sibling node of item
+- `TVIR_PREVSIBLING`: To get the previous sibling node of item
 
-SendMessage function returns the handle of the node item related to item.
+`SendMessage` function returns the handle of the node item related to item.
 
-TVM_SEARCHITEM message is used to search a specified node item:
+`TVM_SEARCHITEM` message is used to search a specified node item:
 
-```cplusplus
-`GHANDLE` `itemRoot`;
+```cpp
+GHANDLE itemRoot;
 const char *text;
-`GHANDLE` found;
-found = `SendMessage` (hTrvWnd, `TVM_SEARCHITEM`, (`WPARAM`) `itemRoot`,
-(`LPARAM`) text);
+GHANDLE found;
+found = SendMessage (hTrvWnd, TVM_SEARCHITEM, (WPARAM) itemRoot, (LPARAM) text);
 ```
 
-Here, itemRoot specifies the searching range (a sub-tree with itemRoot being the root), and the string pointed to by text is the searching content. SendMessage function will return the handle of the found node item if succeeds, and return zero if fails.
+Here, `itemRoot` specifies the searching range (a sub-tree with `itemRoot` 
+being the root), and the string pointed to by text is the searching content.
+`SendMessage` function will return the handle of the found node item if
+succeeds, and return zero if fails.
 
-TVM_FINDCHILD message is used to find a specified child node item of a node item.
+`TVM_FINDCHILD` message is used to find a specified child node item of a node
+item. 
 
-```cplusplus
-`GHANDLE` `itemParent`;
+```cpp
+GHANDLE itemParent;
 const char *text;
-`GHANDLE` found;
-found = `SendMessage` (hTrvWnd, `TVM_FINDCHILD`, (`WPARAM`) `itemParent`,
-(`LPARAM`) text);
+GHANDLE found;
+found = SendMessage (hTrvWnd, TVM_FINDCHILD, (WPARAM) itemParent, (LPARAM) text);
 ```
 
-The child nodes of the node item specified by itemParent are the searching range, and the string pointed to by text is the searching content. SendMessage function will return the handle of the found node item if succeeds, and return zero for if fails. 
+The child nodes of the node item specified by `itemParent` are the searching
+range, and the string pointed to by text is the searching content. 
+`SendMessage` function will return the handle of the found node item if
+succeeds, and return zero for if fails.
 
-The difference of TVM_FINDCHILD from TVM_SEARCHITEM is that TVM_FINDCHILD only searches in the child nodes, while TVM_SEARCHITEM searches in the whole sub-tree.
+The difference of `TVM_FINDCHILD` from `TVM_SEARCHITEM` is that `TVM_FINDCHILD`
+only searches in the child nodes, while `TVM_SEARCHITEM` searches in the whole
+sub-tree. 
 
-### 31.2.4 Comparing and Sorting
+### Comparing and Sorting
 
-The tree view control with TVS_SORT style automatically sorts the node items. When the application uses TVM_ADDITEM message to add a node item, the item are sorted according to adding sequence if the control has not TVS_SORT style; and sorted according to string comparison if the control has TVS_SORT style.
+The tree view control with `TVS_SORT` style automatically sorts the node items.
+When the application uses `TVM_ADDITEM` message to add a node item, the item 
+are sorted according to adding sequence if the control has not `TVS_SORT` 
+style; and sorted according to string comparison if the control has `TVS_SORT`
+style. 
 
-The string comparison function of the tree view control determines sorting order of the strings. The initial string comparing function is strncmp, and the application can set a new string comparing function of the tree view control by sending TVM_SETSTRCMPFUNC message:
+The string comparison function of the tree view control determines sorting 
+order of the strings. The initial string comparing function is strncmp, and the
+application can set a new string comparing function of the tree view control by
+sending `TVM_SETSTRCMPFUNC` message:
 
-```cplusplus
-`SendMessage` (hTrvWnd, `TVM_SETSTRCMPFUNC`, 0, (LPARAM)str_cmp);
+```cpp
+SendMessage (hTrvWnd, TVM_SETSTRCMPFUNC, 0, (LPARAM)str_cmp);
 ```
 
-Here, str_cmp is the pointer to a function of STRCMP type:
+Here, `str_cmp` is the pointer to a function of `STRCMP` type:
 
-```cplusplus
-typedef int (*STRCMP) (const char* s1, const char* s2, `size_t` n);
+```cpp
+typedef int (*STRCMP) (const char* s1, const char* s2, size_t n);
 ```
 
-This string comparison function compares the first (at most) n characters of the two strings s1 and s2, and returns an integer less than, equal to, or greater than zero according to comparison result.
+This string comparison function compares the first (at most) n characters of 
+the two strings s1 and s2, and returns an integer less than, equal to, or
+greater than zero according to comparison result.
 
-## 31.3 Notification Codes of Tree View Control
+## Notification Codes of Tree View Control
 
-The tree view control will generate notification messages when responding to the user’s operation such as clicking and some state changes, including:
-- TVN_SELCHANGE: Current selected node item changed.
-- TVN_DBLCLK: The user double clicked a node item.
-- TVN_SETFOCUS: The tree view control gained the input focus.
-- TVN_KILLFOCUS: The tree view control lost the input focus.
-- TVN_CLICKED: The user clicked a node item.
-- TVN_ENTER: The user pressed the ENTER key.
-- TVN_FOLDED: A node item is folded.
-- TVN_UNFOLDED: The node item is unfolded.
+The tree view control will generate notification messages when responding to 
+the user’s operation such as clicking and some state changes, including:
+- `TVN_SELCHANGE`: Current selected node item changed.
+- `TVN_DBLCLK`: The user double clicked a node item.
+- `TVN_SETFOCUS`: The tree view control gained the input focus.
+- `TVN_KILLFOCUS`: The tree view control lost the input focus.
+- `TVN_CLICKED`: The user clicked a node item.
+- `TVN_ENTER`: The user pressed the `ENTER` key.
+- `TVN_FOLDED`: A node item is folded.
+- `TVN_UNFOLDED`: The node item is unfolded.
 
-If the application needs to know the notification from a tree view control, it needs to use SetNotificationCallback function to register a notification callback function for the control.
+If the application needs to know the notification from a tree view control, it
+needs to use `SetNotificationCallback` function to register a notification
+callback function for the control.
 
-## 31.4 Sample Program
+## Sample Program
 
-The program in List 31.1 illustrates the use of a tree view control. Please refer to treeview.c of the demo program package of this guide for complete source code.
+The program in List 1 illustrates the use of a tree view control. Please refer
+to treeview.c of the demo program package of this guide for complete source
+code. 
 
-<center>List 31.1 Sample program of tree view control</center>
 
-```cplusplus
-#define `IDC_TREEVIEW` 100
+List 1 Sample program of tree view control
 
-#define `CHAPTER_NUM` 5
+```cpp
+#define IDC_TREEVIEW  100
+
+#define CHAPTER_NUM    5
 
 /* Define the text used by the items of the tree view control */
-static const char *chapter[] =
+static const char *chapter[] = 
 {
-"Static Control",
-"Button Control",
-"Edit Control",
-"Listbox Control",
-"Treeview Control",
+    "Static Control",
+    "Button Control",
+    "Edit Control",
+    "Listbox Control",
+    "Treeview Control",
 };
 
 /* Define the text used by the items of the tree view control */
 static const char *section[] =
 {
-"Styles of Control",
-"Messages of Control",
-"Sample Program"
+    "Styles of Control",
+    "Messages of Control",
+    "Sample Program"
 };
 
-static int `BookProc(HWND` `hDlg`, int message, `WPARAM` `wParam`, `LPARAM`
-`lParam`) 
+static int BookProc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
-switch (message) {
-case `MSG_INITDIALOG`:
+    switch (message) {
+        case MSG_INITDIALOG:
+        {
+            TVITEMINFO tvItemInfo;
+            int item;
+            int i, j;
+
+            /* Add items to the tree view control */
+            for (i = 0; i < CHAPTER_NUM; i++) {
+                 tvItemInfo.text = (char*)chapter[i];
+                 item = SendMessage (GetDlgItem(hDlg, IDC_TREEVIEW), TVM_ADDITEM, 
+                                    0, (LPARAM)&tvItemInfo);
+                 /* Add subitems to each item */
+                 for (j = 0; j < 3; j++) {
+                     tvItemInfo.text = (char*)section[j];
+                     SendMessage (GetDlgItem(hDlg, IDC_TREEVIEW), TVM_ADDITEM, 
+                                    item, (LPARAM)&tvItemInfo);
+                 }
+            }
+        }
+        break;
+
+        case MSG_CLOSE:
+            EndDialog (hDlg, 0);
+            return 0;
+    }
+
+    return DefaultDialogProc (hDlg, message, wParam, lParam);
+}
+
+static TVITEMINFO bookInfo =
 {
-`TVITEMINFO` `tvItemInfo`;
-int item;
-int i, j;
-
-/* Add items to the tree view control */
-for (i = 0; i < `CHAPTER_NUM`; i++) {
-`tvItemInfo.text` = (char*)chapter[i];
-item = `SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW`), `TVM_ADDITEM`,
-0, (LPARAM)&tvItemInfo);
-/* Add subitems to each item */
-for (j = 0; j < 3; j++) {
-`tvItemInfo.text` = (char*)section[j];
-`SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW`), `TVM_ADDITEM`,
-item, (LPARAM)&tvItemInfo);
-}
-}
-}
-break;
-
-case `MSG_CLOSE`:
-`EndDialog` (hDlg, 0);
-return 0;
-}
-
-return `DefaultDialogProc` (hDlg, message, `wParam`, `lParam`);
-}
-
-static `TVITEMINFO` `bookInfo` =
-{
-"Contents"
+    "Contents"
 };
 
 /* Dialog box template */
-static `DLGTEMPLATE` `DlgBook` =
+static DLGTEMPLATE DlgBook =
 {
-`WS_BORDER` | `WS_CAPTION`,
-`WS_EX_NONE`,
-100, 100, 320, 240,
-"Book Contents",
-0, 0,
-1, `NULL`,
-0
+    WS_BORDER | WS_CAPTION,
+    WS_EX_NONE,
+    100, 100, 320, 240,
+    "Book Contents",
+    0, 0,
+    1, NULL,
+    0
 };
 
 /* The dialog box has only one control: tree view control */
-static `CTRLDATA` `CtrlBook[`] =
+static CTRLDATA CtrlBook[] =
 {
-{
-`CTRL_TREEVIEW`,
-`WS_BORDER` | `WS_CHILD` | `WS_VISIBLE` |
-`WS_VSCROLL` | `WS_HSCROLL`,
-10, 10, 280, 180,
-`IDC_TREEVIEW`,
-"treeview control",
-(DWORD)&bookInfo
-}
+    {
+        CTRL_TREEVIEW,
+        WS_BORDER | WS_CHILD | WS_VISIBLE | 
+                  WS_VSCROLL | WS_HSCROLL,
+         10, 10, 280, 180,
+        IDC_TREEVIEW,
+        "treeview control",
+        (DWORD)&bookInfo
+    }
 };
 ```
 
+
+
 ![alt](figures/31.1.jpeg)
-Figure 1 Tree view formed by book content
 
-The treeview.c program uses a tree view control to display the book contents structure. The program specifies dwAddData of the tree view control data structure CTRLDATA to be &bookInfo when creating the dialog box with the dialog box template. BookInfo is a structure of TVITEMINFO type, where the title of the node is “MiniGUI Programming Guide”, so the title of the root node of this tree view is "MiniGUI Programming Guide".
+##### Figure 1 Tree view formed by book content
 
--- Main.XiaodongLi - 26 Oct 2009
-
+The treeview.c program uses a tree view control to display the book contents
+structure. The program specifies `dwAddData` of the tree view control data
+structure `CTRLDATA` to be &bookInfo when creating the dialog box with the
+dialog box template. `BookInfo` is a structure of `TVITEMINFO` type, where the
+title of the node is “MiniGUI Programming Guide”, so the title of the root node
+of this tree view is "MiniGUI Programming Guide".
 
 ----
 

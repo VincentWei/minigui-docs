@@ -36,11 +36,12 @@ Table 1 `NTBINFO` structure
 
 
 | *Member* |*Meaning* |*Note*|
+|----------|----------|------|
 | image |Image for displaying the bitmaps of the buttons. | |
 | `nr_cells` |Number of bitmap cells in the image, that is to say, number of lines in total| |
 | `nr_cols` |Number of cell columns in the image, that is to say, number of states of each bitmap cell |1 means the cells have only normal state; <br>2 means the cells have normal and highlight states; <br>3 means the cells have not disabled state. <br>4 or 0 means the cells have all the four possible states. |
-| `w_cell` |Width of bitmap cell |If `w_cell` is zero, it will be equal to (width_of_image / `nr_cols`)|
-| `h_cell` |Height of bitmap cell |If `h_cell` is zero, it will be equal to (height_of_image / `nr_cells`)|
+| `w_cell` |Width of bitmap cell |If `w_cell` is zero, it will be equal to (`width_of_image` / `nr_cols`)|
+| `h_cell` |Height of bitmap cell |If `h_cell` is zero, it will be equal to (`height_of_image` / `nr_cells`)|
 
 
 We must organize the bitmaps on the toolbar buttons (we called bitmap cells) in
@@ -99,8 +100,10 @@ An item can be added by sending `NTBM_ADDITEM` message and passing
 `NTBITEMINFO` structure to the toolbar control. Table 2 gives the meanings of
 the members of `NTBITEMINFO`.
 
-<center>Table 27.2 `NTBITEMINFO` structure<br>
-| *Members *|*Meanings * |*Note*|
+##### Table 2 `NTBITEMINFO` structure
+
+| *Members *|*Meanings* |*Note*|
+|-----------|-----------|------|
 | which |Used for `NTBM_GETITEM` and `NTBM_SETITEM` messages.| |
 | flags |This member is used to specify the type and state of an item. The type can be one of the following values:<br>1. `NTBIF_PUSHBUTTON`: A normal push button<br>2. `NTBIF_CHECKBUTTON`: A check box button<br>3. `NTBIF_HOTSPOTBUTTON`: A button with hotspot<br>4. `NTBIF_NEWLINE`: A new line separator when the style `NTBS_MULTILINE` specified.<br>5. `NTBIF_SEPARATOR`: A separator.<br>The item has only one state, namely `NTBIF_DISABLED`, indicating the item is disabled.| The value of this member should be `OR’d` value by one of the type identifier and the state identifier.|
 | id |Identifier of the button. When the user clicked a button, the identifier would be sent as the notification code of the notification message of the toolbar to the parent window or the notification callback function.| |

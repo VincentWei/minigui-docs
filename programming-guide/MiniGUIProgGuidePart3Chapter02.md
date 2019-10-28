@@ -13,8 +13,8 @@ National Standard Authorization. `ASCII` code can be understood as an encoding
 format of American English charset; this coding format uses one 7-bit byte to
 represent one character scoped from 0x00 to 0x7F.
 
-<b>[Note] Type man ascii to get the definition of `ASCII` on Linux command 
-line. </b>
+__NOTE__ Type man ascii to get the definition of `ASCII` on Linux command 
+line.
 
 `ASCII` cannot meet the requirement of non-English speakers as the use of
 computer has spreads to the entire world. Therefore, almost all countries 
@@ -53,8 +53,8 @@ double bytes to express one character; it is also called `USC2`; another is
 `UTF8` encoding format, which can be compatible with `ASCII` and `ISO8859-1`
 charset. The byte-count used to represent a character is variable.
 
-<b>[Prompt] Type man unicode and man utf-8 on Linux command line can get the
-information of `UNICODE` charset and `UTF8` encoding. </b>
+__PROMPT__ Type man unicode and man utf-8 on Linux command line can get the
+information of `UNICODE` charset and `UTF8` encoding. 
 
 `UNICODE` can solve the compatibility problem of charsets. However, most
 countries and regions do not recognize `UNICODE` charset. For example, China
@@ -74,8 +74,8 @@ charsets), `GB2312`, `GBK`, `GB18030`, `BIG5`, `EUCKR`, Shift-JIS, and `EUCJP`
 (multi-byte charsets). MiniGUI also support `UTF-8` and `UTF-16` encode of
 `UNICODE` charset through the abstract interface of charset.
 
-<b>[Prompt] The charset support of MiniGUI can be also understood as the 
-support of certain encoding format of that charset. </b>
+__PROMPT__ The charset support of MiniGUI can be also understood as the 
+support of certain encoding format of that charset. 
 
 MiniGUI uses logical font interface to support multi-byte charset. When
 application displays text, it usually needs to set logical font and assign the
@@ -234,7 +234,8 @@ static DEVFONT *dev_font;
                           FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE,
                           10, 0);
 ```
-The following images are used in above codes.<br />
+
+The following images are used in above codes.
 
 ![alt](figures/digits1.png)
 
@@ -248,8 +249,8 @@ The following images are used in above codes.<br />
 ![alt](figures/digits4.png)
 
 
-<b>[Prompt] The information of definition, name and format of device font is
-described in 3.1.4 of MiniGUI User Manual.</b>
+__PROMPT__ The information of definition, name and format of device font is
+described in 3.1.4 of MiniGUI User Manual.
 
 
 ## Logical font
@@ -328,8 +329,8 @@ logical font.
 The system logical fonts above are created corresponding to definition of
 `MiniGUI.cfg` when MiniGUI is initialized.
 
-<b>[Prompt] The information of definition, name and format of system logical
-font is described in 3.1.5 of MiniGUI User Manual.</b>
+__PROMPT__ The information of definition, name and format of system logical
+font is described in 3.1.5 of MiniGUI User Manual.
 
 `GetCurFont` function returns current logical font in a device context. You
 cannot call `DestroyLogFont` to destroy a system logical font.
@@ -631,31 +632,31 @@ supported by MiniGUI.
 
 Table 3 The font glyph render effects of MiniGUI
 
-<center>
 | *Style of logical font* | *Style character in logical font name* | *Style value of logical font* | *Meaning* |
-| weight：<br>FONT_WEIGHT_REGULAR | First char is ‘r’ | `FS_WEIGHT_REGULAR` | No any weight effect |
-| weight：<br>FONT_WEIGHT_BOLD | First char is ‘b’ | `FS_WEIGHT_BOLD` | Bold |
-| weight：<br>FONT_WEIGHT_LIGHT | First char is ‘l’ | `FS_WEIGHT_LIGHT` | To render glyph edge with the background color |
-| weight：<br>FONT_WEIGHT_BOOK | First char is ’b’ | `FS_WEIGHT_BOOK` | To handle to glyph edge by using the low-pass filter to anti-aliase |
-| weight：<br>FONT_WEIGHT_DEMIBOLD | Fist char is ‘d’ | `FS_WEIGHT_DEMIBOLD` | Both `FS_WEIGHT_BOLD` and `FS_WEIGHT_BOOK` |
-| weight：<br>FONT_WEIGHT_SUBPIXEL | Fist char is ‘s’ | `FS_WEIGHT_SUBPIXEL` | To handle to glyph by using sub-pixel render |
-| slant：<br>FONT_SLANT_ROMAN | Second char is ‘r’ | `FONT_SLANT_ROMAN` | No any slant effect |
-| slant：<br>FONT_SLANT_ITALIC | Second char is ‘i’ | `FONT_SLANT_ITALIC` | Italic |
-| flip：<br>FONT_OTHER_NIL | Third char is any letter but H/V/T | N/A | No any flipping effect |
-| flip：<br>FONT_FLIP_HORZ | Third char is ‘H’ | `FS_FLIP_HORZ` | To flip the glyph horinzontally |
-| flip：<br>FONT_FLIP_VERT | Third char is ‘V’ | `FS_FLIP_VERT` | To flip the glyph vertically |
-| flip：<br>FONT_FLIP_HORZVERT | Third char is ‘T’ | `FS_FLIP_HORZVERT` | Both `FS_FLIP_HORZ` and `FS_FLIP_VERT` |
-| other：<br>FONT_OTHER_NIL | Forth char is any letter but S/N | N/A | No any other effect |
-| other：<br>FONT_OTHER_AUTOSCALE | Forth char is ‘S’ | `FS_OTHER_AUTOSCALE` | To scale the glyph to meet the desired logical font size, only good for bitmap font. |
-| other：<br>FONT_OTHER_TTFNOCACHE | Forth char is ‘N’ | `FS_OTHER_TTFNOCACHE` | To close the cache when render glyph by using `TrueType` font. |
-| other：<br>FONT_OTHER_LCDPORTRAIT | Forth char is ‘P’ | `FS_OTHER_LCDPORTRAIT` | Using portrait `LCD` when render glyph by using `TrueType` font. |
-| underline：<br>FONT_UNDERLINE_NONE | Fifth char is ‘n’ | `FS_UNDERLINE_NONE` | No underline |
-| underline：<br>FONT_UNDERLINE_LINE | Fifth char is ‘u’ | `FS_UNDERLINE_LINE` | Underline |
-| struckout：<br>FONT_STRUCKOUT_NONE | Sixth char is ’n’ | `FS_STRUCKOUT_NONE` | No struckout line |
-| struckout：<br>FONT_STRUCKOUT_LINE | Sixth char is ’s’ | `FS_STRUCKOUT_LINE` | Struckout line |
+|-------------------------|----------------------------------------|-------------------------------|-----------|
+| weight：<br>`FONT_WEIGHT_REGULAR` | First char is ‘r’ | `FS_WEIGHT_REGULAR` | No any weight effect |
+| weight：<br>`FONT_WEIGHT_BOLD` | First char is ‘b’ | `FS_WEIGHT_BOLD` | Bold |
+| weight：<br>`FONT_WEIGHT_LIGHT` | First char is ‘l’ | `FS_WEIGHT_LIGHT` | To render glyph edge with the background color |
+| weight：<br>`FONT_WEIGHT_BOOK` | First char is ’b’ | `FS_WEIGHT_BOOK` | To handle to glyph edge by using the low-pass filter to anti-aliased |
+| weight：<br>`FONT_WEIGHT_DEMIBOLD` | Fist char is ‘d’ | `FS_WEIGHT_DEMIBOLD` | Both `FS_WEIGHT_BOLD` and `FS_WEIGHT_BOOK` |
+| weight：<br>`FONT_WEIGHT_SUBPIXEL` | Fist char is ‘s’ | `FS_WEIGHT_SUBPIXEL` | To handle to glyph by using sub-pixel render |
+| slant：<br>`FONT_SLANT_ROMAN` | Second char is ‘r’ | `FONT_SLANT_ROMAN` | No any slant effect |
+| slant：<br>`FONT_SLANT_ITALIC` | Second char is ‘i’ | `FONT_SLANT_ITALIC` | Italic |
+| flip：<br>`FONT_OTHER_NIL` | Third char is any letter but H/V/T | N/A | No any flipping effect |
+| flip：<br>`FONT_FLIP_HORZ` | Third char is ‘H’ | `FS_FLIP_HORZ` | To flip the glyph horizontally |
+| flip：<br>`FONT_FLIP_VERT` | Third char is ‘V’ | `FS_FLIP_VERT` | To flip the glyph vertically |
+| flip：<br>`FONT_FLIP_HORZVERT` | Third char is ‘T’ | `FS_FLIP_HORZVERT` | Both `FS_FLIP_HORZ` and `FS_FLIP_VERT` |
+| other：<br>`FONT_OTHER_NIL` | Forth char is any letter but S/N | N/A | No any other effect |
+| other：<br>`FONT_OTHER_AUTOSCALE` | Forth char is ‘S’ | `FS_OTHER_AUTOSCALE` | To scale the glyph to meet the desired logical font size, only good for bitmap font. |
+| other：<br>`FONT_OTHER_TTFNOCACHE` | Forth char is ‘N’ | `FS_OTHER_TTFNOCACHE` | To close the cache when render glyph by using `TrueType` font. |
+| other：<br>`FONT_OTHER_LCDPORTRAIT` | Forth char is ‘P’ | `FS_OTHER_LCDPORTRAIT` | Using portrait `LCD` when render glyph by using `TrueType` font. |
+| underline：<br>`FONT_UNDERLINE_NONE` | Fifth char is ‘n’ | `FS_UNDERLINE_NONE` | No underline |
+| underline：<br>`FONT_UNDERLINE_LINE` | Fifth char is ‘u’ | `FS_UNDERLINE_LINE` | Underline |
+| strikeout：<br>`FONT_STRUCKOUT_NONE` | Sixth char is ’n’ | `FS_STRUCKOUT_NONE` | No strikeout line |
+| strikeout：<br>`FONT_STRUCKOUT_LINE` | Sixth char is ’s’ | `FS_STRUCKOUT_LINE` | strikeout line |
 
 
-The style character given by Table 3 can be used to define the logial font 
+The style character given by Table 3 can be used to define the logical font 
 name. 
 
 ## Usage of `BIDI` text
@@ -683,10 +684,6 @@ Arabic demo is shown as below:
 ![alt](figures/14.3.jpeg)
 
 Figure 3 Arabic font demo
-
-
--- Main.XiaodongLi - 07 Nov 2009
-
 
 ----
 

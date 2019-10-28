@@ -839,8 +839,9 @@ The operation functions for these attributes are listed in Table 1.
 
 
 Table 1 Basic drawing attributes and operation function
-<center>
-| *Drawing Attributes *|*Operations *|*Effected `GDI` Functions*|
+
+| *Drawing Attributes*|*Operations*|*Effected `GDI` Functions*|
+|---------------------|------------|--------------------------|
 | Pen color |GetPenColor/SetPenColor |LineTo、Circle、Rectangle|
 | Brush color |GetBrushColor/SetBrushColor |FillBox|
 | Text background mode |GetBkMode/SetBkMode |TextOut、DrawText|
@@ -1385,6 +1386,7 @@ seen from program bitblt.c included in `mg-samples` program package.
 
 
 List 2 Using `BitBlt` function
+
 ```cpp
 #include <minigui/common.h>
 #include <minigui/minigui.h>

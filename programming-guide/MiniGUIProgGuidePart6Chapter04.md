@@ -26,7 +26,7 @@ Selected, Copy and Paste, etc.
 
 Except the differences described above, the styles, messages and notification
 codes of the three types of edit box control classes are general similar, with
-only a little differences. Fig 22.1 shows the running effect of the three types
+only a little differences. Figure 1 shows the running effect of the three types
 of edit boxes.
 
 
@@ -185,7 +185,7 @@ The use of `EM_GETSELPOS` message is similar to that of `EM_GETCARETPOS`
 message. 
 
 `EM_SELECTALL` message is used to make all the text in edit box selected, as
-<CTRL+A> operation:
+`CTRL+A` operation:
 
 ```cpp
 SendMessage (hwndEdit, EM_SELECTALL, 0, 0);
@@ -201,22 +201,22 @@ operations of edit box control, such as copy:
 - `CTRL+X`: Cut text of edit box to clipboard
 
 `EM_COPYTOCB` message is used to copy the currently selected text of an edit 
-box control to the clipboard, as <CTRL+C> operation:
+box control to the clipboard, as `CTRL+C` operation:
 
 ```cpp
 SendMessage (hwndEdit, EM_COPYTOCB, 0, 0);
 ```
 
 `EM_CUTTOCB` message is used to cut the currently selected text of an edit box
-control to the clipboard, as <CTRL+X> operation:
+control to the clipboard, as `CTRL+X` operation:
 
 `CODE{"cpp"}`%
 `SendMessage` (hwndEdit, `EM_CUTTOCB`, 0, 0);
 ```
 
-EM_INSERTCBTEXT message is used to copy the text on the clipboard to an edit box, as <CTRL+V> operation:
+EM_INSERTCBTEXT message is used to copy the text on the clipboard to an edit box, as `CTRL+V` operation:
 
-```cplusplus
+```cpp
 `SendMessage` (hwndEdit, `EM_INSERTCBTEXT`, 0, 0);
 ```
 
@@ -226,14 +226,14 @@ Row height here represents the height of single line in wrapped display style.
 
 EM_GETLINEHEIGHT message is used to get the row height of an edit box:
 
-```cplusplus
+```cpp
 int `line_height;`
 `line_height` = `SendMessage` (hwndEdit, `EM_GETLINEHEIGHT`, 0, 0);
 ```
 
 EM_SETLINEHEIGHT message is used to set the row height, If success, return old line height value, otherwise return –1:
 
-```cplusplus
+```cpp
 int `line_height;`
 `SendMessage` (hwndEdit, `EM_SETLINEHEIGHT`, `line_height,` 0);
 ```
@@ -244,7 +244,7 @@ It should be noted that it is preferred to use EM_SETLINEHEIGHT message before s
 
 EM_GETLINECOUNT message is used to get the number of rows:
 
-```cplusplus
+```cpp
 int `line_count;`
 `line_count` = `SendMessage` (hwndEdit, `EM_GETLINECOUNT`, 0, 0);
 ```
@@ -255,7 +255,7 @@ Row herein represents a single line in wrapped display style.
 
 Sending EM_LIMITTEXT to an edit box can set the text upper limit in bytes of an edit box:
 
-```cplusplus
+```cpp
 `SendMessage` (hwndEdit, `EM_LIMITTEXT`, 10, 0L);
 ```
 
@@ -269,7 +269,7 @@ Using EM_SETREADONLY message and passing TRUE for wParam, the edit box will be s
 
 By default, MiniGUI uses asterisks (*) to display the characters input in a password edit box. However, we can use the EM_SETPASSWORDCHAR message to change the password character:
 
-```cplusplus
+```cpp
 `SendMessage` (hwndEdit, `EM_SETPASSWORDCHAR`, ‘%’, 0L);
 ```
 
@@ -287,7 +287,7 @@ Note that TEXTEDIT control does not carry out EM_SETPASSWORDCHAR and EM_GETPASSW
 
 When SLEDIT has ES_TIP styles, you can set tip text of the edit box using EM_SETTIPTEXT message, and get tip text of edit box using EM_GETTIPTEXT message.
 
-```cplusplus
+```cpp
 int len;
 char *tip_text;
 `SendMessage` (hwndEdit, `EM_SETTIPTEXT`, len, (LPARAM)tip_text);
@@ -295,7 +295,7 @@ char *tip_text;
 
 Here lParam parameter specifies tip text string, wParam parameter specifies the length of the string; if tip_text is ended with ’\0’, wParam can be set to -1, if wParam is 0, tip_text can be NULL. EM_GETTIPTEXT message will return the current tip text string:
 
-```cplusplus
+```cpp
 int len;
 char `tip_text[len+1];`
 `SendMessage` (hwndEdit, `EM_GETTIPTEXT`, len, (LPARAM)tip_text);
@@ -306,7 +306,7 @@ Here lParam specifies the buffer to store the tip text string; wParam specifies 
 When TEXTEDIT control has ES_TITLE style, you can use EM_SETTITLETEXT message to set the title text of the edit box, and use EM_GETTITLETEXT message to get title text of edit box:
 
 
-```cplusplus
+```cpp
 int len;
 char *title_text;
 `SendMessage` (hwndEdit, `EM_SETTITLETEXT`, len, (LPARAM)title_text);
@@ -314,7 +314,7 @@ char *title_text;
 
 Here lParam parameter specifies title text string, wParam parameter specifies the length of the string; if tip_text is ended with ’\0’, wParam can be set as -1, if wParam is 0, tip_text can be NULL. EM_GETTIPTEXT message will return current title text string.
 
-```cplusplus
+```cpp
 int len;
 char `title_text[len+1];`
 `SendMessage` (hwndEdit, `EM_GETTITLETEXT`, len, (LPARAM)title_text);
@@ -326,7 +326,7 @@ Here lParam parameter specifies the buffer to store the title text string; wPara
 
 In normal situation, TEXTEDIT edit box will not display linefeed symbol. If using EM_SETLFDISPCHAR message sets the display symbol for linefeeds, then edit box will display linefeed as the set display symbol.
 
-```cplusplus
+```cpp
 char `disp_char;`
 `SendMessage` (hwndEdit, `EM_SETLFDISPCHAR`, 0, `disp_char);`
 ```
@@ -335,7 +335,7 @@ Here lParam parameter is the display symbol to be set for linefeed.
 
 For example, if you want to display linefeed with “*”, you can set as follows: 
 
-```cplusplus
+```cpp
 `SendMessage` (hwndEdit, `EM_SETLFDISPCHAR`, 0, ‘*’);
 ```
 
@@ -343,7 +343,7 @@ For example, if you want to display linefeed with “*”, you can set as follow
 
 In default situation, linefeed symbol of TEXTEDIT edit box is ’\n’. You can use EM_SETLINESEP message to change the line feed used by edit box.
 
-```cplusplus
+```cpp
 char `sep_char;`
 `SendMessage` (hwndEdit, `EM_SETLINESEP`, 0, `sep_char);`
 ```
@@ -352,7 +352,7 @@ Here lParam parameter is the linefeed symbol to be set.
 
 For example, if you want to indicate the line is end with TAB character, you can set as follows:
 
-```cplusplus
+```cpp
 `SendMessage` (hwndEdit, `EM_SETLINESEP`, 0, ‘\t’);
 ```
 
@@ -360,14 +360,14 @@ For example, if you want to indicate the line is end with TAB character, you can
 
 EM_GETNUMOFPARAGRAPHS message is used to get the number of paragraphs.
 
-```cplusplus
+```cpp
 int num;
 num = `SendMessage` (hwnd, `EM_GETNUMOFPARAGRAPHS`, 0, 0);
 ```
 
 EM_GETPARAGRAPHLENGTH message is used to get the length of a specified paragraph。If success, return the length of a specified paragraph, otherwise return –1.
 
-```cplusplus
+```cpp
 int len;
 len = `SendMessage` (hwnd, `EM_GETPARAGRAPHLENGTH`, idx, 0);
 ```
@@ -377,7 +377,7 @@ Here, wParam argument specifies the paragraph index.
 EM_GETPARAGRAPHTEXT message is used to get the text of a specified paragraph. To show correct characters, it might adjust the number of characters can be copied appropriately.
 
 
-```cplusplus
+```cpp
 `TEXTPOSINFO` info;
 unsigned char buff [32];
 
@@ -391,7 +391,7 @@ info.paragraph_index = -1;
 
 Here, info is a structure of TEXTPOSINFO type, and specifies the related information for the copied text, as follows: 
 
-```cplusplus
+```cpp
 typedef struct _TEXTPOSINFO {
 /*The index of paragraph, if value is -1,
 *it will take effect on the whole text.*/
@@ -422,11 +422,11 @@ The edit box has not ES_NOTIFY style, so any edit box can generate notification 
 
 ## 22.4 Sample Program
 
-In the foregoing chapters, we have already seen the use of edit boxes. List 22.1 gives another example of edit boxes, this program copy the input of a single-line edit box to an automatic wrapped multiple-line edit box. Please refer to edit.c file of the demo program package mg-samples of this guide for the complete source code. Effect of running the program is shown in Fig. 22.2.
+In the foregoing chapters, we have already seen the use of edit boxes. List 22.1 gives another example of edit boxes, this program copy the input of a single-line edit box to an automatic wrapped multiple-line edit box. Please refer to edit.c file of the demo program package mg-samples of this guide for the complete source code. Effect of running the program is shown in Figure.2.
 
-<center>List 22.1 Example for using edit boxes</center>
+##### List 22.1 Example for using edit boxes
 
-```cplusplus
+```cpp
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -587,13 +587,9 @@ return 0;
 #endif
 ```
 
-<center>
 ![alt](figures/22.2.jpeg)
-Fig. 22.2 Effect of running the edit box example program
-</center>
 
--- Main.XiaodongLi - 26 Oct 2009
-
+##### Figure 2 Effect of running the edit box example program
 
 ----
 
