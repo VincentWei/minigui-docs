@@ -115,8 +115,8 @@ The class does not have newly added method
 ### `mSpinner渲染器`
 ### Renderer of `mSpinner`
 
----++++ `mSpinner` classic渲染器
----++++ `mSpinner` classic renderer
+#### `mSpinner` classic渲染器
+#### `mSpinner` classic renderer
 
 非客户区查看[mWidget的classic渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
@@ -135,16 +135,16 @@ For the non client area, refer to [classic renderer of
 | `NCS_BGC_DISABLED_ITEM` | Background color when it is invalid | `ColorBgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
 | `NCS_FGC_DISABLED_ITEM` | Color of the arrow when it is invalid | `ColorFgDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-classic-fg3ddisable.png" alt="spinner-classic-fg3ddisable.png" width='36' height='37' /> |
 
----++++ `mSpinner` Skin渲染器
----++++ `mSpinner` Skin Renderer
+#### `mSpinner` Skin渲染器
+#### `mSpinner` Skin Renderer
 
 参阅 [附录B : Skin 渲染器使用的图片资源规范](MStudioMGNCSV1dot0PGAppB#mSpinner)
 
 Refer to [ Appendix B : Specification for the Image Resource Used by Skin
 Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner) 
 
----++++ `mSpinner` Fashion 渲染器
----++++ `mSpinner` Fashion Renderer
+#### `mSpinner` Fashion 渲染器
+#### `mSpinner` Fashion Renderer
 
 | *属性名* | *说明* | *miniStudio属性名* | *类型* | *示意图* |
 | `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB`) | 同Classic渲染器 |
@@ -162,8 +162,8 @@ Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner)
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) | <img src="%ATTACHURLPATH%/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
 
 
----++++ `mSpinner` Flat 渲染器
----++++ `mSpinner` Flat Renderer
+#### `mSpinner` Flat 渲染器
+#### `mSpinner` Flat Renderer
 
 | *属性名* | *说明* | *miniStudio属性名* | *类型* | *示意图* |
 | `NCS_FGC_3DBODY` | 按钮前景色 | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' /> |

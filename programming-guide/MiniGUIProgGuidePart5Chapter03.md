@@ -301,7 +301,8 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 ```
 
 
----++18.6 Comm Input Engine
+## 18.6 Comm Input Engine
+
 `MiniGUI为传统嵌入式操作系统提供了Common输入引擎（comm），使用该引擎可以很方便地实现对键盘、鼠标或触摸屏等输入设备的支持`。
 
 MiniGUI provides comm `IAL` for conditional real-time operation systems like
@@ -721,8 +722,6 @@ select is more than 0, this function will examine if there is any readable data
 waiting to read in the two file descriptors, if so, it will read touch screen
 and key stroke data separately from the two file descriptors.
 
-
--- Main.XiaodongLi - 07 Nov 2009
 
 ----
 

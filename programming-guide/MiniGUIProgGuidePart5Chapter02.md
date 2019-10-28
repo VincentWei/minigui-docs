@@ -1,4 +1,5 @@
----+!!17 Developing Customized MiniGUI-Processes Server Program
+# Developing Customized MiniGUI-Processes Server Program
+
 `mginit` is the server program of MiniGUI-Processes. This program prepares
 shared resource for client programs and manages windows created by clients. We
 explain how to write a customized MiniGUI-Processes server program according to

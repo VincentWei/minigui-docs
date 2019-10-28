@@ -58,7 +58,7 @@ It is inherited from the method of
 All the methods of `ScrollWidget`? are provided for the child class to use,
 please avoid using the class interface in the concrete control application.
 
----++++ Coordinate Transformation Related Method
+#### Coordinate Transformation Related Method
 
 When handling scrolled window content, three kinds of coordinates are involved:
 - content: coordinate with the appointed content in all the content.
@@ -100,7 +100,7 @@ void viewportToContent(mScrollWidget *self, int *x, int *y);
 void windowToContent(mScrollWidget *self, int *x, int *y);
 ```
 
----++++ Initialization Related Method
+#### Initialization Related Method
 
 `ScrollWidget` control class configures margin as all 0 value by default. When
 the child class based on the control class needs to be configured with margin
@@ -118,7 +118,7 @@ initialize the margin of top, bottom, left and right, and the values are all 5.
     _c(self)->initMargins(self, 5, 5, 5, 5);
 ```
 
----++++ Refreshment Related Method
+#### Refreshment Related Method
 
 When automatically adjusting the scroll bar region and setting configuration
 related to the display region, `ScrollWidget` needs to refresh the screen. In
@@ -135,7 +135,7 @@ void refreshRect(mScrollWidget *self, const RECT *rc);
 full screen refreshment after scrolling the window.
 - `refreshRect` is used to refresh the content of the appointed region.
 
----++++ Method to Getting Information
+#### Method to Getting Information
 
 `ScrollWidget` provides `isVisible` method for child class to judge if a 
 certain content position is visible in the current display region, so as to 
@@ -154,7 +154,7 @@ void (*getVisRect)(mScrollWidget *self, RECT *rcVis);
 in the visible region.
 - `getVisRect` is used to get the current visible region.
 
----++++ Setting Related Method
+#### Setting Related Method
 
 `ScrollWidget` and its derived class needs to carry out corresponding setting 
 to different information when the window size changes or the content changes,
@@ -207,7 +207,7 @@ It is inherited from the <a href="#Event of `m_ScrollWidget">event` of
 It is inherited from the <a href="#Method of `m_ScrollWidget">method` of
 `mScrollWidget</a>`. 
 
----++++ Method of Adding Controls
+#### Method of Adding Controls
 
 Container provides support to mGNCS control and MiniGUI intrinsic control. If 
 it is necessary to add a group of mGNCS controls to Container, `addChildren`
@@ -233,7 +233,7 @@ BOOL addIntrinsicControls(mContainer *self, const PCTRLDATA pCtrl, int nCount);
 %INCLUDE{"%ATTACHURL%/container.c.txt" pattern="^.*?// START_OF_INTRINSICCTRLS(.*?)// END_OF_INTRINSICCTRLS.*"}%
 ```
 
----++++ Focus Related Method
+#### Focus Related Method
 
 In Container, it is often necessary to set and get the current focus control,
 the two methods below are provided for this:
@@ -246,7 +246,7 @@ HWND getFocus(mContainer *self);
 - `setFocus` sets focus control through control `ID`.
 - `getFocus` gets the sentence handle of the current focus control.
 
----++++ Other Methods
+#### Other Methods
 
 Container provides `adjustContent` method to allow the application to carry out
 the function of adjusting its own size through its content instead of 

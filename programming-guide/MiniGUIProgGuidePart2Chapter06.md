@@ -1,6 +1,5 @@
 # Chapter 5 of Part 2 Button Series Control Class
 
-
 ## Brief Introduction of Button Series Control
 
 Button is an essential control of human computer interaction in the user
@@ -124,7 +123,7 @@ Note, the control inherits `NCSN_WIDGET_CLICKED` event of the parent class.
 *For the usage of renderer, see [look and feel
 renderer](MStudioMGNCSV1dot0PGENP2C2)*. 
 
----++++ `mButton` Classic renderer
+#### `mButton` Classic renderer
 
 The basic style under classic renderer is as shown in the figure below:
 
@@ -155,7 +154,7 @@ Schematic diagram:<br/>
 Refer to [Appendix B: Specification for the Image Resources Used by Skin
 Renderer](MStudioMGNCSV1dot0PGENAppB#mButton). 
 
----++++ `mButton` Fashion Renderer
+#### `mButton` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
@@ -187,7 +186,7 @@ Schematic diagram: <br />
 ![alt](figures/push-button-fashion-hilight-check-halfchk.png)
 
 
----++++ `mButton` Flat Renderer
+#### `mButton` Flat Renderer
 
 For the drawing of non client area, please refer to the drawing of Flat 
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
@@ -270,7 +269,7 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 - For the usage of renderers, see [look and feel
 renderer](MStudioMGNCSV1dot0PGENP2C2) 
 
----++++ `mCheckButton` Classic Renderer
+#### `mCheckButton` Classic Renderer
 
 - Drawing of renderer in the `mCheckButton` Classic text region is as below: 
 for the drawing of non client area, please refer to the renderer of
@@ -296,12 +295,12 @@ size will be adopted to draw
 ![alt](figures/classic_check_button.bmp)
 
 
----++++ `mCheckButton` Skin Renderer
+#### `mCheckButton` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
 Renderer](MStudioMGNCSV1dot0PGENAppB#mButton) 
 
----++++ `mCheckButton` Fashion Renderer
+#### `mCheckButton` Fashion Renderer
 - Drawing of `mCheckButton` Fashion text region renderer is as follows: for the
 drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
@@ -326,7 +325,7 @@ size will be adopted to draw
 ![alt](figures/fashion_check_btn.bmp)
 
 
----++++ `mCheckButton` Flat Renderer
+#### `mCheckButton` Flat Renderer
 
 - Drawing of text region and check box of `mCheckButton` Flat renderer is as
 below: for the drawing of non area region, please refer to the renderer of
@@ -374,7 +373,7 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 - For the usage of renderers, see [look and feel
 renderer](MStudioMGNCSV1dot0PGENP2C2) 
 
----++++ `mRadiobutton` Classic Renderer
+#### `mRadiobutton` Classic Renderer
 - For the drawing of `mRadiobutton` Classic non client area, please refer to 
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
@@ -398,12 +397,12 @@ actual size is adopted to draw
 ![alt](figures/classic_radio_button.bmp)
 
 
----++++ `mRadiobutton` Skin Renderer
+#### `mRadiobutton` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
 Renderer](MStudioMGNCSV1dot0PGENAppB#mButton). 
 
----++++ `mRadiobutton` Fashion Renderer
+#### `mRadiobutton` Fashion Renderer
 - For the drawing of `mRadiobutton` Fashion non client area, please refer to 
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
@@ -427,7 +426,7 @@ actual size is adopted to draw
 ![alt](figures/fashion_radio_btn.bmp)
 
 
----++++ `mRadiobutton` Flat Renderer
+#### `mRadiobutton` Flat Renderer
 - For the drawing of `mRadiobutton` Flat non client area, please refer to the
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
@@ -514,15 +513,14 @@ selected color displays in the middle box.
 
 ### Property of `mColorButton`
 
-It is inherited from the property of <a href="#Property of
-`mColorButton"/>mButton</a>`. 
+It is inherited from the property of `mButton`.
 
 | *Property name* | *Type* | *Permission* | *Explanation* |
 | `NCSP_CLRBTN_CURCOLOR`| `DWORD(ARGB`) | `RW` | Set or get Color value |
 
 ### Event of `mColorButton`
 
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
+It is inherited from the event of `mButton`.
 
 | *Event notification code* | *Explanation* | *Parameter* |
 | `NCSN_CLRBTN_COLORCHANGED` | Update after being selected by the user | `DWORD(ARGB`) |

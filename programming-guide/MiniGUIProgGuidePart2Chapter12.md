@@ -123,8 +123,8 @@ It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 It is inherited from [the method of 
 `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
 
----++++ 添加属性页
----++++ Add property page
+#### 添加属性页
+#### Add property page
 
 在创建了属性表控件后，可以通过 *addPage* 方法向属性表中添加属性页。该方法的 _dlgTemplate_ 用来传递对话框模板， _handlers_
 用来传递属性页的事件回调处理函数。函数原型如下： 
@@ -157,8 +157,8 @@ Events of the property pages are handled as:
 %INCLUDE{"%ATTACHURL%/propsheet.c.txt" pattern="^.*?// START_OF_PAGEHANDLERS(.*?)// END_OF_PAGEHANDLERS.*"}%
 ```
 
----++++ 删除属性页
----++++ Remove the Property Page
+#### 删除属性页
+#### Remove the Property Page
 
 要删除某个属性页，只需调用属性表控件的 *removePage* 或 *removePageByIndex*
 方法，需要注意的是在删除了一个属性页后会有可能改变其他属性页的索引值。其中 *removePage* 是通过属性页的类指针来删除指定页，
@@ -189,8 +189,8 @@ implement the following operation:
 _c(propsheet)->removePageByIndex(propsheet, 0);
 ```
 
----++++ 索引属性页
----++++ Index Property Page
+#### 索引属性页
+#### Index Property Page
 
 要获取指定索引的索引页类指针，需调用属性表控件的 *getPageByIndex* 方法；而要获取某个指定属性页的索引则只需调用属性表控件的
 *getPageIndex* 方法。函数原型如下：
@@ -227,8 +227,8 @@ HWND hPanel = _c(page)->getPanel(page);
 ... ...
 ```
 
----++++ 遍历属性页
----++++ Traverse Property Page
+#### 遍历属性页
+#### Traverse Property Page
 
 在属性表控件中可以通过 *getNextPage* 和 *getPrevPage* 方法实现对所有属性页的遍历查找功能。其中 *getNextPage*
 用于从指定属性页向后遍历属性页； *getPrevPage* 用于从指定属性页向前遍历属性页。
@@ -254,8 +254,8 @@ while (page) {
 }
 ```
 
----++++ 广播消息
----++++ Broadcast Message
+#### 广播消息
+#### Broadcast Message
 
 属性表控件可以通过 *broadCastMsg* 方法向所有的属性页广播消息。消息内容通过 _param1_ 和 _param2_
 来传送。当属性表控件接收到任意一个属性页对广播消息处理后返回的非零值后，属性表的返回值将为中断消息广播的属性页索引值加1。通过此方法，可以实现无效输入处理等功能操作。 

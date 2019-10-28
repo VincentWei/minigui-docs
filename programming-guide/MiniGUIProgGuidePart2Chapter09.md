@@ -1,7 +1,7 @@
 # Chapter 8 of Part 2 Slider Control Class
 
 
----++Brief Introduction of Slider Control
+## Brief Introduction of Slider Control
 The slider control is mainly visual realization to the adjustment logic of a
 value. Through dragging and sliding the control, occasions of the users
 adjusting the brightness and volume and operation of adjusting the value of a
@@ -23,7 +23,7 @@ generated automatically.
 programming, corresponding control window class `ID` is imported and control is
 generated. Manual programming sets control property and event handling.
 
----++mSlider
+## mSlider
 
 - *Control window class*: `NCSCTRL_SLIDER`
 - *Control English name*: Slider
@@ -32,7 +32,7 @@ generated. Manual programming sets control property and event handling.
 
 *%RED%The control is abstract control and cannot be used directly%ENDCOLOR%*
 
----+++Style of `mSlider`
+### Style of `mSlider`
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
 | *Style name* | *miniStudio property name* | *Explanation* |
@@ -62,8 +62,8 @@ It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
 ### Example of `mSlider`
 *%RED%The control is abstract control and cannot be used directly%ENDCOLOR%*
 
----++mTrackBar
----++mTrackBar
+## mTrackBar
+## mTrackBar
 
 - *Control window class*: `NCSCTRL_TRACKBAR`
 - *Control English name*: Trackbar
@@ -74,7 +74,7 @@ range
 ![alt](figures/trackbar.png)
 
 
----+++Style of `mTrackBar`
+### Style of `mTrackBar`
 It is inherited from the style of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 | *Style* | *miniStudio property name* | *Explanation* |
 | `NCSS_TRKBAR_HORIZONTAL` | -- | Create horizontal Trackbar control (default) |
@@ -103,7 +103,7 @@ It is inherited from the method of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 ### Renderers of `mTrackBar`
 
----++++ `mTrackBar` Classic Renderer
+#### `mTrackBar` Classic Renderer
 
 For the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
@@ -111,12 +111,12 @@ For the drawing of non client area, please refer to the renderer of
 | `NCS_BGC_3DBODY` | Color of slide block and slide rail | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/trackbar-classic-bg3dcolor.png" alt="trackbar-classic-bg3dcolor.png"/>| |
 | `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="%ATTACHURLPATH%/trackbar-classic-bgdisable.png" alt="trackbar-classic-bgdisable.png"/>| |
 
----++++ `mTrackBar` Skin Renderer
+#### `mTrackBar` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
 Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
 
----++++ `mTrackBar` Fashion Renderer
+#### `mTrackBar` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
@@ -128,7 +128,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 | `NCS_METRICS_3DBODY_ROUNDX` | Round corner X radius of the slide block | `ThumbRoundX` | int | | 0 ~ 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Round corner Y radius of the slide block | `ThumbRoundY` | int| | 0 ~ 1/2 of the window height |
 
----++++ `mTrackBar` Flat Renderer
+#### `mTrackBar` Flat Renderer
 For the drawing of non client area, please refer to the drawing of Flat 
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
@@ -150,7 +150,7 @@ Figure p2c8-1 Example of trackbar
 %INCLUDE{"%ATTACHURL%/trackbar.c.txt"}%
 ```
 
----++mScrollBar
+## mScrollBar
 
 - *Control window class*: `NCSCTRL_SCROLLBAR`
 - *Control English name*: Scrollbar
@@ -161,7 +161,7 @@ window content display adjustment
 ![alt](figures/scrollbar.png)
 
 
----+++Style of `mScrollBar`
+### Style of `mScrollBar`
 
 It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 | *Style* | *miniStudio property name* | *Explanation* |
@@ -196,7 +196,7 @@ It is inherited from the method of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Renderer of `mScrollBar`
 
----++++ `mScrollBar` Classic Renderer
+#### `mScrollBar` Classic Renderer
 
 For the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
@@ -207,12 +207,12 @@ For the drawing of non client area, please refer to the renderer of
 | `NCS_FGC_3DBODY` | Color of the button up arrow | `ArrowColor` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-classic-fg3dcolor.png" alt="scrollbar-classic-fg3dcolor.png"/>| |
 | `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/scrollbar-classic-fgdisable.png" alt="scrollbar-classic-fgdisable.png"/>| |
 
----++++ `mScrollBar` Skin Renderer
+#### `mScrollBar` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
 Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
 
----++++ `mScrollBar` Fashion Renderer
+#### `mScrollBar` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
@@ -227,7 +227,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="%ATTACHURLPATH%/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
 | | | | | <img src="%ATTACHURLPATH%/scrollbar-fashion-vert.png" alt="scrollbar-fashion-vert.png" />| |
 
----++++ `mScrollBar` Flat Renderer
+#### `mScrollBar` Flat Renderer
 For the drawing of non client area, please reefer to the drawing of Flat
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 

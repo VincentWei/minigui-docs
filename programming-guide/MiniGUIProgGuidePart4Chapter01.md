@@ -1,7 +1,7 @@
----+ mGEff Programming
-
+# mGEff Programming
 
 ## mGEff Introduction
+
 ### Animation realization principle
 
 In general, animations fall into two types: Frame animations and properties
@@ -77,7 +77,7 @@ section “Introduction to the use of `mGEW”`.
 
 ### mGEff `API`
 
----++++ Header files
+#### Header files
 
 you only need to include one header file:
 
@@ -85,7 +85,7 @@ you only need to include one header file:
 #include <mgeff/mgeff.h>;
 ```
 
----++++ mGEff Handle
+#### mGEff Handle
 
 - mGEff handle is use to all mgeff api.
 - it is and void pointer, you can think it as an animation object pointer.
@@ -97,7 +97,7 @@ you only need to include one header file:
 MGEFF_DECLARE_HANDLE(MGEFF_ANIMATION);
 ```
 
----++++ Initialize/Deinitialize
+#### Initialize/Deinitialize
 
 In use Before `mGEFF`, it must be initialized; after use (usually at the end of
 the 
@@ -112,7 +112,7 @@ The above two functions can be called in nested pairs, but it should be noted
 that mGEff Not thread-safe, so please do not use it in multiple threads at the
 same time.
 
----++++ Animation create/delete
+#### Animation create/delete
 
 create and delete animation.
 - target is the animation target, you can think it as an animation object,
@@ -141,7 +141,7 @@ MGEFF_EXPORT void mGEffAnimationDelete(MGEFF_ANIMATION handle);
 
 ```
 
----++++ Animation callback
+#### Animation callback
 
 Animation has multiple callbacks, you can use relative callback to do yourself
 things.
@@ -204,7 +204,7 @@ typedef void *(*MGEFF_VARMALLOC_CB)(MGEFF_ANIMATION handle);
 
 ```
 
----++++ Animation start/end value
+#### Animation start/end value
 
 you should set animation start value, end value, it is used to set the
 relative value for animation run.
@@ -218,7 +218,7 @@ MGEFF_EXPORT void mGEffAnimationSetEndValue(MGEFF_ANIMATION handle,
 
 ```
 
----++++ Animation run
+#### Animation run
 
 Async run the animation in the default schedular asynchronous, attachs the
 animation to the default schedular and start the animation. The animation run
@@ -515,7 +515,7 @@ This example will output:
 
 ### Effector effector
 
----++++ Effector create/delete
+#### Effector create/delete
 
 you should create an effector first, mgeff have defined some internal
 effector:
@@ -535,7 +535,7 @@ effector);
 
 ```
 
----++++ Effector property
+#### Effector property
 
 Type of effector set property callback function:
 - It is going to be called every frame.
@@ -554,7 +554,7 @@ typedef int (*MGEFF_EFFECTOR_GETPROPERTY)(MGEFF_EFFECTOR effector,
 
 ```
 
----++++ Effector source/sink
+#### Effector source/sink
 
 Effector have two important elements:
 - sink: sink is used for display, such as an MiniGUI `DC`.
@@ -570,7 +570,7 @@ sink);
 
 ```
 
----++++ Effector callback
+#### Effector callback
 
 Include follow callback function:
 - Type of effector on draw callback function: It is going to be called
@@ -598,7 +598,7 @@ typedef void (*MGEFF_EFFECTOR_FINALIZE)(MGEFF_EFFECTOR effector);
 
 ```
 
----++++ Effector fill
+#### Effector fill
 
 Fills a `DC` with a predefined effector.
 
@@ -614,7 +614,7 @@ src2_dc,
         HDC dst_dc, unsigned long key, int duration);
 ```
 
----++++ Creating and Using Effects
+#### Creating and Using Effects
 
 Since mGEff The animation framework is provided, and the specific animation is
 delivered to the user. However, some animation effects are relatively common.
@@ -719,7 +719,7 @@ src="%ATTACHURLPATH%/mgeff-effctor.png" />
 
 mGEff Effector suppport
 
----++++ How to use Effector
+#### How to use Effector
 
 - Create Effector.
 
@@ -838,7 +838,7 @@ Void mGEffAnimationReStart(MGEFF_ANIMATION handle);
 
 ### Custom Effector
 
----++++ `MGEFF_EFFECTOROPS`
+#### `MGEFF_EFFECTOROPS`
 
 `MGEFF_EFFECTOROPS` contains whole info of an effector, if you want to custom 
 an 
@@ -876,7 +876,7 @@ extern MGEFF_EFFECTOROPS zipeffector;
 
 ```
 
----++++ Simple alphaeffector sample
+#### Simple alphaeffector sample
 
 An very easy alpha effector as follow:
 
@@ -920,7 +920,7 @@ MGEFF_EFFECTOROPS alphaeffector =
 };
 ```
 
----++++ Complex zoomeffector sample
+#### Complex zoomeffector sample
 
 if you want to implement an complex effector, you can see the zoom effector in
 the mGEff:

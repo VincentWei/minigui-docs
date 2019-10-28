@@ -108,7 +108,7 @@ It is inherited from the event of [ `mScrollView` ](MStudioMGNCSV1dot0PGP2C)
 继承自[ `mScrollView` ](MStudioMGNCSV1dot0PGP2C)的方法
 
 It is inherited from the method of[ `mScrollView` ](MStudioMGNCSV1dot0PGP2C)
----++++ `setContent`
+#### `setContent`
 ```cpp
 void setContent(mEdit *self, const char* str, int start, int len)
 ```
@@ -137,7 +137,7 @@ the existing content in edit.
 _c(edit)->setContent(edit, "dddd Show Me", 6, -1);
 ```
 
----++++ `replaceText`
+#### `replaceText`
 ```cpp
 void replaceText(mEdit *self, const char* str, 
     int start, int len, int replace_start, int replace_end)
@@ -182,7 +182,7 @@ to the existing text content in edit.
 _c(edit)->replaceText(edit, "dddd Show Me", 6, -1, 2, 10);
 ```
 
----++++ insert
+#### insert
 ```cpp
 void insert(mEdit *self, const char* str, int start, int len, int at)
 ```
@@ -223,7 +223,7 @@ and it is the location deviation relative to the existing text content in edit
 _c(edit)->insert(edit, "dddd Show Me", 6, -1,  2);
 ```
 
----++++ append
+#### append
 ```cpp
 void append(mEdit *self, const char* str, int start, int len)
 ```
@@ -258,7 +258,7 @@ len is the length, and -1 represents ending till the end of str.
 _c(edit)->append(edit, "dddd Show Me", 6, -1);
 ```
 
----++++ `getTextLength`
+#### `getTextLength`
 ```cpp
 int getTextLength(mEdit *self)                                        
 ```
@@ -273,7 +273,7 @@ Get length of the content of the character string in Edit
 int text_len = _c(edit)->getTextLength(edit);
 ```
 
----++++ `getContent`
+#### `getContent`
 ```cpp
 int getContent(mEdit *self, char *strbuff, int buf_len, int start, int end)
 ```
@@ -304,7 +304,7 @@ _c(edit)->getContent(edit, buff, 127, 0, -1);//取出edit中的全部内容，bu
 // Get out all the content in edit, and buff stores 127 characters to the maximum
 ```
 
----++++ `setSel、getSel`
+#### `setSel、getSel`
 ```cpp
     int setSel(mEdit *self, int start, int end)
     int getSel(mEdit *self, int *pstart, int *pend)
@@ -336,7 +336,7 @@ _c(edit)->getSel(edit, &ps, &pe);//获取选中区域
 // Get the selected region
 ```
 
----++++ `setMargin`
+#### `setMargin`
 ```cpp
 void setMargin(mEdit *self, int left, int top, int right, int bottom)
 ```
@@ -360,7 +360,7 @@ Set left, top, right and bottom margin of the edit region
 _c(edit)- >setMargin(edit, 10,10,10,10);
 ```
 
----++++ copy、paste、cut
+#### copy、paste、cut
 ```cpp
     void copy(mEdit *self)
     void cut(mEdit *self)
@@ -374,7 +374,7 @@ Cut, copy and paste aim at the operation of the selected region. In edit, a
 group of operation set using minigui cut board is realized by default, and the
 users can set operation set realized by itself through `setCopyPaste`.
 
----++++ makevisible
+#### makevisible
 ```cpp
     BOOL makevisible(mEdit *self, int pos)
 ```

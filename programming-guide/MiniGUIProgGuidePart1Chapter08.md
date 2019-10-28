@@ -262,7 +262,8 @@ parameter may be scan code of the pressed/released key (MSG_KEYDOWN and
 `MSG_KEYUP`), and may also be encode value of the character (MSG_CHAR).
 
 ## Mouse
----++++ 9.2.1 Mouse Input
+
+### Mouse Input
 
 The handling for mouse is similar to that for keyboard in MiniGUI, as shown in
 Figure 2.

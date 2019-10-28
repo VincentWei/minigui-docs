@@ -1,4 +1,4 @@
----+ mGNCS4Touch Programming
+# mGNCS4Touch Programming
 
 
 mGNCS4Touch component provides some new controls, which are compliant to new
@@ -20,9 +20,9 @@ idea in mGNCS: assemble complex controls with some simple pieces.
 
 Here are some simple examples of how to use controls and pieces.
 
----++Basic
+## Basic
 
----+++header file
+### header file
 
 you should first include the mGNCS4Touch head file when you use it as follow:
 
@@ -101,7 +101,7 @@ fgc_itb_rtext_light=0xFFFFFFFF
 | `fgc_itb_rtext_light` | `NCS4TOUCH_FGC_ITB_RTEXT_LIGHT` |set itembar foreground right label text color when select|
 
 
----+++init/uninit
+### init/uninit
 
 init/uninit should be called.
 
@@ -111,7 +111,7 @@ init/uninit should be called.
 ```
 
 
----+++setProperty/getProperty
+### setProperty/getProperty
 
 
 if you want to change or get property of control or piece, you can try to
@@ -132,7 +132,7 @@ follow api:
 
 ```
 
----+++Sample entry
+### Sample entry
 
 base require in the `MiniGUIMain` entry:
 - init/uninit mGNCS.
@@ -194,11 +194,11 @@ int MiniGUIMain(int argc, const char *argv[]) {
 `BTW`: mGNCS4Touch also need mGEff and mGPlus, mGNCS, MiniGUI, so you should
 include these component head files.
 
----+++control
+### control
 
 you can try to create mGNCS4Touch control as follow two way:
 
----++++create with `ncsCreateMainWindowIndirect`
+#### create with `ncsCreateMainWindowIndirect`
 
 ```cpp
 //Controls
@@ -245,7 +245,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 }
 ```
 
----++++create with `ncsCreateWindow`.
+#### create with `ncsCreateWindow`.
 
 just use `ncsCreateWindow` and give your control name.
 
@@ -263,9 +263,9 @@ just use `ncsCreateWindow` and give your control name.
 }
 ```
 
----+++pieces
+### pieces
 
----++++piece register
+#### piece register
 
 init piece class: each piece should be init first, use `MGNCS_INIT_CLASS`,
 if no init, it will be crash when you using it. the internal pieces that
@@ -279,7 +279,7 @@ crash when you use the piece.
     MGNCS_INIT_CLASS(mSimpleTableView);
 ```
 
----++++create Piece
+#### create Piece
 
 you can use two method to create an piece, it is provided by mGNCS:
 
@@ -293,7 +293,7 @@ you can use two method to create an piece, it is provided by mGNCS:
 ```
 
 
----++++add piece to window
+#### add piece to window
 
 piece is not an independent element, it should conect with an ncs window, so
 you can do it as follow:
@@ -322,7 +322,7 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 }
 ```
 
----++++piece assemble
+#### piece assemble
 
 mGNCS and mGNCS4Touch have provided some standard simple piece, like
 static/text/image pieces, you can use these simple piece to assemble your own
@@ -352,14 +352,14 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 ```
 
 
----++mWidget control
+## mWidget control
 
 Follow controls are all base on mGNCS `mWidget`, it is an base control for
 mGNCS, you can create these controls and add it to an MiniGUI main window,
 this is not different with pieces.
 
 
----+++NCS4TOUCH_RENDERER
+### NCS4TOUCH_RENDERER
 
 mGNCS4Touch have provide an new renderer for touch screen, you can use
 `ncsSetElement/ncsGetElement` to read/write it.
@@ -398,19 +398,19 @@ need change the default value, you need change it in the mgncs4touch.cfg file.
 | `NCS4TOUCH_FGC_ITB_RTEXT_LIGHT`| int | R | set itembar foreground right label text color when select. | |
 
 
----+++mSwithButton
+### mSwithButton
 - <b>Control Window Class</b>: `NCSCTRL_SWBUTTON`
 - <b>Control English name</b>: switchbutton
 - *Introduction*: This control provied an switch button like `iOS`, it has two
 status: on or off, it has supuport an switch status animation.
 
----++++control name
+#### control name
 
 ```cpp
 #define NCSCTRL_BTNNAVBAR          NCSCLASSNAME("switchbutton")
 ```
 
----++++property
+#### property
 
 | *Property `ID`* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | `NCSP_SWB_STATUS`| - | int | `RW` | switch status | `NCS_SWB_OFF/NCS_SWB_ON` |
@@ -422,19 +422,19 @@ src="%ATTACHURLPATH%/mgncs4touch-mswitchbutton.png" />
 
 `mSwitchButton` control
 
----+++mBtnNavBar
+### mBtnNavBar
 
 - <b>Control Window Class</b>: `NCSCTRL_BTNNAVBAR`
 - <b>Control English name</b>: btnnavbar
 - *Introduction*: This control provied an navigate button like `iOS`.
 
----++++control name
+#### control name
 
 ```cpp
 #define NCSCTRL_BTNNAVBAR          NCSCLASSNAME("btnnavbar")
 ```
 
----++++style
+#### style
 
 | *Property `ID`* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | `NCSS_BNB_LRECT`| - | int | R | the left button is on behalf of the triangular shape of the left| |
@@ -445,7 +445,7 @@ src="%ATTACHURLPATH%/mgncs4touch-mswitchbutton.png" />
 | `NCSS_BNB_RNONE`| - | int | R | the right button is not displayed the shape| |
 
 
----++++property
+#### property
 
 | *Property `ID`* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | `NCSP_BNB_LSTRING`| - | int | `RW` | set the string on the left button | |
@@ -457,7 +457,7 @@ src="%ATTACHURLPATH%/mgncs4touch-mswitchbutton.png" />
 | `NCSP_BNB_BTN_H` | - | int | `RW` | set Left and right buttons of the high| |
 
 
----+++mNewTrackBar
+### mNewTrackBar
 
 - <b>Control Window Class</b>: `NCSCTRL_NEWTRACKBAR`
 - <b>Control English name</b>: newtrackbar
@@ -465,13 +465,13 @@ src="%ATTACHURLPATH%/mgncs4touch-mswitchbutton.png" />
 can set `NCS4TOUCH_RENDERER` to it, other property are all same with 
 `mTrackbar`. 
 
----++++control name
+#### control name
 
 ```cpp
 #define NCSCTRL_BTNNAVBAR          NCSCLASSNAME("newtrackbar")
 ```
 
----++++property
+#### property
 
 no new property, it include all `mTrackBar` property.
 
@@ -488,26 +488,26 @@ src="%ATTACHURLPATH%/mgncs4touch-mtrackbar.png" />
 
 `mNewTrackBar` control
 
----+++mItemBar
+### mItemBar
 
 - <b>Control Window Class</b>: `NCSCTRL_ITEMBAR`
 - <b>Control English name</b>: newtrackbar
 - *Introduction*: it is an base item bar, you can use it to implement an
 setting ui like `iOS`.
 
----++++control name
+#### control name
 
 ```cpp
 #define NCSCTRL_BTNNAVBAR          NCSCLASSNAME("itembar")
 ```
 
----++++style
+#### style
 
 | *Property `ID`* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | `NCSS_ITEMBAR_CHECKABLE`| - | int | R | Check whether there is support | |
 | `NCSS_ITEMBAR_HASCHILD`| - | int | R | Whether child controls identified. | |
 
----++++property
+#### property
 
 | *Property `ID`* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | `NCSP_ITEMBAR_CHECKED`| - | int | `RW` | set checked status | `mItemBarStyle`|
@@ -522,20 +522,20 @@ src="%ATTACHURLPATH%/mgncs4touch-mitembar.png" />
 `mItemBar` control
 
 
----+++mIconFlow
+### mIconFlow
 - <b>Control Window Class</b>: `NCSCTRL_ICONFLOW`
 - <b>Control English name</b>: `IconFlow`
 - *Introduction*: Animated wheel controls, a series of user-supplied options to
 browse as icons,
 the user can select or scroll through the keyboard and mouse operations.
 
----++++control name
+#### control name
 
 ```cpp
 #define NCSCTRL_ICONFLOW NCSCLASSNAME("iconflow")
 ```
 
----++++property
+#### property
 
 Inherited from
 [Properties](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
@@ -549,7 +549,7 @@ Inherited from
 | `NCSP_ICONFLOW_ICONBORDER` | - | unsigned | `RW` | Icon White Border | Pixel |
 | `NCSP_ICONFLOW_ICONUSESCALE` | - | int | `RW` |Whether the icon is scaled to fit the set display area | Boolean |
 
----++++Event
+#### Event
 
 Inherited from
 [event](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
@@ -558,7 +558,7 @@ Inherited from
 `NCSN_ICONFLOW_CLICKED` | Mouse Click Event | Clicked Entry Handle |
 | `NCSN_ICONFLOW_ENTER` | `ENTER` press event | currently selected entry handle |
 
----++++Method
+#### Method
 
 Inherited from
 [Method](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
@@ -580,7 +580,7 @@ Void setIconSize(mIconFlow *self, int width, int height);
 HITEM addItem(mIconFlow *self, NCS_ICONFLOW_ITEMINFO *info, int *pos);
 ```
 
----++++mIconFlow code example
+#### mIconFlow code example
 
 ```cpp
 ...
@@ -608,13 +608,13 @@ src="%ATTACHURLPATH%/mgncs4touch-miconflow.png" />
 iconflow control
 
 
----++Piece
+## Piece
 
 mGNCS4Touch have provide a large pieces, the follow is some important piece,
 The usage of most part pieces is similar.
 
 
----+++mImagePiece
+### mImagePiece
 
 you can use it to display an image, the specify the align and draw mode.
 
@@ -628,30 +628,30 @@ you can use it to display an image, the specify the align and draw mode.
 | `NCSP_IMAGEPIECE_VALIGN`| - | unsigned | `RW` | set vertical align value| Pixel |
 | `NCSP_IMAGEPIECE_DRAWMODE`| - | int | `RW` | set image draw mode | Boolean |
 
----+++mTextPiece
+### mTextPiece
 
 you can use it to display an text.
 
----+++mShapeBoxPiece
+### mShapeBoxPiece
 
 you can use it to display some simple shape.
 
----+++mRadioPiece
+### mRadioPiece
 
 an Radio piece.
 
----+++m3DButtonPiece
+### m3DButtonPiece
 
 an 3D button style piece.
 
 
----+++mPanelPiece
+### mPanelPiece
 
 `mPanelPiece` is an base container piece, when you need use some pieces to
 assemble an widget, you should use `mPanelPiece`, the panel manage piece with
 absolute x/y coordinate, no any auto layout support.
 
----++++concept
+#### concept
 
 `mPanelPiece` is a very powerful basic piece. Its function is similar to a
 container. It supports the addition of other pieces to the panel and specifies
@@ -665,7 +665,7 @@ implemented. Animations of multiple pieces can be executed in parallel. For
 example, if the animation function is similar to ios above, you need to have
 Multiple elements are animated at the same time.
 
----++++addContent
+#### addContent
 
 `addContent` is most important method for `mPanelPiece`, you can add an piece
 to panel and specify piece x/y coordinate.
@@ -679,7 +679,7 @@ int x, int y)
 }
 ```
 
----++++animation
+#### animation
 
 Base property change:
 - move piece.
@@ -706,7 +706,7 @@ Base animation include:
 ```
 
 
----+++mNavigationPanelPiece
+### mNavigationPanelPiece
 
 `mNavigatePanelPiece` is a page-switching navigation container where you can 
 add 
@@ -716,7 +716,7 @@ navigation
 bar, the navigate button will be have an move animation yet.
 
 
----++++mNavigationBarPiece
+#### mNavigationBarPiece
 
 an navigate bar, it provide an title bar like the `iOS`, it have include two
 button that used for go or back.
@@ -735,7 +735,7 @@ button that used for go or back.
 
 it is used by `mNavigationPanelPiece`.
 
----++++mNavigationItem
+#### mNavigationItem
 
 an navigate item, it is base `mObject`, so it is not an piece, just used for
 save an navigate item info, such as:
@@ -782,7 +782,7 @@ push to enter an navigate item, and pop to back preview.
 
 
 
----++++sample
+#### sample
 
 follow is an simple sample for use it:
 
@@ -832,7 +832,7 @@ int onBack(void)
 }
 ```
 
----+++mHScrollViewPiece
+### mHScrollViewPiece
 
 `mHScrollViewPiece` is a container piece that supports horizontal scrolling. It
 inherits from `mPanelPiece` and implements horizontal scrolling, while
@@ -898,11 +898,11 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 
 
 
----+++mTableViewPiece Using
+### mTableViewPiece Using
 
 `mTableViewPiece` is base on the `mPanelPiece` and include an list layout.
 
----++++create piece
+#### create piece
 
 `mTableViewPiece` is an internal piece, it is not an control, so you can not 
 use 
@@ -946,7 +946,7 @@ tatic BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 
 ```
 
----++++init piece
+#### init piece
 
 Definne your own piece and Inherit your piece from `mTableViewPiece`, you 
 should implement the relative

@@ -89,7 +89,7 @@ It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 
 It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 
----++++ increase
+#### increase
 ```cpp
 int increase (mProgressBar *self, int delta);
 ```
@@ -111,7 +111,7 @@ control the increase effect of non even speed
 _c(pb)->increase (pb, 5);    //进度值增加5 //The progress value increases 5
 ```
 
----++++ `stepIncrease`
+#### `stepIncrease`
 ```cpp
 int stepIncrease (mProgressBar *_this);
 ```
@@ -138,8 +138,8 @@ _c(pb)->stepIncrease (pb);
 
 ### `mProgressBar渲染器`
 ### Renderer of `mProgressBar`
----++++ classic渲染器
----++++ Classic Renderer
+#### classic渲染器
+#### Classic Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的classic渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | 进度条的chunk部分的颜色，本渲染器使用高亮item的颜色绘制 |
@@ -149,8 +149,8 @@ It is inherited from the classic renderer of
 | *Property name* |*miniStudio property * | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_BGC_HILIGHT_ITEM` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | Color of chunk part of the progress bar, and this renderer uses the color of highlight item to draw |
 
----++++ fashion渲染器
----++++ Fashion Renderer
+#### fashion渲染器
+#### Fashion Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的fashion渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | 进度条的chunk部分的基础颜色，渲染器会根据这个颜色进行减淡、加深，来绘制渐变效果的进度条 |
@@ -160,8 +160,8 @@ It is inherited from the fashion renderer of
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_BGC_PRGBAR_CHUNK` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | Foundation color of chunk part of the progress bar, and the renderer will lighten or darken according to this color to draw progress bar of gradual change effect |
 
----++++ flat渲染器
----++++ Flat Renderer
+#### flat渲染器
+#### Flat Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的flat渲染器<BR>
 | *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | 进度条的chunk部分的颜色,这里使用窗口前景色 |
@@ -170,8 +170,8 @@ It is inherited from flat renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_FGC_WINDOW` | `ChunkColor` | `DWORD（ARGB`） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | Color of chunk part of the progress bar, here window foreground color is used |
 
----++++ skin渲染器
----++++ Skin Renderer
+#### skin渲染器
+#### Skin Renderer
 参阅
 Skin渲染器使用的图片资源规范([ProgressBar图片规范](MStudioMGNCSV1dot0PGAppB][附录B]])中[[MStudioMGNCSV1dot0PGAppB#m_ProgressBar) 
 

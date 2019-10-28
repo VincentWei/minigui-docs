@@ -1,8 +1,7 @@
 # mGPlus Programming
 
 
-
----+Basic concept introduction
+##Basic concept introduction
 
 mGPlus is a MiniGUI component which provides support for advanced graphics
 functions like path, gradient, anti-aliase stretch, and color combination.
@@ -101,7 +100,7 @@ the user's first impression. The color combination is a powerful tool in this
 area. It can realize the ever-changing combination of pictures and give your
 interface an unexpected effect. mGPlus implements twelve combination modes.
 
----+ Architecture
+## Architecture
 
 ## `MGPlusGraphics` summary
 - MiniGUI have two way to use `MGPlus`：
@@ -143,7 +142,7 @@ class.
 <img align="CENTER" alt="mgplus_framework.jpeg"
 src="%ATTACHURLPATH%/mgplus_framework.jpeg" title="mgplus_framework.jpeg"/>
 
----+ `API` Applications
+## `API` Applications
 
 ## Graphics
 ### Graphics Manage Functions
@@ -151,7 +150,7 @@ src="%ATTACHURLPATH%/mgplus_framework.jpeg" title="mgplus_framework.jpeg"/>
 The Manage functions of Graphics include the functions of creating, deleting,
 and copying. Details are as follows:
 
----++++ Create
+#### Create
 
 There are two ways to create. One is to pass directly into `HDC` to create
 `MGPlusGraphics`
@@ -185,7 +184,7 @@ drawing `DC`
 HGRAPHICS MGPlusGraphicCreateWithoutCanvas (HDC hdc);
 ```
 
----++++ Delete
+#### Delete
 
 When `MGPlusGraphics` is not needed, you need to release the `MGPlusGraphics`
 data structure by calling
@@ -210,7 +209,7 @@ function to clear it. Usage is as follows:
     ReleaseDC (hdc);
 ```
 
----++++ Copy
+#### Copy
 
 ```cpp
 MPStatus MGPlusGraphicCopy (HGRAPHICS src_gs, HGRAPHICS dst_gs);
@@ -514,7 +513,7 @@ color combination
 Graphics rendering mode is anti-aliasing control, including brush smooth mode,
 path anti-aliasing and text anti-aliasing.
 
----++++ Brush's smooth mode
+#### Brush's smooth mode
 
 There are two kinds of smooth brush modes, which are:
 
@@ -540,7 +539,7 @@ The value of the drawing mode is stored in the address of the value.
 MPStatus MGPlusGetSmoothingMode (HGRAPHICS graphics, MPSmoothingMode* value);
 ```
 
----++++ Path antialiasing
+#### Path antialiasing
 
 Path anti-aliasing controls anti-aliasing with
 `MP_PATH_RENDER_HINT_ANTIALIAS_ON` and `MP_PATH_RENDER_HINT_ANTIALIAS_OFF`.
@@ -577,7 +576,7 @@ Added anti-aliasing effect of the path
 
 Adding anti-aliasing effect to the path
 
----++++ Text Antialiasing
+#### Text Antialiasing
 
 Anti-aliasing of text is controlled by `MP_TEXT_RENDER_HINT_ANTIALIAS_ON` and
 `MP_TEXT_RENDER_HINT_ANTIALIAS_OFF`.
@@ -634,7 +633,7 @@ path
 conversion of mgplus, which is the conversion of the coordinates of the
 graphics coordinates (translation, scaling, rotation).
 
----++++ Settings
+#### Settings
 
 The user needs to set the world coordinate system to call the
 `MGPlusSetWorldTransform` function.
@@ -661,7 +660,7 @@ Reset the function to `MGPlusResetWorldTransform`.
 MGPlus MGPlusResetWorldTransform (HGRAPHICS graphics);
 ```
 
----++++ Translation
+#### Translation
 
 If the user wants to translate, it should be noted that: the first world
 coordinate is (0, 0), if you want to figure around (100,
@@ -675,7 +674,7 @@ back.
 MPStatus MGPlusTranslateWorldTransform (HGRAPHICS graphics, float dx, float Dy);
 ```
 
----++++ Zoom
+#### Zoom
 
 Call the function `MGPlusScaleWorldTransform` , users can zoom 
 `MGPlusGraphics`. 
@@ -684,7 +683,7 @@ Call the function `MGPlusScaleWorldTransform` , users can zoom
 MGPlus MGPlusScaleWorldTransform (HGRAPHICS graphics, float sx, float sy);
 ```
 
----++++ Rotation
+#### Rotation
 
 The function `MGPlusRotateWorldTransform` is called and the user can rotate the
 `MGPlus` Graphics.
@@ -920,7 +919,7 @@ achieve drawing of vector graphics, support for vector graphics, such as
 infinity zooming and rotation, as well as providing better support for vector
 fonts.
 
----++++ Create
+#### Create
 
 When `MGPlusPathCreate` creates a path, you need to select the winding rule. 
 The 
@@ -934,7 +933,7 @@ HPATH path;
 Path = MGPlusPathCreate (MP_PATH_FILL_MODE_ALTERNATE) ;//path is filled with a parity rule
 ```
 
----++++ Delete
+#### Delete
 
 Release path.
 If you do not release the memory in the application, it will lead to memory
@@ -944,7 +943,7 @@ leaks and coredump.
 MPStatus MGPlusPathDelete (HPATH path);
 ```
 
----++++ Reset
+#### Reset
 
 Reset the path.
 Clear all the contents of the path.
@@ -952,7 +951,7 @@ Clear all the contents of the path.
 MPStatus MGPlusPathReset (HPATH path);
 ```
 
----++++ fill path
+#### fill path
 
 `MGPlusFillPath`
 Before filling the path, you must determine the Brush fill feature and then
@@ -963,8 +962,8 @@ MPStatus MGPlusFillPath (HGRAPHICS graphics, HBRUSH brush, HPATH path)
 The specific application is explained in detail in the next section "Adding a
 graphic to a path".
 
----++++ Add graphics to the path
----+++++ Add Line
+#### Add graphics to the path
+####+ Add Line
 
 Pass the coordinates of the two points to draw a straight line.
 ```cpp
@@ -1015,7 +1014,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 
 Drawing Effective Results
 
----+++++ Add an arc
+####+ Add an arc
 
 (cx, cy) is the center point coordinate of the ellipse, rx is the radius of
 the X axis, ry
@@ -1061,7 +1060,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 
 <img align="CENTER" alt="arc.png" src="%ATTACHURLPATH%/arc.png" />
 
----+++++ Add Bezier Curve
+####+ Add Bezier Curve
 
 (x1,y1) is the starting point, (x2,y2) is the first control point, (x3,
 Y3) is the second control point, and (x4, y4) is the end point.
@@ -1108,7 +1107,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 
 <img align="CENTER" alt="bezier.png" src="%ATTACHURLPATH%/bezier.png" />
 
----+++++ Add a rectangle
+####+ Add a rectangle
 
 (x, y) is the vertices of the rectangle, and (width, height) is the length and
 width of the rectangle.
@@ -1155,7 +1154,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/rect.png)
 
 
----+++++ Add Rounded Rectangle
+####+ Add Rounded Rectangle
 
 (x, y) is a rectangle vertex, (width,
 Height) is the length and width of the rectangle. The rounded rectangle of the
@@ -1199,7 +1198,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/Rectangle.png)
 
 
----+++++ Add ellipse
+####+ Add ellipse
 
 (cx, cy) is an ellipse center, (rx, ry) is an elliptical x-radius, y-radius,
 clockwise
@@ -1251,7 +1250,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/Ellipse.png)
 
 
----+++++ Add curves
+####+ Add curves
 
 Points Vertex array, count Number of vertices.
 ```cpp
@@ -1302,7 +1301,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/Curve.png)
 
 
----+++++ Add path
+####+ Add path
 
 Add the contents of `add_path` to path.
 ```cpp
@@ -1347,7 +1346,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 // Destroy....Frees memory
 ```
 
----++++ Drawing path
+#### Drawing path
 
 `MGPlusDrawPath`
 To draw the path, you must determine the Pen drawing properties and then use
@@ -1392,7 +1391,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/DrawPath.png)
 
 
----++++ Open and close
+#### Open and close
 
 Start a new subpath in the path. Subpaths allow you to divide a path into
 sections and use it.
@@ -1444,7 +1443,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 ![alt](figures/CloseFigure.png)
 
 
----++++ Line Control
+#### Line Control
 
 Move the current pen to another point without drawing a line.
 ```cpp
@@ -1491,7 +1490,7 @@ MGPlusGraphicSave (graphics, hdc, 0, 0, 0, 0, 0, 0);
 
 <img align="CENTER" alt="Move.png" src="%ATTACHURLPATH%/Moveto.png" />
 
----++++ Get path
+#### Get path
 
 ```cpp
 //Get the path vertex
@@ -1578,7 +1577,7 @@ transformation matrix, so the path transformation is the transformation of the
 graph. Path conversion matrices can be set, and translations, scaling, and
 rotations can also be applied to the path.
 
----++++ Settings
+#### Settings
 
 Call the `MGPlusPathSetTransform` function to set the transformation matrix for
 the path.
@@ -1605,7 +1604,7 @@ the path.
 MPStatus MGPlusPathResetTransform (HPATH path);
 ```
 
----++++ Translation
+#### Translation
 
 Calling the `MGPlusPathTranslate` function, the path is translated from the
 original position along the x and y axes (dx, dy).
@@ -1614,7 +1613,7 @@ original position along the x and y axes (dx, dy).
 MPStatus MGPlusPathTranslate (HPATH path, float dx, float dy);
 ```
 
----++++ Zoom
+#### Zoom
 
 The function `MGPlusPathScale` is used to scale the path. The value of sx , sy
 is greater than 1 is magnified, less than 1 is reduced.
@@ -1623,7 +1622,7 @@ is greater than 1 is magnified, less than 1 is reduced.
 MPStatus MGPlusPathScale (HPATH path, float sx, float sy);
 ```
 
----++++ Rotation
+#### Rotation
 
 The function `MGPlusPathRotate` is used for the rotation of the path, and the
 parameter angle is the rotation angle value.
@@ -1708,7 +1707,7 @@ on point-painting mechanisms. In addition to the common color and width
 attributes, the pen also has properties such as alignment, caps, and
 transitions.
 
----++++ Create Pen
+#### Create Pen
 
 If the user wants to use the pen to draw the shape, he needs to call the
 function `MGPlusPenCreate` to create the pen.
@@ -1717,7 +1716,7 @@ HPEN MGPlusPenCreate (int width, ARGB argb);
 ```
 Note: width is the width of the pen and argb is the color of the pen.
 
----++++ Delete Pen
+#### Delete Pen
 
 When the relevant drawing is completed, you need to release the pen and call
 the `MGPlusPenDelete` function to delete the pen.
@@ -1730,7 +1729,7 @@ MPStatus MGPlusPenDelete (HPEN pen);
 After the pen is created, the user needs to set the pen as needed, such as
 the color, width, connection, and length of the dotted line.
 
----++++ Color Settings
+#### Color Settings
 
 If the user needs to modify the color of the pen, call the function
 `MGPlusPenSetColor`.
@@ -1739,7 +1738,7 @@ If the user needs to modify the color of the pen, call the function
 MPStatus MGPlusPenSetColor (HPEN pen, ARGB rgba)
 ```
 
----++++ width setting
+#### width setting
 
 If the user needs to modify the width of the pen, call the function
 `MGPlusPenSetWidth`.
@@ -1753,7 +1752,7 @@ Width rendering
 Effect of <center> width</center>
 Note: The width of the lines is 1, 10 and 30 in order.
 
----++++ Dashed length setting
+#### Dashed length setting
 
 The pen is drawn in the default state is a solid line, the user wants to set
 the dotted line, call the function
@@ -1780,7 +1779,7 @@ Drawing effect chart
 Explanation: The style of the dotted line is {5, 10, 20}, {5, 10, 20, 15} and
 {5, 10, 20, 15, 10,}.
 
----++++ Connection settings
+#### Connection settings
 
 The connection mode refers to the setting of the shape of the connection when
 two straight lines are connected. There are five ways: `JOIN_MITER` (mock),
@@ -2025,7 +2024,7 @@ The `MGPlusFillPath` and `MGPlusGraphicSave` procedures are not required, and
 the 
 image can be drawn directly with the pen.
 
----++++ Draw a straight line
+#### Draw a straight line
 
 Two points drawn in a straight line
 ```cpp
@@ -2058,7 +2057,7 @@ MGPlusDrawLine (graphics, pen, 200, 100, 100, 100);
 
 <img align="CENTER" alt="DrawLine.png" src="%ATTACHURLPATH%/DrawLine.png" />
 
----++++ Drawing Arcs
+#### Drawing Arcs
 
 (cx, cy) is the center point coordinate of the ellipse, rx is the radius of
 the X axis, ry
@@ -2092,7 +2091,7 @@ MGPlusDrawArc (graphics, pen, 100, 100, 50, 25, 90, 345);
 
 <img align="CENTER" alt="DrawArc.png" src="%ATTACHURLPATH%/DrawArc.png" />
 
----++++ Drawing Bezier Curves
+#### Drawing Bezier Curves
 
 (x1,y1) is the starting point, (x2,y2) is the first control point, (x3,
 Y3) is the second control point, and (x4, y4) is the end point.
@@ -2130,7 +2129,7 @@ MGPlusDrawBezier (graphics, pen, 11, 11, 88, 333, 99, 0, 222, 111);
 <img align="CENTER" alt="DrawBezier.png" src="%ATTACHURLPATH%/DrawBezier.png" 
 /> 
 
----++++ draw a rectangle
+#### draw a rectangle
 
 (x, y) is the vertices of the rectangle, and (width, height) is the length and
 width of the rectangle.
@@ -2164,7 +2163,7 @@ MGPlusDrawRectangle (graphics, pen, 100, 175, 100, 100);
 <img align="CENTER" alt="DrawRectangle.png"
 src="%ATTACHURLPATH%/DrawRectangle.png" />
 
----++++ Drawing Rounded Rectangle
+#### Drawing Rounded Rectangle
 
 (x, y) is a rectangle vertex, (width,
 Height) is the length and width of the rectangle. The rounded rectangle of the
@@ -2199,7 +2198,7 @@ MGPlusDrawRoundRectEx (graphics, pen, 100, 375, 100, 100, 10, 10);
 <img align="CENTER" alt="DrawRoundRect.png"
 src="%ATTACHURLPATH%/DrawRoundRect.png" />
 
----++++ Draw an ellipse
+#### Draw an ellipse
 
 (cx, cy) is an ellipse center, (rx, ry) is an elliptical x-radius, y-radius
 ```cpp
@@ -2230,7 +2229,7 @@ MGPlusDrawEllipse (graphics, pen, 100, 100, 50, 25);
 <img align="CENTER" alt="DrawEllipse.png" src="%ATTACHURLPATH%/DrawEllipse.png"
 /> 
 
----++++ Load image
+#### Load image
 
 The bitmap used by mgplus must be format compatible with graphics, so from
 other dc-loaded bitmaps, you need to convert.
@@ -2250,7 +2249,7 @@ MPStatus MGPlusGraphicLoadBitmapFromFile (HGRAPHICS graphics, int n_index,
 Char* file);
 ```
 
----++++ Drawing pictures
+#### Drawing pictures
 
 There are three ways to draw a picture:
 
@@ -2357,7 +2356,7 @@ src="%ATTACHURLPATH%/DrawImageWithPath.png" />
 The brush is based on a padding mechanism that is used with the Graphics
 object to create a solid shape and an object that renders text.
 
----++++ Create
+#### Create
 
 Select brush style when using `MGPlusBrushCreate` to create a brush
 ```cpp
@@ -2378,7 +2377,7 @@ Typedef enum _MPBrushType
 HBRUSH MGPlusBrushCreate (MGPlusBrushType type);
 ```
 
----++++ Delete
+#### Delete
 
 Release brush
 ```cpp
@@ -2387,7 +2386,7 @@ MPStatus MGPlusBrushDelete (HBRUSH brush);
 
 ### Brush Settings
 
----++++ Solid Brush Setting
+#### Solid Brush Setting
 
 Set the color of a single brush
 ```cpp
@@ -2413,9 +2412,9 @@ MPStatus MGPlusSetTextureBrushImage (HBRUSH brush, BITMAP* bitmap);
 ```
 
 </noscript>
----++++ `GradientBrush` `GradientBrush` Settings
+#### `GradientBrush` `GradientBrush` Settings
 
----+++++ Path Gradient Brush `PathGradientBrush` Settings
+####+ Path Gradient Brush `PathGradientBrush` Settings
 
 Set the center point of `PathGradientBrush`
 ```cpp
@@ -2477,7 +2476,7 @@ SurroundColors, 3);
 <img align="CENTER" alt="PathGradientBrush.png"
 src="%ATTACHURLPATH%/PathGradientBrush.png" />
 
----+++++ Linear `GradientBrush` `LinearGradientBrus` Settings
+####+ Linear `GradientBrush` `LinearGradientBrus` Settings
 
 Set the `LinearGradientBrush` mode
 ```cpp
@@ -2568,7 +2567,7 @@ Set the brush to `MP_LINEAR_GRADIENT_MODE_BACKWARDDIAGONAL` mode
 There is no need for the `MGPlusFillPath` and `MGPlusGraphicSave` procedures to
 fill the image directly with the paintbrush.
 
----++++ Fill the arc
+#### Fill the arc
 
 (cx, cy) is the center point coordinate of the ellipse, rx is the radius of
 the X axis, ry
@@ -2601,7 +2600,7 @@ MGPlusFillArc (graphics, brush, 100, 100, 50, 50, 90, 180);
 
 <img align="CENTER" alt="FillArc.png" src="%ATTACHURLPATH%/FillArc.png" />
 
----++++ Fill Bezier Curve
+#### Fill Bezier Curve
 
 (x1,y1) is the starting point, (x2,y2) is the first control point, (x3,
 Y3) is the second control point, and (x4, y4) is the end point.
@@ -2636,7 +2635,7 @@ MGPlusFillBezier (graphics, brush, 11,11, 88,333, 99,0, 222,111);
 <img align="CENTER" alt="FillBezier.png" src="%ATTACHURLPATH%/FillBezier.png" 
 /> 
 
----++++ Fill rectangle
+#### Fill rectangle
 
 (x, y) is the vertices of the rectangle, and (width, height) is the length and
 width of the rectangle.
@@ -2669,7 +2668,7 @@ MGPlusFillRectangleI (graphics, brush, 100, 175, 100, 100);
 <img align="CENTER" alt="FillBezier.png" src="%ATTACHURLPATH%/FillBezier.png" 
 /> 
 
----++++ Fill rounded rectangle
+#### Fill rounded rectangle
 
 (x, y) is a rectangle vertex, (width,
 Height) is the length and width of the rectangle. The rounded rectangle of the
@@ -2703,7 +2702,7 @@ MGPlusFillRoundRectIEx ( graphics, brush, 100, 375, 100, 100, 10, 10);
 <img align="CENTER" alt="FillRoundRect.png"
 src="%ATTACHURLPATH%/FillRoundRect.png" />
 
----++++ Fill ellipse
+#### Fill ellipse
 
 (cx, cy) is an ellipse center, (rx, ry) is an elliptical x-radius, y-radius
 ```cpp

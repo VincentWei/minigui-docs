@@ -2,8 +2,8 @@
 # Chapter 13 of Part 2 Animation Control Class
 
 
----++动画控件简介
----++Brief Introduction of Animation Control
+## 动画控件简介
+## Brief Introduction of Animation Control
 动画控件通过对图片组和gif动态图片的绘制和显示，为用户提供了丰富的视觉体验。 `mGNCS中的动画控件源于Minigui`
 3.0的animation控件，在其基础上增加了对图片组播放和gif图片播放控制的支持。 同时， 用户可以通过设置图片播放间隔时间， 来控制播放速度。
 
@@ -36,7 +36,7 @@ codes are generated automatically.
 programming, corresponding control window class `ID` is imported, and control 
 is generated. Manual programming sets control property and event handling.
 
----++mAnimate
+## mAnimate
 
 - *控件窗口类*: `NCSCTRL_ANIMATE`
 - *控件英文名*: Animate
@@ -50,8 +50,8 @@ is generated. Manual programming sets control property and event handling.
 loading different image processing objects on the control.
 - *Schematic diagram*:
 
----+++mAnimate风格
----+++Style of `mAnimate`
+### mAnimate风格
+### Style of `mAnimate`
 继承自[mStatic](MStudioMGNCSV1dot0PGP2C4)的风格
 
 | * 风格ID * | * `miniStudio属性名` * | * 说明 * |
@@ -68,8 +68,8 @@ It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 | `NCSS_ANMT_AUTOFIT` | Scale->AutoFit | Set the control region automatic matched as image area |
 | `NCSS_ANMT_AUTOPLAY` | Autoplay | Set images as automatic play or not. When it is True, the images are played automatically. When it is False, it is necessary for the users to send order to control the play |
 
----+++mAnimate属性
----+++Property of `mAnimate`
+### mAnimate属性
+### Property of `mAnimate`
 继承自[mStatic](MStudioMGNCSV1dot0PGP2C4)的属性
 
 | * 属性ID名 * | * `miniStudio属性名` * | * 类型 * | * 权限 * | * 说明 * |
@@ -84,25 +84,25 @@ It is inherited from the property of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 | `NCSP_ANMT_DIR` | Dir | String | `RW` | Name if the directory loaded by the animation control. The control loads all the images in the directory. Image play is according to the first letter ascii code sequence of the images supported |
 | `NCSP_ANMT_INTERVAL` | Interval | int | `RW` | Time interval between the frames when the images are played |
 
----+++mAnimate事件
----+++Event of `mAnimate`
+### mAnimate事件
+### Event of `mAnimate`
 
 继承自[mStatic](MStudioMGNCSV1dot0PGP2C4)的事件
 
 It is inherited from the event of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
----+++mAnimate渲染器
----+++Renderer of `mAnimate`
+### mAnimate渲染器
+### Renderer of `mAnimate`
 
 非客户区的绘制请查阅[mStatic](MStudioMGNCSV1dot0PGP2C4#mStatic)的渲染器
 
 For the drawing of non client area, please refer to the renderer of
 [mStatic](MStudioMGNCSV1dot0PGP2C4#mStatic) 
 
----+++mAnimate方法
----+++Method of `mAnimate`
+### mAnimate方法
+### Method of `mAnimate`
 
----++++ncsAnimateStart
+#### ncsAnimateStart
 ```cpp
 BOOL ncsAnimateStart(mAnimate* self);
 ```
@@ -127,7 +127,7 @@ playing.
     ncsAnimateStart(anim);    
 ```
 
----++++ncsAnimatePauseResume
+#### ncsAnimatePauseResume
 ```cpp
 BOOL ncsAnimatePauseResume(mAnimate* self);
 ```
@@ -153,7 +153,7 @@ animation.
     ncsAnimatePauseResume(anim);    
 ```
 
----++++ncsAnimateStop
+#### ncsAnimateStop
 ```cpp
 BOOL ncsAnimateStop(mAnimate* self);
 ```
@@ -177,8 +177,8 @@ Stop the animation, and reset the animation back to the first frame.
 ```
 
 
----+++mAnimate编程示例
----+++Programming Example of `mAnimate`
+### mAnimate编程示例
+### Programming Example of `mAnimate`
 
 - 运行截图: <br />
 - Operation screen shot: <br />

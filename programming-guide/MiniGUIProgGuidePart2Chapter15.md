@@ -182,8 +182,8 @@ It is inherited from <a href="#Property of `mItem">the` property of `mItem</a`>
 继承自 <a href="#mItem 方法">mItem 方法</a>
 It is inherited from <a href="#Method of `mItem">the` method of `mItem</a`>
 
----++++ 回调方法
----++++ Callback Method
+#### 回调方法
+#### Callback Method
 
 `mItemManager` 类支持根据列表项或列表项字符串进行比较的2个回调方法。其中根据列表项比较的方法优先于根据列表项字符串比较的方法。
 
@@ -212,8 +212,8 @@ setting or default method is returned.
 - `getStrCmpFunc：used` to get the character string comparison method in current
 use. 
 
----++++ 排序方法
----++++ Sorting Method
+#### 排序方法
+#### Sorting Method
 
 ```cpp
 void setAutoSortItem(mItemManager *self, BOOL sort);    
@@ -230,8 +230,8 @@ determined.
 - `sortItems`: sort all the list items again according to the specified list
 item comparison method.
 
----++++ 刷新方法
----++++ Refreshing Method
+#### 刷新方法
+#### Refreshing Method
 
 ```cpp
 BOOL freeze(mItemManager *self, BOOL lock);     
@@ -249,8 +249,8 @@ UI。
 manager handles refreshable status, after the method adjusts the size, it will
 immediately reflect the changes to UI, otherwise UI will not be refreshed.
 
----++++ 创建/删除/移动列表项
----++++ Create/Remove/Move List Items
+#### 创建/删除/移动列表项
+#### Create/Remove/Move List Items
 
 
 在对列表项进行插入时，首先确认是否是自动排序支持，如果是，则按照自动排序算法计算排序插入位置；否则根据前、后列表项或指定索引依次进行插入尝试，尝试成功则返回正确位置。 
@@ -285,8 +285,8 @@ number afterwards to behind a certain list item location.
 - `removeItem`: remove a certain specified list item
 - `removeAll`: remove all the list items.
 
----++++ 遍历列表项
----++++ Traverse List Items
+#### 遍历列表项
+#### Traverse List Items
 
 ```cpp
 list_t* getQueue(mItemManager *self);                              
@@ -308,8 +308,8 @@ HITEM getPrev(mItemManager *self, HITEM hItem);
 - `getNext`: get the next list item of the specified list item.
 - `getPrev`: get the previous list item of the specified list item.
 
----++++ 获取列表项信息
----++++ Get List Item Information
+#### 获取列表项信息
+#### Get List Item Information
 
 ```cpp
 HITEM getItem(mItemManager *self, int index);                      
@@ -346,8 +346,8 @@ starting location of the list item.
 - `getSelection`: get information of the selected list items of specified
 number. 
 
----++++ 设置/获取列表项状态
----++++ Set/Get List Item Status
+#### 设置/获取列表项状态
+#### Set/Get List Item Status
 
 ```cpp
 BOOL isEnabled(mItemManager *self, HITEM hItem);
@@ -669,8 +669,8 @@ It is inherited from [the event of
 It is inherited from [the method of
 `mScrollWidget](MStudioMGNCSV1dot0PGP2C3#mScrollWidget`) 
 
----++++ 回调方法
----++++ Callback Method
+#### 回调方法
+#### Callback Method
 
 `mItemView` 提供了初始化、绘制和销毁列表项3个回调方法，同时还有比较列表项的回调方法。
 
@@ -692,8 +692,8 @@ NCS_CB_CMPSTR setStrCmpFunc(mItemView *self, NCS_CB_CMPSTR func);
 NCS_CB_CMPSTR getStrCmpFunc(mItemView *self);
 ```
 
----++++ 排序方法
----++++ Sorting Method
+#### 排序方法
+#### Sorting Method
 
 ```cpp
 void setAutoSortItem(mItemView *self, BOOL sort);    
@@ -710,8 +710,8 @@ position.
 - `sortItems`: according to the specified list item comparison method, sort all
 the list items again.
 
----++++ 刷新方法
----++++ Refreshing Method
+#### 刷新方法
+#### Refreshing Method
 
 ```cpp
 void freeze(mItemView *self, BOOL lock);
@@ -728,8 +728,8 @@ int adjustItemsHeight(mItemView *self, int diff);
 method will immediately reflect the change to UI after the control adjusts the
 list item size, otherwise UI will not be refreshed.
 
----++++ 创建/删除/移动列表项
----++++ Create/Remove/Move List Item
+#### 创建/删除/移动列表项
+#### Create/Remove/Move List Item
 
 
 在对列表项进行插入时，首先确认是否是自动排序支持，如果是，则按照自动排序算法计算排序插入位置；否则根据前、后列表项或指定索引依次进行插入尝试，尝试成功则返回正确位置。 
@@ -763,8 +763,8 @@ final parameter.
 - `removeItem`: remove certain specified list item.
 - `removeAll`: remove all the list items.
 
----++++ 遍历列表项
----++++ Traverse List Item
+#### 遍历列表项
+#### Traverse List Item
 
 ```cpp
 list_t* getQueue(mItemView *self);
@@ -785,8 +785,8 @@ HITEM getPrev(mItemView *self, HITEM hItem);
 - `getNext`: get the next list item of the specified list item.
 - `getPrev`: get the previous list item of the specified list item.
 
----++++ 获取列表项信息
----++++ Get List Item Information
+#### 获取列表项信息
+#### Get List Item Information
 
 ```cpp
 HITEM getItem(mItemView *self, int index);
@@ -819,8 +819,8 @@ the starting position of the list item.
 - `getSelectionCount`: get number of the selected list items.
 - `getSelection`: get the selected list item information of specified number.
 
----++++ 设置/获取列表项状态
----++++ Set/Get List Item Status
+#### 设置/获取列表项状态
+#### Set/Get List Item Status
 
 ```cpp
 BOOL isEnabled(mItemView *self, HITEM hItem);
@@ -899,8 +899,8 @@ int getTextLen(mItemView *self, HITEM hItem);
 - `getText`: get text character string of the list item.
 - `getTextLen`: get length of the text character string of the list item.
 
----++++ 其它
----++++ Others
+#### 其它
+#### Others
 ```cpp
 int getFirstVisItem(mItemView *self);
 void resetContent(mItemView *self);
@@ -1158,8 +1158,8 @@ It is inherited from <a href="#Event of `mItemView">event` of `mItemView</a`>
 It is inherited from <a href="#Method of `mItemView">the` method of
 `mItemView</a`> 
 
----++++ 将字符串加入列表框
----++++ Add the character string to the list box
+#### 将字符串加入列表框
+#### Add the character string to the list box
 
 建立 listbox 控件之后，下一步是将字符串放入其中，这可以通过调用 `addString`
 方法来完成，添加成功后该方法将返回列表项所在的索引值。字符串通常通过以0开始计数的索引数来引用，其中0对应于最顶上的条目。 
@@ -1226,8 +1226,8 @@ For Example:
     _c(listFile)->addItems(listFile, lbii, count);
 ```
 
----++++ 删除列表框条目
----++++ Remove List Box Item
+#### 删除列表框条目
+#### Remove List Box Item
 
 列表框控件通过 `delString` 或 `removeItemByIdx` 方法可以删除指定索引值的列表项或通过 `removeItem`
 方法删除指定列表项；同时也可以通过 `resetContent` 清空列表框中的所有内容。函数原型如下：
@@ -1251,8 +1251,8 @@ For Example:
 ```
 
 
----++++ 选择和获取条目
----++++ Select and Get Item
+#### 选择和获取条目
+#### Select and Get Item
 
 对于单项选择列表框和多项选择列表框在检索列表框条目的选中状态时需要使用不同的方法，下面先看单项选择列表框。选择条目除了通过鼠标和键盘操作外，还可以通过方法
 `setCurSel` 来控制：
@@ -1344,8 +1344,8 @@ selItem = alloca (sizeof(HITEM)*selCount);
 _c(listFile)->getSelection(listFile, selItem, selCount);
 ```
 
----++++ 查找含有字符串的条目
----++++ Find Items Containing Character String
+#### 查找含有字符串的条目
+#### Find Items Containing Character String
 
 列表框通过 `findString` 方法提供了在指定范围内精确或模糊查找包含某一指定字符串的列表项的方法：
 
@@ -1367,8 +1367,8 @@ list item index found will be returned, otherwise -1 will be returned:
 _c(listFile)->findString(listFile, 2, "test", TRUE);
 ```
 
----++++ 设置和获取某条目的检查框的当前状态
----++++ Set and get current status of the check box of certain item
+#### 设置和获取某条目的检查框的当前状态
+#### Set and get current status of the check box of certain item
 
 ```cpp
     _c(listFile)->getCheckMark(listFile, index);
@@ -1395,8 +1395,8 @@ Set the status of the check box of the item at the index specified by index as
 the value specified in status. When the item specified by index is not found,
 `FALSE` will be returned, if it is successful, `TRUE` will be returned.
 
----++++ 设置某列表框条目加粗显示状态
----++++ Set Certain List Box Item as Bold Display Status
+#### 设置某列表框条目加粗显示状态
+#### Set Certain List Box Item as Bold Display Status
 
 ```cpp
     _c(listFile)->bold(listFile, index, TRUE);
@@ -1406,8 +1406,8 @@ the value specified in status. When the item specified by index is not found,
 The operation will carry out bold setting to the content of the specified index
 item. 
 
----++++ 设置或获取某列表框条目选择状态
----++++ Set or Get Selection Status of Certain List Box Item
+#### 设置或获取某列表框条目选择状态
+#### Set or Get Selection Status of Certain List Box Item
 
 列表框通过 _isEnabled_ 方法确定某特定条目是否处于禁止选中状态：
 
@@ -1428,8 +1428,8 @@ or
     _c(listFile)->enableByIdx(listFile, 0, FALSE);
 ```
 
----++++ 设置字符串比较函数
----++++ Set Character String Comparison Function
+#### 设置字符串比较函数
+#### Set Character String Comparison Function
 
 列表框控件通过 _setStrCmpFunc_ 方法来使用用户设置的排序方法排列列表项。
 
@@ -1698,8 +1698,8 @@ It is inherited from <a href="#Event of `mItemView">the` event of
 It is inherited from <a href="#Style of `mItemView">the` style of 
 `mItemView</a`> 
 
----++++ 列操作
----++++ Column Operation
+#### 列操作
+#### Column Operation
 
 在向该控件中添加列表项前，首先需要通过 `addColumn` 方法添加列：
 
@@ -1737,8 +1737,8 @@ In addition, deleting specified column can be realized through `delColumn`:
 BOOL delColumn(mListView *self, int index);
 ```
 
----++++ 列表项操作
----++++ List Item Operation
+#### 列表项操作
+#### List Item Operation
 
 
 列表型控件由许多纵向排列的列表项组成，每个列表项由列分为多个子项，列表项可以包含特定的应用程序定义的附加数据。应用程序可以通过相应的方法来添加、修改和设置、删除列表项或获取列表项的属性信息。 
@@ -1778,8 +1778,8 @@ int getItemTextLen(mListView *self, int row, int col);
 BOOL setItemText(mListView *self, int row, int col, const char* str);
 ```
 
----++++ 查找列表项
----++++ Find List Item
+#### 查找列表项
+#### Find List Item
 
 `findItem` 用于在列表型控件中查找一个特定的列表项。如果查找成功的话，返回列表项句柄。
 
@@ -1790,8 +1790,8 @@ finding is successful, list item sentence handle is returned.
 HITEM findItem(mListView *self, NCS_LISTV_FINDINFO *info);
 ```
 
----++++ 比较和排序
----++++ Comparison and Sorting
+#### 比较和排序
+#### Comparison and Sorting
 
 除了继承自基类的排序功能支持外，该控件还可以指定某一列作为其排序的依照列，同时还可以设定排序类型是升序还是降序，或无序（不排列）。
 
@@ -1808,8 +1808,8 @@ mListColumn* getSortColumn(mListView *self);
 void setSortColumn(mListView *self, mListColumn* column);   
 ```
 
----++++ 回调方法
----++++ Callback Method
+#### 回调方法
+#### Callback Method
 
 对列表头的绘制包括了背景色和内容绘制2部分，控件对此提供了回调方法供上层应用处理表头的绘制。方法：
 
@@ -1821,8 +1821,8 @@ drawing of header. Method:
 void setCustomDrawHeader(mListView *self, NCS_CB_LISTV_CSTMHDROPS *func);
 ```
 
----++++ 树型节点的操作
----++++ ---++++ 树型节点的操作
+#### 树型节点的操作
+#### 树型节点的操作
 
 树型节点的操作包括获取相关节点和折叠一个节点。 相关方法有：
 

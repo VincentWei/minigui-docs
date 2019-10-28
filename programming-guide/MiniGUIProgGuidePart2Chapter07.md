@@ -1,5 +1,4 @@
-# Chapter 6 of Part 2 Panel and Its Derived Class
-
+# Panel and Its Derived Class
 
 ## Brief Introduction of Panel Class Control
 
@@ -9,7 +8,7 @@ window class.
 
 The class inheritance relation of panel and its derived class is as follows:
 
-- [mWidget ](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+- [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 - [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md)
 * [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox.md)
 * [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd.md)
@@ -26,57 +25,47 @@ panel control, a group of controls can be conveniently displayed or hidden.
 
 ![alt](figures/panel.png)
 
-
 Panel must exist in `MainWnd`, `DialogBox`, another Panel control or other
 controls. Besides other controls, it can contain content such as texts and
 images etc.
 
 ### Style of `mPanel`
 
-It is inherited from the style of 
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 ### Property of `mPanel`
 
-It is inherited from the property of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
----+++Event of `mPanel`
+### Event of `mPanel`
 
-It is inherited from the event of 
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 ### Method of `mPanel`
 
-It is inherited from the method of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 The class does not have newly added methods
 
 ### Renderer of `mPanel`
 
-It is inherited from the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
 `mPanel` does not have newly added renderer method
 
 ### Example of `mPanel`
 
 This example demonstrates how to use panel to group multiple controls to the
-users. 
-
-<p>
+users.
 
 ![alt](figures/panel_demo.png)
 
 Figure p2c6-1 Output of panel Program
-</p>
 
 <p align=center>List p2c6-1 panel.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/panel.c.txt"}%
 ```
-
 ## `mCombobox`
 
 - *Control name*: `NCSCTRL_COMBOBOX`
@@ -91,8 +80,7 @@ well completed. Address column in general browser is a good application.
 
 ### Style of `mCombobox`
 
-It is inherited from the style of
-[mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
+It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md).
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 | `NCSS_CMBOX_SIMPLE` | Type->Simple | Simple combination box |
@@ -137,7 +125,7 @@ It is inherited from the event of
 It is inherited from the method of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
----++++ `addItem`
+#### `addItem`
 
 ```cpp
 BOOL addItem(mCombobox *self, const char *item, DWORD addData);
@@ -162,7 +150,7 @@ for (i = 0; i < 3; i++)
 }
 ```
 
----++++ `removeItem`
+#### `removeItem`
 
 ```cpp
  BOOL removeItem(mCombobox *self, int index);
@@ -178,7 +166,7 @@ Delete certain selected item from the dropdown list of combobox
 _c(combo)->removeItem(combo, 0);
 ```
 
----++++ `setItem`
+#### `setItem`
 
 ```cpp
 BOOL setItem(mCombobox *self, int index, const char *item); 
@@ -194,7 +182,7 @@ Modify content of certain selected item in the dropdown list of combobox
 _c(combo)->setItem(combo, 0, "new content");
 ```
 
----++++ `getItem`
+#### `getItem`
 
 ```cpp
 const char* getItem(mCombobox *self, int index); 
@@ -209,7 +197,7 @@ Get content of certain selected item in the dropdown list of combobox
 const char *item_1 = _c(combo)->getItem(combo, 0);
 ```
 
----++++ `setAddData`
+#### `setAddData`
 ```cpp
 void* setAddData(mCombobox *self, int index, DWORD addData); 
 ```
@@ -226,7 +214,7 @@ LoadBitmap (......);
 _c(combo)->setAddData(combo, 0, (DWORD)pbmp);
 ```
 
----++++ `getAddData`
+#### `getAddData`
 ```cpp
 DWORD getAddData(mCombobox *self, int index); 
 ```
@@ -245,13 +233,13 @@ DWORD add = _c(combo)->getAddData(combo, 0);
 They are inherited from the renderers of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
----++++ `mCombobox` Classic Renderer
+#### `mCombobox` Classic Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
 | `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 
----++++ `mCombobox` Fashion Renderer
+#### `mCombobox` Fashion Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
@@ -260,13 +248,13 @@ They are inherited from the renderers of
 | `NCS_METRICS_3DBODY_ROUNDY` | `RoundY` | int | | Round corner y radius of the dropdown button |
 | `NCS_MODE_BGC` | `GradientMode` | int | | Drawing mode of the gradual change effect (horizontal gradual change or vertical gradual change) |
 
----++++ `mCombobox` Skin Renderer
+#### `mCombobox` Skin Renderer
 
 Refer to [Appendix B](MStudioMGNCSV1dot0PGENAppB][Image Specification]] in the
 Specification for the Image Resource Used by Skin Renderer
 ([[MStudioMGNCSV1dot0PGENAppB)). 
 
----++++ `mCombobox` Flat Renderer
+#### `mCombobox` Flat Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
