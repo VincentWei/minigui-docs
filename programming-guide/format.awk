@@ -18,7 +18,7 @@ function is_proper_name(name)
     else
         name = name " "
 
-    return index ("MiniGUI mGUtils mGEff mGPlus mGNCS mGNCS4Touch mStudio miniStudio VxWorks Linux RT-Thread ThreadX uC/OS-II FreeRTOS RTEMS", name)
+    return index ("MiniGUI MiniGUI-Processes MiniGUI-Threads MiniGUI-Standalone mGUtils mGEff mGPlus mGNCS mGNCS4Touch mStudio miniStudio VxWorks Linux RT-Thread ThreadX uC/OS-II FreeRTOS RTEMS ", name)
 }
 
 {
@@ -31,6 +31,9 @@ function is_proper_name(name)
 #            print $0
     }
     else {
+        if (match ($0, /^!\[/)) {
+            next
+        }
         if (match ($0, /^<br \/>/)) {
             print ""
             next
@@ -84,6 +87,12 @@ function is_proper_name(name)
             else if ($i == "mginit" ) {
                 $i = "`" $i "`"
             }
+            else if (match ($i, /^(minigui\/\w+\.h)$/, fields)) {
+                $i = "`" fields[1] "`"
+            }
+            else if (match ($i, /^(minigui\/\w+\.h)(\W)$/, fields)) {
+                $i = "`" fields[1] "`" fields[2]
+            }
             else if (match ($i, /^[A-Z]{2,}$/)) {
                 $i = "`" $i "`"
             }
@@ -96,6 +105,12 @@ function is_proper_name(name)
             else if (match ($i, /^([A-Z]+_\w*)\./, fields)) {
                 $i = "`" fields[1] "`."
             }
+            else if (match ($i, /^[A-Z]([a-z]*)[A-Z]/) && match ($i, /(.+)(\W)s$/, fields)) {
+                $i = "`" fields[1] "`" fields[2] "s"
+            }
+            else if (match ($i, /^[A-Z]([a-z]*)[A-Z]/) && match ($i, /(.+)(\W)$/, fields)) {
+                $i = "`" fields[1] "`" fields[2]
+            }
             else if (match ($i, /^[A-Z]([a-z]*)[A-Z]/)) {
                 $i = "`" $i "`"
             }
@@ -104,6 +119,9 @@ function is_proper_name(name)
             }
             else if (match ($i, /^[a-z]+_/)) {
                 $i = "`" $i "`"
+            }
+            else if (match ($i, /^[a-z]+[A-Z]/) && match ($i, /(.+)(\W)$/, fields)) {
+                $i = "`" fields[1] "`" fields[2]
             }
             else if (match ($i, /^[a-z]+[A-Z]/)) {
                 $i = "`" $i "`"
