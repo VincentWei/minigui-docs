@@ -72,7 +72,7 @@ Figure p2c6-1 Output of panel Program
 
 It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
-| *Style name* | *mStudio property name* | *Explanation* |
+| *Style name* | *miniStudio property name* | *Explanation* |
 | NCSS_CMBOX_SIMPLE | Type->Simple | Simple combination box |
 | NCSS_CMBOX_DROPDOWNLIST | Type->DropDownList | Dropdown combination box |
 | NCSS_CMBOX_SORT | Sort->TRUE | Character string automatic sorting |
@@ -87,7 +87,7 @@ It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel
 
 It is inherited from the property of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
-| *Property name* | *mStudio property name* | *Type* | *RW* | *Explanation* |
+| *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* |
 | NCSP_COMB_DROPDOWNHEIGHT | DropDownHeight | int | RW | Height of the dropdown list |
 | NCSP_COMB_ITEMHEIGHT | ItemHeight | int | RW | Height of the list item |
 | NCSP_COMB_ITEMCOUNT | ItemCount | int | RO | Number of the list items |
@@ -221,13 +221,13 @@ They are inherited from the renderers of [mPanel](MiniGUIProgGuidePart2Chapter07
 
 ---++++ mCombobox Classic Renderer
 
-| *Property name* | *mStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | NCS_BGC_3DBODY | ColorBg3DBody | DWORD(ARGB) |  | Draw color of the dropdown button |
 | NCS_FGC_WINDOW | ColorFgWindow | DWORD(ARGB) |  | Draw color of the arrow of the dropdown button |
 
 ---++++ mCombobox Fashion Renderer
 
-| *Property name* | *mStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | NCS_BGC_3DBODY | ColorBg3DBody | DWORD(ARGB) |  | Draw color of the dropdown button |
 | NCS_FGC_WINDOW | ColorFgWindow | DWORD(ARGB) |  | Draw color of the arrow of the dropdown button |
 | NCS_METRICS_3DBODY_ROUNDX | RoundX | int | | Round corner x radius of the dropdown button |
@@ -240,7 +240,7 @@ Refer to [Appendix B](MStudioMGNCSV1dot0PGENAppB][Image Specification]] in the S
 
 ---++++ mCombobox Flat Renderer
 
-| *Property name* | *mStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 |NCS_BGC_3DBODY | ColorBg3DBody | DWORD(ARGB) |  | Draw color of the dropdown button |
 | NCS_FGC_WINDOW | ColorFgWindow | DWORD(ARGB) |  | Draw color of the arrow of the dropdown button |
 

@@ -4,7 +4,7 @@
 
 Static box is used to display information of figure, literal and image etc. at specific locations of the window, such as company profile and company product trademark etc., and it is one of the most common controls. Generally speaking, control row of static box series does not need to conduct dynamic response to input of the users, that is to say, it is not necessary to receive any input (such as keyboard and mouse etc.), and there is no event of itself.
 
-|  *Control Name* | *Control name (mStudio display name)* | *Purpose* | *NCS class name* | *Control window class ID* |
+|  *Control Name* | *Control name (miniStudio display name)* | *Purpose* | *NCS class name* | *Control window class ID* |
 | Static box | Label | Display single row or multiple rows of texts | mStatic | NCSCTRL_STATIC |
 | Image box | Image | Display image | mImage | NCSCTRL_IMAGE |
 | Rectangle box | Rectangle | Draw rectangles | mRect | NCSCTRL_RECTANGLE |

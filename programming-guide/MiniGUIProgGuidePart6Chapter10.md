@@ -325,7 +325,7 @@ static void get_systeminfo (HWND hDlg)
     case PAGE_MINIGUI:
         size = snprintf (buff, BUF_LEN,
               "MiniGUI version %d.%d.%d.\n"
-              "Copyright (C) 1998-2003 Feynman Software and others.\n\n"
+              "Copyright (C) 1998-2003 FMSoft and others.\n\n"
               "MiniGUI is free software, covered by the GNU General Public License, "
               "and you are welcome to change it and/or distribute copies of it “
               “under certain conditions. "

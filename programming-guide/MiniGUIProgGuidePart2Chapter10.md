@@ -41,14 +41,14 @@ mGNCS provides two kinds of buttons, mSpinner and mSpinbox, and their inheritanc
 ### Style of mSpinner
 
 继承自[mWidget的风格 ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-|* 风格ID *|* mStudio 名 *| * 说明 *|
+|* 风格ID *|* miniStudio 名 *| * 说明 *|
 | NCSS_SPNR_VERTICAL | Direction->Vert| 垂直风格，上下箭头，当点击上下箭头的时候，会向目标窗口发送上下方向键的键盘消息 |
 | NCSS_SPNR_HORIZONTAL | Direction->Horz | 水平风格，左右箭头,当点击左右箭头的时候，会向目标窗口发送左右方向键的键盘消息 |
 | NCSS_SPNR_AUTOLOOP | AutoLoop | 当到达最大或者最小值时，自动跳转到最小或者最大值处 |
 
 
 It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-|* Style ID *|* mStudio name *| * Explanation *|
+|* Style ID *|* miniStudio name *| * Explanation *|
 | NCSS_SPNR_VERTICAL | Direction->Vert| Vertical style, up and down arrows. When clicking up and down arrows, it will send keyboard information of the up and down direction keys to the objective window |
 | NCSS_SPNR_HORIZONTAL | Direction->Horz | Horizontal style, left and right arrows. When clicking the left and right arrows, it will send keyboard information of the left and right direction keys to the objective window |
 | NCSS_SPNR_AUTOLOOP | AutoLoop | When reaching the maximum or minimum value, it will automatically loop to the minimum or maximum value |
@@ -58,7 +58,7 @@ It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 继承自[mWidget的属性 ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_SPNR_MAXPOS | MaxPos | int | RW | 变化范围的最大值 |
 | NCSP_SPNR_MINPOS | MinPos | int | RW | 变化范围的最小值 |
 | NCSP_SPNR_CURPOS | CurPos | int | RW | 当前值 |
@@ -68,7 +68,7 @@ It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 It is inherited from [the property of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* Property ID *| *mStudio name*| *Type* | *Authority* |* Explanation *|
+|* Property ID *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | NCSP_SPNR_MAXPOS | MaxPos | int | RW | Maximum value of the change range |
 | NCSP_SPNR_MINPOS | MinPos | int | RW | Minimum value of the change range |
 | NCSP_SPNR_CURPOS | CurPos | int | RW | Current value |
@@ -111,7 +111,7 @@ The class does not have newly added method
 
 非客户区查看[mWidget的classic渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-| *属性名*  | *说明* | *mStudio属性名* | *类型* | *示意图*|
+| *属性名*  | *说明* | *miniStudio属性名* | *类型* | *示意图*|
 | NCS_BGC_3DBODY | 背景颜色 | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | | 
 | NCS_FGC_3DBODY | 前景箭头的颜色 | ColorFg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
 | NCS_BGC_DISABLED_ITEM | 无效时的背景颜色 | ColorBgDisable | DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
@@ -119,7 +119,7 @@ The class does not have newly added method
 
 For the non client area, refer to [classic renderer of mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-| *Property name*  | *Explanation* | *mStudio property name* | *Type* | *Schematic diagram*|
+| *Property name*  | *Explanation* | *miniStudio property name* | *Type* | *Schematic diagram*|
 | NCS_BGC_3DBODY | Background color | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-classic-bg3dcolor.png" alt="spinner-classic-bg3dcolor.png" width='42' height='37' /> | | 
 | NCS_FGC_3DBODY | Color of the foreground arrow | ColorFg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png" width='38' height='38' /> | |
 | NCS_BGC_DISABLED_ITEM | Background color when it is invalid | ColorBgDisable | DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-classic-bg3ddisable.png" alt="spinner-classic-bg3ddisable.png" width='39' height='38' /> |
@@ -135,7 +135,7 @@ Refer to [ Appendix B : Specification for the Image Resource Used by Skin Render
 ---++++ mSpinner Fashion 渲染器
 ---++++ mSpinner Fashion Renderer
 
-| *属性名*  | *说明*  | *mStudio属性名* | *类型* | *示意图* |
+| *属性名*  | *说明*  | *miniStudio属性名* | *类型* | *示意图* |
 | NCS_FGC_3DBODY | 按钮前景色 | ColorFg3DBody  |  DWORD(ARGB) | 同Classic渲染器 |
 | NCS_FGC_DISABLED_ITEM | 窗口无效时按钮前景色 |  ColorFgDisable | DWORD(ARGB) | 同Classic渲染器 |
 | NCS_BGC_3DBODY | 背景颜色 | ColorBg3DBody  |  DWORD(ARGB) | 同Classic渲染器 |
@@ -143,7 +143,7 @@ Refer to [ Appendix B : Specification for the Image Resource Used by Skin Render
 | NCS_MODE_BGC | 渐变填充方式 | GradientMode |  [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode)  | <img src="%ATTACHURLPATH%/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
 
 
-| *Property name*  | *Explanation*  | *mStudio property name* | *Type* | *Schematic diagram* |
+| *Property name*  | *Explanation*  | *miniStudio property name* | *Type* | *Schematic diagram* |
 | NCS_FGC_3DBODY | Button foreground color | ColorFg3DBody  |  DWORD(ARGB) | Same as Classic renderer |
 | NCS_FGC_DISABLED_ITEM | Button foreground color when the window is invalid |  ColorFgDisable | DWORD(ARGB) | Same as Classic renderer |
 | NCS_BGC_3DBODY | Background color | ColorBg3DBody  |  DWORD(ARGB) | Same as Classic renderer |
@@ -154,11 +154,11 @@ Refer to [ Appendix B : Specification for the Image Resource Used by Skin Render
 ---++++ mSpinner Flat 渲染器
 ---++++ mSpinner Flat Renderer
 
-| *属性名*  | *说明*  | *mStudio属性名* | *类型* | *示意图* |
+| *属性名*  | *说明*  | *miniStudio属性名* | *类型* | *示意图* |
 | NCS_FGC_3DBODY | 按钮前景色 | ColorFg3DBody  |  DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' />  |
 | NCS_BGC_3DBODY | 背景颜色 | ColorBg3DBody  |  DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
 
-| *Property name*  | *Explanation*  | *mStudio property name* | *Type* | *Schematic diagram* |
+| *Property name*  | *Explanation*  | *miniStudio property name* | *Type* | *Schematic diagram* |
 | NCS_FGC_3DBODY | Button foreground color | ColorFg3DBody  |  DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-flat-fgcolor.png" alt="spinner-flat-bgcolor.png" width='36' height='36' />  |
 | NCS_BGC_3DBODY | Background color | ColorBg3DBody  |  DWORD(ARGB) | <img src="%ATTACHURLPATH%/spinner-flat-bgcolor.png" alt="spinner-flat-fgcolor.png" width='37' height='36' /> |
 
@@ -242,7 +242,7 @@ For convenience, we mainly realize through the method of data binding
 
 继承自<a href="#mSpinner风格">mSpinner的风格</a>
 
-|* 风格ID *| *mStudio名* | * 说明 *| 
+|* 风格ID *| *miniStudio名* | * 说明 *| 
 | NCSS_SPNBOX_NUMBER | ContentType->Number |显示数值，可以通过相应的属性指定显示格式 |
 | NCSS_SPNBOX_STRING | ContentType->String| 显示字符串 |
 | NCSS_SPNBOX_SORT | Sort | 字符串自动排序 |
@@ -255,7 +255,7 @@ For convenience, we mainly realize through the method of data binding
 
 It is inherited from <a href="#the style of mSpinner">the style of mSpinner</a>
 
-|* Style ID *| *mStudio name* | * Explanation *| 
+|* Style ID *| *miniStudio name* | * Explanation *| 
 | NCSS_SPNBOX_NUMBER | ContentType->Number |Display numerical value, display format can be appointed through corresponding properties |
 | NCSS_SPNBOX_STRING | ContentType->String| Display character string |
 | NCSS_SPNBOX_SORT | Sort | Character string automatic sorting |

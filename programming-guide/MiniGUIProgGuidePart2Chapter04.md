@@ -250,14 +250,14 @@ Component supports some universal operations
  * \sa NCS_EVENT_HANDLER_NODE
  */
 typedef struct _NCS_EVENT_HANDLER {
-	/**
-	 * The event code
-	 */
-	int message;
-	/**
-	 * The event callback pointer
-	 */
-	void *handler;
+    /**
+     * The event code
+     */
+    int message;
+    /**
+     * The event callback pointer
+     */
+    void *handler;
 }NCS_EVENT_HANDLER;
 
 /**
@@ -371,11 +371,11 @@ mWidget is the foundation class of all the controls
 
 ### Style of mWidget 
 
-| *Style ID* | *Property Name of mStudio* | *Explanation* ||
+| *Style ID* | *Property Name of miniStudio* | *Explanation* ||
 | NCSS_NOTIFY | Notify | Decide if the control generates Notification event |
 
 ### Property of mWidget
-| *Property name* |*Property name of mStudio* | *Type* | *RW* | *Explanation* |
+| *Property name* |*Property name of miniStudio* | *Type* | *RW* | *Explanation* |
 | NCSP_WIDGET_RDR | Renderer |const char* | W | Set current renderer of the control | 
 | NCSP_WIDGET_TEXT | Text |const char* | W | Set text content of the current control |
 | NCSP_WIDGET_BKIMAGE | BkImage |PBITMAP | RW | Set or get current background image |
@@ -425,44 +425,44 @@ None
  * \sa NCS_CREATE_INFO, ncsCreateMainWindow , ncsCreateMainWindowIndirect
  */
 typedef struct _NCS_MAIN_CREATE_INFO {
-	/**
-	 * The class name of a mMainWnd or its child class
-	 *
-	 * \note if className is NULL or an invalidate class name
-	 * \ref ncsCreateMainWindow and ncsCreateMainWindowIndirect 
+    /**
+     * The class name of a mMainWnd or its child class
+     *
+     * \note if className is NULL or an invalidate class name
+     * \ref ncsCreateMainWindow and ncsCreateMainWindowIndirect 
          *        use \ref CTRL_MINIMAINWND replaced
-	 *
-	 * \sa CTRL_MINIMAINWND
-	 */
-	const char* className;
-	/**
-	 * NCS_CREATE_INFO pointer
-	 */
-	NCS_CREATE_INFO * create_info;
+     *
+     * \sa CTRL_MINIMAINWND
+     */
+    const char* className;
+    /**
+     * NCS_CREATE_INFO pointer
+     */
+    NCS_CREATE_INFO * create_info;
 }NCS_MAIN_CREATE_INFO;
 
 /**
  * \fn mWidget* ncsCreateMainWindow (const char *class_name, const char *caption, 
- * 			DWORD style, DWORD ex_style, \
- * 			int id, int x, int y, int w, int h, HWND host, \
- * 			HICON hIcon, HMENU hMenu, NCS_PROP_ENTRY * props, \
- * 			NCS_RDR_INFO * rdr_info, \
- * 			NCS_EVENT_HANDLER * handlers, \
- * 			DWORD add_data);
+ *             DWORD style, DWORD ex_style, \
+ *             int id, int x, int y, int w, int h, HWND host, \
+ *             HICON hIcon, HMENU hMenu, NCS_PROP_ENTRY * props, \
+ *             NCS_RDR_INFO * rdr_info, \
+ *             NCS_EVENT_HANDLER * handlers, \
+ *             DWORD add_data);
  *
- *	\brief create a NCS main window 
+ *    \brief create a NCS main window 
  *
- *	\param class_name the class name of widget. 
- *	       the class name must be register by \ref ncsRegisterComponent. 
- *	       And must be \ref CTRL_MINIMAINWND or its dirved class.
- *	\param caption the caption of the main window
- *	\param style  the style of main window
- *	\param ex_style  the extend style of main window
- *	\param id the id of main window
- *	\param x the x position of main window
- *	\param y the y position of main window
- *	\param w the width of main window
- *	\param h the height of main window
+ *    \param class_name the class name of widget. 
+ *           the class name must be register by \ref ncsRegisterComponent. 
+ *           And must be \ref CTRL_MINIMAINWND or its dirved class.
+ *    \param caption the caption of the main window
+ *    \param style  the style of main window
+ *    \param ex_style  the extend style of main window
+ *    \param id the id of main window
+ *    \param x the x position of main window
+ *    \param y the y position of main window
+ *    \param w the width of main window
+ *    \param h the height of main window
  *  \param host the handle of host window, can be NULL
  *  \param hIcon the icon of main window
  *  \param hMenu the menu bar handle 
@@ -496,50 +496,50 @@ mWidget* ncsCreateMainWindow (const char *class_name, const char *caption,
  * \sa NCS_CREATE_INFO
  */
 struct _NCS_WND_TEMPLATE{
-	/**
-	 * The class name of mComponent, must be registered by \ref ncsRegisterComponent
-	 *
-	 * \note support \ref mInvisibleComponent class
-	 */
-	const char*         class_name;
-	/**
-	 * The id of commponet
-	 */
-	int                 id;
-	/**
-	 * The Location and Size of mWidget, ignored if class_name 
+    /**
+     * The class name of mComponent, must be registered by \ref ncsRegisterComponent
+     *
+     * \note support \ref mInvisibleComponent class
+     */
+    const char*         class_name;
+    /**
+     * The id of commponet
+     */
+    int                 id;
+    /**
+     * The Location and Size of mWidget, ignored if class_name 
          *  is a \ref mInvisibleComponent
-	 */
-	int                 x, y, w, h;
-	/**
-	 * The style of mWidget, ignored if class_name is a \ref mInvisibleComponent
-	 */
-	DWORD               style;
-	/**
-	 * The extend style of mWidget, ignored if class_name is a \ref mInvisibleComponent
-	 */
-	DWORD               ex_style;
-	/**
-	 * The caption of mWidget, ignored if class_name is a \ref mInvisibleComponent
-	 */
-	const char*         caption;
+     */
+    int                 x, y, w, h;
+    /**
+     * The style of mWidget, ignored if class_name is a \ref mInvisibleComponent
+     */
+    DWORD               style;
+    /**
+     * The extend style of mWidget, ignored if class_name is a \ref mInvisibleComponent
+     */
+    DWORD               ex_style;
+    /**
+     * The caption of mWidget, ignored if class_name is a \ref mInvisibleComponent
+     */
+    const char*         caption;
 
-	//same struct as NCS_CREATE_INFO
-	/**
-	 * Same as NCS_CREATE_INFO
-	 *
-	 * \sa NCS_CREATE_INFO
-	 */
-	NCS_PROP_ENTRY*     props;
-	NCS_RDR_INFO*       rdr_info;
-	NCS_EVENT_HANDLER*  handlers;
-	NCS_WND_TEMPLATE*   ctrls;
-	int                 count;
-	DWORD               user_data;
+    //same struct as NCS_CREATE_INFO
+    /**
+     * Same as NCS_CREATE_INFO
+     *
+     * \sa NCS_CREATE_INFO
+     */
+    NCS_PROP_ENTRY*     props;
+    NCS_RDR_INFO*       rdr_info;
+    NCS_EVENT_HANDLER*  handlers;
+    NCS_WND_TEMPLATE*   ctrls;
+    int                 count;
+    DWORD               user_data;
 
-	//FIXED ME Maybe I  should not put these two param here
-	DWORD				bk_color;
-	PLOGFONT			font;
+    //FIXED ME Maybe I  should not put these two param here
+    DWORD                bk_color;
+    PLOGFONT            font;
 };
 
 //create control window indirect
@@ -565,26 +565,26 @@ mWidget* ncsCreateWindowIndirect( const NCS_WND_TEMPLATE* tmpl, HWND hParent);
  * \sa NCS_WND_TEMPLATE, ncsCreateMainWindow
  */
 typedef struct _NCS_MAINWND_TEMPLATE{
-	const char*         class_name;
-	int                 id;
-	int                 x, y, w, h;
-	DWORD               style;
-	DWORD               ex_style;
-	const char*         caption;
+    const char*         class_name;
+    int                 id;
+    int                 x, y, w, h;
+    DWORD               style;
+    DWORD               ex_style;
+    const char*         caption;
 
-	NCS_PROP_ENTRY*     props;
-	NCS_RDR_INFO*       rdr_info;
-	NCS_EVENT_HANDLER*  handlers;
-	NCS_WND_TEMPLATE*   ctrls;
-	int                 count;
-	DWORD               user_data;
+    NCS_PROP_ENTRY*     props;
+    NCS_RDR_INFO*       rdr_info;
+    NCS_EVENT_HANDLER*  handlers;
+    NCS_WND_TEMPLATE*   ctrls;
+    int                 count;
+    DWORD               user_data;
 
-	//FIXED ME Maybe I  should not put these two param here
-	DWORD				bk_color;
-	PLOGFONT			font;
+    //FIXED ME Maybe I  should not put these two param here
+    DWORD                bk_color;
+    PLOGFONT            font;
 
-	HICON               hIcon;
-	HMENU               hMenu;
+    HICON               hIcon;
+    HMENU               hMenu;
 }NCS_MAINWND_TEMPLATE;
 
 /**
@@ -613,9 +613,9 @@ mWidget* ncsCreateMainWindowIndirect(const NCS_MAINWND_TEMPLATE* tmpl, HWND hHos
  */
 static inline mWidget* ncsObjFromHandle(HWND hwnd)
 {
-	if(IsWindow(hwnd))
-		return (mWidget*)(GetWindowAdditionalData2(hwnd));
-	return NULL;
+    if(IsWindow(hwnd))
+        return (mWidget*)(GetWindowAdditionalData2(hwnd));
+    return NULL;
 }
 
 /**
@@ -630,7 +630,7 @@ static inline mWidget* ncsObjFromHandle(HWND hwnd)
  */
 static inline mWidget* ncsGetChildObj(HWND hwnd, int id)
 {
-	return ncsObjFromHandle(GetDlgItem(hwnd,id));
+    return ncsObjFromHandle(GetDlgItem(hwnd,id));
 }
 
 /**
@@ -644,7 +644,7 @@ static inline mWidget* ncsGetChildObj(HWND hwnd, int id)
  */
 static inline mWidget* ncsGetParentObj(HWND hwnd)
 {
-	return ncsObjFromHandle(GetParent(hwnd));
+    return ncsObjFromHandle(GetParent(hwnd));
 }
 
 ```

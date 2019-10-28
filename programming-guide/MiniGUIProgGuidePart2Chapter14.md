@@ -13,7 +13,7 @@ Animation control provides rich visual experience to the users through drawing a
          * [ mAnimate ](MStudioMGNCSV1dot0PGP2C13#mAnimate) 
  
 - 控件创建方法
-   - 自动创建：通过mStudio中的界面设计器，拖拽对应的动画控件，在属性栏中选择需要加载的GIF图片或图片目录，mStudio将自动创建控件，并提供可视化的控件配置，同时自动生成创建代码。
+   - 自动创建：通过miniStudio中的界面设计器，拖拽对应的动画控件，在属性栏中选择需要加载的GIF图片或图片目录，miniStudio将自动创建控件，并提供可视化的控件配置，同时自动生成创建代码。
    - 手动生成：按照mGNCS控件创建过程，通过编程，传入对应控件窗口类ID，生成控件，手动编程设置控件属性、事件处理。
 
 - Animate class hierarchical relation
@@ -21,7 +21,7 @@ Animation control provides rich visual experience to the users through drawing a
          * [ mAnimate ](MStudioMGNCSV1dot0PGP2C13#mAnimate) 
  
 - Control creating method
-   - Automatic creation: through interface designer in mStudio, drag corresponding animation control, select GIF image or image directory that need to load in the property column, and mStudio will automatically create control and provides visual control configuration, at the same time, creation codes are generated automatically.
+   - Automatic creation: through interface designer in miniStudio, drag corresponding animation control, select GIF image or image directory that need to load in the property column, and miniStudio will automatically create control and provides visual control configuration, at the same time, creation codes are generated automatically.
    - Manual generation: according to mGNCS control creating process, through programming, corresponding control window class ID is imported, and control is generated. Manual programming sets control property and event handling.
 
 ---++mAnimate
@@ -41,7 +41,7 @@ Animation control provides rich visual experience to the users through drawing a
 ---+++Style of mAnimate
 继承自[mStatic](MStudioMGNCSV1dot0PGP2C4)的风格
 
-| * 风格ID * | * mStudio属性名 * |  * 说明 * |
+| * 风格ID * | * miniStudio属性名 * |  * 说明 * |
 | NCSS_ANMT_AUTOLOOP | Loop | 设置动画播放是否为自动循环， 设置为True时，图片循环播放， 设置为False时，图片播放完毕则停止  |
 | NCSS_ANMT_SCALE | Scale->ImageScaled | 设置图片播放面积为控件区域面积， 可以对图片进行扩大或缩减播放  |
 | NCSS_ANMT_AUTOFIT | Scale->AutoFit | 设置控件区域自动匹配为图片面积 |
@@ -59,7 +59,7 @@ It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 ---+++Property of mAnimate
 继承自[mStatic](MStudioMGNCSV1dot0PGP2C4)的属性
 
-| * 属性ID名 * | * mStudio属性名 * |  * 类型 * | * 权限 * | * 说明 * |
+| * 属性ID名 * | * miniStudio属性名 * |  * 类型 * | * 权限 * | * 说明 * |
 | NCSP_ANMT_GIFFILE | GIFFile | String | RW | 动画控件加载的GIF图片文件名 |
 | NCSP_ANMT_DIR | Dir | String | RW | 动画控件加载的目录名， 控件加载目录内的所有图片, 图片播放是按照所支持图片首字母ascii码顺序 |
 | NCSP_ANMT_INTERVAL | Interval | int | RW | 播放图片时帧与帧之间的时间间隔 |

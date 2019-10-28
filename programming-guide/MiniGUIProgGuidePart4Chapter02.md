@@ -408,7 +408,7 @@ status: on or off, it has supuport an switch status animation.
 
 ---++++property
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSP_SWB_STATUS| - | int | RW | switch status | NCS_SWB_OFF/NCS_SWB_ON |
 
 
@@ -429,7 +429,7 @@ status: on or off, it has supuport an switch status animation.
 
 ---++++style
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSS_BNB_LRECT| - | int | R | the left button is on behalf of the triangular shape of the left| |
 | NCSS_BNB_LOPT | - | int | R | the left button is a rounded rectangular shape. |
 | NCSS_BNB_LNONE| - | int | R | the left button is not displayed the shape| |
@@ -440,7 +440,7 @@ status: on or off, it has supuport an switch status animation.
 
 ---++++property
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSP_BNB_LSTRING| - | int | RW | set the string on the left button |  |
 | NCSP_BNB_RSTRING| - | int | RW | set the string on the rightbutton|  |
 | NCSP_BNB_FONT   | - | int | RW | set the font size on the navigation bar |  |
@@ -467,7 +467,7 @@ can set NCS4TOUCH_RENDERER to it, other property are all same with mTrackbar.
 
 no new property, it include all mTrackBar property.
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSP_TRKBAR_MAXPOS  | - | int | RW | The value of the maximum position. |Pixel |
 | NCSP_TRKBAR_MINPOS  | - | int | RW | The value of the minimum position.|Pixel |
 | NCSP_TRKBAR_CURPOS  | - | int | RW | The value of the current position.|Pixel |
@@ -492,13 +492,13 @@ setting ui like iOS.
 
 ---++++style
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSS_ITEMBAR_CHECKABLE| - | int | R | Check whether there is support | |
 | NCSS_ITEMBAR_HASCHILD| - | int | R | Whether child controls identified. | |
 
 ---++++property
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
 | NCSP_ITEMBAR_CHECKED| - | int | RW | set checked status | mItemBarStyle|
 | NCSP_ITEMBAR_IMG| - | int | RW | set image icon|bitmap |
 | NCSP_ITEMBAR_MARGIN| - | int | RW | set margin |pixel |
@@ -524,7 +524,7 @@ the user can select or scroll through the keyboard and mouse operations.
 
 Inherited from
 [Properties](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 | NCSP_ICONFLOW_DEFITEMWIDTH | - | int | RW | List Item Width | Pixel |
 | NCSP_ICONFLOW_DEFITEMHEIGHT | - | int | RW | List Item Height | Pixels |
@@ -599,7 +599,7 @@ The usage of most part pieces is similar.
 
 you can use it to display an image, the specify the align and draw mode.
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 | NCSP_IMAGEPIECE_IMAGE| - | int | RW | set image with Bitmap | Bitmap|
 | NCSP_IMAGEPIECE_ICON| - | int | RW | set image with Icon| Icon|
@@ -703,7 +703,7 @@ button that used for go or back.
 - right button: button on bar right.
 - title button: used to show an text title.
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 |NCSP_NAVIGATIONBARPIECE_BACKGROUND | - | int | RW | set navigate bar backgrounp Bitmap | Bitmap|
 |NCSP_NAVIGATIONBARPIECE_BKG| - | int | RW | do nothing| Icon|
@@ -724,7 +724,7 @@ save an navigate item info, such as:
 - font info: font of buttons.
 - style: navigate bar show or overlapped view.
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 |NAVIGATION_STYLE_NORMAL| - | mHotPiece*| RW | the bar not overlapped the view, not transparent| |
 |NAVIGATION_STYLE_FULLSCREEN| - | int | RW | fullscreen bar overlapped theview, transparent| |
@@ -733,7 +733,7 @@ save an navigate item info, such as:
 
 - property: support follow property.
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 |NCSP_NAVIGATIONITEM_CONTENT | - | mHotPiece*| RW | set item content| |
 |NCSP_NAVIGATIONITEM_BACKGROUND| - | int | RW | set item bacground| |
@@ -754,7 +754,7 @@ push to enter an navigate item, and pop to back preview.
 - showNavigationBar: show navigate bar, it is an mNavigationBarPiece.
 
 
-| *Property ID* | *mStudio Name* | *Type* | *Permission* | *Description* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
 *Unit* |
 |NCSP_NAVIGATIONPANELPIECE_BAR| - | int | RW | do nothing, no used.| |
 |NCSP_NAVIGATIONPANELPIECE_BAR_BKG,| - | int | RW | set navigate panel background bitmap| Bitmap|

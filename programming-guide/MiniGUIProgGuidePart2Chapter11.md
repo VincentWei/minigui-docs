@@ -35,16 +35,16 @@ Progress bar control is an essential control in GUI system, which can visually s
 ### Style of mProgressBar
 
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的风格
-| *风格ID* | *mStudio属性名* | *说明* ||
-| NCSS_PRGBAR_HORIZONTAL | -- | mStudio中将这两种风格分成了两个控件来使用 分别对应为| Horz ProgressBar |
+| *风格ID* | *miniStudio属性名* | *说明* ||
+| NCSS_PRGBAR_HORIZONTAL | -- | miniStudio中将这两种风格分成了两个控件来使用 分别对应为| Horz ProgressBar |
 | NCSS_PRGBAR_VERTICAL | -- | ^ | Vert ProgressBar |
 | NCSS_PRGBAR_BLOCKS | BlockChunk->TRUE | 块状进度 | <img src="%ATTACHURLPATH%/prog_block.png" alt="prog_block.png" width='111' height='30' /> |
 | NCSS_PRGBAR_SMOOTH | BlockChunk->FALSE | 平滑进度，与上面的块状进度相对 | <img src="%ATTACHURLPATH%/prog_smooth.png" alt="prog_smooth.png" width='111' height='30' /> |
 | NCSS_PRGBAR_SHOWPERCENT | ShowPercent | 显示当前进度值（百分比)| <img src="%ATTACHURLPATH%/prog_per.png" alt="prog_per.png" width='111' height='30' /> |
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Style ID* | *mStudio property * | *Explanation* ||
-| NCSS_PRGBAR_HORIZONTAL | -- | In mStudio, the two styles are divided into two controls to use, respectively corresponding to| Horz ProgressBar |
+| *Style ID* | *miniStudio property * | *Explanation* ||
+| NCSS_PRGBAR_HORIZONTAL | -- | In miniStudio, the two styles are divided into two controls to use, respectively corresponding to| Horz ProgressBar |
 | NCSS_PRGBAR_VERTICAL | -- | ^ | Vert ProgressBar |
 | NCSS_PRGBAR_BLOCKS | BlockChunk->TRUE | Block progress | <img src="%ATTACHURLPATH%/prog_block.png" alt="prog_block.png" width='111' height='30' /> |
 | NCSS_PRGBAR_SMOOTH | BlockChunk->FALSE | Smooth progress, relative to the above block progress | <img src="%ATTACHURLPATH%/prog_smooth.png" alt="prog_smooth.png" width='111' height='30' /> |
@@ -53,14 +53,14 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 ### mProgressBar属性
 ### Property of mProgressBar
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的属性
-| *属性名* |*mStudio属性名* | *类型* | *RW* | *说明* |
+| *属性名* |*miniStudio属性名* | *类型* | *RW* | *说明* |
 | NCSP_PROG_MAXPOS | MaxPos | int | RW | 进度范围最大值 |
 | NCSP_PROG_MINPOS | MinPos | int | RW | 进度范围最小值 |
 | NCSP_PROG_CURPOS | CurPos | int | RW | 当前进度值 |
 | NCSP_PROG_LINESTEP | LineStep | int | RW | 步长 |
 
 It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Property name* |*mStudio property name* | *Type* | *RW* | *Explanation* |
+| *Property name* |*miniStudio property name* | *Type* | *RW* | *Explanation* |
 | NCSP_PROG_MAXPOS | MaxPos | int | RW | Maximum value of the progress range |
 | NCSP_PROG_MINPOS | MinPos | int | RW | Minimum value of the progress range |
 | NCSP_PROG_CURPOS | CurPos | int | RW | Current progress value |
@@ -128,31 +128,31 @@ _c(pb)->stepIncrease (pb);
 ---++++ classic渲染器
 ---++++ Classic Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的classic渲染器<BR>
-| *属性名* |*mStudio属性名* | *类型* | *示意图* | *说明* |
+| *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | NCS_BGC_HILIGHT_ITEM | ChunkColor | DWORD（ARGB） |  <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | 进度条的chunk部分的颜色，本渲染器使用高亮item的颜色绘制 |
 
 It is inherited from the classic renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
-| *Property name* |*mStudio property * | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* |*miniStudio property * | *Type* | *Schematic diagram* | *Explanation* |
 | NCS_BGC_HILIGHT_ITEM | ChunkColor | DWORD（ARGB） |  <img src="%ATTACHURLPATH%/classic_prog.png" alt="classic_prog.png"/> | Color of chunk part of the progress bar, and this renderer uses the color of highlight item to draw |
 
 ---++++ fashion渲染器
 ---++++ Fashion Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的fashion渲染器<BR>
-| *属性名* |*mStudio属性名* | *类型* | *示意图* | *说明* |
+| *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | NCS_BGC_PRGBAR_CHUNK | ChunkColor | DWORD（ARGB） |  <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | 进度条的chunk部分的基础颜色，渲染器会根据这个颜色进行减淡、加深，来绘制渐变效果的进度条 |
 
 It is inherited from the fashion renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
-| *Property name* |*mStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | NCS_BGC_PRGBAR_CHUNK | ChunkColor | DWORD（ARGB） |  <img src="%ATTACHURLPATH%/fsh_prog.png" alt="fsh_prog.png" /> | Foundation color of chunk part of the progress bar, and the renderer will lighten or darken according to this color to draw progress bar of gradual change effect  |
 
 ---++++ flat渲染器
 ---++++ Flat Renderer
 继承自[mWidget](MStudioMGNCSV1dot0PGP2C3)的flat渲染器<BR>
-| *属性名* |*mStudio属性名* | *类型* | *示意图* | *说明* |
+| *属性名* |*miniStudio属性名* | *类型* | *示意图* | *说明* |
 | NCS_FGC_WINDOW | ChunkColor | DWORD（ARGB） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | 进度条的chunk部分的颜色,这里使用窗口前景色 |
 
 It is inherited from flat renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)<BR>
-| *Property name* |*mStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+| *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 | NCS_FGC_WINDOW | ChunkColor | DWORD（ARGB） | <img src="%ATTACHURLPATH%/flat_prog.png" alt="flat_prog.png" /> | Color of chunk part of the progress bar, here window foreground color is used |
 
 ---++++ skin渲染器

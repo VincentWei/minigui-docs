@@ -215,7 +215,7 @@ The program in List 31.1 illustrates the use of a tree view control. Please refe
 ```cplusplus
 #define IDC_TREEVIEW  100
 
-#define CHAPTER_NUM	5
+#define CHAPTER_NUM    5
 
 /* Define the text used by the items of the tree view control */
 static const char *chapter[] = 

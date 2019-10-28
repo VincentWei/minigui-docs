@@ -68,10 +68,10 @@ to treat by a program:
 SCROLLINFO si;
 
 si.nMax = 100;  // The maximal position
-si.nMin = 0;	    // The minimal position
+si.nMin = 0;        // The minimal position
 si.nPage = 10;  // this variable determines the length of the thumb
                   // this length is dependent on the value of nPage/(nMax-nMin)
-si.nPos = 0;	    // the present position of the thumb, which must be between nMin and nMax
+si.nPos = 0;        // the present position of the thumb, which must be between nMin and nMax
 
 SetScrollInfo (hWnd, Bar, &si, bRedraw);
 ```

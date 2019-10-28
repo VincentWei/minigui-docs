@@ -40,7 +40,7 @@ The class inheritance relation of the window and its derived class is as follows
 
 继承自[mWidget的风格 ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_PRPSHT_SIMPLE | style->Simple | 控制属性页凸舌宽度的风格：所有的属性页凸舌具有相同的宽度。|
 | NCSS_PRPSHT_COMPACTTAB | style->Compact | 控制属性页凸舌宽度的风格：属性页凸舌的宽度取决于属性页标题文本的长度。|
 | NCSS_PRPSHT_SCROLLABLE | style->Scrollable | 控制属性页凸舌宽度的风格：属性页凸舌的宽度取决于属性页标题文本的长度，当属性页凸舌的数目过多时，将自动出现左右箭头用来调节当前可见的属性页凸舌。|
@@ -50,7 +50,7 @@ The class inheritance relation of the window and its derived class is as follows
 
 It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* Style name * | *mStudio property name* | *Explanation* |
+|* Style name * | *miniStudio property name* | *Explanation* |
 | NCSS_PRPSHT_SIMPLE | style->Simple | Style of controlling the tongue width of the property page: tongues of all the property pages have the same width.|
 | NCSS_PRPSHT_COMPACTTAB | style->Compact | Style of controlling the tongue width of the property page: tongue width of the property page is decided by the length of the title text of the property page.|
 | NCSS_PRPSHT_SCROLLABLE | style->Scrollable | Style of controlling the tongue width of the property page: tongue width of the property page is decided by the length of the title text of the property page. When there are too many property page tongues, left and right arrows will automatically appear to adjust the currently visible property page tongue.|
@@ -62,7 +62,7 @@ It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 继承自[mWidget的属性 ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_PRPSHT_MINTABWIDTH | TabMinWidth | int | RW | 凸舌最小宽度 |
 | NCSP_PRPSHT_TABMARGIN | TabMargin | int | RW | 凸舌边界值，通常情况下，该值加上文字所占宽度为凸舌宽度 |
 | NCSP_PRPSHT_ACTIVEPAGE |  - | mPage* | RW | 当前活动页指针 |
@@ -73,7 +73,7 @@ It is inherited from [the style of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 It is inherited from [the property of mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-|* Property ID *| *mStudio name*| *Type* | *Authority* |* Explanation *|
+|* Property ID *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | NCSP_PRPSHT_MINTABWIDTH | TabMinWidth | int | RW | Minimum width of the tongue |
 | NCSP_PRPSHT_TABMARGIN | TabMargin | int | RW | Tongue boundary value. Under normal condition, the value plus the literal width is the tongue width |
 | NCSP_PRPSHT_ACTIVEPAGE |  - | mPage* | RW | Pointer of the current active page |

@@ -231,7 +231,7 @@ The message LB_ SETITEMBOLD sets the bold status of the item specified by index 
 status = SendMessage (hwndList, LB_GETITEMDISABLE, index, 0) ;
 ```
 
-The message LB_GETI	TEMDISABLE returns the disable status of the item specified by index. If corresponding item is not found, LB_ERR returned. 1 indicates the item is disabled. 0 indicates the item is not disabled. 
+The message LB_GETI    TEMDISABLE returns the disable status of the item specified by index. If corresponding item is not found, LB_ERR returned. 1 indicates the item is disabled. 0 indicates the item is not disabled. 
 
 ```cplusplus
 ret = SendMessage (hwndList, LB_SETITEMDISABLE, index, (LPARAM)status) ;

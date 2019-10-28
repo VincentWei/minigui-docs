@@ -28,7 +28,7 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *mStudio name* | *Type* | *Permission* | *Explanation* |
+| *Property ID* | *miniStudio name* | *Type* | *Permission* | *Explanation* |
 | NCSP_SWGT_CONTWIDTH |   -   | unsigned int | RW | Content width |
 | NCSP_SWGT_CONTHEIGHT |   -   | unsigned int | RW | Content height |
 | NCSP_SWGT_CONTX | ContentX | int | RW | Offset value of the content in horizontal direction |

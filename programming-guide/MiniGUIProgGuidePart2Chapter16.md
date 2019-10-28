@@ -9,9 +9,9 @@
 
 Invisible control refers to the components which cannot be displayed on the window but have certain functions.
 
-这些组件是对一些功能模块的封装，保证它们能够像控件一样在mStudio中被编辑
+这些组件是对一些功能模块的封装，保证它们能够像控件一样在miniStudio中被编辑
 
-These components is encapsulation to some functional templates, guaranteeing that they can be edited in mStudio like control
+These components is encapsulation to some functional templates, guaranteeing that they can be edited in miniStudio like control
 
 - <a href="#?">mObject</a>
    - <a href="#?">mComponent</a>
@@ -148,10 +148,10 @@ typedef struct _NCS_INVSB_CREATE_INFO {
 
 ```
 
-- 注： *不鼓励直接使用该函数创建不可见组件*  ，它们在手写代码中没有优势，优势在于，可以利用mStudio提供的资源来加载。
+- 注： *不鼓励直接使用该函数创建不可见组件*  ，它们在手写代码中没有优势，优势在于，可以利用miniStudio提供的资源来加载。
 故省略例子
 
-- Note: * it is not encouraged to directly use the function to create invisible component, *  and they have no advantage in handwritten codes. The advantage is that resources provided by mStudio can be utilized to load.
+- Note: * it is not encouraged to directly use the function to create invisible component, *  and they have no advantage in handwritten codes. The advantage is that resources provided by miniStudio can be utilized to load.
 
 故省略例子
 
@@ -168,13 +168,13 @@ It is inherited from <a href="#?">the event of mComponent<a/>
 - *控件名称*: NCSCTRL_TIMER
 - *英文名*: Timer
 - *简要介绍*: 对MiniGUI  SetTimerEx和KillTimer的封装
-- *示意图*: 无示意图，在mStudio中的图标是 <img src="%ATTACHURLPATH%/mtimer.png" alt="mtimer.png" width='30' height='29' />
+- *示意图*: 无示意图，在miniStudio中的图标是 <img src="%ATTACHURLPATH%/mtimer.png" alt="mtimer.png" width='30' height='29' />
 
 
 - *Control name*: NCSCTRL_TIMER
 - *English name*: Timer
 - *Brief introduction*: Encapsulation to MiniGUI SetTimerEx and KillTimer
-- *Schematic diagram*: There is no schematic diagram, and the icon in mStudio is <img src="%ATTACHURLPATH%/mtimer.png" alt="mtimer.png" width='30' height='29' />
+- *Schematic diagram*: There is no schematic diagram, and the icon in miniStudio is <img src="%ATTACHURLPATH%/mtimer.png" alt="mtimer.png" width='30' height='29' />
 
 继承关系
 
@@ -196,13 +196,13 @@ It is inherited from <a href="#Style of mInvsbComp">the style of mInvsbComp<a/>
 
 继承自<a href="#mInvsbComp属性">mInvsbComp的属性<a/>
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_TIMER_INTERVAL | interval | DWORD | RW | 设置Timer的时间间隔，以10ms为单位， 如果Timer正在运行，它会重启Timer |
 
 
 It is inherited from <a href="# Property of mInvsbComp"> the property of mInvsbComp<a/>
 
-|* Property ID *| *mStudio name*| *Type* | *Authority* |* Explanation *|
+|* Property ID *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | NCSP_TIMER_INTERVAL | interval | DWORD | RW | Set time interval of Timer, with 10ms as the unit. If Timer is operating, it will restart Timer |
 
 ### mTimer方法

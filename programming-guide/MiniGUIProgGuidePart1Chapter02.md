@@ -121,20 +121,20 @@ function to create a main window. Meanings of the members of MAINWINCREATE
 structure are as follow:
 
 ```
-CreateInfo.dwStyle	the style of the window
-CreateInfo.spCaption	the caption of the window
-CreateInfo.dwExStyle	the extended style of the window
-CreateInfo.hMenu	the handle of the menu attached to the window
-CreateInfo.hCursor	the handle of the cursor of the window
-CreateInfo.hIcon	the icon of the window
-CreateInfo.MainWindowProc	the window procedure of the window
-CreateInfo.lx	absolute x-coordinate of upper-left corner of window relative to screen in pixel
-CreateInfo.ty	absolute y-coordinate of upper-left corner of window relative to screen in pixel
-CreateInfo.rx	absolute x-coordinate of lower-right corner of window relative to screen in pixel
-CreateInfo.by	absolute x-coordinate of lower-right corner of window relative to screen in pixel
-CreateInfo.iBkColor	the background pixel value of the window
-CreateInfo.dwAddData	a 32-bit additional value attached to the window
-CreateInfo.hHosting	the handle of the hosting window of the window
+CreateInfo.dwStyle    the style of the window
+CreateInfo.spCaption    the caption of the window
+CreateInfo.dwExStyle    the extended style of the window
+CreateInfo.hMenu    the handle of the menu attached to the window
+CreateInfo.hCursor    the handle of the cursor of the window
+CreateInfo.hIcon    the icon of the window
+CreateInfo.MainWindowProc    the window procedure of the window
+CreateInfo.lx    absolute x-coordinate of upper-left corner of window relative to screen in pixel
+CreateInfo.ty    absolute y-coordinate of upper-left corner of window relative to screen in pixel
+CreateInfo.rx    absolute x-coordinate of lower-right corner of window relative to screen in pixel
+CreateInfo.by    absolute x-coordinate of lower-right corner of window relative to screen in pixel
+CreateInfo.iBkColor    the background pixel value of the window
+CreateInfo.dwAddData    a 32-bit additional value attached to the window
+CreateInfo.hHosting    the handle of the hosting window of the window
 ```
 Wherein the following members need to be illustrated specially:
 

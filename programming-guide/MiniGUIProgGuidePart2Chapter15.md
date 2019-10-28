@@ -554,7 +554,7 @@ Basic class, direct use is not allowed
 
 It is inherited from [the style of mScrollWidget](MStudioMGNCSV1dot0PGP2C3#mScrollWidget)
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_ITEMV_AUTOSORT | - | 条目自动排序 |
 | NCSS_ITEMV_LOOP | - | 条目可循环浏览 |
 | NCSS_ITEMV_SINGLE | - | 条目单选支持，默认风格 |
@@ -574,7 +574,7 @@ It is inherited from [the style of mScrollWidget](MStudioMGNCSV1dot0PGP2C3#mScro
 
 Inherited from [the property of mScrollWidget](MStudioMGNCSV1dot0PGP2C3#mScrollWidget)
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_ITEMV_DEFITEMHEIGHT | - | int | RW | 条目默认高度 |
 | NCSP_ITEMV_ITEMCOUNT | - | int | RO | 条目总数目 |
 
@@ -875,7 +875,7 @@ BOOL showItem(mItemView *self, HITEM hItem);
 
 It is inherited from  <a href="#Style of m_ItemView">the style of mItemView</a>
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_SCRLV_LOOP | - | 条目可循环浏览 |
 | NCSS_SCRLV_SORT | - | 条目自动排序 |
 
@@ -973,7 +973,7 @@ Figure p2c6-1 Output of scrollview Program
 继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
 It is inherited from <a href="#Style of mItemView">the style of mItemView </a>
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_LSTBOX_SINGLE | Multi->FALSE | 单选列表项支持 |
 | NCSS_LSTBOX_MULTIPLE | Multi->TRUE | 多选列表项支持 |
 | NCSS_LSTBOX_SORT | AutoSort | 列表项排序支持 |
@@ -1003,7 +1003,7 @@ It is inherited from <a href="#Style of mItemView">the style of mItemView </a>
 
 It is inherited from <a href="#Property of mItemView">the property of mItemView</a>
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_LSTBOX_ITEMWIDTH | - | int | RO | 列表项最大宽度 |
 | NCSP_LSTBOX_ITEMCOUNT | - | int | RO | 列表项总数目 |
 | NCSP_LSTBOX_ITEMHEIGHT | - | int | RW | 列表项高度 |
@@ -1329,7 +1329,7 @@ Figure p2c6-1 Output of listbox Program
 继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
 It is inherited from <a href="#Style of mItemView">the style of mItemView</a>
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_ICONV_LOOP | Loop | 条目可循环浏览 |
 | NCSS_ICONV_SORT | AutoSort | 条目自动排序 |
 
@@ -1343,7 +1343,7 @@ It is inherited from <a href="#Style of mItemView">the style of mItemView</a>
 
 继承自 <a href="#m_ItemView 属性">mItemView 属性</a>
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_ICONV_DEFICONHEIGHT | - | int |  RW | 列表项高度 |
 | NCSP_ICONV_DEFICONWIDTH | - | int | RW | 列表项宽度 |
 
@@ -1420,7 +1420,7 @@ Figure p2c6-1 Output of iconview Program
 
 继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
 
-|* 风格名 * | *mStudio属性名* | *说明* |
+|* 风格名 * | *miniStudio属性名* | *说明* |
 | NCSS_LISTV_NOTIFY | Notify | 通知事件支持 |
 | NCSS_LISTV_LOOP | Loop | 循环浏览支持 |
 | NCSS_LISTV_MULTIPLE | Multi->TRUE | 多选支持 |
@@ -1451,7 +1451,7 @@ It is inherited from <a href="#Style of mItemView">the style of mItemView</a>
 
 继承自[mItemView的属性](MStudioMGNCSV1dot0PGP2C3#mItemView)
 
-|* 属性ID *| *mStudio 名*| *类型* | *权限* |* 说明 *|
+|* 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | NCSP_LISTV_DEFITEMHEIGHT | - | int | RW | 列表项默认高度 |
 | NCSP_LISTV_ROWCOUNT | - | RO | int | 列表项行数 |
 | NCSP_LISTV_HDRHEIGHT | HeadHeight | int | RW | 列表头高度 |

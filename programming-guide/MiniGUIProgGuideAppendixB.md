@@ -23,7 +23,7 @@
 - There are two drawing modes for the images:
       $ %BLUE%Direct stretch fill drawing%ENDCOLOR%: This mode is not difficult to understand, which is enlarging the resource image according to the size of the drawing region with certain proportion to fill.
       $ %BLUE%Segment fill drawing%ENDCOLOR%: This mode will divide the image (or child image) obtained into three segments according to the mode of %RED%up middle, down or left, middle right%ENDCOLOR%, and then  fill the two ends separately. For the middle part, use the middle part in circulation to fill. We still take button as the example, as shown in the figure
-     <img src="%ATTACHURLPATH%/spl.png" alt="spl.png" width='367' height='98' />%BR%This mode %RED%can well reserve the border effect of "round corner" etc.%ENDCOLOR%, When using images filled in this mode to design, please not that: %BR% 1. %RED%1.	For the boundary line of left, middle, right and up, middle, down segments, the images are different, which will be explained below%ENDCOLOR% %BR% 2. %RED%Because the middle part will be used in circulation, note that transition shall be smooth%ENDCOLOR%
+     <img src="%ATTACHURLPATH%/spl.png" alt="spl.png" width='367' height='98' />%BR%This mode %RED%can well reserve the border effect of "round corner" etc.%ENDCOLOR%, When using images filled in this mode to design, please not that: %BR% 1. %RED%1.    For the boundary line of left, middle, right and up, middle, down segments, the images are different, which will be explained below%ENDCOLOR% %BR% 2. %RED%Because the middle part will be used in circulation, note that transition shall be smooth%ENDCOLOR%
 
 
 ## 公用图片属性

@@ -12,7 +12,7 @@ The slider control is mainly visual realization to the adjustment logic of a val
             * [ mScrollBar ](MiniGUIProgGuidePart2Chapter09#m_ScrollBar.md)
 
   * Control creating method
-   - Automatic creation: drag corresponding slider control through interface designer in mStudio, and mStudio will automatically create control and provide visual control configuration, and at the same time, creation codes are generated automatically.
+   - Automatic creation: drag corresponding slider control through interface designer in miniStudio, and miniStudio will automatically create control and provide visual control configuration, and at the same time, creation codes are generated automatically.
    - Manual generation: according to mGNCS control creation process, through programming, corresponding control window class ID is imported and control is generated. Manual programming sets control property and event handling.
 
 ---++mSlider
@@ -27,14 +27,14 @@ The slider control is mainly visual realization to the adjustment logic of a val
 ---+++Style of mSlider
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
-| *Style name* | *mStudio property name* | *Explanation* |
+| *Style name* | *miniStudio property name* | *Explanation* |
 | NCSS_SLD_HORIZONTAL | -- | Create horizontal Slider control (default) |
 | NCSS_SLD_VERTICAL | -- | Create vertical Slider control |
 
 ### Property of mSlider
 
 It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
-| *Property* | *mStudio property name* | *Type* | *RW* | *Explanation* ||
+| *Property* | *miniStudio property name* | *Type* | *RW* | *Explanation* ||
 | NCSP_SLD_MAXPOS | -- | int | RW | Set the maximum value of slide range of Slider | Setting of the maximum and minimum values is generally done at initialization |
 | NCSP_SLD_MINPOS | -- | int | RW | Set the minimum value of slide range of Slider | ^ |
 | NCSP_SLD_CURPOS | -- | int | RW | Set the current location of the slide block ||
@@ -65,7 +65,7 @@ It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
 
 ---+++Style of mTrackBar
 It is inherited from the style of [mSlider](MStudioMGNCSV1dot0PGP2C8)
-| *Style* | *mStudio property name* | *Explanation* |
+| *Style* | *miniStudio property name* | *Explanation* |
 | NCSS_TRKBAR_HORIZONTAL | -- | Create horizontal Trackbar control (default) |
 | NCSS_TRKBAR_VERTICAL | -- | Create vertical Trackbar control |
 | NCSS_TRKBAR_NOTICK | Ruler -> False | Scale is not displayed |
@@ -73,7 +73,7 @@ It is inherited from the style of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Property of mTrackBar
 It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
-| *Property name* | *mStudio property name* | *Type* | *RW* | *Explanation* ||
+| *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* ||
 | NCSP_TRKBAR_MAXPOS | MaxPos | int | RW | Set the maximum value of the slide range of Trackbar | Setting of the maximum and minimum values is generally done at initialization |
 | NCSP_TRKBAR_MINPOS | MinPos | int | RW | Set the minimum value of the slide range of the Trackbar | ^ |
 | NCSP_TRKBAR_CURPOS | CurPos | int | RW | Set the current location of the slide block ||
@@ -95,7 +95,7 @@ It is inherited from the method of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 ---++++ mTrackBar Classic Renderer
 
 For the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
 | NCS_BGC_3DBODY | Color of slide block and slide rail | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/trackbar-classic-bg3dcolor.png" alt="trackbar-classic-bg3dcolor.png"/>| |
 | NCS_BGC_DISABLED_ITEM | Color of the slide block when the control is invalid | ColorBgDisable | DWORD(ARGB) |<img src="%ATTACHURLPATH%/trackbar-classic-bgdisable.png" alt="trackbar-classic-bgdisable.png"/>| |
 
@@ -107,7 +107,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 
 For the drawing of non client area, please refer to the drawing of Fashion renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
 | NCS_BGC_3DBODY | Color of the slide block | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/trackbar-fashion-bg3dcolor.png" alt="trackbar-fashion-bg3dcolor.png"/>| |
 | NCS_BGC_DISABLED_ITEM | Color of the slide block when the control is invalid | ColorBgDisable | DWORD(ARGB) |<img src="%ATTACHURLPATH%/trackbar-fashion-bgdisable.png" alt="trackbar-fashion-bgdisable.png"/>| |
 | NCS_BGC_TRKBAR_SLIDER | Color of the slide rail | SliderColor | DWORD(ARGB) |<img src="%ATTACHURLPATH%/trackbar-fashion-slider.png" alt="trackbar-fashion-slider.png" />| |
@@ -117,7 +117,7 @@ For the drawing of non client area, please refer to the drawing of Fashion rende
 ---++++ mTrackBar Flat Renderer
 For the drawing of non client area, please refer to the drawing of Flat renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Color of the slide block side | ColorFg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/trackbar-flat-fgc.png" alt="trackbar-flat-fgc.png"/> | |
 | NCS_BGC_3DBODY | Color of the slide block | ColorBg3DBody | DWORD(ARGB) | Same as Classic renderer | |
 
@@ -144,7 +144,7 @@ Figure p2c8-1 Example of trackbar
 ---+++Style of mScrollBar
 
 It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
-| *Style* | *mStudio property name* | *Explanation* |
+| *Style* | *miniStudio property name* | *Explanation* |
 | NCSS_SCRLBR_HORIZONTAL | -- | Create horizontal scrollbar control (default) |
 | NCSS_SCRLBR_VERTICAL | -- | Create vertical scrollbar control |
 | NCSS_SCRLBR_ARROWS | HaveArrows | Mark if a scroll bar has arrow |
@@ -156,7 +156,7 @@ It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 ### Property of mScrollBar
 It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
-| *Property name* | *mStudio property name* | *Type* | *RW* | *Explanation* ||
+| *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* ||
 | NCSP_SCRLBR_MAXPOS | MaxPos | int | RW | Set the maximum value of the slide range of scrollbar| Setting of maximum and minimum values is generally done at initialization |
 | NCSP_SCRLBR_MINPOS | MinPos | int | RW | Set the minimum value of the slide range of scrollbar | ^ |
 | NCSP_SCRLBR_CURPOS | CurPos | int | RW | Set current location of the slide block ||
@@ -180,7 +180,7 @@ It is inherited from the method of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 For the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
 | NCS_BGC_3DBODY | Background color of the control  | BgColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-classic-bg3dcolor.png" alt="scrollbar-classic-bg3dcolor.png"/>| |
 | NCS_BGC_DISABLED_ITEM | Color of the slide block and arrow button when the control is invalid | ColorBgDisable | DWORD(ARGB) |<img src="%ATTACHURLPATH%/scrollbar-classic-bgdisable.png" alt="scrollbar-classic-bgdisable.png"/>| |
 | NCS_FGC_3DBODY | Color of the button up arrow | ArrowColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-classic-fg3dcolor.png" alt="scrollbar-classic-fg3dcolor.png"/>| |
@@ -194,7 +194,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 
 For the drawing of non client area, please refer to the drawing of Fashion renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
 | NCS_BGC_3DBODY | Color of the slide block and button | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png"/>| |
 | NCS_BGC_DISABLED_ITEM | Color of the slide block and arrow button when the control is invalid | ColorBgDisable | DWORD(ARGB) | Same as Classic renderer | |
 | NCS_BGC_WINDOW | Color of the slide rail | ColorBgWindow | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-fashion-slider.png" alt="scrollbar-fashion-slider.png" /> | |
@@ -207,7 +207,7 @@ For the drawing of non client area, please refer to the drawing of Fashion rende
 ---++++ mScrollBar Flat Renderer
 For the drawing of non client area, please reefer to the drawing of Flat renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Color of the slide block and button side | ColorFg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-flat-fgc.png" alt="scrollbar-flat-fgc.png"/> | |
 | NCS_BGC_3DBODY | Background color of the control | ColorBg3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/scrollbar-flat-bgc.png" alt="scrollbar-flat-bgc.png"/> | |
 

@@ -290,11 +290,11 @@ mToolItem has many child classes. In external interface, it is manifested as all
 
 %CODE{cpp}%
 enum mToolItemType{
-	NCS_UNKNOWNTOOLITEM = 0,
-	NCS_PUSHTOOLITEM,
-	NCS_MENUTOOLITEM,
-	NCS_WIDGETTOOLITEM,
-	NCS_SEPARATORTOOLITEM
+    NCS_UNKNOWNTOOLITEM = 0,
+    NCS_PUSHTOOLITEM,
+    NCS_MENUTOOLITEM,
+    NCS_WIDGETTOOLITEM,
+    NCS_SEPARATORTOOLITEM
 };
 ```
 可以通过以下函数来检测一个ToolItem的类型

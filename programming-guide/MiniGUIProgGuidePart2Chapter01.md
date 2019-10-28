@@ -2,11 +2,11 @@
 
 ## Introduction of the New Control Set
 
-In the development of mStudio, in order to realize the design of visual graphic interface, based on MiniGUI existing interfaces, Feynman Software developed a new control set. The new control set introduced by mStudio is developed on the foundation of the original MiniGUI control set. In order to distinguish it from MiniGUI intrinsic control set, it is referred to as “new control set (mGNCS in short)”.
+In the development of miniStudio, in order to realize the design of visual graphic interface, based on MiniGUI existing interfaces, FMSoft developed a new control set. The new control set introduced by miniStudio is developed on the foundation of the original MiniGUI control set. In order to distinguish it from MiniGUI intrinsic control set, it is referred to as “new control set (mGNCS in short)”.
 
 Features of the new control set are as follows:
 
-- Object-oriented programming idea is adopted to rearrange the inheritance relations between the controls. C language is used to realize concepts similar to C++ class, and C language interface is provided externally. In this respect, the new control set introduced by mStudio is similar to the control set of Gtk+.
+- Object-oriented programming idea is adopted to rearrange the inheritance relations between the controls. C language is used to realize concepts similar to C++ class, and C language interface is provided externally. In this respect, the new control set introduced by miniStudio is similar to the control set of Gtk+.
 - Interfaces and styles of the controls are standardized, enabling all controls to access with uniform interface. 
 - Based on MiniGUI 3.0 look and feel renderer, the concept of look and feel renderer is further expanded. Each control in the new control set has its own look and feel renderer and exclusive renderer interface of each control is defined according to the inheritance rule of the controls, enabling them to change along with the changes of controls. 
 - Through developing the new control set, we settle the deficiencies of MiniGUI intrinsic control set in the following aspects simultaneously. 
@@ -36,7 +36,7 @@ A control is composed of the following parts:
 
 In addition, the invisible components defined by the new control set have interfaces similar to that of control class. At present, timer is realized, in the later edition, the components planned to realize are special effect switching component and program logic control component etc. 
 
-The new control set is mainly used in cooperation with mStudio and can also be directly used as a component of MiniGUI 3.0, and it can be used in mixture with the controls in the intrinsic control set.
+The new control set is mainly used in cooperation with miniStudio and can also be directly used as a component of MiniGUI 3.0, and it can be used in mixture with the controls in the intrinsic control set.
 
 ## Content Organization of This Guide
 

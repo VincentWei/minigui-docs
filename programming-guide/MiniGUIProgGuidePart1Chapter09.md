@@ -351,11 +351,11 @@ obtained icon is one of the seven system icons, which is specified by id. Id is
 an integer value, and may be one of the following values:
 
 ```cpp
-IDI_APPLICATION						Application icon
-IDI_STOP / IDI_HAND					Stoping icon
-IDI_QUESTION							Question icon
-IDI_EXCLAMATION						Exclamation icon
-IDI_INFORMATION / IDI_ASTERISK			Information icon
+IDI_APPLICATION                        Application icon
+IDI_STOP / IDI_HAND                    Stoping icon
+IDI_QUESTION                            Question icon
+IDI_EXCLAMATION                        Exclamation icon
+IDI_INFORMATION / IDI_ASTERISK            Information icon
 ```
 
 These identifiers are defined in minigui/window.h as follow:

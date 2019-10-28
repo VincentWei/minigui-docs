@@ -17,7 +17,7 @@ In this document, button class and the properties in it will be introduced in de
             * [ mColorButton ](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
 
 - Control creating method
-   - Automatic creation: through interface designer in mStudio, corresponding button control is dragged. mStudio will automatically create control and provide visual control configuration, and at the same time, creation codes are generated automatically.
+   - Automatic creation: through interface designer in miniStudio, corresponding button control is dragged. miniStudio will automatically create control and provide visual control configuration, and at the same time, creation codes are generated automatically.
    - Manual generation: according to mGNCS control creation process, through programming, corresponding control window class ID is imported and control is generated. Manual programming sets control property and event handling. 
 
 
@@ -45,7 +45,7 @@ mButton is the foundation class of all buttons, which implements PushButton by d
 
 It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
-| *Style ID* | *mStudio property name* |  *Explanation* |
+| *Style ID* | *miniStudio property name* |  *Explanation* |
 | NCSS_BUTTON_CHECKABLE | Checkable | Set if the button can carry out CHECKED status conversion; if FALSE, CHECK status conversion is not carried out, and autocheck and ThreeDCheck are invalid |
 | NCSS_BUTTON_AUTOCHECK | Autocheck | When CHECKED status conversion can be carried out, set if clicking can be carried out to automatically switch CHECK status |
 | NCSS_BUTTON_3DCHECK | ThreeDCheck | Set button CHECK status as three status (unchecked-halfchecked-checked) or two status (unchecked-checked) switch |
@@ -57,7 +57,7 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
 It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
-| *Property ID name* | *mStudio property name* |  *Type* | *Permission* | *Explanation* |
+| *Property ID name* | *miniStudio property name* |  *Type* | *Permission* | *Explanation* |
 | NCSP_BUTTON_ALIGN | Align | [Alignment enumeration value](MStudioMGNCSV1dot0PGENAppC#AlignValues) | RW | Content on the button (image or literal) is aligned with the button according to the set mode in horizontal direction |
 | NCSP_BUTTON_VALIGN | VAlign | [Alignment enumeration value](MStudioMGNCSV1dot0PGENAppC#AlignValues) | RW | Content on the button (image or literal) is aligned with the button according to the set mode in vertical direction, and the alignment value is top – 0, bottom – 1, center – 2 |
 | NCSP_BUTTON_WORDWRAP | Wordwrap | int | RW | Automatic wrap property of the literals on the button, when the single line length of the literal content is bigger than the control width, automatic wrap can be selected. TRUE: automatic wrap FALSE: single line, and the exceeding part is not displayed |
@@ -87,7 +87,7 @@ The basic style under classic renderer is as shown in the figure below:
 
 Drawing of mButton Classic renderer is as below: for the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) |<img src="%ATTACHURLPATH%/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
 | NCS_BGC_3DBODY | Background color | BgColor3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) |<img src="%ATTACHURLPATH%/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
@@ -109,7 +109,7 @@ Refer to [Appendix B: Specification for the Image Resources Used by Skin Rendere
 
 For the drawing of non client area, please refer to the drawing of Fashion renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) | Same as Classic renderer | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid| TextDisableColor | DWORD(ARGB) | Same as Classic renderer | |
 | NCS_BGC_3DBODY | Background color | BgColor3DBody | DWORD(ARGB) |<img src="%ATTACHURLPATH%/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
@@ -130,7 +130,7 @@ Schematic diagram: <br />
 
 For the drawing of non client area, please refer to the drawing of Flat renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) | Same as Classic renderer | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) | Same as Classic renderer | |
 | NCS_BGC_3DBODY | background color | BgColor3DBody | DWORD(ARGB) | Same as Classic renderer |
@@ -198,7 +198,7 @@ It is inherited from the event of <a href="#Event of mButton"/>mButton</a>.
 
 - Drawing of renderer in the mCheckButton Classic text region is as below: for the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
 
@@ -217,7 +217,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 ---++++ mCheckButton Fashion Renderer
 - Drawing of mCheckButton Fashion text region renderer is as follows: for the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) |  <img src="%ATTACHURLPATH%/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
 
@@ -233,7 +233,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 
 - Drawing of text region and check box of mCheckButton Flat renderer is as below: for the drawing of non area region, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) |  <img src="%ATTACHURLPATH%/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
 | NCS_BGC_3DBODY| Background color | BgColor3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
 
@@ -267,7 +267,7 @@ It is inherited from the event of <a href="#Event of mButton"/>mButton</a>.
 ---++++ mRadiobutton Classic Renderer
 - For the drawing of mRadiobutton Classic non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/radiobutton_classic_fgc.png" alt="radiobutton_classic_fgc.png"/> | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/radiobutton_classic_textdisable.png" alt="radiobutton_classic_textdisable.png"/> | |
 
@@ -286,7 +286,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 ---++++ mRadiobutton Fashion Renderer
 - For the drawing of mRadiobutton Fashion non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) |  <img src="%ATTACHURLPATH%/radiobtn_fashion_fgc.png" alt="radiobtn_fashion_fgc.png"/> | |
 | NCS_FGC_DISABLED_ITEM | Text foreground color when the window is invalid | TextDisableColor | DWORD(ARGB) | <img src="%ATTACHURLPATH%/radiobtn_fashion_disable.png" alt="radiobtn_fashion_disable.png"/> | |
 
@@ -301,7 +301,7 @@ Refer to [Appendix B : Specification for the Image Resource Used by Skin Rendere
 ---++++ mRadiobutton Flat Renderer
 - For the drawing of mRadiobutton Flat non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
-| *Property ID* | *Meaning* | *mStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
+| *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | NCS_FGC_3DBODY | Text foreground color | FgColor3DBody | DWORD(ARGB) |  <img src="%ATTACHURLPATH%/radiobtn_flat_fgc.png" alt="radiobtn_flat_fgc.png"/> | |
 | NCS_BGC_3DBODY| Background color | BgColor3DBody | DWORD(ARGB) | <img src="%ATTACHURLPATH%/radiobtn_flat_bgc.png" alt="radiobtn_flat_bgc.png"/> | |
 
