@@ -104,7 +104,10 @@ for the user.
 
 ##### Figure 2 Typical main windows (classic style) of MiniGUI
 
-__PROMPT__ You can change the appearance style of MiniGUI window when configuring MiniGUI. Figure 2, Figure 3 illustrates display effect with different styles. Please refer to MiniGUI User Manual for relative information about MiniGUI appearance styles.
+__PROMPT__ You can change the appearance style of MiniGUI window when
+configuring MiniGUI. Figure 2 and Figure 3 illustrate the display effect in
+different styles. Please refer to [MiniGUI User Manual] for related information
+about MiniGUI appearance styles.
 
 ![A typical dialog box (flat style) of MiniGUI](figures/3.3.jpeg)
 
