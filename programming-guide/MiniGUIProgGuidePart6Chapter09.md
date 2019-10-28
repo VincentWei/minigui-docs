@@ -39,8 +39,8 @@ Table 1 `NTBINFO` structure
 | image |Image for displaying the bitmaps of the buttons. | |
 | `nr_cells` |Number of bitmap cells in the image, that is to say, number of lines in total| |
 | `nr_cols` |Number of cell columns in the image, that is to say, number of states of each bitmap cell |1 means the cells have only normal state; <br>2 means the cells have normal and highlight states; <br>3 means the cells have not disabled state. <br>4 or 0 means the cells have all the four possible states. |
-| `w_cell` |Width of bitmap cell |If `w_cell` is zero, it will be equal to (width_of_image / `nr_cols)|`
-| `h_cell` |Height of bitmap cell |If `h_cell` is zero, it will be equal to (height_of_image / `nr_cells)|`
+| `w_cell` |Width of bitmap cell |If `w_cell` is zero, it will be equal to (width_of_image / `nr_cols`)|
+| `h_cell` |Height of bitmap cell |If `h_cell` is zero, it will be equal to (height_of_image / `nr_cells`)|
 
 
 We must organize the bitmaps on the toolbar buttons (we called bitmap cells) in

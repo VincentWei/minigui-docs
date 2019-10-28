@@ -317,49 +317,49 @@ The following table explains each member in the structure.
 | name| Renderer name, length is `LEN_RENDERER_NAME`. Macro `LEN_RENDERER_NAME` is defined as 15 |
 | init| Renderer initialization function pointer. It initializes basic renderer information which are window attribute information and private information, such as size, font and color of window element |
 | deinit| Renderer destroy function pointer. It frees resources that were allocated by renderer |
-| `calc_3dbox_color|` Calculating function pointer of 3D box's color. It gets color value according to calculating flat and color of 3D box's border and face |
-| `draw_3dbox|` Drawing function pointer of 3D box |
-| `draw_radio|` Drawing function pointer of radio box |
-| `draw_checkbox|` Drawing function pointer of check box without check mark |
-| `draw_checkmark|` Drawing function pointer of check box with check mark |
-| `draw_arrow|` Drawing function pointer of arrow |
-| `draw_fold|` Drawing function pointer of fold/unfold |
-| `draw_focus_frame|` Drawing function pointer of focus frame |
-| `draw_normal_item|` Drawing function pointer of list item in normal state |
-| `draw_hilite_item|` Drawing function pointer of list item in highlighted state |
-| `draw_disabled_item|` Drawing function pointer of disabled list item |
-| `draw_significant_item|` Drawing function pointer of significant list item |
-| `draw_push_button|` Drawing function pointer of push button |
-| `draw_radio_button|` Drawing function pointer of radio button |
-| `draw_check_button|` Drawing function pointer of check button |
-| `draw_border|` Drawing function pointer of window border |
-| `draw_caption|` Drawing function pointer of window caption |
-| `draw_caption_button|` Drawing function pointer of window caption button. The buttons include minimize/maximize/close button |
-| `draw_scrollbar|` Drawing function pointer of scrollbar |
-| `calc_trackbar_rect|` Drawing function pointer of rectangle of track bar |
-| `draw_trackbar|` Drawing function pointer of track bar |
-| `calc_we_area|` Calculating function pointer of window element area. The areas include border, caption, caption buttons, toolbar, menu, client area and horizontal/vertical scrollbar |
-| `calc_we_metrics|` Calculating function pointer of window element size. The elements are as same as elements in `calc_we_area` |
-| `hit_test|` Function pointer of window element clicked by mouse |
-| `on_click_hotspot|` Corresponding function pointer when mouse clicks hot spot |
-| `draw_custom_hotspot|` Drawing function pointer of hot spot |
-| `calc_thumb_area|` Calculating function pointer of thumb of horizontal/vertical scrollbar |
-| `disabled_text_out|` Output function pointer of disabled area text |
-| `draw_tab|` Drawing function pointer of tab on property sheet |
-| `draw_progress|` Drawing function pointer of progress bar |
-| `draw_header|` Drawing function pointer of header on listbox or grid view control |
-| `on_get_rdr_attr|` Get function pointer of renderer's private information |
-| `on_set_rdr_attr|` Set function pointer of renderer's private information |
-| `erase_background|` Drawing function pointer of erasing window background |
-| `draw_normal_menu_item|` Drawing function pointer of menu item in normal state |
-| `draw_hilite_menu_item|` Drawing function pointer of menu item in highlighted state |
-| `draw_disabled_menu_item|` Drawing function pointer of disabled menu item |
-| `we_metrics|` Attribute of window size |
-| `we_colors|` Attribute of window color |
-| `we_fonts|` Attribute of window font |
-| `we_icon|` Attribute of window icon handle |
+| `calc_3dbox_color`| Calculating function pointer of 3D box's color. It gets color value according to calculating flat and color of 3D box's border and face |
+| `draw_3dbox`| Drawing function pointer of 3D box |
+| `draw_radio`| Drawing function pointer of radio box |
+| `draw_checkbox`| Drawing function pointer of check box without check mark |
+| `draw_checkmark`| Drawing function pointer of check box with check mark |
+| `draw_arrow`| Drawing function pointer of arrow |
+| `draw_fold`| Drawing function pointer of fold/unfold |
+| `draw_focus_frame`| Drawing function pointer of focus frame |
+| `draw_normal_item`| Drawing function pointer of list item in normal state |
+| `draw_hilite_item`| Drawing function pointer of list item in highlighted state |
+| `draw_disabled_item`| Drawing function pointer of disabled list item |
+| `draw_significant_item`| Drawing function pointer of significant list item |
+| `draw_push_button`| Drawing function pointer of push button |
+| `draw_radio_button`| Drawing function pointer of radio button |
+| `draw_check_button`| Drawing function pointer of check button |
+| `draw_border`| Drawing function pointer of window border |
+| `draw_caption`| Drawing function pointer of window caption |
+| `draw_caption_button`| Drawing function pointer of window caption button. The buttons include minimize/maximize/close button |
+| `draw_scrollbar`| Drawing function pointer of scrollbar |
+| `calc_trackbar_rect`| Drawing function pointer of rectangle of track bar |
+| `draw_trackbar`| Drawing function pointer of track bar |
+| `calc_we_area`| Calculating function pointer of window element area. The areas include border, caption, caption buttons, toolbar, menu, client area and horizontal/vertical scrollbar |
+| `calc_we_metrics`| Calculating function pointer of window element size. The elements are as same as elements in `calc_we_area` |
+| `hit_test`| Function pointer of window element clicked by mouse |
+| `on_click_hotspot`| Corresponding function pointer when mouse clicks hot spot |
+| `draw_custom_hotspot`| Drawing function pointer of hot spot |
+| `calc_thumb_area`| Calculating function pointer of thumb of horizontal/vertical scrollbar |
+| `disabled_text_out`| Output function pointer of disabled area text |
+| `draw_tab`| Drawing function pointer of tab on property sheet |
+| `draw_progress`| Drawing function pointer of progress bar |
+| `draw_header`| Drawing function pointer of header on listbox or grid view control |
+| `on_get_rdr_attr`| Get function pointer of renderer's private information |
+| `on_set_rdr_attr`| Set function pointer of renderer's private information |
+| `erase_background`| Drawing function pointer of erasing window background |
+| `draw_normal_menu_item`| Drawing function pointer of menu item in normal state |
+| `draw_hilite_menu_item`| Drawing function pointer of menu item in highlighted state |
+| `draw_disabled_menu_item`| Drawing function pointer of disabled menu item |
+| `we_metrics`| Attribute of window size |
+| `we_colors`| Attribute of window color |
+| `we_fonts`| Attribute of window font |
+| `we_icon`| Attribute of window icon handle |
 | refcount| Attribute of window reference counter |
-| `private_info|` Pointer of renderer's private information |
+| `private_info`| Pointer of renderer's private information |
 
 MiniGUI provides the following `API` to manage renderer:
 

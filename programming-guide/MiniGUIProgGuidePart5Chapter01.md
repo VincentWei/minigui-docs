@@ -62,7 +62,7 @@ BOOL GUIAPI UnregisterListenFD (int fd);
 can be listened by MiniGUI. The default value is 5.
 - `RegisterListenFD` registers a file descriptor that needs to be listened. You
 should specify the event type (the argument of type can be one of `POLLIN`,
-`POLLOUT`, or `POLLERR)`, the context information, and the window handle
+`POLLOUT`, or `POLLERR`), the context information, and the window handle
 receiving the message `MSG_FDEVENT`.
 - `UnregisterListenFD` unregisters a registered listening file descriptor.
 

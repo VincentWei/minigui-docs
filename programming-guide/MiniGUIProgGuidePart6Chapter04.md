@@ -499,7 +499,7 @@ static `CTRLDATA` `CtrlInputChar` [] =
 }
 };
 
-static void `my_notif_proc` (HWND hwnd, int id, int nc, `DWORD` `add_data)`
+static void `my_notif_proc` (HWND hwnd, int id, int nc, `DWORD` `add_data`)
 {
 unsigned char buff [256] = {0};
 if (id == `IDC_CHAR` && nc == `EN_CHANGE`) {
@@ -511,7 +511,7 @@ if (id == `IDC_CHAR` && nc == `EN_CHANGE`) {
 *thus to overlap the old character
 */
 `SendMessage` (hwnd, `EM_SETCARETPOS`, 0, 0);
-`SendMessage` (GetDlgItem (GetParent (hwnd), `IDC_CHARS)`, `MSG_CHAR`, buff[0],
+`SendMessage` (GetDlgItem (GetParent (hwnd), `IDC_CHARS`), `MSG_CHAR`, buff[0],
 0L); 
 }
 else if (id == `IDC_CHARS` && nc == `EN_CHANGE`) {
@@ -532,7 +532,7 @@ case `MSG_INITDIALOG`:
 `FONT_WEIGHT_REGULAR`, `FONT_SLANT_ROMAN`, `FONT_FLIP_NIL`,
 `FONT_OTHER_NIL`, `FONT_UNDERLINE_NONE`, `FONT_STRUCKOUT_NONE`,
 20, 0);
-hwnd = `GetDlgItem` (hDlg, `IDC_CHAR)`;
+hwnd = `GetDlgItem` (hDlg, `IDC_CHAR`);
 /* Set the font of the single-line edit box to be a big font */
 `SetNotificationCallback` (hwnd, `my_notif_proc);`
 /* Simulate the press of `INSERT` key, and set the edit mode to be overlap mode
@@ -541,7 +541,7 @@ hwnd = `GetDlgItem` (hDlg, `IDC_CHAR)`;
 return 1;
 
 case `MSG_CLOSE`:
-`EndDialog` (hDlg, `IDCANCEL)`;
+`EndDialog` (hDlg, `IDCANCEL`);
 break;
 
 case `MSG_COMMAND`:
@@ -549,13 +549,13 @@ switch (wParam) {
 case `IDOK`:
 case `IDCANCEL`:
 `DestroyLogFont` (my_font);
-`EndDialog` (hDlg, `wParam)`;
+`EndDialog` (hDlg, `wParam`);
 break;
 }
 break;
 }
 
-return `DefaultDialogProc` (hDlg, message, `wParam`, `lParam)`;
+return `DefaultDialogProc` (hDlg, message, `wParam`, `lParam`);
 }
 
 int `MiniGUIMain` (int argc, const char* argv[])

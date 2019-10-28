@@ -839,7 +839,7 @@ BOOL GUIAPI InitPolygonRegion (PCLIPRGN dst, const POINT* pts, int vertices);
 
 Using such functions we can initialize certain region as circle, ellipse, or
 polygon region. Then, we can use this region to perform hit-test (PtInRegion 
-and `RectInRegion)`, or select into a `DC` as the clipped region to get special
+and `RectInRegion`), or select into a `DC` as the clipped region to get special
 painting effect. Figure 2 is a special region effect given by gdidemo.c of
 mg-samples. The code building the special regions showed by Figure 2 is listed
 in List 3.
@@ -1085,7 +1085,7 @@ We can treat stippled bitmap as monochrome bitmap, each bit of which represents
 a pixel. When the bit gets 1, it means that the drawing is based on brush 
 color; when the bit gets 0, it means that the drawing is based on background
 color (brush type is `BT_OPAQUE_STIPPLED`) or reservation (brush type is
-`BT_STIPPLED)`. The `STIPPLE` structure is defined as follows:
+`BT_STIPPLED`). The `STIPPLE` structure is defined as follows:
 
 ```cpp
 typedef struct _STIPPLE

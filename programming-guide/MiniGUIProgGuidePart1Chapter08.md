@@ -126,7 +126,7 @@ keys, function keys, Del, Ins, Shift, Ctrl and Alt key strokes.
 
 Meanwhile handling keyboard messages, application need determine the current
 status of special shift keys (Shift, Ctrl and Alt) or switch keys (CapsLock,
-`NumLock`, and `ScrollLock)`. Parameter `lParam` includes the status flags of
+`NumLock`, and `ScrollLock`). Parameter `lParam` includes the status flags of
 special 
 keys, and application can determine the status of a certain key by using `AND`
 operation of specific macro with this parameter. For example, if (lParam &
@@ -259,7 +259,7 @@ static int SimplekeyWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
 Window procedure of above program prints the parameter `wParam` of each message
 `MSG_KEYDOWN`, `MSG_KEYUP`, and `MGS_CHAR` it received. The value of this
 parameter may be scan code of the pressed/released key (MSG_KEYDOWN and
-`MSG_KEYUP)`, and may also be encode value of the character (MSG_CHAR).
+`MSG_KEYUP`), and may also be encode value of the character (MSG_CHAR).
 
 ## Mouse
 ---++++ 9.2.1 Mouse Input

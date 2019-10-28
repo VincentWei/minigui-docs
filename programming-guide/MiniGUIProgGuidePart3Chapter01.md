@@ -249,7 +249,7 @@ the following contents:
 depth, and layout of video memory, etc.);
 - Information of the window presented by this device context and the clipping
 region of this window by other windows (called “global clipping region” in
-`MiniGUI)`; 
+`MiniGUI`); 
 - Basic operation functions of this context (point, line, polygon, filling,
 block operations, etc.), and its context information;
 - Local information set by the program (painting property, mapping 
@@ -315,7 +315,7 @@ MSG_PAINT:
 function as its argument, and returns a device context handle. Then `GDI`
 function can use this device context handle for graphics operations.
 
-In a typical graphics user interface environment (including `MiniGUI)`, the
+In a typical graphics user interface environment (including `MiniGUI`), the
 application is usually paint text and graphics in the client area of the 
 window. However, the graphics system does not ensure the painting content in 
 the client area be kept all the time. If the client area of this program window
@@ -565,7 +565,7 @@ xViewport = ((xWindow - xWinOrg) * xViewExt / xWinExt) + xViewOrg
 The transfer principal of above formulas is: the scale of certain distance 
 value in device space and extent value of coordinates should be equal to the
 scale of page space, in other words, the logical origin (xWinOrg, `yWinOrg`) is
-always mapped as device origin (xViewOrg, `yViewOrg)`.
+always mapped as device origin (xViewOrg, `yViewOrg`).
 
 These two formulas use the origin and extent of both window and viewport. We 
 can see from this that the scale between the extent of viewport and the extent
@@ -1000,7 +1000,7 @@ color.
 
 Two of the important display hardware in `PC` is video adapter and monitor. The
 video adapter is a circuitry board inserted in the main board, which consists 
-of registers, memory (RAM, `ROM` and `BIOS)`, and control circuitry. Most
+of registers, memory (RAM, `ROM` and `BIOS`), and control circuitry. Most
 graphics video adapters are based on `VGA` model. For most embedded devices, 
 the display hardware is always `LCD` and its `LCD` controller.
 

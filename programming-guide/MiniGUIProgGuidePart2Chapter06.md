@@ -170,7 +170,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
 
 - Gradual change color: the gradual change color gives different brightness
-factor from the ground color (NCS_BGC_3DBODY or `NCS_BGC_DISABLED_ITEM)`, and
+factor from the ground color (NCS_BGC_3DBODY or `NCS_BGC_DISABLED_ITEM`), and
 calculates the two objective colors. Gradually change from the center (ground
 color) to the two sides or top and bottom (highlighted color achieved through
 calculation) 

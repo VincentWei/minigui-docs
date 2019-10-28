@@ -1,6 +1,6 @@
 # `GAL` and `IAL` Engines
 In the development of MiniGUI version 0.3.xx, we introduce the concepts of
-Graphics and Input Abstract Layer (GAL and `IAL)`. Abstract layer is similar to
+Graphics and Input Abstract Layer (GAL and `IAL`). Abstract layer is similar to
 Linux kernel virtual file system. It defines a group of abstract interfaces 
 that do not rely on any special hardware. All top-layer graphics operations and
 input handling are based on abstract interfaces. The code used to realize the
@@ -24,7 +24,7 @@ situation, we have to say that it is very important for MiniGUI to provide an
 abstract input layer.
 
 Therefore, the following sections will introduce Custom `IAL` interface of
-MiniGUI 3.0, and focus on how to develop an input engine (Custom `IAL)`.
+MiniGUI 3.0, and focus on how to develop an input engine (Custom `IAL`).
 
 ## Shadow `NEWGAL` Engine
 

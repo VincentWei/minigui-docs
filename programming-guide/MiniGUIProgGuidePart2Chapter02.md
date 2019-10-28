@@ -157,7 +157,7 @@ In the above codes
 
 - The effect of _c macro is to take out the class structure (mMainWndClass)
 pointer stored by mymain. Because `doModal` is a virtual function of `mMainWnd`
-class, it is stored in virtual function table (case of `mMainWndClass)`.
+class, it is stored in virtual function table (case of `mMainWndClass`).
 - The first parameter of `doModal` method is `mMainWnd`* self, similar to this
 pointer in C++. The second parameter `BOOLautoDestroy` tells if `doModal` 
 method automatically deletes dialog box object. When the parameter is `TRUE`,

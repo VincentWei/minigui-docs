@@ -284,12 +284,12 @@ int i, j;
 /* Add items to the tree view control */
 for (i = 0; i < `CHAPTER_NUM`; i++) {
 `tvItemInfo.text` = (char*)chapter[i];
-item = `SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW)`, `TVM_ADDITEM`,
+item = `SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW`), `TVM_ADDITEM`,
 0, (LPARAM)&tvItemInfo);
 /* Add subitems to each item */
 for (j = 0; j < 3; j++) {
 `tvItemInfo.text` = (char*)section[j];
-`SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW)`, `TVM_ADDITEM`,
+`SendMessage` (GetDlgItem(hDlg, `IDC_TREEVIEW`), `TVM_ADDITEM`,
 item, (LPARAM)&tvItemInfo);
 }
 }
@@ -301,7 +301,7 @@ case `MSG_CLOSE`:
 return 0;
 }
 
-return `DefaultDialogProc` (hDlg, message, `wParam`, `lParam)`;
+return `DefaultDialogProc` (hDlg, message, `wParam`, `lParam`);
 }
 
 static `TVITEMINFO` `bookInfo` =

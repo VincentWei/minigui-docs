@@ -319,7 +319,7 @@ ret = SendMessage (hwndList, LB_SETITEMBOLD, index, (LPARAM)status) ;
 ```
 
 The message `LB_` `SETITEMBOLD` sets the bold status of the item specified by
-index to be the value of status (TRUE or `FALSE)`. If the item specified by the
+index to be the value of status (TRUE or `FALSE`). If the item specified by the
 index is not found, it returns `LB_ERR` for failure.
 
 ### Setting/Getting the Disable Status of Item
