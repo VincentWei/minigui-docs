@@ -387,8 +387,7 @@ users can set operation set realized by itself through `setCopyPaste`.
 - Parameter: <BR>
 - pos -- location needs to be visible
 - Explanation: <BR>
-Control scrolling of the edit region, making the characters of the location
-<pos> become visible.
+Control scrolling of the edit region, making the characters of the location `pos` become visible.
 - Example: <BR>
 ```cpp
 //是第201个字符处可见

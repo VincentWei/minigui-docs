@@ -195,11 +195,11 @@ play.
 - Common button complete example 
 code:[animation.c](%ATTACHURL%/animation.c.txt) 
 
-<p align=center>清单 p2c13-1 <a
-href="%ATTACHURL%/animation.c.txt">animation.c</a></p> 
+##### List 1 animation.c
 
-<p align=center>List p2c13-1 <a
-href="%ATTACHURL%/animation.c.txt">animation.c</a></p> 
+```cpp
+%ATTACHURL%/animation.c.txt
+```
 
 - 设置加载图片
 

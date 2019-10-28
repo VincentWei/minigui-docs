@@ -954,8 +954,7 @@ of the list item is decided by the applications themselves.
 
 继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
 
-It is inherited from <a href="#Style of `m_ItemView">the` style of 
-`mItemView</a`> 
+It is inherited from `mItemView`
 
 | * 风格名 * | *miniStudio属性名* | *说明* |
 | `NCSS_SCRLV_LOOP` | - | 条目可循环浏览 |
@@ -971,14 +970,12 @@ It is inherited from <a href="#Style of `m_ItemView">the` style of
 
 继承自 <a href="#m_ItemView 属性">mItemView 属性</a>
 
-it is inherited from <a href="#Property of `mItemView"`> the property of
-`mItemView` </a>
+it is inherited from the property of `mItemView`.
 
 ### `mScrollView` 事件
 ### Event of `mScrollView`
-继承自 <a href="#m_ItemView 事件">mItemView 事件</a>
-It is inherited from <a href="#Event of `mItemView">the` event of 
-`mItemView</a`> 
+
+It is inherited from the event of `mItemView`.
 
 | * 事件通知码 *|* 说明 *|* 参数 *|
 | `NCSN_SCRLV_CLICKED` | 鼠标点击事件 | 被点击的条目句柄 |
@@ -996,8 +993,7 @@ It is inherited from <a href="#Event of `mItemView">the` event of
 ### Method of `mScrollView`
 继承自 <a href="#m_ItemView 方法">mItemView 方法</a>
 
-It is inherited from <a href="#Method of `mItemView">the` method of
-`mItemView</a`> 
+It is inherited from the method of `mItemView`.
 
 `mScrollView` 继承自 `mItemView，提供了控件自身的` `addItem`
 方法，该方法通过列表项信息创建并插入列表项，同时返回插入位置给接口调用者。 
@@ -1031,17 +1027,12 @@ method, such as:
 ### `mScrollView` 实例
 ### Instance of `mScrollView`
 
-<p align=center>
-
 ![alt](figures/scrollview_demo.png)
 
-图 p2c6-1 scrollview 程序的输出
+##### Figure 1 Output of scrollview Program
 
-Figure p2c6-1 Output of scrollview Program
-</p>
+##### List 1 scrollview.c
 
-<p align=center>清单 p214-1 scrollview.c</p>
-<p align=center>List p214-1 scrollview.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/scrollview"}%
 ```
@@ -1069,9 +1060,7 @@ opening dialog box.
 ### `mListBox` 风格
 ### Style of `mListBox`
 
-继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
-It is inherited from <a href="#Style of `mItemView">the` style of `mItemView`
-</a> 
+It is inherited from the style of `mItemView`.
 
 | * 风格名 * | *miniStudio属性名* | *说明* |
 | `NCSS_LSTBOX_SINGLE` | Multi->FALSE | 单选列表项支持 |
@@ -1099,18 +1088,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of `mItemView`
 ### `mListBox` 属性
 ### Property of `mListBox`
 
-继承自 <a href="#m_ItemView 属性">mItemView 属性</a>
-
-It is inherited from <a href="#Property of `mItemView">the` property of
-`mItemView</a`> 
-
-| * 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
-| `NCSP_LSTBOX_ITEMWIDTH` | - | int | `RO` | 列表项最大宽度 |
-| `NCSP_LSTBOX_ITEMCOUNT` | - | int | `RO` | 列表项总数目 |
-| `NCSP_LSTBOX_ITEMHEIGHT` | - | int | `RW` | 列表项高度 |
-| `NCSP_LSTBOX_TOPITEM` | - | int | `RW` | 第一个可见列表项索引 |
-| `NCSP_LSTBOX_HILIGHTEDITEM` | - | int | `RW` | 高亮列表项索引 |
-
+It is inherited from `mItemView`.
 
 | *Property ID* | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_LSTBOX_ITEMWIDTH` | - | int | `RO` | Maximum width of the list item |
@@ -1123,23 +1101,9 @@ It is inherited from <a href="#Property of `mItemView">the` property of
 ### `mListBox` 事件
 ### Event of `mListBox`
 
-继承自 <a href="#m_ItemView 事件">mItemView 事件</a>
+It is inherited from the event of `mItemView`.
 
-It is inherited from <a href="#Event of `mItemView">event` of `mItemView</a`>
-
-| * 事件通知码 *|* 说明 *|* 参数 *|
-| `NCSN_LSTBOX_CLICKED` | 鼠标点击事件 | |
-| `NCSN_LSTBOX_SELCHANGED` | 选择条目已改变 | 新的选择条目句柄 |
-| `NCSN_LSTBOX_ENTER` | Enter 键被按下 | - |
-| `NCSN_LSTBOX_SETFOCUS` | 获取焦点 | - |
-| `NCSN_LSTBOX_KILLFOCUS` | 失去焦点 | - |
-| `NCSN_LSTBOX_ERRSPACE` | 空间不足 | - |
-| `NCSN_LSTBOX_DBCLK` | 双击列表项 | - |
-| `NCSN_LSTBOX_SELCANCEL` | 取消选择条目 | - |
-| `NCSN_LSTBOX_CLKCHKMARK` | check mark 被点击 | - |
-
-
-| * Event notification code *|* Explanation *|* Parameter *|
+| *Event notification code* | *Explanation*| *Parameter* |
 | `NCSN_LSTBOX_CLICKED` | Mouse clicking event | |
 | `NCSN_LSTBOX_SELCHANGED` | The selected item has changed | New selected item sentence handle |
 | `NCSN_LSTBOX_ENTER` | Enter key is pressed down | - |
@@ -1153,10 +1117,7 @@ It is inherited from <a href="#Event of `mItemView">event` of `mItemView</a`>
 ### `mListBox` 方法
 ### Method of `mListBox`
 
-继承自 <a href="#m_ItemView 方法">mItemView 方法</a>
-
-It is inherited from <a href="#Method of `mItemView">the` method of
-`mItemView</a`> 
+It is inherited from the method of `mItemView`.
 
 #### 将字符串加入列表框
 #### Add the character string to the list box
@@ -1282,7 +1243,7 @@ In addition, selected status can be set or canceled through `selectByIdx` or
 
 ```cpp
 int selectByIdx(mListBox *self, int index);
-int deselectByIdx(mListBox *self, int index);                          
+int deselectByIdx(mListBox *self, int index);
 ```
 
 对于多项选择列表框来说，通过 `setCurSel` 和 `getCurSel`
@@ -1414,7 +1375,7 @@ item.
 The list box determines if a specific item is in forbid selected status through
 `isEnabled` method.
 
-%CODE{"cpp"}%
+```cpp
 _c(listFile)->isEnabled(listFile, 0);
 ```
 
@@ -1422,7 +1383,7 @@ _c(listFile)->isEnabled(listFile, 0);
 
 Item selected or forbid item selected can be supported through enableByIdx or enable method. 
 
- %CODE{"cpp"}%
+```cpp
     _c(listFile)->enableByIdx(listFile, 0, TRUE);
 or
     _c(listFile)->enableByIdx(listFile, 0, FALSE);
@@ -1448,19 +1409,14 @@ _c(listFile)->setStrCmpFunc(listFile, my_strcmp);
 
 ### `mListBox` 实例
 ### Instance of `mListBox`
-<p align=center>
 
 ![alt](figures/listbox_demo.png)
 
-图 p2c6-1 listbox 程序的输出
+##### Figure 1 Output of listbox Program
 
-Figure p2c6-1 Output of listbox Program
-</p>
+##### List 2 listbox.c
 
-<p align=center>清单 p2c14-3 listbox.c</p>
-##### List 3 listbox.c
-##### List 3 listbox.c
-##### List 3 listbox.c
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/listbox"}%
 ```
@@ -1488,9 +1444,7 @@ display of the container of desktop icon and documents under the directory.
 ### `mIconView` 风格
 ### Style of `mIconView`
 
-继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
-It is inherited from <a href="#Style of `mItemView">the` style of 
-`mItemView</a`> 
+It is inherited from the style of `mItemView`.
 
 | * 风格名 * | *miniStudio属性名* | *说明* |
 | `NCSS_ICONV_LOOP` | Loop | 条目可循环浏览 |
@@ -1506,13 +1460,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of
 
 继承自 <a href="#m_ItemView 属性">mItemView 属性</a>
 
-| * 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
-| `NCSP_ICONV_DEFICONHEIGHT` | - | int | `RW` | 列表项高度 |
-| `NCSP_ICONV_DEFICONWIDTH` | - | int | `RW` | 列表项宽度 |
-
-
-It is inherited from <a href="#Property of `mItemView">the` property of
-`mItemView</a`> 
+It is inherited from the property of mItemView`.
 
 | *Property ID* | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_ICONV_DEFICONHEIGHT` | - | int | `RW` | Height of the list item |
@@ -1521,10 +1469,7 @@ It is inherited from <a href="#Property of `mItemView">the` property of
 ### `mIconView` 方法
 ### Method of `mIconView`
 
-继承自 <a href="#m_ItemView 方法">mItemView 方法</a>
-
-It is inherited from <a href="#Method of ,mItemView">the method of
-,mItemView</a> 
+It is inherited from the method of `mItemView`.
 
 iconview 控件通过 `setIconSize` 方法来初始化列表项的大小，并通过 `addItem` 方法根据列表项信息添加列表项。
 
@@ -1556,19 +1501,12 @@ Example codes of adding list item are:
 ### `mIconView` 实例
 ### Instance of `mIconView`
 
-<p align=center>
-
 ![alt](figures/iconview_demo.png)
 
-图 p2c6-1 iconview 程序的输出
+##### Figure p2c6-1 Output of iconview Program
 
-Figure p2c6-1 Output of iconview Program
-</p>
+##### List 3 iconview.c
 
-<p align=center>清单 p2c14-3 iconview.c</p>
-##### List 3 iconview.c
-##### List 3 iconview.c
-##### List 3 iconview.c
 ```cpp
 %INCLUDE{"%ATTACHURL%/iconview"}%
 ```
@@ -1597,9 +1535,9 @@ name, file type, size and modification date in a region.
 ### `mListView` 风格
 ### Style of `mListView`
 
-继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
+继承自 mItemView 风格
 
-| * 风格名 * | *miniStudio属性名* | *说明* |
+| *风格名* | *miniStudio属性名* | *说明* |
 | `NCSS_LISTV_NOTIFY` | Notify | 通知事件支持 |
 | `NCSS_LISTV_LOOP` | Loop | 循环浏览支持 |
 | `NCSS_LISTV_MULTIPLE` | Multi->TRUE | 多选支持 |
@@ -1611,8 +1549,7 @@ name, file type, size and modification date in a region.
 | `NCSS_LISTV_WITHICON` | `WithIcon` | |
 | `NCSS_LISTV_SORT` | Sort | 排序支持 |
 
-It is inherited from <a href="#Style of `mItemView">the` style of 
-`mItemView</a`> 
+It is inherited from the style of `mItemView`.
 
 | *Style name* | *mstudio property name* | *Explanation* |
 | `NCSS_LISTV_NOTIFY` | Notify | Notification event supported |
@@ -1631,7 +1568,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of
 
 继承自[mItemView的属性](MStudioMGNCSV1dot0PGP2C3#mItemView)
 
-| * 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
+| *属性ID*| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | `NCSP_LISTV_DEFITEMHEIGHT` | - | int | `RW` | 列表项默认高度 |
 | `NCSP_LISTV_ROWCOUNT` | - | `RO` | int | 列表项行数 |
 | `NCSP_LISTV_HDRHEIGHT` | `HeadHeight` | int | `RW` | 列表头高度 |
@@ -1642,8 +1579,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of
 | `NCSP_LISTV_GRIDLINECOLOR` | `GridLineColor` | int | `RW` | 网格颜色 |
 | `NCSP_LISTV_COLCOUNT` | - | int | `RO` | 列表项列数 |
 
-It is inherited from [the property of
-`mItemView](MStudioMGNCSV1dot0PGP2C3#mItemView`) 
+It is inherited from [the property of mItemView](MStudioMGNCSV1dot0PGP2C3#mItemView`)
 
 | *Property ID* | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_LISTV_DEFITEMHEIGHT` | - | int | `RW` | Default height of the list item |
@@ -1659,18 +1595,19 @@ It is inherited from [the property of
 
 ### `mListView` 事件
 ### Event of `mListView`
+
+```cpp
 /** Double click in item. */
 `NCSN_LISTV_ITEMDBCLK`,
 /** Fold item. */
 ,
 /** Unfold item. */
 `NCSN_LISTV_UNFOLDITEM`,
+```
 
+继承自 mItemView 事件
 
-
-继承自 <a href="#m_ItemView 事件">mItemView 事件</a>
-
-| * 事件通知码 *|* 说明 *|* 参数 *|
+| *事件通知码* | *说明* | *参数* |
 | `NCSN_LISTV_CLICKED` | 鼠标点击事件 | |
 | `NCSN_LISTV_SELCHANGED` | 选择条目已改变 | 新的选择项句柄 |
 | `NCSN_LISTV_ITEMRDOWN` | 鼠标右键在列表项上按下 | 被点击的行索引 |
@@ -1681,10 +1618,9 @@ It is inherited from [the property of
 | `NCSN_LISTV_FOLDITEM` | 树列表项折叠子节点 | 被点击的列表项句柄 |
 | `NCSN_LISTV_UNFOLDITEM` | 树列表项打开子节点 | 被点击的列表项句柄 |
 
-It is inherited from <a href="#Event of `mItemView">the` event of 
-`mItemView</a`> 
+It is inherited from the event of `mItemView`.
 
-| * Event notification code *|* Explanation *|* Parameter *|
+| *Event notification code*|*Explanation*|*Parameter*|
 | `NCSN_LISTV_CLICKED` | Mouse clicking event | |
 | `NCSN_LISTV_SELCHANGED` | The selected item has changed | New selection item sentence handle |
 | `NCSN_LISTV_ITEMRDOWN` | The mouse right key presses down on the list item | Indexed by the clicked row |
@@ -1698,9 +1634,7 @@ It is inherited from <a href="#Event of `mItemView">the` event of
 ### `mListView` 方法
 ### Method of `mListView`
 
-继承自 <a href="#m_ItemView 风格">mItemView 风格</a>
-It is inherited from <a href="#Style of `mItemView">the` style of 
-`mItemView</a`> 
+It is inherited from the style of `mItemView`.
 
 #### 列操作
 #### Column Operation
@@ -1742,6 +1676,7 @@ BOOL delColumn(mListView *self, int index);
 ```
 
 #### 列表项操作
+
 #### List Item Operation
 
 
@@ -1868,30 +1803,15 @@ node.
 ### `mListView` 实例
 ### Instance of `mListView`
 
-<p align=center>
-
 ![alt](figures/listview_demo.png)
 
-图 p2c6-1 listview 程序的输出
+##### Figure 1 Output of listview Program
 
-Figure p2c6-1 Output of listview Program
-</p>
+##### List 4 listview.c
 
-<p align=center>清单 p2c14-4 listview.c</p>
-##### List 4 listview.c
-##### List 4 listview.c
-##### List 4 listview.c
 ```cpp
 %INCLUDE{"%ATTACHURL%/listview"}%
 ```
-
-[Next](MStudioMGNCSV1dot0PGP2C13][Previous]] < [[MStudioMGNCSV1dot0PG][Index]] > [[MStudioMGNCSV1dot0PGP2C15)
-
-
-
-
--- Main.XiaodongLi - 22 Feb 2010
-
 
 ----
 

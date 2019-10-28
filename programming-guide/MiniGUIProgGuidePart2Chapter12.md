@@ -277,11 +277,8 @@ int broadCastMsg(mPropSheet *self, DWORD param1, DWORD param2);
 
 继承自[mWidget 渲染器](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-It is inherited from [the renderer of 
-`mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`) 
+It is inherited from [the renderer of `mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-
-### `mPropSheet` 实例
 ### Instance of `mPropSheet`
 
 本实例为用户演示了如何使用 propsheet 显示本机的一些系统信息，比如 `CPU` 类型、内存大小等等。
@@ -290,14 +287,9 @@ This Instance demonstrates how to use propsheet to display some system
 information of the computer to the users, such as `CPU` type and memory size
 etc. 
 
-<p align=center>
-
 ![alt](figures/propsheet_demo.png)
 
-图 p2c11-1 propsheet 程序的输出
-
-Figure p2c11-1 Output of propsheet Program
-</p>
+##### Figure p2c11-1 Output of propsheet Program
 
 ##### List 1 propsheet.c
 
