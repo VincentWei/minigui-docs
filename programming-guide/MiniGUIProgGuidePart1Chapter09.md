@@ -27,7 +27,7 @@ The argument meanings are as follow:
 - filename: The file name of the icon file
 - which: The index value of the selected icon.
 
-`LoadIconFromFile` function loads an icon from a Windows icon file (`*.ico`),
+`LoadIconFromFile` function loads an icon from a Windows icon file (*`.ico`),
 and 
 the icon can be mono-color, 16-color or 256-color icon. Some Windows icon files
 contain two icons in different sizes. You can tell this function to load which

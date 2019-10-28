@@ -1,4 +1,4 @@
-# Chapter 4 of Part 2 Static Box Series Control Class
+# Static Box Series Control Classes
 
 ## Brief Introduction of Static Box Series
 
@@ -9,7 +9,8 @@ control row of static box series does not need to conduct dynamic response to
 input of the users, that is to say, it is not necessary to receive any input
 (such as keyboard and mouse etc.), and there is no event of itself.
 
-| *Control Name* | *Control name (miniStudio display name)* | *Purpose* | *NCS class name* | *Control window class `ID`* |
+| *Control Name* | *Control name (miniStudio display name)* | *Purpose* | *NCS class name* | *Control window class ID* |
+|----------------|------------------------------------------|-----------|------------------|---------------------------|
 | Static box | Label | Display single row or multiple rows of texts | `mStatic` | `NCSCTRL_STATIC` |
 | Image box | Image | Display image | `mImage` | `NCSCTRL_IMAGE` |
 | Rectangle box | Rectangle | Draw rectangles | `mRect` | `NCSCTRL_RECTANGLE` |
@@ -23,7 +24,7 @@ The inheritance relations of static box series controls are as follows:
 - `mImage`
 - `mRect`
 - `mGroupbox`
-* `mButtonGroup`
+- `mButtonGroup`
 - `mLEDLabel`
 - `mSeparator`
 
@@ -134,6 +135,8 @@ users. <br/>
 
 ![alt](figures/static.png)
 
+##### List 1 static.c
+##### List 1 static.c
 <p align=center>List p2c4-1 static.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/static.c.txt"}%
@@ -227,6 +230,8 @@ different drawing modes to the users<br/>
 
 ![alt](figures/image.png)
 
+##### List 2 image.c
+##### List 2 image.c
 <p align=center>List p2c4-2 image.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/image.c.txt"}%
@@ -368,6 +373,8 @@ This example demonstrate how to draw all kinds of rectangles to the users<br/>
 
 ![alt](figures/rect.png)
 
+##### List 3 rectangle.c
+##### List 3 rectangle.c
 <p align=center>List p2c4-3 rectangle.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/rectangle.c.txt"}%
@@ -436,8 +443,12 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 
 ![alt](figures/groupbox.png)
 
-This example demonstrate how to generate group box with renderers to the users
+This example demonstrate how to generate group box with renderers to the users.
+
+##### List 4 groupbox.c
+##### List 4 groupbox.c
 <p align=center>List p2c4-4 groupbox.c</p>
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/groupbox.c.txt"}%
 ```
@@ -456,7 +467,7 @@ function.
 | *Property Name* | *Type* | *Permission* | *Property explanation* |
 | `NCSP_BTNGRP_SELID` | int | `RW` | Currently selected `radioButton` `ID` number |
 | `NCSP_BTNGRP_SELIDX` | idx | `RW` | Currently selected `radioButton` index number |
-| `NCSP_BTNGRP_SELOBJ` | `mWidget`* | `RW` | Currently selected `radioButton` pointer |
+| `NCSP_BTNGRP_SELOBJ` | `mWidget*` | `RW` | Currently selected `radioButton` pointer |
 
 
 ### Method of `mButtonGroup`

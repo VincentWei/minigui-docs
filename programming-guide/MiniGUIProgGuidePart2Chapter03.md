@@ -60,7 +60,7 @@ Before understanding resources management, it is necessary to understand the
 following two basic concepts:
 - *Resource package* : Set of resources, resource set of any kind and any
 number, which is the minimum unit of resource replacement.
-- *Resource `ID`* : Unique identifier for accessing certain resource in the
+- *Resource ID : Unique identifier for accessing certain resource in the
 resource package.
 
 Compared to MiniGUI intrinsic control set, resources management module provided

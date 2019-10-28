@@ -82,9 +82,9 @@ It is inherited from [the style of `mWidget`
 | * 属性ID *| *miniStudio 名*| *类型* | *权限* |* 说明 *|
 | `NCSP_PRPSHT_MINTABWIDTH` | `TabMinWidth` | int | `RW` | 凸舌最小宽度 |
 | `NCSP_PRPSHT_TABMARGIN` | `TabMargin` | int | `RW` | 凸舌边界值，通常情况下，该值加上文字所占宽度为凸舌宽度 |
-| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage`* | `RW` | 当前活动页指针 |
+| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage*` | `RW` | 当前活动页指针 |
 | `NCSP_PRPSHT_ACTIVEPAGEIDX` | `ActivePageIndex` | int | `RW` | 当前活动页索引 |
-| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage`* | `RO` | 当前第一个可见页指针 |
+| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage*` | `RO` | 当前第一个可见页指针 |
 | `NCSP_PRPSHT_FIRSTVIEWPAGEIDX` | - | int | `RO` | 当前第一个可见页索引 |
 | `NCSP_PRPSHT_PAGECOUNT` | - | int | `RO` | 当前属性页数 |
 
@@ -94,9 +94,9 @@ It is inherited from [the property of `mWidget`
 | * Property `ID` *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | `NCSP_PRPSHT_MINTABWIDTH` | `TabMinWidth` | int | `RW` | Minimum width of the tongue |
 | `NCSP_PRPSHT_TABMARGIN` | `TabMargin` | int | `RW` | Tongue boundary value. Under normal condition, the value plus the literal width is the tongue width |
-| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage`* | `RW` | Pointer of the current active page |
+| `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage*` | `RW` | Pointer of the current active page |
 | `NCSP_PRPSHT_ACTIVEPAGEIDX` | `ActivePageIndex` | int | `RW` | Index of the current active page |
-| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage`* | `RO` | Pointer of the currently first visible page |
+| `NCSP_PRPSHT_FIRSTVIEWPAGE` | - | `mPage*` | `RO` | Pointer of the currently first visible page |
 | `NCSP_PRPSHT_FIRSTVIEWPAGEIDX` | - | int | `RO` | Index of the currently first visible page |
 | `NCSP_PRPSHT_PAGECOUNT` | - | int | `RO` | Current property page number |
 
@@ -111,7 +111,7 @@ It is inherited from [the property of `mWidget`
 
 It is inherited from [the event of `mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget`)
 
-| *Event `ID`* | *Parameter* | *Explanation* |
+| *Event ID | *Parameter* | *Explanation* |
 | `NCSN_PRPSHT_ACTIVECHANGED` | -- | The active property page has changed |
 
 
@@ -300,6 +300,8 @@ Figure p2c11-1 Output of propsheet Program
 </p>
 
 <p align=center>清单 p2c11-1 propsheet.c</p>
+##### List 1 propsheet.c
+##### List 1 propsheet.c
 <p align=center>List p2c11-1 propsheet.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/propsheet.c.txt"}%

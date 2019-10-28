@@ -360,7 +360,7 @@ The function below can rapidly detect the type of an item
 - params:
 * img : `mToolImage` pointer, can be `NULL`
 * str : literal pointer, can be `NULL`, but either *img or str must not be 
-`NULL`* 
+`NULL*` 
 * flags: define the relation between image and str
 * `NCS_TOOLITEM_FLAG_TEXT_LEFT/NCS_TOOLITEM_FLAG_TEXT_UP`, the text is on the
 left or top, default is right or bottom
@@ -471,7 +471,7 @@ for other `ToolItem`, unchecked status will be returned forever
 ```
 - 仅针对menu Tool item, owner为一个mWidgt*对象
 
-- Only aim at menu Tool item, owner is a `mWidgt`* object
+- Only aim at menu Tool item, owner is a `mWidgt*` object
 
 ### `mToolItem示例`
 ### Example of `mToolItem`

@@ -6,7 +6,7 @@ mGNCS packages the main window of MiniGUI and brings it into the control
 system, therefore, the whole programming will become very simple and easy to
 learn. Please look at the helloworld program source codes based on mGNCS:
 
-<p align=center>List p2c1-1 helloworld.c</p>
+##### List 1 `helloworld.c`
 
 ```cpp
 %INCLUDE{"%ATTACHURL%/helloworld.c.txt"}%
@@ -15,20 +15,17 @@ learn. Please look at the helloworld program source codes based on mGNCS:
 The program creates a 300x200 main window on the screen and displays “Hello,
 world!”: 
 
-<p align=center>
-
 ![alt](figures/helloworld.png)
 
-Figure p1c1-1 Output of helloworld program
-</p>
+##### Figure 1 Output of helloworld program
 
 ### Head File
 
-Besides the four head files of MiniGUI (<minigui/common.h>, 
-<minigui/minigui.h>, <minigui/gdi.h> and <minigui/window.h>), helloworld.c 
+Besides the four head files of MiniGUI (`<minigui/common.h>`, 
+`<minigui/minigui.h>`, `<minigui/gdi.h>` and `<minigui/window.h>`), `helloworld.c` 
 shall contain its specific file:
 
-- <mGNCS/mGNCS.h>: mGNCS head file
+- `<mgncs/mgncs.h>`: mGNCS head file
 
 Therefore, normally, head file of a mGNCS program is:
 
@@ -158,7 +155,7 @@ In the above codes
 - The effect of _c macro is to take out the class structure (mMainWndClass)
 pointer stored by mymain. Because `doModal` is a virtual function of `mMainWnd`
 class, it is stored in virtual function table (case of `mMainWndClass`).
-- The first parameter of `doModal` method is `mMainWnd`* self, similar to this
+- The first parameter of `doModal` method is `mMainWnd*` self, similar to this
 pointer in C++. The second parameter `BOOLautoDestroy` tells if `doModal` 
 method automatically deletes dialog box object. When the parameter is `TRUE`,
 after calling `doModal`, mymain will be released and cannot be used.
@@ -180,14 +177,12 @@ template.
 Codes in list p2c1-3 demonstrate how to use template to create a dialog box as
 shown in the figure below, and demonstrate how to use property and renderer.
 
-<p align=center>
-
 ![alt](figures/wnd_template.png)
 
-Figure p1c1-2 Dialog Box Created Using Window Template
-</p>
+##### Figure 2 Dialog Box Created Using Window Template
 
-<p align=center>List p2c1-3 `wnd_template.c</p>`
+##### List 3 `wnd_template.c`
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/wnd_template.c.txt"}%
 ```
@@ -394,12 +389,9 @@ Event listening link mechanism of mGNCS provides a mode to decouple the event
 sender and event observer. It corresponds to the relation between the sender 
 and the receiver through global data sheet. As shown in the figure below:
 
-<p align=center>
-
 ![alt](figures/event-listener.png)
 
-<br>Figure p1c1-3 Event Listening and Connection
-</p>
+##### Figure 3 Event Listening and Connection
 
 When an object is deleted:
 - All the connections listening to the object will be deleted
@@ -549,12 +541,10 @@ stopped through shutting off the timer;
 
 Effect of the window created by the program is as shown in the figure below:
 
-<p align=center>
 
 ![alt](figures/event-listener.png)
 
-Figure p1c1-4 Example of Listening Event
-</p>
+##### Figure 4 Example of Listening Event
 
 The following codes define two listeners, which are used for Stop button and
 Exit button respectively:
@@ -623,12 +613,9 @@ format that it can understand. When the two formats don’t match, what shall we
 do? The answer is data binding. The figure below gives the model of NCS data
 binding: 
 
-<p align=center>
-
 ![alt](figures/data_binding_model.png)
 
-Fig. p2c1-5 Data Binding Model of mGNCS
-</p>
+##### Figure 5 Data Binding Model of mGNCS
 
 Data binding transfers data between the graphic user interface and internal
 logic, and its advantages are:
@@ -645,15 +632,12 @@ The disadvantage is that extra expenditure is needed. However, codes of the
 operation interface themselves will bring expenditure. With the two balanced
 out, using data binding is very worthwhile.
 
-List p2c1-5 gives a simple data binding example program, and interface of the
+List 5 gives a simple data binding example program, and interface of the
 program is as shown in the figure below:
-
-<p align=center>
 
 ![alt](figures/data_binding.png)
 
-Fig. p2c1-6 Data Binding Example Program
-</p>
+##### Figure 6 Data Binding Example Program
 
 The program binds the content in the edit box with the location of the track 
 bar together:
@@ -663,9 +647,8 @@ to reflect the current track bar location;
 - Key an integer value (0-20) in the edit box, and the current location of the
 track bar will change correspondingly.
 
-<p align=center>
-List p1c2-5 `data_binding.c`
-</p>
+##### List 5 `data_binding.c`
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/data_binding.c.txt"}%
 ```
@@ -711,16 +694,12 @@ source;
 Codes in list p1c2-6 uses the static data defined by C program to initialize a
 list item control, as shown in the figure below:
 
-<p align=center>
-
 ![alt](figures/data_source.png)
 
-Fig. p2c1-7 Data Source Example Program
-</p>
+##### Figure 7 Data Source Example Program
 
-<p align=center>
-List p1c2-6 `data_source.c`
-</p>
+##### List 6 `data_source.c`
+
 ```cpp
 %INCLUDE{"%ATTACHURL%/data_source.c.txt"}%
 ```

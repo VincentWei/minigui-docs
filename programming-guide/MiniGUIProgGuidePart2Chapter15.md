@@ -632,7 +632,7 @@ Inherited from [the property of
 | `NCSP_ITEMV_DEFITEMHEIGHT` | - | int | `RW` | 条目默认高度 |
 | `NCSP_ITEMV_ITEMCOUNT` | - | int | `RO` | 条目总数目 |
 
-| *Property `ID`* | *mstudio name* | *Type* | *Authority* | *Explanation* |
+| *Property ID | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_ITEMV_DEFITEMHEIGHT` | - | int | `RW` | Item default height |
 | `NCSP_ITEMV_ITEMCOUNT` | - | int | `RO` | Item total number |
 
@@ -1112,7 +1112,7 @@ It is inherited from <a href="#Property of `mItemView">the` property of
 | `NCSP_LSTBOX_HILIGHTEDITEM` | - | int | `RW` | 高亮列表项索引 |
 
 
-| *Property `ID`* | *mstudio name* | *Type* | *Authority* | *Explanation* |
+| *Property ID | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_LSTBOX_ITEMWIDTH` | - | int | `RO` | Maximum width of the list item |
 | `NCSP_LSTBOX_ITEMCOUNT` | - | int | `RO` | Total number of the list item |
 | `NCSP_LSTBOX_ITEMHEIGHT` | - | int | `RW` | Height of the list item |
@@ -1458,6 +1458,8 @@ Figure p2c6-1 Output of listbox Program
 </p>
 
 <p align=center>清单 p2c14-3 listbox.c</p>
+##### List 3 listbox.c
+##### List 3 listbox.c
 <p align=center>List p2c14-3 listbox.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/listbox"}%
@@ -1512,7 +1514,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of
 It is inherited from <a href="#Property of `mItemView">the` property of
 `mItemView</a`> 
 
-| *Property `ID`* | *mstudio name* | *Type* | *Authority* | *Explanation* |
+| *Property ID | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_ICONV_DEFICONHEIGHT` | - | int | `RW` | Height of the list item |
 | `NCSP_ICONV_DEFICONWIDTH` | - | int | `RW` | Width of the list item |
 
@@ -1564,6 +1566,8 @@ Figure p2c6-1 Output of iconview Program
 </p>
 
 <p align=center>清单 p2c14-3 iconview.c</p>
+##### List 3 iconview.c
+##### List 3 iconview.c
 <p align=center>List p2c14-3 iconview.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/iconview"}%
@@ -1641,7 +1645,7 @@ It is inherited from <a href="#Style of `mItemView">the` style of
 It is inherited from [the property of
 `mItemView](MStudioMGNCSV1dot0PGP2C3#mItemView`) 
 
-| *Property `ID`* | *mstudio name* | *Type* | *Authority* | *Explanation* |
+| *Property ID | *mstudio name* | *Type* | *Authority* | *Explanation* |
 | `NCSP_LISTV_DEFITEMHEIGHT` | - | int | `RW` | Default height of the list item |
 | `NCSP_LISTV_ROWCOUNT` | - | `RO` | int | Row number of the list item |
 | `NCSP_LISTV_HDRHEIGHT` | `HeadHeight` | int | `RW` | height of the list header |
@@ -1874,6 +1878,8 @@ Figure p2c6-1 Output of listview Program
 </p>
 
 <p align=center>清单 p2c14-4 listview.c</p>
+##### List 4 listview.c
+##### List 4 listview.c
 <p align=center>List p2c14-4 listview.c</p>
 ```cpp
 %INCLUDE{"%ATTACHURL%/listview"}%

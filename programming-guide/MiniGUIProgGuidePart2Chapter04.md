@@ -382,7 +382,7 @@ mComponentClass * ncsGetComponentClass(const char* class_name, BOOL check);
 
 ### Style of `mWidget`
 
-| *Style `ID`* | *Property Name of miniStudio* | *Explanation* ||
+| *Style ID | *Property Name of miniStudio* | *Explanation* ||
 | `NCSS_NOTIFY` | Notify | Decide if the control generates Notification event |
 
 ### Property of `mWidget`
@@ -424,7 +424,7 @@ window sentence handle as the parameter cannot be called
 * `mWidget` * event generator object pointer
 * int `nc_code` : event notification code, used to distinguish different events
 
-*Note: Callback of all the notification events is `NCS_CB_NOTIFY`*
+*Note: Callback of all the notification events is `NCS_CB_NOTIFY*`
 
 ### Operation Function of `mWidget`
 

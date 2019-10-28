@@ -112,8 +112,8 @@ finally get the rendered `DC` through the interface function.
 contains all the data of the graph, including information required for
 rendering such as paths, gradients, and change matrices. The data structure is
 not open to the public, only one handle (pointer) is exposed externally.
-- <p>Around the `MGPlusGraphics` structure, it will provide a series of
-function interfaces to operate, including initialization, parameter</p>
+- Around the `MGPlusGraphics` structure, it will provide a series of
+function interfaces to operate, including initialization, parameter
 modification, various ways of rendering, and various 2D coordinate changes
 (such as linear changes).MGPlus includes the following modules:
 - `MGPlus` include follow module:
@@ -124,17 +124,18 @@ modification, various ways of rendering, and various 2D coordinate changes
 - image
 - font
 - text
-- <p>At the bottom, it will be implemented using `AGG` data and
-interfaces.</p>
+- At the bottom, it will be implemented using `AGG` data and
+interfaces.
+
 ## `MGPlus` Frame Diagram
 
-- <p>MGPlus is mainly composed of the above 9 categories. The Graphic class
+- MGPlus is mainly composed of the above 9 categories. The Graphic class
 implements all operations related to rendering, including color
-gradient,</p>
+gradient,
 color combination, anti-aliasing, etc. The other 8 categories are associated
 with Graphic in a one-way manner.
-- <p>The Matrix class is associated with the Path class, the Image class
-and the Bitmap class, and the Font class is associated with the Text</p>
+- The Matrix class is associated with the Path class, the Image class
+and the Bitmap class, and the Font class is associated with the Text
 class.
 
 - `MGPlus` rebuild framework:

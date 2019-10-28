@@ -94,7 +94,7 @@ It is inherited from the property of [ `mScrollView` ](MStudioMGNCSV1dot0PGP2C)
 | `NCSN_EDIT_KILLFOCUS` | -- | 失去焦点 |
 
 It is inherited from the event of [ `mScrollView` ](MStudioMGNCSV1dot0PGP2C)
-| *Event `ID`* | *Parameter* | *Explanation* |
+| *Event ID | *Parameter* | *Explanation* |
 | `NCSN_EDIT_CHANGE` | -- | Content changes |
 | `NCSN_EDIT_CONTCHANGED` | -- | When edit loses the focus, the content changes |
 | `NCSN_EDIT_UPDATE` | -- | The content is refreshed when changed through `setText` and `resetContent` method or the property is changed |
@@ -445,7 +445,7 @@ It is inherited from the property of [ `mEdit`
 | `NCSN_SLEDIT_ENTER` | -- | 捕获到enter键消息 |
 
 It is inherited from the event of [ `mEdit` ](MStudioMGNCSV1dot0PGP2C12#mEdit)
-| *Event `ID`* | *Parameter* | *explanation* |
+| *Event ID | *Parameter* | *explanation* |
 | `NCSN_SLEDIT_ENTER` | -- | Capture enter key information |
 
 
