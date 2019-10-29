@@ -90,6 +90,7 @@ Relation schematic diagram of the three kinds of coordinates:
 
 Corresponding interface of transformation between the three kinds of 
 coordinates are:
+
 ```cpp
 void contentToViewport(mScrollWidget *self, int *x, int *y); 
 void viewportToWindow(mScrollWidget *self, int *x, int *y);
