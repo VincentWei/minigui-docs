@@ -1,8 +1,6 @@
 /*
 ** $Id: propsheet.c 589 2009-10-09 06:19:44Z xwyan $
 **
-** Listing P2C11.1
-**
 ** propsheet.c: Sample program for mGNCS Programming Guide
 **      The demo application for PropSheet.
 **

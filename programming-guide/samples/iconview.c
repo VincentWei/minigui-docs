@@ -1,8 +1,6 @@
 /**
  * $Id: iconview.c 595 2009-10-10 08:19:47Z xwyan $
  *
- * Listing P2C14.3
- *
  * iconview.c: Sample program for mGNCS Programming Guide
  *      The demo application for IconView.
  *

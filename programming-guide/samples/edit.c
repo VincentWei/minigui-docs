@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.12
-**
 ** edit.c: Sample program for mGNCS Programming Guide
 **      Using edit.
 **

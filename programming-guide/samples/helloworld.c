@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.1
-**
 ** helloworld.c: Sample program for mGNCS Programming Guide
 **      The first mGNCS application.
 **

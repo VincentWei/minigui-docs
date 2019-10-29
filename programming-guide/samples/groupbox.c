@@ -1,8 +1,4 @@
 /*
- * ** $Id$
- * **
- * ** Listing P2C4.4
- * **
  * ** groupbox.c: Sample program for mGNCS Programming Guide
  * **      A mGNCS application for mGroupbox.
  * **

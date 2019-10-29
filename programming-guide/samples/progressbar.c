@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.4
-**
 ** wnd_template.c: Sample program for mGNCS Programming Guide
 **      Using progressbar.
 **

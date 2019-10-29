@@ -1,8 +1,4 @@
 /*
- * ** $Id$
- * **
- * ** Listing P2C4.1
- * **
  * ** static.c: Sample program for mGNCS Programming Guide
  * **      A mGNCS application for mStatic.
  * **

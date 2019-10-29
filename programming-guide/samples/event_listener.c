@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.4
-**
 ** event_listener.c: Sample program for mGNCS Programming Guide
 **      Using event listener.
 **

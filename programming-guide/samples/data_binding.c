@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.5
-**
 ** data_binding.c: Sample program for mGNCS Programming Guide
 **      Using data binding.
 **

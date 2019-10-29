@@ -1,8 +1,4 @@
 /*
- * ** $Id$
- * **
- * ** Listing P2C4.7
- * **
  * ** separator.c: Sample program for mGNCS Programming Guide
  * **      A mGNCS application for mSeparator.
  * **

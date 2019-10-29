@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.2
-**
 ** helloworld_domodal.c: Sample program for mGNCS Programming Guide.
 **      The mGNCS helloworld using modal main window.
 **

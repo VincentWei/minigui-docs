@@ -1,8 +1,6 @@
 /*
 ** $Id: panel.c 594 2009-10-10 05:59:06Z xwyan $
 **
-** Listing P2C6.1
-**
 ** panel.c: Sample program for mGNCS Programming Guide
 **      The demo application for Panel.
 **

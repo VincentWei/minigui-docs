@@ -1,8 +1,6 @@
 /*
 ** $Id: resmgr_main.c 534 2009-09-22 05:37:46Z xwyan $
 **
-** Listing P2C2.2
-**
 ** resmgr_main.c: Sample program for mGNCS Programming Guide
 **      The application entry of resource managerment.
 **

@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C1.6
-**
 ** data_source.c: Sample program for mGNCS Programming Guide
 **      Using static data source.
 **

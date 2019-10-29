@@ -1,8 +1,6 @@
 /*
 ** $Id: resmgr.c 534 2009-09-22 05:37:46Z xwyan $
 **
-** Listing P2C2.3
-**
 ** resmgr.c: Sample program for mGNCS Programming Guide
 **      Create main window by resource managerment.
 **

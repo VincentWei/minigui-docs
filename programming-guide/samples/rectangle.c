@@ -1,8 +1,4 @@
 /*
- * ** $Id$
- * **
- * ** Listing P2C4.3
- * **
  * ** rectangle.c: Sample program for mGNCS Programming Guide
  * **      A mGNCS application for mRect.
  * **

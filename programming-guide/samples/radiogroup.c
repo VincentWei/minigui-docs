@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C5.3
-**
 ** radiogroup.c: Sample program for mGNCS Programming Guide
 **      The first mGNCS application.
 **

@@ -1,8 +1,4 @@
 /*
-** $Id$
-**
-** Listing P2C5.4
-**
 ** menubutton.c: Sample program for mGNCS Programming Guide
 **      The first mGNCS application.
 **
