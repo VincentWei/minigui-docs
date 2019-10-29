@@ -189,21 +189,65 @@ Specification]] in Specification for Image Resource Used by Skin Renderer
 - `ProgressBar` template
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_TEMPLATE(.*?)//END_OF_TEMPLATE.*"}%
+static NCS_WND_TEMPLATE _ctrl_templ[] =
+{
+    {
+        NCSCTRL_PROGRESSBAR,
+        ID_PROG,
+        10, 33, 290, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_PRGBAR_SHOWPERCENT,
+        WS_EX_NONE,
+        "",
+        progress_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN,
+        120, 70, 80, 25,
+        WS_VISIBLE | NCSS_NOTIFY,
+        WS_EX_NONE,
+        "Cancel",
+        NULL,
+        btn_rdr_info,
+        btn_handlers, NULL, 0, 0
+    },
+};
 ```
 
 - 初始化ProgressBar属性
 
 - Initialize the property of `ProgressBar`
 ```cpp
-%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_INITIAL_PROPS(.*?)//END_OF_INITIAL_PROPS.*"}%
+static NCS_PROP_ENTRY progress_props[] =
+{
+    {NCSP_PROG_MAXPOS, 100},
+    {NCSP_PROG_MINPOS, 0  },
+    {NCSP_PROG_LINESTEP, 1},
+    {NCSP_PROG_CURPOS, 0  },
+    { 0, 0 }
+};
 ```
 
 - 在Timer消息中，改变ProgressBar的属性值
 
 - In Timer message, change the property value of `ProgressBar`
 ```cpp
-%INCLUDE{"%ATTACHURL%/progressbar.c.txt" pattern="^.*?//START_OF_SET_PROPERTY(.*?)//END_OF_SET_PROPERTY.*"}%
+    static int pb_pos = 0;
+
+    mProgressBar *pb = (mProgressBar*)ncsGetChildObj (_this->hwnd, ID_PROG);
+    if (pb)
+    {
+        pb_pos++;
+        _c(pb)->setProperty(pb, NCSP_PROG_CURPOS, pb_pos);
+
+        if (pb_pos == _c(pb)->getProperty(pb, NCSP_PROG_MAXPOS))
+        {
+            DestroyMainWindow (_this->hwnd);
+            PostQuitMessage (_this->hwnd);
+        }
+    }
 ```
 
 ----

@@ -209,7 +209,14 @@ For convenience, we mainly realize through the method of data binding
 
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_SET_PROPS(.*?)//END_SET_PROPS.*"}%
+//Propties for
+static NCS_PROP_ENTRY spinbox_props [] = {
+    {NCSP_SPNR_MINPOS, MINVALUE},
+    {NCSP_SPNR_MAXPOS, MAXVALUE},
+    {NCSP_SPNR_CURPOS, CURVALUE},
+    {NCSP_SPNR_LINESTEP, 1},
+    {0, 0}
+};
 ```
 
 - 在主窗口的MSG_CREATE消息中，建立和static的连接
@@ -219,19 +226,33 @@ For convenience, we mainly realize through the method of data binding
 - Get window object
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_GET_CTRLS(.*?)//END_GET_CTRLS.*"}%
+    mSpinner * spn1, *spn2;
+    mStatic  * show1, * show2;
+    spn1 = (mSpinner*)_c(self)->getChild(self, ID_SPINNER1);
+    spn2 = (mSpinner*)_c(self)->getChild(self, ID_SPINNER2);
+    show1 = (mStatic*)_c(self)->getChild(self, ID_SHOWSPINNER1);
+    show2 = (mStatic*)_c(self)->getChild(self, ID_SHOWSPINNER2);
 ```
 - 连接窗口属性
 
 - Property of the connection window
 ```cpp
-%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_CONNECT_PROPS(.*?)//END_CONNECT_PROPS.*"}%
+    ncsConnectBindProps(
+        NCS_CMPT_PROP(spn1, NCSN_SPNR_CHANGED, NCSP_SPNR_CURPOS, NCS_BT_INT, NCS_PROP_FLAG_READ),
+        NCS_CMPT_PROP(show1, 0, NCSP_WIDGET_TEXT, NCS_BT_STR, NCS_PROP_FLAG_WRITE),
+        NCS_BPT_SIGNALE);
+
+    ncsConnectBindProps(
+        NCS_CMPT_PROP(spn2, NCSN_SPNR_CHANGED, NCSP_SPNR_CURPOS, NCS_BT_INT, NCS_PROP_FLAG_READ),
+        NCS_CMPT_PROP(show2, 0, NCSP_WIDGET_TEXT, NCS_BT_STR, NCS_PROP_FLAG_WRITE),
+        NCS_BPT_SIGNALE);
 ```
 - 更新当前的信息到Static中
 
 - Update the current information into Static
 ```cpp
-%INCLUDE{"%ATTACHURL%/spinner.c.txt" pattern="^.*?//START_UPDATE_CTRLS(.*?)//END_UPDATE_CTRLS.*"}%
+    ncsRaiseComponentBindProps((mComponent*)spn1, NCSN_SPNR_CHANGED);
+    ncsRaiseComponentBindProps((mComponent*)spn2, NCSN_SPNR_CHANGED);
 ```
 
 ## `mSpinbox`
@@ -409,7 +430,50 @@ Schematic diagram: <br />
 
 - The main codes are as below:
 ```cpp
-%INCLUDE{"%ATTACHURL%/spinbox.c.txt" pattern="^.*?//START_SPINBOX(.*?)//END_SPINBOX.*"}%
+#define ID_SPINBOX1      101
+#define ID_SPINBOX2      102
+#define ID_SPINBOX3      103
+#define ID_SPINBOX4      104
+
+static char * item [] =
+{
+    "SpinBox item-1st",
+    "SpinBox item-2nd",
+    "SpinBox item-3rd",
+    "SpinBox item-4th"
+};
+
+static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
+{
+    int i;
+    mSpinBox *spinner3, *spinner4;
+
+    spinner3 = (mSpinBox *)_c(self)->getChild(self, ID_SPINBOX3);
+    spinner4 = (mSpinBox *)_c(self)->getChild(self, ID_SPINBOX4);
+
+    for (i = 0; i < sizeof(item)/sizeof(char*); i++)
+    {
+
+        _c(spinner3)->addItem (spinner3, item[i]);
+
+        _c(spinner4)->addItem (spinner4, item[i]);
+
+    }
+
+    return TRUE;
+}
+
+
+//Propties for
+static NCS_PROP_ENTRY spinner_props [] = {
+
+    {NCSP_SPNBOX_MAXPOS, 12},
+    {NCSP_SPNBOX_MINPOS, 0},
+    {NCSP_SPNBOX_CURPOS, 0},
+    {NCSP_SPNBOX_LINESTEP, 1},
+    {0, 0}
+};
+
 ```
 
 ----

@@ -291,21 +291,73 @@ operation effect drawing is as below:<br />
 
 - Declare Timer uses the same structure as the control
 ```cpp
-%INCLUDE{"%ATTACHURL%/timer.c.txt" pattern="^.*?//START_DECLARE_TIMER(.*?)//END_DECLARE_TIMER.*"}%
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_TIMER,
+        100,
+        10, 10, 0, 0,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        NULL, //props,
+        NULL, //rdr_info
+        NULL, //timer_props, //handlers,
+        NULL, //controls
+        0,
+        0 //add data
+    },
 ```
 
 - 初始化Timer，建立和一个Static控件的连接，并开始Timer
 
 - Initialize Timer, establish a connection with Static control, and start Timer
 ```cpp
-%INCLUDE{"%ATTACHURL%/timer.c.txt" pattern="^.*?//START_TIMER_CONNECT(.*?)//END_TIMER_CONNECT.*"}%
+static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
+{
+    //TODO : initialize
+    mTimer * timer = SAFE_CAST(mTimer,
+                    _c(self)->getChild(self, 100));
+    if(timer)
+    {
+        ncsAddEventListener((mObject*)timer,
+                        (mObject*)ncsGetChildObj(self->hwnd, 101),
+                        (NCS_CB_ONPIECEEVENT)update_time,
+                        MSG_TIMER);
+        _c(timer)->start(timer);
+    }
+    return TRUE;
+}
 ```
 
 - 当MSG_TIMER事件发生时，更新时间
 
 - When `MSG_TIMER` event occurs, update the time
 ```cpp
-%INCLUDE{"%ATTACHURL%/timer.c.txt" pattern="^.*?//START_UPDATE_TIME(.*?)//END_UPDATE_TIME.*"}%
+static BOOL update_time(mStatic *listener,
+        mTimer* sender,
+        int id,
+        DWORD total_count)
+{
+    char szText[100];
+    time_t tim;
+    struct tm *ptm;
+    static int old_count = 0;
+
+    time(&tim);
+    ptm = localtime(&tim);
+
+    sprintf(szText,
+            "%02d:%02d:%d",
+            ptm->tm_hour,
+            ptm->tm_min,
+            ptm->tm_sec);
+    old_count = total_count;
+
+    SetWindowText(listener->hwnd, szText);
+    InvalidateRect(listener->hwnd, NULL, TRUE);
+
+    return FALSE;
+}
 ```
 
 

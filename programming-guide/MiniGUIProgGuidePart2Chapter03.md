@@ -131,12 +131,19 @@ HPACKAGE ncsLoadResPackageFromMem (const void* mem, int size);
 
 These are the example codes of loading resource package file:
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_LOADRESPKG(.*?)// END_OF_LOADRESPKG.*"}%
+    sprintf(f_package, "%s", "resmgr_demo.res");
+    SetResPath("./");
+
+    hPackage = ncsLoadResPackage (f_package);
+    if (hPackage == HPACKAGE_NULL) {
+        printf ("load resource package:%s failure.\n", f_package);
+        return 1;
+    }
 ```
 
 These are the example codes of unloading resource package file:
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_UNLOADPKG(.*?)// END_OF_UNLOADPKG.*"}%
+    ncsUnloadResPackage(hPackage);
 ```
 
 #### Get and Set Locale
@@ -204,7 +211,14 @@ int ncsCreateModalDialogFromID (HPACKAGE package, Uint32 dlgId,
 Create example codes of UI main window through the resource package:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr.c.txt" pattern="^.*?// START_OF_UIWINDOW(.*?)// END_OF_UIWINDOW.*"}%
+    return ncsCreateMainWindowIndirectFromID(package,
+        ID_MAINWND1,
+        hParent,
+        h_icon,
+        h_menu,
+        mainwnd_Mainwnd1_handlers,
+        NULL,
+        user_data);
 ```
 
 #### Get Character String
@@ -221,7 +235,7 @@ const char* ncsGetString (HPACKAGE package, Uint32 resId);
 Get example codes of string through resource package:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt" pattern="^.*?// START_OF_GETSTRING(.*?)// END_OF_GETSTRING.*"}%
+    SetDefaultWindowElementRenderer(ncsGetString(hPackage, NCSRM_SYSSTR_DEFRDR));
 ```
 
 - Note: mGNCS reserves the `ID` value from `NCSRM_SYSSTR_BASEID` to
@@ -294,13 +308,113 @@ buttons are the look and feel effects of skin and flat renderer respectively.
 #### List 2 resmgr_main.c
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr_main.c.txt"}%
+/*
+** resmgr_main.c: Sample program for mGNCS Programming Guide
+**      The application entry of resource managerment.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+
+#include "resource.h"
+#include "ncs-windows.h"
+
+HPACKAGE hPackage = HPACKAGE_NULL;
+
+int MiniGUIMain(int argc, const char* argv[])
+{
+#ifdef ntStartWindowEx
+    MSG Msg;
+    char f_package[MAX_PATH];
+    mMainWnd *mWin;
+
+    ncsInitialize();
+// START_OF_LOADRESPKG
+    sprintf(f_package, "%s", "resmgr_demo.res");
+    SetResPath("./");
+
+    hPackage = ncsLoadResPackage (f_package);
+    if (hPackage == HPACKAGE_NULL) {
+        printf ("load resource package:%s failure.\n", f_package);
+        return 1;
+    }
+// END_OF_LOADRESPKG
+
+// START_OF_GETSTRING
+    SetDefaultWindowElementRenderer(ncsGetString(hPackage, NCSRM_SYSSTR_DEFRDR));
+// END_OF_GETSTRING
+
+    mWin = ntStartWindowEx(hPackage, HWND_DESKTOP, (HICON)0, (HMENU)0, (DWORD)0);
+
+    while(GetMessage(&Msg, mWin->hwnd))
+    {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+
+    MainWindowThreadCleanup(mWin->hwnd);
+// START_OF_UNLOADPKG
+    ncsUnloadResPackage(hPackage);
+// END_OF_UNLOADPKG
+    ncsUninitialize();
+#endif
+
+    return 0;
+}
 ```
 
 ##### List 3 resmgr.c
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/resmgr.c.txt"}%
+/*
+** resmgr.c: Sample program for mGNCS Programming Guide
+**      Create main window by resource managerment.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+
+#include "resource.h"
+#include "ncs-windows.h"
+
+static NCS_EVENT_HANDLER_INFO mainwnd_Mainwnd1_handlers[] = {
+
+    {-1, NULL}
+};
+
+NCS_WND_EXPORT mMainWnd* ntCreateMainwnd1Ex(HPACKAGE package, HWND hParent, HICON h_icon, HMENU h_menu, DWORD user_data)
+{
+// START_OF_UIWINDOW
+    return ncsCreateMainWindowIndirectFromID(package,
+        ID_MAINWND1,
+        hParent,
+        h_icon,
+        h_menu,
+        mainwnd_Mainwnd1_handlers,
+        NULL,
+        user_data);
+// END_OF_UIWINDOW
+}
 ```
 
 ----

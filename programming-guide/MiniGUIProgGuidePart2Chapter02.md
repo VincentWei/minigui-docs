@@ -9,7 +9,80 @@ learn. Please look at the helloworld program source codes based on mGNCS:
 ##### List 1 `helloworld.c`
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/helloworld.c.txt"}%
+/*
+** helloworld.c: Sample program for mGNCS Programming Guide
+**      The first mGNCS application.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// START_OF_INCS
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+// END_OF_INCS
+
+// START_OF_HANDLERS
+static void mymain_onPaint (mWidget *_this, HDC hdc, const CLIPRGN* inv)
+{
+    RECT rt;
+    GetClientRect (_this->hwnd, &rt);
+    DrawText (hdc, "Hello, world!", -1, &rt, DT_SINGLELINE|DT_CENTER|DT_VCENTER);
+}
+
+static BOOL mymain_onClose (mWidget* _this, int message)
+{
+    DestroyMainWindow (_this->hwnd);
+    return TRUE;
+}
+
+static NCS_EVENT_HANDLER mymain_handlers [] = {
+    {MSG_PAINT, mymain_onPaint},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
+// END_OF_HANDLERS
+
+int MiniGUIMain (int argc, const char* argv[])
+{
+    MSG Msg;
+
+    ncsInitialize ();
+
+    mWidget* mymain = ncsCreateMainWindow (
+        NCSCTRL_MAINWND, "Hello, world!",
+        WS_CAPTION | WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        1,
+        0, 0, 300,200,
+        HWND_DESKTOP,
+        0, 0,
+        NULL,
+        NULL,
+        mymain_handlers,
+        0);
+
+// START_OF_MSGLOOP
+    while (GetMessage (&Msg, mymain->hwnd)) {
+        TranslateMessage (&Msg);
+        DispatchMessage (&Msg);
+    }
+// END_OF_MSGLOOP
+
+    MainWindowThreadCleanup (mymain->hwnd);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
 ```
 
 The program creates a 300x200 main window on the screen and displays “Hello,
@@ -30,7 +103,12 @@ shall contain its specific file:
 Therefore, normally, head file of a mGNCS program is:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/helloworld.c.txt" pattern="^.*?// START_OF_INCS(.*?)// END_OF_INCS.*"}%
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
 ```
 
 ### Create the Main Window
@@ -118,7 +196,24 @@ Therefore, we define the two functions, and establish mapping array of the
 event and event handler:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/helloworld.c.txt" pattern="^.*?(// START_OF_HANDLERS.*?// END_OF_HANDLERS).*"}%
+static void mymain_onPaint (mWidget *_this, HDC hdc, const CLIPRGN* inv)
+{
+    RECT rt;
+    GetClientRect (_this->hwnd, &rt);
+    DrawText (hdc, "Hello, world!", -1, &rt, DT_SINGLELINE|DT_CENTER|DT_VCENTER);
+}
+
+static BOOL mymain_onClose (mWidget* _this, int message)
+{
+    DestroyMainWindow (_this->hwnd);
+    return TRUE;
+}
+
+static NCS_EVENT_HANDLER mymain_handlers [] = {
+    {MSG_PAINT, mymain_onPaint},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
 ```
 
 We can see that compared to MiniGUI common program, mGNCS avoids the use of
@@ -136,7 +231,10 @@ Finally, to make the program runs, a message circulation is needed, same as for
 common MiniGUI programming:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/helloworld.c.txt" pattern="^.*?(// START_OF_MSGLOOP.*?// END_OF_MSGLOOP).*"}%
+    while (GetMessage (&Msg, mymain->hwnd)) {
+        TranslateMessage (&Msg);
+        DispatchMessage (&Msg);
+    }
 ```
 
 ### Create Modal Main Window
@@ -147,7 +245,29 @@ create modal main window, we only need to use `doModal` to replace the existing
 message circulation, as shown below:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/helloworld_domodal.c.txt" pattern="^.*?(// START_OF_MINIGUIMAIN.*?// END_OF_MINIGUIMAIN).*"}%
+int MiniGUIMain (int argc, const char* argv[])
+{
+    ncsInitialize ();
+
+    mMainWnd* mymain = (mMainWnd*) ncsCreateMainWindow (
+        NCSCTRL_MAINWND, "Hello, world!",
+        WS_CAPTION | WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        1,
+        0, 0, 300, 200,
+        HWND_DESKTOP,
+        0, 0,
+        NULL,
+        NULL,
+        mymain_handlers,
+        0);
+
+    _c(mymain)->doModal (mymain, TRUE);
+
+    ncsUninitialize ();
+
+    return 0;
+}
 ```
 
 In the above codes
@@ -184,7 +304,156 @@ shown in the figure below, and demonstrate how to use property and renderer.
 ##### List 3 `wnd_template.c`
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/wnd_template.c.txt"}%
+/*
+** wnd_template.c: Sample program for mGNCS Programming Guide
+**      Using window template.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+#include <minigui/control.h>
+
+#include <mgncs/mgncs.h>
+
+#define ID_BTN  101
+#define ID_PROG 200
+
+// START_OF_HANDLERS
+static BOOL mymain_onCreate (mWidget* _this, DWORD add_data)
+{
+    SetTimer (_this->hwnd, 100, 20);
+    return TRUE;
+}
+
+// START_OF_ONTIMER
+static void mymain_onTimer (mWidget *_this, int id, DWORD count)
+{
+    static int pb_pos = 0;
+    mProgressBar *pb = (mProgressBar*)ncsGetChildObj (_this->hwnd, ID_PROG);
+    if (pb)
+        _c(pb)->setProperty(pb, NCSP_PROG_CURPOS, pb_pos++);
+}
+// END_OF_ONTIMER
+
+static void mymain_onClose (mWidget* _this, int message)
+{
+    DestroyMainWindow (_this->hwnd);
+    PostQuitMessage (_this->hwnd);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {MSG_TIMER, mymain_onTimer},
+    {0, NULL}
+};
+// END_OF_HANDLERS
+
+// START_OF_RDRINFO
+static NCS_RDR_ELEMENT btn_rdr_elements[] =
+{
+    { NCS_MODE_USEFLAT, 1},
+    { -1, 0 }
+};
+
+static NCS_RDR_INFO btn1_rdr_info[] =
+{
+    {"fashion","fashion", btn_rdr_elements}
+};
+
+static NCS_RDR_INFO btn2_rdr_info[] =
+{
+    {"flat", "flat", NULL}
+};
+// END_OF_RDRINFO
+
+// START_OF_PROPERTIES
+static NCS_PROP_ENTRY progress_props [] = {
+    {NCSP_PROG_MAXPOS, 100},
+    {NCSP_PROG_MINPOS, 0 },
+    {NCSP_PROG_LINESTEP, 1},
+    {NCSP_PROG_CURPOS, 0 },
+    { 0, 0 }
+};
+// END_OF_PROPERTIES
+
+// START_OF_TEMPLATE
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_PROGRESSBAR,
+        ID_PROG,
+        10, 10, 290, 30,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "",
+        progress_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN,
+        10, 50, 100, 25,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "button1",
+        NULL,
+        btn1_rdr_info,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN,
+        200, 50, 100, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "button2",
+        NULL,
+        btn2_rdr_info,
+        NULL, NULL, 0, 0
+    },
+
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_DIALOGBOX,
+    1,
+    0, 0, 320, 110,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Window Template",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
+};
+// END_OF_TEMPLATE
+
+int MiniGUIMain (int argc, const char* argv[])
+{
+    ncsInitialize ();
+
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal (mydlg, TRUE);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
 ```
 
 The program defines a dialog box containing three controls:
@@ -239,7 +508,13 @@ control through `NCS_PROP_ENTRY` structure array, which include:
 Concrete codes are as below:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/wnd_template.c.txt" pattern="^.*?// START_OF_PROPERTIES(.*?)// END_OF_PROPERTIES.*"}%
+static NCS_PROP_ENTRY progress_props [] = {
+    {NCSP_PROG_MAXPOS, 100},
+    {NCSP_PROG_MINPOS, 0 },
+    {NCSP_PROG_LINESTEP, 1},
+    {NCSP_PROG_CURPOS, 0 },
+    { 0, 0 }
+};
 ```
 
 Pay attention to the last member {0, 0} in the above structure array, and NCS
@@ -297,7 +572,13 @@ property of the progress bar periodically. In the processing function of the
 timer, the following code calling is done:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/wnd_template.c.txt" pattern="^.*?// START_OF_ONTIMER(.*?)// END_OF_ONTIMER.*"}%
+static void mymain_onTimer (mWidget *_this, int id, DWORD count)
+{
+    static int pb_pos = 0;
+    mProgressBar *pb = (mProgressBar*)ncsGetChildObj (_this->hwnd, ID_PROG);
+    if (pb)
+        _c(pb)->setProperty(pb, NCSP_PROG_CURPOS, pb_pos++);
+}
 ```
 
 ## Use Renderer
@@ -315,7 +596,21 @@ similar to window template to define information of the renderers used by a
 control. 
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/wnd_template.c.txt" pattern="^.*?// START_OF_RDRINFO(.*?)// END_OF_RDRINFO.*"}%
+static NCS_RDR_ELEMENT btn_rdr_elements[] =
+{
+    { NCS_MODE_USEFLAT, 1},
+    { -1, 0 }
+};
+
+static NCS_RDR_INFO btn1_rdr_info[] =
+{
+    {"fashion","fashion", btn_rdr_elements}
+};
+
+static NCS_RDR_INFO btn2_rdr_info[] =
+{
+    {"flat", "flat", NULL}
+};
 ```
 
 - `btn_rdr_elements` defines property array of the renderer. Property of
@@ -550,14 +845,59 @@ The following codes define two listeners, which are used for Stop button and
 Exit button respectively:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/event_listener.c.txt" pattern="^.*?// START_OF_EVENTLISTENER(.*?)// END_OF_EVENTLISTENER.*"}%
+static BOOL mymain_onExit (mMainWnd *self, mButton *sender, int id, DWORD param)
+{
+    mymain_onClose ((mWidget*)self, MSG_CLOSE);
+    return TRUE;
+}
+
+static BOOL mymain_onStop (mMainWnd *self, mButton *sender, int id, DWORD param)
+{
+    KillTimer (self->hwnd, 100);
+    return TRUE;
+}
 ```
 
 When the window is initialized, the two event listeners are connected to the
 clicking events of the above two controls:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/event_listener.c.txt" pattern="^.*?// START_OF_HANDLERS(.*?)// END_OF_HANDLERS.*"}%
+static BOOL mymain_onCreate (mWidget* self, DWORD addData)
+{
+    mButton *btn;
+
+    btn = (mButton*)_c(self)->getChild (self, IDC_EXIT);
+    ncsAddEventListener ((mObject*)btn, (mObject*)self,
+                (NCS_CB_ONOBJEVENT)mymain_onExit, NCSN_WIDGET_CLICKED);
+
+    btn = (mButton*)_c(self)->getChild (self, IDC_STOP);
+    ncsAddEventListener ((mObject*)btn, (mObject*)self,
+                (NCS_CB_ONOBJEVENT)mymain_onStop, NCSN_WIDGET_CLICKED);
+
+    SetTimer (self->hwnd, 100, 20);
+    return TRUE;
+}
+
+static void mymain_onTimer (mWidget *self, int id, DWORD count)
+{
+    static int pb_pos = 0;
+    mProgressBar *pb = (mProgressBar*)ncsGetChildObj (self->hwnd, IDC_PROG);
+    if (pb)
+        _c(pb)->setProperty (pb, NCSP_PROG_CURPOS, pb_pos++);
+}
+
+static void mymain_onClose (mWidget* self, int message)
+{
+    DestroyMainWindow (self->hwnd);
+    PostQuitMessage (self->hwnd);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {MSG_TIMER, mymain_onTimer},
+    {0, NULL}
+};
 ```
 
 Obviously, event listener mechanism brings more convenience to the programming
@@ -650,14 +990,157 @@ track bar will change correspondingly.
 ##### List 5 `data_binding.c`
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_binding.c.txt"}%
+/*
+** data_binding.c: Sample program for mGNCS Programming Guide
+**      Using data binding.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+
+#define IDC_TRACKBAR     101
+#define IDC_SLEDIT       102
+
+// START_OF_BINDING
+static BOOL mymain_onCreate (mWidget* self, DWORD add_data)
+{
+    mTrackbar * tb = (mTrackbar*)_c(self)->getChild (self, IDC_TRACKBAR);
+    mSlEdit   * se = (mSlEdit*) _c(self)->getChild (self, IDC_SLEDIT);
+
+    ncsConnectBindProps (NCS_CMPT_PROP (tb, NCSN_TRKBAR_CHANGED,
+            NCSP_TRKBAR_CURPOS, NCS_BT_INT,
+            NCS_PROP_FLAG_READ|NCS_PROP_FLAG_WRITE),
+        NCS_CMPT_PROP (se, NCSN_EDIT_CHANGE,
+            NCSP_WIDGET_TEXT, NCS_BT_STR,
+            NCS_PROP_FLAG_READ|NCS_PROP_FLAG_WRITE),
+        NCS_BPT_DBL);
+
+    ncsAutoReflectObjectBindProps ((mObject*)se);
+    return TRUE;
+}
+// END_OF_BINDING
+
+static void mymain_onClose (mWidget* self, int message)
+{
+    DestroyMainWindow (self->hwnd);
+    PostQuitMessage (self->hwnd);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate },
+    {MSG_CLOSE, mymain_onClose },
+    {0, NULL }
+};
+
+static NCS_PROP_ENTRY trackbar_props [] = {
+    {NCSP_TRKBAR_MINPOS, 0},
+    {NCSP_TRKBAR_MAXPOS, 20},
+    {NCSP_TRKBAR_CURPOS, 10},
+    {NCSP_TRKBAR_LINESTEP, 2},
+    {NCSP_TRKBAR_PAGESTEP, 5},
+    {0, 0}
+};
+
+static NCS_RDR_INFO trackbar_rdr_info[] =
+{
+    {"flat", "flat", NULL},
+};
+
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_TRACKBAR,
+        IDC_TRACKBAR,
+        10, 10, 240, 40,
+        WS_BORDER | WS_VISIBLE | NCSS_TRKBAR_NOTICK | NCSS_NOTIFY,
+        WS_EX_TRANSPARENT,
+        "",
+        trackbar_props,
+        trackbar_rdr_info,
+        NULL, NULL, 0, 0,
+        MakeRGBA(255,0,0,255)
+    },
+    {
+        NCSCTRL_SLEDIT,
+        IDC_SLEDIT,
+        10, 60, 240, 30,
+        WS_BORDER | WS_VISIBLE | NCSS_EDIT_CENTER | NCSS_NOTIFY,
+        WS_EX_NONE,
+        "edit",
+        NULL, NULL, NULL, NULL, 0, 0
+    },
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_DIALOGBOX,
+    1,
+    0, 0, 268, 130,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Data Binding",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    MakeRGBA(255,255,255,255)
+};
+
+int MiniGUIMain(int argc, const char* argv[])
+{
+    mDialogBox* mydlg;
+
+    if (argc > 1) {
+        trackbar_rdr_info[0].glb_rdr = argv[1];
+        trackbar_rdr_info[0].ctl_rdr = argv[1];
+    }
+
+    ncsInitialize ();
+
+    mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal (mydlg, TRUE);
+
+    MainWindowThreadCleanup (mydlg->hwnd);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
 ```
 
 Finish the above data binding, and the program only does the setting work as
 shown below when the dialog box is created:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_binding.c.txt" pattern="^.*?// START_OF_BINDING(.*?)// END_OF_BINDING.*"}%
+static BOOL mymain_onCreate (mWidget* self, DWORD add_data)
+{
+    mTrackbar * tb = (mTrackbar*)_c(self)->getChild (self, IDC_TRACKBAR);
+    mSlEdit   * se = (mSlEdit*) _c(self)->getChild (self, IDC_SLEDIT);
+
+    ncsConnectBindProps (NCS_CMPT_PROP (tb, NCSN_TRKBAR_CHANGED,
+            NCSP_TRKBAR_CURPOS, NCS_BT_INT,
+            NCS_PROP_FLAG_READ|NCS_PROP_FLAG_WRITE),
+        NCS_CMPT_PROP (se, NCSN_EDIT_CHANGE,
+            NCSP_WIDGET_TEXT, NCS_BT_STR,
+            NCS_PROP_FLAG_READ|NCS_PROP_FLAG_WRITE),
+        NCS_BPT_DBL);
+
+    ncsAutoReflectObjectBindProps ((mObject*)se);
+    return TRUE;
+}
 ```
 
 The above code segments finish two things:
@@ -701,7 +1184,125 @@ list item control, as shown in the figure below:
 ##### List 6 `data_source.c`
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_source.c.txt"}%
+/*
+** data_source.c: Sample program for mGNCS Programming Guide
+**      Using static data source.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+
+#define IDC_LISTVIEW 100
+
+// START_OF_DEFINEDS
+static const NCS_LISTV_CLMRD _header[] = {
+    {"Name", "", 100, NCSF_LSTCLM_LEFTALIGN},
+    {"Sex", "", 80, NCSF_LSTCLM_LEFTALIGN},
+    {"Age", "", 80, NCSF_LSTCLM_LEFTALIGN}
+};
+
+static const char* _content[][3] = {
+    {"Jime", "Male", "15"},
+    {"Lily", "Female", "12"},
+    {"Tom", "Male", "11"}
+};
+// END_OF_DEFINEDS
+
+// START_OF_SETDATA
+static BOOL mymain_onCreate (mWidget* self, DWORD add_data)
+{
+    mListView *lv = (mListView*)_c(self)->getChild (self, IDC_LISTVIEW);
+
+    if (lv) {
+        mRecordSet *rs;
+        rs = _c(g_pStaticDS)->selectRecordSet (g_pStaticDS,
+                    "/listview/header", NCS_DS_SELECT_READ);
+        _c(lv)->setSpecial (lv, NCSID_LISTV_HDR, (DWORD)rs, NULL);
+        rs = _c(g_pStaticDS)->selectRecordSet (g_pStaticDS,
+                    "/listview/content", NCS_DS_SELECT_READ);
+        _c(lv)->setSpecial (lv, NCS_CONTENT, (DWORD)rs, NULL);
+    }
+
+    return TRUE;
+}
+// END_OF_SETDATA
+
+static void mymain_onClose (mWidget* self, int message)
+{
+    DestroyMainWindow (self->hwnd);
+    PostQuitMessage (self->hwnd);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
+
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_LISTVIEW,
+        IDC_LISTVIEW,
+        10, 10, 320, 190,
+        WS_BORDER | WS_VISIBLE | NCSS_LISTV_SORT
+            | NCSS_LISTV_LOOP,
+        WS_EX_NONE,
+        "",
+        NULL, NULL, NULL, NULL, 0, 0
+    }
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_MAINWND,
+    1,
+    0, 0, 350, 240,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Data Source ....",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0, 0, 0,
+};
+
+int MiniGUIMain (int argc, const  char* argv[])
+{
+    mDialogBox* mydlg;
+
+    ncsInitialize ();
+
+// START_OF_REGDS
+    ncsRegisterStaticData ("/listview/header", (void*)_header, 3,
+            sizeof(NCS_LISTV_CLMRD)/sizeof(DWORD), sizeof(DWORD),
+            gListVColumnRecordTypes);
+    ncsRegisterStaticData ("/listview/content", (void*)_content, 3,
+            3, sizeof(char*), NULL);
+// END_OF_REGDS
+
+    mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal (mydlg, TRUE);
+
+    MainWindowThreadCleanup (mydlg->hwnd);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
 ```
 
 To implement the above data source function, the program completes work in the
@@ -710,7 +1311,17 @@ following three aspects:
 First step, define data source:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_source.c.txt" pattern="^.*?// START_OF_DEFINEDS(.*?)// END_OF_DEFINEDS.*"}%
+static const NCS_LISTV_CLMRD _header[] = {
+    {"Name", "", 100, NCSF_LSTCLM_LEFTALIGN},
+    {"Sex", "", 80, NCSF_LSTCLM_LEFTALIGN},
+    {"Age", "", 80, NCSF_LSTCLM_LEFTALIGN}
+};
+
+static const char* _content[][3] = {
+    {"Jime", "Male", "15"},
+    {"Lily", "Female", "12"},
+    {"Tom", "Male", "11"}
+};
 ```
 
 The above codes define the header information and content data of list control
@@ -718,7 +1329,11 @@ The above codes define the header information and content data of list control
 Second step, Register data source:
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_source.c.txt" pattern="^.*?// START_OF_REGDS(.*?)// END_OF_REGDS.*"}%
+    ncsRegisterStaticData ("/listview/header", (void*)_header, 3,
+            sizeof(NCS_LISTV_CLMRD)/sizeof(DWORD), sizeof(DWORD),
+            gListVColumnRecordTypes);
+    ncsRegisterStaticData ("/listview/content", (void*)_content, 3,
+            3, sizeof(char*), NULL);
 ```
 
 The above codes define the two kinds of data into “listview/header” and
@@ -728,7 +1343,22 @@ use the names given here.
 Third step, use data source
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/data_source.c.txt" pattern="^.*?// START_OF_SETDATA(.*?)// END_OF_SETDATA.*"}%
+static BOOL mymain_onCreate (mWidget* self, DWORD add_data)
+{
+    mListView *lv = (mListView*)_c(self)->getChild (self, IDC_LISTVIEW);
+
+    if (lv) {
+        mRecordSet *rs;
+        rs = _c(g_pStaticDS)->selectRecordSet (g_pStaticDS,
+                    "/listview/header", NCS_DS_SELECT_READ);
+        _c(lv)->setSpecial (lv, NCSID_LISTV_HDR, (DWORD)rs, NULL);
+        rs = _c(g_pStaticDS)->selectRecordSet (g_pStaticDS,
+                    "/listview/content", NCS_DS_SELECT_READ);
+        _c(lv)->setSpecial (lv, NCS_CONTENT, (DWORD)rs, NULL);
+    }
+
+    return TRUE;
+}
 ```
 
 The above codes get corresponding data from the data source and then call

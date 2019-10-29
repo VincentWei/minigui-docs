@@ -465,7 +465,116 @@ It is inherited from the method of [ `mEdit`
 - We define use template of `SIEdit` in this way
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/edit.c.txt" pattern="^.*?//START_OF_SLEDIT_TEMPLATE(.*?)//END_OF_SLEDIT_TEMPLATE.*"}%
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Name :",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {   //左对齐
+        NCSCTRL_SLEDIT,
+        ID_NAME,
+        100, HSTART, 150, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_EDIT_LEFT,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART + HSPACE, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Age :",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_SPINBOX,
+        ID_SPIN,
+        100, HSTART + HSPACE, 70, 25,
+        WS_VISIBLE | NCSS_SPNBOX_NUMBER | NCSS_SPNBOX_AUTOLOOP,
+        WS_EX_NONE,
+        "",
+        spin_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART + 2 * HSPACE, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Country:",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {   //居中对齐， 大写字母
+        NCSCTRL_SLEDIT,
+        ID_COUN,
+        100, HSTART + 2 * HSPACE, 130, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_EDIT_CENTER | NCSS_EDIT_UPPERCASE,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART + 3 * HSPACE, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "City :",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {   //小写字母
+        NCSCTRL_SLEDIT,
+        ID_CITY,
+        100, HSTART + 3 * HSPACE, 150, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_EDIT_LOWERCASE,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART + 4 * HSPACE, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Passwd :",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {   //密码输入形式的edit
+        NCSCTRL_SLEDIT,
+        ID_PSWD,
+        100, HSTART + 4 * HSPACE, 150, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_SLEDIT_PASSWORD,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL, NULL, 0, 0
+    },
 ```
 
 ## `mMlEdit`
@@ -540,7 +649,28 @@ It is inherited from the method of [ `mEdit`
 - We define the use template of `MIEdit` in this way
 
 ```cpp
-%INCLUDE{"%ATTACHURL%/edit.c.txt" pattern="^.*?//START_OF_MLEDIT_TEMPLATE(.*?)//END_OF_MLEDIT_TEMPLATE.*"}%
+    {
+        NCSCTRL_STATIC,
+        0,
+        10, HSTART + 5 * HSPACE, 70, 25,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Info :",
+        static_props,
+        NULL,
+        NULL, NULL, 0, 0
+    },
+    {   //多行编辑框
+        NCSCTRL_MLEDIT,
+        ID_INFO,
+        100, HSTART + 5 * HSPACE, 200, 160,
+        WS_BORDER | WS_VISIBLE | WS_VSCROLL | NCSS_EDIT_BASELINE,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL, NULL, 0, 0
+    },
 ```
 ----
 

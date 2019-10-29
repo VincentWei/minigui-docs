@@ -5,9 +5,9 @@ BEGIN { }
 {
     if (match ($0, /^%INCLUDE\{"%ATTACHURL%\/(\w+)\W/, fields)) {
         source_file = "samples/" fields[1] ".c"
-        if (match ($0, /.+pattern=".+ START_OF_([A-Z]+)\W.+ END_OF_([A-Z]+)\W/, fields)) {
-            start_tag = "START_OF_" fields[1]
-            end_tag   = "END_OF_" fields[2]
+        if (match ($0, /.+pattern=".+START_(\w+)\W.+END_(\w+)\W/, fields)) {
+            start_tag = "START_" fields[1]
+            end_tag   = "END_" fields[2]
 #            print "Include source between " start_tag " and " end_tag " from " source_file " here..."
 
             started = 0
