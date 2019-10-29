@@ -352,7 +352,7 @@ checkbutton:
 - If the image is bigger than the drawing region, the image will be reduced to
 draw; if the image is smaller or equal to the drawing region, the image actual
 size will be adopted to draw
-- Example%BR%
+- Example
 
 ![alt](figures/classic_check_button.bmp)
 
@@ -383,7 +383,7 @@ checkbutton:
 - If the image is bigger than the drawing region, the image will be reduced to
 draw; if the image is smaller or equal to the drawing region, the image actual
 size will be adopted to draw
-- Example%BR%
+- Example
 
 ![alt](figures/fashion_check_btn.bmp)
 
@@ -510,7 +510,7 @@ the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 - Classic renderer of Check Box of Radiobutton fills and draws through loading
 image resource. (the image resource is minigui-res by default, and installed in
-/usr/local/share/minigui/res/bmp/classic_radio_button.bmp by default)
+`/usr/local/share/minigui/res/bmp/classic_radio_button.bmp` by default)
 - Specification of the image: the image is composed of eight parts from left to
 right, and each part is a square (13x13), corresponding to eight statuses of
 checkbutton: 
@@ -519,7 +519,7 @@ checkbutton:
 - If the image is bigger than the drawing region, the image will be reduced to
 draw; when the image is smaller than or equal to the drawing region, the image
 actual size is adopted to draw
-- Example%BR%
+- Example
 
 ![alt](figures/classic_radio_button.bmp)
 
@@ -549,7 +549,7 @@ checkbutton:
 - If the image is bigger than the drawing region, the image will be reduced to
 draw; when the image is smaller than or equal to the drawing region, the image
 actual size is adopted to draw
-- Example%BR%
+- Example
 
 ![alt](figures/fashion_radio_btn.bmp)
 
