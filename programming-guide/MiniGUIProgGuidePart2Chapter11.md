@@ -7,10 +7,7 @@ show progress of an item and is often used in file copying, software
 installation and file transmission. Progress bar control in mGNCS is
 strengthened and reconstructed based on the built-in progress bar control in
 MiniGUI 3.0, and setting of renderer is added, making it easier to use and more
-splendid. 
-
-- [ `mWidget` ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-  * [ `mProgressBar` ](MStudioMGNCSV1dot0PGP2C10#m_ProgressBar)
+splendid.
 
 - Class hierarchical relation of progress bar
 - [ `mWidget` ](MStudioMGNCSV1dot0PGP2C3#mWidget)
@@ -87,7 +84,7 @@ int stepIncrease (mProgressBar *_this);
 - Explanation: the function can increase the progress value by step; calling
 once, a step length value is increased, and even-speed increase effect can be
 realized; setting of step length value is completed through corresponding
-properties 
+properties
 - Example:
 
 ```cpp

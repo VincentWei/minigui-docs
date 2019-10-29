@@ -2,9 +2,9 @@
 
 ## Brief Introduction to Property Sheet Control Class
 
-Property Sheet control class is composed of independent property pages, and 
+Property Sheet control class is composed of independent property pages, and
 each property page has a tongue. We can click the tongue to switch between
-different property pages. The property pages here are the page controls that 
+different property pages. The property pages here are the page controls that
 can accommodate other controls. We usually use the method similar to
 establishing dialog box, which is the method of defining the dialog box
 template, to add property page to the property sheet.
@@ -16,10 +16,10 @@ the space of dialog box, on the other hand, it makes it easier to use the
 interaction interface.
 
 The class inheritance relation of the window and its derived class is as
-follows: 
+follows:
 
 - [mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-- [mPropSheet](MStudioMGNCSV1dot0PGP2C11#m_PropSheet)
+   - [mPropSheet](MStudioMGNCSV1dot0PGP2C11#m_PropSheet)
 
 ## `mPropSheet`
 
@@ -148,7 +148,7 @@ To remove certain property page, it is only necessary to call the `removePage`
 or `removePageByIndex` method of the property sheet control. It needs to be
 noted that after a property page is removed, it may change the index value of
 other property pages. `removePage` removes the appointed page through the class
-pointer of the property page, and `removePageByIndex` removes the appointed 
+pointer of the property page, and `removePageByIndex` removes the appointed
 page through property page index.
 
 Prototype of the function is as below:
@@ -197,10 +197,10 @@ HWND hPanel = _c(page)->getPanel(page);
 
 #### Traverse Property Page
 
-In the property sheet control, traversal find function to all the property 
+In the property sheet control, traversal find function to all the property
 pages can be realized through `getNextPage` and `getPrevPage` method.
 `getNextPage` is used to traverse property pages from the appointed property
-page towards the back; `getPrevPage` is used to traverse the property pages 
+page towards the back; `getPrevPage` is used to traverse the property pages
 from the appointed property page towards the front.
 
 ```cpp
