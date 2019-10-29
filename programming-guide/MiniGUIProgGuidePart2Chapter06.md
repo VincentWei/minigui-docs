@@ -12,11 +12,11 @@ Two button types are added, greatly strengthening button control. Buttons in
 `MiniGNCS` include five types, common button, check box, single selection
 button, menu button and color selection button. Users can select or switch
 status of buttons through keyboard or mouse. Input of users will make buttons
-generate notification message, and applications can send messages to the 
-buttons to change the status of the buttons. Each button type corresponds to 
-one class, which contains style, property, event, method and renderer. 
+generate notification message, and applications can send messages to the
+buttons to change the status of the buttons. Each button type corresponds to
+one class, which contains style, property, event, method and renderer.
 Functions of the controls provided in mGNCS are usually stronger than the
-functions of the controls used on `PC`, providing more configurable 
+functions of the controls used on `PC`, providing more configurable
 information, and renderer editing is added.
 
 In this document, button class and the properties in it will be introduced in
@@ -45,8 +45,8 @@ generated. Manual programming sets control property and event handling.
 
 mGNCS provides four types of renderers and defines renderer property setting
 set. The four types of renderers correspond to four kinds of renderer property
-setting set. For button class control, the four kinds of renderers defines 
-which renderer property can be set in the button control and which effect can 
+setting set. For button class control, the four kinds of renderers defines
+which renderer property can be set in the button control and which effect can
 it be set to. mGNCS provides default renderer property. Of course, users can
 change these properties, thus different effects can be set. That is to say,
 users can change different renderer properties and create numerous renderer
@@ -57,13 +57,13 @@ examples based on the four types of renderers.
 - *Control window class*: `NCSCTRL_BUTTON`
 - *Control English name*: Push Button
 - *Brief introduction*: It is button of press down mode. On the button, the
-simple ones can be represented by literals and can be marked by images, and 
+simple ones can be represented by literals and can be marked by images, and
 they can be displayed by mixture of images and literals.
 
 ![alt](figures/push_button.png)
 
 
-To understand programming of buttons, firstly, it is necessary to understand 
+To understand programming of buttons, firstly, it is necessary to understand
 the status of buttons. In mGNCS, the status of buttons is divided into four
 kinds, refer to appendix definition and note: `ButtonState`
 [ButtonState](MiniGUIProgGuidePart2Chapter06#ButtonState)
@@ -71,9 +71,9 @@ kinds, refer to appendix definition and note: `ButtonState`
 ### Style of `mButton`
 
 Style of buttons includes two categories:
-- Firstly, it is defining button `CHECK` status, which is press down status, 
+- Firstly, it is defining button `CHECK` status, which is press down status,
 and setting is carried out through Checkable/Autocheck/ThreeDCheck in the
-property; 
+property;
 - Secondly, it is setting button panel as displaying text or image or
 coexistence if image and text, which is done mainly through options in Label
 Type in property. Text by default, while layout of images and texts is set
@@ -121,15 +121,15 @@ Note, the control inherits `NCSN_WIDGET_CLICKED` event of the parent class.
 
 ### Renderer of `mButton`
 
-*For the usage of renderer, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2)*. 
+*For the usage of renderer, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2)*.
 
 #### `mButton` Classic renderer
 
 The basic style under classic renderer is as shown in the figure below:
 
-Drawing of `mButton` Classic renderer is as below: for the drawing of non 
+Drawing of `mButton` Classic renderer is as below: for the drawing of non
 client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -142,7 +142,7 @@ client area, please refer to the renderer of
 - High light effect: through enhancing the brightness of the background color
 (`NCS_BGC_3DBODY`), as the high light color
 - check effect: implement through drawing invaginated border
-- Three status Check effect: implement half selection through drawing high 
+- Three status Check effect: implement half selection through drawing high
 light color in the invaginated border
 
 Schematic diagram:<br/>
@@ -152,7 +152,7 @@ Schematic diagram:<br/>
 
 ### `mButton` Skin Renderer
 
-Refer to [Appendix B: Specification for the Image Resources Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mButton). 
+Refer to [Appendix B: Specification for the Image Resources Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 
 #### `mButton` Fashion Renderer
 
@@ -173,7 +173,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 factor from the ground color (`NCS_BGC_3DBODY` or `NCS_BGC_DISABLED_ITEM`), and
 calculates the two objective colors. Gradually change from the center (ground
 color) to the two sides or top and bottom (highlighted color achieved through
-calculation) 
+calculation)
 - High light color: after the ground color is highlighted, the gradual change
 color calculates to obtain on the foundation of this
 - Representing method of check status: after the ground color undergoes
@@ -188,7 +188,7 @@ Schematic diagram: <br />
 
 #### `mButton` Flat Renderer
 
-For the drawing of non client area, please refer to the drawing of Flat 
+For the drawing of non client area, please refer to the drawing of Flat
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
@@ -201,7 +201,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 - High light: draw small prompting symbols to implement around the control
 - check status: draw lines at right-bottom edition, and compose inverted “L”
-realization 
+realization
 - check representing method of three status: in half selection status, draw
 lines at left-top, forming fell flat “L”
 
@@ -217,13 +217,187 @@ Schematic diagram: <br />
 
 ![alt](figures/push_button.png)
 
-- This program uses Fashion renderer to create buttons of four different 
+- This program uses Fashion renderer to create buttons of four different
 styles, which are common button, image button, Autocheck style button and three
 status button.
-- Complete example code of common button: [button.c](%ATTACHURL%/button.c.txt)
-
+- Complete example code of common button:
 
 ##### List 1 button.c
+
+```cpp
+/*
+** button.c: Sample program for mGNCS Programming Guide
+**      The first mGNCS application.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// START_OF_INCS
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+// END_OF_INCS
+
+#define ID_BTN  101
+#define ID_BTN1 102
+#define ID_BTN5 106
+#define ID_BTN6 107
+#define ID_BTN7 108
+#define ID_BTN8 109
+
+// START_OF_HANDLERS
+static BITMAP bmp;
+static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
+{
+    //set image
+//START_SET_IMAGE
+    if(LoadBitmapFromFile(HDC_SCREEN, &bmp, "icon_button.png")!=0)
+    {
+        printf("cannot load image file \"icon_button.png\"\n");
+    }
+
+    mButton *mb1 = (mButton*)ncsGetChildObj(self->hwnd, ID_BTN1);
+
+    if(mb1)
+        _c(mb1)->setProperty(mb1, NCSP_BUTTON_IMAGE, (DWORD)&bmp);
+//END_STE_IMAGE
+    return TRUE;
+}
+
+static void mymain_onClose(mWidget* self, int message)
+{
+    DestroyMainWindow(self->hwnd);
+    PostQuitMessage(0);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
+// END_OF_HANDLERS
+
+// START_OF_RDRINFO
+NCS_RDR_ELEMENT btn_rdr_elements[] =
+{
+    { NCS_MODE_USEFLAT, 1},
+    { -1, 0 }
+};
+static NCS_RDR_INFO btn_rdr_info[] =
+{
+    {"fashion","fashion", btn_rdr_elements}
+};
+// END_OF_RDRINFO
+
+// START_OF_TEMPLATE
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+//START_DCL_DEF_PUSHBUTTON
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN,
+        30, 30, 80, 25,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "button",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+//END_DCL_DEF_PUSHBUTTON
+//START_DCL_IMAGEBUTTON
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN1,
+        150, 30, 80, 25,
+        WS_VISIBLE | NCSS_BUTTON_IMAGE,
+        WS_EX_NONE,
+        "Image",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+//END_DCL_IMAGEBUTTON
+//START_DCL_AUTOCHECKBTN
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN1,
+        30, 80, 80, 25,
+        WS_VISIBLE  | NCSS_BUTTON_AUTOCHECK | NCSS_BUTTON_CHECKABLE,
+        WS_EX_NONE,
+        "Auto button",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+//END_DCL_AUTOCHECKBTN
+//START_DCL_3DAUTOCHECKBTN
+    {
+        NCSCTRL_BUTTON,
+        ID_BTN1,
+        150, 80, 80, 25,
+        WS_VISIBLE | NCSS_BUTTON_AUTOCHECK | NCSS_BUTTON_CHECKABLE \
+            | NCSS_BUTTON_3DCHECK,
+        WS_EX_NONE,
+        "3D button",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+//END_DCL_3DAUTOCHECKBTN
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_MAINWND,
+    1,
+    0, 0, 260, 180,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Push Button",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
+};
+// END_OF_TEMPLATE
+
+int MiniGUIMain(int argc, const char* argv[])
+{
+    ncsInitialize();
+
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal(mydlg, TRUE);
+
+    MainWindowThreadCleanup(mydlg->hwnd);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+```
 
 - Define common button
 ```cpp
@@ -244,7 +418,7 @@ status button.
 ```
 
 - Define Image button, generally it is handled in `onCreate` event of the main
-window 
+window
 ```cpp
     {
         NCSCTRL_BUTTON,
@@ -331,7 +505,7 @@ It is inherited from the event of `mButton`.
 
 #### `mCheckButton` Classic Renderer
 
-- Drawing of renderer in the `mCheckButton` Classic text region is as below: 
+- Drawing of renderer in the `mCheckButton` Classic text region is as below:
 for the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
@@ -345,7 +519,7 @@ for the drawing of non client area, please refer to the renderer of
 `/usr/local/share/minigui/res/bmp/classic_check_button.bmp`）by default
 - Specification of image: the image is composed of eight parts from left to
 right, and each part is a square (13x13), corresponding to eight statuses of
-checkbutton: 
+checkbutton:
 * 0~3: common, highlight, pressed down and banned statuses when not selected
 * 4~7: common, highlight, pressed down and banned statuses when selected
 - If the image is bigger than the drawing region, the image will be reduced to
@@ -359,12 +533,12 @@ size will be adopted to draw
 #### `mCheckButton` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
-Renderer](MStudioMGNCSV1dot0PGENAppB#mButton) 
+Renderer](MStudioMGNCSV1dot0PGENAppB#mButton)
 
 #### `mCheckButton` Fashion Renderer
 - Drawing of `mCheckButton` Fashion text region renderer is as follows: for the
 drawing of non client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
+[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -376,7 +550,7 @@ drawing of non client area, please refer to the renderer of
 `/usr/local/share/minigui/res/bmp/fashion_check_btn.bmp` by default)
 - Specification of the image: the image is composed of eight parts from top to
 bottom, and each part is a square (13x13), corresponding to eight statuses of
-checkbutton: 
+checkbutton:
 * 0~3: common, highlight, pressed down and banned status when not selected
 * 4~7: Common, highlight, pressed down and banned status when selected
 - If the image is bigger than the drawing region, the image will be reduced to
@@ -391,7 +565,7 @@ size will be adopted to draw
 
 - Drawing of text region and check box of `mCheckButton` Flat renderer is as
 below: for the drawing of non area region, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -404,8 +578,145 @@ below: for the drawing of non area region, please refer to the renderer of
 
 ![alt](figures/checkbutton.png)
 
+- Check box example code
 
-- Check box example code: [checkbutton.c](%ATTACHURL%/checkbutton.c.txt)
+##### List 2 checkbutton.c
+
+```cpp
+/*
+** checkbutton.c: Sample program for mGNCS Programming Guide
+**      The first mGNCS application.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// START_OF_INCS
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+// END_OF_INCS
+
+// START_OF_HANDLERS
+static BOOL mymain_onCreate(mWidget* _this, DWORD add_data)
+{
+    return TRUE;
+}
+
+static void mymain_onClose(mWidget* _this, int message)
+{
+    DestroyMainWindow(_this->hwnd);
+    PostQuitMessage(0);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
+// END_OF_HANDLERS
+
+// START_OF_RDRINFO
+NCS_RDR_ELEMENT btn_rdr_elements[] =
+{
+    { NCS_MODE_USEFLAT, 1},
+    { -1, 0 }
+};
+
+static NCS_RDR_INFO btn_rdr_info[] =
+{
+    {"flat","flat", btn_rdr_elements}
+};
+// END_OF_RDRINFO
+
+// START_OF_TEMPLATE
+#define ID_BTN  101
+#define ID_BTN1 102
+#define ID_BTN2 103
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_CHECKBUTTON,
+        ID_BTN,
+        20, 30, 120, 25,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
+        "option1",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+    {
+        NCSCTRL_CHECKBUTTON,
+        ID_BTN1,
+        20, 60, 120, 25,
+        WS_BORDER | WS_VISIBLE | NCSS_BUTTON_AUTOCHECK,
+        WS_EX_NONE,
+        "option2",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    },
+    {
+        NCSCTRL_CHECKBUTTON,
+        ID_BTN2,
+        20, 90, 120, 25,
+        WS_BORDER | WS_VISIBLE |NCSS_BUTTON_AUTOCHECK | NCSS_BUTTON_3DCHECK,
+        WS_EX_NONE,
+        "option3",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    }
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_DIALOGBOX,
+    1,
+    0, 0, 260, 180,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Check button",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
+};
+// END_OF_TEMPLATE
+
+int MiniGUIMain(int argc, const char* argv[])
+{
+    ncsInitialize();
+
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal(mydlg, TRUE);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
+```
+
 ```cpp
 #define ID_BTN  101
 #define ID_BTN1 102
@@ -476,7 +787,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 - *Control window class*: `NCSCTRL_RADIOBUTTON`
 - *Control English name*: `RadioButton`
 - *Brief introduction*: Single selection button, matched with `mButtonGroup`.
-`mButtonGroup` concludes multiple single selection buttons into one group. 
+`mButtonGroup` concludes multiple single selection buttons into one group.
 Among the buttons in the group, only one is in the selected status. After a
 button is selected, the originally selected button will cancel the selection.
 When the single selection button is used independently, its behavior is similar
@@ -487,19 +798,19 @@ to that of a <a ref="#m_Checkbutton">mCheckbutton</a>.
 
 ### Property of `mRadiobutton`
 It is inherited from the property of <a href="#Property of
-`mButton"/>mButton</a>`. 
+`mButton"/>mButton</a>`.
 
 ### Event of `mRadiobutton`
 
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
+It is inherited from the event of `mButton`.
 
 ### Renderers of `mRadiobutton`
 
-- For the usage of renderers, see [look and feel
-renderer](MStudioMGNCSV1dot0PGENP2C2) 
+- For the usage of renderers, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2).
 
 #### `mRadiobutton` Classic Renderer
-- For the drawing of `mRadiobutton` Classic non client area, please refer to 
+
+- For the drawing of `mRadiobutton` Classic non client area, please refer to
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
@@ -512,7 +823,7 @@ image resource. (the image resource is minigui-res by default, and installed in
 `/usr/local/share/minigui/res/bmp/classic_radio_button.bmp` by default)
 - Specification of the image: the image is composed of eight parts from left to
 right, and each part is a square (13x13), corresponding to eight statuses of
-checkbutton: 
+checkbutton:
 * 0~3: common, highlight, pressed down and banned status when not selected
 * 4~7: common, highlight, pressed down and banned status when selected
 - If the image is bigger than the drawing region, the image will be reduced to
@@ -526,10 +837,10 @@ actual size is adopted to draw
 #### `mRadiobutton` Skin Renderer
 
 Refer to [Appendix B : Specification for the Image Resource Used by Skin
-Renderer](MStudioMGNCSV1dot0PGENAppB#mButton). 
+Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 
 #### `mRadiobutton` Fashion Renderer
-- For the drawing of `mRadiobutton` Fashion non client area, please refer to 
+- For the drawing of `mRadiobutton` Fashion non client area, please refer to
 the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
@@ -542,7 +853,7 @@ image resource. (The image resource is minigui-res by default, and installed in
 /usr/local/share/minigui/res/bmp/fashion_radio_btn.bmp by default)
 - Specification of the image: the image is composed of eight parts from top to
 bottom, and each part is a square (13x13), corresponding to eight statuses of
-checkbutton: 
+checkbutton:
 * 0~3: common, highlight, pressed down and banned status when not selected
 * 4~7: common, highlight, pressed down and banned status when selected
 - If the image is bigger than the drawing region, the image will be reduced to
@@ -569,8 +880,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 ![alt](figures/radiobutton.png)
 
 
-- Single selection button example code:
-[radiogroup.c](%ATTACHURL%/radiogroup.c.txt) 
+- Single selection button example code
 
 ```cpp
 static NCS_PROP_ENTRY radioGroup_props [] = {
@@ -657,7 +967,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 ## `mMenuButton`
 - *Control window class*: `NCSCTRL_MENUBUTTON`
 - *Control English name*: `MenuButton`
-- *Brief introduction*: Menu button. Click the button, and the menu will pop 
+- *Brief introduction*: Menu button. Click the button, and the menu will pop
 up. Select the menu item through keyboard or mouse, and the selected menu item
 will display on the button.
 
@@ -670,7 +980,7 @@ will display on the button.
 ### Property of `mMenuButton`
 
 It is inherited from the property of <a href="#Property of
-`mButton"/>mButton</a>`. 
+`mButton"/>mButton</a>`.
 
 | *Property name* | *Type* | *Permission* | *Explanation* |
 |-----------------|--------|--------------|---------------|
@@ -698,8 +1008,7 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 
 ![alt](figures/menubutton2.png)
 
-
-- Menu button example code: [menubutton.c](%ATTACHURL%/menubutton.c.txt)
+- Menu button example code:
 
 ```cpp
 /*
@@ -839,7 +1148,7 @@ int MiniGUIMain(int argc, const char* argv[])
 - *Brief introduction*: Color selection button, which is used to select color.
 When clicking the button, color selection box pops up, and the user selects the
 color. After confirmation, the selected color displays effect on the button
-panel. 
+panel.
 
 ![alt](figures/color_button.png)
 
@@ -869,8 +1178,128 @@ It is inherited from the event of `mButton`.
 
 ![alt](figures/colorbutton.png)
 
+- Color button example code:
 
-- Color button example code: [colorbutton.c](%ATTACHURL%/colorbutton.c.txt)
+```cpp
+/*
+** colorbutton.c: Sample program for mGNCS Programming Guide
+**      The first mGNCS application.
+**
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
+*/
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// START_OF_INCS
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <mgncs/mgncs.h>
+// END_OF_INCS
+
+#define ID_BTN  101
+
+// START_OF_HANDLERS
+static BOOL mymain_oncolorchanged(mMainWnd* self, mColorButton *sender,
+        int id, DWORD param)
+{
+    SetWindowBkColor(self->hwnd, DWORD2PIXEL(HDC_SCREEN, param));
+    InvalidateRect(self->hwnd, NULL, TRUE);
+
+    return FALSE;
+}
+
+static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
+{
+    mColorButton *btn = (mColorButton*)_c(self)->getChild(self, ID_BTN);
+    if(btn)
+    {
+        _c(btn)->setProperty(btn, NCSP_CLRBTN_CURCOLOR, PIXEL2DWORD(HDC_SCREEN,
+            GetWindowBkColor(self->hwnd)));
+        ncsAddEventListener((mObject*)btn, (mObject*)self,
+            (NCS_CB_ONPIECEEVENT)mymain_oncolorchanged,
+            NCSN_CLRBTN_COLORCHANGED);
+    }
+
+    return TRUE;
+}
+
+static void mymain_onClose(mWidget* self, int message)
+{
+    DestroyMainWindow(self->hwnd);
+    PostQuitMessage(0);
+}
+
+static NCS_EVENT_HANDLER mymain_handlers[] = {
+    {MSG_CREATE, mymain_onCreate},
+    {MSG_CLOSE, mymain_onClose},
+    {0, NULL}
+};
+// END_OF_HANDLERS
+
+// START_OF_RDRINFO
+static NCS_RDR_INFO btn_rdr_info[] =
+{
+      {"fashion", "fashion", NULL},
+};
+// END_OF_RDRINFO
+
+// START_OF_TEMPLATE
+static NCS_WND_TEMPLATE _ctrl_templ[] = {
+    {
+        NCSCTRL_COLORBUTTON,
+        ID_BTN,
+        40, 40, 80, 30,
+        WS_VISIBLE|NCSS_NOTIFY,
+        WS_EX_NONE,
+        "button",
+        NULL,         //props,
+        btn_rdr_info, //rdr_info
+        NULL,         //handlers,
+        NULL,         //controls
+        0,
+        0             //add data
+    }
+};
+
+static NCS_MNWND_TEMPLATE mymain_templ = {
+    NCSCTRL_MAINWND,
+    1,
+    0, 0, 180, 140,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
+    "Color button",
+    NULL,
+    NULL,
+    mymain_handlers,
+    _ctrl_templ,
+    sizeof(_ctrl_templ)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
+};
+// END_OF_TEMPLATE
+
+int MiniGUIMain(int argc, const char* argv[])
+{
+    ncsInitialize();
+
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
+                (&mymain_templ, HWND_DESKTOP);
+
+    _c(mydlg)->doModal(mydlg, TRUE);
+
+    MainWindowThreadCleanup(mydlg->hwnd);
+
+    ncsUninitialize ();
+
+    return 0;
+}
+
+```
 
 - Definition processing function
 ```cpp
@@ -975,13 +1404,13 @@ definition of `ButtonCheckState` status below.
 /* Button CHECK status subdivided definition */
 enum mButtonCheckState{
         /* Button CHECK status subdivided definition */
-        NCS_BUTTON_UNCHECKED = 0,  
+        NCS_BUTTON_UNCHECKED = 0,
 
         /* Under three status condition, the status is valid, which can be understood as the middle transition status */
-        NCS_BUTTON_HALFCHECKED,      
+        NCS_BUTTON_HALFCHECKED,
 
         /* Represent pressed down status */
-        NCS_BUTTON_CHECKED               
+        NCS_BUTTON_CHECKED
 };
 ```
 
