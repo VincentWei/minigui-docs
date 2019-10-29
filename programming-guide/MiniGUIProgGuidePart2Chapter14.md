@@ -121,16 +121,6 @@ Stop the animation, and reset the animation back to the first frame.
 
 ### Programming Example of `mAnimate`
 
-Operation screen shot:
-
-![alt](figures/animation.png)
-
-- Images on the top of the window region of this program are gif dynamic 
-images, and on the bottom, it is the slide play of the images in the directory
-of the program. The three buttons start, pause and stop are control of gif 
-play. 
-- Complete source code:
-
 ##### List 1 animation.c
 
 ```cpp
