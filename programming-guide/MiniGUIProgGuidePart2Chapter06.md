@@ -61,7 +61,7 @@ examples based on the four types of renderers.
 simple ones can be represented by literals and can be marked by images, and 
 they can be displayed by mixture of images and literals.
 
-![alt](figures/push_botton.png)
+![alt](figures/push_button.png)
 
 
 To understand programming of buttons, firstly, it is necessary to understand 
