@@ -74,7 +74,7 @@ control the increase effect of non even speed
 - Example:
 
 ```cpp
-_c(pb)->increase (pb, 5);    //进度值增加5 //The progress value increases 5
+_c(pb)->increase (pb, 5);    //The progress value increases 5
 ```
 
 #### `stepIncrease`
