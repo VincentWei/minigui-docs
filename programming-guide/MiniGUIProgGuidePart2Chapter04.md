@@ -18,9 +18,9 @@ behavior of class
 
 ### Operation Function of `mObject`
 
-In NCS, many operations about class have `mObject` pointer as the parameter, 
+In mGNCS, many operations about class have `mObject` pointer as the parameter, 
 and these are
-- Type judgment operation: `ncsInstanceOf`, equivalent to instanceof of 
+- Type judgment operation: `ncsInstanceOf`, equivalent to instance of 
 operator of java, case of judging if a pointer is the appointed class
 
 ```cpp
@@ -55,8 +55,9 @@ Example
 
 ```
 
-In addition, to judge if a pointer is `mObject` object, *ncsIsValidObj* can be
-used 
+In addition, to judge if a pointer is `mObject` object, `ncsIsValidObj` can be
+used:
+
 ```cpp
 /**
  * \fn static inline mObject*  ncsIsValidObj(mObject* obj);
@@ -73,6 +74,7 @@ static inline mObject*  ncsIsValidObj(mObject* obj){
 ```
 
 Corresponding macro is
+
 ```cpp
 /**
  * \def CHECKOBJ
@@ -81,12 +83,12 @@ Corresponding macro is
  * \sa ncsIsValidObj
  */
 #define CHECKOBJ(obj)  ncsIsValidObj((mObject*)obj)
-
 ```
 
 
 - Type conversion operation: `ncsSafeCast`, safe type conversion, similar to
 `dynamic_cast` operator of C++
+
 ```cpp
 /**
  * \fn mObject* ncsSafeCast(mObject* obj, mObjectClass *clss);
@@ -104,6 +106,7 @@ mObject* ncsSafeCast(mObject* obj, mObjectClass *clss);
 ```
 
 Corresponding macro is
+
 ```cpp
 /**
  * \def SAFE_CAST
@@ -115,10 +118,10 @@ Corresponding macro is
  */
 #define SAFE_CAST(Type, obj)  \
     TYPE_CAST(Type, ncsSafeCast((mObject*)obj,(mObjectClass*)(void*)(&(Class(Type)))))
-
 ```
 
 Example
+
 ```cpp
 
    // Convert an obj to mWidget pointer
@@ -127,10 +130,10 @@ Example
    // If obj is a mWidget type or mWidget child class type, conversion is successful, otherwise widget == NULL
    if(widget)
      ....
-
 ```
 
 - Other functions: `newObject`, `deleteOBject`, `TYPENAME` macro.
+
 ```cpp
 /**
 * \fn mObject * newObject(mObjectClass *_class);
@@ -156,7 +159,6 @@ void deleteObject(mObject *obj);
  * \brief Get the class name form a Object pointer
  */
 #define TYPENAME(obj)  ((obj)?(((obj)->_class)?((obj)->_class)->typeName:""):"")
-
 ```
 
 To create an object, `newObject` will be used, because it will call constructor
@@ -170,7 +172,7 @@ destructor function of the object
 ### Introduction of `mComponent`
 
 `mComponent` provides the most fundamental realization of component. Component
-is the most fundamental element of mGNCS program
+is the most fundamental element of mGNCS program.
 
 *The class is foundation class and cannot be used directly*
 
@@ -181,42 +183,48 @@ is the most fundamental element of mGNCS program
 
 ### Method of `mComponent`
 
-- `setProperty` <br/>
+- `setProperty`
+
 ```cpp
 BOOL (*setProperty)(clss *_this, int id, DWORD value);
 ```
 - Set property of the component
 - Return: `TRUE` – setting successful; `FALSE` –setting failed
 - Params
-* int id - `ID` of property
-* `DWORD` value – property value
+   * int id - `ID` of property
+   * `DWORD` value – property value
 
-- `getProperty` <br/>
+- `getProperty`
 ```cpp
 DWORD (*getProperty)(clss *_this, int id);
 ```
 - Get property of the component
 - Return: property value or `DWORD(-1`)
 - Params
-* int id – property `ID`
+   * int id – property `ID`
 
-- `setId` <br/>
+- `setId`
+
 ```cpp
 int (*setId)(clss *_this, int id);
 ```
+
 - Set Id of the component
 - Return: return old Id
 - Params
 * int id - new id
 
-- `getId` <br/>
+- `getId`
+
 ```cpp
 int (*getId)(clss *_this);
 ```
+
 - Get component Id
 - Return: component Id
 
 - `getReleated`
+
 ```cpp
 mComponent* (*getReleated)(clss*_this, int releated);
 ```
@@ -228,6 +236,7 @@ component and brother component
 `NCS_COMP_PARENT` and `NCS_COMP_CHILDREN`
 
 - `setReleated`:
+
 ```cpp
 mComponent* (*setReleated)(clss *_this, mComponent* comp,  int releated); 
 ```
@@ -235,17 +244,18 @@ mComponent* (*setReleated)(clss *_this, mComponent* comp,  int releated);
 - Return: associated component pointer after setting, if the setting is not
 successful, `NULL` is returned
 - Params
-* `mComponent` *comp – set component pointer
-* int releated – same as `getReletaed`
+   * `mComponent*` comp – set component pointer
+   * int related – same as `getReletaed`
 
-- `getChild` <br/>
+- `getChild`
+
 ```cpp
 mComponent* (*getChild)(clss* _this, int id);
 ```
 - Get child component appointed by id
 - Return : `NULL` or corresponding component pointer
 - Params:
-* int id – id of the component to get
+  * int id – id of the component to get
 
 ### Operation Function of `mComponent`
 
@@ -316,10 +326,10 @@ void ncsSetComponentHandlers(mComponent* comp, \
  * \return void * the handler of message, or NULL if not set
  */
 void* ncsGetComponentHandler(mComponent* comp, int message);
-
 ```
 
 - Register related functions
+
 ```cpp
 /**
  * \fn BOOL ncsRegisterComponent(mComponentClass *compCls, \
@@ -382,7 +392,8 @@ mComponentClass * ncsGetComponentClass(const char* class_name, BOOL check);
 
 ### Style of `mWidget`
 
-| *Style ID* | *Property Name of miniStudio* | *Explanation* ||
+| *Style ID* | *Property Name of miniStudio* | *Explanation* |
+|------------|-------------------------------|---------------|
 | `NCSS_NOTIFY` | Notify | Decide if the control generates Notification event |
 
 ### Property of `mWidget`
