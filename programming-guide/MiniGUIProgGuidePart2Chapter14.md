@@ -31,7 +31,7 @@ need to load in the property column, and miniStudio will automatically create
 control and provides visual control configuration, at the same time, creation
 codes are generated automatically.
 - Manual generation: according to mGNCS control creating process, through
-programming, corresponding control window class `ID` is imported, and control 
+programming, corresponding control window class ID is imported, and control 
 is generated. Manual programming sets control property and event handling.
 
 ## mAnimate

@@ -88,7 +88,7 @@ It is inherited from [the style of `mWidget`
 It is inherited from [the property of `mWidget`
 ](MStudioMGNCSV1dot0PGP2C3#mWidget) 
 
-| * Property `ID` *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
+| * Property ID *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | `NCSP_PRPSHT_MINTABWIDTH` | `TabMinWidth` | int | `RW` | Minimum width of the tongue |
 | `NCSP_PRPSHT_TABMARGIN` | `TabMargin` | int | `RW` | Tongue boundary value. Under normal condition, the value plus the literal width is the tongue width |
 | `NCSP_PRPSHT_ACTIVEPAGE` | - | `mPage*` | `RW` | Pointer of the current active page |

@@ -38,7 +38,7 @@ button control is dragged. miniStudio will automatically create control and
 provide visual control configuration, and at the same time, creation codes are
 generated automatically.
 - Manual generation: according to mGNCS control creation process, through
-programming, corresponding control window class `ID` is imported and control is
+programming, corresponding control window class ID is imported and control is
 generated. Manual programming sets control property and event handling.
 
 
@@ -106,7 +106,7 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 | `NCSP_BUTTON_IMAGE` | Image | `PBITMAP` | `RW` | Image, corresponding to button property pbmp, which is image pointer, it must be valid when `NCSS_BUTTON_IMAGE` or `NCSS_BUTTON_IMAGELABEL` or `NCSS_BUTTON_VERTIMAGELABEL` is set |
 | `NCSP_BUTTON_CHECKSTATE`| None | [mButtonCheckState](MStudioMGNCSV1dot0PGP2C5#ButtonCheckState)| `RW` | Set or get check status, valid when `NCSS_BUTTON_CHECKABLE` is set, `NCS_BUTTON_HALFCHECKED` is regarded as valid value when `NCSS_BUTTON_3DCHECK` is set |
 | `NCSP_BUTTON_IMAGE_SIZE_PERCENT`| `ImageSizePercent` | int | `RW` | Under the style of coexistence of image and text, set proportion of image on the control (take value 15~85, representing 15% to 85%), and the remaining is occupied by the text |
-| `NCSP_BUTTON_GROUPID`| `GroupID` | int | `RW` | When there is `NCSS_BUTTON_CHECKABLE` style, `ID` of a `mButtonGroup` can be set to the window, it will automatically get a corresponding `mButtonGroup` object and set |
+| `NCSP_BUTTON_GROUPID`| `GroupID` | int | `RW` | When there is `NCSS_BUTTON_CHECKABLE` style, ID of a `mButtonGroup` can be set to the window, it will automatically get a corresponding `mButtonGroup` object and set |
 | `NCSP_BUTTON_GROUP`| None | `mButtonGroup*` |RW| When there is `NCSS_BUTTON_CHECKABLE` style, set a `mButtonGroup` object pointer, and all the buttons adding to the group has the automatic switching ability of Radio style |
 
 ### Event of `mButton`

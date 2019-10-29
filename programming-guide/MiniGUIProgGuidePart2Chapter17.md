@@ -436,7 +436,7 @@ void * ncsCreateSeparatorItem(void);
 
 - 获取或者设置ToolItem的ID
 
-- Get or set `ID` of `ToolItem`
+- Get or set ID of `ToolItem`
 ```cpp
 int ncsToolItem_getId(void *self)
 

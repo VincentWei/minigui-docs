@@ -1330,7 +1330,7 @@ function.
 
 | *Property Name* | *Type* | *Permission* | *Comments* |
 |-----------------|--------|--------------|------------|
-| `NCSP_BTNGRP_SELID` | int | `RW` | Currently selected `radioButton` `ID` number |
+| `NCSP_BTNGRP_SELID` | int | `RW` | Currently selected `radioButton` ID number |
 | `NCSP_BTNGRP_SELIDX` | idx | `RW` | Currently selected `radioButton` index number |
 | `NCSP_BTNGRP_SELOBJ` | `mWidget*` | `RW` | Currently selected `radioButton` pointer |
 

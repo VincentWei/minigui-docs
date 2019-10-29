@@ -191,7 +191,7 @@ BOOL (*setProperty)(clss *_this, int id, DWORD value);
 - Set property of the component
 - Return: `TRUE` – setting successful; `FALSE` –setting failed
 - Params
-   * int id - `ID` of property
+   * int id - ID of property
    * `DWORD` value – property value
 
 - `getProperty`
@@ -201,7 +201,7 @@ DWORD (*getProperty)(clss *_this, int id);
 - Get property of the component
 - Return: property value or `DWORD(-1`)
 - Params
-   * int id – property `ID`
+   * int id – property ID
 
 - `setId`
 

@@ -77,9 +77,9 @@ package containing all kinds of resources.
 Resources management of mGNCS mainly implements all kinds of management and
 accessing to resources surrounding the resource package. If you want to access
 certain resource correctly, you only need to know the resource package where it
-is and corresponding resource `ID`. The overall accessing process is normally:
+is and corresponding resource ID. The overall accessing process is normally:
 1. Load the specified resource package.
-1. Get resource through resource `ID`.
+1. Get resource through resource ID.
 1. Use resource, for certain resources, it is necessary to release the resource
 after use.
 1. Unload resource package
@@ -606,11 +606,11 @@ When the resource package is used, the creating main window interface provided
 by mGNCS is more simple compared to creating main window of MiniGUI. 
 Description of the look and feel information of the main window is stored in 
 the resource package, and the interface can start the interface through window
-resource `ID`.
+resource ID.
 - owner parameter refers to the hosting window;
 - For `hIcon` and `hMenu`, 0 by default;
 - handlers and connects are the event listening and connection associated with
-the window resource `ID` defined by the user;
+the window resource ID defined by the user;
 - `user_data` is additional data, 0 by default.
 
 ```cpp
@@ -621,8 +621,8 @@ mMainWnd* ncsCreateMainWindowIndirectFromID (HPACKAGE package,
                     DWORD user_data);
 ```
 
-The method of creating dialog box through window resource `ID` is similar to 
-the main window. Creating interface through resource `ID`, the parameter 
+The method of creating dialog box through window resource ID is similar to 
+the main window. Creating interface through resource ID, the parameter 
 meaning is also similar to the interface of the main window created above:
 
 ```cpp
@@ -647,7 +647,7 @@ Create example codes of UI main window through the resource package:
 #### Get Character String
 
 The method of getting string through resource package is very simple. It is 
-only necessary to transfer the resource `ID` to interface `ncsGetString`, and
+only necessary to transfer the resource ID to interface `ncsGetString`, and
 the management module will return the default locale string to the application
 according to the current locale information.
 
@@ -661,14 +661,14 @@ Get example codes of string through resource package:
     SetDefaultWindowElementRenderer(ncsGetString(hPackage, NCSRM_SYSSTR_DEFRDR));
 ```
 
-- Note: mGNCS reserves the `ID` value from `NCSRM_SYSSTR_BASEID` to
-`NCSRM_SYSSTR_MAXID` as the system `ID`, and public definitions can be 
+- Note: mGNCS reserves the ID value from `NCSRM_SYSSTR_BASEID` to
+`NCSRM_SYSSTR_MAXID` as the system ID, and public definitions can be 
 returned, such as default renderer: `NCSRM_SYSSTR_DEFRDR`
 
 #### Get Bitmap
 
 Resources management module provides the function of getting corresponding file
-name through bitmap `ID`, making it convenient for the upper layer applications
+name through bitmap ID, making it convenient for the upper layer applications
 to directly use the bitmap provided by MiniGUI to load related interface
 operation bitmap after getting the file name:
 
@@ -677,7 +677,7 @@ const char* ncsGetImageFileName (HPACKAGE package, Uint32 resId);
 ```
 
 Besides using MiniGUI related interface to access the bitmap, mGNCS also
-provides the interface to get bitmap object directly through resource `ID`.
+provides the interface to get bitmap object directly through resource ID.
 After the upper layer applications use the bitmap resource provided by the
 interface, it is necessary to release the bitmap object through corresponding
 release interface. This is valid for setting independent bitmap and setting
@@ -696,7 +696,7 @@ void ncsReleaseMyBitmap (PMYBITMAP myBmp);
 
 #### Set Renderer
 
-Through renderer `ID` contained in the resource pack, specified window can be
+Through renderer ID contained in the resource pack, specified window can be
 set, making it has the window element look and feel property under the renderer
 configuration. But only the renderer used in the current window by the 
 interface has the same name as the newly set renderer, and it can be valid only

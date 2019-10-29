@@ -287,7 +287,7 @@ is simple enough to produce no real animation, this parameter is passed
 property changes. This function will be called in each frame of the
 animation, and will be introduced later;
 - The third parameter is the attribute
-`ID`, this value will be passed as a parameter to the property change
+ID, this value will be passed as a parameter to the property change
 callback function, used to distinguish the property to modify when multiple
 animations share the same property change callback function;
 - The fourth parameter is the type of the property value. This parameter
@@ -317,12 +317,12 @@ some information related to the animation in the function;
 - target - the target to be animated, it is calling `mGEffAnimationCreate`
 Specified when the animation is created, it can be a window, control
 handle, or something else;
-- id - The `ID` value of the property, also called `mGEFFAnimationCreate`
+- id - The ID value of the property, also called `mGEFFAnimationCreate`
 When specified, sometimes users want to share the same property change
 callback in multiple animations to control the change of multiple properties
 of the object. At this time, you can set different for each property.
-The `ID` value allows the user to determine the current changed property in the
-callback function. The current preset attribute `ID` is defined as follows:
+The ID value allows the user to determine the current changed property in the
+callback function. The current preset attribute ID is defined as follows:
 ```cpp
    Enum EffPropertyID {
     ID_NULL = 0,

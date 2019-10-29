@@ -173,7 +173,7 @@ separator bar, and a button with hotspot to a toolbar control:
 
 Using `NTBM_GETITEM` or `NTBM_SETITEM` message can get or set the information 
 of an item through its identifier. Use of the two messages is similar to
-`NTBM_ADDITEM`, and the difference is `wParam` as the `ID` of item and `lParam`
+`NTBM_ADDITEM`, and the difference is `wParam` as the ID of item and `lParam`
 as point to a `NTBITEMINFO` structure that which member in specifies the item
 information to be gotten or set. The member which can be the `OR’d` of the
 following values:

@@ -30,7 +30,7 @@ BOOL GUIAPI SetTimerEx (HWND hWnd, int id, unsigned int speed,
 The meaning of each parameter in `TIMERPROC` is as follows：
 - The window handle passed when creating the timer. If no use, it can be any
 32-bit value.
-- The timer `ID`.
+- The timer ID.
 - The system tick value that the timer is triggered.
 
 When `TIMERPROC` return `FALSE`, MiniGUI will delete the timer automatically. 
@@ -677,10 +677,10 @@ error:
 The MiniGUI-Processes server program to load sharing resource uses the above
 code fragment. If system supports shared memory, it will initialize the shared
 memory object and associate the shared resource with the shared memory object,
-then write the shared memory object `ID` into a file; if system does not 
+then write the shared memory object ID into a file; if system does not 
 support 
 shared memory, it will write all initialized sharing resource into a file. If
-the system support shared memory, clients can get shared memory object `ID` 
+the system support shared memory, clients can get shared memory object ID 
 from 
 the file and directly attach it; if the system does not support shared memory,
 clients can use mmap system call to map the file to the address space of them.

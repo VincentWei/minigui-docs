@@ -20,7 +20,7 @@ designer in miniStudio, and miniStudio will automatically create control and
 provide visual control configuration, and at the same time, creation codes are
 generated automatically.
 - Manual generation: according to mGNCS control creation process, through
-programming, corresponding control window class `ID` is imported and control is
+programming, corresponding control window class ID is imported and control is
 generated. Manual programming sets control property and event handling.
 
 ## mSlider

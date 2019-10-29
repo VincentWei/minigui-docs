@@ -276,7 +276,7 @@ message. `wParam` is notification id, `IParam` is current position of thumb,
 `curPos`, when id is `SB_THUMBPOSITION` or `SB_THUMBTRACK`. In other cases,
 `IParam` doesn't have meaning.
 - When scrollbar doesn't specify `SBS_NOTNOTIFYPARENT` style, parent window of
-scrollbar will receive notification code. `wParam` includes control `ID` and
+scrollbar will receive notification code. `wParam` includes control ID and
 notification code. When notification code is `SB_THUMBPOSITION` or
 `SB_THUMBTRACK`, parent window can get current position of thumb, `curPos`, by
 sending `SBM_GETPOS`. Of course, the control doesn't send `MSG_COMMAND` to

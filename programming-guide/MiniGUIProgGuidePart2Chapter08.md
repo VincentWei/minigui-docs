@@ -516,7 +516,7 @@ HWND setFocus(mContainer *self, int id);
 HWND getFocus(mContainer *self);
 ```
 
-- `setFocus` sets focus control through control `ID`.
+- `setFocus` sets focus control through control ID.
 - `getFocus` gets the sentence handle of the current focus control.
 
 #### Other Methods

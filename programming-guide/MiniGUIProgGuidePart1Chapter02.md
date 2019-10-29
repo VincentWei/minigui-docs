@@ -79,7 +79,7 @@ owns their child windows.
 
 An application window usually includes the following parts:
 - A visible border.
-- A window `ID`, which is used by programs to operate the window and is
+- A window ID, which is used by programs to operate the window and is
 referred as “window handle” in MiniGUI.
 - Some other characteristics, such as, height, width and background color
 etc.

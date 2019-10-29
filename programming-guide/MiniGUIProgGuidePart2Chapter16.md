@@ -211,7 +211,7 @@ It is inherited from <a href="#Style of `mInvsbComp">the` style of
 It is inherited from <a href="# Property of `mInvsbComp"`> the property of
 `mInvsbComp<a/`> 
 
-| * Property `ID` *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
+| * Property ID *| *miniStudio name*| *Type* | *Authority* |* Explanation *|
 | `NCSP_TIMER_INTERVAL` | interval | `DWORD` | `RW` | Set time interval of Timer, with 10ms as the unit. If Timer is operating, it will restart Timer |
 
 ### `mTimer方法`

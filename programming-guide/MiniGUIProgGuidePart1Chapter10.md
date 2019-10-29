@@ -141,12 +141,12 @@ MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd,
         const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs);
 ```
 
-`we_attr_id` in above all functions is attribute `ID` of window element. This 
-`ID` 
+`we_attr_id` in above all functions is attribute ID of window element. This 
+ID 
 must be one of code names in Table 1 and 2.
 
-`GetWindowElementAttr` is to get certain element's attribute `ID` of specified
-window. hwnd is window handle and `we_attr_id` is attribute `ID` of window
+`GetWindowElementAttr` is to get certain element's attribute ID of specified
+window. hwnd is window handle and `we_attr_id` is attribute ID of window
 element. 
 
 The following codes are for getting color of 3D body's border and face.
@@ -157,8 +157,8 @@ DWORD main_c;
 main_c = GetWindowElementAttr (hwnd, WE_MAINC_THREED_BODY);
 ```
 
-`SetWindowElementAttr` is to set certain element's attribute `ID` of specified
-window. hwnd is window handle, `we_attr_id` is attribute `ID` of window element
+`SetWindowElementAttr` is to set certain element's attribute ID of specified
+window. hwnd is window handle, `we_attr_id` is attribute ID of window element
 and 
 `we_attr` is attribute value.
 
@@ -184,7 +184,7 @@ height of menu is greater than window's.
 
 `GetWindowElementPixelEx` is to get color value of window element. hwnd is
 window 
-handle, hdc is `DC` handle and `we_attr_id` is attribute `ID` of window 
+handle, hdc is `DC` handle and `we_attr_id` is attribute ID of window 
 element. 
 
 The following codes can get gradient start color of window caption background.
@@ -199,7 +199,7 @@ active_color = GetWindowElementPixelEx(hWnd, hdc, WE_BGCA_ACTIVE_CAPTION);
 attributes of window. `hWnd` is window handle, `werdr_name` is renderer's name
 which will be set, `we_attrs` is structure array of modified attribute of
 window. 
-The `ID` of last element in array is -1, it means, this is the end.
+The ID of last element in array is -1, it means, this is the end.
 
 `WINDOW_ELEMENT_ATTR` structure is as follow:
 

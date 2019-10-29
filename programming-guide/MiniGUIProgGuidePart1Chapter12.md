@@ -27,7 +27,7 @@ controls.
 - Add new controls in the space already available in the dialog box.
 
 Note: Some properties/styles mustn't be changed in default controls, such as
-`ID`, control class name, etc.
+ID, control class name, etc.
 
 mGUtils provide the following common windows (these windows is reserved old
 implementation,):

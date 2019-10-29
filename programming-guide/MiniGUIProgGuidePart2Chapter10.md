@@ -30,7 +30,7 @@ left and right) that can control values changing in a range
 
 It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-| *Style `ID`*  | *miniStudio name* |  *Explanation* |
+| *Style ID*  | *miniStudio name* |  *Explanation* |
 |---------------|-------------------|----------------|
 | `NCSS_SPNR_VERTICAL` | `Direction->Vert` | Vertical style, up and down arrows. When clicking up and down arrows, it will send keyboard information of the up and down direction keys to the objective window |
 | `NCSS_SPNR_HORIZONTAL` | `Direction->Horz` | Horizontal style, left and right arrows. When clicking the left and right arrows, it will send keyboard information of the left and right direction keys to the objective window |
@@ -40,7 +40,7 @@ It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 It is inherited from the property of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
-| *Property `ID`* | *miniStudio name* | *Type* | *Authority* | *Explanation* |
+| *Property ID* | *miniStudio name* | *Type* | *Authority* | *Explanation* |
 |-----------------|-------------------|--------|-------------|---------------|
 | `NCSP_SPNR_MAXPOS` | `MaxPos` | int | `RW` | Maximum value of the change range |
 | `NCSP_SPNR_MINPOS` | `MinPos` | int | `RW` | Minimum value of the change range |
@@ -367,7 +367,7 @@ control the content in the edit box through arrow button
 
 It is inherited from the style of `mSpinner`.
 
-| * Style `ID` *| *miniStudio name* | * Explanation *|
+| *Style ID*  | *miniStudio name* |  *Explanation* |
 |---------------|-------------------|----------------|
 | `NCSS_SPNBOX_NUMBER` | `ContentType->Number` |Display numerical value, display format can be appointed through corresponding properties |
 | `NCSS_SPNBOX_STRING` | `ContentType->String`| Display character string |
