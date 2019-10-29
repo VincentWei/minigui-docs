@@ -343,7 +343,7 @@ for the drawing of non client area, please refer to the renderer of
 
 - Classic renderer of Check box fills and draws through loading image resource.
 (image resource is minigui-res by default, and installed in
-/usr/local/share/minigui/res/bmp/classic_check_button.bmp）by default
+`/usr/local/share/minigui/res/bmp/classic_check_button.bmp`）by default
 - Specification of image: the image is composed of eight parts from left to
 right, and each part is a square (13x13), corresponding to eight statuses of
 checkbutton: 
@@ -354,7 +354,7 @@ draw; if the image is smaller or equal to the drawing region, the image actual
 size will be adopted to draw
 - Example
 
-![alt](figures/classic_check_button.bmp)
+![alt](figures/classic_check_button.png)
 
 
 #### `mCheckButton` Skin Renderer
@@ -385,7 +385,7 @@ draw; if the image is smaller or equal to the drawing region, the image actual
 size will be adopted to draw
 - Example
 
-![alt](figures/fashion_check_btn.bmp)
+![alt](figures/fashion_check_btn.png)
 
 
 #### `mCheckButton` Flat Renderer
@@ -521,7 +521,7 @@ draw; when the image is smaller than or equal to the drawing region, the image
 actual size is adopted to draw
 - Example
 
-![alt](figures/classic_radio_button.bmp)
+![alt](figures/classic_radio_button.png)
 
 
 #### `mRadiobutton` Skin Renderer
@@ -551,7 +551,7 @@ draw; when the image is smaller than or equal to the drawing region, the image
 actual size is adopted to draw
 - Example
 
-![alt](figures/fashion_radio_btn.bmp)
+![alt](figures/fashion_radio_btn.png)
 
 
 #### `mRadiobutton` Flat Renderer
