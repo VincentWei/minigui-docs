@@ -74,7 +74,8 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
    - [Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21.md)
 - Appendix Specifications for MiniGUI Developers
    - [Code Style and Project Specification](MiniGUIProgGuideAppendixA.md)
-   - [Specification for the Picture Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md)
+   - [Specification for the Image Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md)
+   - [Public Structures and Definitions of mGNCS](MiniGUIProgGuideAppendixC.md)
    - [Specification for the mGNCS-compliant Widget Components](MiniGUIProgGuideAppendixD.md)
 
 ## Copying
