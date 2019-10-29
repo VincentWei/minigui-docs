@@ -6,7 +6,7 @@
 ** resmgr.c: Sample program for mGNCS Programming Guide
 **      Create main window by resource managerment.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

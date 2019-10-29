@@ -6,7 +6,7 @@
 ** radiogroup.c: Sample program for mGNCS Programming Guide
 **      The first mGNCS application.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

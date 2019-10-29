@@ -6,7 +6,7 @@
 ** wnd_template.c: Sample program for mGNCS Programming Guide
 **      Using window template.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

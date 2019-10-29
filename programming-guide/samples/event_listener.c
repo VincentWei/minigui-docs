@@ -6,7 +6,7 @@
 ** event_listener.c: Sample program for mGNCS Programming Guide
 **      Using event listener.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

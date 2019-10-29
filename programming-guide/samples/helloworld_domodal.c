@@ -6,7 +6,7 @@
 ** helloworld_domodal.c: Sample program for mGNCS Programming Guide.
 **      The mGNCS helloworld using modal main window.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

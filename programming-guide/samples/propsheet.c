@@ -6,7 +6,7 @@
 ** propsheet.c: Sample program for mGNCS Programming Guide
 **      The demo application for PropSheet.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,7 +81,7 @@ static void get_systeminfo (mPage* page)
     case PAGE_MINIGUI:
 	    size = snprintf (buff, BUF_LEN,
                     "MiniGUI version %d.%d.%d.\n"
-                    "Copyright (C) 1998-2009 Feynman Software.\n\n"
+                    "Copyright (C) 1998-2009 FMSoft Technologies.\n\n"
                     "MiniGUI is a mature, rich-featured, embedded "
                     "GUI support system.\n\n"
                     "For more information, please visit\n\n"

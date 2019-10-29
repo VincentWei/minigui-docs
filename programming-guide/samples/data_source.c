@@ -6,7 +6,7 @@
 ** data_source.c: Sample program for mGNCS Programming Guide
 **      Using static data source.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>

@@ -6,7 +6,7 @@
 ** data_binding.c: Sample program for mGNCS Programming Guide
 **      Using data binding.
 **
-** Copyright (C) 2009 Feynman Software.
+** Copyright (C) 2009 FMSoft Technologies.
 */
 
 #include <stdio.h>
