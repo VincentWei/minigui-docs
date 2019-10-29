@@ -116,8 +116,6 @@ develop new controls and renderers etc. for mGNCS.
 - Appendix: Compiling Norm for This Document and Content of Other Rapid
 References etc.
 
-[Next](MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP1C2)
-
 ----
 
 [&lt;&lt; Using mGUtils](MiniGUIProgGuidePart1Chapter12.md) |

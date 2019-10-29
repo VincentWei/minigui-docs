@@ -272,10 +272,6 @@ Specification for the Image Resource Used by Skin Renderer
 ```cpp
 %INCLUDE{"%ATTACHURL%/combobox"}%
 ```
-
-
-[Next](MStudioMGNCSV1dot0PGENP2C5][Previous]] < [[MStudioMGNCSV1dot0PGEN][Index]] > [[MStudioMGNCSV1dot0PGENP2C7)
-
 ----
 
 [&lt;&lt; Button and Derived Classes](MiniGUIProgGuidePart2Chapter06.md) |
