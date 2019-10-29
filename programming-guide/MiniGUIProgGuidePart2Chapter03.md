@@ -25,21 +25,21 @@ different interfaces. It falls into the category of control renderer.
 
 | *Property* | *Type* | *Explanation* |
 |------------|--------|---------------|
-| `RDR_3DBODY_FGCLR` | `DWORD(MakeRGBA`) | 3D object foreground color |
-| `RDR_3DBODY_BGCLR` | `DWORD(MakeRGBA`) | 3D object background color |
-| `RDR_CLIENT_FGCLR` | `DWORD(MakeRGBA` | Window client area foreground color |
-| `RDR_CLIENT_BGCLR` | `DWORD(MakeRGBA` | Window client area background color |
-| `RDR_SELECTED_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of the selected object |
-| `RDR_SELECTED_BGCLR` | `DWORD(MakeRGBA`) | Background color of the selected object |
-| `RDR_SELECTED_LOSTFOCUS_CLR` | `DWORD(MakeRGBA`) | Color of the object losing focus |
-| `RDR_DISABLE_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of disabled object |
-| `RDR_DISABLE_BGCLR` | `DWORD(MakeRGBA`) | Background color of disabled object |
-| `RDR_HIGHLIGHT_FGCLR` | `DWORD(MakeRGBA`) | Foreground color of the hilight object |
-| `RDR_HIGHLIGHT_BGCLR` | `DWORD(MakeRGBA`) | Background color of the hilight object |
+| `RDR_3DBODY_FGCLR` | `DWORD` (`MakeRGBA`) | 3D object foreground color |
+| `RDR_3DBODY_BGCLR` | `DWORD` (`MakeRGBA`) | 3D object background color |
+| `RDR_CLIENT_FGCLR` | `DWORD` (`MakeRGBA` | Window client area foreground color |
+| `RDR_CLIENT_BGCLR` | `DWORD` (`MakeRGBA` | Window client area background color |
+| `RDR_SELECTED_FGCLR` | `DWORD` (`MakeRGBA`) | Foreground color of the selected object |
+| `RDR_SELECTED_BGCLR` | `DWORD` (`MakeRGBA`) | Background color of the selected object |
+| `RDR_SELECTED_LOSTFOCUS_CLR` | `DWORD` (`MakeRGBA`) | Color of the object losing focus |
+| `RDR_DISABLE_FGCLR` | `DWORD` (`MakeRGBA`) | Foreground color of disabled object |
+| `RDR_DISABLE_BGCLR` | `DWORD` (`MakeRGBA`) | Background color of disabled object |
+| `RDR_HIGHLIGHT_FGCLR` | `DWORD` (`MakeRGBA`) | Foreground color of the highlighted object |
+| `RDR_HIGHLIGHT_BGCLR` | `DWORD` (`MakeRGBA`) | Background color of the highlighted object |
 | `RDR_METRICS_BORDER` | int | Border Size |
 | `RDR_FONT` | `PLOGFONT` | Logic font used by the window |
 | `RDR_BKIMAGE` | `PBITMAP` | Window background image |
-| `RDR_BKIMAGE_MODE` | enum `ImageDrawMode` | Window drawing mode |
+| `RDR_BKIMAGE_MODE` | `enum ImageDrawMode` | Window drawing mode |
 
 ## Resources Management
 
@@ -178,9 +178,7 @@ ncsSetDefaultLocale("en", "US");
 The getting interface returns current locale information, and format of the
 information is: `language_country`.
 
-Attach:
-
-`ISO639` Language Codes Comparison Table
+`ISO639` Language Codes Comparison Table:
 
 ```
 ISO 639 Codes(Languages)
@@ -353,7 +351,7 @@ zh Chinese
 zu Zulu
 ```
 
-`ISO3166` Country Codes Comparison Table
+`ISO3166` Country Codes Comparison Table:
 
 ```
 ISO 3166 Codes (Countries)
