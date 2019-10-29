@@ -9,9 +9,9 @@ control, value can be changed step by step.
 mGNCS provides two kinds of buttons, `mSpinner` and `mSpinbox`, and their
 inheritance relation is as follows
 
-- [mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-   - [mSpinner](MStudioMGNCSV1dot0PGP2C9#mSpinner)
-      - [mSpinbox](MStudioMGNCSV1dot0PGP2C9#mSpinbox)
+- [mWidget ](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [mSpinner](MiniGUIProgGuidePart2Chapter10.md#mspinner)
+      - [mSpinbox](MiniGUIProgGuidePart2Chapter10.md#mspinbox)
 
 
 ## `mSpinner`
@@ -28,7 +28,7 @@ left and right) that can control values changing in a range
 
 ### Style of `mSpinner`
 
-It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
+It is inherited from the style of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Style ID*  | *miniStudio name* |  *Explanation* |
 |---------------|-------------------|----------------|
@@ -38,7 +38,7 @@ It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 ### Property of `mSpinner`
 
-It is inherited from the property of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
+It is inherited from the property of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property ID* | *miniStudio name* | *Type* | *Authority* | *Explanation* |
 |-----------------|-------------------|--------|-------------|---------------|
@@ -50,7 +50,7 @@ It is inherited from the property of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidge
 
 ### Event of `mSpinner`
 
-It is inherited from the event if [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
+It is inherited from the event if [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -60,7 +60,7 @@ It is inherited from the event if [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
 
 ### Method of `mSpinner`
 
-It is inherited from the method of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
+It is inherited from the method of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 The class does not have newly added method
 
@@ -68,7 +68,7 @@ The class does not have newly added method
 
 #### `mSpinner` classic renderer
 
-For the non client area, refer to [classic renderer of `mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
+For the non client area, refer to [classic renderer of `mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property name* | *Explanation* | *miniStudio property name* | *Type* | *Schematic diagram* |
 |-----------------|---------------|----------------------------|--------|---------------------|
@@ -79,7 +79,7 @@ For the non client area, refer to [classic renderer of `mWidget`](MStudioMGNCSV1
 
 #### `mSpinner` Skin Renderer
 
-Refer to [Specification for the Image Resource Used by Skin Renderer](MStudioMGNCSV1dot0PGAppB#mSpinner)
+Refer to [Specification for the Image Resource Used by Skin Renderer](MiniGUIProgGuideAppendixB.md#mspinner)
 
 #### `mSpinner` Fashion Renderer
 
@@ -89,7 +89,7 @@ Refer to [Specification for the Image Resource Used by Skin Renderer](MStudioMGN
 | `NCS_FGC_DISABLED_ITEM` | Button foreground color when the window is invalid | `ColorFgDisable` | `DWORD(ARGB`) | Same as Classic renderer |
 | `NCS_BGC_3DBODY` | Background color | `ColorBg3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
 | `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `ColorBgDisable` | `DWORD(ARGB`) | Same as Classic renderer |
-| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) | <img src="figures/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
+| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | [GradientMode](MiniGUIProgGuidePart2Chapter06.md#grandientmode) | <img src="figures/spinner-fashion-grandiant-mode.png" alt="spinner-fashion-grandiant-mode.png" width='74' height='38' /> |
 
 
 #### `mSpinner` Flat Renderer

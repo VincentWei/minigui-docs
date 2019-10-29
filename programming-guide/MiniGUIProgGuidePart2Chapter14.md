@@ -10,8 +10,8 @@ can control the play speed through setting image play interval.
 
 Animate class hierarchical relationship:
 
-- [ `mStatic` ](MStudioMGNCSV1dot0PGP2C4#mStatic)
-   * [ `mAnimate` ](MStudioMGNCSV1dot0PGP2C13#mAnimate)
+- [ `mStatic` ](MiniGUIProgGuidePart2Chapter05.md#mstatic)
+   * [ `mAnimate` ](MiniGUIProgGuidePart2Chapter14.md#manimate)
 
 Control creating method
 - Automatic creation: through interface designer in miniStudio, drag
@@ -33,7 +33,7 @@ loading different image processing objects on the control.
 
 ### Style of `mAnimate`
 
-It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
+It is inherited from the style of [mStatic](MiniGUIProgGuidePart2Chapter05.md)
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|-------------------------|---------------|
@@ -44,7 +44,7 @@ It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
 ### Property of `mAnimate`
 
-It is inherited from the property of [mStatic](MStudioMGNCSV1dot0PGP2C4)
+It is inherited from the property of [mStatic](MiniGUIProgGuidePart2Chapter05.md)
 
 | *Property* | *miniStudio property name* | *Type* | *Authority* | *Explanation* |
 |------------|-------------------------|--------|-------------|---------------|
@@ -54,11 +54,11 @@ It is inherited from the property of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
 ### Event of `mAnimate`
 
-It is inherited from the event of [mStatic](MStudioMGNCSV1dot0PGP2C4)
+It is inherited from the event of [mStatic](MiniGUIProgGuidePart2Chapter05.md)
 
 ### Renderer of `mAnimate`
 
-For the drawing of non client area, please refer to the renderer of [mStatic](MStudioMGNCSV1dot0PGP2C4#mStatic)
+For the drawing of non client area, please refer to the renderer of [mStatic](MiniGUIProgGuidePart2Chapter05.md#mstatic)
 
 ### Method of `mAnimate`
 

@@ -127,7 +127,7 @@ BOOL addSeparator(mPopMenuMgr * self);
 
 ### Example of `mPopMenuMgr`
 
-Refer to the example of [`mMenuButton`](MStudioMGNCSV1dot0PGP2C5#m_MenuButton)
+Refer to the example of [`mMenuButton`](MiniGUIProgGuidePart2Chapter06.md#mmenubutton)
 
 ## `mToolImage`
 

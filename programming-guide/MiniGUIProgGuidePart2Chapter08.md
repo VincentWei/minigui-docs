@@ -8,10 +8,10 @@ class of control provides default window scroll processing.
 
 Class inheritance relation of the window and its derived class is as below:
 
-- [mWidget ](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-   - [mScrollWidget](MiniGUIProgGuidePart2Chapter08#m_ScrollWidget.md)
-      * [mContainer](MiniGUIProgGuidePart2Chapter08#mContainer.md)
-         * [mPage](MiniGUIProgGuidePart2Chapter08#mPage.md)
+- [mWidget ](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [mScrollWidget](MiniGUIProgGuidePart2Chapter08.md#mscrollwidget)
+      * [mContainer](MiniGUIProgGuidePart2Chapter08.md#mcontainer)
+         * [mPage](MiniGUIProgGuidePart2Chapter08.md#mpage)
 
 
 ## `mScrollWidget`
@@ -25,12 +25,12 @@ control class
 ### Style of `mScrollWidget`
 
 It is inherited from the style of 
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget). 
 
 ### Property of `mScrollWidget`
 
 It is inherited from the property of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget). 
 
 | *Property ID* | *miniStudio name* | *Type* | *Permission* | *Explanation* |
 |---------------|-------------------|--------|--------------|---------------|
@@ -48,12 +48,12 @@ It is inherited from the property of
 ### Event of `mScrollWidget`
 
 It is inherited from the event of 
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget). 
 
 ### Method of `mScrollWidget`
 
 It is inherited from the method of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget). 
 
 All the methods of `ScrollWidget` are provided for the child class to use,
 please avoid using the class interface in the concrete control application.
@@ -178,7 +178,7 @@ position in the visible region.
 
 ### Renderer of `mScrollWidget`
 
-It is inherited from renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+It is inherited from renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 `mScrollWidget` does not have newly added renderer method.
 

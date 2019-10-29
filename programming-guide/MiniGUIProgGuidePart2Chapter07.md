@@ -8,11 +8,11 @@ window class.
 
 The class inheritance relation of panel and its derived class is as follows:
 
-- [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-   - [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel)
-      - [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox)
-      - [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd)
-         - [mDialogBox](MiniGUIProgGuidePart2Chapter07#mDialogBox)
+- [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel)
+      - [mComboBox](MiniGUIProgGuidePart2Chapter07.md#mcombobox)
+      - [mMainWnd](MiniGUIProgGuidePart2Chapter07.md#mmainwnd)
+         - [mDialogBox](MiniGUIProgGuidePart2Chapter07.md#mdialogbox)
 
 ## `mPanel`
 
@@ -31,25 +31,25 @@ images etc.
 
 ### Style of `mPanel`
 
-It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+It is inherited from the style of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 ### Property of `mPanel`
 
-It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+It is inherited from the property of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 ### Event of `mPanel`
 
-It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+It is inherited from the event of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 ### Method of `mPanel`
 
-It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+It is inherited from the method of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 The class does not have newly added methods
 
 ### Renderer of `mPanel`
 
-It is inherited from the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
+It is inherited from the renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget). 
 
 `mPanel` does not have newly added renderer method
 
@@ -257,7 +257,7 @@ well completed. Address column in general browser is a good application.
 
 ### Style of `mCombobox`
 
-It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md).
+It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel).
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|----------------------------|---------------|
@@ -274,7 +274,7 @@ It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel
 ### Property of `mCombobox`
 
 It is inherited from the property of
-[mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
+[mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel). 
 
 | *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* |
 |-----------------|----------------------------|--------|------|---------------|
@@ -287,7 +287,7 @@ It is inherited from the property of
 ### Event of `mCombobox`
 
 It is inherited from the event of
-[mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
+[mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel). 
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -303,7 +303,7 @@ It is inherited from the event of
 ### Method of `mCombobox`
 
 It is inherited from the method of
-[mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
+[mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel). 
 
 #### `addItem`
 
@@ -411,7 +411,7 @@ DWORD add = _c(combo)->getAddData(combo, 0);
 ### Renderers of `mCombobox`
 
 They are inherited from the renderers of
-[mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
+[mPanel](MiniGUIProgGuidePart2Chapter07.md#mpanel). 
 
 #### `mCombobox` Classic Renderer
 

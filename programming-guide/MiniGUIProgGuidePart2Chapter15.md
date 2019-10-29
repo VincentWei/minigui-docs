@@ -7,21 +7,21 @@ list item information of different types.
 
 Class inheritance relations of other advanced control classes are as below:
 
-- [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)
-   - [mScrollWidget](MStudioMGNCSV1dot0PGP2C7#m_ScrollWidget)
-      * [mItemView](MStudioMGNCSV1dot0PGP2C14#mItemView)
+- [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [mScrollWidget](MiniGUIProgGuidePart2Chapter08.md#mscrollwidget)
+      * [mItemView](MiniGUIProgGuidePart2Chapter15.md#mitemview)
          * [mListBox](MStudioMGNCSV1dot0PGP2C14#mListBox)
-         * [mScrollView](MStudioMGNCSV1dot0PGP2C14#mScrollView)
-         * [mIconview](MStudioMGNCSV1dot0PGP2C14#mIconView)
+         * [mScrollView](MiniGUIProgGuidePart2Chapter15.md#mscrollview)
+         * [mIconview](MiniGUIProgGuidePart2Chapter15.md#miconview)
          * [mListview](MStudioMGNCSV1dot0PGP2C14#mListView)
 
 In the advanced control class, list item is managed as an object. Different
 controls use different list item objects, and the inheritance relations are as
 below:
 
-- [mObject](MStudioMGNCSV1dot0PGP2C3#mObject)
-   - [mItem](MStudioMGNCSV1dot0PGP2C14#mItem)
-      * [mItemManager](MStudioMGNCSV1dot0PGP2C14#mItemManager)
+- [mObject](MiniGUIProgGuidePart2Chapter04.md#mobject)
+   - [mItem](MiniGUIProgGuidePart2Chapter15.md#mitem)
+      * [mItemManager](MiniGUIProgGuidePart2Chapter15.md#mitemmanager)
          * [mListItem](MStudioMGNCSV1dot0PGP2C14#mListItem)
       * [mListColumn](MStudioMGNCSV1dot0PGP2C14#mListColumn)
 
@@ -55,7 +55,7 @@ basic accessing methods. Control classes such as `mListBox`, `mScrollView` and
 
 ### Method of `mItem`
 
-It is inherited from the method of [`mObject`](MStudioMGNCSV1dot0PGP2C3#mObject)
+It is inherited from the method of [`mObject`](MiniGUIProgGuidePart2Chapter04.md#mobject)
 
 An item can contain multiple kinds of content information, such as text and
 image etc. Basic methods provided are:
@@ -409,7 +409,7 @@ Basic class, direct use is not allowed.
 
 ### Style of `mItemView`
 
-It is inherited from the style of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mScrollWidget).
+It is inherited from the style of [`mScrollWidget`](MiniGUIProgGuidePart2Chapter04.md#mscrollwidget).
 
 | *Style name* | *mstudio property name* | *Explanation* |
 |--------------|-------------------------|---------------|
@@ -420,7 +420,7 @@ It is inherited from the style of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mSc
 
 ### Property of `mItemView`
 
-Inherited from the property of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mScrollWidget).
+Inherited from the property of [`mScrollWidget`](MiniGUIProgGuidePart2Chapter04.md#mscrollwidget).
 
 | *Property ID* | *mstudio name* | *Type* | *Authority* | *Explanation* |
 |---------------|----------------|--------|-------------|---------------|
@@ -429,7 +429,7 @@ Inherited from the property of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mScrol
 
 ### Event of `mItemView`
 
-It is inherited from the event of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mScrollWidget).
+It is inherited from the event of [`mScrollWidget`](MiniGUIProgGuidePart2Chapter04.md#mscrollwidget).
 
 | *Event notification code* | *Explanation* | *Parameter* |
 |---------------------------|---------------|-------------|
@@ -443,7 +443,7 @@ It is inherited from the event of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mSc
 
 ### Method of `mItemView`
 
-It is inherited from the method of [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C3#mScrollWidget).
+It is inherited from the method of [`mScrollWidget`](MiniGUIProgGuidePart2Chapter04.md#mscrollwidget).
 
 #### Callback Method
 
@@ -1812,7 +1812,7 @@ It is inherited from the style of `mItemView`.
 
 ### Property of `mListView`
 
-It is inherited from the property of [`mItemView`](MStudioMGNCSV1dot0PGP2C3#mItemView)
+It is inherited from the property of [`mItemView`](MiniGUIProgGuidePart2Chapter04.md#mitemview)
 
 | *Property ID* | *mstudio name* | *Type* | *Authority* | *Explanation* |
 |---------------|----------------|--------|-------------|---------------|

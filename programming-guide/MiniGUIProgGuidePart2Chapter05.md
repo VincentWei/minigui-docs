@@ -1355,7 +1355,7 @@ BOOL (*checkBtn)(clsName *group, mWidget *btn_to_check);
 
 ![alt](figures/buttongroup.png)
 
-Please refer to `mRadioButton` in [Button Series Control Class](MStudioMGNCSV1dot0PGENP2C5).
+Please refer to `mRadioButton` in [Button Series Control Class](MiniGUIProgGuidePart2Chapter06.md).
 
 ## `mLEDLabel`
 

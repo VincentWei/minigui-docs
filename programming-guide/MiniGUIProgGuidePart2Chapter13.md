@@ -10,13 +10,13 @@ line text input with comparatively simple user content, in comparison,
 multi-line text is used to receive complicated and large volume of text input.
 
 - Class hierarchical relation of edit box
-- [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
-   * [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C7#m_ScrollWidget)
-      * [`mItemView`](MStudioMGNCSV1dot0PGP2C)
-         * [`mScrollView`](MStudioMGNCSV1dot0PGP2C)
-            * [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit)
-               * [`mSlEdit`](MStudioMGNCSV1dot0PGP2C12#m_SlEdit)
-               * [`mMlEdit`](MStudioMGNCSV1dot0PGP2C12#m_MlEdit)
+- [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   * [`mScrollWidget`](MiniGUIProgGuidePart2Chapter08.md#mscrollwidget)
+      * [`mItemView`](MiniGUIProgGuidePart2Chapter15.md)
+         * [`mScrollView`](MiniGUIProgGuidePart2Chapter15.md)
+            * [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit)
+               * [`mSlEdit`](MiniGUIProgGuidePart2Chapter13.md#msledit)
+               * [`mMlEdit`](MiniGUIProgGuidePart2Chapter13.md#mmledit)
 
 - Example diagram
 
@@ -33,7 +33,7 @@ defines the common use interface of the two.
 
 ### Style of `mEdit`
 
-It is inherited from the style of [`mScrollView`](MStudioMGNCSV1dot0PGP2C)
+It is inherited from the style of [`mScrollView`](MiniGUIProgGuidePart2Chapter15.md)
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|----------------------------|---------------|
@@ -48,7 +48,7 @@ It is inherited from the style of [`mScrollView`](MStudioMGNCSV1dot0PGP2C)
 
 ### Property of `mEdit`
 
-It is inherited from the property of [`mScrollView`](MStudioMGNCSV1dot0PGP2C).
+It is inherited from the property of [`mScrollView`](MiniGUIProgGuidePart2Chapter15.md).
 
 | *Property* | *miniStudio property name* | *Type* | *Authority* | *Explanation*  |
 |------------|----------------------------|--------|-------------|----------------|
@@ -57,7 +57,7 @@ It is inherited from the property of [`mScrollView`](MStudioMGNCSV1dot0PGP2C).
 
 ### Event of `mEdit`
 
-It is inherited from the event of [`mScrollView`](MStudioMGNCSV1dot0PGP2C).
+It is inherited from the event of [`mScrollView`](MiniGUIProgGuidePart2Chapter15.md).
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -71,7 +71,7 @@ It is inherited from the event of [`mScrollView`](MStudioMGNCSV1dot0PGP2C).
 
 ### Method of `mEdit`
 
-It is inherited from the method of[`mScrollView`](MStudioMGNCSV1dot0PGP2C).
+It is inherited from the method of[`mScrollView`](MiniGUIProgGuidePart2Chapter15.md).
 
 #### `setContent`
 
@@ -299,7 +299,7 @@ _c(edit)- >makevisible(edit, 201);
 
 ### Style of `mSIEdit`
 
-It is inherited from the style of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the style of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|----------------------------|---------------|
@@ -309,7 +309,7 @@ It is inherited from the style of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
 
 ### Property of `mSIEdit`
 
-It is inherited from the property of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the property of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 | *Property* | *miniStudio property name* | *Type* | *Authority* | *Explanation* |
 |------------|----------------------------|--------|-------------|---------------|
@@ -319,7 +319,7 @@ It is inherited from the property of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
 
 ### Event of `mSIEdit`
 
-It is inherited from the event of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the event of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 | *Event ID* | *Parameter* | *explanation* |
 |------------|-------------|---------------|
@@ -328,7 +328,7 @@ It is inherited from the event of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
 
 ### Method of `mSIEdit`
 
-It is inherited from the method of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the method of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 _There is no newly introduced method_.
 
 ### Programming Example of `mSIEdit`
@@ -745,7 +745,7 @@ int MiniGUIMain (int argc, const char* argv[])
 
 ### Style of `mMIEdit`
 
-It is inherited from the style of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the style of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 | *Style name* | *miniStudio property name* | *Explanation*  |
 |--------------|----------------------------|----------------|
@@ -753,7 +753,7 @@ It is inherited from the style of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
 
 ### Property of `mMIEdit`
 
-It is inherited from the property of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the property of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 | *Property* | *miniStudio property name* | *Type* | *Authority* | *Explanation* |
 |------------|----------------------------|--------|-------------|---------------|
@@ -767,12 +767,12 @@ It is inherited from the property of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
 
 ### Event of `mMIEdit`
 
-It is inherited from the event of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the event of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 _There is no newly introduced event_.
 
 ### Method of `mMIEdit`
 
-It is inherited from the method of [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit).
+It is inherited from the method of [`mEdit`](MiniGUIProgGuidePart2Chapter13.md#medit).
 
 ### Programming Example of `mMIEdit`
 

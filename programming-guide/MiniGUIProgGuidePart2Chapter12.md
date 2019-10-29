@@ -18,8 +18,8 @@ interaction interface.
 The class inheritance relation of the window and its derived class is as
 follows:
 
-- [mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-   - [mPropSheet](MStudioMGNCSV1dot0PGP2C11#m_PropSheet)
+- [mWidget ](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [mPropSheet](MiniGUIProgGuidePart2Chapter12.md#mpropsheet)
 
 ## `mPropSheet`
 
@@ -35,7 +35,7 @@ carried out through the tongue.
 
 ### Style of `mPropSheet`
 
-It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget).
+It is inherited from the style of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|----------------------------|---------------|
@@ -47,7 +47,7 @@ It is inherited from the style of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
 ### Property of `mPropSheet`
 
-It is inherited from the property of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget).
+It is inherited from the property of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID*| *miniStudio name* | *Type* | *Authority* | *Explanation* |
 |--------------|-------------------|--------|-------------|---------------|
@@ -62,7 +62,7 @@ It is inherited from the property of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidge
 ### Event of `mPropSheet`
 
 
-It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
+It is inherited from the event of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -71,7 +71,7 @@ It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
 ### Method of `mPropSheet`
 
-It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
+It is inherited from the method of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 #### Add property page
 
@@ -186,7 +186,7 @@ _c(propsheet)->getPageIndex(propsheet, page);
 ```
 
 Or get the class pointer of the first property page, and then operate the
-property page through the method of [mPage](MStudioMGNCSV1dot0PGP2C7#mPage)
+property page through the method of [mPage](MiniGUIProgGuidePart2Chapter08.md#mpage)
 control:
 
 ```cpp
@@ -235,7 +235,7 @@ int broadCastMsg(mPropSheet *self, DWORD param1, DWORD param2);
 
 ### Renderer of `mPropSheet`
 
-It is inherited from the renderer of [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget).
+It is inherited from the renderer of [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 ### Instance of `mPropSheet`
 

@@ -9,10 +9,10 @@ certain range are more visual, avoiding the trouble of keyboard input.
 
 - Hierarchical relation of slider control class
 
-- [`mWidget`](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-   * [`mSlider`](MiniGUIProgGuidePart2Chapter09#mSlider.md)
-      * [`mTrackBar`](MiniGUIProgGuidePart2Chapter09#m_TrackBar.md)
-      * [`mScrollBar`](MiniGUIProgGuidePart2Chapter09#m_ScrollBar.md)
+- [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   * [`mSlider`](MiniGUIProgGuidePart2Chapter09.md#mslider)
+      * [`mTrackBar`](MiniGUIProgGuidePart2Chapter09.md#mtrackbar)
+      * [`mScrollBar`](MiniGUIProgGuidePart2Chapter09.md#mscrollbar)
 
 * Control creating method
 - Automatic creation: drag corresponding slider control through interface
@@ -34,7 +34,7 @@ _The control is abstract control and cannot be used directly._
 
 ### Style of `mSlider`
 
-It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
+It is inherited from the style of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 | *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|----------------------------|---------------|
@@ -43,7 +43,7 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
 
 ### Property of `mSlider`
 
-It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
+It is inherited from the property of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 | *Property* | *miniStudio property name* | *Type* | *RW* | *Explanation* | *Comments* |
 |------------|----------------------------|--------|------|---------------|------------|
@@ -55,7 +55,7 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 ### Event of `mSlider`
 
-It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3)
+It is inherited from the event of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -65,7 +65,7 @@ It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 ### Method of `mSlider`
 
-It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
+It is inherited from the method of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 ### Example of `mSlider`
 
@@ -83,7 +83,7 @@ range
 
 
 ### Style of `mTrackBar`
-It is inherited from the style of [mSlider](MStudioMGNCSV1dot0PGP2C8)
+It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 | *Style* | *miniStudio property name* | *Explanation* |
 |---------|----------------------------|---------------|
@@ -94,7 +94,7 @@ It is inherited from the style of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Property of `mTrackBar`
 
-It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
+It is inherited from the property of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 | *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* | *Comments* |
 |-----------------|----------------------------|--------|------|---------------|------------|
@@ -121,7 +121,7 @@ It is inherited from the method of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 #### `mTrackBar` Classic Renderer
 
-For the drawing of non client area, please refer to the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+For the drawing of non client area, please refer to the renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|----------------|
@@ -130,12 +130,12 @@ For the drawing of non client area, please refer to the renderer of [mWidget](MS
 
 #### `mTrackBar` Skin Renderer
 
-Refer to [Appendix B : Specification for the Image Resource Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
+Refer to [Appendix B : Specification for the Image Resource Used by Skin Renderer](MiniGUIProgGuideAppendixB.md#mtrackbar) 
 
 #### `mTrackBar` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|----------------|
@@ -148,7 +148,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 #### `mTrackBar` Flat Renderer
 
 For the drawing of non client area, please refer to the drawing of Flat 
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Color of the slide block side | `ColorFg3DBody` | `DWORD(ARGB`) | <img src="figures/trackbar-flat-fgc.png" alt="trackbar-flat-fgc.png"/> | |
@@ -369,7 +369,7 @@ It is inherited from the style of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 ### Property of `mScrollBar`
 
-It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
+It is inherited from the property of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 | *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* | *Comments* |
 |-----------------|----------------------------|--------|------|---------------|------------|
@@ -381,7 +381,7 @@ It is inherited from the property of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 ### Event of `mScrollBar`
 
-It is inherited from the event of [mSlider](MStudioMGNCSV1dot0PGP2C8)
+It is inherited from the event of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 | *Event ID* | *Parameter* | *Explanation* |
 |------------|-------------|---------------|
@@ -391,14 +391,14 @@ It is inherited from the event of [mSlider](MStudioMGNCSV1dot0PGP2C8)
 
 
 ### Method of `mScrollBar`
-It is inherited from the method of [mSlider](MStudioMGNCSV1dot0PGP2C8)
+It is inherited from the method of [mSlider](MiniGUIProgGuidePart2Chapter09.md)
 
 ### Renderer of `mScrollBar`
 
 #### `mScrollBar` Classic Renderer
 
 For the drawing of non client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget) 
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|----------------|
@@ -409,12 +409,12 @@ For the drawing of non client area, please refer to the renderer of
 
 #### `mScrollBar` Skin Renderer
 
-Refer to [Appendix B : Specification for the Image Resource Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
+Refer to [Appendix B : Specification for the Image Resource Used by Skin Renderer](MiniGUIProgGuideAppendixB.md#mtrackbar) 
 
 #### `mScrollBar` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -424,12 +424,12 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 | `NCS_FGC_DISABLED_ITEM` | Color of the arrow when the button is invalid | `ArrowColorDisable` | `DWORD(ARGB`) | Same as Classic renderer | |
 | `NCS_METRICS_3DBODY_ROUNDX` | Round corner X radius of the slide block | `RoundX` | int | | 0 ~ 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Round corner Y radius of the slide block | `RoundY` | int| | 0 ~ 1/2 of the window height |
-| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="figures/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
+| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="figures/scrollbar-fashion-bg3dcolor.png" alt="scrollbar-fashion-bg3dcolor.png" />| [GradientMode](MiniGUIProgGuidePart2Chapter06.md#grandientmode) |
 | | | | | <img src="figures/scrollbar-fashion-vert.png" alt="scrollbar-fashion-vert.png" />| |
 
 #### `mScrollBar` Flat Renderer
 For the drawing of non client area, please reefer to the drawing of Flat
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|

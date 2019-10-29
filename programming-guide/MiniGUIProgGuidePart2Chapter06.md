@@ -24,12 +24,12 @@ detail, making it convenient for the users to further understand the details of
 buttons, thus buttons can be used more flexibly.
 
 Class hierarchical relation related to buttons:
-- [`mWidget`](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-   - [`mButton`](MiniGUIProgGuidePart2Chapter06#mButton.md)
-      - [`mCheckButton`](MiniGUIProgGuidePart2Chapter06#m_CheckButton.md)
-      - [`mRadioButton`](MiniGUIProgGuidePart2Chapter06#m_RadioButton.md)
-      - [`mMenuButton`](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) (mPopMenuMgr is used)
-      - [`mColorButton`](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
+- [`mWidget`](MiniGUIProgGuidePart2Chapter04.md#mwidget)
+   - [`mButton`](MiniGUIProgGuidePart2Chapter06.md#mbutton)
+      - [`mCheckButton`](MiniGUIProgGuidePart2Chapter06.md#mcheckbutton)
+      - [`mRadioButton`](MiniGUIProgGuidePart2Chapter06.md#mradiobutton)
+      - [`mMenuButton`](MiniGUIProgGuidePart2Chapter06.md#mmenubutton) (mPopMenuMgr is used)
+      - [`mColorButton`](MiniGUIProgGuidePart2Chapter06.md#mcolorbutton)
 
 Control creating methods:
 - Automatic creation: through interface designer in miniStudio, corresponding
@@ -66,7 +66,7 @@ they can be displayed by mixture of images and literals.
 To understand programming of buttons, firstly, it is necessary to understand
 the status of buttons. In mGNCS, the status of buttons is divided into four
 kinds, refer to appendix definition and note: `ButtonState`
-[ButtonState](MiniGUIProgGuidePart2Chapter06#ButtonState)
+[ButtonState](MiniGUIProgGuidePart2Chapter06.md#buttonstate)
 
 ### Style of `mButton`
 
@@ -82,7 +82,7 @@ through other properties.
 `mButton` is the foundation class of all buttons, which implements `PushButton`
 by default. Buttons of all other types are derived from it.
 
-It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
+It is inherited from the style of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Style ID* | *miniStudio property name* | *Comments* |
 |------------|----------------------------|------------|
@@ -95,7 +95,7 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 
 ### Property of `mButton`
 
-It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
+It is inherited from the property of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Property ID name* | *miniStudio property name* | *Type* | *Permission* | *Comments* |
 |--------------------|----------------------------|--------|--------------|------------|
@@ -103,14 +103,14 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
 | `NCSP_BUTTON_VALIGN` | `VAlign` | [Alignment enumeration value](MStudioMGNCSV1dot0PGENAppC#AlignValues) | `RW` | Content on the button (image or literal) is aligned with the button according to the set mode in vertical direction, and the alignment value is top – 0, bottom – 1, center – 2 |
 | `NCSP_BUTTON_WORDWRAP` | Wordwrap | int | `RW` | Automatic wrap property of the literals on the button, when the single line length of the literal content is bigger than the control width, automatic wrap can be selected. `TRUE`: automatic wrap `FALSE`: single line, and the exceeding part is not displayed |
 | `NCSP_BUTTON_IMAGE` | Image | `PBITMAP` | `RW` | Image, corresponding to button property pbmp, which is image pointer, it must be valid when `NCSS_BUTTON_IMAGE` or `NCSS_BUTTON_IMAGELABEL` or `NCSS_BUTTON_VERTIMAGELABEL` is set |
-| `NCSP_BUTTON_CHECKSTATE`| None | [mButtonCheckState](MStudioMGNCSV1dot0PGP2C5#ButtonCheckState)| `RW` | Set or get check status, valid when `NCSS_BUTTON_CHECKABLE` is set, `NCS_BUTTON_HALFCHECKED` is regarded as valid value when `NCSS_BUTTON_3DCHECK` is set |
+| `NCSP_BUTTON_CHECKSTATE`| None | [mButtonCheckState](MiniGUIProgGuidePart2Chapter06.md#buttoncheckstate)| `RW` | Set or get check status, valid when `NCSS_BUTTON_CHECKABLE` is set, `NCS_BUTTON_HALFCHECKED` is regarded as valid value when `NCSS_BUTTON_3DCHECK` is set |
 | `NCSP_BUTTON_IMAGE_SIZE_PERCENT`| `ImageSizePercent` | int | `RW` | Under the style of coexistence of image and text, set proportion of image on the control (take value 15~85, representing 15% to 85%), and the remaining is occupied by the text |
 | `NCSP_BUTTON_GROUPID`| `GroupID` | int | `RW` | When there is `NCSS_BUTTON_CHECKABLE` style, ID of a `mButtonGroup` can be set to the window, it will automatically get a corresponding `mButtonGroup` object and set |
 | `NCSP_BUTTON_GROUP`| None | `mButtonGroup*` |RW| When there is `NCSS_BUTTON_CHECKABLE` style, set a `mButtonGroup` object pointer, and all the buttons adding to the group has the automatic switching ability of Radio style |
 
 ### Event of `mButton`
 
-It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGENP2C3).
+It is inherited from the event of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Event notification code* | *Explanation* | *Parameter* |
 |---------------------------|---------------|-------------|
@@ -121,7 +121,7 @@ Note, the control inherits `NCSN_WIDGET_CLICKED` event of the parent class.
 
 ### Renderer of `mButton`
 
-*For the usage of renderer, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2)*.
+*For the usage of renderer, see [look and feel renderer](MiniGUIProgGuidePart2Chapter03.md)*.
 
 #### `mButton` Classic renderer
 
@@ -129,7 +129,7 @@ The basic style under classic renderer is as shown in the figure below:
 
 Drawing of `mButton` Classic renderer is as below: for the drawing of non
 client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -152,12 +152,12 @@ Schematic diagram:<br/>
 
 ### `mButton` Skin Renderer
 
-Refer to [Appendix B: Specification for the Image Resources Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
+Refer to [Appendix B: Specification for the Image Resources Used by Skin Renderer](MiniGUIProgGuideAppendixB.md#mbutton).
 
 #### `mButton` Fashion Renderer
 
 For the drawing of non client area, please refer to the drawing of Fashion
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -165,7 +165,7 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 | `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD` (`ARGB`) | Same as Classic renderer | |
 | `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD` (`ARGB`) |<img src="figures/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
 | `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `BgColorDisable` | `DWORD` (`ARGB`) |<img src="figures/push-button-fashion-bgdisalbe.png" alt="push-button-fashion-bgdisalbe.png"/>| |
-| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="figures/push-button-fashion-gradientmode.png" alt="push-button-fashion-gradientmode.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
+| `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="figures/push-button-fashion-gradientmode.png" alt="push-button-fashion-gradientmode.png" />| [GradientMode](MiniGUIProgGuidePart2Chapter06.md#grandientmode) |
 | `NCS_METRICS_3DBODY_ROUNDX` | Window rectangle round corner X radius | `RoundX` | int | | 0 to 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
 
@@ -189,7 +189,7 @@ Schematic diagram: <br />
 #### `mButton` Flat Renderer
 
 For the drawing of non client area, please refer to the drawing of Flat
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -501,13 +501,13 @@ It is inherited from the property of `mButton`.
 It is inherited from the event of `mButton`.
 
 ### Renderers of `mCheckButton`
-- For the usage of renderers, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2)
+- For the usage of renderers, see [look and feel renderer](MiniGUIProgGuidePart2Chapter03.md)
 
 #### `mCheckButton` Classic Renderer
 
 - Drawing of renderer in the `mCheckButton` Classic text region is as below:
 for the drawing of non client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -538,7 +538,7 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton)
 #### `mCheckButton` Fashion Renderer
 - Drawing of `mCheckButton` Fashion text region renderer is as follows: for the
 drawing of non client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -565,7 +565,7 @@ size will be adopted to draw
 
 - Drawing of text region and check box of `mCheckButton` Flat renderer is as
 below: for the drawing of non area region, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+[mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -806,12 +806,12 @@ It is inherited from the event of `mButton`.
 
 ### Renderers of `mRadiobutton`
 
-- For the usage of renderers, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2).
+- For the usage of renderers, see [look and feel renderer](MiniGUIProgGuidePart2Chapter03.md).
 
 #### `mRadiobutton` Classic Renderer
 
 - For the drawing of `mRadiobutton` Classic non client area, please refer to
-the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+the renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -841,7 +841,7 @@ Renderer](MStudioMGNCSV1dot0PGENAppB#mButton).
 
 #### `mRadiobutton` Fashion Renderer
 - For the drawing of `mRadiobutton` Fashion non client area, please refer to
-the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+the renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -866,7 +866,7 @@ actual size is adopted to draw
 
 #### `mRadiobutton` Flat Renderer
 - For the drawing of `mRadiobutton` Flat non client area, please refer to the
-renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
+renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
@@ -975,7 +975,7 @@ will display on the button.
 
 
 `mMenuButton` is inherited from
-[mPopMenuMgr](MStudioNCSSPGENV1dot0Chapter15#mPopMenuMgr) Class.
+[mPopMenuMgr](MiniGUIProgGuidePart2Chapter17.md#mpopmenumgr) Class.
 
 ### Property of `mMenuButton`
 
@@ -999,7 +999,7 @@ It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
 ### Programming Example of `mMenuButton`
 
 `mMenuButton` is mainly implemented through creating
-[mPopMenuMgr](MStudioNCSSPGENV1dot0Chapter15#mPopMenuMgr) object.
+[mPopMenuMgr](MiniGUIProgGuidePart2Chapter17.md#mpopmenumgr) object.
 
 - Operation screen shot: <br />
 

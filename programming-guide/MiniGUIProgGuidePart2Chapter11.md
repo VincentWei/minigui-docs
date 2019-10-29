@@ -10,7 +10,7 @@ MiniGUI 3.0, and setting of renderer is added, making it easier to use and more
 splendid.
 
 - Class hierarchical relation of progress bar
-- [ `mWidget` ](MStudioMGNCSV1dot0PGP2C3#mWidget)
+- [ `mWidget` ](MiniGUIProgGuidePart2Chapter04.md#mwidget)
    * [ `mProgressBar` ](MStudioMGNCSV1dot0PGP2C10#m_ProgressBar)
 
 ## `mProgressBar`
@@ -25,7 +25,7 @@ software installation and file transmission.
 
 ### Style of `mProgressBar`
 
-It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
+It is inherited from the style of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 | *Style ID* | *miniStudio property* | *Explanation* | *Comments* |
 |------------|-----------------------|---------------|------------|
@@ -37,7 +37,7 @@ It is inherited from the style of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 ### Property of `mProgressBar`
 
-It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
+It is inherited from the property of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 | *Property name* |*miniStudio property name* | *Type* | *RW* | *Explanation* |
 |-----------------|---------------------------|--------|------|---------------|
@@ -48,13 +48,13 @@ It is inherited from the property of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 ### Event of `mProgressBar`
 
-It is inherited from the event of [mWidget](MStudioMGNCSV1dot0PGP2C3).
+It is inherited from the event of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 *The control class does not have newly added event*
 
 ### Method of `mProgressBar`
 
-It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGP2C3)
+It is inherited from the method of [mWidget](MiniGUIProgGuidePart2Chapter04.md)
 
 #### increase
 
@@ -98,7 +98,7 @@ _c(pb)->stepIncrease (pb);
 
 #### Classic Renderer
 
-It is inherited from the classic renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3).
+It is inherited from the classic renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Property name* | *miniStudio property* | *Type* | *Schematic diagram* | *Explanation* |
 |-----------------|-----------------------|--------|---------------------|---------------|
@@ -106,7 +106,7 @@ It is inherited from the classic renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 #### Fashion Renderer
 
-It is inherited from the fashion renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3).
+It is inherited from the fashion renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 |-----------------|---------------------------|--------|---------------------|---------------|
@@ -114,7 +114,7 @@ It is inherited from the fashion renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3)
 
 #### Flat Renderer
 
-It is inherited from flat renderer of [mWidget](MStudioMGNCSV1dot0PGP2C3).
+It is inherited from flat renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md).
 
 | *Property name* |*miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
 |-----------------|---------------------------|--------|---------------------|---------------|
