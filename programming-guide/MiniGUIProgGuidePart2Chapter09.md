@@ -401,6 +401,7 @@ For the drawing of non client area, please refer to the renderer of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget) 
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Range* |
+|---------------|-----------|----------------------------|--------------|-----------------------------------------|----------------|
 | `NCS_BGC_3DBODY` | Background color of the control | `BgColor` | `DWORD(ARGB`) | <img src="figures/scrollbar-classic-bg3dcolor.png" alt="scrollbar-classic-bg3dcolor.png"/>| |
 | `NCS_BGC_DISABLED_ITEM` | Color of the slide block and arrow button when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="figures/scrollbar-classic-bgdisable.png" alt="scrollbar-classic-bgdisable.png"/>| |
 | `NCS_FGC_3DBODY` | Color of the button up arrow | `ArrowColor` | `DWORD(ARGB`) | <img src="figures/scrollbar-classic-fg3dcolor.png" alt="scrollbar-classic-fg3dcolor.png"/>| |
