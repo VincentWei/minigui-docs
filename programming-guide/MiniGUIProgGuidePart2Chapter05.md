@@ -50,7 +50,9 @@ including texts and images etc.
 None
 
 ### Property of `mStatic`
+
 | *Property name* | *Type* | *Permission* | *Property explanation* | *Mode value* |
+|-----------------|--------|--------------|------------------------|--------------|
 | `NCSP_STATIC_ALIGN` | int | `RW` | Control content horizontal alignment mode | `NCS_ALIGN_LEFT`, `NCS_ALIGN_RIGHT`, `NCS_ALIGN_CENTER` |
 | `NCSP_STATIC_VALIGN` | int | `RW` | Control content vertical alignment mode | `NCS_VALIGN_TOP`, `NCS_VALIGN_BOTTOM`, `NCS_VALIGN_CENTER` |
 | `NCSP_STATIC_AUTOWRAP` | int | `RW` | Control content automatic wrap | 1, 0 |
@@ -72,6 +74,7 @@ wrap mode
 
 
 Developers can set the property of `mStatic` through the following methods
+
 ```cpp
 //static control property configuration
 static NCS_PROP_ENTRY static1_props [] = {
@@ -354,6 +357,7 @@ int MiniGUIMain(int argc, const char* argv[])
 ### Property of `mImage`
 
 | *Property Name* | *Type* | *Permission* | *Property explanation* | *Value* |
+|-----------------|--------|--------------|------------------------|--------------|
 | `NCSP_IMAGE_IMAGE` | `PBITMAP` | `RW` | image control content image id, corresponds to pbmp image file pointer in mimage | None |
 | `NCSP_IMAGE_IMAGEFILE` | `char*` | `RW` | image control content image name id, corresponds to name pointer of pbmp image | None |
 | `NCSP_IMAGE_DRAWMODE` | enum | `RW` | image control drawing mode, corresponds to `mImageDrawMode` | `NCS_DM_NORMAL`, `NCS_DM_SCALED`, `NCS_DM_SCALED` |
@@ -801,7 +805,8 @@ fill color, round corner and border etc. can be drawn conveniently and rapidly
 
 ### Property of `mRect`
 
-| *Property name* | *Type* | *Permission* | *Explanation* ||
+| *Property name* | *Type* | *Permission* | *Comments* |
+|-----------------|--------|--------------|------------|
 | `NCSP_RECT_BORDERSIZE` | int | `RW` | Thickness of rect control border, border thickness of the corresponding rectangle control, and the type is int |
 | `NCSP_RECT_BORDERCOLOR` | dword | `RW` | Color of rect control border, border color of corresponding rectangle control, and the type is dword |
 | `NCSP_RECT_FILLCOLOR` | dword | `RW` | Fill color of rect control, fill color of corresponding rectangle control, and the type is dword |
@@ -1323,7 +1328,8 @@ function.
 
 ### Property of `mButtonGroup`
 
-| *Property Name* | *Type* | *Permission* | *Property explanation* |
+| *Property Name* | *Type* | *Permission* | *Comments* |
+|-----------------|--------|--------------|------------|
 | `NCSP_BTNGRP_SELID` | int | `RW` | Currently selected `radioButton` `ID` number |
 | `NCSP_BTNGRP_SELIDX` | idx | `RW` | Currently selected `radioButton` index number |
 | `NCSP_BTNGRP_SELOBJ` | `mWidget*` | `RW` | Currently selected `radioButton` pointer |
@@ -1348,7 +1354,7 @@ BOOL (*checkBtn)(clsName *group, mWidget *btn_to_check);
 
 ![alt](figures/buttongroup.png)
 
-Please refer to `mRadioButton` in [Chapter 5 Button Series Control Class](Products/MStudioMGNCSV1dot0PGENP2C5#m_RadioButton). 
+Please refer to `mRadioButton` in [Button Series Control Class](MStudioMGNCSV1dot0PGENP2C5).
 
 ## `mLEDLabel`
 
