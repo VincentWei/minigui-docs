@@ -1,10 +1,8 @@
 /*
-** $Id: panel.c 594 2009-10-10 05:59:06Z xwyan $
-**
 ** panel.c: Sample program for mGNCS Programming Guide
 **      The demo application for Panel.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 #include <stdio.h>
 #include <stdlib.h>

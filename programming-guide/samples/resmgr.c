@@ -1,10 +1,8 @@
 /*
-** $Id: resmgr.c 534 2009-09-22 05:37:46Z xwyan $
-**
 ** resmgr.c: Sample program for mGNCS Programming Guide
 **      Create main window by resource managerment.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 
 #include <stdio.h>

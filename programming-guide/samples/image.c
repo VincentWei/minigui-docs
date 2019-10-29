@@ -2,7 +2,7 @@
  * ** image.c: Sample program for mGNCS Programming Guide
  * **      A mGNCS application for mImage.
  * **
- * ** Copyright (C) 2009 FMSoft Technologies.
+ * ** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
  * */
 
 #include <stdio.h>

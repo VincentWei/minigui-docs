@@ -1,10 +1,8 @@
 /*
-** $Id: container.c 596 2009-10-10 08:49:44Z xwyan $
-**
 ** container.c: Sample program for mGNCS Programming Guide
 **      The demo application for Container.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 #include <stdio.h>
 #include <stdlib.h>

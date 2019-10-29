@@ -1,10 +1,8 @@
 /*
-** $Id: scrollview.c 595 2009-10-10 08:19:47Z xwyan $
-**
 ** scrollview.c: Sample program for mGNCS Programming Guide
 **      The demo application for ScrollView.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 
 #include <stdio.h>

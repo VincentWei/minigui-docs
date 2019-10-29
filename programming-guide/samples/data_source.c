@@ -2,7 +2,7 @@
 ** data_source.c: Sample program for mGNCS Programming Guide
 **      Using static data source.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 
 #include <stdio.h>

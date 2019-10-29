@@ -1,10 +1,8 @@
 /*
-** $Id: resmgr_main.c 534 2009-09-22 05:37:46Z xwyan $
-**
 ** resmgr_main.c: Sample program for mGNCS Programming Guide
 **      The application entry of resource managerment.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 
 #include <stdio.h>

@@ -2,7 +2,7 @@
 ** wnd_template.c: Sample program for mGNCS Programming Guide
 **      Using progressbar.
 **
-** Copyright (C) 2009 FMSoft Technologies.
+** Copyright (C) 2009 ~ 2019 FMSoft Technologies.
 */
 
 #include <stdio.h>
