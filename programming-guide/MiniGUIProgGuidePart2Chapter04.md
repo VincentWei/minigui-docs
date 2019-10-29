@@ -14,25 +14,25 @@ behavior of class
 *The class is foundation class and cannot be used directly*
 
 - Direct child class:
-- `mComponent`
+   - `mComponent`
 
 ### Operation Function of `mObject`
 
-In mGNCS, many operations about class have `mObject` pointer as the parameter, 
+In mGNCS, many operations about class have `mObject` pointer as the parameter,
 and these are
-- Type judgment operation: `ncsInstanceOf`, equivalent to instance of 
+- Type judgment operation: `ncsInstanceOf`, equivalent to instance of
 operator of java, case of judging if a pointer is the appointed class
 
 ```cpp
 
 /**
  * \fn BOOL ncsInstanceOf(mObject* object, mObjectClass* clss);
- * \brief check an object is the class instance or not, 
+ * \brief check an object is the class instance or not,
  *           same as \b instanceof operator in Java
  *
  * \param object - the pointer of object being to test
  * \param clss - the pointer of class for test
- * 
+ *
  * \return TRUE - object is instance of clss, FALSE - not
  */
 BOOL ncsInstanceOf(mObject* object, mObjectClass* clss);
@@ -98,7 +98,7 @@ Corresponding macro is
  * \param clss - the target type to cast
  *
  * \return mObject * - the object pointer if cast safe, NULL otherwise
- * 
+ *
  * \sa ncsInstanceOf
  */
 mObject* ncsSafeCast(mObject* obj, mObjectClass *clss);
@@ -238,7 +238,7 @@ component and brother component
 - `setReleated`:
 
 ```cpp
-mComponent* (*setReleated)(clss *_this, mComponent* comp,  int releated); 
+mComponent* (*setReleated)(clss *_this, mComponent* comp,  int releated);
 ```
 - Set associated component
 - Return: associated component pointer after setting, if the setting is not
@@ -300,14 +300,14 @@ void * ncsSetComponentHandler(mComponent* comp, int message, void *handler);
                         NCS_EVENT_HANDLER* handlers, \
                         int count);
  * \brief set an array of event handlers
- * 
+ *
  * \param comp - the component to set
  * \param handlers - the array of \ref NCS_EVENT_HANDLER
- * \param count - the count of array handlers. 
+ * \param count - the count of array handlers.
  *
  * \note if count == -1, handlers must end by {-1, NULL};
  *   anywhere, ncsSetComponentHandlers would stop
- *   if it find an element of array handlers is equal {-1, NULL}, 
+ *   if it find an element of array handlers is equal {-1, NULL},
  *   whether count is equal -1 or not
  *
  * \sa ncsSetComponentHandler
@@ -318,11 +318,11 @@ void ncsSetComponentHandlers(mComponent* comp, \
 
 /**
  * \fn void* ncsGetComponentHandler(mComponent* comp, int message);
- * \brief get an event callback 
+ * \brief get an event callback
  *
- * \param comp 
+ * \param comp
  * \param message - event code
- * 
+ *
  * \return void * the handler of message, or NULL if not set
  */
 void* ncsGetComponentHandler(mComponent* comp, int message);
@@ -348,8 +348,8 @@ void* ncsGetComponentHandler(mComponent* comp, int message);
  *
  * \return TRUE - success, FALSE - failed
  *
- * \sa ncsGetComponentClass, ncsCreateWindow, 
- *       ncsCreateWindowIndirect, ncsCreateMainWindow, 
+ * \sa ncsGetComponentClass, ncsCreateWindow,
+ *       ncsCreateWindowIndirect, ncsCreateMainWindow,
  *       ncsCreateMainWindowIndirect
  */
 BOOL ncsRegisterComponent(mComponentClass *compCls, \
@@ -365,7 +365,7 @@ BOOL ncsRegisterComponent(mComponentClass *compCls, \
  * \note the class_name must be registered into MiniGUI by calling ncsRegisterComponent
  *
  * \param class_name the class name to find
- * \param check check the class name with found mComponentClass instance, 
+ * \param check check the class name with found mComponentClass instance,
  *              to ensure that we found the right class
  *
  * \return the mComponentClass pointer if sucess, NULL otherwise
@@ -413,7 +413,7 @@ None
 
 - `MSG_NCCREATE`
 - Description: the first message of the window when the window non client area
-is created. Now the window is still not built, and the functions with the 
+is created. Now the window is still not built, and the functions with the
 window sentence handle as the parameter cannot be called
 - Callback: void (* `NCS_CB_ONNCCREATE)(mWidget` *);
 * Returned value: none
@@ -422,8 +422,8 @@ window sentence handle as the parameter cannot be called
 
 - `MSG_CREATE`
 - Description: generated when the window is created.
-- Callback: typedef `BOOL(*`) `NCS_CB_ONCREATE` (mWidget *, `DWORD` 
-`dwAddData`) 
+- Callback: typedef `BOOL(*`) `NCS_CB_ONCREATE` (mWidget *, `DWORD`
+`dwAddData`)
 * Returned value: `TRUE` – continue creating; `FALSE` – exit creating
 * Parameter
 * `mWidget` *
@@ -446,7 +446,7 @@ window sentence handle as the parameter cannot be called
 ```cpp
 /**
  * A struct wrap the NCS_CREATE_INFO
- * 
+ *
  * \note only allowed using in \ref ncsCreateMainWindow
  * Don't use it directly
  *
@@ -457,7 +457,7 @@ typedef struct _NCS_MAIN_CREATE_INFO {
      * The class name of a mMainWnd or its child class
      *
      * \note if className is NULL or an invalidate class name
-     * \ref ncsCreateMainWindow and ncsCreateMainWindowIndirect 
+     * \ref ncsCreateMainWindow and ncsCreateMainWindowIndirect
          *        use \ref CTRL_MINIMAINWND replaced
      *
      * \sa CTRL_MINIMAINWND
@@ -470,7 +470,7 @@ typedef struct _NCS_MAIN_CREATE_INFO {
 }NCS_MAIN_CREATE_INFO;
 
 /**
- * \fn mWidget* ncsCreateMainWindow (const char *class_name, const char *caption, 
+ * \fn mWidget* ncsCreateMainWindow (const char *class_name, const char *caption,
  *             DWORD style, DWORD ex_style, \
  *             int id, int x, int y, int w, int h, HWND host, \
  *             HICON hIcon, HMENU hMenu, NCS_PROP_ENTRY * props, \
@@ -478,10 +478,10 @@ typedef struct _NCS_MAIN_CREATE_INFO {
  *             NCS_EVENT_HANDLER * handlers, \
  *             DWORD add_data);
  *
- *    \brief create a NCS main window 
+ *    \brief create a NCS main window
  *
- *    \param class_name the class name of widget. 
- *           the class name must be register by \ref ncsRegisterComponent. 
+ *    \param class_name the class name of widget.
+ *           the class name must be register by \ref ncsRegisterComponent.
  *           And must be \ref CTRL_MINIMAINWND or its dirved class.
  *    \param caption the caption of the main window
  *    \param style  the style of main window
@@ -493,23 +493,23 @@ typedef struct _NCS_MAIN_CREATE_INFO {
  *    \param h the height of main window
  *  \param host the handle of host window, can be NULL
  *  \param hIcon the icon of main window
- *  \param hMenu the menu bar handle 
+ *  \param hMenu the menu bar handle
  *  \param props the properties array pointer, end by {-1, 0} if it's not NULL
  *  \param rdr_info the renderer info pointer
- *  \param handlers the handlers of event array pointer, 
+ *  \param handlers the handlers of event array pointer,
  *               end by {-1, NULL}, if it's not NULL
- *  \param add_data the additional data send to callback \ref NCS_CB_ONCREATE 
+ *  \param add_data the additional data send to callback \ref NCS_CB_ONCREATE
  *               and \ref NCS_CB_ONINITDLG
  *
- *  \return mWidget* - a mWidget pointer, must be a mMainWnd instance 
+ *  \return mWidget* - a mWidget pointer, must be a mMainWnd instance
  *
- *  \sa ncsCreateWindow,ncsCreateWindowIndirect, nscCreateMainWindowIndirect, 
- *        NCS_PROP_ENTRY, NCS_RDR_INFO, NCS_EVENT_HANDLER, NCS_CB_ONCREATE, 
+ *  \sa ncsCreateWindow,ncsCreateWindowIndirect, nscCreateMainWindowIndirect,
+ *        NCS_PROP_ENTRY, NCS_RDR_INFO, NCS_EVENT_HANDLER, NCS_CB_ONCREATE,
  *        mWidget, mInvisibleComponent , mMainWnd
  *
- *  
+ *
  */
-mWidget* ncsCreateMainWindow (const char *class_name, const char *caption, 
+mWidget* ncsCreateMainWindow (const char *class_name, const char *caption,
         DWORD style, DWORD ex_style, \
         int id, int x, int y, int w, int h, HWND host, \
         HICON hIcon, HMENU hMenu,
@@ -535,7 +535,7 @@ struct _NCS_WND_TEMPLATE{
      */
     int                 id;
     /**
-     * The Location and Size of mWidget, ignored if class_name 
+     * The Location and Size of mWidget, ignored if class_name
          *  is a \ref mInvisibleComponent
      */
     int                 x, y, w, h;
@@ -576,7 +576,7 @@ struct _NCS_WND_TEMPLATE{
  * \brief create a mComponent by \ref NCS_WND_TEMPLATE,
  *
  * \param tmpl the template pointer
- * \param hParent the parent handle, if NCS_WND_TEMPLATE.class_name 
+ * \param hParent the parent handle, if NCS_WND_TEMPLATE.class_name
  *              is a \ref mInvisibleComponent, hParent must releated a mWidget object
  *
  * \return mWidget* - then pointer of object or NULL if failed
@@ -649,9 +649,9 @@ static inline mWidget* ncsObjFromHandle(HWND hwnd)
 
 /**
  * \fn static inline mWidget* ncsGetChildObj(HWND hwnd, int id);
- * \breif Get the child object pointer of window 
+ * \breif Get the child object pointer of window
  *
- * \param hwnd - the handle of window, which can be a normal 
+ * \param hwnd - the handle of window, which can be a normal
  *                           MiniGUI window or a NCS window
  * \param id - the child id. The child must be a NCS window
  *
@@ -666,9 +666,9 @@ static inline mWidget* ncsGetChildObj(HWND hwnd, int id)
  * \fn static inline mWidget* ncsGetParentObj(HWND hwnd)
  * \brief Get the parent object pointer of window
  *
- * \param hwnd - the handle of child window, which can be a 
+ * \param hwnd - the handle of child window, which can be a
  *                           normal MiniGUI window or a NCS window
- * 
+ *
  * \return mWidget * the instance of parent of hwnd
  */
 static inline mWidget* ncsGetParentObj(HWND hwnd)

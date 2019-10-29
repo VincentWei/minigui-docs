@@ -21,12 +21,12 @@ input of the users, that is to say, it is not necessary to receive any input
 
 The inheritance relations of static box series controls are as follows:
 - `mStatic`
-- `mImage`
-- `mRect`
-- `mGroupbox`
-- `mButtonGroup`
-- `mLEDLabel`
-- `mSeparator`
+   - `mImage`
+   - `mRect`
+   - `mGroupbox`
+      - `mButtonGroup`
+   - `mLEDLabel`
+   - `mSeparator`
 
 Static box of each type inherits the property, event and method of the parent
 class, therefore, in the following introduction, the inheritance part will be
@@ -39,14 +39,15 @@ ignored automatically.
 - Function: `mStatic` is the static region control used to draw content
 including texts and images etc.
 - Parent class: `mWidget`
-- Direct child class:
-- `mImage`
-- `mRect`
-- `mGroupbox`
-- `mLEDLabel`
-- `mSeparator`
+- Direct child classes:
+   - `mImage`
+   - `mRect`
+   - `mGroupbox`
+   - `mLEDLabel`
+   - `mSeparator`
 
 ### Style of `mStatic`
+
 None
 
 ### Property of `mStatic`
@@ -59,15 +60,15 @@ None
 
 - `NCSP_STATIC_ALIGN：Set` control content as horizontal alignment mode, and
 there are three kinds of values
-- `NCS_ALIGN_LEFT：left` aligned, default value of horizontal alignment mode - 0
-- `NCS_ALIGN_RIGHT：right` aligned – 1
-- `NCS_ALIGN_CENTER：center` aligned – 2
+   - `NCS_ALIGN_LEFT：left` aligned, default value of horizontal alignment mode - 0
+   - `NCS_ALIGN_RIGHT：right` aligned – 1
+   - `NCS_ALIGN_CENTER：center` aligned – 2
 - `NCSP_STATIC_VALIGN：set` control content as vertical alignment mode, and 
 there are three kinds of values
-- `NCS_VALIGN_TOP：top` aligned – 0
-- `NCS_VALIGN_BOTTOM：bottom` aligned, default value of vertical alignment mode 
-– 1
-- `NCS_VALIGN_CENTER：center` aligned – 2
+   - `NCS_VALIGN_TOP：top` aligned – 0
+   - `NCS_VALIGN_BOTTOM：bottom` aligned, default value of vertical alignment mode 
+   – 1
+   - `NCS_VALIGN_CENTER：center` aligned – 2
 - `NCSP_STATIC_AUTOWRAP：set` static box content as automatic wrap mode or not, 
 0 is single row mode, which is closing automatic wrap mode, and 1 is automatic
 wrap mode
@@ -365,10 +366,10 @@ int MiniGUIMain(int argc, const char* argv[])
 | `NCSP_STATIC_VALIGN` | int | `RW` | Set vertical alignment mode of image control content | `NCS_VALIGN_TOP`, `NCS_VALIGN_BOTTOM`, `NCS_VALIGN_CENTER` |
 
 - `NCSP_IMAGE_DRAWMODE：set` image drawing mode, and there are three modes.
-- `NCS_DM_NORMAL：display` image according to the original condition, and 
-default value of the drawing mode – 0
-- `NCS_DM_SCALED：stretch`, stretch the image to cover the whole static box-1
-- `NCS_DM_TILED：tile`, display the image repeatedly in the whole static box-2
+   - `NCS_DM_NORMAL：display` image according to the original condition, and 
+   default value of the drawing mode – 0
+   - `NCS_DM_SCALED：stretch`, stretch the image to cover the whole static box-1
+   - `NCS_DM_TILED：tile`, display the image repeatedly in the whole static box-2
 - `NCSP_STATIC_ALIGN：refer` to `mStatic`
 - `NCSP_STATIC_VALIGN：refer` to `mStatic`
 
@@ -1153,7 +1154,7 @@ according to functions, and grouping all the options in the group box can
 provide logicalized visible prompt to the users.
 - Inherited from `mStatic`
 - Direct child class:
-- `mButtongroup`
+   - `mButtongroup`
 
 ### Property of `mGroupbox`
 None

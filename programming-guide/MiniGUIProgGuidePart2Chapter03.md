@@ -7,9 +7,9 @@ MiniGUI 3.0.
 
 Renderer separates the management logic of window from drawing of window.
 `MiniGUi` is only responsible for managing window, while renderer finishes
-drawing of window non-client area. Concept of renderer is similar to the 
+drawing of window non-client area. Concept of renderer is similar to the
 concept of skin or theme. The differences are:
-1. MiniGUI provides special renderer interface, which is implemented by 
+1. MiniGUI provides special renderer interface, which is implemented by
 concrete renderer
 1. Renderer is composed of a group of interface realizations and a group of
 property definitions
@@ -43,8 +43,8 @@ different interfaces. It falls into the category of control renderer.
 
 ## Resources Management
 
-In the new control set, as an independent module, resources management module 
-is mainly responsible for managing the resource package, including the 
+In the new control set, as an independent module, resources management module
+is mainly responsible for managing the resource package, including the
 functions of loading, accessing and unloading the resource package. When it
 accesses the resources, it gets the content needed through appointing the
 resource package where the resource lies in and information such as the unique
@@ -103,7 +103,7 @@ Resource types that the current resource package supports are:
 Resource package is divided into built-in format and external file. No matter
 which, it is necessary to firstly load resource package when the system starts,
 and then access the internal resource, and finally unload the resource package
-correctly after the system exits,. When accessing non built-in resource 
+correctly after the system exits,. When accessing non built-in resource
 package, it is necessary to use the following interfaces:
 
 ```cpp
@@ -121,7 +121,7 @@ necessary to firstly get memory resource package information interface
 (`ncsGetIncoreResPackInfo`), return the concrete information of the memory
 resource package, and then use the interface (`ncsLoadResPackageFromMem`) loading
 resource package from the memory to load resource package, and finally use the
-same unload interface (`ncsUnloadResPackage`) as provided above to unload 
+same unload interface (`ncsUnloadResPackage`) as provided above to unload
 resource package. `NcsGetIncoreResPackInfo` interface is provided by built-in
 conversion tool, which is generated when using the built-in tool to convert the
 specified resource package file to built-in resource, and application does not
@@ -166,9 +166,9 @@ package after setting, and the two parameters represent the language code and
 country code:
 - language code is represented by two English lower case letters.
 - country code needs to be represented by two to three English lower case
-letters. 
+letters.
 
-If setting American English as default locale, it can be implemented through 
+If setting American English as default locale, it can be implemented through
 the following statement:
 
 ```cpp
@@ -369,16 +369,16 @@ ANGUILLA                                        AI      AIA     660
 ANTARCTICA                                      AQ      ATA     010
 ANTIGUA AND BARBUDA                             AG      ATG     028
 ARGENTINA                                       AR      ARG     032
-ARMENIA                                         AM      ARM     051  
+ARMENIA                                         AM      ARM     051
 ARUBA                                           AW      ABW     533
 AUSTRALIA                                       AU      AUS     036
 AUSTRIA                                         AT      AUT     040
-AZERBAIJAN                                      AZ      AZE     031  
+AZERBAIJAN                                      AZ      AZE     031
 BAHAMAS                                         BS      BHS     044
 BAHRAIN                                         BH      BHR     048
 BANGLADESH                                      BD      BGD     050
 BARBADOS                                        BB      BRB     052
-BELARUS                                         BY      BLR     112  
+BELARUS                                         BY      BLR     112
 BELGIUM                                         BE      BEL     056
 BELIZE                                          BZ      BLZ     084
 BENIN                                           BJ      BEN     204
@@ -412,10 +412,10 @@ CONGO, Republic of                              CG      COG     178
 COOK ISLANDS                                    CK      COK     184
 COSTA RICA                                      CR      CRI     188
 COTE D'IVOIRE                                   CI      CIV     384
-CROATIA (local name: Hrvatska)                  HR      HRV     191      
+CROATIA (local name: Hrvatska)                  HR      HRV     191
 CUBA                                            CU      CUB     192
 CYPRUS                                          CY      CYP     196
-CZECH REPUBLIC                                  CZ      CZE     203  
+CZECH REPUBLIC                                  CZ      CZE     203
 DENMARK                                         DK      DNK     208
 DJIBOUTI                                        DJ      DJI     262
 DOMINICA                                        DM      DMA     212
@@ -425,7 +425,7 @@ EGYPT                                           EG      EGY     818
 EL SALVADOR                                     SV      SLV     222
 EQUATORIAL GUINEA                               GQ      GNQ     226
 ERITREA                                         ER      ERI     232
-ESTONIA                                         EE      EST     233  
+ESTONIA                                         EE      EST     233
 ETHIOPIA                                        ET      ETH     231
 FALKLAND ISLANDS (MALVINAS)                     FK      FLK     238
 FAROE ISLANDS                                   FO      FRO     234
@@ -437,7 +437,7 @@ FRENCH POLYNESIA                                PF      PYF     258
 FRENCH SOUTHERN TERRITORIES                     TF      ATF     260
 GABON                                           GA      GAB     266
 GAMBIA                                          GM      GMB     270
-GEORGIA                                         GE      GEO     268  
+GEORGIA                                         GE      GEO     268
 GERMANY                                         DE      DEU     276
 GHANA                                           GH      GHA     288
 GIBRALTAR                                       GI      GIB     292
@@ -466,24 +466,24 @@ ITALY                                           IT      ITA     380
 JAMAICA                                         JM      JAM     388
 JAPAN                                           JP      JPN     392
 JORDAN                                          JO      JOR     400
-KAZAKHSTAN                                      KZ      KAZ     398  
+KAZAKHSTAN                                      KZ      KAZ     398
 KENYA                                           KE      KEN     404
 KIRIBATI                                        KI      KIR     296
 KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF          KP      PRK     408
 KOREA, REPUBLIC OF                              KR      KOR     410
 KUWAIT                                          KW      KWT     414
-KYRGYZSTAN                                      KG      KGZ     417  
+KYRGYZSTAN                                      KG      KGZ     417
 LAO PEOPLE'S DEMOCRATIC REPUBLIC                LA      LAO     418
-LATVIA                                          LV      LVA     428  
+LATVIA                                          LV      LVA     428
 LEBANON                                         LB      LBN     422
 LESOTHO                                         LS      LSO     426
 LIBERIA                                         LR      LBR     430
 LIBYAN ARAB JAMAHIRIYA                          LY      LBY     434
 LIECHTENSTEIN                                   LI      LIE     438
-LITHUANIA                                       LT      LTU     440  
+LITHUANIA                                       LT      LTU     440
 LUXEMBOURG                                      LU      LUX     442
 MACAU                                           MO      MAC     446
-MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF      MK      MKD     807 
+MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF      MK      MKD     807
 MADAGASCAR                                      MG      MDG     450
 MALAWI                                          MW      MWI     454
 MALAYSIA                                        MY      MYS     458
@@ -494,10 +494,10 @@ MARSHALL ISLANDS                                MH      MHL     584
 MARTINIQUE                                      MQ      MTQ     474
 MAURITANIA                                      MR      MRT     478
 MAURITIUS                                       MU      MUS     480
-MAYOTTE                                         YT      MYT     175  
+MAYOTTE                                         YT      MYT     175
 MEXICO                                          MX      MEX     484
 MICRONESIA, FEDERATED STATES OF                 FM      FSM     583
-MOLDOVA, REPUBLIC OF                            MD      MDA     498  
+MOLDOVA, REPUBLIC OF                            MD      MDA     498
 MONACO                                          MC      MCO     492
 MONGOLIA                                        MN      MNG     496
 MONTSERRAT                                      MS      MSR     500
@@ -550,8 +550,8 @@ SERBIA AND MONTENEGRO                           CS      SCG     891
 SEYCHELLES                                      SC      SYC     690
 SIERRA LEONE                                    SL      SLE     694
 SINGAPORE                                       SG      SGP     702
-SLOVAKIA                                        SK      SVK     703  
-SLOVENIA                                        SI      SVN     705  
+SLOVAKIA                                        SK      SVK     703
+SLOVENIA                                        SI      SVN     705
 SOLOMON ISLANDS                                 SB      SLB     090
 SOMALIA                                         SO      SOM     706
 SOUTH AFRICA                                    ZA      ZAF     710
@@ -566,7 +566,7 @@ SWEDEN                                          SE      SWE     752
 SWITZERLAND                                     CH      CHE     756
 SYRIAN ARAB REPUBLIC                            SY      SYR     760
 TAIWAN                                          TW      TWN     158
-TAJIKISTAN                                      TJ      TJK     762  
+TAJIKISTAN                                      TJ      TJK     762
 TANZANIA, UNITED REPUBLIC OF                    TZ      TZA     834
 THAILAND                                        TH      THA     764
 TIMOR-LESTE                                     TL      TLS     626
@@ -576,7 +576,7 @@ TONGA                                           TO      TON     776
 TRINIDAD AND TOBAGO                             TT      TTO     780
 TUNISIA                                         TN      TUN     788
 TURKEY                                          TR      TUR     792
-TURKMENISTAN                                    TM      TKM     795  
+TURKMENISTAN                                    TM      TKM     795
 TURKS AND CAICOS ISLANDS                        TC      TCA     796
 TUVALU                                          TV      TUV     798
 UGANDA                                          UG      UGA     800
@@ -586,7 +586,7 @@ UNITED KINGDOM                                  GB      GBR     826
 UNITED STATES                                   US      USA     840
 UNITED STATES MINOR OUTLYING ISLANDS            UM      UMI     581
 URUGUAY                                         UY      URY     858
-UZBEKISTAN                                      UZ      UZB     860  
+UZBEKISTAN                                      UZ      UZB     860
 VANUATU                                         VU      VUT     548
 VATICAN CITY STATE (HOLY SEE)                   VA      VAT     336
 VENEZUELA                                       VE      VEN     862
@@ -603,8 +603,8 @@ ZIMBABWE                                        ZW      ZWE     716
 #### Create Window UI
 
 When the resource package is used, the creating main window interface provided
-by mGNCS is more simple compared to creating main window of MiniGUI. 
-Description of the look and feel information of the main window is stored in 
+by mGNCS is more simple compared to creating main window of MiniGUI.
+Description of the look and feel information of the main window is stored in
 the resource package, and the interface can start the interface through window
 resource ID.
 - owner parameter refers to the hosting window;
@@ -621,8 +621,8 @@ mMainWnd* ncsCreateMainWindowIndirectFromID (HPACKAGE package,
                     DWORD user_data);
 ```
 
-The method of creating dialog box through window resource ID is similar to 
-the main window. Creating interface through resource ID, the parameter 
+The method of creating dialog box through window resource ID is similar to
+the main window. Creating interface through resource ID, the parameter
 meaning is also similar to the interface of the main window created above:
 
 ```cpp
@@ -646,7 +646,7 @@ Create example codes of UI main window through the resource package:
 
 #### Get Character String
 
-The method of getting string through resource package is very simple. It is 
+The method of getting string through resource package is very simple. It is
 only necessary to transfer the resource ID to interface `ncsGetString`, and
 the management module will return the default locale string to the application
 according to the current locale information.
@@ -662,7 +662,7 @@ Get example codes of string through resource package:
 ```
 
 - Note: mGNCS reserves the ID value from `NCSRM_SYSSTR_BASEID` to
-`NCSRM_SYSSTR_MAXID` as the system ID, and public definitions can be 
+`NCSRM_SYSSTR_MAXID` as the system ID, and public definitions can be
 returned, such as default renderer: `NCSRM_SYSSTR_DEFRDR`
 
 #### Get Bitmap
@@ -698,7 +698,7 @@ void ncsReleaseMyBitmap (PMYBITMAP myBmp);
 
 Through renderer ID contained in the resource pack, specified window can be
 set, making it has the window element look and feel property under the renderer
-configuration. But only the renderer used in the current window by the 
+configuration. But only the renderer used in the current window by the
 interface has the same name as the newly set renderer, and it can be valid only
 when the window class is the child class of the new renderer affiliated control
 class, otherwise failure will be returned, and the setting is not successful.
@@ -716,7 +716,7 @@ BOOL ncsSetSysRdr(HPACKAGE package, Uint32 rdrSetId);
 
 ### Example
 
-This instance demonstrates how to use resources management part interface to 
+This instance demonstrates how to use resources management part interface to
 get resources to the users. This part of codes is automatically generated by
 miniStudio tool.
 

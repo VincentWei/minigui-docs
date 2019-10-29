@@ -25,12 +25,12 @@ buttons, thus buttons can be used more flexibly.
 
 - Class hierarchical relation related to buttons
 
-- [ `mWidget` ](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-* [ `mButton` ](MiniGUIProgGuidePart2Chapter06#mButton.md)
-* [ `mCheckButton` ](MiniGUIProgGuidePart2Chapter06#m_CheckButton.md)
-* [ `mRadioButton` ](MiniGUIProgGuidePart2Chapter06#m_RadioButton.md)
-* [ `mMenuButton` ](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) (mPopMenuMgr is used)
-* [ `mColorButton` ](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
+- [`mWidget`](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+   - [`mButton`](MiniGUIProgGuidePart2Chapter06#mButton.md)
+      - [`mCheckButton`](MiniGUIProgGuidePart2Chapter06#m_CheckButton.md)
+      - [`mRadioButton`](MiniGUIProgGuidePart2Chapter06#m_RadioButton.md)
+      - [`mMenuButton`](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) (mPopMenuMgr is used)
+      - [`mColorButton`](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
 
 - Control creating method
 - Automatic creation: through interface designer in miniStudio, corresponding
