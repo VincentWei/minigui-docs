@@ -61,7 +61,7 @@ examples based on the four types of renderers.
 simple ones can be represented by literals and can be marked by images, and 
 they can be displayed by mixture of images and literals.
 
-![alt](figures/push_botton.PNG)
+![alt](figures/push_botton.png)
 
 
 To understand programming of buttons, firstly, it is necessary to understand 
@@ -315,25 +315,23 @@ window
 - *Brief introduction*: Check box button, mainly used on multi-selection
 occasion. The common pattern is a box, and the user checks or unchecks the box.
 
-![alt](figures/check_button.PNG)
+![alt](figures/check_button.png)
 
 
 ### Property of `mCheckButton`
-It is inherited from the property of <a href="#Property of
-`mButton"/>mButton</a>`. 
+It is inherited from the property of `mButton`.
 
 ### Event of `mCheckButton`
-It is inherited from the event of <a href="#Event of `mButton"/>mButton</a>`.
+It is inherited from the event of `mButton`.
 
 ### Renderers of `mCheckButton`
-- For the usage of renderers, see [look and feel
-renderer](MStudioMGNCSV1dot0PGENP2C2) 
+- For the usage of renderers, see [look and feel renderer](MStudioMGNCSV1dot0PGENP2C2)
 
 #### `mCheckButton` Classic Renderer
 
 - Drawing of renderer in the `mCheckButton` Classic text region is as below: 
 for the drawing of non client area, please refer to the renderer of
-[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget). 
+[mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 | `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="%ATTACHURLPATH%/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
@@ -479,7 +477,7 @@ button is selected, the originally selected button will cancel the selection.
 When the single selection button is used independently, its behavior is similar
 to that of a <a ref="#m_Checkbutton">mCheckbutton</a>.
 
-![alt](figures/radio_button.PNG)
+![alt](figures/radio_button.png)
 
 
 ### Property of `mRadiobutton`
@@ -655,7 +653,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 up. Select the menu item through keyboard or mouse, and the selected menu item
 will display on the button.
 
-![alt](figures/menu_button.PNG)
+![alt](figures/menu_button.png)
 
 
 `mMenuButton` is inherited from
@@ -833,7 +831,7 @@ When clicking the button, color selection box pops up, and the user selects the
 color. After confirmation, the selected color displays effect on the button
 panel. 
 
-![alt](figures/color_button.PNG)
+![alt](figures/color_button.png)
 
 
 `mColorButton` uses `ColorSelectDialog` of mgutils to select color, and the
