@@ -3,7 +3,7 @@
 ## Brief Introduction to Animation Control
 
 Animation control provides rich visual experience to the users through drawing
-and displaying image group and GIF dynamic images. Animation control in mGNCS 
+and displaying image group and GIF dynamic images. Animation control in mGNCS
 is derived from animation control of MiniGUI 3.0, and based on it, support to
 image group play and GIF image play control is added. At the same time, users
 can control the play speed through setting image play interval.
@@ -15,12 +15,12 @@ Animate class hierarchical relationship:
 
 Control creating method
 - Automatic creation: through interface designer in miniStudio, drag
-corresponding animation control, select `GIF` image or image directory that 
+corresponding animation control, select `GIF` image or image directory that
 need to load in the property column, and miniStudio will automatically create
 control and provides visual control configuration, at the same time, creation
 codes are generated automatically.
 - Manual generation: according to mGNCS control creating process, through
-programming, corresponding control window class ID is imported, and control 
+programming, corresponding control window class ID is imported, and control
 is generated. Manual programming sets control property and event handling.
 
 ## mAnimate
@@ -72,7 +72,7 @@ BOOL ncsAnimateStart(mAnimate* self);
 - Explanation:
 Start to play the animation control that self corresponds to. If the animation
 control is being played, then return to the animation starting point to begin
-playing. 
+playing.
 - Example:
 
 ```cpp
@@ -90,8 +90,8 @@ BOOL ncsAnimatePauseResume(mAnimate* self);
     - self -- animation control pointer that needs operation
 - Explanation:
 If the current animation is paused, this method will continue to play the
-animation. If the animation is in play, this method will pause to the 
-animation. 
+animation. If the animation is in play, this method will pause to the
+animation.
 - Example:
 
 ```cpp

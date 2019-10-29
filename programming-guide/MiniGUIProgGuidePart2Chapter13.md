@@ -2,21 +2,21 @@
 
 ## Brief Introduction to Edit Box Control
 
-Edit box control is one of the essential controls in GUI system, which is 
+Edit box control is one of the essential controls in GUI system, which is
 mainly used to receive character input of the users and realize the function of
 user interaction and text edition. In Realization, it is divided into single
 line edit and multi-line edit. Single line edit box is used to receive single
-line text input with comparatively simple user content, in comparison, 
+line text input with comparatively simple user content, in comparison,
 multi-line text is used to receive complicated and large volume of text input.
 
 - Class hierarchical relation of edit box
 - [`mWidget`](MStudioMGNCSV1dot0PGP2C3#mWidget)
    * [`mScrollWidget`](MStudioMGNCSV1dot0PGP2C7#m_ScrollWidget)
-   * [`mItemView`](MStudioMGNCSV1dot0PGP2C)
-   * [`mScrollView`](MStudioMGNCSV1dot0PGP2C)
-   * [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit)
-   * [`mSlEdit`](MStudioMGNCSV1dot0PGP2C12#m_SlEdit)
-   * [`mMlEdit`](MStudioMGNCSV1dot0PGP2C12#m_MlEdit)
+      * [`mItemView`](MStudioMGNCSV1dot0PGP2C)
+         * [`mScrollView`](MStudioMGNCSV1dot0PGP2C)
+            * [`mEdit`](MStudioMGNCSV1dot0PGP2C12#mEdit)
+               * [`mSlEdit`](MStudioMGNCSV1dot0PGP2C12#m_SlEdit)
+               * [`mMlEdit`](MStudioMGNCSV1dot0PGP2C12#m_MlEdit)
 
 - Example diagram
 
@@ -81,10 +81,10 @@ void setContent(mEdit *self, const char* str, int start, int len)
 
 - Parameter
    - str -- literal content displayed in edi
-   - start -- display starting location (relative to the starting location of 
+   - start -- display starting location (relative to the starting location of
      str), 0 represents starting from the beginning
    - len -- display character number, -1 represents ending till the end of str
-- Explanation: 
+- Explanation:
 Set the display content of the edit box. The method will get altogether
 characters from No. character location from str character string, and replace
 the existing content in edit.
@@ -98,7 +98,7 @@ _c(edit)->setContent(edit, "dddd Show Me", 6, -1);
 #### `replaceText`
 
 ```cpp
-void replaceText(mEdit *self, const char* str, 
+void replaceText(mEdit *self, const char* str,
     int start, int len, int replace_start, int replace_end)
 ```
 
@@ -110,12 +110,12 @@ void replaceText(mEdit *self, const char* str,
    ending till str
    - `replace_start` -- replace the starting location (relative to the existing
    content in edit)
-   - `replace_end` -- replace the ending location (relative to the existing 
+   - `replace_end` -- replace the ending location (relative to the existing
    content in edit)
-- Explanation: 
+- Explanation:
 Replacement of character string, the method will get altogether characters
-starting from No. character location from str character string, and replaces 
-the existing content from to in edit. Str is the character string to be 
+starting from No. character location from str character string, and replaces
+the existing content from to in edit. Str is the character string to be
 replaced to, start is the starting location relative to str, 0 represents
 starting from the beginning, len is the length, -1 represents ending till the
 end of str, `replace_start` and `replace_end` are the starting point and ending
@@ -136,16 +136,16 @@ void insert(mEdit *self, const char* str, int start, int len, int at)
 ```
 - Parameter
    - str -- source character string to be inserted
-   - start -- starting location of the source text used, 0 represents starting 
+   - start -- starting location of the source text used, 0 represents starting
    from the beginning
    - len -- length of the source text used, -1 represents starting from start, and
    ending till str
-   - at -- location of the insert point (relative to the existing content in 
+   - at -- location of the insert point (relative to the existing content in
    edit), -1 represents the end
-- Explanation: 
+- Explanation:
 Insert of the character string, the method will get altogether characters
 starting from No. character location in str character string, and it is
-inserting into location of No. character of the existing content in edit. Str 
+inserting into location of No. character of the existing content in edit. Str
 is the character string to be inserted, start is the starting location relative
 to str, 0 represents starting from the beginning, len is the length, -1
 represents ending till the end of str, at parameter is the location to insert,
@@ -153,7 +153,7 @@ and it is the location deviation relative to the existing text content in edit
 - Example:
 
 ```cpp
-//In edit, character string starting from the sixth character till the end of the character string “dddd Show Me” will be used (here it is “Show Me”), 
+//In edit, character string starting from the sixth character till the end of the character string “dddd Show Me” will be used (here it is “Show Me”),
 // To insert to after the second character of the existing text in edit
 _c(edit)->insert(edit, "dddd Show Me", 6, -1,  2);
 ```
@@ -165,15 +165,15 @@ void append(mEdit *self, const char* str, int start, int len)
 ```
 - Parameter
    - str -- source character string to append
-   - start -- starting location of the source text used, 0 represents starting 
+   - start -- starting location of the source text used, 0 represents starting
    from the beginning
    - len -- length of the source text used, -1 represents starting from start and
    ending till str
-- Explanation: 
+- Explanation:
 Append the character string, the method will get altogether characters starting
 from No. character location from str character string, and append to after the
 existing content in edit. str is the character string to append, start is the
-starting location relative to str, 0 represents starting from the beginning, 
+starting location relative to str, 0 represents starting from the beginning,
 len is the length, and -1 represents ending till the end of str.
 - Example:
 ```cpp
@@ -209,7 +209,7 @@ int getContent(mEdit *self, char *strbuff, int buf_len, int start, int end)
 Get character string content in edit, and get the content from to location from
 the existing content and write into strbuff, and the maximum number to write in
 is limited to `buff_len.`
-- Example: 
+- Example:
 
 ```cpp
 char buff[128];
@@ -223,15 +223,15 @@ _c(edit)->getContent(edit, buff, 127, 0, -1); // Get out all the content in edit
     int getSel(mEdit *self, int *pstart, int *pend)
 ```
 
-- Parameter: 
+- Parameter:
    - start \end -- starting point and ending point of the selected region
    - pstart\pend -- starting point and ending point of the selected region, used
    for function return
-- Explanation: 
+- Explanation:
 Set and get the region of the selected text, and the last two parameters
 correspond to the starting point and ending point of the selected region
-respectively 
-- Example: 
+respectively
+- Example:
 
 ```cpp
 _c(edit)->setSel(edit, 2, 10); // Set No.2 to No.10 characters of edit as selected status
@@ -245,12 +245,12 @@ _c(edit)->getSel(edit, &ps, &pe); // Get the selected region
 ```cpp
 void setMargin(mEdit *self, int left, int top, int right, int bottom)
 ```
-- Parameter: 
+- Parameter:
    - left,top,right,bottom -- margin of left, top, right and bottom, the parameter
    is not a concept of rectangle, and it just continues to use the data structure
    of rectangle for the convenience of parameter transmission
 - Explanation: Set left, top, right and bottom margin of the edit region
-- Example: 
+- Example:
 
 ```cpp
 // Set margin
@@ -275,12 +275,12 @@ users can set operation set realized by itself through `setCopyPaste`.
 ```cpp
     BOOL makevisible(mEdit *self, int pos)
 ```
-- Parameter: 
+- Parameter:
    - pos -- location needs to be visible
-- Explanation: 
+- Explanation:
 Control scrolling of the edit region, making the characters of the location
 `pos` become visible.
-- Example: 
+- Example:
 
 ```cpp
 // Visible at No. 201 character

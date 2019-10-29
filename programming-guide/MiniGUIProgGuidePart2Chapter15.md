@@ -8,22 +8,22 @@ list item information of different types.
 Class inheritance relations of other advanced control classes are as below:
 
 - [mWidget](MStudioMGNCSV1dot0PGP2C3#mWidget)
-- [mScrollWidget](MStudioMGNCSV1dot0PGP2C7#m_ScrollWidget)
-   * [mItemView](MStudioMGNCSV1dot0PGP2C14#mItemView)
-   * [mListBox](MStudioMGNCSV1dot0PGP2C14#mListBox)
-   * [mScrollView](MStudioMGNCSV1dot0PGP2C14#mScrollView)
-   * [mIconview](MStudioMGNCSV1dot0PGP2C14#mIconView)
-   * [mListview](MStudioMGNCSV1dot0PGP2C14#mListView)
+   - [mScrollWidget](MStudioMGNCSV1dot0PGP2C7#m_ScrollWidget)
+      * [mItemView](MStudioMGNCSV1dot0PGP2C14#mItemView)
+         * [mListBox](MStudioMGNCSV1dot0PGP2C14#mListBox)
+         * [mScrollView](MStudioMGNCSV1dot0PGP2C14#mScrollView)
+         * [mIconview](MStudioMGNCSV1dot0PGP2C14#mIconView)
+         * [mListview](MStudioMGNCSV1dot0PGP2C14#mListView)
 
 In the advanced control class, list item is managed as an object. Different
 controls use different list item objects, and the inheritance relations are as
 below:
 
 - [mObject](MStudioMGNCSV1dot0PGP2C3#mObject)
-- [mItem](MStudioMGNCSV1dot0PGP2C14#mItem)
-   * [mItemManager](MStudioMGNCSV1dot0PGP2C14#mItemManager)
-   * [mListItem](MStudioMGNCSV1dot0PGP2C14#mListItem)
-   * [mListColumn](MStudioMGNCSV1dot0PGP2C14#mListColumn)
+   - [mItem](MStudioMGNCSV1dot0PGP2C14#mItem)
+      * [mItemManager](MStudioMGNCSV1dot0PGP2C14#mItemManager)
+         * [mListItem](MStudioMGNCSV1dot0PGP2C14#mListItem)
+      * [mListColumn](MStudioMGNCSV1dot0PGP2C14#mListColumn)
 
 Let’s firstly introduce the list item objects, and then concretely introduce
 the control classes.

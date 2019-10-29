@@ -9,8 +9,8 @@ These components is encapsulation to some functional templates, guaranteeing
 that they can be edited in miniStudio like control
 
 - `mObject`
-- `mComponent`
-   * `mInvsbComp`
+   - `mComponent`
+      * `mInvsbComp`
 
 ## `mInvsbComp`
 
