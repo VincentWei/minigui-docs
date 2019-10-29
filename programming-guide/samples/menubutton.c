@@ -21,7 +21,7 @@
 #define ID_BTN  101
 
 // START_OF_HANDLERS
-static void menubutton_onitemchanged(mMenuButton *self, int id, int nc, 
+static void menubutton_onitemchanged(mMenuButton *self, int id, int nc,
                                      DWORD add_data)
 {
     char szText[100];
@@ -47,7 +47,7 @@ static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
     {
         _c(mb1)->setProperty(mb1, NCSP_MNUBTN_POPMENU, (DWORD)popmenu);
     }
-    
+
     return TRUE;
 }
 
@@ -65,7 +65,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 // END_OF_HANDLERS
 
 // START_OF_RDRINFO
-NCS_RDR_ELEMENT btn_rdr_elements[] = 
+NCS_RDR_ELEMENT btn_rdr_elements[] =
 {
     { NCS_MODE_USEFLAT, 1},
     { -1, 0 }
@@ -79,7 +79,7 @@ static NCS_RDR_INFO btn_rdr_info[] =
 // START_OF_TEMPLATE
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_MENUBUTTON, 
+        NCSCTRL_MENUBUTTON,
         ID_BTN,
         40, 40, 100, 30,
         WS_BORDER | WS_VISIBLE,
@@ -95,7 +95,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 };
 
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 260, 180,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -115,7 +115,7 @@ int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
 
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

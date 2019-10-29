@@ -33,7 +33,7 @@ static void mymain_onClose(mWidget* self, int message)
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_SEPARATOR , 
+        NCSCTRL_SEPARATOR ,
         ID_GROUP,
         10, 10, 280, 5,
         WS_VISIBLE,
@@ -47,7 +47,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_SEPARATOR , 
+        NCSCTRL_SEPARATOR ,
         ID_GROUP,
         100, 20, 5, 200,
         WS_VISIBLE|NCSS_SPRTR_VERT,
@@ -71,7 +71,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 
 //define the main window template
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 320, 240,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -89,7 +89,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

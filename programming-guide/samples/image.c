@@ -32,7 +32,7 @@ static void set_icon_info(mWidget* self, int id, PBITMAP pbmp, int align_id, int
 {
     mImage *img;
     img = (mImage *)ncsGetChildObj(self->hwnd, id);
-    
+
     if(img){
         _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)pbmp);
         _c(img)->setProperty(img, align_id, align);
@@ -45,16 +45,16 @@ static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
     //TODO : initialize
     mImage *img;
     LoadBitmapFromFile(HDC_SCREEN, &bitmap, "image_test.jpg");
-    
+
     LoadBitmapFromFile(HDC_SCREEN, &icon, "icon.png");
-    
+
     set_icon_info(self, IDC_IMAGE1, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_LEFT);
     set_icon_info(self, IDC_IMAGE2, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_CENTER);
     set_icon_info(self, IDC_IMAGE3, &icon, NCSP_STATIC_ALIGN, NCS_ALIGN_RIGHT);
     set_icon_info(self, IDC_IMAGE4, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_TOP);
     set_icon_info(self, IDC_IMAGE5, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_CENTER);
     set_icon_info(self, IDC_IMAGE6, &icon, NCSP_STATIC_VALIGN, NCS_VALIGN_BOTTOM);
-    
+
     img = (mImage *)ncsGetChildObj(self->hwnd, IDC_IMAGE7);
     if(img){
         _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)&bitmap);
@@ -66,7 +66,7 @@ static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
         _c(img)->setProperty(img, NCSP_IMAGE_IMAGE, (DWORD)&bitmap);
         _c(img)->setProperty(img, NCSP_IMAGE_DRAWMODE, NCS_DM_TILED);
     }
-    
+
     return TRUE;
 }
 
@@ -83,7 +83,7 @@ static void mymain_onClose(mWidget* self, int message)
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, 10, 100, 20,
         WS_VISIBLE,
@@ -97,7 +97,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE1,
         10, 30, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -111,7 +111,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         130, 10, 100, 20,
         WS_VISIBLE,
@@ -125,7 +125,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE2,
         130, 30, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -139,7 +139,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         250, 10, 100, 20,
         WS_VISIBLE,
@@ -153,7 +153,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE3,
         250, 30, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -167,7 +167,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, 140, 100, 20,
         WS_VISIBLE,
@@ -181,7 +181,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE4,
         10, 160, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -195,7 +195,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         130, 140, 100, 20,
         WS_VISIBLE,
@@ -209,7 +209,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE5,
         130, 160, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -223,7 +223,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         250, 140, 100, 20,
         WS_VISIBLE,
@@ -237,7 +237,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE6,
         250, 160, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -251,7 +251,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, 270, 100, 20,
         WS_VISIBLE,
@@ -265,7 +265,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE7,
         10, 290, 280, 150,
         WS_BORDER | WS_VISIBLE,
@@ -279,7 +279,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         300, 270, 100, 20,
         WS_VISIBLE,
@@ -293,7 +293,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_IMAGE, 
+        NCSCTRL_IMAGE,
         IDC_IMAGE8,
         300, 290, 280, 150,
         WS_BORDER | WS_VISIBLE,
@@ -318,7 +318,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 
 //define the main window template
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 600, 480,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -336,7 +336,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

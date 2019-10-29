@@ -53,7 +53,7 @@ static SCORE scores[] =
 };
 
 static NCS_RDR_INFO rdr_info = {
-	"classic","classic",NULL
+    "classic","classic",NULL
 };
 
 static void btn_notify(mWidget *button, int id, int nc, DWORD add_data)
@@ -89,72 +89,72 @@ static void btn_notify(mWidget *button, int id, int nc, DWORD add_data)
 
 static NCS_EVENT_HANDLER btn_handlers [] = {
     NCS_MAP_NOTIFY(NCSN_WIDGET_CLICKED, btn_notify),
-	{0, NULL}	
+    {0, NULL}
 };
 
 static NCS_WND_TEMPLATE _ctrl_tmpl[] = {
-	{
-		NCSCTRL_LISTVIEW, 
-		IDC_LISTVIEW,
+    {
+        NCSCTRL_LISTVIEW,
+        IDC_LISTVIEW,
         10, 10, 320, 220,
         WS_BORDER | WS_VISIBLE | NCSS_LISTV_SORT | NCSS_LISTV_LOOP,
-		WS_EX_NONE,
-		"score table",
-		NULL, 
-		&rdr_info,
-		NULL, 
-		NULL,
-		0,
-		0 
-	},
-	{
-		NCSCTRL_BUTTON, 
-		IDC_BTN1,
+        WS_EX_NONE,
+        "score table",
+        NULL,
+        &rdr_info,
+        NULL,
+        NULL,
+        0,
+        0
+    },
+    {
+        NCSCTRL_BUTTON,
+        IDC_BTN1,
         240, 255, 80, 30,
         WS_VISIBLE | NCSS_NOTIFY,
-		WS_EX_NONE,
-		"everage score",
-		NULL, 
-		NULL,
-		btn_handlers, 
-		NULL,
-		0,
-		0
-	},
-	{
-		NCSCTRL_SLEDIT, 
-		IDC_SLEDIT,
-		100, 256, 80, 28,
-		WS_BORDER | WS_VISIBLE,
-		WS_EX_NONE,
+        WS_EX_NONE,
+        "everage score",
+        NULL,
+        NULL,
+        btn_handlers,
+        NULL,
+        0,
+        0
+    },
+    {
+        NCSCTRL_SLEDIT,
+        IDC_SLEDIT,
+        100, 256, 80, 28,
+        WS_BORDER | WS_VISIBLE,
+        WS_EX_NONE,
         "",
         NULL,
         NULL,
-		NULL,
-		NULL,
-		0,
-		0
-	},
+        NULL,
+        NULL,
+        0,
+        0
+    },
 };
 
 static NCS_EVENT_HANDLER mainwnd_handlers[] = {
-	{0, NULL}
+    {0, NULL}
 };
 
 static NCS_MNWND_TEMPLATE mainwnd_tmpl = {
-	NCSCTRL_DIALOGBOX, 
-	7,
-	0, 0, 350, 340,
-	WS_CAPTION | WS_BORDER | WS_VISIBLE,
-	WS_EX_NONE,
+    NCSCTRL_DIALOGBOX,
+    7,
+    0, 0, 350, 340,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
     "ListView Demo",
-	NULL,
+    NULL,
     &rdr_info,
-	mainwnd_handlers,
-	_ctrl_tmpl,
-	sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
-	0,
-	0, 0,
+    mainwnd_handlers,
+    _ctrl_tmpl,
+    sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
 };
 
 static HITEM add_class_item (mListView *self, NCS_LISTV_ITEMINFO *info)
@@ -206,7 +206,7 @@ static HITEM add_score_item (mListView *self, NCS_LISTV_ITEMINFO *info)
                 subdata[j].textColor = 0;
         }
     }
-    
+
     info->dataSize = SCORE_NUM;
     info->data = subdata;
 
@@ -281,15 +281,15 @@ static BOOL lstv_init(mDialogBox* self)
 
 int MiniGUIMain(int argc, const char* argv[])
 {
-	ncsInitialize();
-	mDialogBox* dialog = 
+    ncsInitialize();
+    mDialogBox* dialog =
         (mDialogBox *)ncsCreateMainWindowIndirect (&mainwnd_tmpl, HWND_DESKTOP);
 
     lstv_init(dialog);
-	_c(dialog)->doModal(dialog, TRUE);
+    _c(dialog)->doModal(dialog, TRUE);
 
-	MainWindowThreadCleanup(dialog->hwnd);
-	ncsUninitialize();
+    MainWindowThreadCleanup(dialog->hwnd);
+    ncsUninitialize();
 
-	return 0;
+    return 0;
 }

@@ -58,7 +58,7 @@ static void btn_onClicked(mWidget* _this, int id, int nc, HWND hCtrl)
     }
 };
 
-static NCS_EVENT_HANDLER btn_handlers[] = 
+static NCS_EVENT_HANDLER btn_handlers[] =
 {
     {NCS_NOTIFY_CODE(NCSN_WIDGET_CLICKED), btn_onClicked},
     {0, NULL}
@@ -75,23 +75,23 @@ static NCS_PROP_ENTRY static_props[] =
     {0, 0}
 };
 
-static NCS_PROP_ENTRY spin_props [] = 
+static NCS_PROP_ENTRY spin_props [] =
 {
-	{NCSP_SPNBOX_MAXPOS, 99},
-	{NCSP_SPNBOX_MINPOS, 0},
-	{NCSP_SPNBOX_CURPOS, 25},
-	{NCSP_SPNBOX_LINESTEP, 1},
-	{0, 0}
+    {NCSP_SPNBOX_MAXPOS, 99},
+    {NCSP_SPNBOX_MINPOS, 0},
+    {NCSP_SPNBOX_CURPOS, 25},
+    {NCSP_SPNBOX_LINESTEP, 1},
+    {0, 0}
 };
 
 #define HSTART  25
 #define HSPACE  40
 
-static NCS_WND_TEMPLATE _ctrl_templ[] = 
+static NCS_WND_TEMPLATE _ctrl_templ[] =
 {
 //START_OF_SLEDIT_TEMPLATE
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART, 70, 25,
         WS_VISIBLE,
@@ -102,7 +102,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {   //左对齐
-        NCSCTRL_SLEDIT, 
+        NCSCTRL_SLEDIT,
         ID_NAME,
         100, HSTART, 150, 25,
         WS_BORDER | WS_VISIBLE | NCSS_EDIT_LEFT,
@@ -113,7 +113,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART + HSPACE, 70, 25,
         WS_VISIBLE,
@@ -124,7 +124,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {
-        NCSCTRL_SPINBOX, 
+        NCSCTRL_SPINBOX,
         ID_SPIN,
         100, HSTART + HSPACE, 70, 25,
         WS_VISIBLE | NCSS_SPNBOX_NUMBER | NCSS_SPNBOX_AUTOLOOP,
@@ -135,7 +135,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART + 2 * HSPACE, 70, 25,
         WS_VISIBLE,
@@ -146,7 +146,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {   //居中对齐， 大写字母
-        NCSCTRL_SLEDIT, 
+        NCSCTRL_SLEDIT,
         ID_COUN,
         100, HSTART + 2 * HSPACE, 130, 25,
         WS_BORDER | WS_VISIBLE | NCSS_EDIT_CENTER | NCSS_EDIT_UPPERCASE,
@@ -157,7 +157,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART + 3 * HSPACE, 70, 25,
         WS_VISIBLE,
@@ -168,7 +168,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {   //小写字母
-        NCSCTRL_SLEDIT, 
+        NCSCTRL_SLEDIT,
         ID_CITY,
         100, HSTART + 3 * HSPACE, 150, 25,
         WS_BORDER | WS_VISIBLE | NCSS_EDIT_LOWERCASE,
@@ -179,7 +179,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART + 4 * HSPACE, 70, 25,
         WS_VISIBLE,
@@ -190,7 +190,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {   //密码输入形式的edit
-        NCSCTRL_SLEDIT, 
+        NCSCTRL_SLEDIT,
         ID_PSWD,
         100, HSTART + 4 * HSPACE, 150, 25,
         WS_BORDER | WS_VISIBLE | NCSS_SLEDIT_PASSWORD,
@@ -203,7 +203,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
 //END_OF_SLEDIT_TEMPLATE
 //START_OF_MLEDIT_TEMPLATE
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         0,
         10, HSTART + 5 * HSPACE, 70, 25,
         WS_VISIBLE,
@@ -214,10 +214,10 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         NULL, NULL, 0, 0
     },
     {   //多行编辑框
-        NCSCTRL_MLEDIT, 
+        NCSCTRL_MLEDIT,
         ID_INFO,
         100, HSTART + 5 * HSPACE, 200, 160,
-        WS_BORDER | WS_VISIBLE | WS_VSCROLL | NCSS_EDIT_BASELINE, 
+        WS_BORDER | WS_VISIBLE | WS_VSCROLL | NCSS_EDIT_BASELINE,
         WS_EX_NONE,
         "",
         NULL,
@@ -227,7 +227,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
 //END_OF_MLEDIT_TEMPLATE
 
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_REG,
         240, 400, 80, 25,
         WS_VISIBLE | NCSS_NOTIFY,
@@ -238,7 +238,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
         btn_handlers, NULL, 0, 0
     },
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_CAN,
         120, 400, 80, 25,
         WS_VISIBLE | NCSS_NOTIFY,
@@ -252,7 +252,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] =
 
 static NCS_MNWND_TEMPLATE mymain_templ =
 {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 360, 480,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -271,11 +271,11 @@ int MiniGUIMain (int argc, const char* argv[])
 {
     ncsInitialize ();
 
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal (mydlg, TRUE);
- 
+
     ncsUninitialize ();
 
     return 0;

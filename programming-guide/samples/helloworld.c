@@ -44,12 +44,12 @@ int MiniGUIMain (int argc, const char* argv[])
     MSG Msg;
 
     ncsInitialize ();
-    
+
     mWidget* mymain = ncsCreateMainWindow (
         NCSCTRL_MAINWND, "Hello, world!",
         WS_CAPTION | WS_BORDER | WS_VISIBLE,
         WS_EX_NONE,
-        1, 
+        1,
         0, 0, 300,200,
         HWND_DESKTOP,
         0, 0,
@@ -57,16 +57,16 @@ int MiniGUIMain (int argc, const char* argv[])
         NULL,
         mymain_handlers,
         0);
-    
+
 // START_OF_MSGLOOP
     while (GetMessage (&Msg, mymain->hwnd)) {
         TranslateMessage (&Msg);
         DispatchMessage (&Msg);
     }
 // END_OF_MSGLOOP
-    
+
     MainWindowThreadCleanup (mymain->hwnd);
-    
+
     ncsUninitialize ();
 
     return 0;

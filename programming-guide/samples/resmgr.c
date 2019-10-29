@@ -23,19 +23,19 @@
 
 static NCS_EVENT_HANDLER_INFO mainwnd_Mainwnd1_handlers[] = {
 
-	{-1, NULL}
+    {-1, NULL}
 };
 
 NCS_WND_EXPORT mMainWnd* ntCreateMainwnd1Ex(HPACKAGE package, HWND hParent, HICON h_icon, HMENU h_menu, DWORD user_data)
 {
 // START_OF_UIWINDOW
-	return ncsCreateMainWindowIndirectFromID(package,
-		ID_MAINWND1, 
-		hParent,
-		h_icon,
-		h_menu,
-		mainwnd_Mainwnd1_handlers,
-		NULL,
-		user_data);
+    return ncsCreateMainWindowIndirectFromID(package,
+        ID_MAINWND1,
+        hParent,
+        h_icon,
+        h_menu,
+        mainwnd_Mainwnd1_handlers,
+        NULL,
+        user_data);
 // END_OF_UIWINDOW
 }

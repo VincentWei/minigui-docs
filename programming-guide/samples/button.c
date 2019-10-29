@@ -35,7 +35,7 @@ static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
     {
         printf("cannot load image file \"icon_button.png\"\n");
     }
-    
+
     mButton *mb1 = (mButton*)ncsGetChildObj(self->hwnd, ID_BTN1);
 
     if(mb1)
@@ -58,7 +58,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 // END_OF_HANDLERS
 
 // START_OF_RDRINFO
-NCS_RDR_ELEMENT btn_rdr_elements[] = 
+NCS_RDR_ELEMENT btn_rdr_elements[] =
 {
     { NCS_MODE_USEFLAT, 1},
     { -1, 0 }
@@ -73,7 +73,7 @@ static NCS_RDR_INFO btn_rdr_info[] =
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
 //START_DCL_DEF_PUSHBUTTON
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_BTN,
         30, 30, 80, 25,
         WS_BORDER | WS_VISIBLE,
@@ -89,7 +89,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 //END_DCL_DEF_PUSHBUTTON
 //START_DCL_IMAGEBUTTON
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_BTN1,
         150, 30, 80, 25,
         WS_VISIBLE | NCSS_BUTTON_IMAGE,
@@ -105,7 +105,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 //END_DCL_IMAGEBUTTON
 //START_DCL_AUTOCHECKBTN
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_BTN1,
         30, 80, 80, 25,
         WS_VISIBLE  | NCSS_BUTTON_AUTOCHECK | NCSS_BUTTON_CHECKABLE,
@@ -121,7 +121,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 //END_DCL_AUTOCHECKBTN
 //START_DCL_3DAUTOCHECKBTN
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         ID_BTN1,
         150, 80, 80, 25,
         WS_VISIBLE | NCSS_BUTTON_AUTOCHECK | NCSS_BUTTON_CHECKABLE \
@@ -139,7 +139,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 };
 
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_MAINWND, 
+    NCSCTRL_MAINWND,
     1,
     0, 0, 260, 180,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -159,7 +159,7 @@ int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
 
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);
@@ -167,7 +167,7 @@ int MiniGUIMain(int argc, const char* argv[])
     MainWindowThreadCleanup(mydlg->hwnd);
 
     ncsUninitialize ();
-    
+
     return 0;
 }
 

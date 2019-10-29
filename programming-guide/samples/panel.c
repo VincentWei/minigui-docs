@@ -29,98 +29,98 @@
 
 // START_OF_REDGROUP
 static NCS_WND_TEMPLATE _ctrl_group1[] = {
-	{
-		NCSCTRL_BUTTON, 
-		ID_RED1,
-		30, 40, 80, 30,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"RED 1",
-		NULL,
-		NULL,
-		NULL,
-		NULL,
+    {
+        NCSCTRL_BUTTON,
+        ID_RED1,
+        30, 40, 80, 30,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "RED 1",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
         0,
-	},
-	{
-		NCSCTRL_BUTTON, 
-		ID_RED2,
-		30, 110, 80, 30,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"RED 2",
-		NULL,
-		NULL,
-		NULL,
-		NULL,
+    },
+    {
+        NCSCTRL_BUTTON,
+        ID_RED2,
+        30, 110, 80, 30,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "RED 2",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
         0,
-	},
+    },
 };
 // END_OF_REDGROUP
 
 // START_OF_BLUEGROUP
 static NCS_WND_TEMPLATE _ctrl_group2[] = {
-	{
-		NCSCTRL_BUTTON, 
-		ID_BLUE1,
-		30, 40, 80, 30,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"BLUE 1",
-		NULL,
-		NULL,
-		NULL,
-		NULL,
+    {
+        NCSCTRL_BUTTON,
+        ID_BLUE1,
+        30, 40, 80, 30,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "BLUE 1",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
         0,
-	},
-	{
-		NCSCTRL_BUTTON, 
-		ID_BLUE2,
-		30, 110, 80, 30,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"BLUE 2",
-		NULL,
-		NULL,
-		NULL,
-		NULL,
+    },
+    {
+        NCSCTRL_BUTTON,
+        ID_BLUE2,
+        30, 110, 80, 30,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "BLUE 2",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
         0,
-	},
+    },
 };
 // END_OF_BLUEGROUP
 
 // START_OF_PANEL
 static NCS_WND_TEMPLATE panel_tmpl[] = {
-	{
-		NCSCTRL_PANEL, 
-		ID_PANEL_GROUP1,
-		10, 10, 140, 180,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"Red Group",
-		NULL,
-		NULL,
-		NULL,
-		_ctrl_group1, 
-		sizeof(_ctrl_group1)/sizeof(NCS_WND_TEMPLATE),
-		0,
+    {
+        NCSCTRL_PANEL,
+        ID_PANEL_GROUP1,
+        10, 10, 140, 180,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Red Group",
+        NULL,
+        NULL,
+        NULL,
+        _ctrl_group1,
+        sizeof(_ctrl_group1)/sizeof(NCS_WND_TEMPLATE),
+        0,
         0xFF0000FF,
-	},
-	{
-		NCSCTRL_PANEL, 
-		ID_PANEL_GROUP2,
-		160, 10, 140, 180,
-		WS_VISIBLE,
-		WS_EX_NONE,
-		"Blue Group",
-		NULL,
-		NULL,
-		NULL,
-		_ctrl_group2,
-		sizeof(_ctrl_group2)/sizeof(NCS_WND_TEMPLATE), 
-		0,
+    },
+    {
+        NCSCTRL_PANEL,
+        ID_PANEL_GROUP2,
+        160, 10, 140, 180,
+        WS_VISIBLE,
+        WS_EX_NONE,
+        "Blue Group",
+        NULL,
+        NULL,
+        NULL,
+        _ctrl_group2,
+        sizeof(_ctrl_group2)/sizeof(NCS_WND_TEMPLATE),
+        0,
         0xFFFF0000,
-	},
+    },
 };
 // END_OF_PANEL
 
@@ -128,21 +128,21 @@ static NCS_WND_TEMPLATE panel_tmpl[] = {
 static BOOL mainwnd_onCreate(mWidget* self, DWORD add_data)
 {
     _c(self)->addChildren(self, panel_tmpl, \
-		sizeof(panel_tmpl)/sizeof(NCS_WND_TEMPLATE));
-	return TRUE;
+        sizeof(panel_tmpl)/sizeof(NCS_WND_TEMPLATE));
+    return TRUE;
 }
 
 static void mainwnd_onClose(mWidget* self, int message)
 {
-	DestroyMainWindow(self->hwnd);
-	PostQuitMessage(0);
+    DestroyMainWindow(self->hwnd);
+    PostQuitMessage(0);
 }
 
 
 static NCS_EVENT_HANDLER mainwnd_handlers[] = {
-	{MSG_CREATE, mainwnd_onCreate},
-	{MSG_CLOSE, mainwnd_onClose},
-	{0, NULL}
+    {MSG_CREATE, mainwnd_onCreate},
+    {MSG_CLOSE, mainwnd_onClose},
+    {0, NULL}
 };
 // END_OF_HANDLERS
 
@@ -156,7 +156,7 @@ int MiniGUIMain(int argc, const char* argv[])
         NCSCTRL_MAINWND, "Panel Demo",
         WS_CAPTION | WS_BORDER | WS_VISIBLE,
         WS_EX_NONE,
-        1, 
+        1,
         0, 0, 320,240,
         HWND_DESKTOP,
         0, 0,
@@ -164,14 +164,14 @@ int MiniGUIMain(int argc, const char* argv[])
         NULL,
         mainwnd_handlers,
         0);
-    
+
 // START_OF_MSGLOOP
     while (GetMessage (&Msg, mainwnd->hwnd)) {
         TranslateMessage (&Msg);
         DispatchMessage (&Msg);
     }
 // END_OF_MSGLOOP
-    
+
     MainWindowThreadCleanup (mainwnd->hwnd);
     ncsUninitialize ();
 

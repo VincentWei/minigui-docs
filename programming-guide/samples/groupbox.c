@@ -40,7 +40,7 @@ static NCS_RDR_INFO grp_rdr_info[] = {
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_GROUPBOX , 
+        NCSCTRL_GROUPBOX ,
         ID_GROUP,
 //        10, 10, 280, 180,
         10, 10, 140, 90,
@@ -65,7 +65,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 
 //define the main window template
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 320, 240,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -88,7 +88,7 @@ int MiniGUIMain(int argc, const char* argv[])
         grp_rdr_info[0].ctl_rdr = argv[1];
     }
     ncsInitialize();
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

@@ -34,7 +34,7 @@ static const char *people[] =
 };
 
 static NCS_RDR_INFO rdr_info = {
-	"classic","classic",NULL
+    "classic","classic",NULL
 };
 
 // START_OF_HANDLERS
@@ -55,28 +55,28 @@ static void scrlv_notify (mWidget *self, int id, int nc, DWORD add_data)
 
 static NCS_EVENT_HANDLER scrlv_handlers[] = {
     NCS_MAP_NOTIFY(NCSN_SCRLV_CLICKED, scrlv_notify),
-	{0, NULL }
+    {0, NULL }
 };
 // END_OF_HANDLERS
 
 static NCS_WND_TEMPLATE _ctrl_tmpl[] = {
-	{
-		NCSCTRL_SCROLLVIEW, 
-		IDC_SCROLLVIEW,
+    {
+        NCSCTRL_SCROLLVIEW,
+        IDC_SCROLLVIEW,
         10, 10, 320, 150,
         WS_BORDER | WS_VISIBLE | NCSS_NOTIFY | NCSS_SCRLV_SORT,
-		WS_EX_NONE,
-		"",
-		NULL,
-		&rdr_info,
-		scrlv_handlers,
-		NULL,
-		0,
-		0
-	},
+        WS_EX_NONE,
+        "",
+        NULL,
+        &rdr_info,
+        scrlv_handlers,
+        NULL,
+        0,
+        0
+    },
 };
 
-static BOOL dialog_onKeyDown(mWidget* self, 
+static BOOL dialog_onKeyDown(mWidget* self,
         int message, int code, DWORD key_status)
 {
     if (message == MSG_KEYDOWN) {
@@ -85,7 +85,7 @@ static BOOL dialog_onKeyDown(mWidget* self,
             int         curSel, count;
             HITEM       delItem;
 
-            scrlvObj = 
+            scrlvObj =
                 (mScrollView*)ncsObjFromHandle(GetDlgItem(self->hwnd, IDC_SCROLLVIEW));
             count = _c(scrlvObj)->getItemCount(scrlvObj);
 
@@ -106,24 +106,24 @@ static BOOL dialog_onKeyDown(mWidget* self,
 }
 
 static NCS_EVENT_HANDLER dialog_handlers[] = {
-	{MSG_KEYDOWN, dialog_onKeyDown},
-	{0, NULL }
+    {MSG_KEYDOWN, dialog_onKeyDown},
+    {0, NULL }
 };
 
 static NCS_MNWND_TEMPLATE dialog_tmpl = {
-	NCSCTRL_DIALOGBOX, 
-	7,
-	0, 0, 350, 200,
-	WS_CAPTION | WS_BORDER | WS_VISIBLE,
-	WS_EX_NONE,
+    NCSCTRL_DIALOGBOX,
+    7,
+    0, 0, 350, 200,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
     "ScrollView Demo",
-	NULL,
+    NULL,
     &rdr_info,
-	dialog_handlers,
-	_ctrl_tmpl,
-	sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
-	0,
-	0, 0,
+    dialog_handlers,
+    _ctrl_tmpl,
+    sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
 };
 
 // START_OF_ITEMFUNCS
@@ -159,7 +159,7 @@ static void scrlv_draw_item (mItemView *self, HITEM hItem, HDC hdc, RECT *rcDraw
     if (_c(self)->isHilight(self, hItem)) {
         isHilite = TRUE;
         oldBrushClr = SetBrushColor (hdc, PIXEL_blue);
-        FillBox (hdc, rcDraw->left + 1, 
+        FillBox (hdc, rcDraw->left + 1,
                 top + 1, RECTWP(rcDraw) - 2, RECTHP(rcDraw) - 1);
         oldTextClr = SetTextColor (hdc, PIXEL_lightwhite);
     }
@@ -208,14 +208,14 @@ static BOOL scrlv_init(mDialogBox* self)
 
 int MiniGUIMain(int argc, const char* argv[])
 {
-	ncsInitialize();
-	mDialogBox* mydlg = 
+    ncsInitialize();
+    mDialogBox* mydlg =
         (mDialogBox *)ncsCreateMainWindowIndirect (&dialog_tmpl, HWND_DESKTOP);
-	
-    scrlv_init(mydlg);
-	_c(mydlg)->doModal(mydlg, TRUE);
 
-	MainWindowThreadCleanup(mydlg->hwnd);
-	ncsUninitialize();
-	return 0;
+    scrlv_init(mydlg);
+    _c(mydlg)->doModal(mydlg, TRUE);
+
+    MainWindowThreadCleanup(mydlg->hwnd);
+    ncsUninitialize();
+    return 0;
 }

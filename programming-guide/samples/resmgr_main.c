@@ -26,40 +26,40 @@ HPACKAGE hPackage = HPACKAGE_NULL;
 int MiniGUIMain(int argc, const char* argv[])
 {
 #ifdef ntStartWindowEx
-	MSG Msg;
-	char f_package[MAX_PATH];
-	mMainWnd *mWin;
+    MSG Msg;
+    char f_package[MAX_PATH];
+    mMainWnd *mWin;
 
-	ncsInitialize();
+    ncsInitialize();
 // START_OF_LOADRESPKG
-	sprintf(f_package, "%s", "resmgr_demo.res");
-	SetResPath("./");
+    sprintf(f_package, "%s", "resmgr_demo.res");
+    SetResPath("./");
 
-	hPackage = ncsLoadResPackage (f_package);
-	if (hPackage == HPACKAGE_NULL) {
-		printf ("load resource package:%s failure.\n", f_package);
-		return 1;
-	}
+    hPackage = ncsLoadResPackage (f_package);
+    if (hPackage == HPACKAGE_NULL) {
+        printf ("load resource package:%s failure.\n", f_package);
+        return 1;
+    }
 // END_OF_LOADRESPKG
 
 // START_OF_GETSTRING
-	SetDefaultWindowElementRenderer(ncsGetString(hPackage, NCSRM_SYSSTR_DEFRDR));
+    SetDefaultWindowElementRenderer(ncsGetString(hPackage, NCSRM_SYSSTR_DEFRDR));
 // END_OF_GETSTRING
 
-	mWin = ntStartWindowEx(hPackage, HWND_DESKTOP, (HICON)0, (HMENU)0, (DWORD)0);
+    mWin = ntStartWindowEx(hPackage, HWND_DESKTOP, (HICON)0, (HMENU)0, (DWORD)0);
 
-	while(GetMessage(&Msg, mWin->hwnd))
-	{
-		TranslateMessage(&Msg);
-		DispatchMessage(&Msg);
-	}
+    while(GetMessage(&Msg, mWin->hwnd))
+    {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
 
-	MainWindowThreadCleanup(mWin->hwnd);
+    MainWindowThreadCleanup(mWin->hwnd);
 // START_OF_UNLOADPKG
-	ncsUnloadResPackage(hPackage);
+    ncsUnloadResPackage(hPackage);
 // END_OF_UNLOADPKG
-	ncsUninitialize();
+    ncsUninitialize();
 #endif
 
-	return 0;
+    return 0;
 }

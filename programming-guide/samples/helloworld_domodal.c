@@ -45,7 +45,7 @@ int MiniGUIMain (int argc, const char* argv[])
         NCSCTRL_MAINWND, "Hello, world!",
         WS_CAPTION | WS_BORDER | WS_VISIBLE,
         WS_EX_NONE,
-        1, 
+        1,
         0, 0, 300, 200,
         HWND_DESKTOP,
         0, 0,

@@ -23,14 +23,14 @@
 #define ID_BTN2  102
 
 // START_OF_HANDLERS
-static BOOL mymain_onRadioChanged(mMainWnd* self, mButtonGroup* sender, 
+static BOOL mymain_onRadioChanged(mMainWnd* self, mButtonGroup* sender,
                                   int event_id, DWORD param)
 {
     mWidget* sel = (mWidget*)_c(sender)->getProperty(sender, NCSP_BTNGRP_SELOBJ);
 
     if(sel)
     {
-        MessageBox(self->hwnd, (const char*)_c(sel)->getProperty(sel, 
+        MessageBox(self->hwnd, (const char*)_c(sel)->getProperty(sel,
             NCSP_WIDGET_TEXT), "Info", 0);
     }
 
@@ -40,8 +40,8 @@ static BOOL mymain_onRadioChanged(mMainWnd* self, mButtonGroup* sender,
 static BOOL mymain_onCreate(mWidget* self, DWORD add_data)
 {
     //connect
-    ncsAddEventListener((mObject*)(_c(self)->getChild(self, ID_GROUP)), 
-        (mObject*)self, (NCS_CB_ONOBJEVENT)mymain_onRadioChanged, 
+    ncsAddEventListener((mObject*)(_c(self)->getChild(self, ID_GROUP)),
+        (mObject*)self, (NCS_CB_ONOBJEVENT)mymain_onRadioChanged,
         NCSN_BTNGRP_SELCHANGED);
     return TRUE;
 }
@@ -74,7 +74,7 @@ static NCS_PROP_ENTRY radioGroup_props [] = {
 
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_BUTTONGROUP , 
+        NCSCTRL_BUTTONGROUP ,
         ID_GROUP,
         5, 10, 200, 120,
         WS_VISIBLE|NCSS_NOTIFY,
@@ -88,7 +88,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0              //add data
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         ID_BTN1,
         20, 30, 80, 25,
         WS_VISIBLE,
@@ -102,7 +102,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0                 //add data
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         ID_BTN2,
         20, 60, 80, 25,
         WS_VISIBLE,
@@ -116,7 +116,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0                 //add data
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         ID_BTN2,
         20, 90, 80, 25,
         WS_VISIBLE,
@@ -132,7 +132,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 };
 
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 260, 180,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -152,7 +152,7 @@ int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
 
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

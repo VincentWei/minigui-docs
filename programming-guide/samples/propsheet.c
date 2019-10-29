@@ -20,14 +20,14 @@
 #include <mgncs/mgncs.h>
 // END_OF_INCS
 
-#define PAGE_VERSION	1
+#define PAGE_VERSION    1
 #define PAGE_CPU        2
-#define PAGE_MEMINFO	3
+#define PAGE_MEMINFO    3
 #define PAGE_PARTITION  4
 #define PAGE_MINIGUI    5
 
 #define BUF_LEN         10240
-#define IDC_PROPSHEET	100
+#define IDC_PROPSHEET    100
 #define IDC_SYSINFO     101
 #define IDC_REFRESH     102
 
@@ -52,32 +52,32 @@ static void get_systeminfo (mPage* page)
     size_t  size = 0;
 
     type = (int)GetWindowAdditionalData (page->hwnd);
-	hwnd = GetDlgItem(_c(page)->getPanel(page), IDC_SYSINFO);
+    hwnd = GetDlgItem(_c(page)->getPanel(page), IDC_SYSINFO);
     buff [BUF_LEN] = 0;
 
     switch (type) {
     case PAGE_VERSION:
-	    size = read_sysinfo ("/proc/version", buff, BUF_LEN);
+        size = read_sysinfo ("/proc/version", buff, BUF_LEN);
         buff [size] = 0;
-	    break;
+        break;
 
     case PAGE_CPU:
-	    size = read_sysinfo ("/proc/cpuinfo", buff, BUF_LEN);
-    	    buff [size] = 0;
-	    break;
+        size = read_sysinfo ("/proc/cpuinfo", buff, BUF_LEN);
+            buff [size] = 0;
+        break;
 
     case PAGE_MEMINFO:
-	    size = read_sysinfo ("/proc/meminfo", buff, BUF_LEN);
-    	    buff [size] = 0;
-	    break;
+        size = read_sysinfo ("/proc/meminfo", buff, BUF_LEN);
+            buff [size] = 0;
+        break;
 
     case PAGE_PARTITION:
-	    size = read_sysinfo ("/proc/partitions", buff, BUF_LEN);
+        size = read_sysinfo ("/proc/partitions", buff, BUF_LEN);
         buff [size] = 0;
-	    break;
+        break;
 
     case PAGE_MINIGUI:
-	    size = snprintf (buff, BUF_LEN,
+        size = snprintf (buff, BUF_LEN,
                     "MiniGUI version %d.%d.%d.\n"
                     "Copyright (C) 1998-2009 FMSoft Technologies.\n\n"
                     "MiniGUI is a mature, rich-featured, embedded "
@@ -85,11 +85,11 @@ static void get_systeminfo (mPage* page)
                     "For more information, please visit\n\n"
                     "http://www.minigui.com\n",
                     MINIGUI_MAJOR_VERSION, MINIGUI_MINOR_VERSION, MINIGUI_MICRO_VERSION);
-	    break;
+        break;
     }
 
     if (size) {
-	    SetWindowText (hwnd, buff);
+        SetWindowText (hwnd, buff);
     }
     GetWindowText(hwnd, buff, BUF_LEN+1);
 }
@@ -97,7 +97,7 @@ static void get_systeminfo (mPage* page)
 // START_OF_PAGEHANDLERS
 static void mypage_onInitPage(mWidget* self, DWORD add_data)
 {
-	get_systeminfo ((mPage*)self);
+    get_systeminfo ((mPage*)self);
 }
 
 static int mypage_onShowPage(mWidget* self, HWND hwnd, int show_cmd)
@@ -115,18 +115,18 @@ static int mypage_onSheetCmd(mWidget* self, DWORD wParam, DWORD lParam)
 }
 
 static NCS_EVENT_HANDLER mypage_handlers[] = {
-	{MSG_INITPAGE, mypage_onInitPage},
-	{MSG_SHOWPAGE, mypage_onShowPage},
-	{MSG_SHEETCMD, mypage_onSheetCmd},
-	{0 , NULL }
+    {MSG_INITPAGE, mypage_onInitPage},
+    {MSG_SHOWPAGE, mypage_onShowPage},
+    {MSG_SHEETCMD, mypage_onSheetCmd},
+    {0 , NULL }
 };
 // END_OF_PAGEHANDLERS
 
 static void btn_notify(mWidget *self, int id, int nc, DWORD add_data)
 {
-    mPropSheet *obj = 
+    mPropSheet *obj =
         (mPropSheet *)ncsGetChildObj(GetParent(self->hwnd), IDC_PROPSHEET);
-    
+
     if (obj) {
         _c(obj)->broadCastMsg(obj, IDC_REFRESH, 0);
     }
@@ -134,43 +134,43 @@ static void btn_notify(mWidget *self, int id, int nc, DWORD add_data)
 
 static NCS_EVENT_HANDLER btn_handlers [] = {
     NCS_MAP_NOTIFY(NCSN_BUTTON_PUSHED, btn_notify),
-	{0, NULL}	
+    {0, NULL}
 };
 
 static NCS_RDR_INFO btn_rdr_info[] =
 {
-	{"classic","classic", NULL}
+    {"classic","classic", NULL}
 };
 
 static NCS_WND_TEMPLATE _ctrl_tmpl[] = {
-	{
-		NCSCTRL_BUTTON, 
-        IDC_REFRESH, 
+    {
+        NCSCTRL_BUTTON,
+        IDC_REFRESH,
         10, 240, 70, 25,
         WS_VISIBLE | WS_TABSTOP,
-		WS_EX_NONE,
+        WS_EX_NONE,
         "Refresh",
-		NULL, 
-		btn_rdr_info,
-		btn_handlers,
-		NULL,
-		0,
-		0 
-	},
-	{
-		NCSCTRL_BUTTON, 
+        NULL,
+        btn_rdr_info,
+        btn_handlers,
+        NULL,
+        0,
+        0
+    },
+    {
+        NCSCTRL_BUTTON,
         IDCANCEL,
         330, 240, 70, 25,
         WS_VISIBLE | WS_TABSTOP,
-		WS_EX_NONE,
+        WS_EX_NONE,
         "Close",
-		NULL, 
-		NULL, 
-		NULL,
-		NULL,
-		0,
-		0 
-	},
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        0
+    },
 };
 
 static DLGTEMPLATE PageSysInfo =
@@ -185,10 +185,10 @@ static DLGTEMPLATE PageSysInfo =
 };
 
 static CTRLDATA CtrlSysInfo [] =
-{ 
+{
     {
         CTRL_STATIC,
-        WS_VISIBLE | SS_LEFT, 
+        WS_VISIBLE | SS_LEFT,
         10, 10, 370, 180,
         IDC_SYSINFO,
         "test",
@@ -204,11 +204,11 @@ static NCS_RDR_INFO prop_rdr_info[] =
 static int init_propsheet (mDialogBox* self)
 {
 // START_OF_CREATEPRPSHT
-    mPropSheet *propsheet =  
+    mPropSheet *propsheet =
         (mPropSheet*) ncsCreateWindow (NCSCTRL_PROPSHEET,
-                       "", WS_VISIBLE | NCSS_PRPSHT_SCROLLABLE, WS_EX_NONE, 
-                       IDC_PROPSHEET, 
-                       10, 10, 390, 225, self->hwnd, 
+                       "", WS_VISIBLE | NCSS_PRPSHT_SCROLLABLE, WS_EX_NONE,
+                       IDC_PROPSHEET,
+                       10, 10, 390, 225, self->hwnd,
                        NULL, prop_rdr_info, NULL, 0);
 // END_OF_CREATEPRPSHT
 
@@ -244,31 +244,31 @@ static int init_propsheet (mDialogBox* self)
 }
 
 static NCS_MNWND_TEMPLATE mymain_tmpl = {
-	NCSCTRL_DIALOGBOX, 
-	1,
-	0, 0, 420, 305,
-	WS_CAPTION | WS_BORDER | WS_VISIBLE,
-	WS_EX_NONE,
+    NCSCTRL_DIALOGBOX,
+    1,
+    0, 0, 420, 305,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
     "PropSheet Demo",
-	NULL,
     NULL,
-	NULL,
-	_ctrl_tmpl,
-	sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
-	0,
-	0, 0,
+    NULL,
+    NULL,
+    _ctrl_tmpl,
+    sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
 };
 
 int MiniGUIMain(int argc, const char* argv[])
 {
-	ncsInitialize();
-	mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    ncsInitialize();
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_tmpl, HWND_DESKTOP);
 
     init_propsheet(mydlg);
-	_c(mydlg)->doModal(mydlg, TRUE);
+    _c(mydlg)->doModal(mydlg, TRUE);
 
-	MainWindowThreadCleanup(mydlg->hwnd);
-	ncsUninitialize();
-	return 0;
+    MainWindowThreadCleanup(mydlg->hwnd);
+    ncsUninitialize();
+    return 0;
 }

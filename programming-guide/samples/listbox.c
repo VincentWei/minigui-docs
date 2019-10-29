@@ -55,7 +55,7 @@ static void lstbox_init(mDialogBox *dialog)
 // START_OF_BTNHANDLERS
 static void btn_notify(mWidget *self, int id, int nc, DWORD add_data)
 {
-    mListBox    *lstboxObj = 
+    mListBox    *lstboxObj =
         (mListBox *)ncsGetChildObj(GetParent(self->hwnd), IDC_LIST);
 // START_OF_DELITEMS
     int sel     = _c(lstboxObj)->getCurSel(lstboxObj);
@@ -74,82 +74,82 @@ static void btn_notify(mWidget *self, int id, int nc, DWORD add_data)
 
 static NCS_EVENT_HANDLER btn_handlers [] = {
     NCS_MAP_NOTIFY(NCSN_BUTTON_PUSHED, btn_notify),
-	{0, NULL}	
+    {0, NULL}
 };
 // END_OF_BTNHANDLERS
 static NCS_WND_TEMPLATE _ctrl_tmpl[] = {
-	{
-		NCSCTRL_LISTBOX, 
-		IDC_LIST,
-		20, 15, 170, 200,
-		WS_BORDER | WS_VISIBLE | NCSS_NOTIFY,
-		WS_EX_NONE,
-		"",
-		NULL,
-		NULL,
-		NULL,
-		NULL,
-		0,
-		0 
-	},
-	{
-		NCSCTRL_BUTTON, 
-		IDC_DELETE,
+    {
+        NCSCTRL_LISTBOX,
+        IDC_LIST,
+        20, 15, 170, 200,
+        WS_BORDER | WS_VISIBLE | NCSS_NOTIFY,
+        WS_EX_NONE,
+        "",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        0
+    },
+    {
+        NCSCTRL_BUTTON,
+        IDC_DELETE,
         15, 230, 80, 30,
         WS_VISIBLE | WS_TABSTOP,
-		WS_EX_NONE,
-		"Delete",
-		NULL,
-		NULL,
-		btn_handlers, 
-		NULL,
-		0,
-		0 
-	},
-	{
-		NCSCTRL_BUTTON, 
-		IDCANCEL,
+        WS_EX_NONE,
+        "Delete",
+        NULL,
+        NULL,
+        btn_handlers,
+        NULL,
+        0,
+        0
+    },
+    {
+        NCSCTRL_BUTTON,
+        IDCANCEL,
         115, 230, 80, 30,
         WS_VISIBLE | WS_TABSTOP,
-		WS_EX_NONE,
-		"Cancel",
-		NULL, 
-		NULL,
-		NULL,
-		NULL,
-		0,
-		0
-	},
+        WS_EX_NONE,
+        "Cancel",
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+        0
+    },
 };
 
 
 static NCS_MNWND_TEMPLATE mainwnd_tmpl = {
-	NCSCTRL_DIALOGBOX, 
-	1,
-	100, 100, 220, 300,
-	WS_CAPTION | WS_BORDER | WS_VISIBLE,
-	WS_EX_NONE,
+    NCSCTRL_DIALOGBOX,
+    1,
+    100, 100, 220, 300,
+    WS_CAPTION | WS_BORDER | WS_VISIBLE,
+    WS_EX_NONE,
     "ListBox Demo",
-	NULL,
-	NULL,
-	NULL,
-	_ctrl_tmpl,
-	sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
-	0,
-	0, 0,
+    NULL,
+    NULL,
+    NULL,
+    _ctrl_tmpl,
+    sizeof(_ctrl_tmpl)/sizeof(NCS_WND_TEMPLATE),
+    0,
+    0, 0,
 };
 
 int MiniGUIMain(int argc, const char* argv[])
 {
-	ncsInitialize();
+    ncsInitialize();
 
-	mDialogBox* dialog = 
+    mDialogBox* dialog =
         (mDialogBox *)ncsCreateMainWindowIndirect (&mainwnd_tmpl, HWND_DESKTOP);
 
     lstbox_init(dialog);
-	_c(dialog)->doModal(dialog, TRUE);
+    _c(dialog)->doModal(dialog, TRUE);
 
-	MainWindowThreadCleanup(dialog->hwnd);
-	ncsUninitialize();
-	return 0;
+    MainWindowThreadCleanup(dialog->hwnd);
+    ncsUninitialize();
+    return 0;
 }

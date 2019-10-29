@@ -60,7 +60,7 @@ static NCS_PROP_ENTRY static6_props [] = {
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+0,
         10, 10, 160, 30,
         WS_BORDER | WS_VISIBLE,
@@ -74,7 +74,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+1,
         10, 50, 160, 30,
         WS_BORDER | WS_VISIBLE,
@@ -88,7 +88,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+2,
         10, 90, 160, 30,
         WS_BORDER | WS_VISIBLE,
@@ -102,7 +102,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+3,
         220, 10, 80, 120,
         WS_BORDER | WS_VISIBLE,
@@ -116,7 +116,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+4,
         315, 10, 70, 120,
         WS_BORDER | WS_VISIBLE,
@@ -130,7 +130,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+5,
         400, 10, 70, 120,
         WS_BORDER | WS_VISIBLE,
@@ -144,7 +144,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_STATIC , 
+        NCSCTRL_STATIC ,
         IDC_STATIC1+6,
         10, 160, 220, 30,
         WS_BORDER | WS_VISIBLE,
@@ -169,7 +169,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 
 //define the main window template
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 480, 270,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -187,7 +187,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);

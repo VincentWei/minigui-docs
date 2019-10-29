@@ -42,184 +42,184 @@ static NCS_PROP_ENTRY radioGroup_props [] = {
 
 static NCS_WND_TEMPLATE ncsCtrlYourTaste[] = {
     {
-        NCSCTRL_BUTTONGROUP, 
+        NCSCTRL_BUTTONGROUP,
         IDC_RDOGROUP,
         16, 10, 230, 160,
         WS_VISIBLE,
         WS_EX_TRANSPARENT,
         "optional snack",
         NULL,
-        NULL, 
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         IDC_LAMIAN,
         36, 38, 200, 20,
         WS_VISIBLE | WS_TABSTOP | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "northwest pulled noodle",
-        radioGroup_props, 
-        NULL, 
+        radioGroup_props,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_RADIOBUTTON, 
-        IDC_CHOUDOUFU, 
-        36, 64, 200, 20, 
+        NCSCTRL_RADIOBUTTON,
+        IDC_CHOUDOUFU,
+        36, 64, 200, 20,
         WS_VISIBLE | WS_TABSTOP | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "chang sha bad smelling bean curd",
-        radioGroup_props, 
-        NULL, 
+        radioGroup_props,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         IDC_JIANBING,
         36, 90, 200, 20,
         WS_VISIBLE | WS_TABSTOP | WS_DISABLED,
         WS_EX_NONE,
         "shan dong thini pancake",
-        radioGroup_props, 
-        NULL, 
+        radioGroup_props,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         IDC_MAHUA,
         36, 116, 200, 20,
         WS_VISIBLE | WS_TABSTOP | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "tianjin fired dough twist",
-        radioGroup_props, 
-        NULL, 
+        radioGroup_props,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_RADIOBUTTON, 
+        NCSCTRL_RADIOBUTTON,
         IDC_SHUIJIAO,
         36, 142, 200, 20,
         WS_VISIBLE | WS_TABSTOP | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "chengdu red oil boiled dumpling",
-        radioGroup_props, 
-        NULL, 
+        radioGroup_props,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_BUTTONGROUP, 
+        NCSCTRL_BUTTONGROUP,
         IDC_CKGROUP,
         250, 10, 100, 160,
         WS_VISIBLE,
         WS_EX_TRANSPARENT,
         "flavor",
-        NULL, 
+        NULL,
         NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_CHECKBUTTON, 
+        NCSCTRL_CHECKBUTTON,
         IDC_XIAN,
         260, 38, 80, 20,
         WS_VISIBLE | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "partial salty",
-        //checkGroup_props, 
+        //checkGroup_props,
         NULL,
-        NULL, 
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_CHECKBUTTON, 
+        NCSCTRL_CHECKBUTTON,
         IDC_LA,
-        260, 64, 80, 20, 
+        260, 64, 80, 20,
         WS_VISIBLE | NCSS_BUTTON_AUTOCHECK,
         WS_EX_NONE,
         "partial spicy",
-        //checkGroup_props, 
+        //checkGroup_props,
         NULL,
-        NULL, 
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_STATIC, 
+        NCSCTRL_STATIC,
         IDC_PROMPT,
         16, 180, 360, 40,
         WS_VISIBLE,
         WS_EX_NONE,
         "northwest pulled noodle is competitive product in the wheaten food",
         NULL,
-        NULL, 
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         IDOK,
         70, 230, 70, 30,
         WS_VISIBLE | WS_TABSTOP | NCSS_NOTIFY,
         WS_EX_NONE,
         "Ok",
-        NULL, 
-        NULL, 
+        NULL,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
     {
-        NCSCTRL_BUTTON, 
+        NCSCTRL_BUTTON,
         IDCANCEL,
         200, 230, 70, 30,
         WS_VISIBLE | WS_TABSTOP | NCSS_NOTIFY,
         WS_EX_NONE,
         "Cancel",
-        NULL, 
-        NULL, 
+        NULL,
+        NULL,
         NULL,
         NULL,
         0,
-        0 
+        0
     },
 };
 // END_OF_NCSCTRLS
 
 // START_OF_INTRINSICCTRLS
 static CTRLDATA CtrlYourTaste[] =
-{ 
+{
     {
         "static",
-        WS_VISIBLE | SS_GROUPBOX, 
+        WS_VISIBLE | SS_GROUPBOX,
         16, 10, 230, 160,
         IDC_STATIC,
         "optional snack",
@@ -236,9 +236,9 @@ static CTRLDATA CtrlYourTaste[] =
     },
     {
         "button",
-        WS_VISIBLE | BS_AUTORADIOBUTTON, 
-        36, 64, 200, 20, 
-        IDC_CHOUDOUFU, 
+        WS_VISIBLE | BS_AUTORADIOBUTTON,
+        36, 64, 200, 20,
+        IDC_CHOUDOUFU,
         "chang sha bad smelling bean curd",
         0
     },
@@ -268,7 +268,7 @@ static CTRLDATA CtrlYourTaste[] =
     },
     {
         "static",
-        WS_VISIBLE | SS_GROUPBOX | WS_GROUP, 
+        WS_VISIBLE | SS_GROUPBOX | WS_GROUP,
         250, 10, 100, 160,
         IDC_STATIC,
         "flavor",
@@ -285,9 +285,9 @@ static CTRLDATA CtrlYourTaste[] =
     },
     {
         "button",
-        WS_VISIBLE | BS_AUTOCHECKBOX | BS_CHECKED, 
-        260, 64, 80, 20, 
-        IDC_LA, 
+        WS_VISIBLE | BS_AUTOCHECKBOX | BS_CHECKED,
+        260, 64, 80, 20,
+        IDC_LA,
         "partial spicy",
         0
     },
@@ -303,7 +303,7 @@ static CTRLDATA CtrlYourTaste[] =
         "button",
         WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP | WS_GROUP | WS_BORDER ,
         70, 230, 70, 30,
-        IDOK, 
+        IDOK,
         "OK",
         0
     },
@@ -333,7 +333,7 @@ static BOOL container_onCommand(mWidget* self, int id, int nc, HWND hCtrl)
         if (nc == NCSN_BUTTON_PUSHED) {
             //close dialog
             HWND hParent = GetParent(self->hwnd);
-            SendNotifyMessage(hParent, 
+            SendNotifyMessage(hParent,
                     MSG_COMMAND, (WPARAM)MAKELONG(id, nc), (LPARAM)hCtrl);
         }
 
@@ -344,8 +344,8 @@ static BOOL container_onCommand(mWidget* self, int id, int nc, HWND hCtrl)
 }
 
 static NCS_EVENT_HANDLER container_handlers[] = {
-	{MSG_COMMAND, container_onCommand},
-	{0, NULL}
+    {MSG_COMMAND, container_onCommand},
+    {0, NULL}
 };
 // END_OF_HANDLERS
 
@@ -357,7 +357,7 @@ int MiniGUIMain(int argc, const char* argv[])
         NCSCTRL_DIALOGBOX, "Container Demo",
         WS_CAPTION | WS_BORDER | WS_VISIBLE | NCSS_MNWND_MODE,
         WS_EX_NONE,
-        1, 
+        1,
         0, 0, 400, 320,
         HWND_DESKTOP,
         0, 0,
@@ -365,30 +365,30 @@ int MiniGUIMain(int argc, const char* argv[])
         NULL,
         NULL,
         0);
-    
-    ncsSetComponentHandler((mComponent*)dialog, 
+
+    ncsSetComponentHandler((mComponent*)dialog,
             MSG_CSIZECHANGED, dialog_onCSizeChanged);
 
-    mContainer *container = 
-        (mContainer*)ncsCreateWindow (NCSCTRL_CONTAINER, 
-                          "", 
+    mContainer *container =
+        (mContainer*)ncsCreateWindow (NCSCTRL_CONTAINER,
+                          "",
                           WS_BORDER | WS_VISIBLE,
                           WS_EX_NONE,
-                          IDC_CONTAINER, 
+                          IDC_CONTAINER,
                           0, 0, 300, 200, dialog->hwnd,
                           NULL, NULL, container_handlers, 0);
 
     if (argc > 1 && strcmp(argv[1], "intrinsic") == 0) {
-        _c(container)->addIntrinsicControls (container, CtrlYourTaste, 
+        _c(container)->addIntrinsicControls (container, CtrlYourTaste,
                 sizeof(CtrlYourTaste)/sizeof(CTRLDATA));
     }
     else {
-        _c(container)->addChildren(container, ncsCtrlYourTaste, 
+        _c(container)->addChildren(container, ncsCtrlYourTaste,
                 sizeof(ncsCtrlYourTaste)/sizeof(NCS_WND_TEMPLATE));
     }
 
     _c(dialog)->doModal(dialog, TRUE);
-    
+
     MainWindowThreadCleanup (dialog->hwnd);
     ncsUninitialize ();
 

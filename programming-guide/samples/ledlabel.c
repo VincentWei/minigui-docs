@@ -54,7 +54,7 @@ static NCS_PROP_ENTRY static2_props [] = {
 //Controls
 static NCS_WND_TEMPLATE _ctrl_templ[] = {
     {
-        NCSCTRL_LEDLABEL , 
+        NCSCTRL_LEDLABEL ,
         IDC_LEDLBL1+0,
         10, 10, 160, 50,
         WS_BORDER | WS_VISIBLE,
@@ -68,7 +68,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_LEDLABEL , 
+        NCSCTRL_LEDLABEL ,
         IDC_LEDLBL1+2,
         10, 70, 160, 30,
         WS_BORDER | WS_VISIBLE,
@@ -82,7 +82,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
         0 //add data
     },
     {
-        NCSCTRL_LEDLABEL , 
+        NCSCTRL_LEDLABEL ,
         IDC_LEDLBL1+5,
         180, 10, 100, 100,
         WS_BORDER | WS_VISIBLE,
@@ -107,7 +107,7 @@ static NCS_EVENT_HANDLER mymain_handlers[] = {
 
 //define the main window template
 static NCS_MNWND_TEMPLATE mymain_templ = {
-    NCSCTRL_DIALOGBOX, 
+    NCSCTRL_DIALOGBOX,
     1,
     0, 0, 300, 150,
     WS_CAPTION | WS_BORDER | WS_VISIBLE,
@@ -125,7 +125,7 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 int MiniGUIMain(int argc, const char* argv[])
 {
     ncsInitialize();
-    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect 
+    mDialogBox* mydlg = (mDialogBox *)ncsCreateMainWindowIndirect
                                 (&mymain_templ, HWND_DESKTOP);
 
     _c(mydlg)->doModal(mydlg, TRUE);
