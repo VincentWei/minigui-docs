@@ -9,10 +9,10 @@ window class.
 The class inheritance relation of panel and its derived class is as follows:
 
 - [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-- [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md)
-* [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox.md)
-* [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd.md)
-* [mDialogBox](MiniGUIProgGuidePart2Chapter07#mDialogBox.md)
+- [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel)
+* [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox)
+* [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd)
+* [mDialogBox](MiniGUIProgGuidePart2Chapter07#mDialogBox)
 
 ## `mPanel`
 
@@ -60,7 +60,7 @@ users.
 
 ![alt](figures/panel_demo.png)
 
-Figure p2c6-1 Output of panel Program
+##### Figure 1 Output of panel Program
 
 ##### List 1 panel.c
 
@@ -260,6 +260,7 @@ well completed. Address column in general browser is a good application.
 It is inherited from the style of [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md).
 
 | *Style name* | *miniStudio property name* | *Explanation* |
+|--------------|----------------------------|---------------|
 | `NCSS_CMBOX_SIMPLE` | Type->Simple | Simple combination box |
 | `NCSS_CMBOX_DROPDOWNLIST` | Type->DropDownList | Dropdown combination box |
 | `NCSS_CMBOX_SORT` | Sort->TRUE | Character string automatic sorting |
@@ -276,6 +277,7 @@ It is inherited from the property of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
 | *Property name* | *miniStudio property name* | *Type* | *RW* | *Explanation* |
+|-----------------|----------------------------|--------|------|---------------|
 | `NCSP_COMB_DROPDOWNHEIGHT` | `DropDownHeight` | int | `RW` | Height of the dropdown list |
 | `NCSP_COMB_ITEMHEIGHT` | `ItemHeight` | int | `RW` | Height of the list item |
 | `NCSP_COMB_ITEMCOUNT` | `ItemCount` | int | `RO` | Number of the list items |
@@ -288,6 +290,7 @@ It is inherited from the event of
 [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel.md). 
 
 | *Event ID* | *Parameter* | *Explanation* |
+|------------|-------------|---------------|
 | `NCSN_CMBOX_SELCHANGE` | -- | The selected item changes |
 | `NCSN_CMBOX_SETFOCUS` | -- | Get focus |
 | `NCSN_CMBOX_KILLFOCUS` | -- | Lose focus |
@@ -413,6 +416,7 @@ They are inherited from the renderers of
 #### `mCombobox` Classic Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+|-----------------|----------------------------|--------|---------------------|---------------|
 | `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
 | `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 
@@ -434,6 +438,7 @@ Specification for the Image Resource Used by Skin Renderer
 #### `mCombobox` Flat Renderer
 
 | *Property name* | *miniStudio property name* | *Type* | *Schematic diagram* | *Explanation* |
+|-----------------|----------------------------|--------|---------------------|---------------|
 | `NCS_BGC_3DBODY` | `ColorBg3DBody` | `DWORD(ARGB`) | | Draw color of the dropdown button |
 | `NCS_FGC_WINDOW` | `ColorFgWindow` | `DWORD(ARGB`) | | Draw color of the arrow of the dropdown button |
 
