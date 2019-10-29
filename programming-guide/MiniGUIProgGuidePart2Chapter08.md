@@ -33,6 +33,7 @@ It is inherited from the property of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
 | *Property ID* | *miniStudio name* | *Type* | *Permission* | *Explanation* |
+|---------------|-------------------|--------|--------------|---------------|
 | `NCSP_SWGT_CONTWIDTH` | - | unsigned int | `RW` | Content width |
 | `NCSP_SWGT_CONTHEIGHT` | - | unsigned int | `RW` | Content height |
 | `NCSP_SWGT_CONTX` | `ContentX` | int | `RW` | Offset value of the content in horizontal direction |
@@ -54,7 +55,7 @@ It is inherited from the event of
 It is inherited from the method of
 [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget). 
 
-All the methods of `ScrollWidget`? are provided for the child class to use,
+All the methods of `ScrollWidget` are provided for the child class to use,
 please avoid using the class interface in the concrete control application.
 
 #### Coordinate Transformation Related Method
