@@ -134,10 +134,10 @@ client area, please refer to the renderer of
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) |<img src="figures/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
-| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="figures/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) |<img src=figures/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
-| `NCS_BGC_DISABLED_ITEM` | background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB`) |<img src=figures/push-button-classic-bgdisable.png" alt="push-button-classic-bgdisable.png"/>| |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) |<img src="figures/push-button-classic-fg3dcolor.png" alt="push-button-classic-fg3dcolor.png"/>| |
+| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/push-button-classic-bg3dcolor.png" alt="push-button-classic-bg3dcolor.png"/>| |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) |<img src=figures/push-button-classic-fgdisable.png" alt="push-button-classic-fgdisable.png"/>| |
+| `NCS_BGC_DISABLED_ITEM` | background color when the window is invalid | `BgColorDisable` | `DWORD` (`ARGB`) |<img src=figures/push-button-classic-bgdisable.png" alt="push-button-classic-bgdisable.png"/>| |
 
 
 - High light effect: through enhancing the brightness of the background color
@@ -162,10 +162,10 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
-| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD(ARGB`) |<img src="figures/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
-| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `BgColorDisable` | `DWORD(ARGB`) |<img src="figures/push-button-fashion-bgdisalbe.png" alt="push-button-fashion-bgdisalbe.png"/>| |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | Same as Classic renderer | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid| `TextDisableColor` | `DWORD` (`ARGB`) | Same as Classic renderer | |
+| `NCS_BGC_3DBODY` | Background color | `BgColor3DBody` | `DWORD` (`ARGB`) |<img src="figures/push-button-fashion-bgcolor.png" alt="push-button-fashion-bgcolor.png"/> | |
+| `NCS_BGC_DISABLED_ITEM` | Text background color when the window is invalid | `BgColorDisable` | `DWORD` (`ARGB`) |<img src="figures/push-button-fashion-bgdisalbe.png" alt="push-button-fashion-bgdisalbe.png"/>| |
 | `NCS_MODE_BGC` | Gradual change fill mode | `GradientMode` | int |<img src="figures/push-button-fashion-gradientmode.png" alt="push-button-fashion-gradientmode.png" />| [GradientMode](MStudioMGNCSV1dot0PGP2C5#GrandientMode) |
 | `NCS_METRICS_3DBODY_ROUNDX` | Window rectangle round corner X radius | `RoundX` | int | | 0 to 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
@@ -194,9 +194,9 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | Same as Classic renderer | |
-| `NCS_BGC_3DBODY` | background color | `BgColor3DBody` | `DWORD(ARGB`) | Same as Classic renderer |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | Same as Classic renderer | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) | Same as Classic renderer | |
+| `NCS_BGC_3DBODY` | background color | `BgColor3DBody` | `DWORD` (`ARGB`) | Same as Classic renderer |
 | `NCS_METRICS_3DBODY_ROUNDX` | Window rectangle round corner X radius | `RoundX` | int | | 0 to 1/2 of the window width |
 | `NCS_METRICS_3DBODY_ROUNDY` | Window rectangle round corner Y radius | `RoundY` | int| | 0 to 1/2 of the window height |
 
@@ -338,8 +338,8 @@ for the drawing of non client area, please refer to the renderer of
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="figures/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/checkbutton_classic_fgc.png" alt="checkbutton_classic_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) | <img src="figures/checkbutton_classic_textdisable.png" alt="checkbutton_classic_textdisable.png"/> | |
 
 - Classic renderer of Check box fills and draws through loading image resource.
 (image resource is minigui-res by default, and installed in
@@ -369,8 +369,8 @@ drawing of non client area, please refer to the renderer of
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="figures/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/checkbtn_fashion_fgc.png" alt="checkbtn_fashion_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) | <img src="figures/checkbtn_fashion_disable.png" alt="checkbtn_fashion_disable.png"/> | |
 
 - Fashion renderer of Check box fills and draws through loading image resource.
 (Note: the image resource is `minigui-res` by default, and installed in
@@ -396,8 +396,8 @@ below: for the drawing of non area region, please refer to the renderer of
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
-| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="figures/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/checkbtn_flat_fgc.png" alt="checkbtn_flat_fgc.png"/> | |
+| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/checkbtn_flat_bgc.png" alt="checkbtn_flat_bgc.png"/> | |
 
 ### Programming Example of `mCheckbutton`
 
@@ -505,8 +505,8 @@ the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/radiobutton_classic_fgc.png" alt="radiobutton_classic_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="figures/radiobutton_classic_textdisable.png" alt="radiobutton_classic_textdisable.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/radiobutton_classic_fgc.png" alt="radiobutton_classic_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) | <img src="figures/radiobutton_classic_textdisable.png" alt="radiobutton_classic_textdisable.png"/> | |
 
 - Classic renderer of Check Box of Radiobutton fills and draws through loading
 image resource. (the image resource is minigui-res by default, and installed in
@@ -535,8 +535,8 @@ the renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/radiobtn_fashion_fgc.png" alt="radiobtn_fashion_fgc.png"/> | |
-| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD(ARGB`) | <img src="figures/radiobtn_fashion_disable.png" alt="radiobtn_fashion_disable.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/radiobtn_fashion_fgc.png" alt="radiobtn_fashion_fgc.png"/> | |
+| `NCS_FGC_DISABLED_ITEM` | Text foreground color when the window is invalid | `TextDisableColor` | `DWORD` (`ARGB`) | <img src="figures/radiobtn_fashion_disable.png" alt="radiobtn_fashion_disable.png"/> | |
 
 - Fashion renderer of Check Box of Radiobutton fills and draws through loading
 image resource. (The image resource is minigui-res by default, and installed in
@@ -560,8 +560,8 @@ renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget).
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value range* |
 |---------------|-----------|----------------------------|--------------|-----------------------------------------|---------------|
-| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD(ARGB`) | <img src="figures/radiobtn_flat_fgc.png" alt="radiobtn_flat_fgc.png"/> | |
-| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD(ARGB`) | <img src="figures/radiobtn_flat_bgc.png" alt="radiobtn_flat_bgc.png"/> | |
+| `NCS_FGC_3DBODY` | Text foreground color | `FgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/radiobtn_flat_fgc.png" alt="radiobtn_flat_fgc.png"/> | |
+| `NCS_BGC_3DBODY`| Background color | `BgColor3DBody` | `DWORD` (`ARGB`) | <img src="figures/radiobtn_flat_bgc.png" alt="radiobtn_flat_bgc.png"/> | |
 
 ### Programming Example of `mRadiobutton`
 
@@ -854,7 +854,7 @@ It is inherited from the property of `mButton`.
 
 | *Property name* | *Type* | *Permission* | *Explanation* |
 |-----------------|--------|--------------|---------------|
-| `NCSP_CLRBTN_CURCOLOR`| `DWORD(ARGB`) | `RW` | Set or get Color value |
+| `NCSP_CLRBTN_CURCOLOR`| `DWORD` (`ARGB`) | `RW` | Set or get Color value |
 
 ### Event of `mColorButton`
 
@@ -862,7 +862,7 @@ It is inherited from the event of `mButton`.
 
 | *Event notification code* | *Explanation* | *Parameter* |
 |---------------------------|---------------|-------------|
-| `NCSN_CLRBTN_COLORCHANGED` | Update after being selected by the user | `DWORD(ARGB`) |
+| `NCSN_CLRBTN_COLORCHANGED` | Update after being selected by the user | `DWORD` (`ARGB`) |
 
 ### Programming Example of `mColorButton`
 
