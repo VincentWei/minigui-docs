@@ -9,9 +9,9 @@ class of control provides default window scroll processing.
 Class inheritance relation of the window and its derived class is as below:
 
 - [mWidget ](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-- [mScrollWidget](MiniGUIProgGuidePart2Chapter08#m_ScrollWidget.md)
-* [mContainer](MiniGUIProgGuidePart2Chapter08#mContainer.md)
-* [mPage](MiniGUIProgGuidePart2Chapter08#mPage.md)
+   - [mScrollWidget](MiniGUIProgGuidePart2Chapter08#m_ScrollWidget.md)
+      * [mContainer](MiniGUIProgGuidePart2Chapter08#mContainer.md)
+         * [mPage](MiniGUIProgGuidePart2Chapter08#mPage.md)
 
 
 ## `mScrollWidget`

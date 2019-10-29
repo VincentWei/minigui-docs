@@ -9,10 +9,10 @@ window class.
 The class inheritance relation of panel and its derived class is as follows:
 
 - [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-- [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel)
-* [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox)
-* [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd)
-* [mDialogBox](MiniGUIProgGuidePart2Chapter07#mDialogBox)
+   - [mPanel](MiniGUIProgGuidePart2Chapter07#mPanel)
+      - [mComboBox](MiniGUIProgGuidePart2Chapter07#mComboBox)
+      - [mMainWnd](MiniGUIProgGuidePart2Chapter07#mMainWnd)
+         - [mDialogBox](MiniGUIProgGuidePart2Chapter07#mDialogBox)
 
 ## `mPanel`
 

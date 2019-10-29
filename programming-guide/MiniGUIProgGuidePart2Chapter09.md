@@ -9,10 +9,10 @@ certain range are more visual, avoiding the trouble of keyboard input.
 
 - Hierarchical relation of slider control class
 
-- [ `mWidget` ](MStudioMGNCSV1dot0PGENP2C3#mWidget)
-* [ `mSlider` ](MiniGUIProgGuidePart2Chapter09#mSlider.md)
-* [ `mTrackBar` ](MiniGUIProgGuidePart2Chapter09#m_TrackBar.md)
-* [ `mScrollBar` ](MiniGUIProgGuidePart2Chapter09#m_ScrollBar.md)
+- [`mWidget`](MStudioMGNCSV1dot0PGENP2C3#mWidget)
+   * [`mSlider`](MiniGUIProgGuidePart2Chapter09#mSlider.md)
+      * [`mTrackBar`](MiniGUIProgGuidePart2Chapter09#m_TrackBar.md)
+      * [`mScrollBar`](MiniGUIProgGuidePart2Chapter09#m_ScrollBar.md)
 
 * Control creating method
 - Automatic creation: drag corresponding slider control through interface
@@ -30,7 +30,7 @@ generated. Manual programming sets control property and event handling.
 - *Brief introduction*: Basic class of slider series controls
 - *Schematic diagram*:
 
-*%RED%The control is abstract control and cannot be used directly%ENDCOLOR%*
+_The control is abstract control and cannot be used directly._
 
 ### Style of `mSlider`
 

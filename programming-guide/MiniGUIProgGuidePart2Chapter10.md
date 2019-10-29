@@ -10,8 +10,8 @@ mGNCS provides two kinds of buttons, `mSpinner` and `mSpinbox`, and their
 inheritance relation is as follows
 
 - [mWidget ](MStudioMGNCSV1dot0PGP2C3#mWidget)
-- [mSpinner](MStudioMGNCSV1dot0PGP2C9#mSpinner)
-* [mSpinbox](MStudioMGNCSV1dot0PGP2C9#mSpinbox)
+   - [mSpinner](MStudioMGNCSV1dot0PGP2C9#mSpinner)
+      - [mSpinbox](MStudioMGNCSV1dot0PGP2C9#mSpinbox)
 
 
 ## `mSpinner`

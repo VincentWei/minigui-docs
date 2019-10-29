@@ -23,8 +23,7 @@ In this document, button class and the properties in it will be introduced in
 detail, making it convenient for the users to further understand the details of
 buttons, thus buttons can be used more flexibly.
 
-- Class hierarchical relation related to buttons
-
+Class hierarchical relation related to buttons:
 - [`mWidget`](MStudioMGNCSV1dot0PGENP2C3#mWidget)
    - [`mButton`](MiniGUIProgGuidePart2Chapter06#mButton.md)
       - [`mCheckButton`](MiniGUIProgGuidePart2Chapter06#m_CheckButton.md)
@@ -32,7 +31,7 @@ buttons, thus buttons can be used more flexibly.
       - [`mMenuButton`](MiniGUIProgGuidePart2Chapter06#m_MenuButton.md) (mPopMenuMgr is used)
       - [`mColorButton`](MiniGUIProgGuidePart2Chapter06#m_ColorButton.md)
 
-- Control creating method
+Control creating methods:
 - Automatic creation: through interface designer in miniStudio, corresponding
 button control is dragged. miniStudio will automatically create control and
 provide visual control configuration, and at the same time, creation codes are
