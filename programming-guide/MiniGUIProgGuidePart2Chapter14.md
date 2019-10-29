@@ -35,7 +35,7 @@ loading different image processing objects on the control.
 
 It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
-| *Style name* | *mstudio property name* | *Explanation* |
+| *Style name* | *miniStudio property name* | *Explanation* |
 |--------------|-------------------------|---------------|
 | `NCSS_ANMT_AUTOLOOP` | `Loop` | Set animation play as automatic circle or not. When setting as True, the images are played in circle. When setting as False, it will stop after the images are all played. |
 | `NCSS_ANMT_SCALE` | `Scale->ImageScaled` | Set the image play area as control region area, and the images can be played enlarged or reduced |
@@ -46,7 +46,7 @@ It is inherited from the style of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
 It is inherited from the property of [mStatic](MStudioMGNCSV1dot0PGP2C4)
 
-| *Property* | *mstudio property name* | *Type* | *Authority* | *Explanation* |
+| *Property* | *miniStudio property name* | *Type* | *Authority* | *Explanation* |
 |------------|-------------------------|--------|-------------|---------------|
 | `NCSP_ANMT_GIFFILE` | `GIFFile` | String | `RW` | Name of the `GIF` image file loaded by the animation control |
 | `NCSP_ANMT_DIR` | Dir | String | `RW` | Name if the directory loaded by the animation control. The control loads all the images in the directory. Image play is according to the first letter ascii code sequence of the images supported |
