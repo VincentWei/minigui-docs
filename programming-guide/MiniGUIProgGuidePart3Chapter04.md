@@ -1,7 +1,6 @@
 # mGPlus Programming
 
-
-##Basic concept introduction
+## Basic concept introduction
 
 mGPlus is a MiniGUI component which provides support for advanced graphics
 functions like path, gradient, anti-aliase stretch, and color combination.
@@ -14,9 +13,9 @@ applications for stand-alone devices.
 - Path: It consists of a group of strictly ordered polylines and curves.
 Use the path for filling and cutting.
 - Color Gradient: refers to a brush that provides a color linear gradient
-or path gradient. This gradient brush can be used to fill areas, path areas, 
+or path gradient. This gradient brush can be used to fill areas, path areas,
 and graphics. Gradient brushes can also be used to draw lines, curves, and
-paths. 
+paths.
 - Color Combination: The color combination determines the color values of
 the source, bottom, and intersection areas according to the combination rule.
 
@@ -161,8 +160,8 @@ return `HGRAPHICS`, a
 MG_EXPORT HGRAPHICS MGPlusGraphicCreateFromDC (HDC hdc);
 ```
 
-Another way is to use a different pixel format to create a `MGPlusGraphics` 
-data 
+Another way is to use a different pixel format to create a `MGPlusGraphics`
+data
 structure, using width and
 The height is initially used to specify the size of the canvas, calling
 `MGPlusGraphicCreate`
@@ -194,11 +193,11 @@ MPStatus MGPlusGraphicDelete (HGRAPHICS graphics);
 ```
 
 There is another kind of color that can clear `MGPlusGraphic`, similar to
-clear screen, this function is `MGPlusGraphicClear`. Under normal 
-circumstances, 
+clear screen, this function is `MGPlusGraphicClear`. Under normal
+circumstances,
 when creating `MGPlusGraphics`, the contents of the relevant dc will also be
-copied. Therefore, before using `MGPlusGraphicCopyFromDC`, you need to call 
-this 
+copied. Therefore, before using `MGPlusGraphicCopyFromDC`, you need to call
+this
 function to clear it. Usage is as follows:
 ```cpp
     MGPlusGraphicClear (graphics, 0);
@@ -331,8 +330,8 @@ MPStatus MGPlusSetCompositingMode ( HGRAPHICS graphics, CompositingMode composit
 
 If the user wants to get the current color combination mode, directly call the
 function `MGPlusGetCompositingMode` to get
-`MGPlusGraphics` combination mode. The acquired combination pattern is stored 
-in 
+`MGPlusGraphics` combination mode. The acquired combination pattern is stored
+in
 the address pointed to by `compositingMode`.
 
 ```cpp
@@ -347,8 +346,8 @@ src-over mode.
 In addition to the color combinations of graphics, you can also add pictures
 to participate in color combinations. Users want to add pictures, first call
 the function
-`MGPlusGraphicLoadBitmapFromFile` to load the picture and then call the 
-function 
+`MGPlusGraphicLoadBitmapFromFile` to load the picture and then call the
+function
 `MGPlusDrawImage`
 Draw the picture in `MGPlusGraphics`.
 
@@ -371,7 +370,7 @@ There is another way to load pictures. In the initialization of the program
 calls the function in MiniGUI
 `LoadBitmap` (For details, see MiniGUI.
 `API` Manual) and then call `MGPlusGraphicLoadBitmap` and `MGPlusDrawImage` to
-draw 
+draw
 the picture
 In `MGPlusGraphics`, remember to call MiniGUI in the end of the program
 `UnloadBitmap`
@@ -381,12 +380,12 @@ The function frees memory space.
 MPStatus MGPlusGraphicLoadBitmap (HGRAPHICS graphics, int n_index, PBITMAP P_bitmap);
 ```
 Note: `n_index` is the prime value of the loaded image; `p_bitmap` is the
-address 
+address
 of the stored image.
 
 After completing the corresponding work, be sure to call the function
 `MGPlusGraphicBlend`, otherwise the effect of the color combination is
-invisible. 
+invisible.
 
 ```cpp
 MPStatus MGPlusGraphicBlend (HGRAPHICS src_gs, HGRAPHICS dst_gs);
@@ -627,8 +626,8 @@ Add text anti-aliasing effect
 ### World Coordinate System Conversion
 
 The conversion of the world coordinate system is the conversion (translation,
-scaling, rotation) of the coordinates of `MGPlus` Graphics. There is also a 
-path 
+scaling, rotation) of the coordinates of `MGPlus` Graphics. There is also a
+path
 conversion of mgplus, which is the conversion of the coordinates of the
 graphics coordinates (translation, scaling, rotation).
 
@@ -666,8 +665,8 @@ coordinate is (0, 0), if you want to figure around (100,
 100) Rotate the coordinates first to (100, 100), ie using
 `MGPlusTranslateWorldTransform(graphics,-100`, -100), then use Rotatate
 rotation, and finally use
-`MGPlusTranslateWorldTransform(graphics`, 100, 100), translate coordinates 
-back. 
+`MGPlusTranslateWorldTransform(graphics`, 100, 100), translate coordinates
+back.
 
 ```cpp
 MPStatus MGPlusTranslateWorldTransform (HGRAPHICS graphics, float dx, float Dy);
@@ -675,8 +674,8 @@ MPStatus MGPlusTranslateWorldTransform (HGRAPHICS graphics, float dx, float Dy);
 
 #### Zoom
 
-Call the function `MGPlusScaleWorldTransform` , users can zoom 
-`MGPlusGraphics`. 
+Call the function `MGPlusScaleWorldTransform` , users can zoom
+`MGPlusGraphics`.
 
 ```cpp
 MGPlus MGPlusScaleWorldTransform (HGRAPHICS graphics, float sx, float sy);
@@ -919,8 +918,8 @@ fonts.
 
 #### Create
 
-When `MGPlusPathCreate` creates a path, you need to select the winding rule. 
-The 
+When `MGPlusPathCreate` creates a path, you need to select the winding rule.
+The
 winding rule is divided into two types:
 - `MP_PATH_FILL_MODE_WINDING` // Non-zero rule
 - `MP_PATH_FILL_MODE_ALTERNATE` // odd and even rules
@@ -1413,7 +1412,7 @@ Hdc = GetClientDC (hWnd);
 //Insert HDC to create graphics
 HGRAPHICS graphics= MGPlusGraphicCreateFromDC (hdc);
 
-//Create a pen 
+//Create a pen
 HPEN pen = MGPlusPenCreate (9, 0xFF0000FF);
 
 //Create path
@@ -1466,7 +1465,7 @@ Hdc = GetClientDC (hWnd);
 //Insert HDC to create graphics
 HGRAPHICS graphics= MGPlusGraphicCreateFromDC (hdc);
 
-//Create a pen 
+//Create a pen
 HPEN pen = MGPlusPenCreate (9, 0xFF0000FF);
 
 //Create path
@@ -1517,7 +1516,7 @@ Hdc = GetClientDC (hWnd);
 //Insert HDC to create graphics
 HGRAPHICS graphics= MGPlusGraphicCreateFromDC (hdc);
 
-//Create a pen 
+//Create a pen
 HPEN pen = MGPlusPenCreate (9, 0xFF0000FF);
 
 //Create path
@@ -1783,7 +1782,7 @@ two straight lines are connected. There are five ways: `JOIN_MITER` (mock),
 `JOIN_ROUND` (round), `JOIN_BEVEL`
 (diagonal)
 `JOIN_MILTER_REVERT`, `JOIN_MILTER_ROUND`. The function `MGPlusPenSetJoinStyle`
-is 
+is
 called to modify the shape of the two straight line connections.
 ```cpp
  /*
@@ -1933,14 +1932,6 @@ Int PenProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
             {
                 Hwnd1 = CreateWindow (CTRL_TRACKBAR, "",
                         WS_VISIBLE | TBS_NOTIFY,
-   1 
-      1 
-         1 
-            1 
-               1 
-                  1 
-                     1 
-                        1 ,
                         1 , 10, 210, 50, hWnd, 0);
 
                 SendMessage (hwnd1, TBM_SETRANGE, 0, 80);
@@ -1954,14 +1945,6 @@ Int PenProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
                 Hwnd2 = CreateWindow (CTRL_COMBOBOX,"",
                         WS_VISIBLE | CBS_DROPDOWNLIST | CBS_NOTIFY,
-   1 
-      1 
-         1 
-            1 
-               1 
-                  1 
-                     1 
-                        1 ,
                         1 , 10, 150, 40, hWnd, 0 );
 
                // for (i = 0; i < 3 ; i++) {
@@ -2018,7 +2001,7 @@ then close the relevant point of `JoinStyle`.
 ### Drawing graphics
 
 The `MGPlusFillPath` and `MGPlusGraphicSave` procedures are not required, and
-the 
+the
 image can be drawn directly with the pen.
 
 #### Draw a straight line
