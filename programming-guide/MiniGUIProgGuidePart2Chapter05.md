@@ -1621,7 +1621,8 @@ None
 
 ### Style of `mSeparator`
 
-| *Property name* | *Explanation* |
+| *Property name* | *Comments* |
+|-----------------|------------|
 | `NCSS_SPRTR_VERT` | Set as vertical separation line, default by default |
 
 Users can use the following method to set the style:
