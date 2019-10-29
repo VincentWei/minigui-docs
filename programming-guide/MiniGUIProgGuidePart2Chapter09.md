@@ -72,7 +72,6 @@ It is inherited from the method of [mWidget](MStudioMGNCSV1dot0PGENP2C3)
 *The control is abstract control and cannot be used directly.*
 
 ## mTrackBar
-## mTrackBar
 
 - *Control window class*: `NCSCTRL_TRACKBAR`
 - *Control English name*: Trackbar
@@ -131,8 +130,7 @@ For the drawing of non client area, please refer to the renderer of [mWidget](MS
 
 #### `mTrackBar` Skin Renderer
 
-Refer to [Appendix B : Specification for the Image Resource Used by Skin
-Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
+Refer to [Appendix B : Specification for the Image Resource Used by Skin Renderer](MStudioMGNCSV1dot0PGENAppB#mTrackbar) 
 
 #### `mTrackBar` Fashion Renderer
 
@@ -140,6 +138,7 @@ For the drawing of non client area, please refer to the drawing of Fashion
 renderer of [mWidget](MStudioMGNCSV1dot0PGENP2C3#mWidget)
 
 | *Property ID* | *Meaning* | *miniStudio property name* | *Value type* | *Schematic diagram of the valid region* | *Value Region* |
+|---------------|-----------|----------------------------|--------------|-----------------------------------------|----------------|
 | `NCS_BGC_3DBODY` | Color of the slide block | `ColorBg3DBody` | `DWORD(ARGB`) | <img src="figures/trackbar-fashion-bg3dcolor.png" alt="trackbar-fashion-bg3dcolor.png"/>| |
 | `NCS_BGC_DISABLED_ITEM` | Color of the slide block when the control is invalid | `ColorBgDisable` | `DWORD(ARGB`) |<img src="figures/trackbar-fashion-bgdisable.png" alt="trackbar-fashion-bgdisable.png"/>| |
 | `NCS_BGC_TRKBAR_SLIDER` | Color of the slide rail | `SliderColor` | `DWORD(ARGB`) |<img src="figures/trackbar-fashion-slider.png" alt="trackbar-fashion-slider.png" />| |
