@@ -1,9 +1,55 @@
+# Public Structures and Definitions of mGNCS
+
+## Alignment Values
+
+Horizontal alignment enumeration values:
+
+```cpp
+enum enumNCSAlign {
+    NCS_ALIGN_LEFT = 0,
+    NCS_ALIGN_RIGHT,
+    NCS_ALIGN_CENTER,
+};
+```
+
+Vertical alignment enumeration values:
+
+```cpp
+enum enumNCSVAlign {
+    NCS_VALIGN_TOP = 0,
+    NCS_VALIGN_BOTTOM,
+    NCS_VALIGN_CENTER,
+};
+```
+
+## Image Drawing Modes
+
+```cpp
+enum enumNCSImageDrawMode {
+    NCS_DM_NORMAL = 0,
+    NCS_DM_SCALED,
+    NCS_DM_TILED,
+};
+
+```
+
+- `NCS_DM_NORMAL`  
+Draw in normal mode without stretching and tiling. Under default condition, display
+the image in the center (horizontal and vertical direction) Certain controls
+such as Image can be changed through the alignment setting of control itself
+- `NCS_DM_SCALED`  
+Stretch image to fit to the filling region.
+- `NCS_DM_TILED`  
+When the image size is smaller than the filling region, tile the image to fill
+the whole region.
+
+_TBC_
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Specification for the Image Resources Used by mGNCS Skin Renderer](MiniGUIProgGuideAppendixB.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Specification for the mGNCS-compliant Widget Components &gt;&gt;](MiniGUIProgGuideAppendixD.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
