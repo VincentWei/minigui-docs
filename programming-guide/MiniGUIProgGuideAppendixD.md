@@ -2,18 +2,48 @@
 
 ## Terms
 
-* MiniGUI new control set (mGNCS). The new control set not only realizes multiple customizable and extensible control classes, but also realizes resources management function, and object-oriented encapsulation for other common functions, such as main window, dialog box and menu etc.
-* Style. Symbol used for controlling window or control basic look and feel and behavior.
-   * Control style of the new control set, only used for control properties that cannot be modified dynamically, such as if the progress bar is vertical or horizontal can be realized with style. In the realization of all the controls, use of style shall be reduced as much as possible.
-   * Besides system global styles such as `WS_` and `WS_EX_` etc. are reserved, the control styles defined by MiniGUI intrinsic control set are not used in the new control set. Control styles in the new control set will be defined again.
-   * In the new control set, control no longer has extension style.
-* Property. Control property is a newly added concept, which is used for the control features that can be dynamically set (such as intercalator location in the edit box) or dynamically changed (such as list item number in the list box). mGNCS provides uniform interface (getProperty/setProperty) to get or set property of control.
-* Renderer. In mGNCS, it refers to the drawing method set of controlling the main window or control look and feel, the full name is “look and feel renderer”, generally referred to as “renderer” in short.
-   * In the new control set, each visible control will have its own renderer. In order to distinguish from renderers introduced by MiniGUI 3.0, we refer to the renderers of MiniGUI 3.0 as “global renderer”, and the renderers introduced by the new control set is referred to as “control renderer”:
-   * The global renderer acts on the main window, old control set and system components of the new control set (such as non client area elements such as border, title bar and scroll bar etc.).
-   * Control renderer only acts on the client area drawing of each control of the new control set.
-* Window class name. In order to distinguish from the name of control class, we refer to the class name used by MiniGUI for child window as “window class name”. For example, control class name of static box is mStatic, while the window class name of static box is `static_`.
-* Event. In the traditional programming mode of MiniGUI, there exist two concepts, message and notification; they have their own effect, but for application developers, the nature of notification is the same as that of the message. Therefore, mGNCS abstracts the message and notification as event. Looking from the angle of application developers, each event correspond to an event handler.
+- MiniGUI new control set (mGNCS). The new control set not only realizes
+  multiple customizable and extensible control classes, but also realizes
+resources management function, and object-oriented encapsulation for other
+common functions, such as main window, dialog box and menu etc.
+- Style. Symbol used for controlling window or control basic look and feel and
+  behavior.
+   - Control style of the new control set, only used for control properties
+     that cannot be modified dynamically, such as if the progress bar is
+vertical or horizontal can be realized with style. In the realization of all
+the controls, use of style shall be reduced as much as possible.
+   - Besides system global styles such as `WS_` and `WS_EX_` etc. are reserved,
+     the control styles defined by MiniGUI intrinsic control set are not used
+in the new control set. Control styles in the new control set will be defined
+again.
+   - In the new control set, control no longer has extension style.
+- Property. Control property is a newly added concept, which is used for the
+  control features that can be dynamically set (such as intercalator location
+  in the edit box) or dynamically changed (such as list item number in the list
+  box). mGNCS provides uniform interface (`getProperty`/`setProperty`) to get or set
+  property of control.
+- Renderer. In mGNCS, it refers to the drawing method set of controlling the
+  main window or control look and feel, the full name is “look and feel
+  renderer”, generally referred to as “renderer” in short.
+   - In the new control set, each visible control will have its own renderer.
+     In order to distinguish from renderers introduced by MiniGUI 3.0, we refer
+     to the renderers of MiniGUI 3.0 as “global renderer”, and the renderers
+     introduced by the new control set is referred to as “control renderer”:
+   - The global renderer acts on the main window, old control set and system
+     components of the new control set (such as non client area elements such
+     as border, title bar and scroll bar etc.).
+   - Control renderer only acts on the client area drawing of each control of
+     the new control set.
+- Window class name. In order to distinguish from the name of control class, we
+  refer to the class name used by MiniGUI for child window as “window class
+  name”. For example, control class name of static box is `mStatic`, while the
+  window class name of static box is `static_`.
+- Event. In the traditional programming mode of MiniGUI, there exist two
+  concepts, message and notification; they have their own effect, but for
+  application developers, the nature of notification is the same as that of the
+  message. Therefore, mGNCS abstracts the message and notification as event.
+  Looking from the angle of application developers, each event correspond to an
+  event handler.
 
 ## Interface Naming Norm of the New Control Set
 
@@ -23,27 +53,57 @@ mode, all capital letter mode, lower case and capital letter mixture mode and
 capital letter abbrev mode of the class name are represented by `<classname>`,
 `<CLASSNAME>`, `<ClassName>`, and `<CLSNM>`.
 
-* Class name (refers to containing method, which is structure of function pointer). Although the new control adopts C language to realize, because OOP idea is adopted, the mode of capital letter and lower case letter mixture is adopted to represent the name of “class”, and lower case letter m is used as prefix, such as `mWidget` and corresponding `mWidgetClass`.
-* General structure. Use all capital letter modes similar to MiniGUI interface to name, and use `NCS<CLSNM>_`  as the prefix.
-* Naming rules for functions and parameters
-   * The new control set newly adds global general function, and uses `nc` as the function name prefix. Afterwards, it is the verb object phrase describing the function function, and the method of capital letter and lower case letter mixture is used to name, such as `ncsCreateWindow`.
-   * Function interface facing the control developers, the first parameter shall be `mWidget*`  or corresponding child class type pointer.
-   * Method naming of the control class: verb object phrase, word link writing, except the first word, the first letter of other words is capital letter, such as `void (*moveContent) (mWidget *)`  .
-   * Naming norm for the message callback function in control class is: `on<MessageName>` ，such as `void (*onSetFocus) (mWidget *)` .
-   * Parameter sequence and engagement of control message: according to the message criteria defined by MiniGUI, define its sequence and name.
-   * Naming norm for control renderer interface is: `<className>Renderer`.
-   * Internal function parameter engagement of renderer interface: the first is `mWidget*`  or corresponding child class type pointer, and the second parameter is generally `HDC` .
-   * In the new control set, for the functions equivalent to C++ member function, pointer variable representing the object is named as `self` , while the class pointer that the object corresponds to is `_class` .
-   * For the parameter names in the function interface, Java JDK style is adopted to name (the first word is all lower case letter, and afterwords, they are all capital letter and lower case letter mixture), and Hungarian naming method is no longer used.
-   * Read only pointer parameter type and returned value type must use `const` key word for modification.
-* Window class name. In order to avoid confliction with the window class name of the old control set, the new control set uses under line (`_`) as the suffix of window class name, such as `static_` . The reason for not using prefix is to try to avoid hash conflict under the algorithm of existing MiniGUI core management window class code. For the C language macro name of window class name,  `NCSCTRL_` is used as prefix, such as `NCSCTRL_STATIC` .
+- Class name (refers to containing method, which is structure of function
+  pointer). Although the new control adopts C language to realize, because OOP
+idea is adopted, the mode of capital letter and lower case letter mixture is
+adopted to represent the name of “class”, and lower case letter m is used as
+prefix, such as `mWidget` and corresponding `mWidgetClass`.
+- General structure. Use all capital letter modes similar to MiniGUI interface
+  to name, and use `NCS<CLSNM>_`  as the prefix.
+- Naming rules for functions and parameters
+   - The new control set newly adds global general function, and uses `nc` as
+     the function name prefix. Afterwards, it is the verb object phrase
+describing the function function, and the method of capital letter and lower
+case letter mixture is used to name, such as `ncsCreateWindow`.
+   - Function interface facing the control developers, the first parameter
+     shall be `mWidget*`  or corresponding child class type pointer.
+   - Method naming of the control class: verb object phrase, word link writing,
+     except the first word, the first letter of other words is capital letter,
+such as `void (*moveContent) (mWidget *)`  .
+   - Naming norm for the message callback function in control class is:
+     `on<MessageName>` ，such as `void (*onSetFocus) (mWidget *)` .
+   - Parameter sequence and engagement of control message: according to the
+     message criteria defined by MiniGUI, define its sequence and name.
+   - Naming norm for control renderer interface is: `<className>Renderer`.
+   - Internal function parameter engagement of renderer interface: the first is
+     `mWidget*`  or corresponding child class type pointer, and the second
+parameter is generally `HDC` .
+   - In the new control set, for the functions equivalent to C++ member
+     function, pointer variable representing the object is named as `self` ,
+while the class pointer that the object corresponds to is `_class` .
+   - For the parameter names in the function interface, Java JDK style is
+     adopted to name (the first word is all lower case letter, and afterwords,
+they are all capital letter and lower case letter mixture), and Hungarian
+naming method is no longer used.
+   - Read only pointer parameter type and returned value type must use `const`
+     key word for modification.
+- Window class name. In order to avoid confliction with the window class name
+  of the old control set, the new control set uses under line (`_`) as the
+suffix of window class name, such as `static_` . The reason for not using
+prefix is to try to avoid hash conflict under the algorithm of existing MiniGUI
+core management window class code. For the C language macro name of window
+class name,  `NCSCTRL_` is used as prefix, such as `NCSCTRL_STATIC` .
 
-It needs to be noted that because we adopt C language to realize rule-oriented feature similar to C++ language. In order to avoid unnecessary errors, we need to obey the naming norm as grammar norm, the purpose is:
+It needs to be noted that because we adopt C language to realize rule-oriented
+feature similar to C++ language. In order to avoid unnecessary errors, we need
+to obey the naming norm as grammar norm, the purpose is:
 
-* Simplify programming through all kinds of macros.
-* Convenient for fixing programming mode through macro, according to fixed programming mode, it is easy to read and realize and not easy to make mistakes.
-* Generation and index of compiled documents.
-* Reduce study time of the developers to the maximum extent.
+- Simplify programming through all kinds of macros.
+- Convenient for fixing programming mode through macro, according to fixed
+  programming mode, it is easy to read and realize and not easy to make
+mistakes.
+- Generation and index of compiled documents.
+- Reduce study time of the developers to the maximum extent.
 
 ## Defining Rule for the Class Name and Its Identifier
 
@@ -98,18 +158,33 @@ The table below gives the class name, corresponding window class name and their 
 
 Naming rule for the identifier is as below:
 
-* Window class name identifier. In order to avoid confliction with the identifier of the old control set, the new control set uses `NCSCTRL_<CLASSNAME>` as the window class name identifier.。
-* Control style identifier. In order to avoid confliction with the style name of the old control set, the new control set uses `NCSS_<CLSNM>_` as the prefix of the style identifier.
-* Control property identifier. The new control set uses `NCSP_<CLSNM>_` as the prefix of control property identifier.
-* Control notification code identifier. In order to avoid confliction with the notification code name of the old control set, the new control set uses `NCSN_<CLSNM>_` as the prefix of control notification identifier.
-* Class specific data identifier. The new control set uses `NCSSPEC_<CLSNM>_`  as the identifier prefix of class specific data, and specific data of mObject class uses `NCSSPEC_OBJ_` as the prefix.
-* Parameter of class method and symbol and status used by the returned value etc. The new control set uses `NCSF_<CLSNM>_` as the prefix of this identifier.
-* Return value identifier of function interface and class method. The new control set uses `NCSE_<CLSNM>_`  as the prefix of the identifier.
-* Other identifiers. Besides the above identifiers, identifiers of other types are determined with reference to the above method.
+- Window class name identifier. In order to avoid confliction with the
+  identifier of the old control set, the new control set uses
+`NCSCTRL_<CLASSNAME>` as the window class name identifier.
+- Control style identifier. In order to avoid confliction with the style name
+  of the old control set, the new control set uses `NCSS_<CLSNM>_` as the
+prefix of the style identifier.
+- Control property identifier. The new control set uses `NCSP_<CLSNM>_` as the
+  prefix of control property identifier.
+- Control notification code identifier. In order to avoid confliction with the
+  notification code name of the old control set, the new control set uses
+`NCSN_<CLSNM>_` as the prefix of control notification identifier.
+- Class specific data identifier. The new control set uses `NCSSPEC_<CLSNM>_`
+  as the identifier prefix of class specific data, and specific data of `mObject`
+class uses `NCSSPEC_OBJ_` as the prefix.
+- Parameter of class method and symbol and status used by the returned value
+  etc. The new control set uses `NCSF_<CLSNM>_` as the prefix of this
+identifier.
+- Return value identifier of function interface and class method. The new
+  control set uses `NCSE_<CLSNM>_`  as the prefix of the identifier.
+- Other identifiers. Besides the above identifiers, identifiers of other types
+  are determined with reference to the above method.
 
 ### Defining Rule of Control Style Identifier
 
-In the new control set, number of control styles shall be kept to the minimum, and the value range of the control style is 0x00000000 ~ 0x0000FFFF, so as to avoid confusion with the window style defined by MiniGUI.
+In the new control set, number of control styles shall be kept to the minimum,
+and the value range of the control style is 0x00000000 ~ 0x0000FFFF, so as to
+avoid confusion with the window style defined by MiniGUI.
 
 ### Defining Rule of Control Property Identifier
 
@@ -156,17 +231,17 @@ notification code.
 
 ## Function Library and Head File of the New Control Set
 
-Although mGNCS is introduced in the process of developing mStudio, it can be
+Although mGNCS is introduced in the process of developing miniStudio, it can be
 used singularly as a component in MiniGUI 3.0. Therefore, we manage the new
 control set as a component of MiniGUI, and name it mGNCS. Name of the function
-library is libmGNCS, and the current edition is 1.0.0. The head file is stored
+library is `libmgncs`, and the current edition is 1.0.0. The head file is stored
 under mGNCS/ directory of the system head file path, and the main head file
 name is mGNCS.h.
 
 Current mGNCS defines a lot of universal controls, and in the near future, we
 will form extension control set aiming at specific field based on the current
 mGNCS. Then, an independent function library will be formed, and it is named by
-adopting libmGNCS4*, and the head file will be still stored under mGNCS/
+adopting `libmgncs4*`, and the head file will be still stored under `mgncs/`
 directory of the system head file path.
 
 ----
