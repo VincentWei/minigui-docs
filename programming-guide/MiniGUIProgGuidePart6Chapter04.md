@@ -2,10 +2,10 @@
 
 The edit box provides an important approach for the application to receive the
 user input. Compared with the controls mentioned above, such as static control,
-button, list box, etc., the behaviors of edit box is relatively simple. The 
-edit box displays a caret, and the character input by the user would be 
+button, list box, etc., the behaviors of edit box is relatively simple. The
+edit box displays a caret, and the character input by the user would be
 inserted at the caret position. Besides that, the edit box also provides some
-simple editing functions such as selecting text, deleting text, moving the 
+simple editing functions such as selecting text, deleting text, moving the
 caret position, etc.
 
 MiniGUI uses the following three control classes to implement the edit box:
@@ -20,7 +20,7 @@ multiple-byte character input, including variable-byte charset. The Control
 provides the functions of being Selected, Copy and Paste, etc.
 - Single-line Double-Direction edit box: class name "bidisledit", identifier
 `CTRL_BIDISLEDIT`. It can only handle single-line text, except the functions of
-Single-line edit box, it can display and input Double-Direction texts, 
+Single-line edit box, it can display and input Double-Direction texts,
 including Arabic and Hebrew. The Control provides the functions of being
 Selected, Copy and Paste, etc.
 
@@ -29,12 +29,9 @@ codes of the three types of edit box control classes are general similar, with
 only a little differences. Fig 22.1 shows the running effect of the three types
 of edit boxes.
 
-
-
 ![alt](figures/22.1.jpeg)
 
-Figure 1 MiniGUI edit boxes
-
+__Figure 1__ MiniGUI edit boxes
 
 ## Styles of Edit Box
 
@@ -45,19 +42,19 @@ WS_CHILD | WS_VISIBLE | WS_BORDER
 ```
 
 Apparently, the style definition above does not use any styles specific to edit
-box. That is to say, we can use edit box normally without specifying any 
+box. That is to say, we can use edit box normally without specifying any
 special styles of edit box. But the edit box has some special styles, mainly
-including: 
+including:
 - `ES_UPPERCASE`: Make the edit box display all characters in uppercase.
 - `ES_LOWERCASE`: Make the edit box display all characters in lowercase.
 - `ES_PASSWORD`: Edit box is used for inputting the password, and displays an
-asterisk (*) for each character typed into the edit box.
-- `ES_READONLY`: Create a read-only edit box, the user cannot change the text 
+asterisk (`*`) for each character typed into the edit box.
+- `ES_READONLY`: Create a read-only edit box, the user cannot change the text
 in the edit box, but the caret is visible.
 - `ES_BASELINE`: Draws a base line under text of the edit box.
 - `ES_AUTOWRAP`: Used for a multiple-line edit box, and automatically wraps
 against border when the text input exceeds the control border.
-- `ES_LEFT`: Specify the aligning style for a single line edit box, and 
+- `ES_LEFT`: Specify the aligning style for a single line edit box, and
 realizes the left-align style.
 - `ES_NOHIDESEL`: Remain selected for the selected text when losing focus.
 - `ES_AUTOSELECT`: Selects all text when getting focus (only valid for
@@ -75,11 +72,11 @@ For a multiple-line edit box, if you want to use the scroll bars, you can
 specify the styles `WS_HSCROLL` and/or `WS_VSCROLL`.
 
 The following styles can be used to multiple-line edit box: `ES_UPPERCASE`,
-`ES_LOWERCASE`, `ES_READONLY`, `ES_BASELINE`, `ES_AUTOWRAP`, `ES_NOHIDESEL`, 
+`ES_LOWERCASE`, `ES_READONLY`, `ES_BASELINE`, `ES_AUTOWRAP`, `ES_NOHIDESEL`,
 and `ES_TITLE`.
 
 The following styles can be used to single-line edit box: `ES_UPPERCASE`,
-`ES_LOWERCASE`, `ES_READONLY`, `ES_BASELINE`, `ES_LEFT`, `ES_CENTER`, 
+`ES_LOWERCASE`, `ES_READONLY`, `ES_BASELINE`, `ES_LEFT`, `ES_CENTER`,
 `ES_RIGHT`, `ES_PASSWORD`, `ES_NOHIDESEL`, `ES_AUTOSELECT`, and `ES_TIP`.
 
 ## Messages of Edit Box
@@ -102,15 +99,15 @@ corresponding work:
 In fact, the three functions above are the simple wraps of the three messages
 mentioned above. As we have seen in the foregoing chapters, the same messages
 and functions can also be used for controls such as static control and button
-control. 
+control.
 
 The messages to be introduced in the following sections are special for edit
-box. 
+box.
 
 ### Getting/Setting Caret Position
 
 Sending `EM_GETCARETPOS` message to the edit box will get the current caret
-position: 
+position:
 
 ```cpp
 int line_pos;
@@ -119,9 +116,9 @@ int char_pos;
 SendMessage (hwndEdit, EM_GETCARETPOS, (WPARAM) &line_pos, (LPARAM) &char_pos);
 ```
 
-After the message returns, `line_pos` and `char_pos` include the line number 
-and the position in that line of the caret. For a single-line edit box, 
-`line_pos` is always zero, so you can pass `NULL` value for the argument 
+After the message returns, `line_pos` and `char_pos` include the line number
+and the position in that line of the caret. For a single-line edit box,
+`line_pos` is always zero, so you can pass `NULL` value for the argument
 `wParam` of the message.
 
 It should be noted that, for multi-line edit box, one lines means a character
@@ -132,7 +129,7 @@ unit when displaying multiple byte text, instead of byte. This definition works
 for other messages of edit box.
 
 The application can also set the caret position through `EM_SETCARETPOS`
-message: 
+message:
 
 ```cpp
 int line_pos;
@@ -142,7 +139,7 @@ SendMessage (hwndEdit, EM_SETCARETPOS, line_pos, char_pos);
 ```
 
 `wParam` and `IParam` argument specify line position and character position
-respectively. 
+respectively.
 
 ### Setting/Getting Selection of Text
 
@@ -168,7 +165,7 @@ SendMessage (hwndEdit, EM_SETSEL, line_pos, char_pos);
 
 Here, `lParam` argument specifies the row index of selected point; `wParam`
 specifies the character position in line of selected point. After this message
-is sent, text between the current insertion point and the selected point will 
+is sent, text between the current insertion point and the selected point will
 be selected.
 
 `EM_GETSELPOS` message is used to get the position of currently selected point:
@@ -182,7 +179,7 @@ SendMessage (hwndEdit, EM_GETCARETPOS, (WPARAM) &line_pos, (LPARAM) &char_pos);
 ```
 
 The use of `EM_GETSELPOS` message is similar to that of `EM_GETCARETPOS`
-message. 
+message.
 
 `EM_SELECTALL` message is used to make all the text in edit box selected, as
 `CTRL+A` operation:
@@ -200,7 +197,7 @@ operations of edit box control, such as copy:
 - `CTRL+V`: Copy text from clipboard to edit box
 - `CTRL+X`: Cut text of edit box to clipboard
 
-`EM_COPYTOCB` message is used to copy the currently selected text of an edit 
+`EM_COPYTOCB` message is used to copy the currently selected text of an edit
 box control to the clipboard, as <CTRL+C> operation:
 
 ```cpp
@@ -232,7 +229,7 @@ int line_height;
 line_height = SendMessage (hwndEdit, EM_GETLINEHEIGHT, 0, 0);
 ```
 
-`EM_SETLINEHEIGHT` message is used to set the row height, If success, return 
+`EM_SETLINEHEIGHT` message is used to set the row height, If success, return
 old line height value, otherwise return –1:
 
 ```cpp
@@ -240,11 +237,9 @@ int line_height;
 SendMessage (hwndEdit, EM_SETLINEHEIGHT, line_height, 0);
 ```
 
-***
-It should be noted that it is preferred to use `EM_SETLINEHEIGHT` message 
+__NOTE__ It should be noted that it is preferred to use `EM_SETLINEHEIGHT` message
 before setting text of an edit box, because reset row height will redraw the
 whole content of the edit box.
-***
 
 `EM_GETLINECOUNT` message is used to get the number of rows:
 
@@ -264,7 +259,7 @@ an edit box:
 SendMessage (hwndEdit, EM_LIMITTEXT, 10, 0L);
 ```
 
-The message above will make that only 10 bytes of characters can be input to 
+The message above will make that only 10 bytes of characters can be input to
 the edit box.
 
 ### Setting or Canceling Read-only Status
@@ -275,21 +270,18 @@ edit box be set in normal editable status.
 
 ### Setting/Getting Password Character
 
-By default, MiniGUI uses asterisks (*) to display the characters input in a
+By default, MiniGUI uses asterisks (`*`) to display the characters input in a
 password edit box. However, we can use the `EM_SETPASSWORDCHAR` message to
 change the password character:
 
 ```cpp
 SendMessage (hwndEdit, EM_SETPASSWORDCHAR, ‘%’, 0L);
 ```
-
 The message above will change the password character to be ‘%’.
 
 Using `EM_GETPASSWORDCHAR` message would get the current password character.
 
-***
-[Prompt] Password character only can be set ASCII code which can be displayed.
-***
+__PROMPT__ Password character only can be set ASCII code which can be displayed.
 
 Note that `TEXTEDIT` control does not carry out `EM_SETPASSWORDCHAR` and
 `EM_GETPASSWORDCHAR` messages.
@@ -298,7 +290,7 @@ Note that `TEXTEDIT` control does not carry out `EM_SETPASSWORDCHAR` and
 
 When `SLEDIT` has `ES_TIP` styles, you can set tip text of the edit box using
 `EM_SETTIPTEXT` message, and get tip text of edit box using `EM_GETTIPTEXT`
-message. 
+message.
 
 ```cpp
 int len;
@@ -319,10 +311,10 @@ SendMessage (hwndEdit, EM_GETTIPTEXT, len, (LPARAM)tip_text);
 
 Here `lParam` specifies the buffer to store the tip text string; `wParam`
 specifies the length of the string that can be stored in buffer (not including
-’\0’). 
+’\0’).
 
 When `TEXTEDIT` control has `ES_TITLE` style, you can use `EM_SETTITLETEXT`
-message to set the title text of the edit box, and use `EM_GETTITLETEXT` 
+message to set the title text of the edit box, and use `EM_GETTITLETEXT`
 message to get title text of edit box:
 
 
@@ -350,7 +342,7 @@ buffer (not including ’\0’).
 ### Setting End of Line Symbol
 
 In normal situation, `TEXTEDIT` edit box will not display linefeed symbol. If
-using `EM_SETLFDISPCHAR` message sets the display symbol for linefeeds, then
+using `EM_SETLFDISPCHAR` message sets the display symbol for line feeds, then
 edit box will display linefeed as the set display symbol.
 
 ```cpp
@@ -360,10 +352,10 @@ SendMessage (hwndEdit, EM_SETLFDISPCHAR, 0, disp_char);
 
 Here `lParam` parameter is the display symbol to be set for linefeed.
 
-For example, if you want to display linefeed with “*”, you can set as follows:
+For example, if you want to display linefeed with `*`, you can set as follows:
 
 ```cpp
-SendMessage (hwndEdit, EM_SETLFDISPCHAR, 0, ‘*’);
+SendMessage (hwndEdit, EM_SETLFDISPCHAR, 0, '*');
 ```
 
 ### Setting End of Line
@@ -413,7 +405,7 @@ copied appropriately.
 ```cpp
 TEXTPOSINFO info;
 unsigned char buff [32];
- 
+
 info.start_pos = 5;
 info.copy_len = 10;
 info.buff = buff;
@@ -427,14 +419,14 @@ information for the copied text, as follows:
 
 ```cpp
 typedef struct _TEXTPOSINFO {
-    /*The index of paragraph, if value is -1, 
+    /*The index of paragraph, if value is -1,
      *it will take effect on the whole text.*/
     int paragraph_index;
      /*The beginning byte position can be copied to the buffer.*/
     int start_pos;
      /*The maximal number of bytes can be copied to the buffer.*/
     int copy_len;
-    /*The pointer to a buffer receives the text. 
+    /*The pointer to a buffer receives the text.
      *Please make sure buffer size is more than the value of copy_len.*/
     char *buff;
 }TEXTPOSINFO;
@@ -457,9 +449,9 @@ notification messages, as listed below:
 received `MSG_SETTEXT`, `EM_RESETCONTENT`, or `EM_SETLINEHEIGHT` message.
 - `EN_ENTER`: The user has pressed the `ENTER` key in the edit box.
 - `EN_MAXTEXT`: The inserting text exceeds the maximum limitation of the edit
-box. 
+box.
 - `EN_DBLCLK`: The edit control is double clicked with the left button of the
-mouse. 
+mouse.
 - `EN_CLICKED`: The edit control is clicked with the left button of the mouse.
 
 ## Sample Program
@@ -471,7 +463,7 @@ refer to edit.c file of the demo program package `mg-samples` of this guide for
 the complete source code. Effect of running the program is shown in Figure 2.
 
 
-List 1 Example for using edit boxes
+__List 1__ Example for using edit boxes
 
 ```cpp
 #include <stdio.h>
@@ -486,9 +478,9 @@ List 1 Example for using edit boxes
 /* Define dialg template */
 static DLGTEMPLATE DlgBoxInputChar =
 {
-    WS_BORDER | WS_CAPTION, 
+    WS_BORDER | WS_CAPTION,
     WS_EX_NONE,
-    0, 0, 400, 220, 
+    0, 0, 400, 220,
 #ifdef _LANG_ZHCN
     "请键入字母",
 #else
@@ -503,12 +495,12 @@ static DLGTEMPLATE DlgBoxInputChar =
 #define IDC_CHARS       110
 
 static CTRLDATA CtrlInputChar [] =
-{ 
+{
     {
         CTRL_STATIC,
         WS_VISIBLE ,
-        10, 10, 380, 18, 
-        IDC_STATIC, 
+        10, 10, 380, 18,
+        IDC_STATIC,
 #ifdef _LANG_ZHCN
         "请输入一个字母:",
 #else
@@ -527,16 +519,16 @@ static CTRLDATA CtrlInputChar [] =
     {
         CTRL_MLEDIT,
         WS_VISIBLE | WS_BORDER | WS_VSCROLL | ES_BASELINE | ES_AUTOWRAP,
-        10, 80, 380, 70, 
-        IDC_CHARS, 
+        10, 80, 380, 70,
+        IDC_CHARS,
         NULL,
         0
     },
     {
         CTRL_BUTTON,
-        WS_TABSTOP | WS_VISIBLE | BS_DEFPUSHBUTTON, 
+        WS_TABSTOP | WS_VISIBLE | BS_DEFPUSHBUTTON,
         170, 160, 60, 25,
-        IDOK, 
+        IDOK,
 #ifdef _LANG_ZHCN
         "确定",
 #else
@@ -550,11 +542,11 @@ static void my_notif_proc (HWND hwnd, int id, int nc, DWORD add_data)
 {
     unsigned char buff [256] = {0};
     if (id == IDC_CHAR && nc == EN_CHANGE) {
-        /* Get the user input(the first character) of the single-line 
+        /* Get the user input(the first character) of the single-line
          * edit box, and insert it to the multiple-line edit box
          */
         GetWindowText (hwnd, buff, 4);
-        /* Place the caret postion of the single-line edit box in front, 
+        /* Place the caret postion of the single-line edit box in front,
          *thus to overlap the old character
          */
         SendMessage (hwnd, EM_SETCARETPOS, 0, 0);
@@ -564,7 +556,7 @@ static void my_notif_proc (HWND hwnd, int id, int nc, DWORD add_data)
         GetWindowText (hwnd, buff, 255);
         printf ("String: %s\n", buff);
     }
-}       
+}
 
 static int InputCharDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
@@ -573,9 +565,9 @@ static int InputCharDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM
 
     switch (message) {
     case MSG_INITDIALOG:
-        my_font = CreateLogFont (NULL, "fmhei", "ISO8859-1", 
+        my_font = CreateLogFont (NULL, "fmhei", "ISO8859-1",
                         FONT_WEIGHT_REGULAR, FONT_SLANT_ROMAN, FONT_FLIP_NIL,
-                        FONT_OTHER_NIL, FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE, 
+                        FONT_OTHER_NIL, FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE,
                         20, 0);
         hwnd = GetDlgItem (hDlg, IDC_CHAR);
         /* Set the font of the single-line edit box to be a big font */
@@ -583,11 +575,11 @@ static int InputCharDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM
         /* Simulate the press of INSERT key, and set the edit mode to be overlap mode */
         SendMessage (hwnd, MSG_KEYDOWN, SCANCODE_INSERT, 0L);
         return 1;
-        
+
     case MSG_CLOSE:
         EndDialog (hDlg, IDCANCEL);
         break;
-        
+
     case MSG_COMMAND:
         switch (wParam) {
         case IDOK:
@@ -598,7 +590,7 @@ static int InputCharDialogBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM
         }
         break;
     }
-    
+
     return DefaultDialogProc (hDlg, message, wParam, lParam);
 }
 
@@ -632,13 +624,13 @@ int MiniGUIMain (int argc, const char* argv[])
 
 ![alt](figures/22.2.jpeg)
 
-Figure 2 Effect of running the edit box example program
+__Figure 2__ Effect of running the edit box example program
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; List Box Control](MiniGUIProgGuidePart6Chapter03.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Combo Box Control &gt;&gt;](MiniGUIProgGuidePart6Chapter05.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

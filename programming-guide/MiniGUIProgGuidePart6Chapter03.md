@@ -716,7 +716,6 @@ int MiniGUIMain (int argc, const char* argv[])
 
 __Figure 4__ “Delete File” dialog box
 
-
 ----
 
 [&lt;&lt; Button Control](MiniGUIProgGuidePart6Chapter02.md) |
