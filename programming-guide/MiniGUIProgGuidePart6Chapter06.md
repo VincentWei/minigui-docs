@@ -12,15 +12,12 @@ the control, a menu would pop up, and when the user clicks an item of the menu
 with the mouse, the button content will change to the content of this item, as
 shown in Figure 1.
 
-
-
 ![alt](figures/24.1a.PNG)
 
-Figure 1 Menu button (The left is normal status, the right is effect after menu
+__Figure 1__ Menu button (The left is normal status, the right is effect after menu
 pops up)
 
-
-Calling `CreateWindow` function with `CTRL_MENUBUTTON` as the control class 
+Calling `CreateWindow` function with `CTRL_MENUBUTTON` as the control class
 name can create a menu button.
 
 ## Styles of Menu Button
@@ -34,7 +31,7 @@ WS_CHILD | WS_VISIBLE | MBS_SORT
 
 - `MBS_SORT`: Sorting the menu items
 - `MBS_LEFTARROW`: The menu pull-down arrow will be display at the left of the
-text. 
+text.
 - `MBS_NOBUTTON`: The control have not push button
 - `MBS_ALIGNLEFT`: The text on menubutton is left-align
 - `MBS_ALIGNRIGHT`: The text on menubutton is right-align
@@ -52,13 +49,13 @@ the following:
 ```cpp
 MENUBUTTONITEM mbi;       // Declare a menu item structure variable
 mbi.text = "item one";    // Set the item text
-mbi.bmp = NULL;           // Here you can specify a bitmap object 
+mbi.bmp = NULL;           // Here you can specify a bitmap object
 mbi.data = 0;
 pos = SendMessage (hMbtnWnd, MBM_ADDITEM, -1, (LPARAM) &mbi);
 ```
 
 Here `hMbtnWnd` is the handle of a menu button control. `SendMessage` will
-return the index of the new menu item, and return `MB_ERR_SPACE` when the 
+return the index of the new menu item, and return `MB_ERR_SPACE` when the
 memory is not enough.
 
 ### Deleting Items from Menu Button Control
@@ -85,7 +82,7 @@ SendMessage (hMbtnWnd, MBM_RESETCTRL, 0, 0);
 
 Similarly, you can use `MBM_SETCURITEM` message to set the selected item, and
 the text of the selected item will be displayed on the menu button, shown as
-follows: 
+follows:
 
 ```cpp
 SendMessage (hMbtnWnd, MBM_SETCURITEM, index, 0);
@@ -119,8 +116,8 @@ of the following values:
 - `MB_WHICH_TEXT`: Indicate the text of the menu item to be gotten or set. Here
 the text member of the structure must point to a valid buffer.
 - `MB_WHICH_BMP`: Indicate the bitmap object of the menu item to be gotten or
-set. 
-- `MB_WHICH_ATTDATA`: Indicate the additional data of the menu item to be 
+set.
+- `MB_WHICH_ATTDATA`: Indicate the additional data of the menu item to be
 gotten or set.
 
 The example is as follows:
@@ -140,7 +137,7 @@ Here, menubtn is the handle of the menu button.
 
 When using `MBS_SORT` style, because item sorting is involved, MiniGUI also
 provides `MBM_SETSTRCMPFUNC` message for the application to set a customized
-sorting function. Generally speaking, the application should use this message 
+sorting function. Generally speaking, the application should use this message
 to set the new text string comparing function before adding items.
 
 Usage of the message can refer to `LB_SETSTRCMPFUNC` message of list box.
@@ -151,7 +148,7 @@ Usage of the message can refer to `LB_SETSTRCMPFUNC` message of list box.
 The menu button has not `MBS_NOTIFY` style, so any menu button control can
 generate the following notification codes:
 - `MBN_ERRSPACE`: Memory allocation error occurs, and the memory space is not
-enough. 
+enough.
 - `MBN_SELECTED`: Selection is made for the menu button control. Whether or not
 the selected menu item changes, this notification will be generated.
 - `MBN_CHANGED`: The selected item of the menu button control changes.
@@ -167,7 +164,7 @@ demo program package `mg-samples` of this guide for the complete source code.
 The running effect of the program is as shown in Figure 2.
 
 
-List 1 Example of using menu button
+__List 1__ Example of using menu button
 
 ```cpp
 /* Define dialog box template */
@@ -183,7 +180,7 @@ static DLGTEMPLATE DlgMyDate =
 };
 
 static CTRLDATA CtrlMyDate[] =
-{ 
+{
 
     ...
 
@@ -222,7 +219,7 @@ static void prompt (HWND hDlg)
     int min = SendDlgItemMessage(hDlg, IDC_MINUTE, CB_GETSPINVALUE, 0, 0);
     int sel = SendDlgItemMessage(hDlg, IDL_DAXIA, MBM_GETCURITEM, 0, 0);
 
-    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min, 
+    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min,
                     daxia_char [sel], daxia [sel]);
 
     MessageBox (hDlg, date, "约会内容", MB_OK | MB_ICONINFORMATION);
@@ -257,7 +254,7 @@ static int MyDateBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
         SendDlgItemMessage(hDlg, IDL_DAXIA, MBM_SETCURITEM, 0, 0);
         SetWindowText (GetDlgItem (hDlg, IDC_PROMPT), daxia_char [0]);
         return 1;
-        
+
     case MSG_COMMAND:
         switch (wParam) {
         case IDOK:
@@ -267,9 +264,9 @@ static int MyDateBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             break;
         }
         break;
-        
+
     }
-    
+
     return DefaultDialogProc (hDlg, message, wParam, lParam);
 }/* Define dialog box template */
 static DLGTEMPLATE DlgMyDate =
@@ -284,7 +281,7 @@ static DLGTEMPLATE DlgMyDate =
 };
 
 static CTRLDATA CtrlMyDate[] =
-{ 
+{
 
     ...
 
@@ -323,7 +320,7 @@ static void prompt (HWND hDlg)
     int min = SendDlgItemMessage(hDlg, IDC_MINUTE, CB_GETSPINVALUE, 0, 0);
     int sel = SendDlgItemMessage(hDlg, IDL_DAXIA, MBM_GETCURITEM, 0, 0);
 
-    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min, 
+    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min,
                     daxia_char [sel], daxia [sel]);
 
     MessageBox (hDlg, date, "约会内容", MB_OK | MB_ICONINFORMATION);
@@ -358,7 +355,7 @@ static int MyDateBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
         SendDlgItemMessage(hDlg, IDL_DAXIA, MBM_SETCURITEM, 0, 0);
         SetWindowText (GetDlgItem (hDlg, IDC_PROMPT), daxia_char [0]);
         return 1;
-        
+
     case MSG_COMMAND:
 
 int MiniGUIMain (int argc, const char* argv[])
@@ -366,9 +363,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #ifdef _MGRM_PROCESSES
     JoinLayer(NAME_DEF_LAYER , "menubutton" , 0 , 0);
 #endif
-    
+
     DlgMyDate.controls = CtrlMyDate;
-    
+
     DialogBoxIndirectParam (&DlgMyDate, HWND_DESKTOP, MyDateBoxProc, 0L);
 
     return 0;
@@ -377,21 +374,15 @@ int MiniGUIMain (int argc, const char* argv[])
    ...
 ```
 
-
-
 ![alt](figures/24.2.jpeg)
 
-Figure 2 Use of menu button</center>
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 2__ Use of menu button</center>
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Combo Box Control](MiniGUIProgGuidePart6Chapter05.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Progress Bar Control &gt;&gt;](MiniGUIProgGuidePart6Chapter07.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
