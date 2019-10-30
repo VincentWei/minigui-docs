@@ -1,21 +1,24 @@
 # Independent Scrollbar Control
 
 ## Definition of independent scrollbar
-- Arrow, shaft and thumb are the components of scrollbar control. Some
-scrollbars don't have arrow, and some don't have shaft and thumb, as shown in
-Figure 1:<br />
 
-Figure 1 Scrollbar structure
+Arrow, shaft and thumb are the components of scrollbar control. Some
+scrollbars don't have arrow, and some don't have shaft and thumb, as shown in
+Figure 1.
 
 ![alt](figures/scrollbar_specific.gif)
 
-- Scrollbar is rectangular, it sends message to parent window when mouse clicks
+__Figure 1__ Scrollbar structure
+
+Scrollbar is rectangular, it sends message to parent window when mouse clicks
 on it, and parent window will refresh the content of window and the position of
 thumb. It also sends message to parent window and do refresh when mouse clicks
 on arrow.
 
 ## Types of Scrollbar
+
 There are two kinds of scrollbar:
+
 - A part of main window or other controls, application specifies the scrollbar
 is horizontal or vertical by changing the style, `WS_HSCROLL` or `WS_VSCROLL`.
 Main window or other controls can have both of these styles.
@@ -30,9 +33,10 @@ independent scrollbar, so we mentioned it.
 
 Independent scrollbar has the following styles:
 
-Table 1 The styles of independent scrollbar
+__Table 1__ The styles of independent scrollbar
 
 | *Style Identifier* | *Meaning* |
+|--------------------|-----------|
 | `SBS_HORZ` | Create a horizontal scrollbar. The range of scrollbar is decided by the arguments (x, y, w, h) of `CreateWindowEx2` when don't specify `SBS_BOTTOMALIGN` or `SBS_TOPALIGN`. |
 | `SBS_VERT` | Create a vertical scrollbar. The range of scrollbar is decided by the arguments (x, y, w, h) of `CreateWindowEx2` when don't specify `SBS_LEFTALIGN` or `SBS_RIGHTALIGN`. |
 | `SBS_BOTTOMALIGN` | Be used with `SBS_HORZ`. Put horizontal scrollbar on the bottom of the range which is specified by `CreateWindowEx2`. |
@@ -48,8 +52,8 @@ Table 1 The styles of independent scrollbar
 ## Messages of Independent Scrollbar
 
 Application can send following messages to scrollbar control:
-- Get/set data information of scrollbar: `SBM_GETSCROLLINFO`, 
-`SBM_SETSCROLLINFO` 
+- Get/set data information of scrollbar: `SBM_GETSCROLLINFO`,
+`SBM_SETSCROLLINFO`
 - Get /set current position of thumb: `SBM_GETPOS`, `SBM_SETPOS`
 - Get/set scroll range: `SBM_GETRANGE`, `SBM_SETRANGE`
 - Get/set scroll range and redraw immediately: `SBM_SETRANGEREDRAW`
@@ -58,7 +62,7 @@ Application can send following messages to scrollbar control:
 ### Get Scrollbar Information
 
 Application can get scrollbar's information (max/min value, pages of scrollbar
-and current position) by sending `SBM_GETSCROLLINFO` and `wParam` argument 
+and current position) by sending `SBM_GETSCROLLINFO` and `wParam` argument
 which is `SCROLLINFO` * pointer to scrollbar. The information is stored in the
 memory pointed by `wParam`.
 
@@ -70,8 +74,8 @@ typedef struct _SCROLLINFO
 {
         /** Size of the structrue in bytes */
         UINT    cbSize;
-        /**  
-        * A flag indicates which fields contain valid values, 
+        /**
+        * A flag indicates which fields contain valid values,
         * can be OR'ed value of the following values:
         *      - SIF_RANGE\n
         *        Retrives or sets the range of the scroll bar.
@@ -93,8 +97,11 @@ typedef struct _SCROLLINFO
         int     nPos;
 } SCROLLINFO, *PSCROLLINFO;
 ```
-`fMask` in `SBM_GETSCROLLINFO` structure specifies the information which can be
+
+The field `fMask` in `SBM_GETSCROLLINFO` structure specifies the information which can be
 got by sending `SBM_GETSCROLLINFO` message, `fMask's` value can be:
+
+__Table 2__ The mask identifiers
 
 | *Information Identifier* | *Meaning* |
 | `SIF_RANGE` | Get values range of scrollbar |
@@ -115,11 +122,11 @@ SendMessage (hwnd_scrollbar, SBM_GETSCROLLINFO, (wParam)&scinfo,  0);
 
 We can send `SBM_SETSCROLLINFO` to scrollbar control to set information of
 scrollbar. `wParam` is a pointer of `SCROLLINFO` structure, it stores the
-scrollbar information which needs to be stored. `IParam` is used to determine 
+scrollbar information which needs to be stored. `IParam` is used to determine
 to (`TRUE`) or not to (`FALSE`) redraw immediately.
 
 The following sample is setting scrollbar's information and not redrawing
-immediately: 
+immediately:
 
 ```cpp
 SCROLLINFO scinfo = {0};
@@ -142,7 +149,7 @@ int pos = SendMessage (hwnd_scrollbar, SBM_GETPOS, 0, 0);
 
 ### Set The Position of Thumb
 We can send `SBM_SETPOS` message to scrollbar to set position of thumb. Target
-position is stored in `wParam`. `IParam` is used to determine to (`TRUE`) or 
+position is stored in `wParam`. `IParam` is used to determine to (`TRUE`) or
 not to (`FALSE`) redraw immediately.
 
 ```cpp
@@ -152,7 +159,7 @@ SendMessage (hwnd_scrollbar, SBM_SETPOS, pos, TRUE);
 
 ### Get Scroll Range of Scrollbar
 
-We can send `SBM_GETRANGE` message to get the scroll range of scrollbar. 
+We can send `SBM_GETRANGE` message to get the scroll range of scrollbar.
 `wParam` stores min range and `IParam` stores max range.
 
 ```cpp
@@ -164,7 +171,7 @@ SendMessage (hwnd_scrollbar, SBM_GETRANGE, &min, &max);
 
 We can send `SBM_SETRANGE` message to set the scroll range of scrollbar.
 `wParam/IParam` is min/max range to set. This message will not redraw scrollbar
-immediately. 
+immediately.
 
 The following codes set the scroll range of scroll bar from 0 to 100. But you
 can only see the change after other message or event redraws UI.
@@ -176,11 +183,11 @@ SendMessage (hwnd_scrollbar, SBM_SETRANGE, 0, 100);
 ### Set Scroll Range of Scrollbar and Redraw Immediately
 
 We can send `SBM_SETRANGEREDRAW` message if we want to redraw scrollbar
-immediately after set the scroll range. `wParam/IParam` is min/max range to 
-set. 
+immediately after set the scroll range. `wParam/IParam` is min/max range to
+set.
 
 The following codes set the scroll range of scroll bar from 0 to 100 and redraw
-immediately. 
+immediately.
 ```cpp
 SendMessage (hwnd_scrollbar, SBM_SETRANGEREDRAW, 0, 100);
 ```
@@ -192,7 +199,10 @@ the scrollbar can't scroll to the direction which is specified by disabled
 arrow. Arrow is enabled (disabled) when `IParam` is `TRUE` (FALSE). `wParam's`
 value is as follow:
 
+__Table 3__ The arrow identifiers
+
 | *Arrow Identifier* | *Meaning* |
+|--------------------|-----------|
 | `SB_ARROW_LTUP` | Left arrow key of horizontal scrollbar or up arrow key of vertical scrollbar |
 | `SB_ARROW_BTDN` | Right arrow key of horizontal scrollbar or down arrow key of vertical scrollbar |
 | `SB_ARROW_BOTH` | All arrow keys |
@@ -207,10 +217,9 @@ SendMessage (hwnd_scrollbar, SBM_ENABLE_ARROW, SB_ARROW_BOTH, FALSE);
 
 The following properties of scrollbar can be set by `GetWindowElementAttr`,
 `SetWindowElementAttr`, `GetWindowElementPixelEx` and `SetWindowElementPixelEx`
-functions: 
+functions in the following table.
 
-
-Table 4 Notification codes table
+__Table 4__ Notification codes table
 
 | *Property Identifier* | *Meaning* |
 | `WE_MAINC_THREED_BODY` | Draw the colors of shaft and thumb |
@@ -252,10 +261,10 @@ The following codes is an example for above properties:
 
 All notification codes of scrollbar are in the following table:
 
-
-Table 5 Notification codes table
+__Table 5__ Notification codes table
 
 | *Notification Code Identifier* | *Meaning* |
+|--------------------------------|-----------|
 | `SB_LINEUP` | Vertical scrollbar scrolls up one line |
 | `SB_LINEDOWN` | Vertical scrollbar scrolls down one line |
 | `SB_PAGEUP` | Vertical scrollbar scrolls up one page |
@@ -282,27 +291,28 @@ notification code. When notification code is `SB_THUMBPOSITION` or
 sending `SBM_GETPOS`. Of course, the control doesn't send `MSG_COMMAND` to
 parent window if you have invoked `SetNotificationCallback` function to set
 callback function of scrollbar control, it invokes given callback function
-directly. 
+directly.
 
 ### Trigger of Notification Message
 Scrollbar can receive events of mouse and keyboard and trigger different
 notification message accroding to different situations.
-- It triggers different notification message when mouse clicks different part 
+- It triggers different notification message when mouse clicks different part
 of scrollbar. It is important to note, when dragging thumb by using mouse left
 button, scrollbar keeps sending `SB_THUMBTRACK` message, and it sends
 `SB_THUMBPOSITION` after mouse left button is released. The messages which are
 triggered by the part of scrollbar are as follow:
 
-
-Figure 2 notification messages which are triggered by mouse
-
 ![alt](figures/scrollbar_notif.gif)
+
+__Figure 2__ notification messages which are triggered by mouse
 
 - The key of keyboard triggers corresponding notification message, see the
 following table:
 
-Table 6 Notification Code table
+__Table 6__ Notification Code table
+
 | *Key* | *Notification Code* |
+|-------|---------------------|
 | `PAGEUP` | Horizontal scrollbar sends `SB_PAGELEFT`; Vertical scrollbar sends `SB_PAGEUP` |
 | `PAGEDOWN` | Horizontal scrollbar sends `SB_PAGERIGHT` ；Vertical scrollbar sends `SB_PAGEDOWN` |
 | `UpArrow` | Vertical scrollbar sends `SB_LINEUP` |
@@ -310,18 +320,18 @@ Table 6 Notification Code table
 | `DownArrow` | Vertical scrollbar sends `SB_LINEDOWN` |
 | `RightArrow` | Horizontal scrollbar sends `SB_LINERIGHT` |
 
-
 ## Sample Program
 
 The following codes show how to create scrollbar with multiple styles. By
 operating mouse or keyboard, you can do many operations on scrollbar, for
-example, clicking, draging and so on. To make the demo more vivid, we put a
+example, clicking, dragging and so on. To make the demo more vivid, we put a
 circle and a box on right of the window. The circle will become larger or
 smaller and the box will moved up or down, just follow scrollbar's control.
-Figure 3 is the screenshot, the codes are from `scrollbar_ctrl.c` in 
+Figure 3 is the screenshot, the codes are from `scrollbar_ctrl.c` in
 mg-samples, please see this file for full codes.
 
-List 1 Scrollbar sample codes
+__List 1__ Scrollbar sample codes
+
 ```cpp
 #include <stdio.h>
 #include <string.h>
@@ -408,7 +418,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                        ,
                         0,
                         ++_my_scroll_idc,
-                        20, 50, 20, 150, hwnd, 
+                        20, 50, 20, 150, hwnd,
                         "classic", 0,
                         0);
 
@@ -423,7 +433,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                        ,
                         0,
                         ++_my_scroll_idc,
-                        43, 50, 20, 150, hwnd, 
+                        43, 50, 20, 150, hwnd,
                         "flat", 0,
                         0);
 
@@ -438,7 +448,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                        ,
                         0,
                         ++_my_scroll_idc,
-                        66, 50, 20, 150, hwnd, 
+                        66, 50, 20, 150, hwnd,
                         "fashion", 0,
                         0);
 
@@ -453,7 +463,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                        ,
                         0,
                         ++_my_scroll_idc,
-                        92, 50, 20, 150, hwnd, 
+                        92, 50, 20, 150, hwnd,
                         "tiny", 0,
                         0);
 
@@ -463,11 +473,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** classic NOSHAFT VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        120, 50, 20, 34, hwnd, 
+                        120, 50, 20, 34, hwnd,
                         "classic", 0,
                         0);
 
@@ -477,11 +487,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** flat NOSHAFT VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        140, 50, 20, 34, hwnd, 
+                        140, 50, 20, 34, hwnd,
                         "flat", 0,
                         0);
 
@@ -491,11 +501,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** fashion NOSHAFT VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        160, 50, 20, 34, hwnd, 
+                        160, 50, 20, 34, hwnd,
                         "fashion", 0,
                         0);
 
@@ -505,11 +515,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** tiny NOSHAFT VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOSHAFT | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        184, 50, 20, 34, hwnd, 
+                        184, 50, 20, 34, hwnd,
                         "tiny", 0,
                         0);
 
@@ -519,11 +529,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** classic NOARROW VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        210, 50, 20, 150, hwnd, 
+                        210, 50, 20, 150, hwnd,
                         "classic", 0,
                         0);
 
@@ -533,11 +543,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** flat NOARROW VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        232, 50, 20, 150, hwnd, 
+                        232, 50, 20, 150, hwnd,
                         "flat", 0,
                         0);
 
@@ -547,11 +557,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** fashion NOARROW VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        254, 50, 20, 150, hwnd, 
+                        254, 50, 20, 150, hwnd,
                         "fashion", 0,
                         0);
 
@@ -561,11 +571,11 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** tiny NOARROW VSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN 
+                        WS_VISIBLE | SBS_VERT | SBS_NOARROW | SBS_LEFTALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        276, 50, 20, 150, hwnd, 
+                        276, 50, 20, 150, hwnd,
                         "tiny", 0,
                         0);
 
@@ -575,12 +585,12 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** classic HSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_HORZ 
+                        WS_VISIBLE | SBS_HORZ
                         | SBS_TOPALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        20, 220, 150, 20, hwnd, 
+                        20, 220, 150, 20, hwnd,
                         "classic", 0,
                         0);
 
@@ -590,12 +600,12 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** flat HSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_HORZ 
+                        WS_VISIBLE | SBS_HORZ
                         | SBS_TOPALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        20, 240, 150, 20, hwnd, 
+                        20, 240, 150, 20, hwnd,
                         "flat", 0,
                         0);
 
@@ -605,12 +615,12 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** fashion HSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_HORZ 
+                        WS_VISIBLE | SBS_HORZ
                         | SBS_TOPALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        20, 260, 150, 20, hwnd, 
+                        20, 260, 150, 20, hwnd,
                         "fashion", 0,
                         0);
 
@@ -620,12 +630,12 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 /** tiny HSCROLL */
 
                 hwnd_sb_ctrl = CreateWindowEx2 (CTRL_SCROLLBAR, "",
-                        WS_VISIBLE | SBS_HORZ 
+                        WS_VISIBLE | SBS_HORZ
                         | SBS_TOPALIGN
                        ,
                         0,
                         ++_my_scroll_idc,
-                        20, 280, 150, 20, hwnd, 
+                        20, 280, 150, 20, hwnd,
                         "tiny", 0,
                         0);
 
@@ -640,7 +650,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                 HWND scroll = (HWND)lParam;
                 int pos = 0;
 
-                switch (code) 
+                switch (code)
                 {
                     case SB_LINELEFT:
                         {
@@ -824,7 +834,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                             pos = SendMessage (hwnd_sb_main, SBM_GETPOS, 0, 0);
 
                             SendMessage (hwnd_sb_main, SBM_SETPOS, --pos, TRUE);
-                            
+
                         }
 
                         break;
@@ -886,7 +896,7 @@ static int ScrollbarProc(HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
 
         case MSG_PAINT:
             {
-                HDC hdc = BeginPaint(hwnd); 
+                HDC hdc = BeginPaint(hwnd);
 
                 /** separator */
                 MoveTo (hdc, SEP, 0);
@@ -970,14 +980,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-
-Figure 3 Scrollbar control
-
 ![alt](figures/scrollbar_sample.png)
 
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 3__ Scrollbar control
 
 ----
 
