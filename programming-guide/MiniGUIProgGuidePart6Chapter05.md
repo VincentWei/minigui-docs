@@ -483,7 +483,7 @@ __Figure 6__ Use of combo boxes
 
 [&lt;&lt; Edit Box Control](MiniGUIProgGuidePart6Chapter04.md) |
 [Table of Contents](README.md) |
-[Menu Button Control &gt;&gt;](MiniGUIProgGuidePart.md)
+[Menu Button Control &gt;&gt;](MiniGUIProgGuidePart6Chapter06.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
