@@ -1,5 +1,20 @@
 # Input Messages
 
+- [Keyboard](#keyboard)
+   + [Keyboard Input](#keyboard-input)
+   + [Key Stroke Message](#key-stroke-message)
+   + [Character Message](#character-message)
+   + [Key Status](#key-status)
+   + [Input Focus](#input-focus)
+   + [Sample Program](#sample-program)
+- [Mouse](#mouse)
+   + [Mouse Input](#mouse-input)
+   + [Mouse Message](#mouse-message)
+   + [Capture of Mouse](#capture-of-mouse)
+   + [Tracking Mouse Cursor](#tracking-mouse-cursor)
+- [Event Hook](#event-hook)
+
+
 The application receives the user’s input from keyboard and mouse (or other
 pointing device, such as touch-screen). Application of MiniGUI receives
 keyboard and mouse input by handling messages sent to window. We will describe

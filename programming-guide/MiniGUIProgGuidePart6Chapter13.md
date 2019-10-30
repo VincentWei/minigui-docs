@@ -1,5 +1,15 @@
 # Tree View Control
 
+- [Styles of Tree View Control](#styles-of-tree-view-control)
+- [Messages of Tree View Control](#messages-of-tree-view-control)
+   + [Creating and Deleting Node Item](#creating-and-deleting-node-item)
+   + [Setting/Getting Properties of Node Item](#settinggetting-properties-of-node-item)
+   + [Selecting and Searching a Node Item](#selecting-and-searching-a-node-item)
+   + [Comparing and Sorting](#comparing-and-sorting)
+- [Notification Codes of Tree View Control](#notification-codes-of-tree-view-control)
+- [Sample Program](#sample-program)
+
+
 The tree view control displays a hierarchy items in a tree form, and each item
 (sub item) can include one or more child items. Each item or sub item includes
 the text title and an optional icon, and the user can unfold or fold the sub

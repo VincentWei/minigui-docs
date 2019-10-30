@@ -1,5 +1,10 @@
 # Cool Bar Control
 
+- [Styles of Cool Bar](#styles-of-cool-bar)
+- [Messages of Cool Bar](#messages-of-cool-bar)
+- [Sample Program](#sample-program)
+
+
 The cool bar control is a toolbar which can display a line of text or icon
 buttons. The cool bar is very simple and is easy to use.
 

@@ -1,5 +1,23 @@
 # Look-and-feel and UI effects
 
+- [Look and Feel Renderer and attributes of window elements](#look-and-feel-renderer-and-attributes-of-window-elements)
+   + [Attributes of Window Elements](#attributes-of-window-elements)
+   + [Attributes of skin renderer's window skin](#attributes-of-skin-renderers-window-skin)
+   + [Operating function of window attribute](#operating-function-of-window-attribute)
+   + [Renderer Management](#renderer-management)
+   + [Creating main window](#creating-main-window)
+   + [Creating control](#creating-control)
+   + [Creating dialog box](#creating-dialog-box)
+- [Double Buffering Main Window](#double-buffering-main-window)
+   + [Extension Style of Double Buffering Main Window](#extension-style-of-double-buffering-main-window)
+   + [Functions of double buffering window mechanism](#functions-of-double-buffering-window-mechanism)
+   + [Sample program of double buffering mechanism](#sample-program-of-double-buffering-mechanism)
+- [Customization of Desktop](#customization-of-desktop)
+   + [Structure of Desktop Customization](#structure-of-desktop-customization)
+   + [Functions of Desktop Customization](#functions-of-desktop-customization)
+   + [Sample program](#sample-program)
+
+
 ## Look and Feel Renderer and attributes of window elements
 
 MiniGUI 3.0 has totally different window and control's look and feel

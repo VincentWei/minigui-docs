@@ -1,5 +1,19 @@
 # Using mGUtils
 
+- [Functions](#functions)
+- [Using sample](#using-sample)
+   + [Common Dialog Box](#common-dialog-box)
+   + [Open and Save As Dialog Boxes](#open-and-save-as-dialog-boxes)
+   + [Color Dialog Box](#color-dialog-box)
+   + [Font Dialog Box](#font-dialog-box)
+   + [Info Dialog Box](#info-dialog-box)
+   + [Common window dialog](#common-window-dialog)
+- [Message](#message)
+   + [`MSG_FILESELOK`](#msg-fileselok)
+   + [`MSG_COLORSELOK`](#msg-colorselok)
+   + [`MSG_FONTSELOK`](#msg-fontselok)
+
+
 mGUtils is a component of MiniGUI, which provides some common
 dialog boxes as window templates for applications, such as opening files,
 choosing color values, etc. It also has appropriate customization and

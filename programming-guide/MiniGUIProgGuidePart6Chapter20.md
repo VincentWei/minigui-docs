@@ -1,5 +1,12 @@
 # Iconview Control
 
+- [Styles of Iconview](#styles-of-iconview)
+- [Messages of Iconview](#messages-of-iconview)
+   + [Icon operation](#icon-operation)
+- [Notification Codes of Iconview](#notification-codes-of-iconview)
+- [Sample Program](#sample-program)
+
+
 Iconview control offers an interface for user to surf entry in icon and label
 mode. These entire icon items can be shown in a scroll child window. User can
 select one or some items using keyboard and mouse operation and the selected

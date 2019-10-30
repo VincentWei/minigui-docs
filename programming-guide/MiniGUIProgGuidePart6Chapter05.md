@@ -1,5 +1,15 @@
 # Combo Box Control
 
+- [Types and Styles of Combo Box](#types-and-styles-of-combo-box)
+   + [Simple Combo Box, Pull-Down Combo Box, and Spin Combo Box](#simple-combo-box-pull-down-combo-box-and-spin-combo-box)
+   + [Digital Spin Box](#digital-spin-box)
+- [Messages of Combo Box](#messages-of-combo-box)
+   + [Messages of Simple, Pull-Down, and Spin Combo Box](#messages-of-simple-pull-down-and-spin-combo-box)
+   + [Messages of Digital Spin Box](#messages-of-digital-spin-box)
+- [Notification Codes of Combo Box](#notification-codes-of-combo-box)
+- [Sample Program](#sample-program)
+
+
 In nature, a general combo box is the combination of an edit box and a list
 box. The user can type text in the edit box, and also can select one item from
 the options listed in the list box. The combo box in MiniGUI can be divided

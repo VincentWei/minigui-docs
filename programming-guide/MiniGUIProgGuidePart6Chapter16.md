@@ -1,5 +1,14 @@
 # Spin Box Control
 
+- [Styles of Spin Box](#styles-of-spin-box)
+- [Messages of Spin Box](#messages-of-spin-box)
+   + [Setting/Getting Position](#settinggetting-position)
+   + [Disabling and Enabling](#disabling-and-enabling)
+   + [Target Window](#target-window)
+- [Notification Codes of Spin Box](#notification-codes-of-spin-box)
+- [Sample Program](#sample-program)
+
+
 The spin box control described in this chapter makes the user be able to select
 from a group of predefined values. The interface of a spin box control contains
 up and down arrows, and the user can select a value by clicking the arrows.

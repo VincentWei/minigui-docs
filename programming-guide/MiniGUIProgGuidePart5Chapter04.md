@@ -1,5 +1,10 @@
 # Universal Startup API for RTOSes
 
+- [Malloc Initialization Interface](#malloc-initialization-interface)
+- [Standard Output Initialization Interface](#standard-output-initialization-interface)
+- [POSIX Threads Initialization Interface](#posix-threads-initialization-interface)
+
+
 MiniGUI provides universal startup API for RTOSes and spare startup
 reference files in V2.0.4/1.6.9. MiniGUI 3.0 continues to use these files.
 These files are saved in the MiniGUI source code `rtos/` directory. The rules of

@@ -1,5 +1,21 @@
 # Other Classes
 
+- [`mReferencedObj`](#mreferencedobj)
+   + [Method of `mReferencedObj`](#method-of-mreferencedobj)
+   + [Example of `mReferencedObj`](#example-of-mreferencedobj)
+- [`mPopMenuMgr`](#mpopmenumgr)
+   + [Method of `mPopMenuMgr`](#method-of-mpopmenumgr)
+   + [Example of `mPopMenuMgr`](#example-of-mpopmenumgr)
+- [`mToolImage`](#mtoolimage)
+   + [Method of `mToolImage`](#method-of-mtoolimage)
+   + [Example of `mToolImage`](#example-of-mtoolimage)
+- [`mToolItem`](#mtoolitem)
+   + [Type of `mToolItem`](#type-of-mtoolitem)
+   + [Creation and Deletion of `mToolItem`](#creation-and-deletion-of-mtoolitem)
+   + [Other `mToolItem` Functions](#other-mtoolitem-functions)
+   + [Example of `mToolItem`](#example-of-mtoolitem)
+
+
 This chapter introduces some mGNCS non control classes. They are designed to
 provide for the control class to use.
 

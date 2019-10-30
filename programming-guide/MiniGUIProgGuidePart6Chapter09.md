@@ -1,5 +1,15 @@
 # Toolbar Control
 
+- [Creating Toolbar Control](#creating-toolbar-control)
+- [Styles of Toolbar](#styles-of-toolbar)
+- [Messages of Toolbar](#messages-of-toolbar)
+   + [Adding an Item](#adding-an-item)
+   + [Getting/Setting Information of an Item](#gettingsetting-information-of-an-item)
+   + [`NTBM_SETBITMAP` Message](#ntbm-setbitmap-message)
+- [Notification Codes of Toolbar](#notification-codes-of-toolbar)
+- [Sample Program](#sample-program)
+
+
 The use of toolbar is frequently seen in modern GUI applications. MiniGUI
 prepares the predefined toolbar control class for the application. In fact,
 MiniGUI provides three different predefined toolbar control classes, namely

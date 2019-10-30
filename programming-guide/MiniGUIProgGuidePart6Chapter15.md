@@ -1,5 +1,15 @@
 # Month Calendar Control
 
+- [Styles of Month Calendar](#styles-of-month-calendar)
+- [Messages of Month Calendar](#messages-of-month-calendar)
+   + [Getting Date](#getting-date)
+   + [Setting Date](#setting-date)
+   + [Adjusting Colors](#adjusting-colors)
+   + [Size of Control](#size-of-control)
+- [Notification Codes of Month Calendar](#notification-codes-of-month-calendar)
+- [Sample Program](#sample-program)
+
+
 The month calendar control provides a user interface similar to a calendar, and
 makes the user be able to select and set the date conveniently. The application
 can get or set the date by sending message to a month calendar control.

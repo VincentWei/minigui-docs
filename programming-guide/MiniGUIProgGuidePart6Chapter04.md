@@ -1,5 +1,22 @@
 # Edit Box Control
 
+- [Styles of Edit Box](#styles-of-edit-box)
+- [Messages of Edit Box](#messages-of-edit-box)
+   + [Getting/Setting Caret Position](#gettingsetting-caret-position)
+   + [Setting/Getting Selection of Text](#settinggetting-selection-of-text)
+   + [Copy, Cut, and Past](#copy-cut-and-past)
+   + [Setting/Getting Properties of Line Height and Others](#settinggetting-properties-of-line-height-and-others)
+   + [Setting Limit of Text](#setting-limit-of-text)
+   + [Setting or Canceling Read-only Status](#setting-or-canceling-read-only-status)
+   + [Setting/Getting Password Character](#settinggetting-password-character)
+   + [Setting Title and Tip Text](#setting-title-and-tip-text)
+   + [Setting End of Line Symbol](#setting-end-of-line-symbol)
+   + [Setting End of Line](#setting-end-of-line)
+   + [Getting Paragraphs Information](#getting-paragraphs-information)
+- [Notification Codes of Edit Box](#notification-codes-of-edit-box)
+- [Sample Program](#sample-program)
+
+
 The edit box provides an important approach for the application to receive the
 user input. Compared with the controls mentioned above, such as static control,
 button, list box, etc., the behaviors of edit box is relatively simple. The

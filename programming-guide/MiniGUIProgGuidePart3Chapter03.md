@@ -1,5 +1,37 @@
 # Advanced GDI Functions Based on NEWGAL
 
+- [New Region Implementation](#new-region-implementation)
+- [Raster Operations](#raster-operations)
+- [Memory `DC` and `BitBlt`](#memory-dc-and-bitblt)
+- [Enhanced `BITMAP` Operations](#enhanced-bitmap-operations)
+- [New `GDI` functions](#new-gdi-functions)
+- [Advanced `GDI` functions](#advanced-gdi-functions)
+   + [Image Scaling Functions](#image-scaling-functions)
+   + [Image Rotation Functions](#image-rotation-functions)
+   + [Rounded Corners Rectangle](#rounded-corners-rectangle)
+- [Curve Generators](#curve-generators)
+   + [Line Clipper and Line Generator](#line-clipper-and-line-generator)
+   + [Circle Generator](#circle-generator)
+   + [Ellipse Generator](#ellipse-generator)
+   + [Arc Generator](#arc-generator)
+   + [Vertical Monotonous Polygon Generator](#vertical-monotonous-polygon-generator)
+   + [General Polygon Generator](#general-polygon-generator)
+   + [Flood Filling Generator](#flood-filling-generator)
+   + [Using Curve Generator](#using-curve-generator)
+- [Plotting Complex Curve](#plotting-complex-curve)
+- [Filling Enclosed Curve](#filling-enclosed-curve)
+- [Building Complex Region](#building-complex-region)
+- [Visiting Frame Buffer Directly](#visiting-frame-buffer-directly)
+- [Advanced Two-Dimension `GDI` Functions](#advanced-two-dimension-gdi-functions)
+   + [Pen and Its Properties](#pen-and-its-properties)
+   + [Brush and Its Properties](#brush-and-its-properties)
+   + [Advanced Two-Dimension Drawing Functions](#advanced-two-dimension-drawing-functions)
+   + [Using Advanced Two-Dimension `GDI` Functions](#using-advanced-two-dimension-gdi-functions)
+- [Support for Slave Screens](#support-for-slave-screens)
+   + [Creating Slave Screen](#creating-slave-screen)
+   + [Destroying Slave Screen](#destroying-slave-screen)
+
+
 It is mentioned in Chapter 13 that MiniGUI 1.1.0 has greatly improved `GAL` and
 `GDI` by rewriting almost all code. Those new interfaces and functions strongly
 enhance the graphics capability of MiniGUI. In this chapter we will introduce

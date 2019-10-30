@@ -1,5 +1,11 @@
 # Foundation of Control Programming
 
+- [Control and Control Class](#control-and-control-class)
+- [Creating Control Instance by Using Predefined Control Class](#creating-control-instance-by-using-predefined-control-class)
+- [Topics Involved in Control Programming](#topics-involved-in-control-programming)
+- [Operations Specific to Control](#operations-specific-to-control)
+
+
 There are predefined controls in a relatively complex GUI system, and they are
 the main elements for the human-machine interaction. This chapter will
 illustrate what is the control and control class, and briefly introduce the

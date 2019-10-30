@@ -1,5 +1,14 @@
 # Button Control
 
+- [Types and Styles of Button](#types-and-styles-of-button)
+   + [Push button](#push-button)
+   + [Check Box](#check-box)
+   + [Radio Button](#radio-button)
+- [Messages of Button](#messages-of-button)
+- [Notification Codes of Button](#notification-codes-of-button)
+- [Sample Program](#sample-program)
+
+
 Button control is the most frequently used control besides the static control.
 A button is usually used to provide switch selection for the user. The buttons
 of MiniGUI can be classified into push button, check box, radio button, etc.

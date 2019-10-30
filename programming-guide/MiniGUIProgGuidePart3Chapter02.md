@@ -1,4 +1,16 @@
 # Handling and Rendering of Text
+
+- [Charset and Encoding](#charset-and-encoding)
+- [Device Font](#device-font)
+   + [Bitmap device font](#bitmap-device-font)
+- [Logical font](#logical-font)
+- [Text Analysis](#text-analysis)
+- [Text Transformation](#text-transformation)
+- [Text Output](#text-output)
+- [Special Render Effects of Font Glyph](#special-render-effects-of-font-glyph)
+- [Usage of `BIDI` text](#usage-of-bidi-text)
+- [Enhancements in MiniGUI 4.0](#enhancements-in-minigui-40)
+
 As discussed before, the handling and rendering of text has some of their own
 features in MiniGUI. We will elaborate the concepts related to text handling
 and introduce the relevant `APIs` in this chapter.
@@ -461,6 +473,18 @@ void GUIAPI GetLastTextOutPos (HDC hdc, POINT* pt);
 #define TabbedTextOut(hdc, x, y, text)  TabbedTextOutLen (hdc, x, y, text, -1)
 
 # #define DrawText(hdc, text, n, rc, format)   DrawTextEx2 (hdc, text, n, rc, 0, format, NULL)
+
+- [Charset and Encoding](#charset-and-encoding)
+- [Device Font](#device-font)
+   + [Bitmap device font](#bitmap-device-font)
+- [Logical font](#logical-font)
+- [Text Analysis](#text-analysis)
+- [Text Transformation](#text-transformation)
+- [Text Output](#text-output)
+- [Special Render Effects of Font Glyph](#special-render-effects-of-font-glyph)
+- [Usage of `BIDI` text](#usage-of-bidi-text)
+- [Enhancements in MiniGUI 4.0](#enhancements-in-minigui-40)
+
 
 #define DrawTextEx(hdc, text, n, rc, indent, format)   DrawTextEx2 (hdc, text, n, rc, indent, format, NULL)
 

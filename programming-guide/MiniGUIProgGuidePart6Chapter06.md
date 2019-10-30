@@ -1,5 +1,18 @@
 # Menu Button Control
 
+- [Styles of Menu Button](#styles-of-menu-button)
+- [Messages of Menu Button](#messages-of-menu-button)
+   + [Adding Items to Menu Button Control](#adding-items-to-menu-button-control)
+   + [Deleting Items from Menu Button Control](#deleting-items-from-menu-button-control)
+   + [Deleting All Items in the Menu](#deleting-all-items-in-the-menu)
+   + [Setting Current Selected Item](#setting-current-selected-item)
+   + [Getting Current Selected Item](#getting-current-selected-item)
+   + [Getting/Setting Data of Menu Item](#gettingsetting-data-of-menu-item)
+   + [Other Messages](#other-messages)
+- [Notification Codes of Menu Button](#notification-codes-of-menu-button)
+- [Sample Program](#sample-program)
+
+
 Functions of a menu button are generally the same as that of a normal pull-down
 combo box. Actually, in the early version of MiniGUI, the menu button acts as
 the alternate of the combo box. Of course, the menu button has much limitation,

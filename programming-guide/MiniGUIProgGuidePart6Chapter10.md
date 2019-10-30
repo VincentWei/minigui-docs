@@ -1,5 +1,16 @@
 # Property Sheet Control
 
+- [Styles of Property Sheet](#styles-of-property-sheet)
+- [Messages of Property Sheet](#messages-of-property-sheet)
+   + [Adding Property Page](#adding-property-page)
+   + [Procedure Function of Property Page](#procedure-function-of-property-page)
+   + [Deleting Property Page](#deleting-property-page)
+   + [Handle and Index of Property Page](#handle-and-index-of-property-page)
+   + [Messages Relevant Property Page](#messages-relevant-property-page)
+- [Notification Codes of Property Sheet](#notification-codes-of-property-sheet)
+- [Sample Program](#sample-program)
+
+
 The most familiar usage of property sheet is to place the interaction content
 belonging to different dialog boxes into one dialog box according to their
 catalogues. This can save space of the dialog box on the one hand, and can make

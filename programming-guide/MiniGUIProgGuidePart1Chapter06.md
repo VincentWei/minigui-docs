@@ -1,5 +1,16 @@
 # Menu
 
+- [Concept of Menu](#concept-of-menu)
+- [Creating and Handling Menu](#creating-and-handling-menu)
+   + [Creating Normal Menu](#creating-normal-menu)
+   + [Creating Popup Menu](#creating-popup-menu)
+   + [`MENUITEMINFO` Structure](#menuiteminfo-structure)
+   + [Operating on Menu Item](#operating-on-menu-item)
+   + [Deleting and Destroying Menu or Menu Item](#deleting-and-destroying-menu-or-menu-item)
+   + [`MSG_ACTIVEMENU` Message](#msg-activemenu-message)
+- [Sample Program](#sample-program)
+
+
 ## Concept of Menu
 
 The menu is generally associated with a window (called normal menu), or

@@ -1,5 +1,9 @@
 # Public Structures and Definitions of mGNCS
 
+- [Alignment Values](#alignment-values)
+- [Image Drawing Modes](#image-drawing-modes)
+
+
 ## Alignment Values
 
 Horizontal alignment enumeration values:

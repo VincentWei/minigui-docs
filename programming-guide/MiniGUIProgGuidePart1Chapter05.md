@@ -1,5 +1,10 @@
 # Advanced Programming of Control
 
+- [User-Defined Control](#user-defined-control)
+- [Subclassing of Control](#subclassing-of-control)
+- [Combined Use of Controls](#combined-use-of-controls)
+
+
 ## User-Defined Control
 
 You can also register your own control class by calling `RegisterWindowClass`

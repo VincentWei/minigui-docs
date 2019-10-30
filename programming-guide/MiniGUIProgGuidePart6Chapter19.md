@@ -1,5 +1,15 @@
 # Gridview Control
 
+- [Styles of Gridview](#styles-of-gridview)
+- [Messages of Gridview](#messages-of-gridview)
+   + [Column Operations](#column-operations)
+   + [Row Operations](#row-operations)
+   + [Cell Operations](#cell-operations)
+- [Other Messages](#other-messages)
+- [Notification Codes of Gridview](#notification-codes-of-gridview)
+- [Sample Program](#sample-program)
+
+
 Gridview displays a series of data items (cells) in table form, and the
 contents of every cell are independent each other. The contents of gridview
 header, including a column of header and a row of header, usually express the

@@ -1,5 +1,43 @@
 # Graphics Device Interfaces
 
+- [Architecture of MiniGUI Graphics System](#architecture-of-minigui-graphics-system)
+   + [`GAL` and `GDI`](#gal-and-gdi)
+   + [New `GAL`](#new-gal)
+- [Painting and Updating of a Window](#painting-and-updating-of-a-window)
+   + [When Painting a Window?](#when-painting-a-window)
+   + [`MSG_PAINT` Message](#msg-paint-message)
+   + [Valid and Invalid Region](#valid-and-invalid-region)
+- [Graphics Device Context](#graphics-device-context)
+   + [Abstraction of Graphics Device](#abstraction-of-graphics-device)
+   + [Getting and Releasing of Device Context](#getting-and-releasing-of-device-context)
+   + [Saving and Restoring of Device Context](#saving-and-restoring-of-device-context)
+   + [Device Context in Memory](#device-context-in-memory)
+   + [Screen Device Context](#screen-device-context)
+- [Mapping Mode and Coordinate Space](#mapping-mode-and-coordinate-space)
+   + [Mapping Mode](#mapping-mode)
+   + [Viewport and Window](#viewport-and-window)
+   + [Conversion of Device Coordinates](#conversion-of-device-coordinates)
+   + [The Deviation and Zoom of Coordinate System](#the-deviation-and-zoom-of-coordinate-system)
+- [Rectangle and Region Operations](#rectangle-and-region-operations)
+   + [Rectangle Operations](#rectangle-operations)
+   + [Region Operations](#region-operations)
+- [Basic Graphics Drawing](#basic-graphics-drawing)
+   + [Basic Drawing Attributes](#basic-drawing-attributes)
+   + [Basic Drawing Functions](#basic-drawing-functions)
+   + [Clipping Region Operations](#clipping-region-operations)
+- [Text and Font](#text-and-font)
+- [Bitmap Operations](#bitmap-operations)
+   + [Concept of Bitmap](#concept-of-bitmap)
+   + [Bitmap Color](#bitmap-color)
+   + [Device-Dependent Bitmap and Device-Independent Bitmap](#device-dependent-bitmap-and-device-independent-bitmap)
+   + [Loading a Bitmap from File](#loading-a-bitmap-from-file)
+   + [Filling Block](#filling-block)
+   + [Bit Blitting](#bit-blitting)
+- [Palette](#palette)
+   + [Why Is the Palette Needed?](#why-is-the-palette-needed)
+   + [Using Palette](#using-palette)
+
+
 Graphics Device Interfaces (`GDI`) is an important part of a GUI system.
 Through `GDI`, the GUI application can execute graphics output on the screen or
 other display devices, including basic painting and text output. In this

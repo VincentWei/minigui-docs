@@ -1,5 +1,16 @@
 # Progress Bar Control
 
+- [Styles of Progress Bar](#styles-of-progress-bar)
+- [Messages of Progress Bar](#messages-of-progress-bar)
+   + [Setting Range of Progress Bar](#setting-range-of-progress-bar)
+   + [Setting Step Value of Progress Bar](#setting-step-value-of-progress-bar)
+   + [Setting Position of Progress Bar](#setting-position-of-progress-bar)
+   + [Setting Offset Based-on Current Position](#setting-offset-based-on-current-position)
+   + [Advancing Position by One Step](#advancing-position-by-one-step)
+- [Notification Codes of Progress Bar](#notification-codes-of-progress-bar)
+- [Sample Program](#sample-program)
+
+
 The progress bar is generally used to prompt the progress of a task for the
 user, and is frequently used for tasks such as copying file, installing
 software. Calling `CreateWindow` function with `CTRL_PROGRESSBAR` as the

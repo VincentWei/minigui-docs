@@ -1,5 +1,11 @@
 # Track Bar Control
 
+- [Styles of Track Bar](#styles-of-track-bar)
+- [Messages of Track Bar](#messages-of-track-bar)
+- [Notification Codes of Track Bar](#notification-codes-of-track-bar)
+- [Sample Program](#sample-program)
+
+
 The track bar is generally used for adjusting brightness, volume, etc. In the
 situation for adjusting the value in a range, track bar can be used. Calling
 `CreateWindow` function with `CTRL_TRACKBAR` as the control class name can

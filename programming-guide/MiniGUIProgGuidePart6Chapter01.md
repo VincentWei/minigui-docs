@@ -1,5 +1,15 @@
 # Static Control
 
+- [Types and Styles of Static Control](#types-and-styles-of-static-control)
+   + [Standard Type](#standard-type)
+   + [Bitmap Type](#bitmap-type)
+   + [Group Box](#group-box)
+   + [Other static control types](#other-static-control-types)
+- [Static Control Messages](#static-control-messages)
+- [Notification Codes of Static Control](#notification-codes-of-static-control)
+- [Sample Program](#sample-program)
+
+
 A static control is used to display information, such as text and digits, in
 the specified position of a window, and can also be used to display some static
 image information, such as corporation logos, product brands, etc. As suggested

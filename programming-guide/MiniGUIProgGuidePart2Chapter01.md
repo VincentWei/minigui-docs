@@ -1,5 +1,9 @@
 # Brief Introduction to mGNCS
 
+- [Introduction of the New Control Set](#introduction-of-the-new-control-set)
+- [Content Organization of This Guide](#content-organization-of-this-guide)
+
+
 ## Introduction of the New Control Set
 
 In the development of miniStudio, in order to realize the design of visual

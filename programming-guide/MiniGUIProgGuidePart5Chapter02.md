@@ -1,5 +1,16 @@
 # Developing Customized MiniGUI-Processes Server Program
 
+- [`mginit` in `mg-samples`](#mginit-in-mg-samples)
+   + [Initializing Itself as the Server of MiniGUI-Processes](#initializing-itself-as-the-server-of-minigui-processes)
+   + [Displaying Copyright Information](#displaying-copyright-information)
+   + [Creating Taskbar](#creating-taskbar)
+   + [Startup the Default Program](#startup-the-default-program)
+   + [Entering Message Loop](#entering-message-loop)
+- [A Simple `mginit` Program](#a-simple-mginit-program)
+- [Functions Specific to Clients of MiniGUI-Processes](#functions-specific-to-clients-of-minigui-processes)
+- [Other Functions and Interfaces Specific to `mginit`](#other-functions-and-interfaces-specific-to-mginit)
+
+
 `mginit` is the server program of MiniGUI-Processes. This program prepares
 shared resource for client programs and manages windows created by clients. We
 explain how to write a customized MiniGUI-Processes server program according to

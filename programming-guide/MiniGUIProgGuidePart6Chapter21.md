@@ -1,5 +1,23 @@
 # Independent Scrollbar Control
 
+- [Definition of independent scrollbar](#definition-of-independent-scrollbar)
+- [Types of Scrollbar](#types-of-scrollbar)
+- [Styles of Independent Scrollbar](#styles-of-independent-scrollbar)
+- [Messages of Independent Scrollbar](#messages-of-independent-scrollbar)
+   + [Get Scrollbar Information](#get-scrollbar-information)
+   + [Set Information of Scrollbar](#set-information-of-scrollbar)
+   + [Get Current Position of Thumb](#get-current-position-of-thumb)
+   + [Set The Position of Thumb](#set-the-position-of-thumb)
+   + [Get Scroll Range of Scrollbar](#get-scroll-range-of-scrollbar)
+   + [Set Scroll Range of Scrollbar](#set-scroll-range-of-scrollbar)
+   + [Set Scroll Range of Scrollbar and Redraw Immediately](#set-scroll-range-of-scrollbar-and-redraw-immediately)
+   + [Enable or Disable Arrow](#enable-or-disable-arrow)
+- [Configurable Properties of Scrollbar](#configurable-properties-of-scrollbar)
+- [Notification Codes of Scrollbar](#notification-codes-of-scrollbar)
+   + [Trigger of Notification Message](#trigger-of-notification-message)
+- [Sample Program](#sample-program)
+
+
 ## Definition of independent scrollbar
 
 Arrow, shaft and thumb are the components of scrollbar control. Some

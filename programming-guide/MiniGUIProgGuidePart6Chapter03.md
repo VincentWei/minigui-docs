@@ -1,5 +1,20 @@
 # List Box Control
 
+- [Types and Styles of List Box](#types-and-styles-of-list-box)
+- [Messages of List Box](#messages-of-list-box)
+   + [Adding Item into List Box](#adding-item-into-list-box)
+   + [Deleting Item from List Box](#deleting-item-from-list-box)
+   + [Selecting and Getting Item](#selecting-and-getting-item)
+   + [Searching Item Including a Text String](#searching-item-including-a-text-string)
+   + [Setting/Getting the Status of Check Mark](#settinggetting-the-status-of-check-mark)
+   + [Setting the Bold Status of Item](#setting-the-bold-status-of-item)
+   + [Setting/Getting the Disable Status of Item](#settinggetting-the-disable-status-of-item)
+   + [Adding Multiple Items into List Box](#adding-multiple-items-into-list-box)
+   + [Other Messages](#other-messages)
+- [Notification Codes of List Box](#notification-codes-of-list-box)
+- [Sample Program](#sample-program)
+
+
 A list box generally provides a series of options, which are shown in a scroll
 window. The user can select one or more items with the keyboard or mouse
 operation. The selected items are usually highlighted. The most typical use of

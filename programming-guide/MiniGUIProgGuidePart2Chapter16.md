@@ -1,5 +1,19 @@
 # Invisible Control Class
 
+- [Brief Introduction to Invisible Control Class](#brief-introduction-to-invisible-control-class)
+- [`mInvsbComp`](#minvsbcomp)
+   + [Style of `mInvsbComp`](#style-of-minvsbcomp)
+   + [Property of `mInvsbComp`](#property-of-minvsbcomp)
+   + [Method of `mInvsbComp`](#method-of-minvsbcomp)
+   + [Event of `mInvsbComp`](#event-of-minvsbcomp)
+- [`mTimer`](#mtimer)
+   + [Style of `mTimer`](#style-of-mtimer)
+   + [Property of `mTimer`](#property-of-mtimer)
+   + [Method of `mTimer`](#method-of-mtimer)
+   + [Event of `mTimer`](#event-of-mtimer)
+   + [Example of `mTimer`](#example-of-mtimer)
+
+
 ## Brief Introduction to Invisible Control Class
 
 Invisible control refers to the components which cannot be displayed on the

@@ -1,5 +1,15 @@
 # Animation Control Class
 
+- [Brief Introduction to Animation Control](#brief-introduction-to-animation-control)
+- [mAnimate](#manimate)
+   + [Style of `mAnimate`](#style-of-manimate)
+   + [Property of `mAnimate`](#property-of-manimate)
+   + [Event of `mAnimate`](#event-of-manimate)
+   + [Renderer of `mAnimate`](#renderer-of-manimate)
+   + [Method of `mAnimate`](#method-of-manimate)
+   + [Programming Example of `mAnimate`](#programming-example-of-manimate)
+
+
 ## Brief Introduction to Animation Control
 
 Animation control provides rich visual experience to the users through drawing

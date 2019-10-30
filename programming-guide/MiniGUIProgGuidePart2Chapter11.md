@@ -1,5 +1,15 @@
 # Progress Bar Control Class
 
+- [Brief Introduction to Progress Bar Control](#brief-introduction-to-progress-bar-control)
+- [`mProgressBar`](#mprogressbar)
+   + [Style of `mProgressBar`](#style-of-mprogressbar)
+   + [Property of `mProgressBar`](#property-of-mprogressbar)
+   + [Event of `mProgressBar`](#event-of-mprogressbar)
+   + [Method of `mProgressBar`](#method-of-mprogressbar)
+   + [Renderer of `mProgressBar`](#renderer-of-mprogressbar)
+   + [Instance of `mProgressBar`](#instance-of-mprogressbar)
+
+
 ## Brief Introduction to Progress Bar Control
 
 Progress bar control is an essential control in GUI system, which can visually

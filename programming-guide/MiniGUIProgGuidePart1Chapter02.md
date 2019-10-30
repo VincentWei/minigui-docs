@@ -1,5 +1,38 @@
 # Window and Message
 
+- [Window System and Window](#window-system-and-window)
+   + [What Is Window System](#what-is-window-system)
+   + [Concept of Window](#concept-of-window)
+- [Window of MiniGUI](#window-of-minigui)
+   + [Window Type](#window-type)
+   + [Creation of Main Window](#creation-of-main-window)
+   + [Window Style](#window-style)
+   + [Create Irregular Window](#create-irregular-window)
+   + [Destroying Main Window](#destroying-main-window)
+   + [Dialog Box](#dialog-box)
+   + [Control and Control Class](#control-and-control-class)
+   + [Input Method](#input-method)
+- [Message and Message Handling](#message-and-message-handling)
+   + [Message](#message)
+   + [Message Type](#message-type)
+   + [Message Queue](#message-queue)
+   + [Message Handling](#message-handling)
+   + [Sending and Posting Message](#sending-and-posting-message)
+   + [Message Handling Function Specific to MiniGUI-Processes](#message-handling-function-specific-to-minigui-processes)
+- [Several Important Messages and Corresponding Handling](#several-important-messages-and-corresponding-handling)
+   + [`MSG_NCCREATE`](#msg-nccreate)
+   + [`MSG_SIZECHANGING`](#msg-sizechanging)
+   + [`MSG_SIZECHANGED` and `MSG_CSIZECHANGED`](#msg-sizechanged-and-msg-csizechanged)
+   + [`MSG_CREATE`](#msg-create)
+   + [`MSG_FONTCHANGING`](#msg-fontchanging)
+   + [`MSG_FONTCHANGED`](#msg-fontchanged)
+   + [`MSG_ERASEBKGND`](#msg-erasebkgnd)
+   + [`MSG_PAINT`](#msg-paint)
+   + [`MSG_CLOSE`](#msg-close)
+   + [`MSG_DESTROY`](#msg-destroy)
+- [Common Window Operation Functions](#common-window-operation-functions)
+
+
 Window and message/event are two important concepts in graphics user
 interface programming. A window is a rectangle region on the screen, and
 the application uses windows to display the output or accept the user

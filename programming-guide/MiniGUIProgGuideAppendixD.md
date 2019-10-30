@@ -1,5 +1,14 @@
 # Specification for the mGNCS-compliant Widget Components
 
+- [Terms](#terms)
+- [Interface Naming Norm of the New Control Set](#interface-naming-norm-of-the-new-control-set)
+- [Defining Rule for the Class Name and Its Identifier](#defining-rule-for-the-class-name-and-its-identifier)
+   + [Defining Rule of Control Style Identifier](#defining-rule-of-control-style-identifier)
+   + [Defining Rule of Control Property Identifier](#defining-rule-of-control-property-identifier)
+   + [Defining Rule of Control Notification Code](#defining-rule-of-control-notification-code)
+- [Function Library and Head File of the New Control Set](#function-library-and-head-file-of-the-new-control-set)
+
+
 ## Terms
 
 - MiniGUI new control set (mGNCS). The new control set not only realizes

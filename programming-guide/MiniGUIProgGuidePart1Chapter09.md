@@ -1,5 +1,25 @@
 # Icon, Cursor, and Caret
 
+- [Icon](#icon)
+   + [Loading and Displaying Icon](#loading-and-displaying-icon)
+   + [Destroying Icon](#destroying-icon)
+   + [Creating Icon](#creating-icon)
+   + [Using System Icons](#using-system-icons)
+- [Cursor](#cursor)
+   + [Loading and Creating Cursor](#loading-and-creating-cursor)
+   + [Destroying Cursor](#destroying-cursor)
+   + [Positioning and Displaying Cursor](#positioning-and-displaying-cursor)
+   + [Clipping Cursor](#clipping-cursor)
+   + [Using System Cursors](#using-system-cursors)
+   + [Sample Program](#sample-program)
+- [Caret](#caret)
+   + [Creating and Destroying Caret](#creating-and-destroying-caret)
+   + [Showing and Hiding Caret](#showing-and-hiding-caret)
+   + [Positioning Caret](#positioning-caret)
+   + [Changing Blink Time of Caret](#changing-blink-time-of-caret)
+   + [Sample Program](#sample-program)
+
+
 
 ## Icon
 
@@ -334,6 +354,26 @@ renderer are shown as follow:
 ```cpp
 [classic]
 # Note that max number defined in source code is 5.
+
+- [Icon](#icon)
+   + [Loading and Displaying Icon](#loading-and-displaying-icon)
+   + [Destroying Icon](#destroying-icon)
+   + [Creating Icon](#creating-icon)
+   + [Using System Icons](#using-system-icons)
+- [Cursor](#cursor)
+   + [Loading and Creating Cursor](#loading-and-creating-cursor)
+   + [Destroying Cursor](#destroying-cursor)
+   + [Positioning and Displaying Cursor](#positioning-and-displaying-cursor)
+   + [Clipping Cursor](#clipping-cursor)
+   + [Using System Cursors](#using-system-cursors)
+   + [Sample Program](#sample-program)
+- [Caret](#caret)
+   + [Creating and Destroying Caret](#creating-and-destroying-caret)
+   + [Showing and Hiding Caret](#showing-and-hiding-caret)
+   + [Positioning Caret](#positioning-caret)
+   + [Changing Blink Time of Caret](#changing-blink-time-of-caret)
+   + [Sample Program](#sample-program)
+
 iconnumber=5
 icon0=form.ico
 icon1=failed.ico
@@ -640,6 +680,26 @@ defines all the cursors provide by the system, as shown below:
 ```cpp
 [cursorinfo]
 # Edit following line to specify cursor files path
+
+- [Icon](#icon)
+   + [Loading and Displaying Icon](#loading-and-displaying-icon)
+   + [Destroying Icon](#destroying-icon)
+   + [Creating Icon](#creating-icon)
+   + [Using System Icons](#using-system-icons)
+- [Cursor](#cursor)
+   + [Loading and Creating Cursor](#loading-and-creating-cursor)
+   + [Destroying Cursor](#destroying-cursor)
+   + [Positioning and Displaying Cursor](#positioning-and-displaying-cursor)
+   + [Clipping Cursor](#clipping-cursor)
+   + [Using System Cursors](#using-system-cursors)
+   + [Sample Program](#sample-program)
+- [Caret](#caret)
+   + [Creating and Destroying Caret](#creating-and-destroying-caret)
+   + [Showing and Hiding Caret](#showing-and-hiding-caret)
+   + [Positioning Caret](#positioning-caret)
+   + [Changing Blink Time of Caret](#changing-blink-time-of-caret)
+   + [Sample Program](#sample-program)
+
 cursorpath=/usr/local/lib/minigui/res/cursor/
 cursornumber=23
 cursor0=d_arrow.cur

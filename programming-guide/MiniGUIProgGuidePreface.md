@@ -1,5 +1,12 @@
 # Preface
 
+- [Related Documents](#related-documents)
+- [Organization of this Guide](#organization-of-this-guide)
+- [Obtaining Samples of the Guide](#obtaining-samples-of-the-guide)
+- [Compiling and Running Environment of the Samples](#compiling-and-running-environment-of-the-samples)
+- [Copyright and Licensing](#copyright-and-licensing)
+
+
 MiniGUI is a mature cross-platform windowing system and a GUI
 (Graphics User Interface) support system for embedded systems and
 smart IoT devices.

@@ -1,5 +1,11 @@
 # Animation Control
 
+- [`ANIMATION` Object](#animation-object)
+- [Styles of Animation Control](#styles-of-animation-control)
+- [Messages of Animation Control](#messages-of-animation-control)
+- [Sample Program](#sample-program)
+
+
 Animation control is one control, which can be used to display animations; it
 is very simple and easy to use.
 

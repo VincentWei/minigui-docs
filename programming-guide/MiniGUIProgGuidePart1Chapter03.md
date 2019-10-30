@@ -1,5 +1,13 @@
 # Foundation of Dialog Box Programming
 
+- [Main Window and Dialog Box](#main-window-and-dialog-box)
+- [Dialog Box Template](#dialog-box-template)
+- [Dialog Box Callback Function](#dialog-box-callback-function)
+- [`MSG_INITDIALOG` Message](#msg-initdialog-message)
+- [Modal and Modeless Dialog Box](#modal-and-modeless-dialog-box)
+- [Control Styles and Operations Relevant to Dialog Box](#control-styles-and-operations-relevant-to-dialog-box)
+
+
 The dialog box programming is a technique to construct a user interface
 quickly. In general, when we write a simple user interface, we can directly
 create all the needed child windows, i.e. the controls, by calling 

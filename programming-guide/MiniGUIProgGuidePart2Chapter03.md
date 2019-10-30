@@ -1,5 +1,12 @@
 # Renderer and Resources Management
 
+- [Look and Feel Renderer](#look-and-feel-renderer)
+   + [Common properties of the Renderer](#common-properties-of-the-renderer)
+- [Resources Management](#resources-management)
+   + [Resource Interface](#resource-interface)
+   + [Example](#example)
+
+
 ## Look and Feel Renderer
 
 The full name of renderer is “look and feel renderer”, which is developed from
