@@ -2,18 +2,18 @@
 
 The list view control displays a series of data items (list item) in a table
 form, and the content of each list item may be comprised of one or more sub
-items. The sub items with the same type of different list items are organized 
+items. The sub items with the same type of different list items are organized
 in a column form. The header content of the list view control generally depicts
-the meaning of the different sub items of the list item. In appearance, the 
+the meaning of the different sub items of the list item. In appearance, the
 list view control is a rectangle including header and list items. The width of
 each sub item in the list view control can be adjusted by dragging the header,
 and the scrolling the control can show the content, which cannot be displayed
 fully in the list.
 
 For the data including multiple properties, the list view control is a
-convenient and efficient tool for sorting and displaying such data. For 
+convenient and efficient tool for sorting and displaying such data. For
 example, the list view control is usually used as a file browser, which can
-display many file attributes including the file name, type, size, modified 
+display many file attributes including the file name, type, size, modified
 date, and so on.
 
 You can create a list view control by calling `CreateWindow` function with
@@ -24,7 +24,7 @@ notification messages when responding to the user operations such as clicking.
 
 ## Styles of List View Control
 
-In the default state, the window of a list view control only displays the 
+In the default state, the window of a list view control only displays the
 header and the list view items, and has no border around the displaying area.
 You can add border to the list view control by using `WS_BORDER` when creating
 the list view control with `CreateWindow` function. In addition, you can add
@@ -40,13 +40,13 @@ responding to the user mouse click operation. In the default condition, if you
 does not specify `LVS_UPNOTIFY` style, a list view control will send
 notification messages when the mouse if pressed down; if this style is
 specified, the control will send notification message when the mouse is
-released. 
+released.
 
 ## Messages of List View Control
 ### Operations on Columns
 
 After a list view control has been created, the next step generally is adding
-one or more columns successively to this control. Sending `LVM_ADDCOLUMN` to 
+one or more columns successively to this control. Sending `LVM_ADDCOLUMN` to
 the control can complete this:
 
 ```cpp
@@ -54,7 +54,7 @@ LVCOLUMN p;
 SendMessage (hwndListView, LVM_ADDCOLUMN, 0, (LPARAM)&p) ;
 ```
 
-Here, p is a `LVCOLUMN` structure, which includes the information related to 
+Here, p is a `LVCOLUMN` structure, which includes the information related to
 the newly added column in the list view control. Definition and meaning of each
 field of `LVCOLUMN` are as follow:
 
@@ -70,7 +70,7 @@ typedef struct _LVCOLUMN
     /* The maximum length of the column title */
     int nTextMax;
     /* The image of the column header */
-    DWORD image; 
+    DWORD image;
     /* The comparing function for sorting the columns  */
     PFNLVCOMPARE pfnCompare;
     /* The column flag */
@@ -80,12 +80,12 @@ typedef LVCOLUMN *PLVCOLUMN;
 ```
 
 `LVCOLUMN` structure is used to create or operate on columns of a list view
-control, and is used together with the messages `LVM_ADDCOLUMN`, 
+control, and is used together with the messages `LVM_ADDCOLUMN`,
 `LVM_GETCOLUMN`, `LVM_SETCOLUMN`, and `LVM_MODIFYHEAD`.
 
 When used with `LVM_ADDCOLUMN` message, it is needed at least to give the value
 of `pszHeadText` of `LVCOLUMN` structure, i.e. the column title, and the other
-items can be set `NULL` or 0. At this time, the list view control will adopt 
+items can be set `NULL` or 0. At this time, the list view control will adopt
 the default values for these fields.
 
 The `nCols` item is an integer value to indicate which column the newly added
@@ -101,29 +101,29 @@ not work at present.
 
 `PfnCompare` points to a `PFNLVCOMPARE` type function, and this function is the
 comparing function attached to the newly added column. When the user clicks the
-title of the column, the list view control will determine the order of each 
+title of the column, the list view control will determine the order of each
 list item according to the comparing function. If the column comparing function
 is not specified, the list view control will adopt the default string comparing
-function: 
+function:
 
 ```cpp
 typedef int (*PFNLVCOMPARE) (int nItem1, int nItem2, PLVSORTDATA sortData);
 ```
 
-Here `nItem1` and `nItem2` are integers, and are the indices of the two 
+Here `nItem1` and `nItem2` are integers, and are the indices of the two
 compared list items. `SortData` has no meaning at present and reserved for
 future. The comparing function determines the comparing result according to the
 indices of the two list items passed to it. The comparing basis is generally
 related to the meaning of the column, and the meaning is defined by the
 application. Other data besides the list item index may be needed for
 comparison. One commonly used and feasible approach is that setting additional
-data useful for the comparing function when adding list items, then getting 
+data useful for the comparing function when adding list items, then getting
 this additional data in the comparing function to handle.
 
-`colFlags` is the column flag, and has the following alignment flags at 
+`colFlags` is the column flag, and has the following alignment flags at
 present: `LVCF_LEFTALIGN`, `LVCF_RIGHTALIGN`, and `LVCF_CENTERALIGN`, which
 means left-aligned, right-aligned, and center-aligned of the column text,
-respectively. 
+respectively.
 
 After a column has been added, you can also set or change the attributes of the
 column by `LVM_SETCOLUMN` message:
@@ -133,10 +133,10 @@ LVCOLUMN p;
 SendMessage (hwndListView, LVM_SETCOLUMN, 0, (LPARAM)&p);
 ```
 
-Here p is also a `LVCOLUMN` structure, and the meanings and requirements of 
+Here p is also a `LVCOLUMN` structure, and the meanings and requirements of
 each item are the same as parameter p of `LVM_ADDCOLUMN` message.
 
-`LVM_MODIFYHEAD` message is a simplification of `LVM_SETCOLUMN`, and can be 
+`LVM_MODIFYHEAD` message is a simplification of `LVM_SETCOLUMN`, and can be
 used to set the title of a list header:
 
 ```cpp
@@ -148,7 +148,7 @@ Here p is also a `LVCOLUMN` structure, but only the values of `nCols` and
 `pszHeadText` are needed to set.
 
 `LVM_GETCOLUMN` message is used to get the column attributes of a list view
-control: 
+control:
 
 ```cpp
 LVCOLUMN p;
@@ -157,8 +157,8 @@ SendMessage (hwndListView, LVM_GETCOLUMN, nCols, (LPARAM)&p) ;
 ```
 
 Here `nCols` is the integer index of the column of which the information is to
-be gotten, and p is a `LVCOLUMN` structure, used to store the gotten 
-attributes. 
+be gotten, and p is a `LVCOLUMN` structure, used to store the gotten
+attributes.
 
 `LVM_GETCOLUMNWIDTH` message is used to get the width of a column:
 
@@ -173,7 +173,7 @@ be gotten, and the return value of `SendMessage` function is the width of the
 column, and is -1 if error occurred.
 
 `LVM_GETCOLUMNCOUNT` is used to get the number of columns in a list view
-control: 
+control:
 
 ```cpp
 int count;
@@ -276,7 +276,7 @@ SendMessage (hwndListView, LVM_GETITEM, hItem, (LPARAM)&lvItem) ;
 
 Here `hItem` is the handle of target list type; `lvItem` is a structure of
 `LVITEM` type, and this structure is used to save the gotten list item
-information. If `hItem` is 0, `nItem` of `lvItem` structure should be set as 
+information. If `hItem` is 0, `nItem` of `lvItem` structure should be set as
 the index value of list item to be gotten.
 
 `LVM_GETITEMCOUNT` message is used to get the number of all the items in the
@@ -299,7 +299,7 @@ HLVITEM hItem;
 addData = SendMessage (hwndListView, LVM_GETITEMADDDATA, nItem, hItem) ;
 ```
 
-Here `hItem` is the handle of list item to be gotten, if `hItem` is zero, 
+Here `hItem` is the handle of list item to be gotten, if `hItem` is zero,
 `nItem` should be used to specify the index value of list item to be gotten.
 `SendMessage` function returns the additional data of list item.
 
@@ -325,7 +325,7 @@ SendMessage (hwndListView, LVM_SETITEMHEIGHT, hItem, newHeight) ;
 ```
 
 Here `hItem` is the handle of the list item to be set; `newHeight` is the new
-height value of the list item. Setting successfully, `SendMessage` function 
+height value of the list item. Setting successfully, `SendMessage` function
 will return `TRUE`; otherwise return `FALSE`.
 
 `LVM_DELITEM` message is used to delete an item from the list view control, and
@@ -344,7 +344,7 @@ should be used to specify the index value of the list item to be deleted.
 Each list item contains one or multiple sub items, and the number of sub items
 is the same as the number of columns in the list view control. A sub item
 contains string and bitmap, and can use the messages `LVM_SETSUBITEM`,
-`LVM_SETSUBITEMTEXT`, `LVM_SETSUBITEMCOLOR`, and `LVM_GETSUBITEMTEXT` to get 
+`LVM_SETSUBITEMTEXT`, `LVM_SETSUBITEMCOLOR`, and `LVM_GETSUBITEMTEXT` to get
 and set the sub item attributes.
 
 `LVM_SETSUBITEM` (`LVM_FILLSUBITEM`) message is used to set the attributes of a
@@ -376,15 +376,15 @@ typedef struct _LVSUBITEM
     /* The text color of a subitem  */
     int nTextColor;
     /* The image of a subitem */
-    DWORD image; 
+    DWORD image;
 } LVSUBITEM;
 typedef LVSUBITEM *PLVSUBITEM;
 ```
 
 Here, flags is the flag value of a sub item, can be `LVFLAG_BITMAP` or
 `LVFLAG_ICON` at present. If a bitmap or an icon is to be displayed in the sub
-item, the corresponding flag should be set, for example, flags |= 
-`LVFLAG_BITMAP`. 
+item, the corresponding flag should be set, for example, flags |=
+`LVFLAG_BITMAP`.
 
 `NItem` and sub item are the vertical index and horizontal index of an item,
 i.e. the positions of the row and the column, respectively. `PszText` is the
@@ -417,7 +417,7 @@ len = SendMessage (hwndListView, LVM_GETSUBITEMLEN, hItem, (LPARAM)&subItem) ;
 
 `LVM_SELECTITEM` message is used to select a list item, and the selected item
 will be highlighted. It should be noted that, the selected item might not be
-visible. 
+visible.
 
 ```cpp
 int nItem;
@@ -426,7 +426,7 @@ HLVITEM hItem;
 SendMessage (hwndListView, LVM_SELECTITEM, nItem, hItem) ;
 ```
 
-Here `hItem` is the handle of list item to be selected; if `hItem` is 0, 
+Here `hItem` is the handle of list item to be selected; if `hItem` is 0,
 `nItem` specifies the index value of list item to be selected.
 
 `LVM_GETSELECTEDITEM` message is used to get the current selected list item:
@@ -450,7 +450,7 @@ SendMessage (hwndListView, LVM_SHOWITEM, nItem, hItem) ;
 
 Here `hItem` is the handle of the list item to be displayed; if `hItem` is 0,
 `nItem` should be used to specify the index value of list item to be displayed.
-If the item to be displayed is not visible or not totally visible, the item 
+If the item to be displayed is not visible or not totally visible, the item
 will become the first or last visible item of visible area and is totally
 visible after sending `LVM_SHOWITEM` message.
 
@@ -464,7 +464,7 @@ SendMessage (hwndListView, LVM_CHOOSEITEM, nItem, hItem) ;
 ```
 
 Here `hItem` is the handle of the list item to be selected and displayed; if
-`hItem` is 0, `nItem` should be used to specify the index value of the list 
+`hItem` is 0, `nItem` should be used to specify the index value of the list
 item to be selected and displayed.
 
 `LVM_FINDITEM` message is used to search a certain list item in a list view
@@ -480,7 +480,7 @@ hFound = SendMessage (hwndListView, LVM_FINDITEM, hParent, (LPARAM)&findInfo) ;
 
 Here `hParent` specifies the root node of target node tree to be searched for.
 `FindInfo` is a `LVFINDINFO` structure, and contains the information needed for
-searching: 
+searching:
 
 ```cpp
 typedef struct _LVFINDINFO
@@ -505,15 +505,15 @@ typedef struct _LVFINDINFO
 typedef LVFINDINFO *PLVFINDINFO;
 ```
 
-The field flags is the search flag, and can be `LVFF_TEXT` and/or 
+The field flags is the search flag, and can be `LVFF_TEXT` and/or
 `LVFF_ADDDATA`, which means to search according to sub item text and (or)
 additional data of list item. If the root node `hParent` specified by `wParam`
 argument of `LVM_FINDITEM` message is zero, `iStart` is the start index value
 for searching, and if it is zero then search from the start.
 
-The poineter pszinfo points to a multiple character strings to be searched for,
+The pointer `pszinfo` points to a multiple character strings to be searched for,
 value of `nCols` means text content of the first `nCols` column sub item in
-matching list item should be consistent to the character string in `pszInfo`. 
+matching list item should be consistent to the character string in `pszInfo`.
 If searching according to the additional data, `addData` field should include
 the additional data to be searched for.
 
@@ -537,7 +537,7 @@ SendMessage (hwndListView, LVM_SORTITEMS, 0, (LPARAM)pfnCompare) ;
 
 Here `pfnCompare` points to a function with `PFNLVCOMPARE` type, and this
 function is the comparing function to sort list items and should be defined by
-application. 
+application.
 
 In addition, we can also make the list view control sort all the sub items
 according to a certain column by sending `LVM_COLSORT` message:
@@ -547,13 +547,13 @@ int nCol;
 SendMessage (hwndListView, LVM_COLSORT, nCol, 0) ;
 ```
 
-Here `nCol` is the index of the specified column, and the list view control 
+Here `nCol` is the index of the specified column, and the list view control
 will compare and sort the sub items according to the comparing function
 associated with the column.
 
 When the comparing function is not specified, the list view control uses the
-default string comparing function to sort. The initial string comparing 
-function is strcasecmp. We can set a user-defined string comparing function by
+default string comparing function to sort. The initial string comparing
+function is `strcasecmp`. We can set a user-defined string comparing function by
 `LVM_SETSTRCMPFUNC` message:
 
 ```cpp
@@ -567,13 +567,13 @@ typedef int (*STRCMP) (const char* s1, const char* s2, size_t n);
 ```
 
 This string comparing function compares the first (at most) n characters of the
-two compared strings s1 and s2, and returns an integer less than, equal to, or
+two compared strings `s1` and `s2`, and returns an integer less than, equal to, or
 greater than 0 according to the comparing result.
 
 ### Operation of Tree View Node
 
-We can perform some operations on the tree view node in a list view control 
-with `LVS_TREEVIEW` style, including getting the related node and/or 
+We can perform some operations on the tree view node in a list view control
+with `LVS_TREEVIEW` style, including getting the related node and/or
 fold/unfold a node.
 
 `LVM_GETRELATEDITEM` message is used to get the related tree view nodes of a
@@ -587,7 +587,7 @@ hRelatedItem = SendMessage (hwndListView, LVM_GETRELATEDITEM, related, hItem) ;
 ```
 
 Here related specifies the relationship between the node and the target node,
-including: 
+including:
 - `LVIR_PARENT`: Get the parent node.
 - `LVIR_FIRSTCHILD`: Get the first child node.
 - `LVIR_NEXTSIBLING`: Get the next sibling node.
@@ -597,7 +597,7 @@ including:
 handle to the gotten related node.
 
 `LVM_FOLDITEM` message is used to fold or unfold a node item including child
-nodes: 
+nodes:
 
 ```cpp
 HLVITEM hItem;
@@ -611,23 +611,23 @@ handle of the node.
 ## Handling of Key Messages
 
 When the user clicks the up or down arrow key, the current selected list item
-will change, moving forward or backward by one item, and the newly selected 
+will change, moving forward or backward by one item, and the newly selected
 item will change to be visible (if it is invisible originally). When the user
 presses the `PageUp` or `PageDown` key, the list item will go to the next page,
 and the range is the same as clicking the scrollbar to the next page, i.e. the
 last item of the former page becomes the first item of the latter page. If the
 `HOME` key is pressed down, the first list item will be selected and visible;
 and if the `END` key is pressed down, the last item will be selected and
-visible. 
+visible.
 
 ## Notification Codes of List View Control
 
-The list view control will generate notification messages when responding to 
+The list view control will generate notification messages when responding to
 the user operation such as clicking and some state changes, including:
 - `LVN_ITEMRDOWN`: The right mouse button is pressed down on a list view item.
 - `LVN_ITEMRUP`: The right mouse button is released on a list view item.
 - `LVN_HEADRDOWN`: The right mouse button is pressed down on the list view
-header. 
+header.
 - `LVN_HEADRUP`: The right mouse button is released up on the list view header.
 - `LVN_KEYDOWN`: A key is pressed down.
 - `LVN_ITEMDBCLK`: The user double clicked a list item.
@@ -638,7 +638,7 @@ header.
 
 When the right mouse button is pressed down on a list item, the item is
 selected, and two notification codes `LVN_SELCHANGE` and `LVN_ITEMRDOWN` are
-generated. 
+generated.
 
 If the application need to know the notification codes generated by a list view
 control, it is better to use `SetNotificationCallback` function to register a
@@ -647,11 +647,10 @@ notification callback function.
 ## Sample Program
 
 The program in List 1 illustrates the use of a list view control. Please refer
-to listview.c file of the demo program package of this guide for the complete
+to `listview.c` file of the demo program package of this guide for the complete
 source code.
 
-
-List 1 Sample program of list view control
+__List 1__ Sample program of list view control
 
 ```cpp
 #define IDC_LISTVIEW    10
@@ -854,25 +853,20 @@ static DLGTEMPLATE DlgScore =
 };
 ```
 
-
-
 ![alt](figures/32.1.jpeg)
 
-Figure 1 Use of list view control
+__Figure 1__ Use of list view control
 
 
 The listview.c program creates a list view control in dialog box for displaying
 each class scores of students, and you can get the average of total classes of
 students by clicking the button.
 
--- Main.XiaodongLi - 26 Oct 2009
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Tree View Control](MiniGUIProgGuidePart6Chapter13.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Month Calendar Control &gt;&gt;](MiniGUIProgGuidePart6Chapter15.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
