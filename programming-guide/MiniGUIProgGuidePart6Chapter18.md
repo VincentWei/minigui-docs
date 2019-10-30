@@ -1,6 +1,6 @@
 # Animation Control
 
-Animation control is one control, which can be used to display animations; it 
+Animation control is one control, which can be used to display animations; it
 is very simple and easy to use.
 
 You can create an animation control by calling `CreateWindow` function with
@@ -20,10 +20,10 @@ typedef struct _ANIMATIONFRAME
     /** The disposal method (from GIF89a specification):
      *  Indicates the way in which the graphic is to be treated after being displayed.
      *  - 0\n No disposal specified. The decoder is not required to take any action.
-     *  - 1\n Do not dispose. The graphic is to be left in place. 
-     *  - 2\n Restore to background color. The area used by the frame must be restored to 
+     *  - 1\n Do not dispose. The graphic is to be left in place.
+     *  - 2\n Restore to background color. The area used by the frame must be restored to
      *        the background color.
-     *  - 3\n Restore to previous. The decoder is required to restore the area overwritten by 
+     *  - 3\n Restore to previous. The decoder is required to restore the area overwritten by
      *        the frmae with what was there prior to rendering the frame.
      */
     int disposal;
@@ -77,7 +77,7 @@ typedef struct _ANIMATION
 } ANIMATION;
 ```
 
-What the `ANIMATION` structure describes are the global properties of objects 
+What the `ANIMATION` structure describes are the global properties of objects
 of animation, and includes the width and height of an animation, number of
 frames, time scale used for indicating delaying (1 means 10ms), and the header
 pointer to the linked list of animation frames.
@@ -94,7 +94,7 @@ frame with `time_unit` in the `ANIMATION` object as the scale.
 image is represented by a memory `DC`; otherwise a `BITMAP` object represents
 the image.
 
-An application can construct an `ANIMATION` object itself, and can also call 
+An application can construct an `ANIMATION` object itself, and can also call
 the following function to directly create an `ANIMATION` object from an image
 file in `GIF98a` format.
 
@@ -106,30 +106,30 @@ ANIMATION* CreateAnimationFromGIF89aMem (HDC hdc, const void* mem, int size);
 
 The above-mentioned function will read the image information of the animation
 `GIF` from the data area in `GIF98a` format, and then create an `ANIMATION`
-object. 
+object.
 
 After an application creates an `ANIMATION` object, and can both display it,
 also can create an animation control to display the animation. When you call
-`CreateWindow` function to create an animation control, you can pass the 
+`CreateWindow` function to create an animation control, you can pass the
 created `ANIMATION` object to the animation control and the animation control
 will use the `ANIMATION` object to display the animation automatically. For
 example, an `ANIMATION` object is created from a `GIF` file in the following
 code fragment, and then using the object creates an animation control:
 
 ```cpp
- ANIMATION* anim = CreateAnimationFromGIF89aFile (HDC_SCREEN, "banner.gif");
-        if (anim == NULL)
-            return 1;
+ANIMATION* anim = CreateAnimationFromGIF89aFile (HDC_SCREEN, "banner.gif");
+if (anim == NULL)
+    return 1;
 
-        CreateWindow (CTRL_ANIMATION, 
-                          "", 
-                          WS_VISIBLE | ANS_AUTOLOOP, 
-                          100, 
-                          10, 10, 300, 200, hWnd, (DWORD)anim);
+CreateWindow (CTRL_ANIMATION,
+                  "",
+                  WS_VISIBLE | ANS_AUTOLOOP,
+                  100,
+                  10, 10, 300, 200, hWnd, (DWORD)anim);
 ```
 
 It should be noted that you could pass the pointer to the `ANIMATION` object
-into an animation control through `dwAddData` argument when calling 
+into an animation control through `dwAddData` argument when calling
 `CreateWindow` function.
 
 ## Styles of Animation Control
@@ -148,8 +148,8 @@ animation control.
 - `ANM_SETANIMATION`: Set an `ANIMATION` object.
 - `ANM_GETANIMATION`: Get the current `ANIMATION` object.
 - `ANM_STARTPLAY`: Start playing the animation. Before sending `ANM_STARTPLAY`
-to an animation control, the animation control will only display the first 
-frame image of the `ANIMATION` object; and only after `ANM_STARTPLAY` message 
+to an animation control, the animation control will only display the first
+frame image of the `ANIMATION` object; and only after `ANM_STARTPLAY` message
 is sent, the animation control can display an animation according to the
 information in `ANIMATION` object.
 - `ANM_PAUSE_RESUME`: Pause/Resume playing. This message is used to pause the
@@ -161,11 +161,10 @@ the first frame of the `ANIAMTION`.
 ## Sample Program
 
 Code in List 1 illustrates the use of an animation control. Please refer to
-animation.c file of the demo program package `mg-samples` of this guide for
+`animation.c` file of the demo program package `mg-samples` of this guide for
 complete source code.
 
-
-List 1 Use of animation control
+__List 1__ Use of animation control
 
 ```cpp
 static int AnimationWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
@@ -178,17 +177,17 @@ static int AnimationWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
             return 1;
 
         SetWindowAdditionalData (hWnd, (DWORD) anim);
-        CreateWindow (CTRL_ANIMATION, 
-                          "", 
-                          WS_VISIBLE | ANS_AUTOLOOP, 
-                          100, 
+        CreateWindow (CTRL_ANIMATION,
+                          "",
+                          WS_VISIBLE | ANS_AUTOLOOP,
+                          100,
                           10, 10, 300, 200, hWnd, (DWORD)anim);
         SendMessage (GetDlgItem (hWnd, 100), ANM_STARTPLAY, 0, 0);
 
-        CreateWindow (CTRL_ANIMATION, 
-                          "", 
-                          WS_VISIBLE | ANS_AUTOLOOP, 
-                          200, 
+        CreateWindow (CTRL_ANIMATION,
+                          "",
+                          WS_VISIBLE | ANS_AUTOLOOP,
+                          200,
                           10, 210, 300, 200, hWnd, (DWORD)anim);
         break;
     }
@@ -214,30 +213,24 @@ static int AnimationWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
 /* Following codes to create the main window are omitted */
 ```
 
-
-
 ![alt](figures/36.1.jpeg)
 
-Figure 1 Use of an animation control
+__Figure 1__ Use of an animation control
 
-
-In the program within List 1, banner.gif file in the current directory is 
-loaded when the main window is created, and the corresponding `ANIMATION` 
+In the program within List 1, `banner.gif` file in the current directory is
+loaded when the main window is created, and the corresponding `ANIMATION`
 object is created. Then two animation controls are created. The first animation
 control start playing the animation immediately after created, and the second
 animation control won’t play until the user clicks the window. Figure 1 shows
 the running effect of the sample program, in which what the first animation
-control displays is the second frame of banner.gif file, and the second
+control displays is the second frame of `banner.gif` file, and the second
 animation control displays the first frame.
-
--- Main.XiaodongLi - 26 Oct 2009
-
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Cool Bar Control](MiniGUIProgGuidePart6Chapter17.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Grid View Control &gt;&gt;](MiniGUIProgGuidePart6Chapter19.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
