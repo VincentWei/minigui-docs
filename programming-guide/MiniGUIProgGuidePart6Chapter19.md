@@ -1,35 +1,35 @@
-# `GridView` Control
+# Gridview Control
 
-`GridView` displays a series of data items (cells) in table form, and the
+Gridview displays a series of data items (cells) in table form, and the
 contents of every cell are independent each other. The contents of gridview
 header, including a column of header and a row of header, usually express the
-meanings of the column and the row. From the appearance, gridview is a 
+meanings of the column and the row. From the appearance, gridview is a
 rectangle box including header cells. You can adjust the height of the row and
 the width of the column in the gridview by dragging the header, and use the
 scrollbar to display the content, which was out of the display window.
 
-`GridView` is a convenient and effective tool, which can arrange and display 
+Gridview is a convenient and effective tool, which can arrange and display
 the data item. It suits to deal with a great deal of datum with different
 attribute, such as experiment data or account table.
 
 You can call `CreateWindow` function and use the control name `CTRL_GRID` to
-create a `GridView`. Applications usually add, delete or operate the table 
-items by sending messages to the `GridView`. Like other controls, `GridView`
+create a Gridview. Applications usually add, delete or operate the table
+items by sending messages to the Gridview. Like other controls, Gridview
 will not generate messages until it responds user clicking or other operations.
 
 ## Styles of Gridview
 
-By default, `GridView` window only displays header and cell, and there is no
-border in the display region. When creating `GridView` with `CreateWindow`
+By default, Gridview window only displays header and cell, and there is no
+border in the display region. When creating Gridview with `CreateWindow`
 function, you can use window style `WS_BORDER` to add the border in it.
 Otherwise, use window style `WS_VSCROLL` and `WS_HSCROLL` to add upright and
-horizontal scroll bars. It is convenient for using mouse to display all 
-contents in the `GridView` by scrolling the bar.
+horizontal scroll bars. It is convenient for using mouse to display all
+contents in the Gridview by scrolling the bar.
 
-## Messages of `GridView`
+## Messages of Gridview
 
-When creating `GridView`, you can set a structure `GRIDVIEWDATA` and transfer
-this structure as a parameter. The definition of this structure and the 
+When creating Gridview, you can set a structure `GRIDVIEWDATA` and transfer
+this structure as a parameter. The definition of this structure and the
 meanings of every member are:
 
 ```cpp
@@ -48,18 +48,18 @@ typedef struct _GRIDVIEWDATA
 
 ### Column Operations
 
-After creating the `GridView`, user demands to add a column to the control,
+After creating the Gridview, user demands to add a column to the control,
 which can be finished by application sending `GRIDM` `ADDCOLUMN` message to the
-control. 
+control.
 
 ```cpp
-int index; 
+int index;
 GRIDCELLDATA celldata;
 GRIDCELLDATAHEADER cellheader;
 SendMessage(hWndGrid, GRIDM_ADDCOLUMN, index, &celldata);
 ```
 
-Here celldata is a `GRIDCELLDATA` structure, including the information about 
+Here `celldata` is a `GRIDCELLDATA` structure, including the information about
 the new added column. The `GRIDCELLDATA` structure definition and the meanings
 of every member are:
 
@@ -79,13 +79,13 @@ typedef struct _GRIDCELLDATA
     /** mask of properties, can be OR'ed with following values:
      * set or get a cell style
      * - GVITEM_STYLE\n
-     * set or get a cell text color 
+     * set or get a cell text color
      * - GVITEM_FGCOLOR\n
-     * set or get a cell background color 
+     * set or get a cell background color
      * - GVITEM_BGCOLOR\n
-     * set or get a cell text font 
+     * set or get a cell text font
      * - GVITEM_FONT\n
-     * set or get a cell's image 
+     * set or get a cell's image
      * - GVITEM_IMAGE\n
      * set or get all of the content of a cell
      * - GVITEM_ALLCONTENT\n
@@ -108,8 +108,8 @@ typedef struct _GRIDCELLDATA
 }GRIDCELLDATA;
 ```
 
-content field in the above structure points to the address of another structure
-`GRIDCELLDATAHEADER`. The definition of this structure and the meanings of 
+The `content` field in the above structure points to the address of another structure
+`GRIDCELLDATAHEADER`. The definition of this structure and the meanings of
 every member are:
 
 ```cpp
@@ -126,19 +126,19 @@ typedef struct _GRIDCELLDATAHEADER
 
 Before adding a new column, you should set the number size of the structure
 `GRIDCELLDATAHEADE` and the number buff point to the caption of the column. The
-number `len_buff` is the length of the caption. Adding a row is same as adding 
+number `len_buff` is the length of the caption. Adding a row is same as adding
 a column. But the number size is the height of the new row.
 
-`GRIDCELLDATA` structure is to set the attributes of the row, column and cell 
-in `GridView`, which is used by many messages, such as `GRIDM_SETCELLPROPERTY`,
+`GRIDCELLDATA` structure is to set the attributes of the row, column and cell
+in Gridview, which is used by many messages, such as `GRIDM_SETCELLPROPERTY`,
 `GRIDM_GETCELLPROPERTY`, `GRIDM_ADDROW` and `GRIDM_ADDCOLUMN` etc.
 
-style field in the `GRIDCELLDATA` structure is the style of cell. Every times,
+The `style` field in the `GRIDCELLDATA` structure is the style of cell. Every times,
 when you set, you should point out which type is among below options:
 `GV_TYPE_HEADER`, `GV_TYPE_TEXT`, `GV_TYPE_NUMBER`, `GV_TYPE_SELECTION` and
 `GV_TYPE_CHECKBOX`. It can be used with cell style, such as `GVS_READONLY` etc.
 
-content field also can point to other structures, which are
+The `contentThe ` field also can point to other structures, which are
 `GRIDCELLDATATEXT（text` cell）, `GRIDCELLDATANUMBER（data` cell）,
 `GRIDCELLDATASELECTION（combo` boxes cell）, `GRIDCELLDATACHECKBOX(selection`
 cell). The definition and the meaning of every member are:
@@ -191,7 +191,7 @@ int width;
 SendMessage (hwndGrid, GRIDM_SETCOLWIDTH, index, width) ;
 ```
 
-Here index is the integral index value of the column needed to set, and width 
+Here index is the integral index value of the column needed to set, and width
 is the width of the column.
 
 `GRIDM_GETCOLWIDTH` can get the width of the control column:
@@ -215,10 +215,10 @@ SendMessage (hwndGrid, GRIDM_ADDCOLUMN, index, celldata) ;
 ```
 
 Here index is the integral index value of the column upon the added column, and
-celldata is a pointer of `GRIDCELLDATA` structure, which is used to set initial
+`celldata` is a pointer of `GRIDCELLDATA` structure, which is used to set initial
 value for new column.
 
-`GRIDM_DELCOLUMN` message is used to delete a column in `GridView`.
+`GRIDM_DELCOLUMN` message is used to delete a column in Gridview.
 
 ```cpp
 int index;
@@ -227,7 +227,7 @@ SendMessage (hwndGrid, GRIDM_DELCOLUMN, 0, index) ;
 
 Here index is the index value of the deleted column.
 
-`GRIDM_GETCOLCOUNT` message is used to get the number of columns in `GridView`.
+`GRIDM_GETCOLCOUNT` message is used to get the number of columns in Gridview.
 
 ```cpp
 int count;
@@ -260,11 +260,11 @@ int index;
 height = SendMessage (hwndGrid, GRIDM_GETROWHEIGHT, 0, index);
 ```
 
-Here, index is the integral index value of the row needed to get, and the 
-return value of the `SendMessage` function is the height of the row. The 
+Here, index is the integral index value of the row needed to get, and the
+return value of the `SendMessage` function is the height of the row. The
 message will return –1 on error.
 
-`GRIDM_ADDROW` message is used to add a new row in `GridView`.
+`GRIDM_ADDROW` message is used to add a new row in Gridview.
 
 ```cpp
 int index;
@@ -272,11 +272,11 @@ GRIDCELLDATA* celldata;
 SendMessage (hwndGrid, GRIDM_ADDROW, index, celldata) ;
 ```
 
-Here, index is the integral index value of row upon the added row; celldata is 
-a pointer of `GRIDCELLDATA` structure, which is used to set the initial value 
+Here, index is the integral index value of row upon the added row; `celldata` is
+a pointer of `GRIDCELLDATA` structure, which is used to set the initial value
 of the new row.
 
-`GRIDM_DELROW` message is used to delete a row in `GridView`.
+`GRIDM_DELROW` message is used to delete a row in Gridview.
 
 ```cpp
 int index;
@@ -285,7 +285,7 @@ SendMessage (hwndGrid, GRIDM_DELROW, 0, index) ;
 
 Here index is the index value of the deleted row.
 
-`GRIDM_GETROWCOUNT` is used to get the number of the rows in `GridView`.
+`GRIDM_GETROWCOUNT` is used to get the number of the rows in Gridview.
 
 ```cpp
 int count;
@@ -322,8 +322,8 @@ typedef struct _GRIDCELLS
 }GRIDCELLS;
 ```
 
-If `SendMessage` function is ok, return `GRID_OKAY`; otherwise, return 
-`GRID_ERR`. 
+If `SendMessage` function is ok, return `GRID_OKAY`; otherwise, return
+`GRID_ERR`.
 
 `GRIDM_GETCELLPROPERTY` message is used to obtain the attribute of cell.
 
@@ -335,12 +335,12 @@ SendMessage (hwndGrid, GRIDM_GETCELLPROPERTY, &cells, celldata) ;
 
 Here, cells is an idiographic cell, which is not multi-cell. After the content
 of certain cell is set successfully, the function `SendMessage` will return
-`GRID_OKAY`. The structure celldata contains the information of the certain
+`GRID_OKAY`. The structure `celldata` contains the information of the certain
 cell. If error occurred, the message will return `GRID_ERR`.
 
 Otherwise, there are some other messages for cells with different format, such
 as `GRIDM_SETNUMFORMAT` message, which is used to set the data format of data
-cell (GRIDCELLDATANUMBER).
+cell (`GRIDCELLDATANUMBER`).
 
 ```cpp
 GRIDCELLS* cells;
@@ -369,7 +369,7 @@ SendMessage (hwndGrid, GRIDM_GETSELECTED, 0, cells);
 ```
 
 With this option, the function `SendMessage` will return all the highlighted
-cells. 
+cells.
 
 ## Other Messages
 
@@ -385,7 +385,7 @@ highlighted area will be carried out. When cell is double clicked or selected,
 it will edit the content of the cell to input character.
 
 The grid control is also able to associate some cells (source cells) with other
-cells (target cells). Then the target cells will refresh themselves according 
+cells (target cells). Then the target cells will refresh themselves according
 to the given operation function when the source cells’ data is changed. The
 structure to carry out this operation is listed below:
 
@@ -419,7 +419,7 @@ If success, the message will return the index of the association; otherwise it
 will return `GRID_ERR`.
 
 The message `GRIDM_DELDEPENDENCE` is used to delete a cell association in the
-`GridView`. 
+Gridview.
 
 ```cpp
 int dependence_id;
@@ -430,14 +430,14 @@ Here the `dependence_id` is the index of the associated cell to be deleted. The
 message function will return `GRID_OKAY` when deletion is successful, otherwise
 it will return `GRID_ERR`.
 
-## Notification Codes of `GridView`
+## Notification Codes of Gridview
 
-The `GridView` will generate notification code when it responds to user's
+The Gridview will generate notification code when it responds to user's
 operation such as clicking or some status is changed. The notification codes
-include: 
-- `GRIDN_HEADLDOWN`: the left buttuon of the user's mouse is pressed on the
+include:
+- `GRIDN_HEADLDOWN`: the left button of the user's mouse is pressed on the
 table head
-- `GRIDN_HEADLUP`: the left buttuon of the user’s mouse is released on the 
+- `GRIDN_HEADLUP`: the left button of the user’s mouse is released on the
 table head
 - `GRIDN_KEYDOWN`: key is pressed down
 - `GRIDN_CELLDBCLK`: user double click one cell
@@ -446,21 +446,20 @@ table head
 - `GRIDN_CELLTEXTCHANGED`: the content of the cell is changed
 
 When the left button of the user’s mouse is pressed on some cell, the cell will
-be selected, and two notification codes `GRIDN_FOCUSCHANGED` and 
+be selected, and two notification codes `GRIDN_FOCUSCHANGED` and
 `GRIDN_CELLCLK` will be generated.
 
 If an application needs to know the notification code of the grid control, a
-notification handle function should be registered using 
+notification handle function should be registered using
 `SetNotificationCallback` to handle all the received notification code.
 
 ## Sample Program
 
-Code in List 1 illustrates the use of a `GridView` control. Please refer to
+Code in List 1 illustrates the use of a Gridview control. Please refer to
 grid.c file of the demo program package `mg-samples` of this guide for complete
 source code.
 
-
-List 1 Use of `GridView` Control
+__List 1__ Use of Gridview Control
 
 ```cpp
 int ww = 800;
@@ -504,7 +503,7 @@ int total(GRIDCELLS* target, GRIDCELLS* source, DWORD dwAddData)
     cells.row = target->row;
     cells.column = target->column;
     SendMessage(hGVWnd, GRIDM_SETCELLPROPERTY, (WPARAM)&cells, (LPARAM)&data);
-    
+
     return 0;
 }
 
@@ -540,7 +539,7 @@ int averge(GRIDCELLS* target, GRIDCELLS* source, DWORD dwAddData)
     cells.row = target->row;
     cells.column = target->column;
     SendMessage(hGVWnd, GRIDM_SETCELLPROPERTY, (WPARAM)&cells, (LPARAM)&data);
-    
+
     return 0;
     return 0;
 }
@@ -615,7 +614,7 @@ ControlTestWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
                 cellsel.width = 3;
                 cellsel.height = 4;
                 SendMessage(hGVWnd, GRIDM_SETCELLPROPERTY, (WPARAM)&cellsel, (LPARAM)&celldata);
-                
+
                 /* operation to add one column */
                 memset(&header, 0, sizeof(header));
                 memset(&celldata, 0, sizeof(celldata));
@@ -695,28 +694,21 @@ ControlTestWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
             DestroyMainWindow (hWnd);
             MainWindowCleanup (hWnd);
             return 0;
-            
+
     }
     return DefaultMainWinProc (hWnd, message, wParam, lParam);
-} 
-
+}
 ```
-
-
 
 ![alt](figures/37.1.jpeg)
 
-Figure 1 Use of a `GridView` control
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 1__ Use of a Gridview control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Animation Control](MiniGUIProgGuidePart6Chapter18.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Iconview Control &gt;&gt;](MiniGUIProgGuidePart6Chapter19.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
