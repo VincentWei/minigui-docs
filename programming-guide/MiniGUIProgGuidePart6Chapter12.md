@@ -1,10 +1,10 @@
 # Scroll View Control
 
-Scroll View (ScrollView) control is also a scroll window control, and different
+Scroll View (`ScrollView`) control is also a scroll window control, and different
 from `ScrollWnd` control in that `ScrollView` control displays list items
 instead of controls.
 
-The major usage of `ScrollView` is to display and handle list items; this 
+The major usage of `ScrollView` is to display and handle list items; this
 aspect is similar to list box and list view control. However the height of a
 list item in `ScrollView` can be specified by the user, so different list item
 can have different height. The most important is, draw of list items in
@@ -33,9 +33,9 @@ List item comparison function of `ScrollView` control has the prototype of
 typedef int (*SVITEM_CMP) (HSVITEM hsvi1, HSVITEM hsvi2);
 ```
 
-Here, hsvi1 and hsvi2 are the handles of the two list items to be compared. If
-the comparison function returns a negative value, the list item hsvi1 will be
-displayed before the list item hsvi2.
+Here, `hsvi1` and `hsvi2` are the handles of the two list items to be compared. If
+the comparison function returns a negative value, the list item `hsvi1` will be
+displayed before the list item `hsvi2`.
 
 In addition, you can also use `SVM_SORTITEMS` message to sort list items in a
 `ScrollView` control without `SVS_AUTOSORT` style:
@@ -51,7 +51,7 @@ specified by an application.
 ## Messages of Scroll View Control
 
 Except responds to some general scroll window message as `ScrollWnd`, related
-messages of `ScrollView` control are mainly used to add, delete, and access 
+messages of `ScrollView` control are mainly used to add, delete, and access
 list item.
 
 ### Draw of List Item
@@ -74,10 +74,10 @@ typedef void (*SVITEM_DRAWFUNC) (HWND hWnd, HSVITEM hsvi, HDC hdc, RECT *rcDraw)
 ```
 
 The arguments passed to the draw function are the handle to the `ScrollView`
-control (hWnd), the handle of list item to be drawn (hsvi), the graphics device
-context (hdc), and the rectangle area in which the item be drawn (rcDraw).
+control (`hWnd`), the handle of list item to be drawn (`hsvi`), the graphics device
+context (`hdc`), and the rectangle area in which the item be drawn (`rcDraw`).
 
-According to the actual usage of `ScrollView` control, content draw function 
+According to the actual usage of `ScrollView` control, content draw function
 can draw user-defined content, which can be text or picture, all decided by an
 application itself, in the specified rectangle area.
 
@@ -91,7 +91,7 @@ SVITEMOPS myops;
 SendMessage (hScrWnd, SVM_SETITEMOPS, 0, (LPARAM)&myops);
 ```
 
-Here, myops is a structure of `SVITEMOPS` type, and specifies the related
+Here, `myops` is a structure of `SVITEMOPS` type, and specifies the related
 operation functions for list items of `ScrollView`, as follows:
 
 ```cpp
@@ -110,29 +110,29 @@ creating list items, and its prototype is defined as follows:
 typedef int  (*SVITEM_INITFUNC)    (HWND hWnd, HSVITEM hsvi);
 ```
 
-The arguments are the handle to the control window (hWnd), and the handle to 
-the created list item (hsvi). This function can be used to perform some
+The arguments are the handle to the control window (`hWnd`), and the handle to
+the created list item (`hsvi`). This function can be used to perform some
 operations relevant to the items during creating them.
 
-The member `destroyItem` is the destroying function called during destroying 
+The member `destroyItem` is the destroying function called during destroying
 the list items; its prototype is defined as follows:
 
 ```cpp
 typedef void (*SVITEM_DESTROYFUNC) (HWND hWnd, HSVITEM hsvi);
 ```
 
-The arguments are the handle to the control window (hWnd), and the handle to 
+The arguments are the handle to the control window (`hWnd`), and the handle to
 the list item being destroyed. This function can be used to perform some
 cleaning up work during destroying them, such as release related resource.
 
 The member `drawItem` specifies the draw function of the list items. Its effect
 is completely the same as using `SVM_SETITEMDRAW` message to set the draw
-function. 
+function.
 
 ### Operations on List Item
 
 `SVM_ADDITEM` and `SVM_DELITEM` messages are used to add and delete a list item
-respectively: 
+respectively:
 
 ```cpp
 int idx;
@@ -141,7 +141,7 @@ SVITEMINFO svii;
 Idx = SendMessage (hScrWnd, SVM_ADDITEM, (WPARAM)&hsvi, (LPARAM)&svii);
 ```
 
-Here, svii is a structure of `SVITEMINFO` type, defined as follows:
+Here, `svii` is a structure of `SVITEMINFO` type, defined as follows:
 
 ```cpp
 typedef struct _SCROLLVIEWITEMINFO
@@ -152,12 +152,12 @@ typedef struct _SCROLLVIEWITEMINFO
 } SVITEMINFO;
 ```
 
-The field `nItem` is the desired index of the list item; if `nItem` is 
+The field `nItem` is the desired index of the list item; if `nItem` is
 negative, the list item will be appended to the end. The field `nItemHeight` is
 the height of the list item; `addData` is the additional data value of the list
-item. 
+item.
 
-Hsvi is used to store the handle to a list item, and this handle can be used to
+`hsvi` is used to store the handle to a list item, and this handle can be used to
 access the list item. `SVM_ADDITEM` message returns the actual index value of
 the list item after inserted.
 
@@ -169,9 +169,9 @@ HSVITEM hsvi;
 SendMessage (hScrWnd, SVM_DELITEM, idx, hsvi);
 ```
 
-Here, hsvi is used to specify the handle of the list item to be deleted. If 
-hsvi is 0, you should specify the index value of the list item to be deleted
-through idx.
+Here, `hsvi` is used to specify the handle of the list item to be deleted. If
+`hsvi` is 0, you should specify the index value of the list item to be deleted
+through `idx`.
 
 `SVM_REFRESHITEM` message is used to refresh the area of a list item:
 
@@ -181,9 +181,9 @@ HSVITEM hsvi;
 SendMessage (hScrWnd, SVM_REFRESHITEM, idx, hsvi);
 ```
 
-Here, hsvi is uesed to specify the handle of the list item to be refreshed. If
-hsvi is 0, you should specify the index value of the list item to be refreshed
-through idx.
+Here, `hsvi` is used to specify the handle of the list item to be refreshed. If
+`hsvi` is 0, you should specify the index value of the list item to be refreshed
+through `idx`.
 
 `SVM_GETITEMADDDATA` message is used to get the additional data of a list item:
 
@@ -191,9 +191,9 @@ through idx.
 SendMessage (hScrWnd, SVM_GETITEMADDDATA, idx, hsvi);
 ```
 
-Here, hsvi is used to specify the handle of the list item to be accessed. If
-hsvi is 0, you should specify the index value of the list item to be accessed
-through idx.
+Here, `hsvi` is used to specify the handle of the list item to be accessed. If
+`hsvi` is 0, you should specify the index value of the list item to be accessed
+through `idx`.
 
 `SVM_SETITEMADDDATA` message is used to set the additional data of a list item:
 
@@ -203,7 +203,7 @@ DWORD addData;
 SendMessage (hScrWnd, SVM_SETITEMADDDATA, idx, addData);
 ```
 
-Here, idx is used to specify the index value of the list item to be accessed,
+Here, `idx` is used to specify the index value of the list item to be accessed,
 and `addData` is the additional data to be set.
 
 `SVM_GETITEMCOUNT` message is used to get the number of all list items:
@@ -229,16 +229,16 @@ Being the current highlighted item does not mean the list item must have some
 specialty in appearance (such as highlighted display), and this is completely
 determined by the application itself.
 
-`SVM_SETCURSEL` message is used to set the highlighted list item of a 
+`SVM_SETCURSEL` message is used to set the highlighted list item of a
 `ScrollView` control:
 
 ```cpp
 SendMessage (hScrWnd, SVM_SETCURSEL, idx, bVisible);
 ```
 
-Here, idx is used to specify the index value of the list item to be set as the
+Here, `idx` is used to specify the index value of the list item to be set as the
 highlighted item, and if `bVisible` is `TRUE`, the list item becomes a visible
-item. 
+item.
 
 `SVM_GETCURSEL` message is used to get the current highlighted list item of a
 `ScrollView` control:
@@ -259,7 +259,7 @@ set the selection state of list items.
 
 Like highlight property, we should be noted that selection is only a state of a
 list item. Being selected does not mean the list item must have some specialty
-in appearance (such as highlight display), this is also completely determined 
+in appearance (such as highlight display), this is also completely determined
 by the application itself.
 
 `SVM_SELECTITEM` message is used to select a list item:
@@ -268,9 +268,9 @@ by the application itself.
 SendMessage (hScrWnd, SVM_SELECTITEM, idx, bSel);
 ```
 
-Here, idx is used to specify the index value of the list item to be operated,
+Here, `idx` is used to specify the index value of the list item to be operated,
 and if `bSel` is `TRUE`, the list item will be selected; otherwise will not be
-selected. 
+selected.
 
 `SVM_SHOWITEM` message is used to make sure a list item is visible:
 
@@ -278,9 +278,9 @@ selected.
 SendMessage (hScrWnd, SVM_SHOWITEM, idx, hsvi);
 ```
 
-Here, hsvi is used to specify the handle of list item to be displayed, while 
-idx is used to specify the index value of the list item to be displayed, and 
-idx only works when hsvi is 0.
+Here, `hsvi` is used to specify the handle of list item to be displayed, while
+`idx` is used to specify the index value of the list item to be displayed, and
+`idx` only works when `hsvi` is 0.
 
 `SVM_CHOOSEITEM` message is combination of `SVM_SELECTITEM` and `SVM_SHOWITEM`
 messages, and is used to select a list item and make
@@ -289,9 +289,9 @@ messages, and is used to select a list item and make
 SendMessage (hScrWnd, SVM_CHOOSEITEM, idx, hsvi);
 ```
 
-Here, hsvi is the handle of list item to be selected and displayed, and idx is
+Here, `hsvi` is the handle of list item to be selected and displayed, and `idx` is
 used to specify the index value of the list item to be selected and displayed,
-and idx only works when hsvi is 0.
+and `idx` only works when `hsvi` is 0.
 
 ### Optimization of Display
 
@@ -308,15 +308,13 @@ frozen, otherwise de-frozen.
 A window of a `ScrollView` control not only contains a visible area, but also a
 margin area, as shown in Figure 1.
 
-
-
 ![alt](figures/30.1_T.jpeg)
 
-Figure 1 Visible area of a `ScrollView` control
+__Figure 1__ Visible area of a `ScrollView` control
 
 
 `SVM_SETMARGINS` message can be used to set the margin range of a `ScrollView`
-control: 
+control:
 
 ```cpp
 RECT rcMargin;
@@ -362,11 +360,10 @@ item clicked or currently highlighted.
 
 Code in List 1 illustrates the use of `ScrollView` control. The program
 constructs a simple contact person list by using `ScrollView` control. Please
-refer to scrollview.c program in the sample program package for the complete
+refer to `scrollview.c` program in the sample program package for the complete
 source code of the program.
 
-
-List 1 Example program of `ScrollView` control
+__List 1__ Example program of `ScrollView` control
 
 ```cpp
 #define IDC_SCROLLVIEW    100
@@ -496,23 +493,17 @@ static DLGTEMPLATE DlgBook =
 ```
 
 This program displays the contact person in list form, and sorts them by their
-names. 
-
-
+names.
 
 ![alt](figures/30.2.jpeg)
 
-Figure 2 Contact person list
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 2__ Contact person list
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Scroll Window Control](MiniGUIProgGuidePart6Chapter11.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Tree View Control &gt;&gt;](MiniGUIProgGuidePart6Chapter13.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
