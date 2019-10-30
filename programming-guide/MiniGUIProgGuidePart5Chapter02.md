@@ -5,7 +5,7 @@ shared resource for client programs and manages windows created by clients. We
 explain how to write a customized MiniGUI-Processes server program according to
 the project requirement in this chapter. We first use program `mginit` of
 `mg-samples` as an example to analyze the basic constitution of `mginit`
-program. 
+program.
 
 ## `mginit` in `mg-samples`
 
@@ -13,8 +13,8 @@ program.
 following tasks:
 - Initializing itself as the server of MiniGUI-Processes;
 - Showing two dialog boxes displaying copyright information;
-- Reading mginit.rc configuration file and creating a task bar;
-- Starting up the default startup program specified by mginit.rc file;
+- Reading `mginit.rc` configuration file and creating a task bar;
+- Starting up the default startup program specified by `mginit.rc` file;
 - Maintaining information of MiniGUI-Processes layers and switching between
 layers in the taskbar window procedure.
 
@@ -23,16 +23,17 @@ Now we analyze the implementation of `mginit` in mg-samples.
 ### Initializing Itself as the Server of MiniGUI-Processes
 
 The following code is located in function `MiniGUIMain`:
+
 ```cpp
 int MiniGUIMain (int args, const char* arg[])
 {
     int pid_desktop;
     struct sigaction siga;
     MSG msg;
-    
+
     OnNewDelClient = on_new_del_client;
     OnChangeLayer = on_change_layer;
-    
+
     if (!ServerStartup (0, 0, 0)) {
         fprintf (stderr, "Can not start the server of MiniGUI-Processes: mginit.\n");
         return 1;
@@ -41,24 +42,24 @@ int MiniGUIMain (int args, const char* arg[])
     if (!InitMiniGUIExt ()) {
         fprintf (stderr, "Can not init mgext library.\n");
         return 1;
-    }   
-    
+    }
+
     ...
 ```
-First, this function initializes variables `OnNewDelClient` and 
+First, this function initializes variables `OnNewDelClient` and
 `OnChangeLayer`, which are the global variables owned by the server program.
 After this, the function calls `ServerStartup` to start the server function of
-mginit. `ServerStartup` function will create listening socket, prepare to 
+mginit. `ServerStartup` function will create listening socket, prepare to
 accept the connection requests from clients. So far the server initialization
 has finished. Let’s analyze the above process in details.
 
 #### 1. Listen events coming from clients and layers
 
-The global variables `OnNewDelClient` and `OnChangeLayer` are only available 
+The global variables `OnNewDelClient` and `OnChangeLayer` are only available
 for MiniGUI-Processes server program. They are two function pointer variables.
 When a client connects to `mginit` or drops the socket connection with mginit,
 and if the variable of `OnNewDelClient` has been set, MiniGUI will call the
-function pointed to by this variable. In `minigui/minigui.h`, the declaration 
+function pointed to by this variable. In `minigui/minigui.h`, the declaration
 of this function prototype is as follows:
 
 ```cpp
@@ -118,7 +119,7 @@ The second argument cli is the client identifier; it is an integer. The third
 argument `idx_znode` is the znode index.
 
 The global variables `OnLockClientReq`, `OnTrylockClientReq`, and
-`OnUnlockClientReq` are available for MiniGUI-Processes client program. They 
+`OnUnlockClientReq` are available for MiniGUI-Processes client program. They
 are three function pointer variables. They can avoid thread deadlock problem in
 the same process. In `minigui/minigui.h`, the declaration of this function
 prototype is as follows:
@@ -135,7 +136,7 @@ ON_UNLOCK_CLIENT_REQ  OnUnlockClientReq;
 Once having client identifier or layer pointer and client pointer, `mginit` can
 easily access the internal data structure of MiniGUI library, and so can get
 some system information. For doing this, MiniGUI defines the following global
-variables: 
+variables:
 - `mgClients`: An `MG_Client` structure pointer. It points to an `MG_Client`
 structure array including all clients’ information. You can use the client
 identifier to access it.
@@ -153,16 +154,17 @@ sets two global variables mentioned above.
 
 The first function is `on_new_del_client,` which does not have material work,
 but just simply prints the name of the client coming or dropping the socket
-connection. 
+connection.
 
 The second function is `on_change_layer,` which mainly handles events
-`LCO_NEW_LAYER`, `LCO_DEL_LAYER`, and `LCO_TOPMOST_CHANGED`. When system 
-creates new layers, this function will create a new button in taskbar and 
+`LCO_NEW_LAYER`, `LCO_DEL_LAYER`, and `LCO_TOPMOST_CHANGED`. When system
+creates new layers, this function will create a new button in taskbar and
 assign the handle value of this button to `dwAddData` member of the current
 layer; when system deletes a certain layer, the function destroys the button
-corresponding the layer; when the top-most layer of system changes, the 
+corresponding the layer; when the top-most layer of system changes, the
 function calls `on_change_topmost` to adjust the state of these buttons
 representing layers. The code of this function is as follows:
+
 ```cpp
 static void on_change_layer (int op, MG_Layer* layer, MG_Client* client)
 {
@@ -171,7 +173,7 @@ static void on_change_layer (int op, MG_Layer* layer, MG_Client* client)
     int new_width;
 
     if (op > 0 && op <= LCO_ACTIVE_CHANGED)
-        printf (change_layer_info [op], layer?layer->name:"NULL", 
+        printf (change_layer_info [op], layer?layer->name:"NULL",
                       client?client->name:"NULL");
 
     switch (op) {
@@ -199,7 +201,7 @@ static void on_change_layer (int op, MG_Layer* layer, MG_Client* client)
     case LCO_DEL_LAYER:
         DestroyWindow ((HWND)(layer->dwAddData));
         layer->dwAddData = 0;
-        nr_boxes --; 
+        nr_boxes --;
         if (box_width * nr_boxes < _WIDTH_BOXES) {
             if (nr_boxes = 0)
                 new_width = _WIDTH_BOXES / nr_boxes;
@@ -239,13 +241,13 @@ BOOL GUIAPI ServerStartup (int nr_globals,
                 int def_nr_topmosts, int def_nr_normals);
 ```
 
-You can pass some arguments to this function to control the limits of the 
+You can pass some arguments to this function to control the limits of the
 window management:
-- `nr_globals` The number of the global z-order nodes. All z-order nodes 
+- `nr_globals` The number of the global z-order nodes. All z-order nodes
 created by `mginit` are global ones.
 - `def_nr_topmosts` The maximal number of the topmost z-order nodes in the
 default layer. It is also the default number of topmost z-order nodes of a new
-layer. 
+layer.
 - `def_nr_normals` The maximal number of normal z-order nodes in the new layer.
 It is also the default number of normal z-order nodes of a new layer.
 
@@ -261,7 +263,7 @@ AboutMiniGUI ();
 
 ### Creating Taskbar
 As mentioned above, `mginit` uses taskbar and buttons on the taskbar to
-represent the current layers of system. It also provides a simple user 
+represent the current layers of system. It also provides a simple user
 interface (see Figure 1):
 - If the user clicks an icon on the taskbar, a certain application program will
 be started.
@@ -274,17 +276,18 @@ the top-most layer.
 Figure 1 Taskbar created by `mginit` in `mg-samples`
 
 This taskbar uses the cool bar control to create a toolbar used to startup
-applications. It reads application configuration information from mginit.rc 
+applications. It reads application configuration information from mginit.rc
 file and initializes the information, including name, description string, and
 corresponding program icon of application.
 
 Taskbar also creates a timer and a static control, which displays current time
-and refreshs once per second.
+and refreshes once per second.
 
 As this code is not the proprietary of mginit, so we will not discuss it in
-detail. 
+detail.
 
 ### Startup the Default Program
+
 mginit.rc file defines an initial application that needs to startup by default.
 The following code startups this application program:
 ```cpp
@@ -354,8 +357,8 @@ MiniGUI-Processes exits.
 `mginit` in `mg-samples` is not too complex. It illustrates a basic design
 method of the MiniGUI-Processes server program. In this section, we will design
 a simpler `mginit` program, which initializes itself as the server of
-MiniGUI-Processes and startups helloworld program. This program also 
-illustrates the use of the event hook. When the user presses the key F1, F2, 
+MiniGUI-Processes and startups helloworld program. This program also
+illustrates the use of the event hook. When the user presses the key F1, F2,
 F3, or F4, some other clients will be started up. If the user has not operated
 for a long time, `mginit` will startup a screen saver program. When the user
 closes all clients, `mginit` exits. List 1 lists the code of this `mginit`
@@ -382,18 +385,18 @@ List 1 The code of a simple `mginit` program
 static BOOL quit = FALSE;
 
 static void on_new_del_client (int op, int cli)
-{       
+{
     static int nr_clients = 0;
 
     if (op == LCO_NEW_CLIENT) {
         nr_clients ++;
-    }   
+    }
     else if (op == LCO_DEL_CLIENT) {
         nr_clients --;
         if (nr_clients == 0) {
             printf ("There is no any client, I will quit.\n");
             quit = TRUE;
-        }               
+        }
         else if (nr_clients < 0) {
             printf ("Serious error: nr_clients less than zero.\n");
         }
@@ -480,7 +483,7 @@ int MiniGUIMain (int args, const char* arg[])
         fprintf (stderr, "Can not start the server of MiniGUI-Processes: mginit.\n");
         return 1;
     }
-    
+
 
         SetServerEventHook (my_event_hook);
 
@@ -508,7 +511,7 @@ int MiniGUIMain (int args, const char* arg[])
 ```
 This program sets the `OnNewDelClient` event handling function of mginit. It
 will set the global variable quit as `TRUE` when the event handling function
-encounter `LCO_DEL_CLIENT`, so as to result in the stop of the message loop, 
+encounter `LCO_DEL_CLIENT`, so as to result in the stop of the message loop,
 and finally exits the server.
 You can compile the program by using the following command:
 
@@ -519,7 +522,7 @@ As this `mginit` program need startup helloworld program when starting up, so,
 we have to make sure that there is helloworld program in the current directory.
 Certainly, we can also add this program into the sample program package in this
 guide. As `mginit` program can only be compiled under MiniGUI-Processes
-environment, we need to modify the file configure.in and the file Makefile.am 
+environment, we need to modify the file configure.in and the file Makefile.am
 of the project `mg-samples` in order to add `mginit` into `mg-samples` project.
 First, we delete the notation of following line in file configure.in:
 ```cpp
@@ -560,19 +563,19 @@ make will not compile `mginit` program and scrnsaver program.
 ## Functions Specific to Clients of MiniGUI-Processes
 As you know, a client of MiniGUI-Processes should call `JoinLayer` to join
 itself into a layer before calling other functions of MiniGUI. Besides
-`JoinLayer`, a client can call other functions to get the information of 
+`JoinLayer`, a client can call other functions to get the information of
 layers, delete a layer or change the topmost layer.
 
 Clients should call `JoinLayer` before calling any other MiniGUI functions. The
 prototype of this function is as follows:
 ```cpp
 GHANDLE GUIAPI JoinLayer (const char* layer_name,
-                const char* client_name, 
+                const char* client_name,
                 int max_nr_topmosts, int max_nr_normals);
 ```
 If the layer to be joined does not exist, the server will try to create a new
 one. If you passed a `NULL` pointer or a null string for `layer_name,` the
-client will be tried to join to the default layer. If the client wants to 
+client will be tried to join to the default layer. If the client wants to
 create a new layer, you should specify the maximal number of topmost frame
 objects (max_nr_topmosts) and the maximal number of normal frame objects
 (max_nr_normals) in the new layer. Passing zero to `max_nr_topmosts` and
@@ -587,16 +590,16 @@ GHANDLE GUIAPI GetLayerInfo (const char* layer_name,
 ```
 
 The information of the layer will be returned through the pointer arguments if
-the specific pointer is not `NULL`. The information are the number of clients 
+the specific pointer is not `NULL`. The information are the number of clients
 in the layer, whether the layer is the topmost one, and the client identifier
 whose window is the current active one respectively.
 
-Clients can call `SetTopmostLayer` to set the topmost layer and call 
-`DeleteLayer` to delete a layer. Detail information about these functions can 
+Clients can call `SetTopmostLayer` to set the topmost layer and call
+`DeleteLayer` to delete a layer. Detail information about these functions can
 be referred to MiniGUI `API` Reference.
 
 ## Other Functions and Interfaces Specific to `mginit`
-Apart from `ServerStartup`, `OnNewDelClient`, and `mgClients`, 
+Apart from `ServerStartup`, `OnNewDelClient`, and `mgClients`,
 MiniGUI-Processes also defines several interfaces for `mginit` program. These
 interfaces are specific to the MiniGUI-Processes server programs. Detail
 information about these interfaces can be referred to MiniGUI `API` Reference.
@@ -604,10 +607,10 @@ information about these interfaces can be referred to MiniGUI `API` Reference.
 topmost layer.
 - `ServerCreateLayer`: This function creates a specified layer in the system.
 - `ServerDeleteLayer`: This function deletes a specified layer from the system.
-- `GetClientByPID`: This function returns the client identifier according to 
+- `GetClientByPID`: This function returns the client identifier according to
 pid of a client.
 - `SetTopmostClient`: This function sets the topmost layer by the specified
-client identifier. It will bring the layer contains the client to be the 
+client identifier. It will bring the layer contains the client to be the
 topmost one.
 - `SetServerEventHook`: This function sets a hook of bottom event in mginit.
 When hook function return zero to MiniGUI, MiniGUI will continue the event
@@ -618,23 +621,19 @@ a certain client.
 - Send2TopMostClients: The server can send a message to all clients in the
 topmost layer.
 - Send2ActiveWindow: The server can send a message to the active window in a
-layer. 
+layer.
 - `ServerGetNextZNode：Get` the next z-node in the specified layer from the
-server. 
+server.
 - `ServerGetZNodeInfo：Get` the z-node information in the specified layer from
 the server.
 - `ServerDoZNodeOperation：Does` an operation on the z-node in the specified
 layer from the server.
 
-
--- Main.XiaodongLi - 07 Nov 2009
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[GAL and IAL Engines &gt;&gt;](MiniGUIProgGuidePart5Chapter03.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

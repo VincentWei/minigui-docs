@@ -1,7 +1,8 @@
 # `GAL` and `IAL` Engines
+
 In the development of MiniGUI version 0.3.xx, we introduce the concepts of
 Graphics and Input Abstract Layer (GAL and `IAL`). Abstract layer is similar to
-Linux kernel virtual file system. It defines a group of abstract interfaces 
+Linux kernel virtual file system. It defines a group of abstract interfaces
 that do not rely on any special hardware. All top-layer graphics operations and
 input handling are based on abstract interfaces. The code used to realize the
 abstract interfaces are called graphic engine and input engine, similar to the
@@ -17,7 +18,7 @@ will be simple introduction in the first and second sections of this chapter.
 
 Compared to graphics engine, it is more important to separate the bottom input
 handling and top input handling of MiniGUI. In Linux-based embedded systems,
-graphics engine can get from `FrameBuffer`, while input device does not have 
+graphics engine can get from `FrameBuffer`, while input device does not have
 the uniformed interface. We usually use keyboard and mouse on `PC`, but we may
 only use touch screen and keypad on embedded systems. Considering this
 situation, we have to say that it is very important for MiniGUI to provide an
@@ -35,23 +36,23 @@ indirect access to `FrameBuffer`, etc.
 support all kinds of display modes of `QVFB` and all packed-pixel modes of
 `FrameBuffer` console.
 
-Shadow engine uses the conception of sub-driver. MiniGUI uses the name of 
+Shadow engine uses the conception of sub-driver. MiniGUI uses the name of
 target board to determine which sub-driver to be included. Only one sub-driver
 can be included at one time, which is determined by the configuration option
-–-with-targetname. 
+–-with-targetname.
 
 Some child drivers are implemented in the Shadow engine now, for example:
 - --with-targetname=vfanvil: The sub-driver for `VisualFone` Anvil board. This
 sub-driver runs on ThreadX operation system.
 - --with-targetname=qvfb: The sub-driver for all kinds of Linux `QVFB` display
-modes. 
-- --with-targetname=wvfb: The sub-driver for all kinds of Windows `QVFB` 
+modes.
+- --with-targetname=wvfb: The sub-driver for all kinds of Windows `QVFB`
 display modes.
 - Without target (__TARGET_UNKNOWN__): The default sub-driver. This sub-driver
 operates similarly to the Dummy `GAL` engine. You can modify this sub-driver to
 implement operations on the underlayer graphics device.
 
-When configure rotating screen, Shadow engine can be configured in 
+When configure rotating screen, Shadow engine can be configured in
 `MiniGUI.cfg` as follow:
 
 ```
@@ -87,7 +88,7 @@ configuration (more than or equal to 8) is real color depth.
 
 ## `MLShadow` `GAL` Engine
 
-`MLShadow` engine implements multi-display-layer in many product solutions, 
+`MLShadow` engine implements multi-display-layer in many product solutions,
 such as set-top box and `PMP`. Multi-display-layer is similar with overlay
 display layer which is provided by hardware, it can implement
 transparence/translucent display between layers.
@@ -96,13 +97,13 @@ MiniGUI provides the operation functions on virtual graphic layer in `MLShadow`
 engine to implement controls for different graphic layers.
 
 ```cpp
-BOOL mlsSetSlaveScreenInfo (HDC dc_mls, DWORD mask, int offset_x, int offset_y, 
+BOOL mlsSetSlaveScreenInfo (HDC dc_mls, DWORD mask, int offset_x, int offset_y,
 DWORD blend_flags, gal_pixel color_key, int alpha, int z_order);
 ```
 This function can get corresponding graphic layer, and set this graphic layer's
 offset, blend flag, transparent color, alpha and overlay order relative to real
 graphic layer by given `dc_mls` argument. The details of arguments are as
-follow: 
+follow:
 - `dc_mls` the corresponding `DC` handler of graphic layer
 - mask To determine which properties should be set, ignore passed other
 properties's value. For example, only set `offset_x` and `offset_y` when mask =
@@ -123,7 +124,7 @@ flags can be:
 - `z_order` overlay order, `z_order` is greater, display layer is wider.
 
 ```cpp
-BOOL mlsGetSlaveScreenInfo (HDC dc_mls,  DWORD mask, int *offset_x, int *offset_y, 
+BOOL mlsGetSlaveScreenInfo (HDC dc_mls,  DWORD mask, int *offset_x, int *offset_y,
 DWORD *blend_flags, gal_pixel *color_key, int *alpha, int *z_order);
 ```
 This function gets overlay information of display layer which is given by
@@ -132,21 +133,21 @@ explained in argument description of `mlsSetSlaveScreenInfo`.
 ```cpp
 BOOL mlsEnableSlaveScreen (HDC dc_mls, BOOL enable)；
 ```
-This function set whether display layer which is give by `dc_mls` is visible. 
-In other words, it means whether or not participate overlay operation of 
+This function set whether display layer which is give by `dc_mls` is visible.
+In other words, it means whether or not participate overlay operation of
 display layer. It is visible (invisible) when enable is `TRUE` (FALSE).
 
 ## `pc_xvfb` `GAL` Engine
 This engine's main functions are:
 - Using unified parameters startup options, so MiniGUI can start xvfb
 automatically when it is initializing.
-- Using unified shared memory ???, so `pc_xvfb` engine can use same key value 
-to get framebuffer's system shared memory instance without caring about using 
+- Using unified shared memory ???, so `pc_xvfb` engine can use same key value
+to get framebuffer's system shared memory instance without caring about using
 Qt vfb, Window vfb or Gtk+ vfb.
 - Using unified pipe/Unix socket object and input data transfer protocol, so
 `pc_xvfb` input engine can use same mechanism to get the data which is entered
-by user in the window without caring about using Qt vfb, Window vfb or Gtk+ 
-vfb. 
+by user in the window without caring about using Qt vfb, Window vfb or Gtk+
+vfb.
 
 Configurations of `pc_xvfb` engine in `MiniGUI.cfg` are as follow:
 ```
@@ -161,7 +162,7 @@ exec_file=/usr/local/bin/qvfb2
 qvfb2. wvfb2 is for wvfb. mvfb2 is for mvfb.
 
 ## `rtos_xvfb` `GAL` Engine
-By using of `rtos_xvfb` engine, we can run MiniGUI on an exist GUI of RTOS, 
+By using of `rtos_xvfb` engine, we can run MiniGUI on an exist GUI of RTOS,
 such as `uC/GUI`, Gtk+ and Tilcon. The principle is as follows:
 - `rtos_xvfb` program model creates window, allocates virtual frame buffer, and
 starts MiniGUI application with thread mode, so that MiniGUI application can be
@@ -176,7 +177,7 @@ void xVFBFreeVirtualFrameBuffer (XVFBHeader *fb);
 ```
 - Store input data which is generated by `rtos_xvfb` engine in ring buffer
 refers to agreed standard. `rtos_xvfb` input engine of MiniGUI provides related
-interfaces: 
+interfaces:
 - The interfaces of creating and destroying ring buffer
 
 ```cpp
@@ -197,17 +198,17 @@ defaultmode=800x600-16bpp
 ```
 
 ## `CommLCD` `NEWGAL` Engine
-This engine provides the support for direct access to `LCD` `FrameBuffer` 
-(video memory) on conditional real-time operation systems like VxWorks, 
+This engine provides the support for direct access to `LCD` `FrameBuffer`
+(video memory) on conditional real-time operation systems like VxWorks,
 Nucleus, uC/OS-II, and `eCos`. The `LCD`’s pixel format should be above 8-bpp
 (bits-per-pixel), and in packed-pixel mode.
 
-`CommLCD` engine also uses the conception of sub-driver. The sub-drivers 
+`CommLCD` engine also uses the conception of sub-driver. The sub-drivers
 already implemented in `CommLCD` engine include:
 - --with-targetname= vxi386/vxppc (__TARGET_VXi386__ and __TARGET_VXPPC__): The
 sub-driver for VxWorks i386/PowerPc target.
 - --with-targetname=c33l05(__TARGET_C33L05__)：The sub-driver for `EPSON` C33L05
-target. 
+target.
 - --with-targetname=mx21(__TARGET_MX21__)：The sub-driver for `OSE` mx21 target.
 - Without target (__TARGET_UNKNOWN__): The default sub-driver. If it is `eCos`
 operation system, MiniGUI will use the standard interfaces to implement the
@@ -226,8 +227,8 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors);
 ```
 - __commlcd_drv_init function is used to initialize the `LCD` device.
 - __commlcd_drv_release function is used to release the `LCD` device.
-- __commlcd_drv_getinfo function is used to get information of the `LCD` 
-device. 
+- __commlcd_drv_getinfo function is used to get information of the `LCD`
+device.
 - __commlcd_drv_setclut is used to set color palette.
 
 The structure `commlcd_info` is defined as follows:
@@ -252,27 +253,27 @@ struct commlcd_info {
     short rlen;           // Length of one raster line in bytes
     void  *fb;            // Address of the frame buffer
 };
-    
+
 int __commlcd_drv_init (void)
 {
     if (uglInitialize() == UGL_STATUS_ERROR)
         return 1;
-    
-    return 0; 
+
+    return 0;
 }
 
 int __commlcd_drv_getinfo (struct commlcd_info *li)
 {
     UGL_MODE_INFO modeInfo;
 
-    
+
     /* Obtain display device identifier */
-    devId = (UGL_DEVICE_ID) uglRegistryFind (UGL_DISPLAY_TYPE,  
+    devId = (UGL_DEVICE_ID) uglRegistryFind (UGL_DISPLAY_TYPE,
                     0, 0, 0)->id;
-   
+
     /* Create a graphics context */
     gc = uglGcCreate (devId);
-    
+
 ……
     uglPcBiosInfo (devId, UGL_MODE_INFO_REQ, &modeInfo);
     li->type = COMMLCD_TRUE_RGB565;
@@ -300,14 +301,13 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 
 ## 18.6 Comm Input Engine
 
-`MiniGUI为传统嵌入式操作系统提供了Common输入引擎（comm），使用该引擎可以很方便地实现对键盘、鼠标或触摸屏等输入设备的支持`。
-
 MiniGUI provides comm `IAL` for conditional real-time operation systems like
-VxWorks, Nucleus, uC/OS-II, and `eCos`. Based on this engine, you can easily 
+VxWorks, Nucleus, uC/OS-II, and `eCos`. Based on this engine, you can easily
 add the support for input device such as keyboard, mouse, and touch screen.
 
 The comm ial engine needs the OS or low-level device driver to provide five
 functions as follows:
+
 ```cpp
 int __comminput_init (void);
 void __comminput_deinit (void);
@@ -316,26 +316,26 @@ int __comminput_kb_getdata (short *key, short *status);
 int __comminput_wait_for_input (void);
 ```
 
-- __comminput_init is used to initialize the input device.
-- __comminput_deinit is used to release the input device.
-- __comminput_ts_getdata get the input data of the touch screen. The "x" and 
-"y" returns the position data, and "button" returns the pressed state (if pen 
+- `__comminput_init` is used to initialize the input device.
+- `__comminput_deinit` is used to release the input device.
+- `__comminput_ts_getdata` get the input data of the touch screen. The "x" and
+"y" returns the position data, and "button" returns the pressed state (if pen
 is pressed, return a non-zero value). It returns 0 while getting data
 successfully, otherwise returns -1.
-- __comminput_kb_getdata gets the input data of the keyboard. "key" returns the
+- `__comminput_kb_getdata` gets the input data of the keyboard. "key" returns the
 key code of corresponding key; "status" returns the key status (1 for key-down,
-0 for key-up). _comminput_kb_getdata returns 0 while getting data successfully,
+0 for key-up). `__comminput_kb_getdata` returns 0 while getting data successfully,
 otherwise returns -1. The key code here is the `MiniGUI-defined` scan code of a
 keyboard key. The low-level keyboard driver needs to translate a keyboard scan
 code to a corresponding MiniGUI key code and return this key code.
-- __comminput_wait_for_input enquires whether there are input data. If no input
+- `__comminput_wait_for_input` enquires whether there are input data. If no input
 events comes, this function returns 0; if mouse events or touch screen events
 comes, the return value's first position is set to 1; if keyboard events comes,
 the return value's second position is set to 1.
 The control of the external events in MiniGUI is implemented as a single system
 thread. This event thread sleeps while no external events come. So,
-__comminput_wait_for_input should provide a waiting mechanism, such as using
-semaphore. __comminput_wait_for_input waits on an input semaphore while
+`__comminput_wait_for_input` should provide a waiting mechanism, such as using
+semaphore. `__comminput_wait_for_input` waits on an input semaphore while
 enquiring about input data, and makes the MiniGUI input task which calls this
 function go to sleep. When input events come, the low-level drivers (or
 interrupt routines) should post a semaphore to wake up the MiniGUI event task.
@@ -343,20 +343,9 @@ interrupt routines) should post a semaphore to wake up the MiniGUI event task.
 When migrating MiniGUI to new hardware, we need to implement the above five
 functions interface according to OS or hardware driver.
 
-MiniGUI
-3.0专业版和标准版的输入和输出引擎都是飞漫软件定制实现的，当然如果客户需要自己定制IAL的话，我们也可以提供custom-ial的库由客户自定义ial引擎接口的实现。按照下面的方法编写好IAL源代码后，要将该源代码编译生成一个ial 
-库，最后将实例、minigui 库和 ial 库一起编译，才可以生成正确的可执行文件。
-
-Input and output engines of MiniGUI 3.0 standard/professional edtion are
-customized by Feynman software. Feynman can also provide custom-ial library to
-help custom implement customized ial engine interface if custom wants to
-customize `IAL`. Custom needs to compile `IAL` codes into a ial library, then
-get executable file by compiling application, minigui library and ial library
-together. 
-
 Custom input engine provides user message handle interfaces of customized
 keyboard and mouse. User can handle message after implements the following
-interfaces: 
+interfaces:
 
 ```cpp
 BOOL InitCustomInput (INPUT* input, const char* mdev, const char* mtype);
@@ -365,9 +354,9 @@ void TermCustomInput (void);
 
 When we need to customize input engine for specified embedded device, firstly,
 set value for member of input engine structure in initializing function. These
-members are function pointers, they are called by `MiniGUI`'s upper-level to 
+members are function pointers, they are called by `MiniGUI`'s upper-level to
 get input device's status and data. Definition of `INPUT` structure is as
-follow: 
+follow:
 
 ```cpp
 typedef struct tagINPUT
@@ -395,7 +384,7 @@ typedef struct tagINPUT
     void (*set_leds) (unsigned int leds);
 
     // Event
-    int (*wait_event) (int which, int maxfd, fd_set *in, fd_set *out, 
+    int (*wait_event) (int which, int maxfd, fd_set *in, fd_set *out,
             fd_set *except, struct timeval *timeout);
 
     char mdev [MAX_PATH + 1];
@@ -404,37 +393,37 @@ typedef struct tagINPUT
 
 These members' function are:
 - `update_mouse` inform bottom-layer engine to update new mouse information
-- `get_mouse_xy` calling this function by upper-layer to get x and y 
+- `get_mouse_xy` calling this function by upper-layer to get x and y
 coordinates of mouse
 - `set_mouse_xy` calling function by upper-layer to set the new mouse position.
 For those engines not supporting this function, the member can be null.
 - `get_mouse_button` get mouse button state. Return value can be
 `IAL_MOUSE_LEFTBUTTON`, `IAL_MOUSE_MIDDLEBUTTON`, `IAL_MOUSE_RIGHTBUTTON` to
-respectively represent the pressed states: mouse left key, middle key, and 
+respectively represent the pressed states: mouse left key, middle key, and
 right key.
-- `set_mouse_range` set range of mouse movement. For engines not supporting 
+- `set_mouse_range` set range of mouse movement. For engines not supporting
 this function, can be set as `NULL`.
-- `update_keyboard` inform bottom-layer to update keyborad information
+- `update_keyboard` inform bottom-layer to update keyboard information
 - `get_keyboard_state` get keyboard state, return a byte array, including
 keyboard pressed state indexed by scan code. Pressed is 1, released is 0.
 - `suspend_keyboard` pause keyboard device read/write, used for switch of
-virtual console. Ususally set as `NULL` for embedded device.
+virtual console. Usually set as `NULL` for embedded device.
 - `resume_keyboard` resume keyboard device read/write, used for switch of
-virtual console. Ususally set as `NULL` for embedded device.
+virtual console. Usually set as `NULL` for embedded device.
 - `set_leds` set keyboard status `LEDs`, used for `CapLock`, `NumLock`, and
 `ScrollLock` statues.
 - `wait_event` calling this function by upper-layer to wait for an event from
 input devices. This function has different interfaces for MiniGUI-Threads and
 MiniGUI-Processes, and must implement with select or poll system calls.
 
-## Custom `IAL` enginee sample
+## Custom `IAL` engine sample
 
 Actually developing a new `IAL` engine is not difficult. We use `iPAQ` as an
 example to illustrate the design of a customized input engine.
 
 `IPAQ` produced by `COMPAQ` is a `StrongARM-based` high-end hand-held product,
 which includes touch screen and several control keys. The touch screen is
-similar to the mouse of `PC`, but it can only differentiate left button. For 
+similar to the mouse of `PC`, but it can only differentiate left button. For
 the control keys, we can emulate them as some keys in `PC` keyboard, such as
 cursor keys, `ENTER` key, and function keys. The source code of this engine is
 showed in List 1.
@@ -532,17 +521,17 @@ static int keyboard_update(void)
 
     switch (key)
     {
-    case 1: 
+    case 1:
         //state[H3600_SCANCODE_RECORD] = status;
         state[SCANCODE_LEFTSHIFT] = status;
     break;
-    case 2: 
+    case 2:
         state[H3600_SCANCODE_CALENDAR] = status;
     break;
-    case 3: 
+    case 3:
         state[H3600_SCANCODE_CONTACTS] = status;
     break;
-    case 4: 
+    case 4:
         state[H3600_SCANCODE_Q] = status;
     break;
     case 5:
@@ -576,7 +565,7 @@ static const char* keyboard_getstate(void)
     return (char *)state;
 }
 
-#ifdef _LITE_VERSION 
+#ifdef _LITE_VERSION
 static int wait_event (int which, int maxfd, fd_set *in, fd_set *out, fd_set *except,
                 struct timeval *timeout)
 #else
@@ -612,14 +601,14 @@ static int wait_event (int which, fd_set *in, fd_set *out, fd_set *except,
     e = select (FD_SETSIZE, in, out, except, timeout) ;
 #endif
 
-    if (e > 0) { 
+    if (e > 0) {
         if (ts >= 0 && FD_ISSET (ts, in))
         {
             FD_CLR (ts, in);
             pos.x=0;
             pos.y=0;
             // FIXME: maybe failed due to the struct alignment.
-            read (ts, &pos, sizeof (POS));    
+            read (ts, &pos, sizeof (POS));
             //if (pos.x = -1 && pos.y = -1) {
         if (pos.b > 0) {
                 mousex = pos.x;
@@ -679,7 +668,7 @@ BOOL InitCustomInput (INPUT* input, const char* mdev, const char* mtype)
     mousex = 0;
     mousey = 0;
     pos.x = pos.y = pos.b = 0;
-    
+
     return TRUE;
 }
 
@@ -703,7 +692,7 @@ screen; the latter is the device for control keys. They are similar to device
 device files, the function sets `INPUT` structure and other members, some of
 which is assigned with `NULL`.
 - The function `mouse_update` returns 1, indicating that the mouse state is
-ready. 
+ready.
 - The function `mouse_getxy` returns mouse position data prepared by other
 functions and performs proper boundary examination.
 - The function `mouse_getbutton` returns touch screen state, that is, whether
@@ -722,9 +711,9 @@ and key stroke data separately from the two file descriptors.
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Universal Startup API for RTOSes &gt;&gt;](MiniGUIProgGuidePart5Chapter04.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
