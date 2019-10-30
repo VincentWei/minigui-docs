@@ -7,7 +7,7 @@ up and down arrows, and the user can select a value by clicking the arrows.
 You can create a spin box control by calling `CreateWindow` function with
 `CTRL_SPINBOX` as the control class name.
 
-It should be noted that the size of a spin box control is fixed, that is to 
+It should be noted that the size of a spin box control is fixed, that is to
 say, the width and height of the window passed through `CreateWindow` function
 will be ignored.
 
@@ -31,7 +31,7 @@ SPININFO spinfo;
 SendMessage (hwndSpinBox, SPM_SETINFO, 0, (LPARAM)&spinfo) ;
 ```
 
-In above codes, spinfo is a structure of `SPININFO` type, and its definition is
+In above code, `spinfo` is a structure of `SPININFO` type, and its definition is
 as following:
 
 ```cpp
@@ -51,7 +51,7 @@ The fields of `SPININFO` structure specify the maximum position value, the
 minimum position value, and the current position value of a spin box control.
 For the spin box control with `SPS_AUTOSCROLL`, the following condition must be
 satisfied: maximum position value >= current position value >= minimum position
-value. 
+value.
 
 `SPM_GETINFO` message is used to get the attributes of a spin box control:
 
@@ -60,7 +60,7 @@ SPININFO spinfo;
 SendMessage (hwndSpinBox, SPM_GETINFO, 0, (LPARAM)&spinfo) ;
 ```
 
-Here spinfo is used to store the gotten attribute values.
+Here `spinfo` is used to store the gotten attribute values.
 
 `SPM_SETCUR` message is used to set the current position of a spin box control:
 
@@ -69,7 +69,7 @@ int cur;
 SendMessage (hwndSpinBox, SPM_SETCUR, cur, 0) ;
 ```
 
-Here cur is the desired current position of a spin box to be set, and cur 
+Here cur is the desired current position of a spin box to be set, and cur
 should be in the range of the minimum and the maximum when its style is
 `SPS_AUTOSCROLL`, otherwise the set will fail, and `SendMessage` returns -1.
 
@@ -82,10 +82,10 @@ cur = SendMessage (hwndSpinBox, SPM_GETCUR, 0, 0) ;
 
 ### Disabling and Enabling
 
-`SPM_DISABLEDOWN`, `SPM_ENABLEDOWN`, `SPM_DISABLEUP` and `SPM_ENABLEUP` are 
+`SPM_DISABLEDOWN`, `SPM_ENABLEDOWN`, `SPM_DISABLEUP` and `SPM_ENABLEUP` are
 used to disable and enable the scrolling ability of the up/down arrow
-respectively but never mind the current position reached the maximum or 
-minimum. These messages only work for spin boxes without `SPS_AUTOSCROLL` 
+respectively but never mind the current position reached the maximum or
+minimum. These messages only work for spin boxes without `SPS_AUTOSCROLL`
 style. For spin boxes with `SPS_AUTOSCROLL` style, the scrolling ability and
 states of the arrows are controlled by the control itself:
 
@@ -109,7 +109,7 @@ When the user clicks the up/down arrow of the spin box, the spin box will send
 `MSG_KEYDOWN` and `MSG_KEYUP` message to the target window. `wParam` parameter
 is `SCANCODE_CURSORBLOCKUP` (when clicking the up arrow) or
 `SCANCODE_CURSORBLOCKDOWN` (when clicking the down arrow), and `lParam`
-parameter will have the flag of `KS_SPINPOST` to indicate that the message 
+parameter will have the flag of `KS_SPINPOST` to indicate that the message
 comes from a spin box.
 
 `SPM_GETTARGET` message gets the target window of a spin box:
@@ -121,18 +121,17 @@ hTarget = SendMessage (hwndSpinBox, SPM_SETTARGET, 0, 0) ;
 
 ## Notification Codes of Spin Box
 
-A spin box will generate a `SPN_REACHMAX` notification code when it greater 
+A spin box will generate a `SPN_REACHMAX` notification code when it greater
 than or equal to the maximum. It will generate a `SPN_REACHMIN` notification
 code when it less than or equal to the minimum.
 
 ## Sample Program
 
-The program in List 1 illustrates the use of a spin box control. Please refer 
-to spinbox.c file of the demo program package of this guide for the complete
+The program in List 1 illustrates the use of a spin box control. Please refer
+to `spinbox.c` file of the demo program package of this guide for the complete
 source code.
 
-
-List 1 Example of spin box
+__List 1__ Example of spin box
 
 ```cpp
 #define IDC_SPIN        10
@@ -161,10 +160,10 @@ SpinProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 
     case MSG_KEYDOWN:
     {
-        /* Handle the key-pressed messagees, 
+        /* Handle the key-pressed messagees,
          * including the emulate key stroke messages from the spin box
          */
-        if (wParam == SCANCODE_CURSORBLOCKUP || 
+        if (wParam == SCANCODE_CURSORBLOCKUP ||
                   wParam == SCANCODE_CURSORBLOCKDOWN) {
             if (!(lParam & KS_SPINPOST)) {
                 int cur;
@@ -247,25 +246,20 @@ static CTRLDATA CtrlSpin[] =
 };
 ```
 
-
-
 ![alt](figures/34.1.jpeg)
 
-Figure 1 The use of spin box control
+__Figure 1__ The use of spin box control
 
 
-The spinbox.c program creates a spin box control with `SPS_AUTOSCROLL` in a
-dialog box, and the user can operate the black block to move between the top 
+The `spinbox.c` program creates a spin box control with `SPS_AUTOSCROLL` in a
+dialog box, and the user can operate the black block to move between the top
 and bottom lines by clicking the up and down arrows of the spin box.
-
--- Main.XiaodongLi - 26 Oct 2009
-
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Month Calendar Control](MiniGUIProgGuidePart6Chapter15.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Cool Bar Control &gt;&gt;](MiniGUIProgGuidePart6Chapter17.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
