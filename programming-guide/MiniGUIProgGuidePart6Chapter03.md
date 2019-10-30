@@ -5,12 +5,9 @@ window. The user can select one or more items with the keyboard or mouse
 operation. The selected items are usually highlighted. The most typical use of
 list box is the open file dialog box, as shown in Figure 1.
 
-
-
 ![alt](figures/21.1.jpeg)
 
-Figure 1 Typical use of list box: “Open File” dialog box
-
+__Figure 1__ Typical use of list box: “Open File” dialog box
 
 We can create a list box control by calling `CreateWindow` function with
 `CTRL_LISTBOX` as the control class name.
@@ -19,19 +16,18 @@ We can create a list box control by calling `CreateWindow` function with
 
 List box controls of MiniGUI can be divided into three types: single-selection
 list box, multiple-selection list box and bitmap list box. A list box is
-single-selection style by default; namely, the user can only select one item. 
-To create a multiple-selection list box, you should use `LBS_MULTIPLESEL` 
-style. When using this style, the user can select an item by clicking this 
+single-selection style by default; namely, the user can only select one item.
+To create a multiple-selection list box, you should use `LBS_MULTIPLESEL`
+style. When using this style, the user can select an item by clicking this
 item, and cancel the selection by clicking it again. When the list box has the
 input focus, you can also use the space key to select or cancel selection of an
 item. The effect of running a multiple-selection list box is as shown in Figure
-2. 
-
+2.
 
 
 ![alt](figures/21.2.jpeg)
 
-Figure 2 Multiple-selection list box
+__Figure 2__ Multiple-selection list box
 
 
 Besides the two list box types described above, MiniGUI also provides an
@@ -44,23 +40,20 @@ the advanced list box. If you want the selection state auto-switched when the
 user clicks the check box, you can use `LBS_AUTOCHECK` style. The advanced list
 box can also have `LBS_MULTIPLESEL` style.
 
-
-
 ![alt](figures/21.3.jpeg)
 
-Figure 3 Advanced list box control
-
+__Figure 3__ Advanced list box control
 
 Except the styles described above to distinguish the type of list box, you can
 also specify other general styles when creating a list box.
 
-By default, the message handler of a list box only shows the list items, with 
+By default, the message handler of a list box only shows the list items, with
 no border around them. You can add border by using the window style `WS_BORDE`.
-In addition, you can also add a vertical scroll bar with window style 
+In addition, you can also add a vertical scroll bar with window style
 `WS_VSCROLL` to scroll the list items by the mouse and add a horizontal scroll
 bar with window style `WS_HSCROLL`.
 
-The default list box styles does not generate notification message when the 
+The default list box styles does not generate notification message when the
 user select a list item, so the program must send a message to the list box to
 get the selection state of item. Therefore, a list box control generally
 includes `LBS_NOTIFY` style, which can feed back some state information in time
@@ -70,7 +63,7 @@ In addition, if you want the list box control sort the list items, you can use
 another commonly used style `LBS_SORT`.
 
 Generally, the most commonly used style combination for creating list box is as
-follows: 
+follows:
 
 
 ```cpp
@@ -80,12 +73,12 @@ follows:
 ## Messages of List Box
 ### Adding Item into List Box
 
-After a list box is created, the next step is to add text strings to it. You 
+After a list box is created, the next step is to add text strings to it. You
 can realize this by sending messages to the window message handler of the list
 box by calling `SendMessage`. The items in a list box can be referred to by an
 index value; the top-most item has index value of zero. In the following
 example, `hwndList` is the handle of the list box control, and index is the
-index value. When `SendMessage` is used to pass the text string, `lParam` is 
+index value. When `SendMessage` is used to pass the text string, `lParam` is
 the pointer to the `NULL-terminated` string.
 
 When the stored content of the list box exceeds the available memory space,
@@ -94,7 +87,7 @@ When the stored content of the list box exceeds the available memory space,
 returns `LB_OKAY`. We can determine above two errors by testing the non-zero
 value of `SendMessage`.
 
-If you adopt `LBS_SORT` style, or just want to append the new text string as 
+If you adopt `LBS_SORT` style, or just want to append the new text string as
 the last item of a list box, the simplest approach to append string into the
 list box is using `LB_ADDSTRING` message:
 
@@ -112,11 +105,11 @@ SendMessage (hwndList, LB_INSERTSTRING, index, (LPARAM)string) ;
 For example, if index value is 4, string would be a text string with index 4:
 the fifth string counting from the beginning (due to zero-based), and all the
 text strings after this position will move backward. When the index is -1, the
-string will append to the last position. We can also use `LB_INSERTSTRING` for 
+string will append to the last position. We can also use `LB_INSERTSTRING` for
 a list box with `LBS_SORT` style, but at this time the list box will ignore the
 index, and insert the new item according to the sorted result.
 
-It should be noted that, after specifying `LBS_CHECKBOX` or `LBS_USEICON` 
+It should be noted that, after specifying `LBS_CHECKBOX` or `LBS_USEICON`
 style, when you add an item to a list box, you must use `LISTBOXITEMINFO`
 structure, and cannot use the string address directly, for example:
 
@@ -136,12 +129,12 @@ SendMessage (hChildWnd3, LB_ADDSTRING, 0, (LPARAM)&lbii);
 
 Here, the value of `cmFlag` can be `CMFLAG_CHECKED`, `CMFLAG_BLANK`, or
 `CMFLAG_PARTCHECKED`, indicating checked, unchecked, and partly checked,
-respectively. 
+respectively.
 
 We can also display bitmaps in an advanced list box, rather than icons by
 default. If you want a list box item display a bitmap instead of an icon, you
 can include `IMGFLAG_BITMAP` in the flag, and specify the pointer to the bitmap
-object: 
+object:
 
 
 ```cpp
@@ -161,8 +154,8 @@ delete an item with the index from the list box:
 SendMessage (hwndList, LB_DELETESTRING, index, 0) ;
 ```
 
-We can even use `LB_RESETCONTENT` message to clear all contents in the list 
-box: 
+We can even use `LB_RESETCONTENT` message to clear all contents in the list
+box:
 
 ```cpp
 SendMessage (hwndList, LB_RESETCONTENT, 0, 0) ;
@@ -177,7 +170,7 @@ count = SendMessage (hwndList, LB_GETCOUNT, 0, 0) ;
 ```
 
 When you need to get the text string of a certain item, you can send
-`LB_GETTEXTLEN` message to get the length of the string of the specified item 
+`LB_GETTEXTLEN` message to get the length of the string of the specified item
 in a list box:
 
 ```cpp
@@ -191,7 +184,7 @@ length = SendMessage (hwndList, LB_GETTEXT, index, (LPARAM)buffer) ;
 ```
 
 In these two conditions, the length value returned by above messages is the
-length of the text. For the length of a `NULL-terminate` string, the buffer 
+length of the text. For the length of a `NULL-terminate` string, the buffer
 must be big enough. You can use the string length returned by `LB_GETTEXTLEN`
 message to allocate some local memory for storing the string.
 
@@ -202,7 +195,7 @@ SendMessage (hwndList, LB_SETTEXT, index, buffer) ;
 ```
 
 For an advanced list box, we must use `LB_GETITEMDATA` and `LB_SETITEMDATA` to
-get other information of a list item, such as the bitmap object or the handle 
+get other information of a list item, such as the bitmap object or the handle
 to icon, state of check box, and these messages also can be used to get or set
 the text string of item:
 
@@ -222,7 +215,7 @@ SendMessage (hChildWnd3, LB_SETITEMDATA, index, (LPARAM)&lbii);
 The following messages are used to retrieve the selection state of list items;
 these messages have different calling method for single-selection list box and
 multiple-selection list box. Let us to look at the single-selection list box
-first. 
+first.
 
 Generally, the user selects an item by mouse and keyboard. But we also can
 control the current selected item by program, at this time, we need send
@@ -288,7 +281,7 @@ index = SendMessage (hwndList, LB_FINDSTRING, (LPARAM)string) ;
 ```
 
 Here, string is the pointer to a string, which should be found; the message
-returns the index of the fuzzy matched string, and `LB_ERR` means failure. 
+returns the index of the fuzzy matched string, and `LB_ERR` means failure.
 Using `LB_FINDSTRINGEXACT` message will search the matched item exactly.
 
 ### Setting/Getting the Status of Check Mark
@@ -308,9 +301,9 @@ ret = SendMessage (hwndList, LB_SETCHECKMARK, index, (LPARAM)status) ;
 ```
 
 The message `LB_SETCHECKMARK` sets the check mark status of the check box
-specified by index to be the value of status. If the item specified by the 
+specified by index to be the value of status. If the item specified by the
 index is not found, it returns `LB_ERR` for failure, else returns `LB_OKAY` for
-success. 
+success.
 
 ### Setting the Bold Status of Item
 
@@ -336,7 +329,7 @@ indicates the item is disabled. 0 indicates the item is not disabled.
 ret = SendMessage (hwndList, LB_SETITEMDISABLE, index, (LPARAM)status) ;
 ```
 
-The message `LB_SETITEMDISABLE` sets the disable status of the item specified 
+The message `LB_SETITEMDISABLE` sets the disable status of the item specified
 by index to be the value of status. If the item specified by the index is not
 found, it returns `LB_ERR` for failure.
 
@@ -359,11 +352,11 @@ const char text[num][] = {“item1”, “item2”};
 SendMessage (hwndList, LB_MULTIADDITEM, num, (LPARAM)text);
 ```
 
-Parameter `hwndList` is the handle of the list box control; num is the number 
+Parameter `hwndList` is the handle of the list box control; num is the number
 of item added, and text is the string text array address.
 
-It should be noted that, after specifying `LBS_CHECKBOX` or `LBS_USEICON` 
-style, when you add multiple items to a list box, you must use 
+It should be noted that, after specifying `LBS_CHECKBOX` or `LBS_USEICON`
+style, when you add multiple items to a list box, you must use
 `LISTBOXITEMINFO` structure, and cannot use the string array address directly,
 for example:
 
@@ -388,10 +381,10 @@ SendMessage (hwndList, LB_MULTIADDITEM, num, (LPARAM)lbii);
 
 ### Other Messages
 
-A list box with style of `LBS_SORT` uses the standard C function strncmp to 
+A list box with style of `LBS_SORT` uses the standard C function strncmp to
 sort items. But we can overload the default sort method by using
 `LB_SETSTRCMPFUNC` in order to sort items according to the expected method. For
-example: 
+example:
 
 ```cpp
 static int my_strcmp (const char* s1, const char* s2, size_t n)
@@ -408,10 +401,10 @@ Thus, the list box will use the user-defined function to sort items. Sort
 function described above can be used to sort the items in form as 1, 2, 3, 4,
 10, 20 etc. according to integer values, while the default sort rule would sort
 the items above as 1, 10, 2, 20, 3, and 4. Generally speaking, application
-should use the message to set a new string comparison function before adding 
+should use the message to set a new string comparison function before adding
 any item.
 
-We also can associate an additional 32-bit data with each list item, and get 
+We also can associate an additional 32-bit data with each list item, and get
 the value at appropriate time. For doing this, we can use `LB_SETITEMADDDATA`
 and `LB_GETITEMADDDATA` messages. The values operated by the two messages have
 no meaning for the list box control. The control only takes charge to store the
@@ -422,7 +415,7 @@ items, and use `LB_GETITEMHEIGHT` to get the height. Generally, height of items
 depends on the size of control font, and varies when the control font changes
 (call `SetWindowFont` to change). The users can also set themselves height of
 items. The actual height will be the maximum of the height set and control font
-size. 
+size.
 
 
 ## Notification Codes of List Box
@@ -431,8 +424,10 @@ Notification codes generated by a list box with `LBS_NOTIFY` style and their
 meanings are shown in Table 1.
 
 
-Table 1 Notification codes of list box<br>
-| *Notification code identifier* |*Meaning*|
+__Table 1__ Notification codes of list box
+
+| *Notification code identifier* | *Meaning* |
+|--------------------------------|-----------|
 | `LBN_ERRSPACE` |Indicates that memory allocation failure.|
 | `LBN_SELCHANGE` |Indicates the current selected item changes|
 | `LBN_CLICKED` |Indicates click on an item|
@@ -443,9 +438,8 @@ Table 1 Notification codes of list box<br>
 | `LBN_CLICKCHECKMARK` |Indicates click on the check mark|
 | `LBN_ENTER` |Indicates the user has pressed the `ENTER` key|
 
-
 A list box control will not send notification messages described above unless
-the window style of the list box have `LBS_NOTIFY` style. Certainly, if you 
+the window style of the list box have `LBS_NOTIFY` style. Certainly, if you
 have called `SetNotificationCallback` function to set the notification callback
 function, the control will not send `MSG_COMMAND` notification message to its
 parent window, but call the specified notification callback function directly.
@@ -461,7 +455,7 @@ indicates the user clicked the check mark, and if `LBS_AUTOCHECK` style is set
 at the same time, the check box will be auto-switched between the checked or
 unchecked status.
 
-Based on the requirements of applications, either `LBN_SELCHANGE` or 
+Based on the requirements of applications, either `LBN_SELCHANGE` or
 `LBN_DBLCLK` might be used, or both might be used. Program will receive many
 messages of `LBN_SELCHANGE`, but the message of `LBN_DBLCLK` will be received
 only when users double click.
@@ -476,11 +470,10 @@ box. The user can select multiple files to be deleted in the file list box by
 select the check marks. When the user pushes the “Delete” button, the program
 will prompt the user. Of course, to protect the user’s files, the program does
 not delete the files really. The effect of the dialog box created by this
-program is shown in Figure 4. Please refer to listbox.c file of the demo 
+program is shown in Figure 4. Please refer to `listbox.c` file of the demo
 program package of this guide for complete source code.
 
-
-List 1 The use of list box controls
+__List 1__ The use of list box controls
 
 ```cpp
 #include <stdio.h>
@@ -517,10 +510,10 @@ static DLGTEMPLATE DlgDelFiles =
 };
 
 static CTRLDATA CtrlDelFiles[] =
-{ 
+{
     {
         CTRL_STATIC,
-        WS_VISIBLE | SS_SIMPLE, 
+        WS_VISIBLE | SS_SIMPLE,
         10, 10, 130, 15,
         IDC_STATIC,
         "目录列表框",
@@ -537,9 +530,9 @@ static CTRLDATA CtrlDelFiles[] =
     },
     {
         CTRL_STATIC,
-        WS_VISIBLE | SS_SIMPLE, 
-        150, 10, 130, 15, 
-        IDC_STATIC, 
+        WS_VISIBLE | SS_SIMPLE,
+        150, 10, 130, 15,
+        IDC_STATIC,
        "文件列表框",
         0
     },
@@ -555,9 +548,9 @@ static CTRLDATA CtrlDelFiles[] =
     /* This static control is used to display the current path information */
     {
         CTRL_STATIC,
-        WS_VISIBLE | SS_SIMPLE, 
-        10, 150, 290, 15, 
-        IDC_PATH, 
+        WS_VISIBLE | SS_SIMPLE,
+        10, 150, 290, 15,
+        IDC_PATH,
        "路径：",
         0
     },
@@ -565,7 +558,7 @@ static CTRLDATA CtrlDelFiles[] =
         "button",
         WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP | WS_GROUP,
         10, 170, 130, 25,
-        IDOK, 
+        IDOK,
         "删除",
         0
     },
@@ -579,7 +572,7 @@ static CTRLDATA CtrlDelFiles[] =
     },
 };
 
-/* This function gets all the directory items in the current directory, 
+/* This function gets all the directory items in the current directory,
  * and adds them to the directory list box and file list box, respectively
  */
 static void fill_boxes (HWND hDlg, const char* path)
@@ -592,7 +585,7 @@ static void fill_boxes (HWND hDlg, const char* path)
     SendDlgItemMessage (hDlg, IDL_DIR, LB_RESETCONTENT, 0, (LPARAM)0);
     SendDlgItemMessage (hDlg, IDL_FILE, LB_RESETCONTENT, 0, (LPARAM)0);
     SetWindowText (GetDlgItem (hDlg, IDC_PATH), path);
-    
+
     if ((dir = opendir (path)) == NULL)
          return;
 
@@ -602,7 +595,7 @@ static void fill_boxes (HWND hDlg, const char* path)
         strncpy (fullpath, path, PATH_MAX);
         strcat (fullpath, "/");
         strcat (fullpath, dir_ent->d_name);
-        
+
         if (stat (fullpath, &ftype) < 0 ) {
            continue;
         }
@@ -610,7 +603,7 @@ static void fill_boxes (HWND hDlg, const char* path)
         if (S_ISDIR (ftype.st_mode))
             SendDlgItemMessage (hDlg, IDL_DIR, LB_ADDSTRING, 0, (LPARAM)dir_ent->d_name);
         else if (S_ISREG (ftype.st_mode)) {
-            /* When using the list box of a checkbox, 
+            /* When using the list box of a checkbox,
              * the following structure need to be used */
             LISTBOXITEMINFO lbii;
 
@@ -626,7 +619,7 @@ static void fill_boxes (HWND hDlg, const char* path)
 
 static void dir_notif_proc (HWND hwnd, int id, int nc, DWORD add_data)
 {
-    /* When the user double clicked the directory name or 
+    /* When the user double clicked the directory name or
      * pressed the ENTER key, he will enter the corresponding directory */
     if (nc == LBN_DBLCLK || nc == LBN_ENTER) {
         int cur_sel = SendMessage (hwnd, LB_GETCURSEL, 0, 0L);
@@ -684,7 +677,7 @@ static int DelFilesBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam
         fill_boxes (hDlg, getcwd (cwd, MAX_PATH));
         return 1;
     }
-        
+
     case MSG_COMMAND:
         switch (wParam) {
         case IDOK:
@@ -694,9 +687,9 @@ static int DelFilesBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam
             break;
         }
         break;
-        
+
     }
-    
+
     return DefaultDialogProc (hDlg, message, wParam, lParam);
 }
 
@@ -706,9 +699,9 @@ int MiniGUIMain (int argc, const char* argv[])
     JoinLayer(NAME_DEF_LAYER , "listbox" , 0 , 0);
 
 #endif
-    
+
     DlgDelFiles.controls = CtrlDelFiles;
-    
+
     DialogBoxIndirectParam (&DlgDelFiles, HWND_DESKTOP, DelFilesBoxProc, 0L);
 
     return 0;
@@ -719,22 +712,16 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-
-
 ![alt](figures/21.4.jpeg)
 
-Figure 4 “Delete File” dialog box
-
-
-
--- Main.XiaodongLi - 26 Oct 2009
+__Figure 4__ “Delete File” dialog box
 
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Button Control](MiniGUIProgGuidePart6Chapter02.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Edit Box Control &gt;&gt;](MiniGUIProgGuidePart6Chapter04.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
