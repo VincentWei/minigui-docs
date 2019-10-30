@@ -986,9 +986,9 @@ __Figure 3__ Scrollbar control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Iconview Control](MiniGUIProgGuidePart6Chapter20.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Code Style and Project Specification &gt;&gt;](MiniGUIProgGuideAppendixA.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
