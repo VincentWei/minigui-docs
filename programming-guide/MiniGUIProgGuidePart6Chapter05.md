@@ -1,12 +1,12 @@
 # Combo Box Control
 
-In nature, a general combo box is the combination of an edit box and a list 
+In nature, a general combo box is the combination of an edit box and a list
 box. The user can type text in the edit box, and also can select one item from
-the options listed in the list box. The combo box in MiniGUI can be divided 
+the options listed in the list box. The combo box in MiniGUI can be divided
 into three types: simple combo box, pull-down combo box, spin combo box and
 digital spin box. Using pull-down combo box has another advantage, i.e. it can
 reduce the occupied space of parent window because of using a poll-down list
-box. 
+box.
 
 We can create a combo box control by calling `CreateWindow` function with
 `CTRL_COMBOBOX` as the control class name.
@@ -20,26 +20,21 @@ of a simple combo box will always be shown below the edit box. When the user
 selects an item in the list box, the text of this item will fill the edit box,
 as shown in Figure 1.
 
-
-
 ![alt](figures/23.1.jpeg)
 
-Figure 1 Simple combo box control
+__Figure 1__ Simple combo box control
 
 
 A pull-down combo box can be created with the style of `CBS_DROPDOWNLIST`. The
-pull-down combo box is different from the simple combo box in that the combo 
+pull-down combo box is different from the simple combo box in that the combo
 box only shows an item in the rectangle region, and an icon pointing downwards
-presents on the right of the item content. When the user clicks the icon, a 
+presents on the right of the item content. When the user clicks the icon, a
 list box will be popped up to show more items. Figure 2 shows the effect of the
 pull-down combo boxes in normal state and pull-down state.
 
-
-
 ![alt](figures/23.2.jpeg)
 
-Figure 2 Pull-down combo box control
-
+__Figure 2__ Pull-down combo box control
 
 When calling `CreateWindow` function to create the simple combo box and
 pull-down combo box, you should use `dwAddData` argument of `CreateWindow` to
@@ -51,61 +46,55 @@ pass the height value of the list box, as shown in following:
             WS_VISIBLE | CBS_SIMPLE | CBS_SORT | WS_TABSTOP,
             IDC_BOX4,
             10, 100, 180, 24,
-            parent, 100); 
-/* Specify dwAddData to be 100, that is, specify the height of 
- * the list box in the simple combo box to be 100 
+            parent, 100);
+/* Specify dwAddData to be 100, that is, specify the height of
+ * the list box in the simple combo box to be 100
  */
 ```
 
-Although behaviors of a spin combo box control differs much from that of the 
-two types of combo boxes above, it is in nature still combination of an edit 
+Although behaviors of a spin combo box control differs much from that of the
+two types of combo boxes above, it is in nature still combination of an edit
 box and a list box, except that the list box in a spin combo box is always
 hidden, and we can select an item in the list box by the two arrow buttons
 beside the edit box. The spin combo box can be created with `CBS_SPINLIST`
 style, and its effect is shown in Figure 3.
 
-
-
 ![alt](figures/23.3.jpeg)
 
-Figure 3 Spin combo box
-
+__Figure 3__ Spin combo box
 
 Spin combo box also has two special display styles (as shown in Figure 4):
 
-
-
 ![alt](figures/23.4.jpeg)
 
-Figure 4 The special styles of spin combo box
+__Figure 4__ The special styles of spin combo box
 
 
 As the three types of combo boxes described above use the edit box and the list
 box predefined in MiniGUI, you can use similar styles of the edit box control
 and the list box control for the combo boxes:
 
-- `CBS_READONLY`: The input field is read-only, corresponding to the 
+- `CBS_READONLY`: The input field is read-only, corresponding to the
 `ES_READONLY` style of edit box.
 - `CBS_UPPERCASE`: Corresponding to the `ES_UPPERCASE` style of the edit box,
-making the text typed in the edit box transferring into uppercase 
-automatically. 
+making the text typed in the edit box transferring into uppercase
+automatically.
 - `CBS_LOWERCASE`: Corresponding to the `ES_LOWERCASE` style of the edit box,
-making the text typed in the edit box transferring into lowercase 
-automatically. 
+making the text typed in the edit box transferring into lowercase
+automatically.
 - `CBS_EDITBASELINE`: Corresponding to the `ES_BASELINE` style of the edit box,
 making the edit box have a base line.
 - `CBS_SORT`: Corresponding to the `LBS_SORT` style of the list box, combo box
 with this style will automatically sort the inserted items.
 
-***
-[Note] A list box can have other advanced styles, but the list box in a combo box is only a normal single-selection list box.
-***
+__NOTE__ A list box can have other advanced styles, but the list box in a combo
+box is only a normal single-selection list box.
 
 Except the styles described above, the combo box also defines the following two
 styles, which can be used for all types of combo box:
 - `CBS_EDITNOBORDER`: Make the edit box have no `WS_BORDER` style, and make the
 input field have no border.
-- `CBS_AUTOFOCUS`: The edit box will gain the input focus automatically when 
+- `CBS_AUTOFOCUS`: The edit box will gain the input focus automatically when
 the combo box gains the input focus.
 
 ### Digital Spin Box
@@ -115,16 +104,13 @@ are displayed instead of item of a list box. A combo box of this type can be
 used in many situations. However, because the operated object is digit instead
 of arbitrary text, it does not use a list box internally. The digital spin box
 can be created with combo box style `CBS_AUTOSPIN`, which is as shown in Figure
-5. 
-
-
+5.
 
 ![alt](figures/23.5.jpeg)
 
-Figure 5 Digital spin box
+__Figure 5__ Digital spin box
 
-
-The digital spin box has only a style, i.e. `CBS_AUTOLOOP`. The digit in the 
+The digital spin box has only a style, i.e. `CBS_AUTOLOOP`. The digit in the
 box will be looped automatically when this style has been used. That is to say,
 after the user has clicked the up arrow to the maximum value, the digit in the
 box will change to the minimum value if the up arrow is clicked again. The
@@ -133,14 +119,14 @@ respectively. Each time the user clicks the button on the right side, the
 digit-changed step is 1 by default.
 
 The default max and min value are 100 and 0; the default step value when click
-the button is 1 and the defalut step of click pagedown or pageup is 5.
+the button is 1 and the default step of click pagedown or pageup is 5.
 
 ## Messages of Combo Box
 ### Messages of Simple, Pull-Down, and Spin Combo Box
 
 Because the three types of combo boxes all include list box, messages used for
 these three types of combo boxes basically correspond to the messages of a list
-box: 
+box:
 - `CB_ADDSTRING`: Correspond to `LB_ADDSTRING`, used for adding items to the
 inner list box.
 - `CB_INSERTSTRING`: Correspond to `LB_INSERTSTRING`, used for inserting items
@@ -174,55 +160,55 @@ item of the inner list box.
 - `CB_GETLBTEXTLEN`: Correspond to `LB_GETTEXTLEN`, used for getting the length
 of text of an item of the inner list box.
 - `CB_GETCHILDREN`: Gets the handles to the children of `ComboBox` control. The
-parameter `wParam` holds a editor pointer and `lParam` holds a list box 
-pointer. 
+parameter `wParam` holds a editor pointer and `lParam` holds a list box
+pointer.
 
 Combo box also provides the message for the inner edit box:
 - `CB_LIMITTEXT`: Correspond to `EM_LIMITTEXT`, used for limiting the length of
 text in the inner edit box.
 - `CB_SETEDITSEL`: Correspond to `EM_SETSEL`, set the selected text in the
-editor. 
+editor.
 - `CB_GETEDITSEL`: Correspond to `EM_GETSEL`, get the selected text in the
-editor. 
+editor.
 
 You can refer to the description on the list box message and the edit box
-message in Chapter 21 and Chapter 22 for the concrete use of the above 
+message in Chapter 21 and Chapter 22 for the concrete use of the above
 messages. The following two messages can be used for a spin combo box:
-- `CB_SPIN`: Send the message to spin the spin box forward or backward, like 
+- `CB_SPIN`: Send the message to spin the spin box forward or backward, like
 the user click the up or down arrow besides the edit box (Typing the up or down
 arrow key in the edit box also can get the same effect). The parameter `wParam`
 controls the direction of the spin, 0 means up, 1 means down.
-- `CB_FASTSPIN`: Send the message to fast spin the spin box, like the user 
-types `PageUp/PageDown` key in the edit box. The parameter `wParam` controls 
+- `CB_FASTSPIN`: Send the message to fast spin the spin box, like the user
+types `PageUp/PageDown` key in the edit box. The parameter `wParam` controls
 the direction of the spin, 0 means up, 1 means down.
 
 Follow two message can be used for drop down combo box:
-- `CB_GETDROPPEDCONTROLRECT`: Get the rect of the drop down combo box.
+- `CB_GETDROPPEDCONTROLRECT`: Get the rectangle of the drop down combo box.
 - `CB_GETDROPPEDSTATE`: Check the combo box's drop down list is displayed or
-not. 
+not.
 
 ### Messages of Digital Spin Box
 
 Digital spin box can receive the following messages:
-- `CB_GETSPINRANGE`: Get the maximum and minimum values, which are stored in 
+- `CB_GETSPINRANGE`: Get the maximum and minimum values, which are stored in
 the addresses to which are pointed to by `wParam` and `lParam`, respectively.
-- `CB_SETSPINRANGE`: Set the maximum and minimum values, which are the values 
+- `CB_SETSPINRANGE`: Set the maximum and minimum values, which are the values
 of `wParam` and `lParam`, respectively.
 - `CB_SETSPINVALUE`: Set the current value of the edit box, and the value to be
 set is passed by `wParam`.
 - `CB_GETSPINVALUE`: This message returns the current value of the edit box.
 - `CB_SPIN`: Send the message to spin the spin box forwards or backwards, the
-same as the user clicks the up or down arrow besides the edit box (Typing the 
+same as the user clicks the up or down arrow besides the edit box (Typing the
 up or down arrow key in the edit box also can get the same effect). The
 parameter `wParam` controls the direction of the spin: 1 means up and 0 means
-down. 
+down.
 - `CB_FASTSPIN`: Send the message to spin the spin box quickly, like the user
-types `PageUp/PageDown` key in the edit box. The parameter `wParam` controls 
+types `PageUp/PageDown` key in the edit box. The parameter `wParam` controls
 the spinning direction: 0 means up and 1 means down.
 - `CB_GETSPINPACE`: Get the pace and the fast pace of the spin box in a combo
-box. 
+box.
 - `CB_SETSPINPACE`: Set the pace and the fast pace of the spin box in a combo
-box 
+box
 - `CB_SETSPINFORMAT`: Sets the format string of integer. MiniGUI uses sprintf
 and sscanf to transform between text string and integer, and make them have
 specified format. After format string is set, MiniGUI will use this format
@@ -242,11 +228,11 @@ which are listed as follow:
 - `CBN_CLICKED`: User clicked the combo box.
 - `CBN_SETFOCUS`: The combo box gains the input focus. If the combo box has
 `CBS_AUTOFOCUS` style, the inner edit box would gain the input box
-simultaneously. 
+simultaneously.
 - `CBN_KILLFOCUS`: The combo box loses the input focus.
 - `CBN_DROPDOWN`: The user pulled down the list box. When the user clicks the
-down arrow button beside the edit box or type an arrow key in the edit box, 
-such as up or down arrow key, `PageDown` or `PageUp` key etc. the list box 
+down arrow button beside the edit box or type an arrow key in the edit box,
+such as up or down arrow key, `PageDown` or `PageUp` key etc. the list box
 would be pulled down and showed.
 - `CBN_CLOSEUP`: Pull-down list box is hidden (closed up).
 - `CBN_SELENDOK`: The user selects an item from the pull-down list box.
@@ -256,14 +242,13 @@ list box.
 ## Sample Program
 
 The program in List 1 gives an example of use of combo boxes. The program
-comprises a time selection box with digital spin box, and then provides the 
+comprises a time selection box with digital spin box, and then provides the
 list of heroes to be dated with a pull-down list box. When pressing “OK”, the
 program uses `MessageBox` to display the date information. Please refer to
-combobox.c file of the demo program package of this guide for the complete
+`combobox.c` file of the demo program package of this guide for the complete
 source code of the program. Effect of running the program is shown in Figure 6.
 
-
-List 1 Use of combo boxes
+__List 1__ Use of combo boxes
 
 ```cpp
 #include <stdio.h>
@@ -294,7 +279,7 @@ static DLGTEMPLATE DlgMyDate =
 };
 
 static CTRLDATA CtrlMyDate[] =
-{ 
+{
     {
         "static",
         WS_CHILD | SS_RIGHT | WS_VISIBLE,
@@ -306,10 +291,10 @@ static CTRLDATA CtrlMyDate[] =
 /* the digital spin box to display hour */
     {
         CTRL_COMBOBOX,
-        WS_CHILD | WS_VISIBLE | 
+        WS_CHILD | WS_VISIBLE |
             CBS_READONLY | CBS_AUTOSPIN | CBS_AUTOLOOP | CBS_EDITBASELINE,
         60, 18, 40, 20,
-        IDC_HOUR, 
+        IDC_HOUR,
         "",
         0
     },
@@ -324,7 +309,7 @@ static CTRLDATA CtrlMyDate[] =
 /* The digital spin box to display minute */
     {
         CTRL_COMBOBOX,
-        WS_CHILD | WS_VISIBLE | 
+        WS_CHILD | WS_VISIBLE |
             CBS_READONLY | CBS_AUTOSPIN | CBS_AUTOLOOP | CBS_EDITBASELINE,
         120, 18, 40, 20,
         IDC_MINUTE,
@@ -361,7 +346,7 @@ static CTRLDATA CtrlMyDate[] =
         CTRL_BUTTON,
         WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP | WS_GROUP,
         10, 70, 130, 25,
-        IDOK, 
+        IDOK,
         "确定",
         0
     },
@@ -417,7 +402,7 @@ static void prompt (HWND hDlg)
     int min = SendDlgItemMessage(hDlg, IDC_MINUTE, CB_GETSPINVALUE, 0, 0);
     int sel = SendDlgItemMessage(hDlg, IDL_DAXIA, CB_GETCURSEL, 0, 0);
 
-    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min, 
+    sprintf (date, "你打算于今日 %02d:%02d 去见那个%s的%s", hour, min,
                    daxia_char [sel], daxia [sel]);
 
     MessageBox (hDlg, date, "约会内容", MB_OK | MB_ICONINFORMATION);
@@ -455,7 +440,7 @@ static int MyDateBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
         SendDlgItemMessage(hDlg, IDL_DAXIA, CB_SETCURSEL, 0, 0);
         SetWindowText (GetDlgItem (hDlg, IDC_PROMPT), daxia_char [0]);
         return 1;
-        
+
     case MSG_COMMAND:
         switch (wParam) {
         case IDOK:
@@ -466,9 +451,9 @@ static int MyDateBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             break;
         }
         break;
-        
+
     }
-    
+
     return DefaultDialogProc (hDlg, message, wParam, lParam);
 }
 
@@ -477,9 +462,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #ifdef _ MGRM_PROCESSES
     JoinLayer(NAME_DEF_LAYER , "combobox" , 0 , 0);
 #endif
-    
+
     DlgMyDate.controls = CtrlMyDate;
-    
+
     DialogBoxIndirectParam (&DlgMyDate, HWND_DESKTOP, MyDateBoxProc, 0L);
 
     return 0;
@@ -490,22 +475,15 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-
-
 ![alt](figures/23.6.jpeg)
 
-Figure 6 Use of combo boxes
-
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 6__ Use of combo boxes
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Edit Box Control](MiniGUIProgGuidePart6Chapter04.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Menu Button Control &gt;&gt;](MiniGUIProgGuidePart.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
