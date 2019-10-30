@@ -258,7 +258,7 @@ Figure 6 The sample of static control
 
 [&lt;&lt; Universal Startup API for RTOSes](MiniGUIProgGuidePart5Chapter04.md) |
 [Table of Contents](README.md) |
-[[Button Control &gt;&gt;](MiniGUIProgGuidePart6Chapter02.md)
+[Button Control &gt;&gt;](MiniGUIProgGuidePart6Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
