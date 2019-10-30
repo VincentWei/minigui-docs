@@ -1,9 +1,12 @@
+# Code Style and Project Specification
+
+_TBC_
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Specification for the Image Resources Used by mGNCS Skin Renderer &gt;&gt;](MiniGUIProgGuideAppendixB.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
