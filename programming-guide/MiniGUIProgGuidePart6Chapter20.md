@@ -1,35 +1,35 @@
-# `IconView` Control
+# Iconview Control
 
-`IconView` control offers an interface for user to surf entry in icon and label
+Iconview control offers an interface for user to surf entry in icon and label
 mode. These entire icon items can be shown in a scroll child window. User can
 select one or some items using keyboard and mouse operation and the selected
-icon usually are shown high lightly. The representative usage of `IconView`
+icon usually are shown high lightly. The representative usage of Iconview
 control is to be the container of the desktop icons and display of files under
 some directory.
 
 `CreateWindow` using `CTRL_ICONVIEW` as control class name can create Icon View
-control. 
+control.
 
 We can add, delete, set the size of icon (should be done before adding this
 icon) and get label text of the icon, etc. by sending corresponding message
-after creating `IconView` control.
+after creating Iconview control.
 
-## Styles of `IconView`
+## Styles of Iconview
 
-By default, the `IconView` control window will only display the icon and its
+By default, the Iconview control window will only display the icon and its
 label and there will be no border in display region. You can add border for the
-`IconView` control by using window style `WS_BORDER` when create control using
-`CreatWindow`. On the other hand, you can also use window style `WS_VSCROLL` 
+Iconview control by using window style `WS_BORDER` when create control using
+`CreatWindow`. On the other hand, you can also use window style `WS_VSCROLL`
 and `WS_HSCROLL` to add vertical and horizontal scroll bar so that you can
 display all the content in the list control.
 
-`IconView` control is based on the `ScrollView` Control and it remains the 
+Iconview control is based on the `ScrollView` Control and it remains the
 style of the `ScrollView` Control.
 
-## Messages of `IconView`
+## Messages of Iconview
 ### Icon operation
 
-After an `IconView` control is created, the next step is to add icon to the
+After an Iconview control is created, the next step is to add icon to the
 control. Sending an `IVM_ADDITEM` message to the control does this work.
 
 ```cpp
@@ -37,7 +37,7 @@ IVITEMINFO ivii;
 SendMessage (hIconView, IVM_ADDITEM, 0, (LPARAM)&ivii) ;
 ```
 
-In above program, ivii is an `IVITEMINFO` structure and it is used to display
+In above program, `ivii` is an `IVITEMINFO` structure and it is used to display
 the icon information needed to be set. The definition and meaning of the
 `IVITEMINFO` structure are as below:
 
@@ -80,57 +80,57 @@ SendMessage (hIconView, IVM_SETITEMSIZE, width, height) ;
 
 In above code, width is the width to be set and height is the height to be set.
 
-Since the `IconView` control is based on the `ScrollView`, the rest messages of
-the `IconView` control are almost the same as the `ScrollView`.
+Since the Iconview control is based on the `ScrollView`, the rest messages of
+the Iconview control are almost the same as the `ScrollView`.
 - `IVM_RESETCONTENT`: corresponding to `SVM_RESETCONTENT`: used to clear the
-icon item in `IconView` control.
-- `IVM_DELITEM`: corresponding to `SVM_DELITEM`: used to delete the icon item 
-in `IconView` control.
+icon item in Iconview control.
+- `IVM_DELITEM`: corresponding to `SVM_DELITEM`: used to delete the icon item
+in Iconview control.
 - `IVM_SETITEMDRAW`: corresponding to `SVM_SETITEMDRAW`: used to set drawing
 function of the icon item.
-- `IVM_SETCONTWIDTH`: corresponding to `SVM_SETCONTWIDTH`: used to set the 
+- `IVM_SETCONTWIDTH`: corresponding to `SVM_SETCONTWIDTH`: used to set the
 width of the scrollable window.
 - `IVM_SETCONTHEIGHT`: corresponding to `SVM_SETCONTHEIGHT`: used to set the
 height of the scrollable window.
 - `IVM_SETITEMOPS`: corresponding to `SVM_` `SETITEMOPS`: used to set the
 callback function of correlation operation of the icon item.
 - `IVM_GETMARGINS`: corresponding to `SVM_GETMARGINS`: used to get the margin
-range of the `IconView`.
+range of the Iconview.
 - `IVM_SETMARGINS`: corresponding to `SVM_SETMARGINS`: used to set the margin
-range of the `IconView`.
+range of the Iconview.
 - `IVM_GETLEFTMARGIN`, `IVM_GETTOPMARGIN`, `IVM_GETRIGHTMARGIN` and
 `IVM_GETBOTTOMMARGIN` corresponding to `SVM_GETLEFTMARGIN`, `SVM_GETTOPMARGIN`,
 `SVM_GETRIGHTMARGIN`, and `SVM_GETBOTTOMMARGIN`: used to get the left, up,
-right, down margin range of the `IconView` control
+right, down margin range of the Iconview control
 - `IVM_GETCONTWIDTH`, `IVM_GETCONTHEIGHT`, `IVM_GETVISIBLEWIDTH` and
-`IVM_GETVISIBLEHEIGHT` corresponding to `SVM_GETCONTWIDTH`, 
+`IVM_GETVISIBLEHEIGHT` corresponding to `SVM_GETCONTWIDTH`,
 `SVM_GETCONTHEIGHT`, `SVM_GETVISIBLEWIDTH` and `SVM_GETVISIBLEHEIGHT`: Used to
 get the width and height of the content area and visual area.
-- `IVM_SETCONTRANGE`: corresponding to `SVM_SETCONTRANGE`: used to set the 
+- `IVM_SETCONTRANGE`: corresponding to `SVM_SETCONTRANGE`: used to set the
 range of the content area in the scrollable window.
-- `IVM_GETCONTENTX` and `IVM_GETCONTENTY` corresponding to `SVM_GETCONTENTX` 
+- `IVM_GETCONTENTX` and `IVM_GETCONTENTY` corresponding to `SVM_GETCONTENTX`
 and `SVM_GETCONTENTY`: used to get the current position of the content area.
 - `IVM_SETCONTPOS`: corresponding to `SVM_SETCONTPOS`: used to set the current
 position of the content area, in other word, to move content area to a specific
 position in the visual area.
 - `IVM_GETCURSEL` and `IVM_SETCURSEL` corresponding to `SVM_GETCURSEL` and
 `SVM_SETCURSEL`: used to get and set the current highlighted icon of the icon
-control. 
+control.
 - `IVM_SELECTITEM`: corresponding to `SVM_SELECTITEM`: used to select a column
 item, and the selected item will be highlighted displayed.
 - `IVM_SHOWITEM`: corresponding to `SVM_SHOWITEM`: used to show an icon item.
 - `IVM_CHOOSEITEM`: corresponding to `SVM_CHOOSEITEM` is the combination of
 `IVM_SELECTITEM` and `IVM_SHOWITEM` message: used to select an icon and
 visualize it.
-- `IVM_SETITEMINIT`: corresponding to `SVM_SETITEMINIT`: used to set the 
+- `IVM_SETITEMINIT`: corresponding to `SVM_SETITEMINIT`: used to set the
 initial operation of the icon item.
 - `IVM_SETITEMDESTROY`: corresponding to `SVM_SETITEMDESTROY`: used to set the
 destroy operation of the icon item.
 - `IVM_SETITEMCMP`: corresponding to `SVM_SETITEMCMP`: used to set the
 comparison function of the iconview control item.
-- `IVM_MAKEPOSVISIBLE`: corresponding to `SVM_MAKEPOSVISIBLE`: used to 
+- `IVM_MAKEPOSVISIBLE`: corresponding to `SVM_MAKEPOSVISIBLE`: used to
 visualize one position in the content area.
-- `IVM_GETHSCROLLVAL` and `IVM_GETVSCROLLVAL` corresponding to 
+- `IVM_GETHSCROLLVAL` and `IVM_GETVSCROLLVAL` corresponding to
 `SVM_GETHSCROLLVAL` and `SVM_GETVSCROLLVAL`: used to get the current horizontal
 and vertical scroll data (the scroll range by clicking the scroll bar arrow).
 - `IVM_GETHSCROLLPAGEVAL` and `IVM_GETVSCROLLPAGEVAL` corresponding to
@@ -150,12 +150,12 @@ additional data of current icon item.
 additional data of current icon item.
 - `IVM_REFRESHITEM`: corresponding to `SVM_REFRESHITEM`: used to refresh a icon
 item area.
-- `IVM_GETFIRSTVISIBLEITEM`: corresponding to `SVM_GETFIRSTVISIBLEITEM`: used 
+- `IVM_GETFIRSTVISIBLEITEM`: corresponding to `SVM_GETFIRSTVISIBLEITEM`: used
 to get the first visible icon item.
 
-## Notification Codes of `IconView`
+## Notification Codes of Iconview
 
-The `IconView` control will generate notification code when it responds to
+The Iconview control will generate notification code when it responds to
 user’s operations such as clicking or some status changed. The notification
 codes include:
 - `LVN_SELCHANGE`: corresponding to `SVN_SELCHANGE`: current highlighted icon
@@ -165,17 +165,16 @@ item is changed.
 A notification handle function should be registered by application using
 `SetNotificationCallback` to handle all the received notification code.
 
-`LVN_CLICKED` and `LVN_SELCHANGE` are used to inform the message handle 
+`LVN_CLICKED` and `LVN_SELCHANGE` are used to inform the message handle
 function that the additional data is the clicked or highlighted icon handle.
 
 ## Sample Program
 
-Code in List 1 illustrates the use of an `IconView` control to construct a
-simple icon explore window. Please refer to iconview.c file of the demo program
+Code in List 1 illustrates the use of an Iconview control to construct a
+simple icon explore window. Please refer to `iconview.c` file of the demo program
 package `mg-samples` of this guide for complete source code.
 
-
-List 1 Use of `IconView` control
+__List 1__ Use of iconview control
 
 ```cpp
 #define IDC_ICONVIEW    100
@@ -227,7 +226,7 @@ static void myDrawItem (HWND hWnd, GHANDLE hsvi, HDC hdc, RECT *rcDraw)
 {
     const PBITMAP pbmp = (PBITMAP)iconview_get_item_bitmap (hsvi);
     const char *label = (const char*)iconview_get_item_label (hsvi);
-    
+
     SetBkMode (hdc, BM_TRANSPARENT);
     SetTextColor (hdc, PIXEL_black);
 
@@ -239,7 +238,7 @@ static void myDrawItem (HWND hWnd, GHANDLE hsvi, HDC hdc, RECT *rcDraw)
     }
     FillBox (hdc, rcDraw->left, rcDraw->top, RECTWP(rcDraw), RECTHP(rcDraw));
     SetBkColor (hdc, PIXEL_blue);
-    
+
     if (label) {
         RECT rcTxt = *rcDraw;
         rcTxt.top = rcTxt.bottom - GetWindowFont (hWnd)->size * 2;
@@ -255,7 +254,7 @@ BookProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    
+
     case MSG_INITDIALOG:
     {
         IVITEMINFO ivii;
@@ -298,7 +297,7 @@ BookProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             char buff [10];
             int idx;
             int count = SendMessage (hIconView, IVM_GETITEMCOUNT, 0, 0);
-            
+
             sprintf (buff, "NewIcon%i", count);
             memset (&ivii, 0, sizeof (IVITEMINFO));
             ivii.bmp = &myicons [0];
@@ -318,7 +317,7 @@ BookProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             char *label = NULL;
 
             if (sel >= 0){
-                label = (char *) SendMessage (hIconView, IVM_GETITEMADDDATA, sel, 0); 
+                label = (char *) SendMessage (hIconView, IVM_GETITEMADDDATA, sel, 0);
                 if (label && strlen (label))
                     printf ("delelete item:%s\n", label);
                 SendMessage (hIconView, IVM_DELITEM, sel, 0);
@@ -336,7 +335,7 @@ BookProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
     case MSG_KEYDOWN:
         if (wParam == SCANCODE_REMOVE) {
             int cursel = SendMessage (hIconView, IVM_GETCURSEL, 0, 0);
-            
+
             if (cursel >= 0){
                 SendMessage (hIconView, IVM_DELITEM, cursel, 0);
                 SendMessage (hIconView, IVM_SETCURSEL, cursel, 0);
@@ -399,17 +398,13 @@ static DLGTEMPLATE DlgIcon =
 
 ![alt](figures/38.1.jpeg)
 
-Figure 1 Use of an Icon View control
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 1__ Use of an Icon View control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Gridview Control](MiniGUIProgGuidePart6Chapter19.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Independent Scrollbar Control &gt;&gt;](MiniGUIProgGuidePart6Chapter21.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
