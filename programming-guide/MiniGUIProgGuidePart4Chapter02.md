@@ -1,15 +1,13 @@
 # mGNCS4Touch Programming
 
-
 mGNCS4Touch component provides some new controls, which are compliant to new
-control `API` spec of mGNCS, for devices with a touch screen.
+control API spec of mGNCS, for devices with a touch screen.
 
 Supports common touch-screen operations, like quickly sliding the
 screen up and down, and has scroll rebound effect, and supports accelerated
 sliding, if the faster the finger slides, the farther the screen is
-slide. when the finger has been released, The screen will slowly slow down 
-until it
-stops.
+slide. When the finger has been released, The screen will slowly slow down
+until it stops.
 
 Currently supported controls can be divided into two categories, one is the
 basic controls: such as the switch button, Slider bar, etc, and the other is
@@ -24,21 +22,19 @@ Here are some simple examples of how to use controls and pieces.
 
 ### header file
 
-you should first include the mGNCS4Touch head file when you use it as follow:
+You should first include the mGNCS4Touch head file when you use it as follow:
 
 ```cpp
-#include "mgncs4touch.h"
+#include <mgncs4touch/mgncs4touch.h>
 ```
 
 ### config file
 
-if you need an different renderer, you can change follow config:
+If you need an different renderer, you can change follow config:
 - fashion renderer config.
 
-```cpp
-
-#define MGNCS4TOUCH_ETCFILE "mgncs4touch.cfg"
-
+```ini
+[fashion]
 roundrect_radius=3
 bgc_block=0xFFDBDBDB
 fgc_swb_on=0xFFDDDDDD
@@ -67,10 +63,10 @@ fgc_itb_ltext=0XFF000000
 fgc_itb_ltext_light=0xFFFFFFFF
 fgc_itb_rtext=0XFFE2B956
 fgc_itb_rtext_light=0xFFFFFFFF
-
 ```
 
-| *config key* || *Property id* *Description* |
+| *config key* | *Property id* | *Description* |
+|--------------|---------------|---------------|
 | `roundrect_radius` | `NCS4TOUCH_RRECT_RADIUS` | round rect raidus size|
 | `bgc_block` | `NCS4TOUCH_BGC_BLOCK` | background color, switch button now|
 | `fgc_swb_on` | `NCS4TOUCH_FGC_SWBON` | foreground color of switch button on staus|
@@ -110,18 +106,14 @@ init/uninit should be called.
     ncsUninitialize();
 ```
 
-
 ### setProperty/getProperty
 
-
-if you want to change or get property of control or piece, you can try to
-follow api:
-
+If you want to change or get property of control or piece, you can try to
+follow API:
 
 ```cpp
-/* define */
-        BOOL (*setProperty)(clss *self, int id, DWORD value); \
-        DWORD (*getProperty)(clss *self, int id); \
+BOOL (*setProperty)(clss *self, int id, DWORD value);
+DWORD (*getProperty)(clss *self, int id);
 
 ...
 
@@ -134,7 +126,8 @@ follow api:
 
 ### Sample entry
 
-base require in the `MiniGUIMain` entry:
+Base require in the `MiniGUIMain` entry:
+
 - init/uninit mGNCS.
 - init/uninit mGNCS4Touch.
 - init/uninit mGEff.
@@ -176,10 +169,10 @@ int MiniGUIMain(int argc, const char *argv[]) {
 
     mGEffInit();
 
-    while(GetMessage(&Msg, mymain->hwnd)) {   
+    while(GetMessage(&Msg, mymain->hwnd)) {
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
-    }   
+    }
 
     mGEffDeinit();
 
@@ -190,15 +183,14 @@ int MiniGUIMain(int argc, const char *argv[]) {
 }
 ```
 
-
-`BTW`: mGNCS4Touch also need mGEff and mGPlus, mGNCS, MiniGUI, so you should
-include these component head files.
+By the way, mGNCS4Touch also needs mGEff and mGPlus, mGNCS, MiniGUI Core, so you
+should include these component head files.
 
 ### control
 
-you can try to create mGNCS4Touch control as follow two way:
+You can try to create mGNCS4Touch control as follow two way:
 
-#### create with `ncsCreateMainWindowIndirect`
+#### Create with `ncsCreateMainWindowIndirect`
 
 ```cpp
 //Controls
@@ -245,15 +237,14 @@ static NCS_MNWND_TEMPLATE mymain_templ = {
 }
 ```
 
-#### create with `ncsCreateWindow`.
+#### Create with `ncsCreateWindow`.
 
-just use `ncsCreateWindow` and give your control name.
+Just use `ncsCreateWindow` and give your control name:
 
 ```cpp
 {
 ...
-        mContainerCtrl* ctnr =
-(mContainerCtrl*)ncsCreateWindow(NCSCTRL_CONTAINERCTRL,
+mContainerCtrl* ctnr = (mContainerCtrl*)ncsCreateWindow(NCSCTRL_CONTAINERCTRL,
                 "ContainerCtrl",
                 WS_VISIBLE, 0, 0,
                 0, 0, 100, 100,
@@ -263,15 +254,15 @@ just use `ncsCreateWindow` and give your control name.
 }
 ```
 
-### pieces
+### Pieces
 
-#### piece register
+#### Piece register
 
-init piece class: each piece should be init first, use `MGNCS_INIT_CLASS`,
-if no init, it will be crash when you using it. the internal pieces that
-provided by mGNCS4Touch will be init when call ncs4TouchInitialize(), but the
-piece 
-that custom by user should be call `MGNCS_INIT_CLASS` directly. else it will be
+Init piece class: each piece should be init first, use `MGNCS_INIT_CLASS`,
+if no init, it will be crash when you using it. The internal pieces that
+provided by mGNCS4Touch will be init when call `ncs4TouchInitialize`, but the
+piece
+that custom by user should be call `MGNCS_INIT_CLASS` directly. Or it will be
 crash when you use the piece.
 
 ```cpp
@@ -279,12 +270,12 @@ crash when you use the piece.
     MGNCS_INIT_CLASS(mSimpleTableView);
 ```
 
-#### create Piece
+#### Create piece
 
-you can use two method to create an piece, it is provided by mGNCS:
+You can use two method to create an piece, it is provided by mGNCS:
 
 - `NEWPIECE`: just give your piece class name.
-- `NEWPIECEEX`: piece class name and an private addtional data.
+- `NEWPIECEEX`: piece class name and an private additional data.
 
 ```cpp
     mPanelPiece* panel = NEWPIECE(mPanelPiece);
@@ -293,10 +284,11 @@ you can use two method to create an piece, it is provided by mGNCS:
 ```
 
 
-#### add piece to window
+#### Add piece to window
 
-piece is not an independent element, it should conect with an ncs window, so
+Piece is not an independent element, it should connect with an NCS window, so
 you can do it as follow:
+
 - use `ncsCreateWindow` to create `NCSCTRL_CONTAINERCTRL` control.
 - use `setBody` to set piece to control.
 
@@ -322,7 +314,7 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 }
 ```
 
-#### piece assemble
+#### Piece assemble
 
 mGNCS and mGNCS4Touch have provided some standard simple piece, like
 static/text/image pieces, you can use these simple piece to assemble your own
@@ -342,15 +334,14 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
     for (i = 0; i < 18; i++) {
         mHotPiece *imagePiece = (mHotPiece*)NEWPIECE(mImagePiece);
         mHotPiece *labelPiece = (mHotPiece*)NEWPIECE(mLabelPiece);
-        _c(content)->addContent (content, imagePiece, 15 + (bmp[i % 3].bmWidth
-+ 15) * i, 10);
-        _c(content)->addContent (content, labelPiece, 15 + (bmp[i % 3].bmWidth
-+ 15) * i, bmp[i % 3].bmHeight + 15);
+        _c(content)->addContent (content, imagePiece,
+                15 + (bmp[i % 3].bmWidth + 15) * i, 10);
+        _c(content)->addContent (content, labelPiece,
+                15 + (bmp[i % 3].bmWidth + 15) * i, bmp[i % 3].bmHeight + 15);
     }
 ...
 }
 ```
-
 
 ## mWidget control
 
@@ -358,21 +349,21 @@ Follow controls are all base on mGNCS `mWidget`, it is an base control for
 mGNCS, you can create these controls and add it to an MiniGUI main window,
 this is not different with pieces.
 
-
-### NCS4TOUCH_RENDERER
+### `NCS4TOUCH_RENDERER`
 
 mGNCS4Touch have provide an new renderer for touch screen, you can use
 `ncsSetElement/ncsGetElement` to read/write it.
 
 This render have some follow elements, you can change it by yourself, if you
-need change the default value, you need change it in the mgncs4touch.cfg file.
+need change the default value, you need change it in the `mgncs4touch.cfg` file.
 
-| *Property ID* | *Type* | *Permission* | *Description* |*Unit* |
-| `NCS4TOUCH_RRECT_RADIUS` | int | R | set `mItemBar` round rect radious.|pixel |
+| *Property ID* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|--------|--------------|---------------|--------|
+| `NCS4TOUCH_RRECT_RADIUS` | int | R | set `mItemBar` round rectangle radius.|pixel |
 | `NCS4TOUCH_BGC_BLOCK` | int | R | get control background color. |pixel|
 | `NCS4TOUCH_FGC_SWBON` | int | R | set switchbutton foreground color for on status| |
 | `NCS4TOUCH_BGC_SWBON` | int | R | set switchbutton background color for on status| |
-| `NCS4TOUCH_FGC_SWBOFF` | int | R | set switchbutton forground color for off status| |
+| `NCS4TOUCH_FGC_SWBOFF` | int | R | set switchbutton foreground color for off status| |
 | `NCS4TOUCH_BGC_SWBOFF` | int | R | set swithbutton background color for off status| |
 | `NCS4TOUCH_BGC_NTB_HITEM` | int | R | set newtrackbar left area color. | |
 | `NCS4TOUCH_BGC_NTB_DITEM` | int | R | set newtrackbar right area color. |
@@ -387,7 +378,7 @@ need change the default value, you need change it in the mgncs4touch.cfg file.
 | `NCS4TOUCH_BGC_PCK_SELECT` | int | R | set picker background picker item select color| |
 | `NCS4TOUCH_FGC_PCK_DISABLE` | int | R | set picker foreground picker item disable color. |
 | `NCS4TOUCH_BGC_ITB` | int | R | set itemnavbar background item color| |
-| `NCS4TOUCH_BGC_ITB_LIGHT` | int | R | set itemnavbar hit hightlight background item color| |
+| `NCS4TOUCH_BGC_ITB_LIGHT` | int | R | set itemnavbar hit highlight background item color| |
 | `NCS4TOUCH_FGC_ITB_TICK` | int | R | set itemnavbar foreground tick color.| |
 | `NCS4TOUCH_FGC_ITB_TICK_LIGHT` | int | R | the right button is not displayed the shape| |
 | `NCS4TOUCH_FGC_ITB_ANGLE` | int | R | the left button is a rounded rectangular shape. |
@@ -399,12 +390,13 @@ need change the default value, you need change it in the mgncs4touch.cfg file.
 
 
 ### mSwithButton
-- <b>Control Window Class</b>: `NCSCTRL_SWBUTTON`
-- <b>Control English name</b>: switchbutton
-- *Introduction*: This control provied an switch button like `iOS`, it has two
-status: on or off, it has supuport an switch status animation.
 
-#### control name
+- Control Window Class: `NCSCTRL_SWBUTTON`
+- Control English name: switchbutton
+- Introduction: This control provides an switch button like `iOS`, it has two
+status: on or off, it has supported an switch status animation.
+
+#### Control name
 
 ```cpp
 #define NCSCTRL_BTNNAVBAR          NCSCLASSNAME("switchbutton")
@@ -412,19 +404,19 @@ status: on or off, it has supuport an switch status animation.
 
 #### property
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
-| `NCSP_SWB_STATUS`| - | int | `RW` | switch status | `NCS_SWB_OFF/NCS_SWB_ON` |
-
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|---------|
+| `NCSP_SWB_STATUS` | - | int | `RW` | switch status | `NCS_SWB_OFF/NCS_SWB_ON` |
 
 ![alt](figures/mgncs4touch-mswitchbutton.png)
 
-`mSwitchButton` control
+Figure `mSwitchButton` control
 
 ### mBtnNavBar
 
-- <b>Control Window Class</b>: `NCSCTRL_BTNNAVBAR`
-- <b>Control English name</b>: btnnavbar
-- *Introduction*: This control provied an navigate button like `iOS`.
+- Control Window Class: `NCSCTRL_BTNNAVBAR`
+- Control English name: btnnavbar
+- *Introduction*: This control provides an navigate button like `iOS`.
 
 #### control name
 
@@ -434,7 +426,8 @@ status: on or off, it has supuport an switch status animation.
 
 #### style
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|---------|
 | `NCSS_BNB_LRECT`| - | int | R | the left button is on behalf of the triangular shape of the left| |
 | `NCSS_BNB_LOPT` | - | int | R | the left button is a rounded rectangular shape. |
 | `NCSS_BNB_LNONE`| - | int | R | the left button is not displayed the shape| |
@@ -445,7 +438,8 @@ status: on or off, it has supuport an switch status animation.
 
 #### property
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|---------|
 | `NCSP_BNB_LSTRING`| - | int | `RW` | set the string on the left button | |
 | `NCSP_BNB_RSTRING`| - | int | `RW` | set the string on the rightbutton| |
 | `NCSP_BNB_FONT` | - | int | `RW` | set the font size on the navigation bar | |
@@ -457,11 +451,11 @@ status: on or off, it has supuport an switch status animation.
 
 ### mNewTrackBar
 
-- <b>Control Window Class</b>: `NCSCTRL_NEWTRACKBAR`
-- <b>Control English name</b>: newtrackbar
-- *Introduction*: new style track bar, it is base on mGNCS `mTrackbar`, you
-can set `NCS4TOUCH_RENDERER` to it, other property are all same with 
-`mTrackbar`. 
+- Control Window Class: `NCSCTRL_NEWTRACKBAR`
+- Control English name: newtrackbar
+- Introduction: new style track bar, it is base on mGNCS `mTrackbar`, you
+can set `NCS4TOUCH_RENDERER` to it, other property are all same with
+`mTrackbar`.
 
 #### control name
 
@@ -471,9 +465,10 @@ can set `NCS4TOUCH_RENDERER` to it, other property are all same with
 
 #### property
 
-no new property, it include all `mTrackBar` property.
+No new property, it include all `mTrackBar` property.
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|---------|
 | `NCSP_TRKBAR_MAXPOS` | - | int | `RW` | The value of the maximum position. |Pixel |
 | `NCSP_TRKBAR_MINPOS` | - | int | `RW` | The value of the minimum position.|Pixel |
 | `NCSP_TRKBAR_CURPOS` | - | int | `RW` | The value of the current position.|Pixel |
@@ -483,13 +478,13 @@ no new property, it include all `mTrackBar` property.
 
 ![alt](figures/mgncs4touch-mtrackbar.png)
 
-`mNewTrackBar` control
+Figure `mNewTrackBar` control
 
 ### mItemBar
 
-- <b>Control Window Class</b>: `NCSCTRL_ITEMBAR`
-- <b>Control English name</b>: newtrackbar
-- *Introduction*: it is an base item bar, you can use it to implement an
+- Control Window Class: `NCSCTRL_ITEMBAR`
+- Control English name: newtrackbar
+- Introduction: it is an base item bar, you can use it to implement an
 setting ui like `iOS`.
 
 #### control name
@@ -500,27 +495,26 @@ setting ui like `iOS`.
 
 #### style
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NCSS_ITEMBAR_CHECKABLE`| - | int | R | Check whether there is support | |
 | `NCSS_ITEMBAR_HASCHILD`| - | int | R | Whether child controls identified. | |
 
 #### property
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NCSP_ITEMBAR_CHECKED`| - | int | `RW` | set checked status | `mItemBarStyle`|
 | `NCSP_ITEMBAR_IMG`| - | int | `RW` | set image icon|bitmap |
 | `NCSP_ITEMBAR_MARGIN`| - | int | `RW` | set margin |pixel |
 
-
-
 ![alt](figures/mgncs4touch-mitembar.png)
 
-`mItemBar` control
-
+Figure `mItemBar` control
 
 ### mIconFlow
-- <b>Control Window Class</b>: `NCSCTRL_ICONFLOW`
-- <b>Control English name</b>: `IconFlow`
+- Control Window Class: `NCSCTRL_ICONFLOW`
+- Control English name: `IconFlow`
 - *Introduction*: Animated wheel controls, a series of user-supplied options to
 browse as icons,
 the user can select or scroll through the keyboard and mouse operations.
@@ -533,10 +527,10 @@ the user can select or scroll through the keyboard and mouse operations.
 
 #### property
 
-Inherited from
-[Properties](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
-*Unit* |
+Inherited from mItemView.
+
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NCSP_ICONFLOW_DEFITEMWIDTH` | - | int | `RW` | List Item Width | Pixel |
 | `NCSP_ICONFLOW_DEFITEMHEIGHT` | - | int | `RW` | List Item Height | Pixels |
 | `NCSP_ICONFLOW_BKGNDPIECE` | - | `mHotPiece*` | `RW` | Background piece | - |
@@ -547,20 +541,19 @@ Inherited from
 
 #### Event
 
-Inherited from
-[event](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
-| *Event notification code* | *Description* | *Parameter* |
+Inherited from mItemView
 
-`NCSN_ICONFLOW_CLICKED` | Mouse Click Event | Clicked Entry Handle |
+| *Event notification code* | *Description* | *Parameter* |
+|---------------------------|---------------|-------------|
+| `NCSN_ICONFLOW_CLICKED` | Mouse Click Event | Clicked Entry Handle |
 | `NCSN_ICONFLOW_ENTER` | `ENTER` press event | currently selected entry handle |
 
 #### Method
 
-Inherited from
-[Method](http://wiki.minigui.com/bin/view/Products/MStudioMGNCSV1dot0PGP2C14#m_ItemView)
-The iconflow control initializes the size of the list item via the 
-`setIconSize` 
-method and passes the `addItem`
+Inherited from mItemView.
+
+The iconflow control initializes the size of the list item via the
+`setIconSize` method and passes the `addItem`
 The method adds a list item based on the list item information.
 
 ```cpp
@@ -596,25 +589,21 @@ _c(self)->setProperty (self, NCSP_ICONFLOW_VISITEMCOUNT, 5);
 _c(self)->setProperty (self, NCSP_ICONFLOW_SPAN, 120);
 ...
 ```
-
-
 ![alt](figures/mgncs4touch-miconflow.png)
 
-iconflow control
-
+Figure Iconflow control
 
 ## Piece
 
 mGNCS4Touch have provide a large pieces, the follow is some important piece,
 The usage of most part pieces is similar.
 
-
 ### mImagePiece
 
-you can use it to display an image, the specify the align and draw mode.
+You can use it to display an image, the specify the align and draw mode.
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
-*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NCSP_IMAGEPIECE_IMAGE`| - | int | `RW` | set image with Bitmap | Bitmap|
 | `NCSP_IMAGEPIECE_ICON`| - | int | `RW` | set image with Icon| Icon|
 | `NCSP_IMAGEPIECE_MYBITMAP`| - | `mHotPiece*` | `RW` | set image with `MyBitmap`| `MyBitmap` |
@@ -625,20 +614,19 @@ you can use it to display an image, the specify the align and draw mode.
 
 ### mTextPiece
 
-you can use it to display an text.
+You can use it to display an text.
 
 ### mShapeBoxPiece
 
-you can use it to display some simple shape.
+You can use it to display some simple shape.
 
 ### mRadioPiece
 
-an Radio piece.
+An Radio piece.
 
 ### m3DButtonPiece
 
-an 3D button style piece.
-
+An 3D button style piece.
 
 ### mPanelPiece
 
@@ -646,7 +634,7 @@ an 3D button style piece.
 assemble an widget, you should use `mPanelPiece`, the panel manage piece with
 absolute x/y coordinate, no any auto layout support.
 
-#### concept
+#### Concept
 
 `mPanelPiece` is a very powerful basic piece. Its function is similar to a
 container. It supports the addition of other pieces to the panel and specifies
@@ -657,7 +645,7 @@ be achieved through nesting levels.
 `mPanel` also supports animation internally. For the piece added to the panel,
 basic animation such as alpha change, position change, zoom, etc. can be
 implemented. Animations of multiple pieces can be executed in parallel. For
-example, if the animation function is similar to ios above, you need to have
+example, if the animation function is similar with iOS above, you need to have
 Multiple elements are animated at the same time.
 
 #### addContent
@@ -700,39 +688,36 @@ Base animation include:
 ...
 ```
 
-
 ### mNavigationPanelPiece
 
-`mNavigatePanelPiece` is a page-switching navigation container where you can 
-add 
+`mNavigatePanelPiece` is a page-switching navigation container where you can
+add
 a piece to it and then switch animations from one piece page to another,
 including a simple page-level pull/push animation and an alpha change of
-navigation 
+navigation
 bar, the navigate button will be have an move animation yet.
-
 
 #### mNavigationBarPiece
 
-an navigate bar, it provide an title bar like the `iOS`, it have include two
+An navigate bar, it provide an title bar like the `iOS`, it have include two
 button that used for go or back.
 - left button: buttton on bar left.
 - right button: button on bar right.
 - title button: used to show an text title.
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
-*Unit* |
-| `NCSP_NAVIGATIONBARPIECE_BACKGROUND` | - | int | `RW` | set navigate bar backgrounp Bitmap | Bitmap|
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
+| `NCSP_NAVIGATIONBARPIECE_BACKGROUND` | - | int | `RW` | set navigate bar background Bitmap | Bitmap|
 | `NCSP_NAVIGATIONBARPIECE_BKG`| - | int | `RW` | do nothing| Icon|
 | `NCSP_NAVIGATIONBARPIECE_LEFT_BUTTON`| - | `mButtonPanelPiece*` | `RW` | set left button piece | |
 | `NCSP_NAVIGATIONBARPIECE_TITLE_BUTTON`| - | `mTextPiece*`| `RW` | set center title piece| |
 | `NCSP_NAVIGATIONBARPIECE_RIGHT_BUTTON`| - | `mButtonPanelPiece*`| `RW` | set right button piece| |
 
-
-it is used by `mNavigationPanelPiece`.
+It is used by `mNavigationPanelPiece`.
 
 #### mNavigationItem
 
-an navigate item, it is base `mObject`, so it is not an piece, just used for
+An navigate item, it is base `mObject`, so it is not an piece, just used for
 save an navigate item info, such as:
 
 - content: the main content, it is also an piece.
@@ -740,29 +725,29 @@ save an navigate item info, such as:
 - font info: font of buttons.
 - style: navigate bar show or overlapped view.
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
-*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NAVIGATION_STYLE_NORMAL`| - | `mHotPiece*`| `RW` | the bar not overlapped the view, not transparent| |
-| `NAVIGATION_STYLE_FULLSCREEN`| - | int | `RW` | fullscreen bar overlapped theview, transparent| |
-| `NAVIGATION_STYLE_HIDE_BAR`| - | unsigned | `RW` | fullscreen no navigate bar| |
+| `NAVIGATION_STYLE_FULLSCREEN`| - | int | `RW` | full screen bar overlapped the view, transparent| |
+| `NAVIGATION_STYLE_HIDE_BAR`| - | unsigned | `RW` | full screen no navigate bar| |
 
 
 - property: support follow property.
 
-| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* |
-*Unit* |
+| *Property ID* | *miniStudio Name* | *Type* | *Permission* | *Description* | *Unit* |
+|---------------|-------------------|--------|--------------|---------------|--------|
 | `NCSP_NAVIGATIONITEM_CONTENT` | - | `mHotPiece*`| `RW` | set item content| |
-| `NCSP_NAVIGATIONITEM_BACKGROUND`| - | int | `RW` | set item bacground| |
+| `NCSP_NAVIGATIONITEM_BACKGROUND`| - | int | `RW` | set item background| |
 | `NCSP_NAVIGATIONITEM_BAR_BKG` | - | unsigned | `RW` | set item bar background | Pixel |
 | `NCSP_NAVIGATIONITEM_TITLE` | - | int | `RW` | set item title label | |
 | `NCSP_NAVIGATIONITEM_STYLE` | - | unsigned | `RW` | set item style| Pixel |
 | `NCSP_NAVIGATIONITEM_LEFT_BUTTON` | - | `mHotPiece*`| `RW` | set item bar left button| Boolean |
 | `NCSP_NAVIGATIONITEM_TITLE_BUTTON`| - | `mHotPiece*`| `RW` | set item bar title piece| Boolean |
-| `NCSP_NAVIGATIONITEM_RIGHT_BUTTON`| - | `mHotPiece*`| `RW` | set item bar right buton| Boolean |
+| `NCSP_NAVIGATIONITEM_RIGHT_BUTTON`| - | `mHotPiece*`| `RW` | set item bar right button| Boolean |
 | `NCSP_NAVIGATIONITEM_DEFAULT_BUTTON_FONT`| - | int | `RW` | set item button font| Boolean |
 
-it is used by `mNavigationPanelPiece`.
-an navigate bar panel, it is used to manage the navigate item, you can use
+It is used by `mNavigationPanelPiece`.
+An navigate bar panel, it is used to manage the navigate item, you can use
 push to enter an navigate item, and pop to back preview.
 
 - push: enter new navigate item.
@@ -776,11 +761,9 @@ push to enter an navigate item, and pop to back preview.
 | `NCSP_NAVIGATIONPANELPIECE_BAR_BKG`, - | int | `RW` | set navigate panel background bitmap| Bitmap|
 
 
-
 #### sample
 
-follow is an simple sample for use it:
-
+The following is a simple sample for use it:
 
 ```cpp
 
@@ -892,15 +875,14 @@ static BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 ```
 
 
-
-### mTableViewPiece Using
+### Using mTableViewPiece
 
 `mTableViewPiece` is base on the `mPanelPiece` and include an list layout.
 
 #### create piece
 
-`mTableViewPiece` is an internal piece, it is not an control, so you can not 
-use 
+`mTableViewPiece` is an internal piece, it is not an control, so you can not
+use
 it directly, you should inherit it first.
 
 - init piece class: each piece should be init first, use `MGNCS_INIT_CLASS`,
@@ -911,7 +893,7 @@ directly.
 - connect your piece `mContainerCtrl` by `setBody` of `mContainerCtrl`.
 
 ```cpp
-static NCS_EVENT_HANDLER mymain_handlers [] = { 
+static NCS_EVENT_HANDLER mymain_handlers [] = {
     {MSG_CREATE, mymain_onCreate },
     {MSG_LBUTTONDOWN, SpeedMeterMessageHandler },
     {MSG_LBUTTONUP, SpeedMeterMessageHandler },
@@ -927,7 +909,7 @@ tatic BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
     WS_VISIBLE, 0, 0,
     ITEM_W + 50, BTN_H + 10, ITEM_W, TABLEVIEW_ITEMNUM *ITEM_H + 2,
     self->hwnd,
-    NULL, NULL, NULL, 0); 
+    NULL, NULL, NULL, 0);
 
     table_index = table = (mSimpleTableView*)NEWPIECEEX(mSimpleTableView, NCS_TABLEVIEW_INDEXLOCATE_STYLE);
     _c(table)->setSeparatorColor(table, 0xFFFF00FF);
@@ -943,7 +925,7 @@ tatic BOOL mymain_onCreate(mMainWnd* self, DWORD dwAddData )
 
 #### init piece
 
-Definne your own piece and Inherit your piece from `mTableViewPiece`, you 
+Define your own piece and Inherit your piece from `mTableViewPiece`, you
 should implement the relative
 method:
 - `createItemForRow`: used for create one row for the list, it is the most
@@ -953,7 +935,7 @@ create your any other need piece.
 - `numberOfSections`: your section of data, one section is an group, like
 'A', 'B', 'C', if you have no sections for your data, you do not need it.
 - `numberOfRowsInSection`: the number rows in an section, it will return row
-number for each setion.
+number for each section.
 - `titleForSection`: section title.
 - `indexForSection`: section index, it is used to quick jump section
 position.
@@ -987,16 +969,15 @@ END_MINI_CLASS
 /* end of mSimpleTableViewPiece.*/
 ```
 
-
 ![alt](figures/mgncs4touch-mtableview.png)
 
-`mSimpleTableViewPiece` piece
+Figure `mSimpleTableViewPiece` piece
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Using MiniGUI UX Framework &gt;&gt;](MiniGUIProgGuidePart4Chapter03.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
