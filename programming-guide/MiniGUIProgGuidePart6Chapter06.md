@@ -12,7 +12,7 @@ the control, a menu would pop up, and when the user clicks an item of the menu
 with the mouse, the button content will change to the content of this item, as
 shown in Figure 1.
 
-![alt](figures/24.1a.PNG)
+![alt](figures/24.1a.png)
 
 __Figure 1__ Menu button (The left is normal status, the right is effect after menu
 pops up)
