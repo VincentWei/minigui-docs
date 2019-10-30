@@ -205,31 +205,32 @@ Nucleus, uC/OS-II, and `eCos`. The `LCD`’s pixel format should be above 8-bpp
 
 `CommLCD` engine also uses the conception of sub-driver. The sub-drivers
 already implemented in `CommLCD` engine include:
-- --with-targetname= vxi386/vxppc (__TARGET_VXi386__ and __TARGET_VXPPC__): The
+- --with-targetname=vxi386/vxppc (`__TARGET_VXi386__` and `__TARGET_VXPPC__`): The
 sub-driver for VxWorks i386/PowerPc target.
-- --with-targetname=c33l05(__TARGET_C33L05__)：The sub-driver for `EPSON` C33L05
+- --with-targetname=c33l05(`__TARGET_C33L05__`)：The sub-driver for `EPSON` C33L05
 target.
-- --with-targetname=mx21(__TARGET_MX21__)：The sub-driver for `OSE` mx21 target.
-- Without target (__TARGET_UNKNOWN__): The default sub-driver. If it is `eCos`
+- --with-targetname=mx21(`__TARGET_MX21__`)：The sub-driver for `OSE` mx21 target.
+- Without target (`__TARGET_UNKNOWN__`): The default sub-driver. If it is `eCos`
 operation system, MiniGUI will use the standard interfaces to implement the
 sub-driver. Otherwise, you should define the sub-driver by yourself. For more
-information, please see src/newgal/commlcd/unknown.c. There is a default
-implementation for uC/OS-II in rtos/ucos2_startup.c and it is similar to dummy
+information, please see `src/newgal/commlcd/unknown.c`. There is a default
+implementation for uC/OS-II in `rtos/ucos2_startup.c` and it is similar to dummy
 graphics engine.
 
 In every sub-drive of `CommLCD`, we need to implement the following interfaces
-according to the operating system and lower-level `API`.
+according to the operating system and lower-level API.
+
 ```cpp
 int __commlcd_drv_init (void);
 int __commlcd_drv_getinfo (struct commlcd_info *li);
 int __commlcd_drv_release (void);
 int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors);
 ```
-- __commlcd_drv_init function is used to initialize the `LCD` device.
-- __commlcd_drv_release function is used to release the `LCD` device.
-- __commlcd_drv_getinfo function is used to get information of the `LCD`
+- `__commlcd_drv_init` function is used to initialize the `LCD` device.
+- `__commlcd_drv_release` function is used to release the `LCD` device.
+- `__commlcd_drv_getinfo` function is used to get information of the `LCD`
 device.
-- __commlcd_drv_setclut is used to set color palette.
+- `__commlcd_drv_setclut` is used to set color palette.
 
 The structure `commlcd_info` is defined as follows:
 ```cpp
@@ -298,8 +299,7 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 ……
 ```
 
-
-## 18.6 Comm Input Engine
+## Comm Input Engine
 
 MiniGUI provides comm `IAL` for conditional real-time operation systems like
 VxWorks, Nucleus, uC/OS-II, and `eCos`. Based on this engine, you can easily
@@ -707,7 +707,6 @@ descriptor set in. Then it calls select system call. When the value returned by
 select is more than 0, this function will examine if there is any readable data
 waiting to read in the two file descriptors, if so, it will read touch screen
 and key stroke data separately from the two file descriptors.
-
 
 ----
 
