@@ -4,9 +4,9 @@ _To be written_
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Inter-Process Communication and Asynchronous Event Process &gt;&gt;](MiniGUIProgGuidePart5Chapter01.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

@@ -1,7 +1,8 @@
 # Inter-Process Communication and Asynchronous Event Process
+
 In this chapter, we introduce how application processes asynchronous event, and
 how it implements the inter-process communication by using `APIs` provided by
-MiniGUI. 
+MiniGUI.
 
 ## Asynchronous Event Process
 
@@ -22,9 +23,9 @@ As we know, there is only one message queue in an application running on
 MiniGUI-Processes. Application will create a message loop after being
 initialized, and then continuously get messages from this queue until receiving
 message `MSG_QUIT`. When the window procedure of the application handles a
-message, it should immediately returns after having handled the message in 
+message, it should immediately returns after having handled the message in
 order to have a chance to get other messages and handle them. If an application
-calls select to listen in a certain file descriptor, it is possible to 
+calls select to listen in a certain file descriptor, it is possible to
 encounter a problem: as select system call may cause long-time block, and those
 events sent to the application by the MiniGUI-Processes serve will not be
 processed in time. Therefore, the way of message driving and select system call
@@ -39,14 +40,14 @@ Under MiniGUI-Processes, we have some ways of resolving this problem:
 - When calling select system call, pass the value of timeout to ensure select
 system call will not be long-time blocked.
 - Using timer. When the timer is expired, you can use select system call to
-check the listened file descriptor. If there is not any event occurring, it 
+check the listened file descriptor. If there is not any event occurring, it
 will return immediately, otherwise perform read or write operation.
 - Using function `RegisterListenFD` provided by MiniGUI-Processes to register a
 listened file descriptor. When a desired event occurs, MiniGUI-Processes will
 send message `MSG_FDEVENT` to a certain window.
 
 As the former two solutions are comparatively simple, here we will focus on the
-third solution. MiniGUI-Processes provides the following functions and one 
+third solution. MiniGUI-Processes provides the following functions and one
 macro to application:
 
 ```cpp
@@ -67,11 +68,12 @@ receiving the message `MSG_FDEVENT`.
 - `UnregisterListenFD` unregisters a registered listening file descriptor.
 
 After application uses `RegisterListenFD` function to register a listening file
-descriptor, MiniGUI will send a message of `MSG_FDEVENT` to the specified 
-window when the specified event occurs on the descriptor. Application can 
-handle this message in the window procedure. Libvcongui of MiniGUI uses the
+descriptor, MiniGUI will send a message of `MSG_FDEVENT` to the specified
+window when the specified event occurs on the descriptor. Application can
+handle this message in the window procedure. VCOnGUI of mGUtils uses the
 above function to listen to the readable event coming from the master pseudo
-terminal, seen as follows (vcongui/vcongui.c):
+terminal, seen as follows (`src/vcongui/vcongui.c`):
+
 ```cpp
     ...
 
@@ -112,12 +114,14 @@ static int VCOnGUIMainWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lPa
         return DefaultMainWinProc (hWnd, message, wParam, lParam);
 }
 ```
+
 We can see the use of `RegisterListenFD` in the following section. Obviously, a
 MiniGUI-Processes program can conveniently use the bottom message mechanism to
 finish the process of asynchronous event by using this simple interface of
 registering listening file descriptor.
 
 ## MiniGUI-Processes and Inter-Process Communication
+
 As we know, MiniGUI-Processes uses `UNIX` domain sockets to realize the
 interaction between client programs and the server. Application also can use
 this mechanism to finish its own communicating task – send a request from
@@ -127,7 +131,7 @@ to register your own request processing functions to implement your
 request-response communicating task. On the other hand, MiniGUI-Processes also
 provides some wrap functions used to create and operate `UNIX` domain sockets.
 Any application under MiniGUI-Processes can create `UNIX` domain sockets and
-finish the data exchange with other MiniGUI-Processes applications. This 
+finish the data exchange with other MiniGUI-Processes applications. This
 chapter will describe how to use the functions provided by MiniGUI-Processes to
 finish such kind of communication. Before introducing the certain interface,
 let’s first to understand the multi-process communication model and
@@ -141,10 +145,10 @@ in the server is set to `TRUE`; the other MiniGUI applications are clients,
 `mgServer` is set to `FALSE`. Each application runs in different process space,
 seen as Figure 1.
 
-
 ![alt](figures/16.1.jpeg)
 
-Figure 1 Multi-process model of MiniGUI-Processes
+*Figure 1* Multi-process model of MiniGUI-Processes
+
 The current program structure allows each process to have its own (virtual)
 desktop and message queue. The process communication model includes data
 exchange realized by shared memory and the client/server communication model
@@ -157,7 +161,7 @@ and the clients. In order to facilitate such communication, MiniGUI-Processes
 introduces a simple request/response mechanism. Clients send request to the
 server through a specific structure; the server handles the request and
 responds. At the end of clients, a request is defined as follows
-(minigui/minigui.h): 
+(`minigui/minigui.h`):
 
 ```cpp
 typedef struct _REQUEST {
@@ -169,7 +173,7 @@ typedef REQUEST* PREQUEST;
 ```
 Here, id is an integer used to identify the request type; data is the data
 associated to the request; `len_data` is the length of the data in bytes. After
-initializing a `REQUEST` structure, clients can call `ClientRequest` to send 
+initializing a `REQUEST` structure, clients can call `ClientRequest` to send
 the request to the server, and wait for the response from the server. The
 prototype of this function is as follows:
 
@@ -177,19 +181,23 @@ prototype of this function is as follows:
 /* send a request to server and wait reply */
 int ClientRequest (PREQUEST request, void* result, int len_rslt);
 ```
+
 The server program (mginit) can get all client requests during its own message
 loop; it will process each request and send the final result to the client. The
 server can call `ServerSendReply` to send the reply to the client:
+
 ```cpp
 int GUIAPI ServerSendReply (int clifd, const void* reply, int len);
 ```
+
 In the above simple C/S communication, the clients and the serve must be accord
 with each other for a certain request type, that is, the clients and the server
 must understand each type of data and process it properly.
 
 MiniGUI-Processes uses the above way to realize most of system-level
 communication tasks:
-- Mouse cursor management. Mouse cursor is a global resource. When you create 
+
+- Mouse cursor management. Mouse cursor is a global resource. When you create
 or destroy it, change the shape or position of it, or show or hide it, you
 should send a request to the server. The server will finish the task and reply
 the result to you.
@@ -209,9 +217,9 @@ the server:
 
 ```cpp
 #define MAX_SYS_REQID           0x0014
-#define MAX_REQID                0x0020
+#define MAX_REQID               0x0020
 
-/* 
+/*
  * Register user defined request handlers for server
  * Note that user defined request id should larger than MAX_SYS_REQID
  */
@@ -221,7 +229,7 @@ REQ_HANDLER GUIAPI GetRequestHandler (int req_id);
 ```
 The server can register a request handler by calling `RegisterRequestHandler`.
 Note that the prototype of request handler is defined by `REQ_HANDLER`. MiniGUI
-has also defined two macros: `MAX_SYS_REQID` and `MAX_REQID`. `MAX_REQID` is 
+has also defined two macros: `MAX_SYS_REQID` and `MAX_REQID`. `MAX_REQID` is
 the maximum request identifier that can be registered; while `MAX_SYS_REQID`
 does MiniGUI use the maximum request identifier internally. In other words, the
 request identifier registered by `RegisterRequestHandler` must be larger than
@@ -231,6 +239,7 @@ We assume that the server calculates the sum of two integers for clients.
 Clients send two integers to the server, while the server sends the sum of two
 integers to the clients. The following program runs in the server program and
 registers a request handler in the system:
+
 ```cpp
 typedef struct TEST_REQ
 {
@@ -252,8 +261,10 @@ static int test_request (int cli, int clifd, void* buff, size_t len)
      RegisterRequestHandler (MAX_SYS_REQID + 1, test_request);
 ...
 ```
+
 Client can send a request to the server to get the sum of two integers by using
 the following program:
+
 ```cpp
  REQUEST req;
         TEST_REQ test_req = {5, 10};
@@ -264,19 +275,22 @@ the following program:
         req.len_data = sizeof (TEST_REQ);
 
         ClientRequest (&req, &ret_value, sizeof (int));
-        printf (“the returned value: %d\n”, ret_value);    /* ret_value 的值应该是 15 */
+        printf (“the returned value: %d\n”, ret_value);    /* ret_value should be 15 */
 ```
-By using this simple request/response technology, MiniGUI-Processes can create 
+
+By using this simple request/response technology, MiniGUI-Processes can create
 a convenient inter-process communication mechanism between the clients and the
 server. However, this technology also has some shortcomings, for example, the
 number of request is limited by the value of `MAX_REQID`, the communication
 mechanism is not flexible, and the request can only be sent to the server
-(mginit) of MiniGUI-Processes from the clients.
+(`mginit`) of MiniGUI-Processes from the clients.
 
 ### Wraps for `UNIX` Domain Socket
+
 In order to solve the problem of above simple request/reply mechanism,
 MiniGUI-Processes also provides some wrap functions for `UNIX` domain socket.
-The prototypes of these functions are as follow (minigui/minigui.h):
+The prototypes of these functions are as follow (`minigui/minigui.h`):
+
 ```cpp
 /* Used by server to create a listen socket.
  * Name is the name of listen socket.
@@ -320,29 +334,30 @@ int sock_read_t (int fd, void* buff, int count, unsigned int timeout);
 The above functions are used to create `UNIX` domain socket and perform data
 transfer. They are the wraps of basic socket function provided by the operating
 system. The uses of these functions are described as follow:
-- `serv_listen:` The server calls this function to create a listening socket 
+- `serv_listen:` The server calls this function to create a listening socket
 and returns socket file descriptor. It is suggested to create server listening
-socket under the directory of /var/tmp/.
-- `serv_accept:` The server calls this function to accept the connection 
+socket under the directory of `/var/tmp/`.
+- `serv_accept:` The server calls this function to accept the connection
 request from clients.
 - `cli_conn:` Client calls this function to connect the server. Name is the
 listening socket of the server. The socket created for the client is stored in
-the directory of /var/tmp/, named with <pid>-c, in which c is used to
+the directory of `/var/tmp/`, named with `<pid>-c`, in which `c` is used to
 differentiate the purpose of different socket communication task, and specified
-by the argument of project. MiniGUI-Processes internally uses a, so the sockets
-created by application program should use alphabets excluding a.
+by the argument of project. MiniGUI-Processes internally uses `a`, so the sockets
+created by application program should use alphabets excluding `a`.
 - `sock_write_t:` After creating the connection, client and server can use
 `sock_write_t` and `sock_read_t` to perform data exchange. Arguments of
-`sock_write_t` are similar to system call write, but can pass a timeout value 
+`sock_write_t` are similar to system call write, but can pass a timeout value
 in the unit of 10ms. When the argument is zero, the timeout is disabled. Note
-that timeout setting is only valid in the program mginit.
-- `sock_read_t:` Arguments of `sock_read_t` are similar to system call read, 
-but can pass a timeout value in the unit of 10ms. When the argument is zero, 
+that timeout setting is only valid in the program `mginit`.
+- `sock_read_t:` Arguments of `sock_read_t` are similar to system call read,
+but can pass a timeout value in the unit of 10ms. When the argument is zero,
 the timeout is disabled. Note that timeout setting is only valid in program
-mginit. 
+`mginit`.
 
 The following code illustrates how a server program creates a listening socket
 by using above functions:
+
 ```cpp
 #define LISTEN_SOCKET    “/var/tmp/mysocket”
 
@@ -355,16 +370,18 @@ BOOL listen_socket (HWND hwnd)
     return RegisterListenFD (fd, POLL_IN, hwnd, NULL);
 }
 ```
-When the server receives the client connection request, the window of hwnd will
+
+When the server receives the client connection request, the window of `hwnd` will
 receive message `MSG_FDEVENT`, then the server can accept this connection
-request: 
+request:
+
 ```cpp
 int MyWndProc (HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
 {
     switch (message) {
-        
+
         ...
-        
+
         case MSG_FDEVENT:
              if (LOWORD (wParam) == listen_fd) { /* From monitor socket */
                   pid_t pid;
@@ -382,21 +399,23 @@ int MyWndProc (HWND hwnd, int message, WPARAM wParam, LPARAM lParam)
                    sock_write_t (fd, ....);
              }
         break;
-        
+
         ...
-        
+
     }
 }
 ```
+
 In the above code, the server registers the connected file descriptor as
-listening descriptor. Therefore, when handling message `MSG_FDEVENT`, the 
+listening descriptor. Therefore, when handling message `MSG_FDEVENT`, the
 server should determine the file descriptor type that causes message
-`MSG_FDEVENT`. 
+`MSG_FDEVENT`.
 
 Client can use the following code to connect to the server:
+
 ```cpp
     int conn_fd;
-    
+
     if ((conn_fd  = cli_conn (LISTEN_SOCKET, ‘b’)) >= 0) {
         /* Send a require to the server */
         sock_write_t (fd, ....);
@@ -405,15 +424,11 @@ Client can use the following code to connect to the server:
 }
 ```
 
-
--- Main.XiaodongLi - 06 Nov 2009
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Using MiniGUI UX Framework](MiniGUIProgGuidePart4Chapter03.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Developing Customized MiniGUI-Processes Server Program &gt;&gt;](MiniGUIProgGuidePart5Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
