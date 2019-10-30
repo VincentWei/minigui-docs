@@ -7,7 +7,6 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
 - [MiniGUI Overview](MiniGUI-Overview.md)
 - [MiniGUI User Manual](user-manual/README.md)
 - [MiniGUI Programming Guide](programming-guide/README.md)
-- [MiniGUI Porting Guide](porting-guide/README.md)
 - [MiniGUI Supplementary Documents](supplementary-docs/README.md)
 - API Reference Manuals for MiniGUI Core
    * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
@@ -29,6 +28,7 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
    * [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
    * [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
    * [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
+- [MiniGUI Porting Guide](porting-guide/README.md) - Old documents just FYI.
 
 ## 针对中文用户
 
@@ -48,19 +48,29 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
 
 ## Current Status
 
-We are summarizing and rearranging them from various historical documents:
+We have cleaned up the following documents:
 
-- Convert the format from TWiki, PDF, or DOCX to Markdown.
-- Adjust the description according to the latest MiniGUI version.
-- Fix spelling or grammar errors.
-- Use the latest screenshots.
-- Cleanup the document format.
+- MiniGUI User Manual
+- MiniGUI Programming Guide
+- MiniGUI Supplementary Documents
+
+The following documents need to be written:
+
+- [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
+- [The C++ UX Framework](/programming-guide/MiniGUIProgGuidePart4Chapter03.md)
+- [Code Style and Project Specification](/programming-guide/MiniGUIProgGuideAppendixA.md)
 
 We hope that we can finish this work at the end of the year 2019.
 
 ### ChangeLog
 
+- 2019-10-30  
+  MiniGUI Programming Guide is ready.
+
+- 2019-10-37  
+  MiniGUI Supplementary Documents is ready.
+
 - 2019-10-24  
-  MiniGUI User Manual now is ready.
+  MiniGUI User Manual is ready.
 
 

@@ -45,7 +45,7 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
 - Part IV Visual Effects and Animations
    - [Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01.md)
    - [Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02.md)
-   - [Using MiniGUI UX Framework](MiniGUIProgGuidePart4Chapter03.md)
+   - [The C++ UX Framework](MiniGUIProgGuidePart4Chapter03.md)
 - Part V MiniGUI Advanced Programming
    - [Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01.md)
    - [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md)
