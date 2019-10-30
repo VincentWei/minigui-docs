@@ -2,16 +2,13 @@
 
 The progress bar is generally used to prompt the progress of a task for the
 user, and is frequently used for tasks such as copying file, installing
-software. Calling `CreateWindow` function with `CTRL_PROGRESSBAR` as the 
+software. Calling `CreateWindow` function with `CTRL_PROGRESSBAR` as the
 control class name can create a progress bar. Figure 1 is the typical running
 effect of a progress bar.
 
-
-
 ![alt](figures/25.1.jpeg)
 
-Figure 1 Progress bar control
-
+__Figure 1__ Progress bar control
 
 ## Styles of Progress Bar
 
@@ -20,12 +17,9 @@ Progress bar has only the following two styles available:
 notification messages.。
 - `PBS_VERTICAL`: Display the progress bar vertically, as shown in Figure 2.
 
-
-
 ![alt](figures/25.2.jpeg)
 
-Figure 2 Vertical progress bar control
-
+__Figure 2__ Vertical progress bar control
 
 The combination of styles commonly used by a progress bar controls is:
 
@@ -43,16 +37,14 @@ its own progress bar range by calling `PBM_SETRANGE` message:
 SendMessage (hwndEdit, PBM_SETRANGE, min, max) ;
 ```
 
-***
-[Prompt] The range of a progress bar can be set to be a negative value.
-***
+__PROMPT__ The range of a progress bar can be set to be a negative value.
 
 ### Setting Step Value of Progress Bar
 
-We can set the step value for a progress bar, and make the progress bar 
+We can set the step value for a progress bar, and make the progress bar
 stepping forward when each stage task is complete. The step value is 10 by
 default, and can be changed by sending `PBM_SETSTEP` message, as shown in the
-following: 
+following:
 
 ```cpp
 SendMessage (hwndEdit, PBM_SETSTEP, 5, 0) ;
@@ -60,9 +52,7 @@ SendMessage (hwndEdit, PBM_SETSTEP, 5, 0) ;
 
 The above message changes the step value of a progress bar to be 5.
 
-***
-[Prompt] The step value of a progress bar can be set to be a negative value.
-***
+__PROMPT__ The step value of a progress bar can be set to be a negative value.
 
 You should set the position of the progress bar as the max value of its range
 when the step value is a negative and the progress bar will decrease from its
@@ -88,12 +78,10 @@ change the progress position:
 SendMessage (hwndEdit, PBM_DELTAPOS, 10, 0) ;
 ```
 
-The above message will add 10 to the new position based on the current 
+The above message will add 10 to the new position based on the current
 position, i.e., new position is the current position plus 10.
 
-***
-[Prompt] The offset of a progress bar can be set to be a negative value.
-***
+__PROMPT__ The offset of a progress bar can be set to be a negative value.
 
 ### Advancing Position by One Step
 
@@ -104,9 +92,7 @@ equals the result of the current position plus the step value:
 SendMessage (hwndEdit, PBM_STEPIT, 0, 0) ;
 ```
 
-***
-[Note] The present progress bar control does not provide any messages for getting the current position, the current step increment, and the current position range.
-***
+__NOTE__ The present progress bar control does not provide any messages for getting the current position, the current step increment, and the current position range.
 
 ## Notification Codes of Progress Bar
 
@@ -117,18 +103,18 @@ notification codes:
 
 ## Sample Program
 
-List 1 gives an example of using the progress bar control. This program 
+List 1 gives an example of using the progress bar control. This program
 provides two functions. Calling `createProgressWin` function will create a main
 window with a progress bar and then return. We can control the progress bar of
 the main window in our own program, and call `destroyProgressWin` function to
 destroy the progress main window after completing the task. The two functions
 actually come from `MiniGUIExt` library of MiniGUI. List 1 gives the example of
 the implementation and the usage of these two functions, and the running effect
-is as shown in Figure 3. Please refer to progressbar.c of the sample program
+is as shown in Figure 3. Please refer to `progressbar.c` of the sample program
 package `mg-samples` of this guide for the complete source code.
 
 
-List 1 Example of using progress bar
+__List 1__ Example of using progress bar
 
 ```cpp
 #include <stdio.h>
@@ -155,15 +141,12 @@ static HWND createProgressWin (HWND hParentWnd, char * title, char * label,
     int ww, wh;
     HWND hStatic, hProgBar;
 
-    /* 根据窗口客户区宽度计算窗口宽度 */
     /* Calculate the window width according to the width of the window client region */
     ww = ClientWidthToWindowWidth (WS_CAPTION | WS_BORDER, 400);
-    /* 根据窗口客户区高度计算窗口高度 */
     /* Calculate the window height according to the height of the window client region */
-    wh = ClientHeightToWindowHeight (WS_CAPTION | WS_BORDER, 
+    wh = ClientHeightToWindowHeight (WS_CAPTION | WS_BORDER,
             (range > 0) ? 70 : 35, FALSE);
-    
-    /* 创建主窗口 */
+
     /* Create the main window */
     CreateInfo.dwStyle = WS_ABSSCRPOS | WS_CAPTION | WS_BORDER | WS_VISIBLE;
     CreateInfo.dwExStyle = WS_EX_NONE;
@@ -171,8 +154,7 @@ static HWND createProgressWin (HWND hParentWnd, char * title, char * label,
     CreateInfo.hMenu = 0;
     CreateInfo.hCursor = GetSystemCursor(IDC_WAIT);
     CreateInfo.hIcon = 0;
-    /* 该主窗口的窗口过程取默认的主窗口过程 */
-    /* The window procedure of the main window is set to 
+    /* The window procedure of the main window is set to
      * be the default main window procedure
      */
     CreateInfo.MainWindowProc = DefaultMainWinProc;
@@ -193,20 +175,18 @@ static HWND createProgressWin (HWND hParentWnd, char * title, char * label,
     if (hwnd == HWND_INVALID)
         return hwnd;
 
-    /* 在主窗口中创建提示用静态框控件 */
     /* Create a static control for prompting in the main window */
-    hStatic = CreateWindowEx ("static", 
-                  label, 
-                  WS_VISIBLE | SS_SIMPLE, 
+    hStatic = CreateWindowEx ("static",
+                  label,
+                  WS_VISIBLE | SS_SIMPLE,
                   WS_EX_USEPARENTCURSOR,
-                  IDC_STATIC, 
+                  IDC_STATIC,
                   10, 10, 380, 16, hwnd, 0);
-    
-    /* 在主窗口中创建进度条控件 */
+
     /* Create the progress bar control in the main window */
     if (range > 0) {
-        hProgBar = CreateWindowEx ("progressbar", 
-                  NULL, 
+        hProgBar = CreateWindowEx ("progressbar",
+                  NULL,
                   WS_VISIBLE,
                   WS_EX_USEPARENTCURSOR,
                   id,
@@ -216,18 +196,15 @@ static HWND createProgressWin (HWND hParentWnd, char * title, char * label,
     else
         hProgBar = HWND_INVALID;
 
-    /* 更新控件 */
     /* Update the controls */
     UpdateWindow (hwnd, TRUE);
 
-    /* 返回主窗口句柄 */
     /* Return the handle of the main window */
     return hwnd;
 }
 
 static void destroyProgressWin (HWND hwnd)
 {
-    /* 销毁控件以及主窗口 */
     /* Destroy the controls and the main window  */
     DestroyAllControls (hwnd);
     DestroyMainWindow (hwnd);
@@ -245,12 +222,10 @@ int MiniGUIMain (int argc, const char* argv[])
     JoinLayer(NAME_DEF_LAYER , "progressbar" , 0 , 0);
 #endif
 
-    /* 设置“沙漏”鼠标，以表示系统正忙 */
     /* Set “sandglass” mouse to indicate the system is busy */
     hOldCursor = SetDefaultCursor (GetSystemCursor (IDC_WAIT));
 
-    /* 创建进度条窗口，指定进度条控件的标识符和范围值 */
-    /* Create the progressbar window, and specify the 
+    /* Create the progressbar window, and specify the
      * identifier and range of the progress bar control */
     hwnd = createProgressWin (HWND_DESKTOP, "进度条",
             "正在计算，请稍候...", 100, 2000);
@@ -261,14 +236,13 @@ int MiniGUIMain (int argc, const char* argv[])
          DispatchMessage (&msg);
     }
 
-    /* 进入长时计算过程，完成大循环时更新进度条控件的位置 */
-    /* Begin the long time calculating progress,and 
-     * refresh the position of the progressbar when completing 
+    /* Begin the long time calculating progress,and
+     * refresh the position of the progressbar when completing
      * the external loop.
      */
     for (i = 0; i < 2000; i++) {
         unsigned long j;
-        
+
         if (i % 100 == 0) {
             SendDlgItemMessage (hwnd, 100, PBM_SETPOS, i, 0L);
             while (HavePendingMessage (hwnd)) {
@@ -284,10 +258,8 @@ int MiniGUIMain (int argc, const char* argv[])
         sum += sum;
     }
 
-    /* 销毁进度条窗口 */
     /* Destroy the progressbar window */
     destroyProgressWin (hwnd);
-    /* 恢复原有鼠标 */
     /* Recover the original mouse */
     SetDefaultCursor (hOldCursor);
 
@@ -298,22 +270,15 @@ int MiniGUIMain (int argc, const char* argv[])
 #include <minigui/dti.c>
 #endif
 ```
-
-
-
 ![alt](figures/25.3.jpeg)
 
-Figure 3 Example of progress bar control
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 3__ Example of progress bar control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Menu Button Control](MiniGUIProgGuidePart6Chapter06.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Track Bar Control &gt;&gt;](MiniGUIProgGuidePart6Chapter08.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
