@@ -32,7 +32,7 @@ own renderer to draw the UI.
 
 MiniGUI defines the following window elements:
 
-##### Table 1 Window elements and their names in configuration file and codes
+__Table 1__ Window elements and their names in configuration file and codes
 
 | *Name in config file* | *Code Name* | *Meaning* |
 | -----------------------|-------------|-----------|
@@ -86,7 +86,7 @@ renderer. Skin renderer has not only window attributes of other renderers, but
 also attributes of window skin. The descriptions of attributes of window skin
 are as follow:
 
-##### Table 2 Attributes of window skin and their names in configuration file
+__Table 2__ Attributes of window skin and their names in configuration file
 and codes
 
 | *Name in config file* | *Code Name* | *Meaning* |
@@ -310,7 +310,7 @@ typedef struct _WINDOW_ELEMENT_RENDERER {
 
 The following table explains each member in the structure.
 
-##### Table 3 Explanation of renderer structure member
+__Table 3__ Explanation of renderer structure member
 
 | *Member Name* | *Meaning* |
 | ---------------|-----------|
@@ -957,7 +957,7 @@ static void ue_3_term (HWND hwnd)
 
 ![Double buffering](figures/dbuff.gif)
 
-##### Figure 1 UI effect of double buffering main window
+__Figure 1__ UI effect of double buffering main window
 
 ## Customization of Desktop
 
@@ -1637,7 +1637,7 @@ int MiniGUIMain (int args, const char* arg[])
 The screenshot of the application.
 
 ![Customization of Desktop](figures/11.1.png)
-##### Figure 2 Customization of Desktop
+__Figure 2__ Customization of Desktop
 
 ----
 

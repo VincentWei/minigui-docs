@@ -139,7 +139,7 @@ users. <br/>
 
 ![alt](figures/static.png)
 
-##### List 1 static.c
+__List 1__ static.c
 
 ```cpp
 /*
@@ -437,7 +437,7 @@ different drawing modes to the users<br/>
 
 ![alt](figures/image.png)
 
-##### List 2 image.c
+__List 2__ image.c
 
 ```cpp
 /*
@@ -932,7 +932,7 @@ This example demonstrate how to draw all kinds of rectangles to the users<br/>
 
 ![alt](figures/rect.png)
 
-##### List 3 rectangle.c
+__List 3__ rectangle.c
 
 ```cpp
 /*
@@ -1209,7 +1209,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 
 This example demonstrate how to generate group box with renderers to the users.
 
-##### List 4 groupbox.c
+__List 4__ groupbox.c
 
 ```cpp
 /*

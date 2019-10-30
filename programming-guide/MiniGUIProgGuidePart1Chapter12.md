@@ -149,11 +149,11 @@ save file Dialog.
 
 ![Open File Dialog](figures/mgutils-template-openfile.png)
 
-##### Figure 1 Open File Dialog
+__Figure 1__ Open File Dialog
 
 ![Save File Dialog](figures/mgutils-template-savefile.png)
 
-##### Figure 2 Open File Dialog
+__Figure 2__ Open File Dialog
 
 | *ID* | *class name* | *remarks* |
 | ------|--------------|-----------|
@@ -202,11 +202,11 @@ Illustration:
 
 ![Color Select Dialog](figures/mgutils-template-colorselect.png)
 
-##### Figure 3 Color Select Dialog
+__Figure 3__ Color Select Dialog
 
 ![Small Color Select Dialog](figures/mgutils-template-colorselect-small.png)
 
-##### Figure 4 Small Color Select Dialog
+__Figure 4__ Small Color Select Dialog
 
 | *ID* | *class name* | *remarks* |
 | ------|--------------|-----------|
@@ -303,7 +303,7 @@ Illustration:
 
 ![Font Select Dialog](figures/mgutils-template-fontselect.png)
 
-##### Figure 5 Small Color Select Dialog
+__Figure 5__ Small Color Select Dialog
 
 | *ID* | *class name* | *remarks* |
 | ------|--------------|-----------|
@@ -356,7 +356,7 @@ Illustration:
 
 ![Information Dialog](figures/mgutils-template-info.png)
 
-##### Figure 6 Small Color Select Dialog
+__Figure 6__ Small Color Select Dialog
 
 | *ID* | *class name* | *remarks* |
 | ------|--------------|-----------|
@@ -380,7 +380,7 @@ MGUTILS_EXPORT int myMessageBox (HWND hwnd, DWORD dwStyle, const char* title,
 
 ![Message Box](figures/mgutils-messagebox.png)
 
-##### Figure 7 Small Color Select Dialog
+__Figure 7__ Small Color Select Dialog
 
 - `ProgressBar`: Creates a main window within a progress bar.
 
@@ -395,7 +395,7 @@ MGUTILS_EXPORT HWND createProgressWin (HWND hParentWnd, const char* title,
 
 ![Progress Box](figures/mgutils-progressbar.png)
 
-##### Figure 8 Progress Box
+__Figure 8__ Progress Box
 
 - Other common dialog:
 - `createStatusWin`: creates a status main window

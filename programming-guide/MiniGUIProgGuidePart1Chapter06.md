@@ -362,11 +362,11 @@ static HMENU createmenu (void)
 ```
 
 ![Menu created by the notebook program](figures/7.1.jpeg)
-##### Figure 1 Menu created by the notebook program
+__Figure 1__ Menu created by the notebook program
 
 List 2 illustrates the sample program for the popup menu.
 
-##### List 2 Sample program of popup menu</center>
+__List 2__ Sample program of popup menu</center>
 
 ```cpp
 static HMENU CreateQuickMenu (void)
@@ -412,7 +412,7 @@ The pop up menu created by the program in List 2 is as shown in Figure 2.
 
 ![Popup menu](figures/7.2.jpeg)
 
-##### Figure 2 Popup menu
+__Figure 2__ Popup menu
 
 ----
 

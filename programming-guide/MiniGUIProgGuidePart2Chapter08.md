@@ -544,9 +544,9 @@ multiple controls exceeding the window size to the users.
 
 ![alt](figures/container_demo.png)
 
-##### Figure 1 Output of Container Program
+__Figure 1__ Output of Container Program
 
-##### List 1 container.c
+__List 1__ container.c
 
 ```cpp
 /*

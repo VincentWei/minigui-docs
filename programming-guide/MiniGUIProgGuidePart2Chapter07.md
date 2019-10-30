@@ -60,9 +60,9 @@ users.
 
 ![alt](figures/panel_demo.png)
 
-##### Figure 1 Output of panel Program
+__Figure 1__ Output of panel Program
 
-##### List 1 panel.c
+__List 1__ panel.c
 
 ```cpp
 /*
@@ -448,7 +448,7 @@ Specification for the Image Resource Used by Skin Renderer
 ![alt](figures/com.png)
 
 
-##### List 1 combobox.c
+__List 1__ combobox.c
 
 ```cpp
 /*

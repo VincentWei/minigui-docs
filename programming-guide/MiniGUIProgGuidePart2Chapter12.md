@@ -245,9 +245,9 @@ etc.
 
 ![alt](figures/propsheet_demo.png)
 
-##### Figure 1 Output of propsheet Program
+__Figure 1__ Output of propsheet Program
 
-##### List 1 propsheet.c
+__List 1__ propsheet.c
 
 ```cpp
 /*

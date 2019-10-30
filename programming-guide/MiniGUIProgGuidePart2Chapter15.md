@@ -712,9 +712,9 @@ method, such as:
 
 ![alt](figures/scrollview_demo.png)
 
-##### Figure 1 Output of scrollview Program
+__Figure 1__ Output of scrollview Program
 
-##### List 1 scrollview.c
+__List 1__ scrollview.c
 
 ```cpp
 /*
@@ -1242,9 +1242,9 @@ _c(listFile)->setStrCmpFunc(listFile, my_strcmp);
 
 ![alt](figures/listbox_demo.png)
 
-##### Figure 1 Output of listbox Program
+__Figure 1__ Output of listbox Program
 
-##### List 2 listbox.c
+__List 2__ listbox.c
 
 ```cpp
 /**
@@ -1476,9 +1476,9 @@ Example code of adding list item are:
 
 ![alt](figures/iconview_demo.png)
 
-##### Figure p2c6-1 Output of iconview Program
+__Figure 1__ Output of iconview Program
 
-##### List 3 iconview.c
+__List 3__ iconview.c
 
 ```cpp
 /**
@@ -2003,9 +2003,9 @@ node.
 
 ![alt](figures/listview_demo.png)
 
-##### Figure 1 Output of listview Program
+__Figure 1__ Output of listview Program
 
-##### List 4 listview.c
+__List 4__ listview.c
 
 ```cpp
 /**

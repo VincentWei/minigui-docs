@@ -71,7 +71,7 @@ draw an icon in the client area of the window. The complete code of this
 program can be referred to program drawicon.c in sample program package
 `mg-samples` for this guide.
 
-##### List 1 Loading and drawing an icon
+__List 1__ Loading and drawing an icon
 
 ```cpp
 #include <minigui/common.h>
@@ -127,7 +127,7 @@ The output of the program is as shown in Figure 1.
 
 ![Drawing icon](figures/10.1.jpeg)
 
-##### Figure 1 Drawing icon
+__Figure 1__ Drawing icon
 
 The program described above loads two 16-color icons of 32x32 pixels and 16x16
 pixels, respectively. The icon with number 0 is the big icon with 32x32 pixels,
@@ -210,7 +210,7 @@ The code in List 2 describes how to use `CreateIcon` function to create a
 user-defined icon during runtime. The complete code of this program is
 available in program createicon.c in the example program package mg-samples.
 
-##### List 2 Creating an icon
+__List 2__ Creating an icon
 
 ```cpp
 #include <minigui/common.h>
@@ -312,7 +312,7 @@ static int CreateiconWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 The output of the program is as shown in Figure 2.
 
 ![Creating and drawing icon](figures/10.2.jpeg)
-##### Figure 2 Creating and drawing icon
+__Figure 2__ Creating and drawing icon
 
 The code in List 2 creates a user-defined icon `new_icon` by calling 
 `CreateIcon` 
@@ -854,7 +854,7 @@ static int CursordemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 
 ![Using cursor](figures/10.3.jpeg)
 
-##### Figure 3 Using cursor
+__Figure 3__ Using cursor
 
 The user interface of the sample program above is shown in Figure 3. The
 procedure of the main window registers a window class “trap” by calling
@@ -1010,7 +1010,7 @@ caret by left and right arrow key (caret moving key), and delete the character
 in the window with backspace key. The complete code of this program is
 available in program caretdemo.c in the sample program package mg-samples.
 
-##### List 4 Using caret
+__List 4__ Using caret
 
 ```cpp
 #include <stdio.h>
@@ -1187,7 +1187,7 @@ static int CaretdemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
 
 ![A simple edit box](figures/10.4.jpeg)
 
-##### Figure 4 A simple edit box
+__Figure 4__ A simple edit box
 
 For simplification, we use fixed-width font in “myedit” because other fonts are
 more difficult to handle. The window procedure function of myedit uses

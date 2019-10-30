@@ -28,7 +28,7 @@ interface usually have the relationship as shown in Figure 1.
 
 ![Components of graphics user interface](figures/3.1.jpeg)
 
-##### Figure 1: Components of graphics user interface
+__Figure 1__ Components of graphics user interface
 
 The window system is a software system, which helps the user managing and
 controlling different display environments by dividing the display screen
@@ -102,7 +102,7 @@ for the user.
 
 ![Typical main windows (classic style) of MiniGUI](figures/3.2.jpeg)
 
-##### Figure 2 Typical main windows (classic style) of MiniGUI
+__Figure 2__ Typical main windows (classic style) of MiniGUI
 
 __PROMPT__ You can change the appearance style of MiniGUI window when
 configuring MiniGUI. Figure 2 and Figure 3 illustrate the display effect in
@@ -111,7 +111,7 @@ about MiniGUI appearance styles.
 
 ![A typical dialog box (flat style) of MiniGUI](figures/3.3.jpeg)
 
-##### Figure 3 Typical main windows (classic style) of MiniGUI
+__Figure 3__ Typical main windows (classic style) of MiniGUI
 
 ### Creation of Main Window
 
@@ -201,7 +201,7 @@ guide. Some common styles are listed in Table 1. The identifiers for
 these styles are defined in `minigui/window.h`, with prefix of `WS_` or 
 `WS_EX`. 
 
-##### Table 1 Common styles of a window
+__Table 1__ Common styles of a window
 
 | *Style identifier* | *Meaning* | *Comment* |
 | -------------------|-----------|-----------|
@@ -263,7 +263,7 @@ The following codes show how to create irregular window.
 
 ![An irregular window](figures/WindowMask.png)
 
-##### Figure 4 An irregular window (transparent color is white)
+__Figure 4__ An irregular window (transparent color is white)
 
 The following codes show how to create irregular control:
 
@@ -289,7 +289,7 @@ The following codes show how to create irregular control:
 
 ![A multi-line EditBox control which background color is red](figures/EditMask.png)
 
-##### Figure 5 A multi-line `EditBox` control which background color is
+__Figure 5__ A multi-line `EditBox` control which background color is
 red</center> 
 
 For creating irregular window or control, you can also call the following
@@ -326,7 +326,7 @@ Example:
 
 ![Circle button](figures/RoundBtn.png)
 
-##### Figure 6 Circle button
+__Figure 6__ Circle button
 
 MiniGUI created two extended styles, `WS_EX_TROUNDCNS` and `WS_EX_BROUNDCNS`,
 to implement rounded-corner window for convenience. You can just add these
@@ -376,7 +376,7 @@ int MiniGUIMain (int argc, const char* argv[])
 }
 ```
 ![rounded-corner window](figures/RoundWindow.png)
-##### Figure 7 Rounded-corner window
+__Figure 7__ Rounded-corner window
 
 ### Destroying Main Window
 
@@ -603,7 +603,7 @@ mg-sample of this guide to get the complete list of this program.
 
 ![User-define control](figures/3.4.jpeg)
 
-##### Figure 8 Display “Hello, world!” using the user-defined control
+__Figure 8__ Display “Hello, world!” using the user-defined control
 
 We will describe in detail the foundation knowledge of control programming
 in Chapter 5; and discusses the advanced programming techniques related to
@@ -1175,7 +1175,7 @@ the effect of the program is as shown in Figure 9.
 
 ![Using image as window background](figures/3.5.jpeg)
 
-##### Figure 9 Using image as window background
+__Figure 9__ Using image as window background
 
 ### `MSG_PAINT`
 
@@ -1278,7 +1278,7 @@ use the term “window” to refer generally to main windows or controls. The
 functions for windows can be used for main windows or controls if no
 particular note.
 
-##### Table 2 Common window operation functions
+__Table 2__ Common window operation functions
 
 | *Function* | *Purpose* | *Note* |
 | ------------|-----------|--------|

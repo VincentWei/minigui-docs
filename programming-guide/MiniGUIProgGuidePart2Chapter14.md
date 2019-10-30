@@ -121,7 +121,7 @@ Stop the animation, and reset the animation back to the first frame.
 
 ### Programming Example of `mAnimate`
 
-##### List 1 animation.c
+__List 1__ animation.c
 
 ```cpp
 #include <stdio.h>

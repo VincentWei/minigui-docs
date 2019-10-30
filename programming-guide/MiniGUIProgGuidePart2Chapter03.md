@@ -796,7 +796,7 @@ int MiniGUIMain(int argc, const char* argv[])
 }
 ```
 
-##### List 3 resmgr.c
+__List 3__ resmgr.c
 
 ```cpp
 /*

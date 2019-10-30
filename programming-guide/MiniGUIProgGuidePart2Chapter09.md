@@ -158,9 +158,9 @@ renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 ![alt](figures/trackbar-sample.png)
 
-##### Figure 1 Example of trackbar
+__Figure 1__ Example of trackbar
 
-##### List 1 trackbar.c
+__List 1__ trackbar.c
 
 ```cpp
 #include <stdio.h>
@@ -440,9 +440,9 @@ renderer of [mWidget](MiniGUIProgGuidePart2Chapter04.md#mwidget)
 
 ![alt](figures/scrollbar-sample.png)
 
-##### Figure 2 Example of scrollbar
+__Figure 2__ Example of scrollbar
 
-##### List 2 scrollbar.c
+__List 2__ scrollbar.c
 
 
 ```cpp

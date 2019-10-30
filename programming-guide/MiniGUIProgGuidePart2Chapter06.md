@@ -222,7 +222,7 @@ styles, which are common button, image button, Autocheck style button and three
 status button.
 - Complete example code of common button:
 
-##### List 1 button.c
+__List 1__ button.c
 
 ```cpp
 /*
@@ -580,7 +580,7 @@ below: for the drawing of non area region, please refer to the renderer of
 
 - Check box example code
 
-##### List 2 checkbutton.c
+__List 2__ checkbutton.c
 
 ```cpp
 /*

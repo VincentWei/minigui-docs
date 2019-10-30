@@ -6,7 +6,7 @@ mGNCS packages the main window of MiniGUI and brings it into the control
 system, therefore, the whole programming will become very simple and easy to
 learn. Please look at the helloworld program source codes based on mGNCS:
 
-##### List 1 `helloworld.c`
+__List 1__ `helloworld.c`
 
 ```cpp
 /*
@@ -90,7 +90,7 @@ world!”:
 
 ![alt](figures/helloworld.png)
 
-##### Figure 1 Output of helloworld program
+__Figure 1__ Output of helloworld program
 
 ### Head File
 
@@ -299,9 +299,9 @@ shown in the figure below, and demonstrate how to use property and renderer.
 
 ![alt](figures/wnd_template.png)
 
-##### Figure 2 Dialog Box Created Using Window Template
+__Figure 2__ Dialog Box Created Using Window Template
 
-##### List 3 `wnd_template.c`
+__List 3__ `wnd_template.c`
 
 ```cpp
 /*
@@ -686,7 +686,7 @@ and the receiver through global data sheet. As shown in the figure below:
 
 ![alt](figures/event-listener.png)
 
-##### Figure 3 Event Listening and Connection
+__Figure 3__ Event Listening and Connection
 
 When an object is deleted:
 - All the connections listening to the object will be deleted
@@ -839,7 +839,7 @@ Effect of the window created by the program is as shown in the figure below:
 
 ![alt](figures/event-listener.png)
 
-##### Figure 4 Example of Listening Event
+__Figure 4__ Example of Listening Event
 
 The following codes define two listeners, which are used for Stop button and
 Exit button respectively:
@@ -955,7 +955,7 @@ binding:
 
 ![alt](figures/data_binding_model.png)
 
-##### Figure 5 Data Binding Model of mGNCS
+__Figure 5__ Data Binding Model of mGNCS
 
 Data binding transfers data between the graphic user interface and internal
 logic, and its advantages are:
@@ -977,7 +977,7 @@ program is as shown in the figure below:
 
 ![alt](figures/data_binding.png)
 
-##### Figure 6 Data Binding Example Program
+__Figure 6__ Data Binding Example Program
 
 The program binds the content in the edit box with the location of the track
 bar together:
@@ -987,7 +987,7 @@ to reflect the current track bar location;
 - Key an integer value (0-20) in the edit box, and the current location of the
 track bar will change correspondingly.
 
-##### List 5 `data_binding.c`
+__List 5__ `data_binding.c`
 
 ```cpp
 /*
@@ -1179,9 +1179,9 @@ list item control, as shown in the figure below:
 
 ![alt](figures/data_source.png)
 
-##### Figure 7 Data Source Example Program
+__Figure 7__ Data Source Example Program
 
-##### List 6 `data_source.c`
+__List 6__ `data_source.c`
 
 ```cpp
 /*

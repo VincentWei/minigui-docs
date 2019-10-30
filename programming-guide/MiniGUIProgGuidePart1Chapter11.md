@@ -71,7 +71,7 @@ Code in List 1 creates a timer with interval of one second, then use current
 time to set static text when timer is expired so as to display the clock.
 Finally, program will delete the timer while closing window.
 
-##### List 1 Use of Timer
+__List 1__ Use of Timer
 
 ```cpp
 #define _ID_TIMER 100
@@ -400,7 +400,7 @@ icon of the application. Code in List 2 illustrates how to use the functions
 above to get such information (the code comes from program `mginit` of
 mg-samples).
 
-##### List 2 Using MiniGUI configuration file functions to get information
+__List 2__ Using MiniGUI configuration file functions to get information
 
 ```cpp
 #define APP_INFO_FILE “mginit.rc”
@@ -751,7 +751,7 @@ important for three-dimension graphics. Readers can refer to
 Code in List 5 illustrates the use of fixed-point number. This code converts
 plane rectangular coordinates to screen coordinates.
 
-##### List 5 fixed-point computing
+__List 5__ fixed-point computing
 
 ```cpp
 void scale_to_window (const double * in_x, const double * in_y, double * out_x, double * out_y)

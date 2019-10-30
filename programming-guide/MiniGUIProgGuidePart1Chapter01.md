@@ -150,7 +150,7 @@ The quickest approach to understand the basic programming method of MiniGUI is
 to analyze structure of a simple program. List 1 shows a "Hello, world!" program
 of MiniGUI, which will be discussed in detail.
 
-##### List 1 helloworld.c
+__List 1__ helloworld.c
 
 ```cpp
 #include <minigui/common.h>
@@ -228,7 +228,7 @@ As shown in Figure 1, the program creates an application window with size of
 320x240 pixels, and displays “Hello world!” at the center of the window client
 region.
 
-##### Figure 1 The window created by `helloworld` program
+__Figure 1__ The window created by `helloworld` program
 
 ![The window created by helloworld program](figures/1-1.png)
 

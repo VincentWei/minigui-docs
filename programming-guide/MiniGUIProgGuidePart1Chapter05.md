@@ -124,7 +124,7 @@ listed in List 2, and please refer to timeeditor.c file of the sample program
 package of this guide for the complete source code. Fig 6.1 shows the running
 effect of the timeeditor.
 
-##### List 2 Time Editor
+__List 2__ Time Editor
 
 ```cpp
 #include <stdio.h>
@@ -307,7 +307,7 @@ static int TimeEditorWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lPar
 
 ![Running effect of time editor](figures/6.1.jpeg)
 
-##### Figure 1 Running effect of time editor
+__Figure 1__ Running effect of time editor
 
 ----
 

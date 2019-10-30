@@ -155,7 +155,7 @@ and existing as the child controls of `hStaticWnd1`; While `hEdit2` is the
 child 
 control of `hStaicWnd2`, and is the grandchild control of `hStaticWnd1`.
 
-##### List 1 Creating controls using the predefined control classes
+__List 1__ Creating controls using the predefined control classes
 
 ```cpp
 #define IDC_STATIC1     100
@@ -262,7 +262,7 @@ edit box, the system will display the corresponding data in unit of inch in the
 static control below the edit box, and return the data input by the user to the
 function calling the dialog box when the user select “OK” button.
 
-##### List 2 Realizing a simple input dialog box using the predefined controls
+__List 2__ Realizing a simple input dialog box using the predefined controls
 
 ```cpp
 #include <stdio.h>
@@ -431,7 +431,7 @@ the sample code of the controls.
 MiniGUI provides some operation functions specific to control, as show in Table
 2.
 
-##### Table 2 Operation functions specific to control
+__Table 2__ Operation functions specific to control
 
 | *Function* | *Purpose* | *Comment* |
 | -------------------------|------------|-----------|

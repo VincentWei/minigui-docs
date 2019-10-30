@@ -14,7 +14,7 @@ Figure 1 illustrates the process of handling keyboard input in MiniGUI.
 
 ![Keyboard input in MiniGUI](figures/9.1_T.jpeg)
 
-##### Figure 1 Keyboard input in MiniGUI
+__Figure 1__ Keyboard input in MiniGUI
 
 MiniGUI receives original input event or data from keyboard through keyboard
 device driver, and transforms it into MiniGUI abstract keyboard event and data.
@@ -438,7 +438,7 @@ mouse capture, although it can do nothing and does not look like a button very
 much. The complete code is available in program capture.c in the example
 program package `mg-samples` for this guide.
 
-##### List 2 capture.c
+__List 2__ capture.c
 
 ```cpp
 #include <minigui/common.h>
@@ -558,7 +558,7 @@ arbitrarily in the client area of the window, and clear the screen when the
 user clicks the right button. The complete code of this program is available in
 program painter.c in the example program package `mg-samples` for this guide.
 
-##### List 3 painter.c
+__List 3__ painter.c
 
 ```cpp
 #include <minigui/common.h>
@@ -642,7 +642,7 @@ static int PainterWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
 ![A simple painting program](figures/9.3.jpeg)
 
-##### Figure 3 A simple painting program
+__Figure 3__ A simple painting program
 
 The painting flag is set to be `TRUE` when painter handles `MSG_LBUTTONDOWN`
 message, so that the program can paint when receiving `MSG_MOUSEMOVE` message.

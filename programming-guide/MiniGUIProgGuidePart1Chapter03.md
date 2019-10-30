@@ -105,7 +105,7 @@ default renderer and window element property. The application based on MiniGUI
 1.6/2.0 can be compiled in MiniGUI 3.0 directly, if its `CTRLDATA` structure is
 defined as static variable or global variable.
 
-##### List 1 Definition of dialog box template
+__List 1__ Definition of dialog box template
 
 ```cpp
 static DLGTEMPLATE DlgInitProgress =
@@ -162,7 +162,7 @@ as shown in List 2. The running effect of the created dialog box is as shown
 in Figure 1. Please refer to dialogbox.c of the sample program package
 `mg-samples` for this guide to get the complete source code of this program.
 
-##### List 2 Defining the callback function of a dialog box and creating the dialog box
+__List 2__ Defining the callback function of a dialog box and creating the dialog box
 
 ```cpp
 /* Define the dialog box callback function */
@@ -191,7 +191,7 @@ static void InitDialogBox (HWND hWnd)
 ```
 
 ![The dialog box created by program in List 2](figures/4.2.jpeg)
-##### Figure 1 The dialog box created by program in List 2
+__Figure 1__ The dialog box created by program in List 2
 
 The prototypes of `DialogBoxIndirectParam` and related functions are listed as
 follow:
@@ -251,7 +251,7 @@ that
 this data can be readily gotten from the additional data of the dialog box
 window whenever needed.
 
-##### List 3 Handling of `MSG_INITDIALOG` message
+__List 3__ Handling of `MSG_INITDIALOG` message
 
 ```cpp
 static int DepInfoBoxProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
@@ -369,7 +369,7 @@ follows:
 The program in List 4 creates a main window with the dialog box template in
 List 1
 
-##### List 4 Creating a main window with a dialog box template
+__List 4__ Creating a main window with a dialog box template
 
 ```cpp
 /* Define the window callback function */
@@ -421,7 +421,7 @@ Some general window styles are only valid for child controls in the dialog box;
 Table 1 summarizes these styles. The default window procedure of the dialog
 box will handle control with these styles.
 
-##### Table 1 Some styles used only for the controls in a dialog box
+__Table 1__ Some styles used only for the controls in a dialog box
 
 | *Style Identifier* | *Purpose* | *Comment* |
 | --------------------|-----------|-----------|
@@ -435,7 +435,7 @@ dialog boxes although their name having prefix of “Dlg”. For example,
 only the handle of parent window and the identifier of child controls are
 known.
 
-##### Table 2 Operation functions of the dialog box
+__Table 2__ Operation functions of the dialog box
 
 | *Function* | *Purpose* | *Comment* |
 | ------------|-----------|-----------|
