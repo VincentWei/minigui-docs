@@ -67,7 +67,7 @@ We hope that we can finish this work at the end of the year 2019.
 - 2019-10-30  
   MiniGUI Programming Guide is ready.
 
-- 2019-10-37  
+- 2019-10-27  
   MiniGUI Supplementary Documents is ready.
 
 - 2019-10-24  
