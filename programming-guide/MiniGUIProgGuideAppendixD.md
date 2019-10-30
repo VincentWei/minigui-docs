@@ -18,7 +18,7 @@ in the new control set. Control styles in the new control set will be defined
 again.
    - In the new control set, control no longer has extension style.
 - Property. Control property is a newly added concept, which is used for the
-  control features that can be dynamically set (such as intercalator location
+  control features that can be dynamically set (such as caret location
   in the edit box) or dynamically changed (such as list item number in the list
   box). mGNCS provides uniform interface (`getProperty`/`setProperty`) to get or set
   property of control.
