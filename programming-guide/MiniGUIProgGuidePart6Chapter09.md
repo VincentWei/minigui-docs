@@ -12,7 +12,7 @@ MiniGUI is just for compatibility, and new applications should not use it. We
 introduce `CTRL_NEWTOOLBAR` control class in this chapter, and introduce
 `CTRL_COOLBAR` control class in Chapter 36.
 
-Calling `CreateWindow` function with `CTRL_NEWTOOLBAR` as the control class 
+Calling `CreateWindow` function with `CTRL_NEWTOOLBAR` as the control class
 name can create a toolbar control. The running effect of this control is shown
 in Figure 1.
 
@@ -20,8 +20,7 @@ in Figure 1.
 
 ![alt](figures/27.1.jpeg)
 
-Figure 1 Toolbar control
-
+__Figure 1__ Toolbar control
 
 ## Creating Toolbar Control
 
@@ -31,12 +30,10 @@ class through `dwAddData` argument of `CreateWindow` function. `NTBINFO`
 structure is mainly used to define the information of the bitmap used by a
 toolbar, as shown in Table 1.
 
+__Table 1__ `NTBINFO` structure
 
-Table 1 `NTBINFO` structure
-
-
-| *Member* |*Meaning* |*Note*|
-|----------|----------|------|
+| *Member* | *Meaning* | *Note* |
+|----------|-----------|--------|
 | image |Image for displaying the bitmaps of the buttons. | |
 | `nr_cells` |Number of bitmap cells in the image, that is to say, number of lines in total| |
 | `nr_cols` |Number of cell columns in the image, that is to say, number of states of each bitmap cell |1 means the cells have only normal state; <br>2 means the cells have normal and highlight states; <br>3 means the cells have not disabled state. <br>4 or 0 means the cells have all the four possible states. |
@@ -46,19 +43,17 @@ Table 1 `NTBINFO` structure
 
 We must organize the bitmaps on the toolbar buttons (we called bitmap cells) in
 a single bitmap object, and should organize them into a structure as shown in
-Figure 2. Here, the first column illustrates the normal states of all the 
-bitmap cells possibly used by the toolbar buttons; the second column 
+Figure 2. Here, the first column illustrates the normal states of all the
+bitmap cells possibly used by the toolbar buttons; the second column
 illustrates the highlighted states of all the bitmap cells possibly used by the
 toolbar buttons; the third column illustrates the pushed state, and the fourth
 column illustrates the disabled (grayed) state. Each row of the bitmap
 illustrates all the states of a single button bitmap cell.
 
 
-
 ![alt](figures/27.2.jpeg)
 
-Figure 2 Bitmap object used for a toolbar control
-
+__Figure 2__ Bitmap object used for a toolbar control
 
 The toolbar control selects the appropriate bitmap cell in the bitmap object to
 display the button according to the button state in the toolbar.
@@ -68,12 +63,12 @@ display the button according to the button state in the toolbar.
 The toolbar control class supports the following styles:
 - `NTBS_HORIZONTAL`: Display toolbar horizontally. This is the default style.
 - `NTBS_VERTICAL`: Display toolbar vertically, as shown in Figure 3.
-- `NTBS_MULTLINE`: Toolbar can display multiple lines. When type of tool item 
+- `NTBS_MULTLINE`: Toolbar can display multiple lines. When type of tool item
 is `NTBIF_NEWLINE`, it will display the added tool item in another row or
 column, as shown in Figure 3.
 - `NTBS_WITHTEXT`: Display the text under or at the right side of the button,
 and display the text under the button bitmap by default. In this case, the
-application must specify the corresponding text when adding a button. The 
+application must specify the corresponding text when adding a button. The
 bitmap will be popped when the button is active with this style.
 - `NTBS_TEXTRIGHT`: When using it with `NTBS_WITHTEXT` style, this style
 specifies the text to display at the right side of the button bitmap. The
@@ -86,21 +81,18 @@ separate buttons in the toolbar will not be drawn by default, but increase the
 distance between two buttons. When the toolbar has this style, it will draw a
 narrow separator bar.
 
-
-
 ![alt](figures/27.3.jpeg)
 
-Figure 3 Toolbar control display vertically and in multiple columns
-
+__Figure 3__ Toolbar control display vertically and in multiple columns
 
 ## Messages of Toolbar
 ### Adding an Item
 
-An item can be added by sending `NTBM_ADDITEM` message and passing 
+An item can be added by sending `NTBM_ADDITEM` message and passing
 `NTBITEMINFO` structure to the toolbar control. Table 2 gives the meanings of
 the members of `NTBITEMINFO`.
 
-##### Table 2 `NTBITEMINFO` structure
+__Table 2__ `NTBITEMINFO` structure
 
 | *Members *|*Meanings* |*Note*|
 |-----------|-----------|------|
@@ -171,19 +163,19 @@ separator bar, and a button with hotspot to a toolbar control:
 
 ### Getting/Setting Information of an Item
 
-Using `NTBM_GETITEM` or `NTBM_SETITEM` message can get or set the information 
+Using `NTBM_GETITEM` or `NTBM_SETITEM` message can get or set the information
 of an item through its identifier. Use of the two messages is similar to
 `NTBM_ADDITEM`, and the difference is `wParam` as the ID of item and `lParam`
 as point to a `NTBITEMINFO` structure that which member in specifies the item
 information to be gotten or set. The member which can be the `OR’d` of the
 following values:
-- `MTB_WHICH_FLAGS`: Get or set the flag of an item, which is the flags field 
+- `MTB_WHICH_FLAGS`: Get or set the flag of an item, which is the flags field
 in `NTBITEMINFO` structure.
 - `MTB_WHICH_ID`: Get or set the identifier of an item
 - `MTB_WHICH_TEXT`: Get or set the item text. Note that when getting text, you
 must ensure that enough buffer to be passed by text field. For safety
 consideration, it should ensure that the size of the buffer is at least
-“NTB_TEXT_LEN+1”. 
+`NTB_TEXT_LEN+1`.
 - `MTB_WHICH_CELL`: Get or set the bitmap cell index used by the item.
 - `MTB_WHICH_HOTSPOT`: Get or set the hotspot rectangle of the item.
 - `MTB_WHICH_ADDDATA`: Get or set the additional data of the item.
@@ -196,7 +188,7 @@ SendMessage (ntb1, NTBM_ENABLEITEM, 100, FALSE);
 ```
 
 The above code disables (grays) the item with identifier of 100 in ntb1 toolbar
-control. 
+control.
 
 ### `NTBM_SETBITMAP` Message
 
@@ -221,16 +213,16 @@ button, and will not generate a notification message.
 
 ## Sample Program
 
-List 1 gives a sample program of toolbar control. This program creates a 
+List 1 gives a sample program of toolbar control. This program creates a
 toolbar with three buttons. We can control the position of the circle in the
 window by clicking the left item and right item on the toolbar. The other item
 grayed initially is only for demonstration and has no function. The running
-effect of this program is shown in Figure 4. Please refer to newtoolbar.c of 
+effect of this program is shown in Figure 4. Please refer to `newtoolbar.c` of
 the demo program package `mg-samples` of this guide for the complete source
-code. 
+code.
 
 
-List 1 Sample program of toolbar control
+__List 1__ Sample program of toolbar control
 
 ```cpp
 #include <stdio.h>
@@ -252,7 +244,7 @@ static RECT rcCircle = {0, 40, 300, 300};
 
 static void my_notif_proc (HWND hwnd, int id, int nc, DWORD add_data)
 {
-    /* When the user clicked the left or right button, the circle in the window 
+    /* When the user clicked the left or right button, the circle in the window
      * will move left or right correspondingly
      */
     if (nc == IDC_NTB_LEFT) {
@@ -283,7 +275,7 @@ static void create_new_toolbar (HWND hWnd)
     /* Create the toolbar control */
     ntb = CreateWindow (CTRL_NEWTOOLBAR,
                     "",
-                    WS_CHILD | WS_VISIBLE, 
+                    WS_CHILD | WS_VISIBLE,
                     100,
                     0, 0, 1024, 0,
                     hWnd,
@@ -292,7 +284,7 @@ static void create_new_toolbar (HWND hWnd)
     /* Set notification callback */
     SetNotificationCallback (ntb, my_notif_proc);
 
-    /* Set the background color of the toolbar control, 
+    /* Set the background color of the toolbar control,
      * and make it consistent with the background of the button bitmap
      */
     pixel = GetPixelInBitmap (&ntb_bmp, 0, 0);
@@ -367,21 +359,15 @@ static int ToolBarWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 /* Following codes to create the main window are omitted */
 ```
 
-
-
 ![alt](figures/27.4.jpeg)
 
-Figure 4 Use of toolbar control
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 4__ Use of toolbar control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Track Bar Control](MiniGUIProgGuidePart6Chapter08.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Property Sheet Control &gt;&gt;](MiniGUIProgGuidePart6Chapter10.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

@@ -70,8 +70,8 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
    - [Spin Box Control](MiniGUIProgGuidePart6Chapter16.md)
    - [Cool Bar Control](MiniGUIProgGuidePart6Chapter17.md)
    - [Animation Control](MiniGUIProgGuidePart6Chapter18.md)
-   - [GridView Control](MiniGUIProgGuidePart6Chapter19.md)
-   - [IconView Control](MiniGUIProgGuidePart6Chapter20.md)
+   - [Grid View Control](MiniGUIProgGuidePart6Chapter19.md)
+   - [Icon View Control](MiniGUIProgGuidePart6Chapter20.md)
    - [Independent Scrollbar Control](MiniGUIProgGuidePart6Chapter21.md)
 - Appendix Specifications for MiniGUI Developers
    - [Code Style and Project Specification](MiniGUIProgGuideAppendixA.md)
