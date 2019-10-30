@@ -1,21 +1,17 @@
 # Static Control
 
-
-A static control is used to display information, such as text and digits, in 
+A static control is used to display information, such as text and digits, in
 the specified position of a window, and can also be used to display some static
 image information, such as corporation logos, product brands, etc. As suggested
-by its name, the behavior of a static box cannot respond dynamically to the 
+by its name, the behavior of a static box cannot respond dynamically to the
 user input. The existence of the control is basically for displaying some
 information, and does not receive any input from the keyboard or the mouse. Fig
 19.1 shows the typical use of the static control: to be the label of other
 controls in a dialog box.
 
-
-
 ![alt](figures/19.1.jpeg)
 
 Figure 1 Typical use of the static control
-
 
 You can create a static control by calling `CreateWindow` function with
 `CTRL_STATIC` as the control class name.
@@ -23,7 +19,7 @@ You can create a static control by calling `CreateWindow` function with
 ## Types and Styles of Static Control
 
 Styles of a static control comprise the type of the static control and some
-flags. We can divide the static controls into standard type (display text 
+flags. We can divide the static controls into standard type (display text
 only), bitmap type (display icon or bitmap), and special type of group box. We
 will introduce the different types of static control in the following sections.
 
@@ -33,7 +29,7 @@ By setting the style of a static control to be one of `SS_SIMPLE`, `SS_LEFT`,
 `SS_CENTER`, `SS_RIGHT`, and `SS_LEFTNOWORDWRAP`, you can create a static
 control displaying only text. The displayed content thereof is specified in the
 caption argument of `CreateWindow` function and can be changed by calling
-`SetWindowText`. 
+`SetWindowText`.
 
 Static controls with `SS_SIMPLE` style can only be used to display single-line
 text, that is to say, the text in such controls is not wrapped automatically,
@@ -47,7 +43,7 @@ Static controls with `SS_LEFTNOWORDWRAP` will extend `TAB` characters in the
 text, but words are not wrapped automatically.
 
 The following program creates static controls of the several types described
-above: 
+above:
 
 ```cpp
  CreateWindow (CTRL_STATIC,
@@ -79,7 +75,7 @@ above:
                             10, 290, 540, 20, hWnd, 0);
 ```
 
-The appearance of the controls described above is shown in Figure 2. For 
+The appearance of the controls described above is shown in Figure 2. For
 showing the effect clearly, all these static controls have borders.
 
 
@@ -97,9 +93,9 @@ the handle of an icon object or the pointer to a bitmap object to be displayed
 through `dwAddData` parameter when the static control is created. Styles
 associated with these two types of static control are `SS_CENTERIMAGE` and
 `SS_REALSIZEIMAGE`. These two styles are used to control the position of a
-bitmap or an icon in the control. By default, the bitmap or icon fills the 
+bitmap or an icon in the control. By default, the bitmap or icon fills the
 whole static control by appropriate scale, but this scaling operation will be
-canceled when `SS_REALSIZEIMAGE` style is used, and the bitmap or icon aligns 
+canceled when `SS_REALSIZEIMAGE` style is used, and the bitmap or icon aligns
 in the top-left of the static control. If `SS_REALSIZEIMAGE` style is used with
 `SS_CENTERIMAGE` style simultaneously, the bitmap or icon will be displayed in
 the center of the control.
@@ -110,56 +106,36 @@ control by using `SS_REALSIZEIMAGE` and `SS_CENTERIMAGE` styles:
 
 ```cpp
 CreateWindow (CTRL_STATIC,
-                        "",
-                        WS_CHILD | SS_BITMAP | WS_VISIBLE,
-                        IDC_STATIC,
-   1 
-      1 
-         1 
-            1 
-               1 
-                  1 
-                     1 
-                        1 , 80, 50, 50, hWnd, (DWORD)GetSystemBitmap (SYSBMP_CHECKMARK));
+            "",
+            WS_CHILD | SS_BITMAP | WS_VISIBLE,
+            IDC_STATIC,
+            100, 80, 50, 50, hWnd, (DWORD)GetSystemBitmap (SYSBMP_CHECKMARK));
 
-        CreateWindow (CTRL_STATIC,
-                        "",
-                        WS_CHILD | SS_ICON | WS_VISIBLE,
-                        IDC_STATIC,
-   1 
-      1 
-         1 
-            1 
-               1 
-                  1 
-                     1 
-                        1 , 20, 50, 50, hWnd, (DWORD)GetLargeSystemIcon (IDI_INFORMATION));
+CreateWindow (CTRL_STATIC,
+            "",
+            WS_CHILD | SS_ICON | WS_VISIBLE,
+            IDC_STATIC,
+            100, 20, 50, 50, hWnd, (DWORD)GetLargeSystemIcon (IDI_INFORMATION));
 
-        CreateWindow (CTRL_STATIC,
-                   "",
-                  WS_CHILD | SS_BITMAP | SS_REALSIZEIMAGE | SS_CENTERIMAGE | WS_VISIBLE,
-                  IDC_STATIC,
-   1 
-      1 
-         1 
-            1 
-               1 
-                  1 , 140, 50, 50, hWnd, (DWORD)GetSystemBitmap (SYSBMP_CHECKMARK));
+CreateWindow (CTRL_STATIC,
+           "",
+          WS_CHILD | SS_BITMAP | SS_REALSIZEIMAGE | SS_CENTERIMAGE | WS_VISIBLE,
+          IDC_STATIC,
+          100 , 140, 50, 50, hWnd, (DWORD)GetSystemBitmap (SYSBMP_CHECKMARK));
 ```
 
-***
-[Note] Many predefined controls need you pass some initial parameters of them through dwAddData parameter of CreateWindowEx function. Here the first additional data of the window is used to pass these parameters during creating the control, and the application can also use the first additional data of the window to save private data after the control has been created.
-***
+__NOTE__ Many predefined controls need you pass some initial parameters of them
+through dwAddData parameter of CreateWindowEx function. Here the first
+additional data of the window is used to pass these parameters during creating
+the control, and the application can also use the first additional data of the
+window to save private data after the control has been created.
 
 The appearance of the static controls created by the above program is shown in
 Figure 3.
 
-
-
 ![alt](figures/19.3.jpeg)
 
 Figure 3 Static control of bitmap type
-
 
 ### Group Box
 
@@ -179,11 +155,7 @@ CreateWindow (CTRL_STATIC,
                             350, 10, 200, 100, hWnd, 0);
 ```
 
-
-
 ![alt](figures/19.4.jpeg)
-
-
 
 ### Other static control types
 
@@ -196,15 +168,12 @@ control types not frequently used:
 - `SS_WHITEFRAME：A` frame drawn with the light white color.
 - `SS_BLACKFRAME：A` frame drawn with the black color.
 
-Appearances of the static controls using the above styles are shown in Figure 
-5. 
-
-
+Appearances of the static controls using the above styles are shown in Figure
+5.
 
 ![alt](figures/19.5.jpeg)
 
 Figure 5 Other static control types
-
 
 ## Static Control Messages
 
@@ -226,7 +195,7 @@ in a static control.
 
 ## Sample Program
 
-The program in List 1 creates a bitmap static control, and changes the text 
+The program in List 1 creates a bitmap static control, and changes the text
 when the user double-clicks the static control. Please refer to static.c of the
 demo program package `mg-samples` of this guide to get the complete source code
 of the program. The running effect of the program is shown in Figure 6.
@@ -281,21 +250,15 @@ static int StaticDemoWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lPar
 /* The Following code to create the main window are omitted  */
 ```
 
-
-
 ![alt](figures/19.6.jpeg)
 
 Figure 6 The sample of static control
 
-
--- Main.XiaodongLi - 26 Oct 2009
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Universal Startup API for RTOSes](MiniGUIProgGuidePart5Chapter04.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[[Button Control &gt;&gt;](MiniGUIProgGuidePart6Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
