@@ -10,16 +10,16 @@ You can create a month calendar control by calling `CreateWindow` function with
 ## Styles of Month Calendar
 
 A month calendar control can use several forms of Chinese or English and so on
-to display the date information such as week, month, etc. Specifying the 
-control style to be `MCS_CHN`, `MCS_ENG_L`, or `MCS_ENG_S` can complete this. 
+to display the date information such as week, month, etc. Specifying the
+control style to be `MCS_CHN`, `MCS_ENG_L`, or `MCS_ENG_S` can complete this.
 If a month calendar control has the style `MCS_CHN`, the control will display
 the date information in Chinese; if having the style `MCS_ENG_L`, the control
-will display the date information in English; and if having the style 
+will display the date information in English; and if having the style
 `MCS_ENG_S`, the control displays the date information in abbreviate English.
 
 If having the style `MCS_NOTIFY`, the month calendar control will generate
 corresponding notification messages in cases such as responding to the user’s
-operation. 
+operation.
 
 ## Messages of Month Calendar
 ### Getting Date
@@ -80,16 +80,16 @@ current month. The weekday number is the number of days since Sunday, in the
 range 0 to 6.
 
 `MCM_GETCURDATE` message gets the current selected date in a month calendar
-control: 
+control:
 
 ```cpp
 SYSTEMTIME systime;
 SendMessage (hwndMonthcal, MCM_GETCURDATE, 0, (LPARAM)&systime) ;
 ```
 
-Here systime is a structure of `SYSTEMTIME` type, which stores the gotten date
-information such as year, month, day, and week, etc. This structure is also 
-used for messages such as `MCM_GETTODAY` and so on. The definition of 
+Here `systime` is a structure of `SYSTEMTIME` type, which stores the gotten date
+information such as year, month, day, and week, etc. This structure is also
+used for messages such as `MCM_GETTODAY` and so on. The definition of
 `SYSTEMTIME` structure is as follows:
 
 ```cpp
@@ -114,14 +114,14 @@ SYSTEMTIME systime;
 SendMessage (hwndMonthcal, MCM_GETTODAY, 0, (LPARAM)&systime) ;
 ```
 
-Here systime is also a structure of `SYSTEMTIME` type.
+Here `systime` is also a structure of `SYSTEMTIME` type.
 
 ### Setting Date
 
 It should be noted that special user right (such as root) may needed to set the
 date in Linux/UNIX system.
 
-`MCM_SETCURDAY` message sets the current day, `MCM_SETCURMONTH` message sets 
+`MCM_SETCURDAY` message sets the current day, `MCM_SETCURMONTH` message sets
 the current month, and `MCM_SETCURYEAR` sets the current year:
 
 ```cpp
@@ -133,7 +133,7 @@ SendMessage (hwndMonthcal, MCM_SETCURMONTH, month, 0) ;
 SendMessage (hwndMonthcal, MCM_SETCURYEAR, year, 0) ;
 ```
 
-Here, day, month, and year specify the new day, month and year respectively, 
+Here, day, month, and year specify the new day, month and year respectively,
 and if these values exceed the rational values, the control will adopt the most
 approached day, month, or year.
 
@@ -162,7 +162,7 @@ SendMessage (hwndMonthcal, MCM_SETCOLOR, 0, (LPARAM)&color) ;
 ```
 
 Here color is a structure of `MCCOLORINFO`, and is used to store color
-information: 
+information:
 
 ```cpp
 typedef struct _MCCOLORINFO
@@ -197,7 +197,7 @@ typedef struct _MCCOLORINFO
 ### Size of Control
 
 A month calendar has a minimum limit for the window to display content in it
-normally. `MCM_GETMINREQRECTW` and `MCM_GETMINREQRECTH` messages are used to 
+normally. `MCM_GETMINREQRECTW` and `MCM_GETMINREQRECTH` messages are used to
 get the minimum width and the minimum height respectively:
 
 ```cpp
@@ -210,17 +210,16 @@ The return values of `SendMessage` functions are the minimum width and height.
 
 ## Notification Codes of Month Calendar
 
-When user clicked month calendar and the currently selected date is changed, 
+When user clicked month calendar and the currently selected date is changed,
 the control will generate `MCN_DATECHANGE` notification code.
 
 ## Sample Program
 
-Program in List 1 illustrates the use of month calendar control. Please refer 
-to monthcal.c file of the demo program package of this guide for the complete
+Program in List 1 illustrates the use of month calendar control. Please refer
+to `monthcal.c` file of the demo program package of this guide for the complete
 source code.
 
-
-List 1 Sample Program of month calendar control
+__List 1__ Sample Program of month calendar control
 
 ```cpp
 #define IDC_MC                100
@@ -247,7 +246,7 @@ static CTRLDATA CtrlTime[]=
         }
 };
 
-static DLGTEMPLATE DlgTime = 
+static DLGTEMPLATE DlgTime =
 {
         WS_VISIBLE | WS_CAPTION | WS_BORDER,
         WS_EX_NONE,
@@ -272,7 +271,7 @@ static int TimeWinProc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
                  SYSTEMTIME date;
                  /* Get the current date of month calendar */
                  SendMessage (GetDlgItem(hDlg, IDC_MC), MCM_GETCURDATE, 0, (LPARAM)&date);
-                 sprintf (info, "You will meet Bush president on  %d.%d.%d", 
+                 sprintf (info, "You will meet Bush president on  %d.%d.%d",
                                   date.year, date.month, date.day);
                  MessageBox (hDlg, info, "Date", MB_OK);
                  EndDialog (hDlg, 0);
@@ -291,21 +290,15 @@ static int TimeWinProc(HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 }
 ```
 
-
-
 ![alt](figures/33.1.jpeg)
 
-Figure 1 Use of month calendar
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 1__ Use of month calendar
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; List View Control](MiniGUIProgGuidePart6Chapter14.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Spin Box Control &gt;&gt;](MiniGUIProgGuidePart6Chapter16.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
