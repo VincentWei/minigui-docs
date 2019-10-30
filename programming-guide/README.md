@@ -41,10 +41,11 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
    - [Handling and Rendering of Text](MiniGUIProgGuidePart3Chapter02.md)
    - [Advanced GDI Functions](MiniGUIProgGuidePart3Chapter03.md)
    - [Using mGPlus for Vector Graphics](MiniGUIProgGuidePart3Chapter04.md)
+   - [Integrating with GPU](MiniGUIProgGuidePart3Chapter05.md)
 - Part IV Visual Effects and Animations
    - [Using mGEff for Visual Effects and Animations](MiniGUIProgGuidePart4Chapter01.md)
    - [Using mGNCS4Touch](MiniGUIProgGuidePart4Chapter02.md)
-   - [Using OpenGL ES and/or OpenVG with MiniGUI](MiniGUIProgGuidePart4Chapter03.md)
+   - [Using MiniGUI UX Framework](MiniGUIProgGuidePart4Chapter03.md)
 - Part V MiniGUI Advanced Programming
    - [Inter-Process Communication and Asynchronous Event Process](MiniGUIProgGuidePart5Chapter01.md)
    - [Developing Customized MiniGUI-Processes Server Program](MiniGUIProgGuidePart5Chapter02.md)

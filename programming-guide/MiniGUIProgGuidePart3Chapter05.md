@@ -4,9 +4,9 @@ _To be written_
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Using mGPlus for Vector Graphics](MiniGUIProgGuidePart3Chapter04.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Using mGEff for Visual Effects and Animations &gt;&gt;](MiniGUIProgGuidePart4Chapter01.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

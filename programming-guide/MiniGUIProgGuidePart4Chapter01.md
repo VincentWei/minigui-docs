@@ -7,15 +7,13 @@
 In general, animations fall into two types: Frame animations and properties
 animation. Frame animation
 refers to playing a series of disparate images
-prepared in advance to achieve an animation effect, such as Gif,Image and so 
-on; 
+prepared in advance to achieve an animation effect, such as GIF, image and so
+on;
 and attribute animation is achieved by continuously changing
 the various properties of the displayed object (such as size, position, angle,
 transparency, etc.) to achieve animation effects. This animation also has the
 concept of frame, but each frame is through real-time calculate and change
 the object's property value to generate an animation.
-
-mGEff
 
 It is the property animation that is supported: the user can obtain
 the changed property value at each frame when the animation is performed by
@@ -24,18 +22,18 @@ property and other related parameters. The value changes the object's
 properties to make it sporty. To sum up, use mGEff the essence of the animation
 is to
 change the value of the object property from the starting value to the ending
-value 
+value
 within the specified time range.
 
 ### Terminology
 
-- Animation: The underlying mechanism by which the `mGEFF` component operates.
+- Animation: The underlying mechanism by which the mGEff component operates.
 It mainly provides
 the application with trajectory control mechanisms for animation objects, such
 as dynamic curves and time schedules.
 It also provides parallel and serial processing functions for multiple
 animation objects. Users can develop their own interface special effects based
-on `mGEFF's` animation mechanism.
+on `mGEff's` animation mechanism.
 - Special Effect: Based on the underlying animation mechanism, provides `UX`
 effects that can
 be used directly by upper-level applications, such as blinds, fades. mGEff
@@ -44,7 +42,7 @@ only a single degree of freedom in the
 special effects, the future can achieve multiple degrees of freedom effects.
 The process of developing interface special effects directly based on the
 animation mechanism is more complicated. In order to support common user
-interface special effects, `mGEFF` provides directly usable interface special
+interface special effects, mGEff provides directly usable interface special
 effects based on the underlying animation mechanism. The use of special
 effects interfaces is convenient and simple, but has some limitations. For
 more complex special effects, applications still need to use animation
@@ -54,26 +52,25 @@ mechanisms directly.
 ### Framework
 
 mGEff is a C Language-implemented lightweight animation framework that provides
-an 
+an
 efficient and flexible animation implementation. Since mGEff
 The design goal is to create an animation mechanism that is independent of the
 specific platform and graphics system, so it can be combined with
 `MiniGUI,GTK+`, and other GUI systems combined to develop `GDI` level, control
-level, 
+level,
 and window level animations:
 
 Although mGEff itself uses C Language development, but its design and
 implementation use some basic
 object-oriented thinking, such as simulation with struct
 Class, knowing this is very helpful for using it. Here is the mGEff class
-diagram: 
+diagram:
 
-As you can see from the figure above, mGEff provides `EffAnimation`
-/EffAnimationGroup/EffEffector For other components, the use of `mGEFF` will be
-described in detail in the
-section “Introduction to the use of `mGEW”`.
+As you can see from the figure above, mGEff provides `EffAnimation`,
+`EffAnimationGroup`, and `EffEffector`. For other components, the use of mGEff
+will be described in detail in the following section.
 
-## `mGEFF` basics
+## mGEff basics
 
 ### mGEff `API`
 
@@ -99,13 +96,13 @@ MGEFF_DECLARE_HANDLE(MGEFF_ANIMATION);
 
 #### Initialize/Deinitialize
 
-In use Before `mGEFF`, it must be initialized; after use (usually at the end of
-the 
+In use Before mGEff, it must be initialized; after use (usually at the end of
+the
 program), deinitialize to destroy the resources occupied by the framework.
 
 ```cpp
 MGEFF_EXPORT int mGEffInit (void); // Initialization function
-MGEFF_EXPORT void mGEFFDeinit (void); // Deinitialization function
+MGEFF_EXPORT void mGEffDeinit (void); // Deinitialization function
 ```
 
 The above two functions can be called in nested pairs, but it should be noted
@@ -238,7 +235,7 @@ MGEFF_EXPORT int  mGEffAnimationSyncRun(MGEFF_ANIMATION handle);
 
 ### Animation simple sample
 
-After `mGEFF` is initialized, you can start creating animations:
+After mGEff is initialized, you can start creating animations:
 ```cpp
 #include <mgeff/mgeff.h>;
 
@@ -257,7 +254,7 @@ Int main(int argc, const char *argv[])
     Int startValue = 0;
     Int endValue = 10;
 
-    mGEffInit(); // mGEFF initialization
+    mGEffInit(); // mGEff initialization
     // Create an animation
     MGEFF_ANIMATION animation = mGEffAnimationCreate(NULL, onPropertyChanged,
 0, MGEFF_INT);
@@ -317,7 +314,7 @@ some information related to the animation in the function;
 - target - the target to be animated, it is calling `mGEffAnimationCreate`
 Specified when the animation is created, it can be a window, control
 handle, or something else;
-- id - The ID value of the property, also called `mGEFFAnimationCreate`
+- id - The ID value of the property, also called `mGEffAnimationCreate`
 When specified, sometimes users want to share the same property change
 callback in multiple animations to control the change of multiple properties
 of the object. At this time, you can set different for each property.
@@ -348,7 +345,7 @@ By changing the printf to a circle radius, you can get a realistic animation.
 
 ### Power curve
 
-The previous section introduced an example of creating a simple `mGEFF`
+The previous section introduced an example of creating a simple mGEff
 animation, but a callback from a property change
 Printing of `onPropertyChanged` function can be seen, property values
 from 1 to 10
@@ -456,8 +453,8 @@ Void mGEffAnimationSetProperty(MGEFF_ANIMATION handle, enum EffAnimProperty
 Id, int value);
 ```
 
-For example by `mGEffAnimationSetProperty(animation`, `MGEFF_PROP_LOOPCOUNT`, 
-5) 
+For example by `mGEffAnimationSetProperty(animation`, `MGEFF_PROP_LOOPCOUNT`,
+5)
 You can change the number of animation animation loops to 5 times.
 
 ### Animation Group
@@ -742,8 +739,8 @@ effector);
 
 ```
 
-Follow sample is `MGEFF_MINOR_zip`, you can use all above effector that has 
-been 
+Follow sample is `MGEFF_MINOR_zip`, you can use all above effector that has
+been
 support by mGEff.
 
 ```cpp
@@ -790,7 +787,7 @@ MGEFF_DIRECTION_LDOWN2RUP);
 
 ```
 
-## `mGEFF` use advanced
+## mGEff use advanced
 ### Animation execution
 
 The animation supports synchronous and asynchronous two different execution
@@ -800,6 +797,7 @@ the message; after the asynchronous execution function is called, the
 animation will be returned immediately and the animation will still be The
 schedule is executed until it is aborted or ended, and the program can respond
 to the processing message. The specific function prototype is as follows:
+
 ```cpp
 // Perform animations synchronously
 Int mGEffAnimationSyncRun(MGEFF_ANIMATION handle);
@@ -810,9 +808,10 @@ Int mGEffAnimationAsyncRun(MGEFF_ANIMATION handle);
 // Wait for the asynchronous animation to end
 MGEFF_BOOL mGEffAnimationWait(void* phWnd, MGEFF_ANIMATION handle);
 ```
+
 Synchronous and asynchronous animation function is very simple, there is only
 one animation handle parameters, create a good animation, its handle passed to
-any function will run in the corresponding execution. and
+any function will run in the corresponding execution. And
 `mGEffAnimationWait`
 Function is used to wait for an asynchronous animation to complete, the first
 parameter is the address of the current thread's form handle, the second
@@ -838,35 +837,26 @@ Void mGEffAnimationReStart(MGEFF_ANIMATION handle);
 
 #### `MGEFF_EFFECTOROPS`
 
-`MGEFF_EFFECTOROPS` contains whole info of an effector, if you want to custom 
-an 
-effector, implement it, In the mGEff, it has defined some effector like the
+`MGEFF_EFFECTOROPS` contains whole info of an effector, if you want to custom
+an effector, implement it, In the mGEff, it has defined some effector like the
 follow, when you custom an your own effector, you do not need to implement all
-the callback, but the ondraw callback must be include.
+the callback, but the `ondraw` callback must be include.
 
 ```cpp
 typedef struct _EFFECTOROPS {
-    char                         name[EFFECTORNAME_MAX_LEN + 1]; /*< name
-of effector */
-    enum EffVariantType          varianttype;                    /*<
-variant type */
-    MGEFF_EFFECTOR_INIT          init;                           /*< init
-*/
-    MGEFF_EFFECTOR_FINALIZE      finalize;                       /*<
-finalize */
-    MGEFF_EFFECTOR_ANIM_ONDRAW   ondraw;                         /*< on
-draw */
-    MGEFF_EFFECTOR_ONBEGINDRAW   begindraw;                      /*< begin
-draw */
-    MGEFF_EFFECTOR_ONENDDRAW     enddraw;                        /*< end
-draw */
-    MGEFF_EFFECTOR_SETPROPERTY   setproperty;                    /*< set
-property */
-    MGEFF_EFFECTOR_GETPROPERTY   getproperty;                    /*< get
-property */
+    char                         name[EFFECTORNAME_MAX_LEN + 1]; /* name of effector */
+    enum EffVariantType          varianttype;                    /* variant type */
+    MGEFF_EFFECTOR_INIT          init;                           /* init */
+    MGEFF_EFFECTOR_FINALIZE      finalize;                       /* finalize */
+    MGEFF_EFFECTOR_ANIM_ONDRAW   ondraw;                         /* on draw */
+    MGEFF_EFFECTOR_ONBEGINDRAW   begindraw;                      /* begin draw */
+    MGEFF_EFFECTOR_ONENDDRAW     enddraw;                        /* end draw */
+    MGEFF_EFFECTOR_SETPROPERTY   setproperty;                    /* set property */
+    MGEFF_EFFECTOR_GETPROPERTY   getproperty;                    /* get property */
 } MGEFF_EFFECTOROPS;
 
-...;
+...
+
 #ifdef _MGEFF_ZIPEFFECTOR
 extern MGEFF_EFFECTOROPS zipeffector;
 #endif
@@ -874,7 +864,7 @@ extern MGEFF_EFFECTOROPS zipeffector;
 
 ```
 
-#### Simple alphaeffector sample
+#### Simple alpha effector sample
 
 An very easy alpha effector as follow:
 
@@ -896,8 +886,7 @@ _effector,
     effbaseeffector_rect(sink_dc, &rc_sink);
 
     if (sink_dc = HDC_INVALID) {
-        SetMemDCAlpha (source2->hdc, MEMDC_FLAG_SRCALPHA,  (*(float*)value)
-* 255);
+        SetMemDCAlpha (source2->hdc, MEMDC_FLAG_SRCALPHA,  (*(float*)value) * 255);
         BitBlt (source1->hdc, rc1.left, rc1.top, RECTW(rc1),
                 RECTH(rc1 ), sink_dc, rc_sink .left, rc_sink .top, 0);
         BitBlt (source2->hdc, rc2.left, rc2.top, RECTW(rc2 ),
@@ -918,22 +907,21 @@ MGEFF_EFFECTOROPS alphaeffector =
 };
 ```
 
-#### Complex zoomeffector sample
+#### Complex zoom effector sample
 
-if you want to implement an complex effector, you can see the zoom effector in
+If you want to implement a complex effector, you can see the zoom effector in
 the mGEff:
 
-- init/finalize: malloc or free your own context var, like `EffZoomCtxt` is
+- `init/finalize`: allocate or free your own context var, like `EffZoomCtxt` is
 use to save zoom factor property.
-- begindraw: init the start and end value of animation, such as zoom start
-rect size and end rect size.
-- setproperty: setproperty is used to change zoom factor strategy, you can
+- `begindraw`: initialize the start and end value of animation, such as zoom start
+rectangle size and end rectangle size.
+- `setproperty`: `setproperty` is used to change zoom factor strategy, you can
 change it to implement your own strategy, just like zoom more quick or
 zoom accelerate.
-- getproperty: getproperty is used to return zoom factor for effector.
+- `getproperty`: `getproperty` is used to return zoom factor for effector.
 
 ```cpp
-
 typedef struct _EffZoomCtxt{
     int zoom;
     RECT prev_rc;
@@ -947,8 +935,7 @@ MGEFF_EFFECTOR effzoomeffector_init(MGEFF_EFFECTOR _effector)
     return _effector;
 }
 
-void effzoomeffector_begindraw(MGEFF_ANIMATION animation, MGEFF_EFFECTOR
-_effector)
+void effzoomeffector_begindraw(MGEFF_ANIMATION animation, MGEFF_EFFECTOR _effector)
 {
 ...
     mGEffAnimationSetStartValue (animation, &rc_s);
@@ -962,8 +949,7 @@ void effzoomeffector_finalize (MGEFF_EFFECTOR _effector)
     free (effector->context);
 }
 
-int effzoomeffector_setproperty(MGEFF_EFFECTOR _effector, int property_id, int
-value)
+int effzoomeffector_setproperty(MGEFF_EFFECTOR _effector, int property_id, int value)
 {
     EffEffector *effector = (EffEffector *)_effector;
     EffZoomCtxt* zoom_context = (EffZoomCtxt*)effector->context;
@@ -983,8 +969,7 @@ value)
     return -1;
 }
 
-int effzoomeffector_getproperty(MGEFF_EFFECTOR _effector, int property_id,
-int* value)
+int effzoomeffector_getproperty(MGEFF_EFFECTOR _effector, int property_id, int* value)
 {
     EffEffector *effector = (EffEffector *)_effector;
     EffZoomCtxt* zoom_context = (EffZoomCtxt*)effector->context;
@@ -1029,10 +1014,9 @@ motion curve function, you can implement your own curve change.
 ```cpp
 enum EffMotionType {
 ....
-    SineCurve, /*< Sine Curve */
-    CosineCurve, /*< Cosine Curve */
-    Custom,  /*< This is returned if the user specified a custom curve
-type. */
+    SineCurve,      /* Sine Curve */
+    CosineCurve,    /* Cosine Curve */
+    Custom,         /* This is returned if the user specified a custom curve type. */
     NCurveTypes
 };
 
@@ -1067,17 +1051,11 @@ MGEFF_FLOAT);
 }
 ```
 
-
-## Comments
-
-
-
-
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Integrating with GPU](MiniGUIProgGuidePart3Chapter05.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Using mGNCS4Touch &gt;&gt;](MiniGUIProgGuidePart4Chapter02.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md

@@ -2706,7 +2706,7 @@ MGPlusFillEllipse (graphics, brush, 100, 100, 50, 25);
 
 [&lt;&lt; Advanced GDI Functions Based on NEWGAL](MiniGUIProgGuidePart3Chapter03.md) |
 [Table of Contents](README.md) |
-[Using mGEff for Visual Effects and Animations &gt;&gt;](MiniGUIProgGuidePart4Chapter01.md)
+[Integrating with GPU &gt;&gt;](MiniGUIProgGuidePart4Chapter01.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
