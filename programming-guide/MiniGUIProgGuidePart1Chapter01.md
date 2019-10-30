@@ -1,19 +1,5 @@
 # Beginning MiniGUI Programming
 
-- [Basic Programming Concepts](#basic-programming-concepts)
-   + [Event Driven Programming](#event-driven-programming)
-   + [Three Runtime Modes of MiniGUI](#three-runtime-modes-of-minigui)
-- [Hello, world!](#hello-world)
-   + [Header Files](#header-files)
-   + [Entrance of the Program](#entrance-of-the-program)
-   + [Joining a Layer in MiniGUI-Processes](#joining-a-layer-in-minigui-processes)
-   + [Creating and Showing Main Window](#creating-and-showing-main-window)
-   + [Window Procedure Function](#window-procedure-function)
-   + [Screen Output](#screen-output)
-   + [Exit of the Program](#exit-of-the-program)
-- [Compiling, Linking and Running](#compiling-linking-and-running)
-- [Writing Autotools Scripts for MiniGUI Application](#writing-autotools-scripts-for-minigui-application)
-
 We describe the basic concepts and foundation knowledge of MiniGUI programming
 with a simple MiniGUI program (`Hello, world!`) in this chapter.
 
