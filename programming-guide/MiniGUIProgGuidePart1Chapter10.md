@@ -125,7 +125,7 @@ and codes
 We can change window attribute before execute program and control look and feel
 of window by changing MiniGUI configuration file. We can also customize look
 and feel of window in the program by using `APIs`. To help with operating of
-window attribute, MiniGUI defines the following `API` to implement operating of
+window attribute, MiniGUI defines the following API to implement operating of
 window attribute.
 
 ```cpp
@@ -361,7 +361,7 @@ The following table explains each member in the structure.
 | refcount| Attribute of window reference counter |
 | `private_info`| Pointer of renderer's private information |
 
-MiniGUI provides the following `API` to manage renderer:
+MiniGUI provides the following API to manage renderer:
 
 - `GetWindowRendererFromName`: Get renderer from name. Function prototype is as
 follows:
@@ -411,7 +411,7 @@ MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd, const char* werdr_nam
 ### Creating main window
 
 It needs more arguments to create main window after draw a window by using
-renderer, for `API` compatible, MiniGUI created a new function,
+renderer, for API compatible, MiniGUI created a new function,
 `CreateMainWindowEx`, and packaged the old creating function. Function 
 prototype 
 is as follow.

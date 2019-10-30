@@ -72,7 +72,7 @@ will be described in detail in the following section.
 
 ## mGEff basics
 
-### mGEff `API`
+### mGEff API
 
 #### Header files
 

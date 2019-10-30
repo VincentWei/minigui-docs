@@ -110,7 +110,7 @@ This guide is divided into the following appendixes:
 
 - Part 1: It introduces the basic concept and system structure of mGNCS.
 - Part 2: facing application developers, it states how to use mGNCS to develop
-applications and describes the main `API` interface in detail.
+applications and describes the main API interface in detail.
 - Part 3: facing the developers of the new control set, it states how to
 develop new controls and renderers etc. for mGNCS.
 - Appendix: Compiling Norm for This Document and Content of Other Rapid

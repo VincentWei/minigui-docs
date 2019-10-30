@@ -140,7 +140,7 @@ class.
 
 ![alt](figures/mgplus_framework.jpeg)
 
-## `API` Applications
+## API Applications
 
 ## Graphics
 ### Graphics Manage Functions
@@ -369,7 +369,7 @@ it means that the picture will be drawn with the original size.
 There is another way to load pictures. In the initialization of the program
 calls the function in MiniGUI
 `LoadBitmap` (For details, see MiniGUI.
-`API` Manual) and then call `MGPlusGraphicLoadBitmap` and `MGPlusDrawImage` to
+API Manual) and then call `MGPlusGraphicLoadBitmap` and `MGPlusDrawImage` to
 draw
 the picture
 In `MGPlusGraphics`, remember to call MiniGUI in the end of the program

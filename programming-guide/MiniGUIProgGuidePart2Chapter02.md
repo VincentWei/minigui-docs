@@ -150,7 +150,7 @@ the users’ use.
 
 `mWidget` structure provides a hwnd data member, which is window sentence
 handle associated with the window object. Users can directly use the sentence
-handle to call corresponding MiniGUI `API`.
+handle to call corresponding MiniGUI API.
 
 ### Event Handler
 

@@ -147,7 +147,7 @@ linked-list of all layers in the system.
 
 `mginit` program can visit these data structure at any time to get the current
 client and the current layer information. Regarding members of `MG_Client` and
-`MG_Layer` structures can refer to MiniGUI `API` Reference.
+`MG_Layer` structures can refer to MiniGUI API Reference.
 
 `mginit` in `mg-samples` defines two functions to handle above events, and also
 sets two global variables mentioned above.
@@ -596,13 +596,13 @@ whose window is the current active one respectively.
 
 Clients can call `SetTopmostLayer` to set the topmost layer and call
 `DeleteLayer` to delete a layer. Detail information about these functions can
-be referred to MiniGUI `API` Reference.
+be referred to MiniGUI API Reference.
 
 ## Other Functions and Interfaces Specific to `mginit`
 Apart from `ServerStartup`, `OnNewDelClient`, and `mgClients`,
 MiniGUI-Processes also defines several interfaces for `mginit` program. These
 interfaces are specific to the MiniGUI-Processes server programs. Detail
-information about these interfaces can be referred to MiniGUI `API` Reference.
+information about these interfaces can be referred to MiniGUI API Reference.
 - `ServerSetTopmostLayer`: This function switches the specified layer to be the
 topmost layer.
 - `ServerCreateLayer`: This function creates a specified layer in the system.

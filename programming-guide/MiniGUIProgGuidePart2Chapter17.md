@@ -193,7 +193,7 @@ draw function is used by `ToolItem`
 ## `mToolItem`
 
 `mToolItem` is the basic class of item of `mToolbar`. The class and its derived
-class are not public. Users only need to automatically create through `API`
+class are not public. Users only need to automatically create through API
 provided externally.
 
 `mToolbar` also delete the ones automatically managing `mToolItem`

@@ -19,7 +19,7 @@ hardware, and all the top layer graphics operation are based on these abstract
 interfaces. The bottom layer code used to realize this abstract interface is
 called “graphics engine”, similar to the driver in an operating system. Using
 `GAL`, MiniGUI can run on may existed graphics function libraries, and can be
-readily port to other `POSIX` systems, only requiring to realize the new
+readily port to other POSIX systems, only requiring to realize the new
 graphics engine according to our abstract layer interfaces. For example, in a
 system based on Linux, we can create general MiniGUI graphics engine based on
 Linux `FrameBuffer` driver. In fact, the native graphics engine included in

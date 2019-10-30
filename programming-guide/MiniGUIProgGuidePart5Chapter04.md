@@ -1,20 +1,20 @@
-# Appendix A Universal Startup `API` for `RTOSes`
+# Universal Startup API for RTOSes
 
-MiniGUI provides universal startup `API` for `RTOSes` and spare startup
-reference files in V2.0.4/1.6.9. MiniGUI 3.0 continues to use these files. 
-These files are saved in the MiniGUI source code rtos/ directory. The rules of
-nomenclature in these files are like &gt;os_name&lt;_startup.c. In startup 
-file, there are an introduction to malloc, printf and `POSIX` pthread
+MiniGUI provides universal startup API for RTOSes and spare startup
+reference files in V2.0.4/1.6.9. MiniGUI 3.0 continues to use these files.
+These files are saved in the MiniGUI source code `rtos/` directory. The rules of
+nomenclature in these files are like `<os_name>_startup.c`. In startup
+file, there are an introduction to malloc, printf and POSIX thread
 initialization interface. The following is detailed description.
 
 ## Malloc Initialization Interface
 
 MiniGUI provides an own-implemented malloc set of functions. We can use macro
-_USE_OWN_MALLOC to open it. MiniGUI provides the following interface to
+`_MGUSE_OWN_MALLOC` to open it. MiniGUI provides the following interface to
 initialize MiniGUI malloc set of functions.
 
 ```cpp
-int init_minigui_malloc (unsigned char* heap, unsigned int heap_size, 
+int init_minigui_malloc (unsigned char* heap, unsigned int heap_size,
 int (*lock_heap) (void), int (*unlock_heap) (void));
 ```
 
@@ -22,6 +22,7 @@ To use MiniGUI malloc set of functions, you should pass the information of heap
 address, lock and unlock heap function pointer, and stack size.
 
 The following is the reference implementation on ThreadX OS.
+
 ```cpp
 #include "tx_api.h"
 
@@ -37,22 +38,22 @@ static TX_MUTEX __threadx_malloc_mutex;
 static int __threadx_heap_lock (void)
 {
         UINT status;
-        
+
         status = tx_mutex_get (&__threadx_malloc_mutex, TX_WAIT_FOREVER);
         if (status == TX_SUCCESS)
             return 0;
-        
+
         return -1;
 }
 
 static int __threadx_heap_unlock (void)
 {
         UINT status;
-        
+
         status = tx_mutex_put (&__threadx_malloc_mutex);
         if (status == TX_SUCCESS)
             return 0;
-        
+
         return -1;
 }
 
@@ -76,7 +77,7 @@ static int __threadx_heap_unlock (void)
 ## Standard Output Initialization Interface
 
 MiniGUI provides an own-implemented printf set of functions. We can use macro
-_USE_OWN_STDIO to open it. MiniGUI provides the following interface to
+`_MGUSE_OWN_STDIO` to open it. MiniGUI provides the following interface to
 initialize MiniGUI printf set of functions.
 
 ```cpp
@@ -95,11 +96,12 @@ init_minigui_printf (serial_write, serial_read);
 So the information which is printed to standard output and standard error by
 printf/fprintf functions will be printed to serial port of the device.
 
-## `POSIX` Threads Initialization Interface
+## POSIX Threads Initialization Interface
 
-MiniGUI provides an own-implemented `POSIX` threads system. We can use macro
-_USE_OWN_PTHREAD to open it. MiniGUI provides the following interface to
-initialize RTOS `POSIX` threads system.
+MiniGUI provides an own-implemented POSIX threads system. We can use macro
+`_MGUSE_OWN_PTHREAD` to open it. MiniGUI provides the following interface to
+initialize RTOS POSIX threads system.
+
 ```cpp
 #define MAIN_PTH_MIN_STACK_SIZE (1024)
 #define MAIN_PTH_DEF_STACK_SIZE (1024*4)
@@ -129,25 +131,22 @@ char* argv[] = {"pth_entry", NULL};
 
 The following list shows the relationship between RTOS and macros above.
 
-
 | *RTOS* | *Macro* |
-| VxWorks | _MGUSE_OWN_STDIO <br/> _MGUSE_OWN_MALLOC <br/> _MGUSE_OWN_PTHREAD |
-| uC/OS-II | _MGUSE_OWN_STDIO <br/> _MGUSE_OWN_MALLOC <br> _MGUSE_OWN_PTHREAD |
+|--------|---------|
+| VxWorks | `_MGUSE_OWN_STDIO` <br/> `_MGUSE_OWN_MALLOC` <br/> `_MGUSE_OWN_PTHREAD` |
+| uC/OS-II | `_MGUSE_OWN_STDIO` <br/> `_MGUSE_OWN_MALLOC` <br> `_MGUSE_OWN_PTHREAD` |
 | `eCos` | none |
-| `pSOS` | _MGUSE_OWN_PTHREAD |
-| Win32 | _MGUSE_OWN_STDIO|
-| `OSE` | _MGUSE_OWN_PTHREAD|
-| ThreadX | _MGUSE_OWN_STDIO <br/> _MGUSE_OWN_MALLOC <br/> _MGUSE_OWN_PTHREAD |
-| Nucleus |_MGUSE_OWN_STDIO <br/> _MGUSE_OWN_MALLOC <br/> _MGUSE_OWN_PTHREAD |
-
-
--- Main.XiaodongLi - 26 Oct 2009
+| `pSOS` | `_MGUSE_OWN_PTHREAD` |
+| Win32 | `_MGUSE_OWN_STDIO`|
+| `OSE` | `_MGUSE_OWN_PTHREAD`|
+| ThreadX | `_MGUSE_OWN_STDIO` <br/> `_MGUSE_OWN_MALLOC` <br/> `_MGUSE_OWN_PTHREAD` |
+| Nucleus | `_MGUSE_OWN_STDIO` <br/> `_MGUSE_OWN_MALLOC` <br/> `_MGUSE_OWN_PTHREAD` |
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; GAL and IAL Engines](MiniGUIProgGuidePart5Chapter03.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Static Control &gt;&gt;](MiniGUIProgGuidePart6Chapter01.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
