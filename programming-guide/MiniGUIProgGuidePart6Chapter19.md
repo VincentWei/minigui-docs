@@ -708,7 +708,7 @@ __Figure 1__ Use of a Gridview control
 
 [&lt;&lt; Animation Control](MiniGUIProgGuidePart6Chapter18.md) |
 [Table of Contents](README.md) |
-[Iconview Control &gt;&gt;](MiniGUIProgGuidePart6Chapter19.md)
+[Iconview Control &gt;&gt;](MiniGUIProgGuidePart6Chapter20.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
