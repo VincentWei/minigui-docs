@@ -6,19 +6,17 @@ catalogues. This can save space of the dialog box on the one hand, and can make
 the interaction interface more convenient to use on the other hand. Figure 1 is
 a typical use of the property sheet control of MiniGUI.
 
-
-
 ![alt](figures/28.1.jpeg)
 
-Figure 1 Property sheet control
+__Figure 1__ Property sheet control
 
 
-The property sheet is comprised of a group of property pages. Each property 
+The property sheet is comprised of a group of property pages. Each property
 page has a tab, and we can click the tab to switch among different property
-pages. We can interpret the property page as a container control, in which 
+pages. We can interpret the property page as a container control, in which
 other controls can be contained. From the point of view of an application
 developer, we can also interpret the property page as a dialog box in a dialog
-box - each property page has its own window procedure, and we can use the 
+box - each property page has its own window procedure, and we can use the
 method similar to create a dialog box, i.e. the method to define a dialog box
 template, to add a property page into a property sheet control.
 
@@ -27,12 +25,12 @@ class name can create a property sheet control.
 
 ## Styles of Property Sheet
 
-At present, there are only the following two styles of property sheet, which 
+At present, there are only the following two styles of property sheet, which
 are used to control the width of a tab of the property sheet:
 - `PSS_SIMPLE`: All tabs of the control will have the same width.
-- `PSS_COMPACTTAB`: The width of a tab depends on the length of the tab title 
+- `PSS_COMPACTTAB`: The width of a tab depends on the length of the tab title
 of the property sheet.
-- `PSS_SCROLLABLE`: The width of a tab depends on the length of the tab title 
+- `PSS_SCROLLABLE`: The width of a tab depends on the length of the tab title
 of the property sheet. There will be two of navigation button for scroll the
 tabs when the count of tab is too many.
 - `PSS_BOTTOM`: Tabs are displayed at the bottom of the property sheet. This
@@ -42,12 +40,12 @@ style can be used to with other three styles.
 ### Adding Property Page
 
 After the property sheet control has been created, we can send `PSM_ADDPAGE`
-message to add a property page to the property sheet. `WParam` of the message 
-is used to pass the dialog box template, and `lParam` is used to pass the 
+message to add a property page to the property sheet. `WParam` of the message
+is used to pass the dialog box template, and `lParam` is used to pass the
 window procedure function of the property page, as shown in the following code:
 
 ```cpp
- HWND pshwnd = GetDlgItem (hDlg, IDC_PROPSHEET);
+    HWND pshwnd = GetDlgItem (hDlg, IDC_PROPSHEET);
 
     /* Prepare the dialog box template */
     DlgStructParams.controls = CtrlStructParams;
@@ -63,15 +61,15 @@ and the index is base-on zero.
 ### Procedure Function of Property Page
 
 Similar to the dialog box, each property page has its own procedure function to
-handle the related messages of the property page. The prototype of the 
+handle the related messages of the property page. The prototype of the
 procedure function is the same with a normal window procedure function, but the
 followings are different:
 - The procedure function of a property page should call `DefaultPageProc`
 function for the message needing default handling.
-- The procedure function of a property page need handle two messages specific 
+- The procedure function of a property page need handle two messages specific
 to the property page: `MSG_INITPAGE` and `MSG_SHOWPAGE`. The former is similar
 to `MSG_INITDIALOG` message of a dialog box; and the latter is sent to the
-procedure of the property page when the property page is hidden or showed, 
+procedure of the property page when the property page is hidden or showed,
 where `lParam` parameter is `SW_HIDE` and `SW_SHOW`, respectively. When the
 property page is displayed, the procedure function of the property page returns
 1 to make the first control with `WS_TABSTOP` has the input focus.
@@ -83,7 +81,7 @@ return -1 to break the continued broadcast of this message. After receiving a
 non-zero value from any property page, the property sheet control will make
 `PSM_SHEETCMD` message return a non-zero value, and this is equal to the page
 index plus one. In such a way, we can know which page includes invalid input
-during handling the property pages of the property sheet, and then terminate 
+during handling the property pages of the property sheet, and then terminate
 the handling and switch to this property page.
 
 List 1 gives a typical procedure function of a property page, and the procedure
@@ -96,8 +94,9 @@ message, the procedure function of the property page will determine whether the
 user input is valid, and returns 0 or -1 correspondingly.
 
 
-List 1 A typical procedure function of property page and a procedure function 
+__List 1__ A typical procedure function of property page and a procedure function
 of dialog box containing property sheet
+
 ```cpp
 static int PageProc1 (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
 {
@@ -114,14 +113,14 @@ static int PageProc1 (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             GetDlgItemText (hDlg, IDC_EDIT1, buffer, 18);
             buffer [18] = '\0';
 
-             /* When the user clicked the “OK” button in 
-              * the dialog box containing the property sheet, 
+             /* When the user clicked the “OK” button in
+              * the dialog box containing the property sheet,
               * determine whether the user input is valid
               */
             if (buffer [0] == '\0') {
-                MessageBox (hDlg, 
-                            "Please input something in the first edit box.", 
-                            "Warning!", 
+                MessageBox (hDlg,
+                            "Please input something in the first edit box.",
+                            "Warning!",
                             MB_OK | MB_ICONEXCLAMATION | MB_BASEDONPARENT);
                 /* The user input is invalid, return a non-zero value */
                 return -1;
@@ -137,7 +136,7 @@ static int PageProc1 (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
         }
         break;
     }
-    
+
     return DefaultPageProc (hDlg, message, wParam, lParam);
 }
 
@@ -153,43 +152,43 @@ static int PropSheetProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             DlgStructParams.controls = CtrlStructParams;
             SendMessage (pshwnd, PSM_ADDPAGE,
                             (WPARAM)&DlgStructParams, (LPARAM)PageProc1);
-            
+
             DlgPassword.controls = CtrlPassword;
-            SendMessage ( pshwnd, PSM_ADDPAGE, 
+            SendMessage ( pshwnd, PSM_ADDPAGE,
                             (WPARAM)&DlgPassword,(LPARAM) PageProc2);
-            
+
             DlgStartupMode.controls = CtrlStartupMode;
-            SendMessage ( pshwnd, PSM_ADDPAGE, 
+            SendMessage ( pshwnd, PSM_ADDPAGE,
                             (WPARAM)&DlgStartupMode,(LPARAM)PageProc3);
 
             DlgInitProgress.controls = CtrlInitProgress;
-            SendMessage ( pshwnd, PSM_ADDPAGE, 
+            SendMessage ( pshwnd, PSM_ADDPAGE,
                             (WPARAM)&DlgInitProgress, (LPARAM) PageProc4);
 
             break;
         }
 
         case MSG_COMMAND:
-        switch (wParam) 
+        switch (wParam)
         {
             case IDC_APPLY:
             break;
 
             case IDOK:
             {
-                /* Send PSM_SHEETCMD messaeg to the property sheet control to 
+                /* Send PSM_SHEETCMD messaeg to the property sheet control to
                  * inform it that the “OK” button is clicked
                  */
-                int index = SendDlgItemMessage (hDlg, IDC_PROPSHEET, 
+                int index = SendDlgItemMessage (hDlg, IDC_PROPSHEET,
                                 PSM_SHEETCMD, IDOK, 0);
                 if (index) {
-                    /* A property page returns a non-zero value, 
+                    /* A property page returns a non-zero value,
                      * switch to this property page and prompt to input again
                      */
-                    SendDlgItemMessage (hDlg, IDC_PROPSHEET, 
+                    SendDlgItemMessage (hDlg, IDC_PROPSHEET,
                                     PSM_SETACTIVEINDEX, index - 1, 0);
                 }
-                else 
+                else
                     /* Every thing is ok, close the dialog box */
                     EndDialog (hDlg, wParam);
 
@@ -218,18 +217,16 @@ SendDlgItemMessage (hDlg, IDC_PROPSHEET, PSM_REMOVEPAGE, 0, 0);
 
 This message will delete the first property page in the property sheet.
 
-***
-[Note] Deleting a property page may change the indices of other property pages.
-***
+__NOTE__ Deleting a property page may change the indices of other property pages.
 
 ### Handle and Index of Property Page
 
-The handle of a property page is actually the handle of the parent window of 
+The handle of a property page is actually the handle of the parent window of
 the controls in the property page, i.e. the window handle passed by the
 procedure function of the property page, and this window is actually a child
 window of the property sheet control. Sending `PSM_GETPAGE` message to the
 property sheet control can get the handle of a property page with a certain
-index: 
+index:
 
 ```cpp
 hwnd = SendDlgItemMessage (hDlg, IDC_PROPSHEET, PSM_GETPAGE, index, 0);
@@ -252,13 +249,13 @@ procedure function of the property page, we can complete the similar task.
 MiniGUI provides the following messages to get the relevant information of
 property pages:：
 - `PSM_GETPAGECOUNT:returns` the number of pages in the property sheet.
-- `PSM_GETTITLELENGTH`: gets the length of the page title according to the 
+- `PSM_GETTITLELENGTH`: gets the length of the page title according to the
 index value passed by `wParam` parameter, like the `MSG_GETTEXTLENGTH` message
 of a window.
 - `PSM_GETTITLE`: gets the page title according to the index value passed by
-`wParam` parameter, and save it in the buffer passed by `lParam` parameter, 
+`wParam` parameter, and save it in the buffer passed by `lParam` parameter,
 like the `MSG_GETTEXT` message of a window.
-- `PSM_SETTITLE`: sets the property page title according to the string passed 
+- `PSM_SETTITLE`: sets the property page title according to the string passed
 by `lParam`, like `MSG_SETTEXT` message of a window.
 
 The active property page is the property page currently displayed in the
@@ -281,11 +278,10 @@ changed, the property sheet control will generate this notification code.
 List 2 gives a sample program for property sheet control. This program displays
 some system information of the computer, such as `CPU` type, memory size, etc.
 The running effect of this program is shown in Figure 2. Please refer to
-propsheet.c of the sample program package of this guide for the complete source
-code. 
+`propsheet.c` of the sample program package of this guide for the complete source
+code.
 
-
-List 2 A sample program of property sheet control
+__List 2__ A sample program of property sheet control
 
 ```cpp
 #include <stdio.h>
@@ -322,14 +318,14 @@ static DLGTEMPLATE PageSysInfo =
 };
 
 /*系统信息属性页中只有一个用来显示信息的静态控件 */
-/* There is only one static control to display the information 
+/* There is only one static control to display the information
  * in the system information property page
  */
 static CTRLDATA CtrlSysInfo [] =
-{ 
+{
     {
         CTRL_STATIC,
-        WS_VISIBLE | SS_LEFT, 
+        WS_VISIBLE | SS_LEFT,
         10, 10, 370, 160,
         IDC_SYSINFO,
         "测试\n测试\n测试\n测试\n测试\n测试\n",
@@ -359,7 +355,7 @@ static size_t read_sysinfo (const char* file, char* buff, size_t buf_len)
  * 注意，这个函数被所有的属性页调用。
  */
 /*
- * Call this function to refresh the corresponding window 
+ * Call this function to refresh the corresponding window
  * when initializing and refreshing
  * Note, this function is called by all the property pages.
  */
@@ -435,15 +431,15 @@ static int SysInfoPageProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam
         return 1;
 
     case MSG_SHEETCMD:
-        if (wParam == IDOK) 
+        if (wParam == IDOK)
             /* 用户单击对话框中的“刷新”按钮时，将调用该函数刷新 */
-            /* When the user clicked the “refresh” button of the 
+            /* When the user clicked the “refresh” button of the
              * dialog box, call this function to refresh.
              */
             get_systeminfo (hDlg);
         return 0;
     }
-    
+
     return DefaultPageProc (hDlg, message, wParam, lParam);
 }
 
@@ -457,7 +453,7 @@ static int PropSheetProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             PageSysInfo.controls = CtrlSysInfo;
 
             /* 添加属性页，注意每个属性页具有不同的附加数据 */
-            /* Add property pages. Note that each property page 
+            /* Add property pages. Note that each property page
              * has different additional data
              */
 
@@ -467,7 +463,7 @@ static int PropSheetProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
             PageSysInfo.caption = "CPU 信息";
             PageSysInfo.dwAddData = PAGE_CPU;
             SendMessage (pshwnd, PSM_ADDPAGE, (WPARAM)&PageSysInfo, (LPARAM)SysInfoPageProc);
-            
+
             PageSysInfo.caption = "内存信息";
             PageSysInfo.dwAddData = PAGE_MEMINFO;
             SendMessage (pshwnd, PSM_ADDPAGE, (WPARAM)&PageSysInfo, (LPARAM)SysInfoPageProc);
@@ -486,7 +482,7 @@ static int PropSheetProc (HWND hDlg, int message, WPARAM wParam, LPARAM lParam)
         switch (wParam) {
             case IDOK:
                 /* 用户按“刷新”按钮时，向所有属性表控件发送 PSM_SHEETCMD 消息 */
-                /* When the user clicked the “refresh” button, 
+                /* When the user clicked the “refresh” button,
                  * send PSM_SHEETCMD message to the property sheet control
                  */
                 SendDlgItemMessage (hDlg, IDC_PROPSHEET, PSM_SHEETCMD, IDOK, 0);
@@ -516,14 +512,14 @@ static DLGTEMPLATE DlgPropSheet =
 };
 
 /* 该对话框只有三个控件：属性表、“刷新”按钮和“关闭”按钮 */
-/* The dialog box has only three controls: 
+/* The dialog box has only three controls:
  * the property sheet, “refresh” button and “close” button
  */
 static CTRLDATA CtrlPropSheet[] =
-{ 
+{
     {
         CTRL_PROPSHEET,
-        WS_VISIBLE | PSS_COMPACTTAB, 
+        WS_VISIBLE | PSS_COMPACTTAB,
         10, 10, 390, 200,
         IDC_PROPSHEET,
         "",
@@ -533,7 +529,7 @@ static CTRLDATA CtrlPropSheet[] =
         CTRL_BUTTON,
         WS_VISIBLE | BS_DEFPUSHBUTTON | WS_TABSTOP | WS_GROUP,
         10, 220, 140, 25,
-        IDOK, 
+        IDOK,
         "刷新",
         0
     },
@@ -552,9 +548,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #ifdef _MGRM_PROCESSES
     JoinLayer(NAME_DEF_LAYER , "propsheet" , 0 , 0);
 #endif
-    
+
     DlgPropSheet.controls = CtrlPropSheet;
-    
+
     DialogBoxIndirectParam (&DlgPropSheet, HWND_DESKTOP, PropSheetProc, 0L);
 
     return 0;
@@ -565,21 +561,15 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-
-
 ![alt](figures/28.2.jpeg)
 
-Figure 2 Use of property sheet control
-
-
--- Main.XiaodongLi - 26 Oct 2009
-
+__Figure 2__ Use of property sheet control
 
 ----
 
-[&lt;&lt; ](MiniGUIProgGuidePart.md) |
+[&lt;&lt; Toolbar Control](MiniGUIProgGuidePart6Chapter09.md) |
 [Table of Contents](README.md) |
-[ &gt;&gt;](MiniGUIProgGuidePart.md)
+[Scroll Window Control &gt;&gt;](MiniGUIProgGuidePart6Chapter11.md)
 
 [Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
 [Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
