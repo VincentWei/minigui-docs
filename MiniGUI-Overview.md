@@ -151,8 +151,10 @@ to <sales@minigui.com>.
 __Figure 9__ Vertical Layout of Chinese
 
 ![Complex Script: Arabic](figures/complex-script-arabic.png)
+![Complex Script: Hebrew](figures/complex-script-hebrew.png)
+![Complex Script: Thai](figures/complex-script-thai.png)
 
-__Figure 10__ Sample of complex script: text layout of Arabic with BIDI.
+__Figure 10__ Sample of complex script: Arabic, Hebrew, and Thai.
 
 ## A BRIEF BUILDING INSTRUCTION
 
