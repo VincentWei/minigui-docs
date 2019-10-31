@@ -112,9 +112,33 @@ We now maintain the documents about MiniGUI on the following public repo:
 
 __Figure 1__ The software stack of MiniGUI, MiniGUI components, and MiniGUI apps.
 
-![Inside MiniGUI](figures/minigui-architecture.png)
+![MiniGUI Architecture](figures/minigui-architecture.png)
 
 __Figure 2__ The architecture of MiniGUI.
+
+![Controls in mGNCS](figures/controls-in-mgncs.png)
+
+__Figure 3__ The controls provides by mGNCS.
+
+![Controls in mGNCS4Touch](figures/controls-in-mgncs4touch.png)
+
+__Figure 4__ The controls provides by mGNCS4Touch.
+
+![Architecture of mGUXDemo](figures/animated-ui-framework.png)
+
+__Figure 5__ The architecture of [mGUXDemo](https://github.com/VincentWei/cell-phone-ux-demo).
+
+![Screenshots of mGUXDemo](figures/screenshots-mguxdemo.png)
+
+__Figure 6__ Screenshots of [mGUXDemo](https://github.com/VincentWei/cell-phone-ux-demo).
+
+![MiniGUI-based solution for feature phone](figures/minigui-based-feature-phone-solution.png)
+
+__Figure 7__ MiniGUI-based solution for feature phone.
+
+![Screenshots of MiniGUI-based solution for feature phone](figures/screenshots-mguxdemo.png)
+
+__Figure 8__ The screenshots of MiniGUI-based solution for feature phone.
 
 ## A BRIEF BUILDING INSTRUCTION
 
