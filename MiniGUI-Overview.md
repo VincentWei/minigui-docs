@@ -104,59 +104,73 @@ We now maintain the documents about MiniGUI on the following public repo:
 
 ## CHARTS AND SCREENSHOTS
 
-__NOTE__ If you can not see the figures below, please visit the
-original page: <https://gitlab.fmsoft.cn/VincentWei/minigui-docs/blob/master/MiniGUI-Overview.md>.
+__Figure 1__ The software stack of MiniGUI, MiniGUI components, and MiniGUI apps.
 
 ![The software stack chart](figures/minigui-software-stack.png)
 
-__Figure 1__ The software stack of MiniGUI, MiniGUI components, and MiniGUI apps.
-
-![MiniGUI Architecture](figures/minigui-architecture.png)
+---
 
 __Figure 2__ The architecture of MiniGUI.
 
-![Controls in mGNCS](figures/controls-in-mgncs.png)
+![MiniGUI Architecture](figures/minigui-architecture.png)
+
+---
 
 __Figure 3__ The controls provides by mGNCS.
 
-![Controls in mGNCS4Touch](figures/controls-in-mgncs4touch.png)
+![Controls in mGNCS](figures/controls-in-mgncs.png)
+
+---
 
 __Figure 4__ The controls provides by mGNCS4Touch.
 
-![Architecture of mGUXDemo](figures/animated-ui-framework.png)
+![Controls in mGNCS4Touch](figures/controls-in-mgncs4touch.png)
+
+---
 
 __Figure 5__ The architecture of [mGUXDemo].
 
-![Screenshots of mGUXDemo](figures/screenshots-mguxdemo.png)
+![Architecture of mGUXDemo](figures/animated-ui-framework.png)
+
+---
 
 __Figure 6__ Screenshots of [mGUXDemo].
 
-![MiniGUI-based solution for feature phone](figures/minigui-based-feature-phone-solution.png)
+![Screenshots of mGUXDemo](figures/screenshots-mguxdemo.png)
 
 __Figure 7__ MiniGUI-based solution for feature phone.
+
+![MiniGUI-based solution for feature phone](figures/minigui-based-feature-phone-solution.png)
 
 The solution is developed for feature phones made by Nokia and Samsung.
 This solution is not an open source project. If you are interested in this solution, please write
 to <sales@minigui.com>.
 
-![Screenshots of MiniGUI-based solution for feature phone](figures/screenshots-mgngux.png)
+---
 
 __Figure 8__ The screenshots of MiniGUI-based solution for feature phone.
+
+![Screenshots of MiniGUI-based solution for feature phone](figures/screenshots-mgngux.png)
+
 Note that the above screenshots conform to the specification of Nokia 3310.
 This solution is not an open source project. If you are interested in this solution, please write
 to <sales@minigui.com>.
+
+---
+
+__Figure 9__ Samples of complex scripts: Chinese (vertical layout), Japanese, and Korean.
 
 ![Vertical Layout of Chinese](figures/complex-script-chinese.png)
 ![Complex Script: Japanese](figures/complex-script-japanese.png)
 ![Complex Script: Korean](figures/complex-script-korean.png)
 
-__Figure 9__ Samples of complex scripts: Vertical layout of Chinese, Japanese, and Korean.
+---
+
+__Figure 10__ Samples of complex scripts: Arabic, Hebrew, and Thai.
 
 ![Complex Script: Arabic](figures/complex-script-arabic.png)
 ![Complex Script: Hebrew](figures/complex-script-hebrew.png)
 ![Complex Script: Thai](figures/complex-script-thai.png)
-
-__Figure 10__ Samples of complex scripts: Arabic, Hebrew, and Thai.
 
 ## A BRIEF BUILDING INSTRUCTION
 
