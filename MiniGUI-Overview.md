@@ -58,18 +58,14 @@ and graphics interfaces as well as a lot of standard controls (toolkit).
 Besides MiniGUI Core, FMSoft also provides some components
 for the developers to develop app much easier:
 
-* mGUtils: A MiniGUI component which contains miscellaneous utilities
+* [mGUtils]: A MiniGUI component which contains miscellaneous utilities
   like `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
-
-* mGPlus: A MiniGUI component which provides support for advanced graphics
+* [mGPlus]: A MiniGUI component which provides support for advanced graphics
   functions like path, gradient, anti-aliased stretch, and color combination.
-
-* mGEff: mGEff provides an animation framework for MiniGUI app.
+* [mGEff]: mGEff provides an animation framework for MiniGUI app.
   It also provides some popular UI/UE special effects.
-
-* mGNCS: This component provides a new control set for MiniGUI app.
-
-* mGNCS4Touch: This component provides some new controls, which are
+* [mGNCS]: This component provides a new control set for MiniGUI app.
+* [mGNCS4Touch]: This component provides some new controls, which are
   compliant to the new control API spec of mGNCS, for devices with
   touch screens.
 
@@ -126,11 +122,11 @@ __Figure 4__ The controls provides by mGNCS4Touch.
 
 ![Architecture of mGUXDemo](figures/animated-ui-framework.png)
 
-__Figure 5__ The architecture of [mGUXDemo](https://github.com/VincentWei/cell-phone-ux-demo).
+__Figure 5__ The architecture of [mGUXDemo].
 
 ![Screenshots of mGUXDemo](figures/screenshots-mguxdemo.png)
 
-__Figure 6__ Screenshots of [mGUXDemo](https://github.com/VincentWei/cell-phone-ux-demo).
+__Figure 6__ Screenshots of [mGUXDemo].
 
 ![MiniGUI-based solution for feature phone](figures/minigui-based-feature-phone-solution.png)
 
@@ -624,9 +620,9 @@ the commercial license of MiniGUI, please write to <sales@minigui.com>.
 ## A LITTLE FAQ
 
 Q: Which operating systems does MiniGUI support?  
-A: MiniGUI can run on Linux/uClinux, uC/OS-II, eCos, ThreadX, pSOS,
-   VxWorks, ThreadX, OSE, and even Win32. Any other real-time OSes can
-   be supported theoretically.
+A: MiniGUI can run on Linux/uClinux, uC/OS-II, eCos, ThreadX, RTEMS,
+   RT-Thread, FreeRTOS, pSOS, VxWorks, ThreadX, OSE, and even Win32.
+   Any other real-time OSes can be supported theoretically.
 
 Q: Which architecture does MiniGUI support?  
 A: x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7),
@@ -635,7 +631,43 @@ A: x86 32/64-bit, ARM 32/64-bit (e.g., ARMv7 and ARM Cortex-A7),
 Q: Does MiniGUI offer the support for grey LCD with 4bpp (bits per pixel)?  
 A: Yes, it offers. It even offers the support for 1bpp and 2bpp LCD.
 
-Q: Can I get the tech. support from MiniGUI team?  
+Q: Can I get the tech support from MiniGUI team?  
 A: Yes, FMSoft can provide you with guaranteed commercial technical
    support services. Please send messages to <sales@minigui.com>.
 
+[mGUtils]: https://github.com/VincentWei/mgutils
+[mGEff]: https://github.com/VincentWei/mgeff
+[mGPlus]: https://github.com/VincentWei/mgplus
+[mGNCS]: https://github.com/VincentWei/mgncs
+[mGNCS4Touch]: https://github.com/VincentWei/mgncs4touch
+[mGUXDemo]: https://github.com/VincentWei/cell-phone-ux-demo
+
+[Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
+[Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
+[Compile-time Configuration]: /user-manual/MiniGUIUserManualCompiletimeConfiguration.md
+[Runtime Configuration]: /user-manual/MiniGUIUserManualRuntimeConfiguration.md
+[Tools]: /user-manual/MiniGUIUserManualTools.md
+[Feature List]: /user-manual/MiniGUIUserManualFeatureList.md
+[FAQs]: /user-manual/MiniGUIUserManualFAQsEN.md
+[常见问题]: /user-manual/MiniGUIUserManualFAQsZH.md
+
+[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
+[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
+[Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
+[Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
+[Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
+[Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
+[Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
+[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
+
+[MiniGUI User Manual]: /user-manual/README.md
+[MiniGUI Programming Guide]: /programming-guide/README.md
+[MiniGUI Porting Guide]: /porting-guide/README.md
+[MiniGUI API Reference Manuals]: /api-reference/README.md
+
+[MiniGUI Official Website]: http://www.minigui.com
+[Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
+[FMSoft Technologies]: https://www.fmsoft.cn
+[HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
