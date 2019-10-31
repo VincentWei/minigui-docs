@@ -147,8 +147,8 @@ This solution is not an open source project. If you are interested in this solut
 to <sales@minigui.com>.
 
 ![Vertical Layout of Chinese](figures/complex-script-chinese.png)
-![Vertical Layout of Japanese](figures/complex-script-japanese.png)
-![Vertical Layout of Korean](figures/complex-script-korean.png)
+![Complex Script: Japanese](figures/complex-script-japanese.png)
+![Complex Script: Korean](figures/complex-script-korean.png)
 
 __Figure 9__ Samples of complex scripts: Vertical layout of Chinese, Japanese, and Korean.
 
