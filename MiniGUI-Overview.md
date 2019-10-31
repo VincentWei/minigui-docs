@@ -104,6 +104,9 @@ We now maintain the documents about MiniGUI on the following public repo:
 
 ## CHARTS AND SCREENSHOTS
 
+__NOTE__ If you can not visit the figures below, please visit the
+original page: <https://gitlab.fmsoft.cn/VincentWei/minigui-docs/blob/master/MiniGUI-Overview.md>.
+
 ![The software stack chart](figures/minigui-software-stack.png)
 
 __Figure 1__ The software stack of MiniGUI, MiniGUI components, and MiniGUI apps.
