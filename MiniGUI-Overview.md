@@ -108,12 +108,13 @@ We now maintain the documents about MiniGUI on the following public repo:
 
 ## CHARTS AND SCREENSHOTS
 
-The Figure 1 shows the software stack of MiniGUI, MiniGUI components,
-and MiniGUI apps.
+![The software stack chart](figures/minigui-software-stack.png)
 
-![The software stack chart](figures/minigui-architecture.png)
+__Figure 1__ The software stack of MiniGUI, MiniGUI components, and MiniGUI apps.
 
-__Figure 1__ The software stack of MiniGUI
+![Inside MiniGUI](figures/minigui-architecture.png)
+
+__Figure 2__ The architecture of MiniGUI.
 
 ## A BRIEF BUILDING INSTRUCTION
 
