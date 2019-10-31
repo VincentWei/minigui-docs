@@ -147,14 +147,16 @@ This solution is not an open source project. If you are interested in this solut
 to <sales@minigui.com>.
 
 ![Vertical Layout of Chinese](figures/complex-script-chinese.png)
+![Vertical Layout of Japanese](figures/complex-script-japanese.png)
+![Vertical Layout of Korean](figures/complex-script-korean.png)
 
-__Figure 9__ Vertical Layout of Chinese
+__Figure 9__ Samples of complex scripts: Vertical layout of Chinese, Japanese, and Korean.
 
 ![Complex Script: Arabic](figures/complex-script-arabic.png)
 ![Complex Script: Hebrew](figures/complex-script-hebrew.png)
 ![Complex Script: Thai](figures/complex-script-thai.png)
 
-__Figure 10__ Sample of complex script: Arabic, Hebrew, and Thai.
+__Figure 10__ Samples of complex scripts: Arabic, Hebrew, and Thai.
 
 ## A BRIEF BUILDING INSTRUCTION
 
