@@ -133,14 +133,15 @@ __Figure 6__ Screenshots of [mGUXDemo].
 __Figure 7__ MiniGUI-based solution for feature phone.
 
 The solution is developed for feature phones made by Nokia and Samsung.
-It is not an open source project. If you are interested in this solution, please write
+This solution is not an open source project. If you are interested in this solution, please write
 to <sales@minigui.com>.
 
 ![Screenshots of MiniGUI-based solution for feature phone](figures/screenshots-mgngux.png)
 
 __Figure 8__ The screenshots of MiniGUI-based solution for feature phone.
-
-The screenshots above conform to the specification of Nokia 3310.
+Note that the above screenshots conform to the specification of Nokia 3310.
+This solution is not an open source project. If you are interested in this solution, please write
+to <sales@minigui.com>.
 
 ## A BRIEF BUILDING INSTRUCTION
 
