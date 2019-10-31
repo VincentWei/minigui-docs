@@ -146,6 +146,14 @@ Note that the above screenshots conform to the specification of Nokia 3310.
 This solution is not an open source project. If you are interested in this solution, please write
 to <sales@minigui.com>.
 
+![Vertical Layout of Chinese](figures/complex-script-chinese.png)
+
+__Figure 9__ Vertical Layout of Chinese
+
+![Complex Script: Arabic](figures/complex-script-arabic.png)
+
+__Figure 10__ Sample of complex script: text layout of Arabic with BIDI.
+
 ## A BRIEF BUILDING INSTRUCTION
 
 This instruction assumes that you are using Ubuntu Linux.
