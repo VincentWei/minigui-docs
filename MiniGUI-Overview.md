@@ -6,6 +6,7 @@ for embedded and/or smart IoT devices._
 ## TABLE OF CONTENTS
 
 - [INTRODUCTION](#introduction)
+- [CHARTS AND SCREENSHOTS](#charts-and-screenshots)
 - [A BRIEF BUILDING INSTRUCTION](#a-brief-building-instruction)
   * [Prerequisites](#prerequisites)
   * [Building MiniGUI Core](#building-minigui-core)
@@ -42,26 +43,26 @@ use.
 MiniGUI aims to provide a fast, stable, full-featured, and cross-platform
 windowing and GUI support system, which is especially fit for
 embedded systems or smart IoT devices based-on Linux/uClinux, eCos, and other
-traditional RTOSes, such as VxWorks, ThreadX, Nucleus, pSOS, uC/OS-II,
-and OSE.
+traditional RTOSes, such as RT-Thread, RTEMS, FreeRTOS, VxWorks, ThreadX, Nucleus,
+pSOS, uC/OS-II, and OSE.
 
 MiniGUI is also a free software project. In December 1998, the initiator of
 FMSoft, Wei Yongming, began to develop MiniGUI under the GNU General Public
 License (GPL). In September 2002, the core developers of
-MiniGUI founded Beijing FMSoft Technologies Co., Ltd. and started the
+MiniGUI founded Beijing FMSoft Technologies Co., Ltd., and started the
 commercial marketing with the free software. By now, FMSoft still
 continues to release MiniGUI as a free software project.
 
-[MiniGUI core](https://gitlab.fmsoft.cn/VincentWei/minigui) provides windowing
-and graphics interfaces as well as a lot of standard controls (tookit).
-Besides MiniGUI core, FMSoft also provides some components
+MiniGUI Core provides the basic windowing
+and graphics interfaces as well as a lot of standard controls (toolkit).
+Besides MiniGUI Core, FMSoft also provides some components
 for the developers to develop app much easier:
 
 * mGUtils: A MiniGUI component which contains miscellaneous utilities
-  like ColorSelectionDialogBox, FileOpenDialogBox, and so on.
+  like `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
 
 * mGPlus: A MiniGUI component which provides support for advanced graphics
-  functions like path, gradient, anti-aliase stretch, and color combination.
+  functions like path, gradient, anti-aliased stretch, and color combination.
 
 * mGEff: mGEff provides an animation framework for MiniGUI app.
   It also provides some popular UI/UE special effects.
@@ -72,25 +73,11 @@ for the developers to develop app much easier:
   compliant to the new control API spec of mGNCS, for devices with
   touch screens.
 
-There are also some legacy MiniGUI components. But we will not maintain these
-components since MiniGUI v3.2.0:
-
-* mGi: An input method component for MiniGUI. This component provides
-  some typical input methods (such as softkey, hand-writing, and predict
-  text input for mobile phone) for MiniGUI apps.
-
-* mGp: A printing component for MiniGUI. By using mGp, you can print
-  out the graphics created by MiniGUI app to general-purpose printers.
-
-* mG3d: A simple three-dimension component for MiniGUI. This component
-  provides a simple 3D API for app. You can use mG3d to create simple
-  3D UI.
-
 You can download the source code tarballs of MiniGUI Core, MiniGUI
 components, and the dependent libraries from the download zone of
 the site:
 
-http://www.minigui.com
+<http://www.minigui.com/en/download>
 
 FMSoft also releases some open source apps for MiniGUI on the site above,
 for examples:
@@ -98,27 +85,35 @@ for examples:
 * mDolphin, licensed under Apache 2.0, is a full-featured
   WEB/WAP browser, which is developed based on the open source browser
   core WebKit and uses MiniGUI as its underlying graphics support system.
-
 * mGallery, licensed under Apache 2.0, intends to
   provide a total solution for PMP (Portable Multimedia Player),
   which uses MiniGUI as the graphics platform.
-
 * mSpider, licensed under GPL 3.0, intends to provide a
   light-weight MiniGUI-based web browser (HTML 3.2 and part JavaScript)
-
 * mEagle, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
 
 FMSoft had created the public repositories for MiniGUI core, MiniGUI
 components, and other open source apps on GitHub. You can visit them on:
 
-https://github.com/VincentWei
-https://github.com/FMSoftCN
+<https://github.com/VincentWei>
 
-We now maintain the documents about MiniGUI on GitHub Wiki:
+and
 
-https://github.com/VincentWei/minigui/wiki
+<https://github.com/FMSoftCN>
 
+We now maintain the documents about MiniGUI on the following public repo:
+
+<https://github.com/VincentWei/minigui-docs>
+
+## CHARTS AND SCREENSHOTS
+
+The Figure 1 shows the software stack of MiniGUI, MiniGUI components,
+and MiniGUI apps.
+
+![The software stack chart](figures/minigui-architecture.png)
+
+__Figure 1__ The software stack of MiniGUI
 
 ## A BRIEF BUILDING INSTRUCTION
 
