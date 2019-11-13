@@ -17,7 +17,7 @@ A) MiniGUI is widely used in products like mobile phones, IPTVs,
 digital TVs, industry control systems, information terminals, industrial
 meters, and so on. For detailed introduction for some typical
 products, you can visit:
-<http://www.minigui.com/en/introduction/application/>.
+<http://www.minigui.com/case-studies>.
 
 Q) Which operating systems does MiniGUI support?
 

@@ -160,7 +160,7 @@ We organize the sample programs in this guide into a complete Autoconf/Automake
 project package called `mg-samples`. You can download this source tarball from
 the download zone of MiniGUI website:
 
-<http://www.minigui.com/en/download>
+<http://www.minigui.com/download>
 
 or fetch the source code from the public repository:
 

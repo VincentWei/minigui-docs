@@ -124,7 +124,7 @@ All software packages of MiniGUI are listed as following:
 The source code tarballs of MiniGUI and its components can be
 downloaded from the download zone of [MiniGUI Official Website]:
 
-<http://www.minigui.com/en/download>
+<http://www.minigui.com/download>
 
 FMSoft has created public repositories for MiniGUI Core and
 components on GitHub. You can visit them at:
@@ -153,7 +153,7 @@ Besides MiniGUI, FMSoft also released tools and dependencies of MiniGUI,
 such as the virtual buffer program GVFB, freetype, libjpeg, libpng, zlib,
 and others. Please refer to:
 
-<http://www.minigui.com/en/download>
+<http://www.minigui.com/download>
 
 ### Documents
 
