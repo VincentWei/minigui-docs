@@ -2,6 +2,9 @@
 
 Table of Contents
 
+- [Version 4.0.4](#version-404)
+- [Version 4.0.2](#version-402)
+- [Version 4.0.1](#version-401)
 - [Version 4.0.0](#version-400)
   * [Overview](#overview)
   * [New APIs conforming Unicode 12.0](#new-apis-conforming-unicode-120)
@@ -12,6 +15,43 @@ Table of Contents
   * [Other Enhancements](#other-enhancements)
   * [Backward compatibility issues](#backward-compatibility-issues)
   * [Deprecated features](#deprecated-features)
+
+## Version 4.0.4
+
+MiniGUI 4.0.4 was released on Dec 24, 2019.
+
+In this version, we mainly enhanced the DRM engine of MiniGUI in order
+to integrate MiniGUI with Mesa and Cairo, for example, to implement EGL
+for MiniGUI platform.
+
+* MODIFICATIONS:
+   - Change the name of old `dri` NEWGAL engine to `drm`.
+   - Change the configuration option of DRM engine to `--enable-videodrm`.
+   - Change the macro for DRM engine to `_MGGAL_DRM`.
+   - Change the runtime configuration section for DRM engine to `drm`.
+* ENHANCEMENTS:
+   - New APIs for GPU integration, such as `IsMemDC`, `IsScreenDC`, `IsWindowDC`, `GetVideoHandle`, and `drmGetDeviceFD`.
+   - Add new operation for DRM engine: `create_buffer_from_prime_fd`.
+   - Use `dlopen` to load the external DRM driver instead of external variable.
+   - Add a new runtime configuration key for DRM engine `drm.exdriver` to define the external DRM driver.
+
+## Version 4.0.2
+
+* ENHANCEMENTS:
+   - Support for RTEMS operating system
+   - Basic support for RT-Thread and FreeRTOS operating systems.
+* BUGFIXES:
+   - Fixed errors in makefile.ng files.
+* CLEANUP:
+   - `README.md` for correct markdown tags.
+
+## Version 4.0.1
+
+This version mainly fixed some minor issues:
+
+- Use FVN algorithm to implement `Str2Key`.
+- Tune some API description.
+- Tune format string to use '%z' instead of '%l' or '%ll' for `size_t` values.
 
 ## Version 4.0.0
 
