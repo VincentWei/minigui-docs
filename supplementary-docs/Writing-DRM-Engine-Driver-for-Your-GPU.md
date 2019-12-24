@@ -314,7 +314,8 @@ chard in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
 
 ## DRM Drivers for HybridOS
 
-The [HybridOS](https://hybridos.fmsoft.cn) project maintains the
+[HybridOS](https://hybridos.fmsoft.cn) uses MiniGUI as the
+underlying windowing system. So the HybridOS project maintains the
 DRM drivers for MiniGUI in the following repo (`hiDRMDrivers`):
 
 <https://github.com/FMSoftCN/hidrmdrivers>
@@ -326,8 +327,18 @@ called `hiDRM`, not the original libdrm:
 
 Please use the code on the branch `hybridos` of `hiDRM`.
 
-When you want to use `hiDRMDrivers`, please make sure that let MiniGUI
+When you use `hiDRMDrivers`, please make sure that let MiniGUI
 use `hiDRM` as well.
+
+By using DRM engines and DRM drivers, MiniGUI and HybridOS now provide
+the GPU integration via `hiMesa` and `hiCairo`:
+
+- [hiMesa](https://github.com/FMSoftCN/himesa) is the Mesa derivative for HybridOS.
+- [hiCairo](https://github.com/FMSoftCN/hicairo) is the Cairo derivative for HybridOS.
+
+For the usage and samples, please refer to
+
+[Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
 
 ## Restrictions
 
