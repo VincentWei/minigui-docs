@@ -315,16 +315,16 @@ chard in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
 ## DRM Drivers for HybridOS
 
 The [HybridOS](https://hybridos.fmsoft.cn) project maintains the
-DRM drivers for MiniGUI in the following repo (hiDRMDrivers):
+DRM drivers for MiniGUI in the following repo (`hiDRMDrivers`):
 
 <https://github.com/FMSoftCN/hidrmdrivers>
 
 Note that `hiDRMDrivers` depends on the LibDRM derivative for HybridOS
-`hiDRM`, not the original libdrm:
+called `hiDRM`, not the original libdrm:
 
 <https://github.com/FMSoftCN/hidrm>
 
-Please use the code on the branch `tune-for-hybridos` of `hiDRM`.
+Please use the code on the branch `hybridos` of `hiDRM`.
 
 ## Restrictions
 
