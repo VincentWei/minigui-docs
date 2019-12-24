@@ -336,9 +336,9 @@ the GPU integration via `hiMesa` and `hiCairo`:
 - [hiMesa](https://github.com/FMSoftCN/himesa) is the Mesa derivative for HybridOS.
 - [hiCairo](https://github.com/FMSoftCN/hicairo) is the Cairo derivative for HybridOS.
 
-For the usage and samples, please refer to
-
+For the usage and samples, please refer to the chapter
 [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
+in the [MiniGUI Programming Guide](/programming-guide/README.md).
 
 ## Restrictions
 
