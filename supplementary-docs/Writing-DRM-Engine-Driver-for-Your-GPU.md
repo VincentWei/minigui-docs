@@ -10,7 +10,7 @@ Table of Contents
 - [Implementing a DRM driver](#implementing-a-drm-driver)
 - [DRM Drivers for HybridOS](#drm-drivers-for-hybridos)
 - [Restrictions](#restrictions)
-- [Future Feature](#future-feature)
+- [Future Feature](#future-features)
 
 ## Overview
 
