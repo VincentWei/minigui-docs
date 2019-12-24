@@ -320,15 +320,15 @@ DRM drivers for MiniGUI in the following repo (`hiDRMDrivers`):
 
 <https://github.com/FMSoftCN/hidrmdrivers>
 
-Note that `hiDRMDrivers` depends on the LibDRM derivative for HybridOS
+Note that hiDRMDrivers depends on the LibDRM derivative for HybridOS
 called `hiDRM`, not the original libdrm:
 
 <https://github.com/FMSoftCN/hidrm>
 
-Please use the code on the branch `hybridos` of `hiDRM`.
+Please use the code on the branch `hybridos` of hiDRM repo.
 
-When you use `hiDRMDrivers`, please make sure that let MiniGUI
-use `hiDRM` as well.
+When you use hiDRMDrivers, please make sure that let MiniGUI
+use hiDRM as well.
 
 By using DRM engines and DRM drivers, MiniGUI and HybridOS now provide
 the GPU integration via `hiMesa` and `hiCairo`:
