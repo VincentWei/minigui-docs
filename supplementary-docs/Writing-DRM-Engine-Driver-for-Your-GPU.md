@@ -7,9 +7,9 @@ Table of Contents
 - [Overview](#overview)
 - [Compile-time Configuration](#compile-time-configuration)
 - [Run-time Configuration](#run-time-configuration)
-- [Implement DRM driver](#implementing-drm-driver)
+- [Implementing a DRM driver](#implementing-a-drm-driver)
+- [DRM Drivers for HybridOS](#drm-drivers-for-hybridos)
 - [Restrictions](#restrictions)
-- [Examples](#examples)
 - [Future Feature](#future-feature)
 
 ## Overview
@@ -46,15 +46,20 @@ care about this.
 
 ## Compile-time Configuration
 
-There are two configure options related to the `drm` engine:
+There is one configure options related to the `drm` engine:
 
 * `--enable-videodrm` enables the `drm` engine, and `--disable-videodrm`
   disables the `drm` engine. Note that the `drm` engine is only
   available on Linux, and you need to install the `libdrm` 2.4 or later
   first.
-* `--with-targetname=external`. When you configure MiniGUI with this
-  option, MiniGUI will use the external function `__drm_ex_driver_get`
-  to initialize the DRM driver.
+
+Before version 4.0.4, we use the option `--with-targetname=external` to
+enable the external DRM driver; when you configure MiniGUI with this
+option, MiniGUI will use the external function `__drm_ex_driver_get`
+to initialize the DRM driver.
+
+Since 4.0.4, we use `dlopen` to load the DRM driver. So the above
+option does not make sense for DRM engine.
 
 ## Run-time Configuration
 
@@ -67,6 +72,7 @@ defaultmode=1024x768-32bpp
 dpi=96
 pixelformat=XR24
 device=/dev/dri/card0
+exdriver=libhidrmdrivers.so.0
 ```
 
 Note that the `defaultmode` and `dpi` keys are standard keys for
@@ -85,28 +91,36 @@ of the screen surface in MiniGUI run-time configuration. For example,
 For more information, please see `<drm/drm_fourcc.h>` header file.
 Note that only 8/16/24/32 bpp RGB formats are supported.
 
-## Implementing DRM driver
+You can use the key `drm.exdriver` to specify the SO name of the
+shared library, which implements the DRM driver for your GPU and
+export an external symbol called `__drm_ex_driver_get` to
+initialize the DRM driver.
 
-The header file `<minigui/exstubs.h>` defines the external sutbs and
+## Implementing a DRM driver
+
+The header file `<minigui/exstubs.h>` defines the external stubs and
 the driver operations (a set of callback functions) you need to implement
 for your GPU externally.
 
 First, you need to implement the following external stub:
 
 ```cpp
-DrmDriverOps* __drm_ex_driver_get (const char* driver_name);
+DrmDriverOps* __drm_ex_driver_get (const char* driver_name, int device_fd);
 ```
 
-This function takes an argument `driver_name` and returns NULL or
+This function takes tow arguments and returns NULL or
 a valid pointer of `DrmDriverOps` to MiniGUI. The argument `driver_name`
-gives the driver name determined by libdrm. Generally, it is the model
-or number of your GPU. For example, for Intel i915 GPU, the driver name
-will be `i915`. The `__drm_ex_driver_get` can returns different
-`DrmDriverOps` to MiniGUI according to the driver name. In this way,
-your implementation can support multiple GPUs.
+gives the driver name determined by libdrm. Generally, it is the kernel
+driver name for your GPU. For example, for Intel i915/i965 GPUs, the
+driver name will be `i915`. The argument `device_fd` gives you
+the file descriptor of the opened DRI device.
 
-If the external stub returns NULL, MiniGUI will use the dumb frame buffer
-instead.
+The `__drm_ex_driver_get` can return different
+`DrmDriverOps` to MiniGUI according to the driver name and device file
+descriptor. In this way, your implementation can support multiple GPUs.
+
+If the external stub returns NULL, MiniGUI will try to use the dumb
+frame buffer instead.
 
 The `DrmDriverOps` is a struct type consisting of a set of operations
 (callbacks):
@@ -139,21 +153,48 @@ typedef struct _DrmDriverOps {
 
     /**
      * This operation creates a buffer with the specified pixel format,
-     * width, and height. If succeed, a valid (not zero) buffer identifier
-     * and the picth (row stride in bytes) will be returned.
-     * If failed, it returns 0.
+     * width, and height. If succeed, a valid DrmSurfaceBuffer object will
+     * be returned; NULL on error. Note that the field of `pixels` of the
+     * DrmSurfaceBuffer object is NULL until the \a map_buffer was called.
      *
      * \note The driver must implement this operation.
      */
-    uint32_t (* create_buffer) (DrmDriver *driver,
+    DrmSurfaceBuffer* (* create_buffer) (DrmDriver *driver,
             uint32_t drm_format,
-            unsigned int width, unsigned int height,
-            unsigned int *pitch);
+            unsigned int width, unsigned int height);
 
-    BOOL (* fetch_buffer) (DrmDriver *driver,
-            uint32_t buffer_id,
-            unsigned int *width, unsigned int *height,
-            unsigned int *pitch);
+    /**
+     * This operation creates a buffer for the given handle
+     * with the specified pixel format, width, and height. If succeed,
+     * a valid DrmSurfaceBuffer object will be returned; NULL on error.
+     *
+     * \note This operation can be NULL.
+     */
+    DrmSurfaceBuffer* (* create_buffer_from_handle) (DrmDriver *driver,
+            uint32_t handle, unsigned long size, uint32_t drm_format,
+            unsigned int width, unsigned int height, unsigned int pitch);
+
+    /**
+     * This operation creates a buffer for the given system global name
+     * with the specified pixel format, width, and height. If succeed,
+     * a valid DrmSurfaceBuffer object will be returned; NULL on error.
+     *
+     * \note This operation can be NULL.
+     */
+    DrmSurfaceBuffer* (* create_buffer_from_name) (DrmDriver *driver,
+            uint32_t name, uint32_t drm_format,
+            unsigned int width, unsigned int height, unsigned int pitch);
+
+    /**
+     * This operation creates a buffer for the given PRIME file descriptor
+     * with the specified pixel format, width, height, and pitch. If succeed,
+     * a valid DrmSurfaceBuffer object will be returned; NULL on error.
+     *
+     * \note This operation can be NULL.
+     */
+    DrmSurfaceBuffer* (* create_buffer_from_prime_fd) (DrmDriver *driver,
+            int prime_fd, unsigned long size, uint32_t drm_format,
+            unsigned int width, unsigned int height, unsigned int pitch);
 
     /**
      * This operation maps the buffer into the current process's virtual memory
@@ -161,8 +202,7 @@ typedef struct _DrmDriverOps {
      *
      * \note The driver must implement this operation.
      */
-    DrmSurfaceBuffer* (* map_buffer) (DrmDriver *driver,
-            uint32_t buffer_id);
+    uint8_t* (* map_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer);
 
     /**
      * This operation un-maps a buffer.
@@ -176,7 +216,7 @@ typedef struct _DrmDriverOps {
      *
      * \note The driver must implement this operation.
      */
-    void (* destroy_buffer) (DrmDriver *driver, uint32_t buffer_id);
+    void (* destroy_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer);
 
     /**
      * This operation clears the specific rectangle area of a buffer
@@ -267,6 +307,25 @@ typedef struct _DrmDriver DrmDriver;
 
 For other operations, please see the comments above.
 
+As an example, we implement a sample DRM driver for `i915` graphics
+chard in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
+
+<https://github.com/VincentWei/mg-tests/tree/master/drm-engine>
+
+## DRM Drivers for HybridOS
+
+The [HybridOS](https://hybridos.fmsoft.cn) project maintains the
+DRM drivers for MiniGUI in the following repo (hiDRMDrivers):
+
+<https://github.com/FMSoftCN/hidrmdrivers>
+
+Note that `hiDRMDrivers` depends on the LibDRM derivative for HybridOS
+`hiDRM`, not the original libdrm:
+
+<https://github.com/FMSoftCN/hidrm>
+
+Please use the code on the branch `tune-for-hybridos` of `hiDRM`.
+
 ## Restrictions
 
 Currently (MiniGUI 4.0.4), the `drm` NEWGAL engine does not provide
@@ -277,13 +336,6 @@ Also note that when you use the hardware accelerating driver, MiniGUI app
 may need the root privilege to call `drmSetMaster` to set the video mode.
 However, under MiniGUI-Processes run-time mode, only the server (`mginit`) will
 need this privilege when you use the future `drm` engine.
-
-## Examples
-
-As an example, we implement the DRM driver for `i915` graphics chard
-in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
-
-<https://github.com/VincentWei/mg-tests/tree/master/drm-engine>
 
 ## Future Features
 
