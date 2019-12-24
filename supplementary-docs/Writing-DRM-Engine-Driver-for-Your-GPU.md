@@ -1,13 +1,13 @@
 # Writing DRM Engine Driver for Your GPU
 
-_Writing a driver of the DRI engine for your GPU._
+_Writing a driver of the DRM engine for your GPU._
 
 Table of Contents
 
 - [Overview](#overview)
 - [Compile-time Configuration](#compile-time-configuration)
 - [Run-time Configuration](#run-time-configuration)
-- [Implement DRI driver](#implementing-dri-driver)
+- [Implement DRM driver](#implementing-drm-driver)
 - [Restrictions](#restrictions)
 - [Examples](#examples)
 - [Future Feature](#future-feature)
@@ -15,11 +15,11 @@ Table of Contents
 ## Overview
 
 In order to support modern graphics cards or GPUs, we introduced a
-new NEWGAL engine of `dri`. Developers can use this engine to
+new NEWGAL engine of `drm`. Developers can use this engine to
 run MiniGUI apps on a Linux system on which the DRI
 (Direct Rendering Infrastructure) is enabled.
 
-The `dri` engine uses `libdrm` developed by Free Desktop project:
+The `drm` engine uses `libdrm` developed by Free Desktop project:
 
 <https://dri.freedesktop.org/wiki/>
 
@@ -29,15 +29,15 @@ MiniGUI mainly uses this library to support the dumb frame buffer
 graphics cards or GPUs to implement the hardware accelerated features.
 
 To avoid modifying the MiniGUI source code when supporting a new GPU,
-the `dri` engine has adopted a scalable design:
+the `drm` engine has adopted a scalable design:
 
-* You can directly use the `dri` engine to run MiniGUI on a GPU
+* You can directly use the `drm` engine to run MiniGUI on a GPU
 which supports dumb frame buffer.
 * When you want to take advantage of the hardware acceleration of
 your GPU, you can write some code for your GPU as a sub driver
-of `dri` engine outside MiniGUI.
+of `drm` engine outside MiniGUI.
 
-This document describes how to enable `dri` engine and write a
+This document describes how to enable `drm` engine and write a
 hardware-accelerating driver for your own GPU.
 
 Note that, generally, the driver will be implemented by the GPU
@@ -46,24 +46,23 @@ care about this.
 
 ## Compile-time Configuration
 
-There are two configure options related to the `dri` engine:
+There are two configure options related to the `drm` engine:
 
-* `--enable-videodri` enables the `dri` engine, and `--disable-videodri`
-  disables the `dri` engine. Note that the `dri` engine is only
+* `--enable-videodrm` enables the `drm` engine, and `--disable-videodrm`
+  disables the `drm` engine. Note that the `drm` engine is only
   available on Linux, and you need to install the `libdrm` 2.4 or later
   first.
 * `--with-targetname=external`. When you configure MiniGUI with this
-  option, MiniGUI will use the external function `__dri_ex_driver_get`
-  to initialize the DRI driver. If you do not implement this function,
-  the link will fail.
+  option, MiniGUI will use the external function `__drm_ex_driver_get`
+  to initialize the DRM driver.
 
 ## Run-time Configuration
 
-For `dri` engine, we introduced a new section in MiniGUI runtime
+For `drm` engine, we introduced a new section in MiniGUI runtime
 configuration:
 
 ```
-[dri]
+[drm]
 defaultmode=1024x768-32bpp
 dpi=96
 pixelformat=XR24
@@ -74,10 +73,10 @@ Note that the `defaultmode` and `dpi` keys are standard keys for
 a NEWGAL engine. These two keys define the screen resolution for
 MiniGUI.
 
-For `dri` engine, you can use the key `dri.device` to specify
+For `drm` engine, you can use the key `drm.device` to specify
 your DRI device. Generally, it is `/dev/dri/card0`.
 
-You can use the key `dri.pixelformat` to specify the DRM pixel format
+You can use the key `drm.pixelformat` to specify the DRM pixel format
 of the screen. We use libdrm's fourcc code to defined the pixel format
 of the screen surface in MiniGUI run-time configuration. For example,
 `XR24` means `X8R8G8B8` pixel format (`DRM_FORMAT_XRGB8888`), and
@@ -86,7 +85,7 @@ of the screen surface in MiniGUI run-time configuration. For example,
 For more information, please see `<drm/drm_fourcc.h>` header file.
 Note that only 8/16/24/32 bpp RGB formats are supported.
 
-## Implementing DRI driver
+## Implementing DRM driver
 
 The header file `<minigui/exstubs.h>` defines the external sutbs and
 the driver operations (a set of callback functions) you need to implement
@@ -95,48 +94,48 @@ for your GPU externally.
 First, you need to implement the following external stub:
 
 ```cpp
-DriDriverOps* __dri_ex_driver_get (const char* driver_name);
+DrmDriverOps* __drm_ex_driver_get (const char* driver_name);
 ```
 
 This function takes an argument `driver_name` and returns NULL or
-a valid pointer of `DriDriverOps` to MiniGUI. The argument `driver_name`
+a valid pointer of `DrmDriverOps` to MiniGUI. The argument `driver_name`
 gives the driver name determined by libdrm. Generally, it is the model
 or number of your GPU. For example, for Intel i915 GPU, the driver name
-will be `i915`. The `__dri_ex_driver_get` can returns different
-`DriDriverOps` to MiniGUI according to the driver name. In this way,
+will be `i915`. The `__drm_ex_driver_get` can returns different
+`DrmDriverOps` to MiniGUI according to the driver name. In this way,
 your implementation can support multiple GPUs.
 
 If the external stub returns NULL, MiniGUI will use the dumb frame buffer
 instead.
 
-The `DriDriverOps` is a struct type consisting of a set of operations
+The `DrmDriverOps` is a struct type consisting of a set of operations
 (callbacks):
 
 ```cpp
 /**
- * The struct type defines the operations for a DRI driver.
+ * The struct type defines the operations for a DRM driver.
  */
-typedef struct _DriDriverOps {
+typedef struct _DrmDriverOps {
     /**
-     * This operation creates the DriDriver object.
+     * This operation creates the DrmDriver object.
      *
      * \note The driver must implement this operation.
      */
-    DriDriver* (*create_driver) (int device_fd);
+    DrmDriver* (*create_driver) (int device_fd);
 
     /**
-     * This operation destroies the DriDriver object.
+     * This operation destroies the DrmDriver object.
      *
      * \note The driver must implement this operation.
      */
-    void (*destroy_driver) (DriDriver *driver);
+    void (*destroy_driver) (DrmDriver *driver);
 
     /**
      * This operation flushs the batch buffer of the driver or the hardware cache.
      *
      * \note This operation can be NULL.
      */
-    void (* flush_driver) (DriDriver *driver);
+    void (* flush_driver) (DrmDriver *driver);
 
     /**
      * This operation creates a buffer with the specified pixel format,
@@ -146,12 +145,12 @@ typedef struct _DriDriverOps {
      *
      * \note The driver must implement this operation.
      */
-    uint32_t (* create_buffer) (DriDriver *driver,
+    uint32_t (* create_buffer) (DrmDriver *driver,
             uint32_t drm_format,
             unsigned int width, unsigned int height,
             unsigned int *pitch);
 
-    BOOL (* fetch_buffer) (DriDriver *driver,
+    BOOL (* fetch_buffer) (DrmDriver *driver,
             uint32_t buffer_id,
             unsigned int *width, unsigned int *height,
             unsigned int *pitch);
@@ -162,7 +161,7 @@ typedef struct _DriDriverOps {
      *
      * \note The driver must implement this operation.
      */
-    DriSurfaceBuffer* (* map_buffer) (DriDriver *driver,
+    DrmSurfaceBuffer* (* map_buffer) (DrmDriver *driver,
             uint32_t buffer_id);
 
     /**
@@ -170,14 +169,14 @@ typedef struct _DriDriverOps {
      *
      * \note The driver must implement this operation.
      */
-    void (* unmap_buffer) (DriDriver *driver, DriSurfaceBuffer* buffer);
+    void (* unmap_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer);
 
     /**
      * This operation destroies a buffer.
      *
      * \note The driver must implement this operation.
      */
-    void (* destroy_buffer) (DriDriver *driver, uint32_t buffer_id);
+    void (* destroy_buffer) (DrmDriver *driver, uint32_t buffer_id);
 
     /**
      * This operation clears the specific rectangle area of a buffer
@@ -186,8 +185,8 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, the driver does not support
      * hardware accelerated clear operation.
      */
-    int (* clear_buffer) (DriDriver *driver,
-            DriSurfaceBuffer* dst_buf, const GAL_Rect* rc, uint32_t pixel_value);
+    int (* clear_buffer) (DrmDriver *driver,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* rc, uint32_t pixel_value);
 
     /**
      * This operation checks whether a hardware accelerated blit
@@ -197,8 +196,8 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, it will be supposed that
      * the driver does not support any hardware accelerated blit operation.
      */
-    int (* check_blit) (DriDriver *driver,
-            DriSurfaceBuffer* src_buf, DriSurfaceBuffer* dst_buf);
+    int (* check_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, DrmSurfaceBuffer* dst_buf);
 
     /**
      * This operation copies bits from a source buffer to a destination buffer.
@@ -206,10 +205,10 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, the driver does not support
      * hardware accelerated copy blit.
      */
-    int (* copy_blit) (DriDriver *driver,
-            DriSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DriSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
-            enum DriColorLogicOp logic_op);
+    int (* copy_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
+            enum DrmColorLogicOp logic_op);
 
     /**
      * This operation blits pixles from a source buffer with the source alpha value
@@ -218,9 +217,9 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, the driver does not support
      * hardware accelerated blit with alpha.
      */
-    int (* alpha_blit) (DriDriver *driver,
-            DriSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DriSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint8_t alpha);
+    int (* alpha_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint8_t alpha);
 
     /**
      * This operation blits pixles from a source buffer to a destination buffer,
@@ -229,9 +228,9 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, the driver does not support
      * hardware accelerated blit with color key.
      */
-    int (* key_blit) (DriDriver *driver,
-            DriSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DriSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint32_t color_key);
+    int (* key_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint32_t color_key);
 
     /**
      * This operation blits pixles from a source buffer with the source alpha value
@@ -240,61 +239,56 @@ typedef struct _DriDriverOps {
      * \note If this operation is set as NULL, the driver does not support
      * hardware accelerated blit with alpha and color key.
      */
-    int (* alpha_key_blit) (DriDriver *driver,
-            DriSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DriSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
+    int (* alpha_key_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
             uint8_t alpha, uint32_t color_key);
 
-} DriDriverOps;
+} DrmDriverOps;
 ```
 
-If the external stub `__dri_ex_driver_get` returns a valid pointer
-of `DriDriverOps`, MiniGUI will call the operation `create_driver`
-to initialize the DRI driver. The operation will return a pointer
-to the type of `DriDriver`. All other operations of `DriDriverOps`
-need this pointer as the context of your DRI driver.
+If the external stub `__drm_ex_driver_get` returns a valid pointer
+of `DrmDriverOps`, MiniGUI will call the operation `create_driver`
+to initialize the DRM driver. The operation will return a pointer
+to the type of `DrmDriver`. All other operations of `DrmDriverOps`
+need this pointer as the context of your DRM driver.
 
 Note that MiniGUI does not define the detailed structure of
-`DriDriver`, it is up to your implementation:
+`DrmDriver`, it is up to your implementation:
 
 ```cpp
 /**
  * The struct type represents the DRI sub driver.
  * The concrete struct should be defined by the driver.
  */
-struct _DriDriver;
-typedef struct _DriDriver DriDriver;
+struct _DrmDriver;
+typedef struct _DrmDriver DrmDriver;
 ```
 
 For other operations, please see the comments above.
 
 ## Restrictions
 
-In version 4.0.0, the `dri` NEWGAL engine does not provide support for
-MiniGUI-Processes run-time mode. We will enhance this in the subsequent
-version of MiniGUI.
+Currently (MiniGUI 4.0.4), the `drm` NEWGAL engine does not provide
+support for MiniGUI-Processes run-time mode. We will enhance this in
+the subsequent version of MiniGUI.
 
 Also note that when you use the hardware accelerating driver, MiniGUI app
 may need the root privilege to call `drmSetMaster` to set the video mode.
 However, under MiniGUI-Processes run-time mode, only the server (`mginit`) will
-need this privilege when you use the future `dri` engine.
+need this privilege when you use the future `drm` engine.
 
 ## Examples
 
-As an example, we implement the DRI driver for `i915` graphics chard
-in `mg-tests/dri-engine/`. Please refer to `mg-tests` repository:
+As an example, we implement the DRM driver for `i915` graphics chard
+in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
 
-https://github.com/VincentWei/mg-tests/tree/master/dri-engine
+<https://github.com/VincentWei/mg-tests/tree/master/drm-engine>
 
 ## Future Features
 
 In the near future, the MiniGUI team will:
 
-* Enhance `dri` engine to support MiniGUI-Processes run-time mode.
-* Enhance `dri` engine to support video plane/overlay.
-* Implement the MiniGUI back-end of `cairo` and `EGL` for OpenGL,
-  OpenGL ES, and OpenVG, in order to fully exploit the GPU's 2D/3D
-  accelerated rendering capabilities.
-* Provide some samples in `mg-tests` or `mg-samples` to integrate
-  MiniGUI with `cairo` and OpenGL/OpenGL ES/OpenVG.
+* Enhance `drm` engine to support MiniGUI-Processes run-time mode.
+* Enhance `drm` engine to support video plane/overlay.
 
