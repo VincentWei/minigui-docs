@@ -326,6 +326,9 @@ called `hiDRM`, not the original libdrm:
 
 Please use the code on the branch `hybridos` of `hiDRM`.
 
+When you want to use `hiDRMDrivers`, please make sure that let MiniGUI
+use `hiDRM` as well.
+
 ## Restrictions
 
 Currently (MiniGUI 4.0.4), the `drm` NEWGAL engine does not provide
