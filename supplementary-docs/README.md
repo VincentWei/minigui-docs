@@ -32,7 +32,7 @@ We call these documents "MiniGUI Supplementary Documents".
 
 * [Release Notes for MiniGUI 4.0](Release-Notes-for-MiniGUI-4.0.md) -
     Enhancements and changes of MiniGUI 4.0.x.
-* [Write DRI Engine Driver for Your GPU](Writing-DRI-Engine-Driver-for-Your-GPU.md) -
+* [Write DRM Engine Driver for Your GPU](Writing-DRM-Engine-Driver-for-Your-GPU.md) -
     Writea DRI engine driver to exploit the hardware accelerating functions of your GPU.
 * [Support and Use Extra Input Messages](Supporting-and-Using-Extra-Input-Messages.md) -
     Support and use extra input messages.
