@@ -4,7 +4,7 @@
    * [Section `system`](#section-system)
    * [Section `pc_xvfb`](#section-pc_xvfb)
    * [Section `fbcon`](#section-fbcon)
-   * [Section `dri`](#section-dri)
+   * [Section `drm`](#section-drm)
    * [Section `libinput`](#section-libinput)
    * [Section `systemfont`](#section-systemfont)
    * [Section `cursorinfo`](#section-cursorinfo)
@@ -185,38 +185,44 @@ defaultmode=1024x768-16bpp
 dpi=96
 ```
 
-### Section `dri`
+### Section `drm`
 
-This section is dedicated to the `dri` graphics engine which runs on
-Linux DRI/DRM.
-It is available since MiniGUI 4.0.0.
+This section is dedicated to the `drm` graphics engine which runs on
+Linux DRI (Direct Rendering Infrastructure).
+It is available since MiniGUI 4.0.4.
 
-The section `dri` is only effective when you define the key
-`system.gal_engine` with value `dri`.
+The section `drm` is only effective when you define the key
+`system.gal_engine` with value `drm`.
 
-The valid keys in the section `dri` are listed as follow:
+The valid keys in the section `drm` are listed as follow:
 
 - `defaultmode`: The display mode of the graphics engine `fbcon`.
 - `dpi`: The pixel density of the display, in dots (physical pixels) per inch;
    the default value is 96.
 - `pixelformat`: The pixel format.
 - `device`: The DRI device.
+- `exdriver`: The filename of the shared library for the external DRM driver.
 
-The key `defaultmode` also defines the default display mode for the `dri`
+The key `defaultmode` also defines the default display mode for the `drm`
 engine. This key value will override the value defined by `system.defaultmode`.
-If the section is undefined or the key value is invalid, the `dri`
+If the section is undefined or the key value is invalid, the `drm`
 engine will use the key value of `system.gal_engine`.
 
-For `dri` engine, we introduced a new key `pixelformat` to
+For `drm` engine, we introduced a new key `pixelformat` to
 define the pixel format precisely. We use DRM fourcc code (like `XR24`)
 to define the pixel format of the video surface. For more information,
 please see the header file `drm/drm_fourcc.h` of libdrm.
 Note that only 8/16/24/32 bpp RGB formats are supported.
 
+The key `exdriver` defines the filename of the shared library for the
+external driver for MiniGUI DRM NEWGAL engine. The default value is
+`libhidrmdrivers.so.0`. You can also change the value of this key
+by the system environment variable: `MG_GAL_DRM_DRIVER`.
+
 The content of the section in the default `MiniGUI.cfg` is as follow:
 
 ```ini
-[dri]
+[drm]
 defaultmode=1024x768-32bpp
 
 # We use DRM fourcc code to defined the pixel format of the video surface.
@@ -230,6 +236,10 @@ device=/dev/dri/card0
 # It is defined in dots (physical pixels) per inch
 # The default value is 96.
 dpi=96
+
+# The filename of the shared library for the external driver.
+# The equivalent environment variable: MG_GAL_DRM_DRIVER
+exdriver=libhidrmdrivers.so.0
 ```
 
 ### Section `libinput`
@@ -1413,7 +1423,7 @@ fontfile0=../res/fonts/SourceHanSans-Normal.ttc
 [Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
 [Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
 [Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
-[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing DRM Engine Driver for Your GPU]: /supplementary-docs/Writing-DRM-Engine-Driver-for-Your-GPU.md
 [Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [MiniGUI User Manual]: /user-manual/README.md

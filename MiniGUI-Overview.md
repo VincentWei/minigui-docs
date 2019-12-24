@@ -252,7 +252,7 @@ in order to support [HybridOS Foundation Class Library].
   to support the input events from devices other than standard mouse
   and keyboard. We call these messages as 'extra input messages'.
 
-* The NEWGAL engine of `dri` to support modern DRI/DRM-driven graphics cards
+* The NEWGAL engine of `drm` to support modern DRI/DRM-driven graphics cards
   or GPUs on Linux.
 
 * The IAL engine of `libinput` to support all modern input devices including

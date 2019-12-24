@@ -91,12 +91,12 @@ of MiniGUI core. Instead, you implement the engines outside the MiniGUI
 Core by defining some external functions. In this way, we reduce the
 amount of work required to port MiniGUI to a new target board.
 
-Since MiniGUI 4.0.0, the NEWGAL engine `dri` for Linux also supports
+Since MiniGUI 4.0.0, the NEWGAL engine `drm` for Linux also supports
 the target name `external`. So you can implement the sub-driver of
 `dri` engine outside MiniGUI Core. For more information, please refer to:
 
 - [Using CommLCD NEWGAL Engine and Comm IAL Engine]
-- [Writing DRI Engine Driver for Your GPU]
+- [Writing DRM Engine Driver for Your GPU]
 
 The following table lists the options and macros related to
 various target boards.
@@ -163,7 +163,7 @@ so we can see the MiniGUI screens in the window. This engine is
 helpful for developing MiniGUI apps on Linux or MS Windows.
 - `FBCon`: A `NEWGAL` engine uses Linux frame buffer device driver
 (`/dev/fb`).
-- `DRI` (Since MiniGUI 4.0): A `NEWGAL` engine uses Linux DRI/DRM
+- `DRM` (Since MiniGUI 4.0): A `NEWGAL` engine uses Linux DRM (Direct Rendering Manager)
 to support modern graphics devices with 2D/3D hardware acceleration.
 - `CommLCD`: A simple `NEWGAL` engine to support LCD without hardware
 acceleration. We often use this engine on traditional real-time
@@ -180,11 +180,11 @@ The table below lists the common `NEWGAL` engines.
 | ---------------|------------------|-------------|----------|---------
 | `videodummy`   | `_MGGAL_DUMMY`   | `dummy`     | Enabled  | All operating system
 | `videopcxvfb`  | `_MGGAL_PCXVFB`  | `pc_xvfb`   | Enabled  | Linux/Windows PC; The universal virtual buffer engine
-| `videodri`     | `_MGGAL_DRI`     | `dri`       | Enabled  | Linux
-| `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux
+| `videodrm`     | `_MGGAL_DRM`     | `drm`       | Enabled  | Linux
+| `videofbcon`   | `_MGGAL_FBCON`   | `fbcon`     | Enabled  | Linux/uClinux (Disabled by default since 4.0.4)
 | `videocommlcd` | `_MGGAL_COMMLCD` | `commlcd`   | Disabled | All operating system
 | `videoshadow`  | `_MGGAL_SHADOW`  | `shadow`    | Disabled | All operating system, but only for MiniGUI-Threads and MiniGUI-Standalone runtime modes
-| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB on Linux; Deprecated, use DRI instead
+| `videodfb`     | `_MGGAL_DFB`     | `dfb`       | Disabled | Run MiniGUI on DirectFB on Linux; Deprecated, use DRM instead
 | `videoqvfb`    | `_MGGAL_QVFB`    | `qvfb`      | Disabled | Linux PC; The virtual buffer engine for QVFB; Deprecated
 | `videowvfb`    | `_MGGAL_WVFB`    | `wvfb`      | Disabled | Win32; virtual buffer graphics engine for Win32; Deprecated
 
@@ -876,7 +876,7 @@ However, for MiniGUI components, you use the default options in most cases.
 [Using Enhanced Font Interfaces]: /supplementary-docs/Using-Enhanced-Font-Interfaces.md
 [Using Images and Fonts on System without File System]: /supplementary-docs/Using-Images-and-Fonts-on-System-without-File-System.md
 [Using SyncUpdateDC to Reduce Screen Flicker]: /supplementary-docs/Using-SyncUpdateDC-to-Reduce-Screen-Flicker.md
-[Writing DRI Engine Driver for Your GPU]: /supplementary-docs/Writing-DRI-Engine-Driver-for-Your-GPU.md
+[Writing DRM Engine Driver for Your GPU]: /supplementary-docs/Writing-DRM-Engine-Driver-for-Your-GPU.md
 [Writing MiniGUI Apps for 64-bit Platforms]: /supplementary-docs/Writing-MiniGUI-Apps-for-64-bit-Platforms.md
 
 [MiniGUI User Manual]: /user-manual/README.md
