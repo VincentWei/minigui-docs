@@ -599,7 +599,7 @@ After created MiniGUI surface, you can use the following code to render
 2D vector graphics on the surface:
 
 ```c
-static int draw_rectangle (HDC target_dc, int height, int height)
+static int draw_rectangle (HDC target_dc, int width, int height)
 {
     int ret = 0;
 
