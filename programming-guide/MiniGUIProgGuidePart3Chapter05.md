@@ -11,7 +11,7 @@
 
 ## Introduction
 
-The graphics stack on Linux has had a long evolution.
+The graphics stack on Linux has had a long time evolution.
 
 Initially, graphics applications on Linux mainly used the old `SVGALib`;
 the Linux kernel did not provide any driver for graphics or GPU.
@@ -23,7 +23,7 @@ code for a specific GPU in application space. For desktop systems,
 it is not a problem, because the XFree86 project provided a complete
 graphics stack for 2D/3D rendering. But it is a nightmare for embedded systems.
 
-Around 2010, the Free Destkop project introduced a new graphics stack for
+Around 2010, the Free Desktop project introduced a new graphics stack for
 Linux system called DRI (Direct Rendering Infrastructure).
 As the name suggests, DRI provides applications with the ability to
 directly access the GPU for 2D/3D rendering. With or without X Window,
