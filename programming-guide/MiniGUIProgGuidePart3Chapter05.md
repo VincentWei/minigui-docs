@@ -159,10 +159,10 @@ For more information about EGL, please refer to:
 
 MiniGUI introduced some new APIs for GPU integration:
 
-- `GetVideoHandle` gets the video handle which corresponds to the given
-  device context. By using the video handle returned by this function, you
-  can call `drmGetDeviceFD` to get the DRI device file descriptor opened by
-  MiniGUI DRM engine.
+- `GetVideoHandle` gets the handle of the video engine which corresponds to
+  the given device context. By using the video engine handle returned by this
+  function, you can call `drmGetDeviceFD` to get the DRI device file descriptor
+  opened by MiniGUI DRM engine.
 - `drmGetDeviceFD` returns the DRI device file descriptor opened by MiniGUI
   DRM engine.
 - `drmGetSurfaceInfo` returns the DRM surface information from a specific
@@ -286,8 +286,7 @@ Revision History
         - Initial draft
 ```
 
-
-## 3D Rendering on MiniGUI
+## Using MiniGUI EGL for OpenGL and OpenGL ES
 
 ## Cairo and MiniGUI
 
