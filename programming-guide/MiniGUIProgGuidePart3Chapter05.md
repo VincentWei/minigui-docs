@@ -29,7 +29,7 @@ switching from frame buffer to DRI.
 
 Therefore, we introduced the support DRI in MiniGUI version 4.0.4,
 and developed the EGL implementation for MiniGUI based on Mesa,
-also the MiniGUI back-end for Cairo.
+also the MiniGUI backend for Cairo.
 
 Now, it is very easy to integrate MiniGUI with your GPU. Your MiniGUI
 app can exploit the GPU accelerated functions to render 2D/3D objects.
@@ -50,21 +50,21 @@ the members of HybridOS project are now maintaining the graphics stack.
 The following chart shows the graphics stack of HybridOS:
 
 ```
-     -----------------------------------------------
-    |           MiniGUI/HybridOS Apps               |
-    |-----------------------------------------------|
-    |           |         (Graphics Stack)          |
-    |           |              ---------------------|
-    |           |              | hiMesa             |
-    |           | hiCairo      |  ------------------|
-    |           | MiniGUI      |  | EGL for MiniGUI |
-    | C++ libs  | hiDRMDrivers |  | GL, GLES, VG    |
-    | C libs    | hiDRM        |  | GPU drivers     |
-    |-----------------------------------------------|
-    |  Linux Kernel                                 |
-    |            -----------------------------------|
-    |           |        DRI and DRI Drivers        |
-     -----------------------------------------------
+  -----------------------------------------------
+ |           MiniGUI/HybridOS Apps               |
+ |-----------------------------------------------|
+ |           |         (Graphics Stack)          |
+ |           |              ---------------------|
+ |           |              | hiMesa             |
+ |           | hiCairo      |  ------------------|
+ |           | MiniGUI      |  | EGL for MiniGUI |
+ | C++ libs  | hiDRMDrivers |  | GL, GLES, VG    |
+ | C libs    | hiDRM        |  | GPU drivers     |
+ |-----------------------------------------------|
+ |  Linux Kernel                                 |
+ |            -----------------------------------|
+ |           |        DRI and DRI Drivers        |
+  -----------------------------------------------
 ```
 
 As shown in the chart above, the HybridOS graphics stack
