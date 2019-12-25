@@ -124,6 +124,8 @@ Please note that the installation order of the software:
 
 ## The EGL Implementation for MiniGUI
 
+The following words give the official definition for EGL:
+
 > EGL™ is an interface between Khronos rendering APIs such as
 > OpenGL ES or OpenVG and the underlying native platform window system.
 > It handles graphics context management, surface/buffer binding, and
@@ -133,10 +135,19 @@ Please note that the installation order of the software:
 > efficient transfer of data between APIs – for example between a
 > video subsystem running OpenMAX AL and a GPU running OpenGL ES.
 
+Obviously, to integrate OpenGL and other graphics APIs with MiniGUI,
+we must implement EGL for MiniGUI.
+
 As mentioned before, Mesa uses DRI to drive various GPUs and implement
 the graphics APIs. Basically, the EGL implementation for MiniGUI depends
-on the DRM engine of MiniGUI. On the other hand, if one MiniGUI instance
-was not using DRM engine, the EGL implementation can still use the
+on the DRM engine of MiniGUI.
+
+The EGL implementation for MiniGUI in Mesa is a sub driver of `egl_dri2`,
+which supports many platforms including `x11`, `wayland`, `drm`, and
+`surfaceless`.
+
+On the other hand, if one MiniGUI instance was not using DRM engine,
+the EGL implementation for MiniGUI can still use the
 software driver in Mesa to render the graphics objects.
 
 For more information about EGL, please refer to:
@@ -144,13 +155,7 @@ For more information about EGL, please refer to:
 - EGL Specification: <https://www.khronos.org/egl/>
 - EGL in Mesa: <https://mesa3d.org/egl.html>
 
-The EGL implementation for MiniGUI in Mesa is a sub driver of `egl_dri2`,
-which supports many platforms including `x11`, `wayland`, `drm`, and
-`surfaceless`.
-
-### APIs specific to DRM engine
-
-
+### New APIs for GPU integration
 
 ## 3D Rendering on MiniGUI
 
