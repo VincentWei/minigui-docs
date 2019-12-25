@@ -41,11 +41,11 @@ constitute the graphics stack of HybridOS.
 
 [HybridOS](https://hybridos.fmsoft.cn) is a totally new open source
 operating system designed for smart IoT devices and cloud computing
-environment. [FMSoft Technologies], who is the developer of MiniGUI,
+environment. [FMSoft Technologies], the developer of MiniGUI,
 initiated HybridOS project in 2018.
 
 HybridOS uses MiniGUI as the underlying windowing system, and
-the members of HybridOS project are now maintaining the graphics stack.
+the members of HybridOS project are now maintaining the whole graphics stack.
 
 The following chart shows the graphics stack of HybridOS:
 
@@ -73,14 +73,19 @@ consists of the following software:
 - [hiDRM](https://github.com/FMSoftCN/hidrm) is the LibDRM derivative
   for HybridOS.
 - [hiDRMDrivers](https://github.com/FMSoftCN/hidrmdrivers) contains the
-  drivers for MiniGUI DRM engine.
+  drivers for MiniGUI DRM engine. The drivers implement the basic hardware
+  acclerated graphics operations of various GPUs for MiniGUI.
 - [hiMesa](https://github.com/FMSoftCN/himesa) is the Mesa derivative
-  for HybridOS. It contains the following components:
-   1. The OpenGL, OpenGL ES v2, OpenGL ES v3 APIs and implementations.
+  for HybridOS, while Mesa is the open source implementation of OpenGL
+  and other graphics APIs, including OpenGL ES (versions 1, 2, 3), OpenCL,
+  OpenMAX, and Vulkan. It contains the following components:
+   1. The implementatin of OpenGL, OpenGL ES (v1, 2, 3), and other
+      graphics APIs.
    1. The EGL implementation for MiniGUI platform.
-   1. The drivers for various GPUs.
+   1. The graphics drivers for various GPUs and a software driver called
+      `swrast`.
 - [hiCairo](https://github.com/FMSoftCN/hicairo) is the Cairo derivative
-  for HybridOS. Cairo is the 2D vector graphics library for Gtk. We provide
+  for HybridOS. Cairo is a 2D vector graphics library for Gtk. We provide
   support for MiniGUI backend in hiCairo.
 
 You can use the following script to fetch the source code of above software:
