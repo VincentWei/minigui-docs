@@ -108,7 +108,7 @@ git clone $REPO_URL/himesa -b minigui-backend
 git clone $REPO_URL/hicairo -b minigui-backend
 ```
 
-_NOTE_ The above fetching script may changed in the future.
+_[NOTE]_ The above fetching script may changed in the future.
 
 The software all ship with the GNU autotools building scripts or
 the meson building scripts. You can refer to the README file for
@@ -366,6 +366,73 @@ int init_minigui_and_egl(int argc, char* argv[])
 }
 
 ```
+
+After initialized MiniGUI and EGL, you call the following EGL function
+on a MiniGUI window to create a window surface:
+
+```c
+// Make sure to call eglChooseConfig to choose config before calling
+// this function.
+static EGLSurface create_window_surface (EGLDisplay dpy, EGLConfig config, HWND hwnd)
+{
+    EGLContext context;
+    EGLSurface surface;
+    EGLint context_attribs[4];
+    EGLint api, i;
+
+    i = 0;
+    context_attribs[i] = EGL_NONE;
+
+    // use OpenGL ES v2
+    api = EGL_OPENGL_ES_API;
+    context_attribs[i++] = EGL_CONTEXT_CLIENT_VERSION;
+    context_attribs[i++] = 2;
+    context_attribs[i] = EGL_NONE;
+
+    eglBindAPI (api);
+
+    context = eglCreateContext (dpy,
+         config, EGL_NO_CONTEXT, context_attribs);
+    if (!context)
+        _fatal ("failed to create context");
+
+    surface = eglCreateWindowSurface(dpy,
+            config, (EGLNativeWindowType)hwnd, NULL);
+    if (surface == EGL_NO_SURFACE)
+      _fatal ("failed to create surface");
+
+    if (!eglMakeCurrent(dpy, surface, surface, context))
+      _fatal ("failed to make window current");
+
+    // use additional data to store the surface
+    SetWindowAdditionalData(hwnd, (DWORD)surface);
+
+    return surface;
+}
+```
+
+_[TIP]_ You can use the extended style `WS_EX_USEPRIVATECDC` when creating
+MiniGUI main window or control for EGL window surface. This extended style
+can provide a performance improvement.
+
+After we created a window surface and make the context as the current context,
+we can call OpenGL or OpenGL ES APIs to draw our graphics object. When we
+finished the rendering, we call `eglSwapBuffers` to swap the content in the
+window surface to the MiniGUI window. This generally happens in the handler
+of `MSG_PAINT`:
+
+```c
+    case MSG_PAINT: {
+        EGLSurface surface =
+            (EGLSurface)GetWindowAdditionalData(hWnd);
+
+        HDC hdc = BeginPaint (hWnd);
+        eglSwapBuffers (dpy, surface);
+        EndPaint (hWnd, hdc);
+        return 0;
+    }
+```
+
 
 ## Cairo and MiniGUI
 
