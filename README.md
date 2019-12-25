@@ -56,13 +56,15 @@ We have cleaned up the following documents:
 
 The following documents need to be written:
 
-- [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
 - [The C++ UX Framework](/programming-guide/MiniGUIProgGuidePart4Chapter03.md)
 - [Code Style and Project Specification](/programming-guide/MiniGUIProgGuideAppendixA.md)
 
 We hope that we can finish this work at the end of the year 2019.
 
 ### ChangeLog
+
+- 2019-12-25  
+  Draft of [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
 
 - 2019-12-24  
   Tune for MiniGUI version 4.0.4.
@@ -75,5 +77,4 @@ We hope that we can finish this work at the end of the year 2019.
 
 - 2019-10-24  
   MiniGUI User Manual is ready.
-
 
