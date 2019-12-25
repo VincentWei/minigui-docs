@@ -85,7 +85,7 @@ consists of the following software:
 
 You can use the following script to fetch the source code of above software:
 
-```bash
+```shell
 #!/bin/bash
 
 # Use this if you want to visit GitHub via HTTPS
