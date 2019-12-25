@@ -157,6 +157,136 @@ For more information about EGL, please refer to:
 
 ### New APIs for GPU integration
 
+MiniGUI introduced some new APIs for GPU integration:
+
+- `GetVideoHandle` gets the video handle which corresponds to the given
+  device context. By using the video handle returned by this function, you
+  can call `drmGetDeviceFD` to get the DRI device file descriptor opened by
+  MiniGUI DRM engine.
+- `drmGetDeviceFD` returns the DRI device file descriptor opened by MiniGUI
+  DRM engine.
+- `drmGetSurfaceInfo` returns the DRM surface information from a specific
+   device context.
+- `drmCreateDCFromName` creates a memory DC with a DRM surface which is
+  created by a foreign process and identified by a global name handle.
+- `drmCreateDCFromPrimeFd` creates a memory DC with a DRM surface which
+  is created by a foreign process and identified by a PRIME file descriptor.
+- `drmCreateDCFromHandle` creates a memory DC with a DRM surface which is
+  created by a foreign graphics component.
+
+Note that all functions prefixed by `drm` is only available when support
+for Linux DRM NEWGAL engine (`_MGGAL_DRM`) is enabled.
+
+### Specification of EGL implementation for MiniGUI
+
+The following text gives the specification of EGL implementation for MiniGUI:
+
+```
+Name
+
+    EXT_platform_minigui
+
+Name Strings
+
+    EGL_EXT_platform_minigui
+
+Contributors
+
+    Vincent Wei <vincent@minigui.org>
+
+Contacts
+
+    Vincent Wei <vincent@minigui.org>
+
+Status
+
+    Beta
+
+Version
+
+    Version 1, 2019-12-10
+
+Number
+
+    EGL Extension <N/A>
+
+Extension Type
+
+    EGL client extension
+
+Dependencies
+
+    Requires EGL_EXT_client_extensions to query its existence without
+    a display.
+
+    Requires EGL_EXT_platform_base.
+
+    This extension is written against the wording of version 7 of the
+    EGL_EXT_platform_base specification.
+
+Overview
+
+    This extension defines how to create EGL resources from native MiniGUI
+    resources using the functions defined by EGL_EXT_platform_base.
+
+New Types
+
+    None
+
+New Procedures and Functions
+
+    None
+
+New Tokens
+
+    Accepted as the <platform> argument of eglGetPlatformDisplayEXT:
+
+        EGL_PLATFORM_MINIGUI_EXT                0x34A0
+
+Additions to the EGL Specification
+
+    None.
+
+New Behavior
+
+    To determine if the EGL implementation supports this extension, clients
+    should query the EGL_EXTENSIONS string of EGL_NO_DISPLAY.
+
+    To obtain an EGLDisplay backed by a MiniGUI video, call
+    eglGetPlatformDisplayEXT with <platform> set to EGL_PLATFORM_MINIGUI_EXT.
+    The <native_display> parameter specifies the MiniGUI video to use and must
+    either a handle to video (returned by `GetVideoHandle()` or be EGL_DEFAULT_DISPLAY.
+    If <native_display> is EGL_DEFAULT_DISPLAY, then EGL will use the video
+    handle returned by `GetVideoHandle(HDC_SCREEN)`.
+
+    To obtain an on-screen rendering surface from a MiniGUI window, call
+    eglCreatePlatformWindowSurfaceEXT with a <dpy> that belongs to MiniGUI and
+    a <native_window> that is a window handle.
+
+    It is not valid to call eglCreatePlatformPixmapSurfaceEXT with a <dpy>
+    that belongs to MiniGUI. Any such call fails and generates
+    EGL_BAD_PARAMETER.
+
+Issues
+
+    1. Should this extension permit EGL_DEFAULT_DISPLAY as input to
+       eglGetPlatformDisplayEXT()?
+
+       Yes. When given EGL_DEFAULT_DISPLAY, eglGetPlatformDisplayEXT
+       returns a display backed by the default MiniGUI video engine.
+
+    2. Should this extension support creation EGLPixmap resources from MiniGUI
+       memory DC?
+
+       No. The implementation has no pixmap type.
+
+Revision History
+
+    Version 1, 2019-12-10 (Vincent)
+        - Initial draft
+```
+
+
 ## 3D Rendering on MiniGUI
 
 ## Cairo and MiniGUI
