@@ -452,7 +452,8 @@ to destroy the surface, context, and terminate EGL:
 ```
 
 ![alt](figures/mesa-minigui-gears.png)
-__Figure 2__ The gears rendered on MiniGUI by using hiMesa.
+
+__Figure 1__ The gears rendered on MiniGUI by using hiMesa.
 
 ### A simple EGLUT implementation
 
@@ -642,6 +643,7 @@ FAIL:
 ```
 
 ![alt](figures/cairo-minigui-tiger.png)
+
 __Figure 2__ The tiger rendered on MiniGUI by using hiCairo.
 
 For the detailed usage, please refer to the source files in
