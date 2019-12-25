@@ -448,9 +448,100 @@ In the HybridOS `himesa` sample, we implement a simple EGLUT, which provide
 an easy-to-use interface to show OpenGL, OpenGL ES, or OpenVG rendering content
 to a MiniGUI main window.
 
-By using the simple EGLUT, our OpenGL app will look very simple:
+By using the simple EGLUT, our OpenGL app will look very simple.
+The below sample draws a triangle with OpenGL and EGLUT:
 
 ```c
+#include <math.h>
+#include <stdlib.h>
+#include <string.h>
+#include <GL/gl.h>
+
+static GLfloat view_rotx = 0.0, view_roty = 0.0, view_rotz = 0.0;
+
+static void
+draw(void)
+{
+   static const GLfloat verts[3][2] = {
+      { -1, -1 },
+      {  1, -1 },
+      {  0,  1 }
+   };
+   static const GLfloat colors[3][3] = {
+      { 1, 0, 0 },
+      { 0, 1, 0 },
+      { 0, 0, 1 }
+   };
+
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+   glPushMatrix();
+   glRotatef(view_rotx, 1, 0, 0);
+   glRotatef(view_roty, 0, 1, 0);
+   glRotatef(view_rotz, 0, 0, 1);
+
+   {
+      glVertexPointer(2, GL_FLOAT, 0, verts);
+      glColorPointer(3, GL_FLOAT, 0, colors);
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glEnableClientState(GL_COLOR_ARRAY);
+
+      glDrawArrays(GL_TRIANGLES, 0, 3);
+
+      glDisableClientState(GL_VERTEX_ARRAY);
+      glDisableClientState(GL_COLOR_ARRAY);
+   }
+
+   glPopMatrix();
+}
+
+
+/* new window size or exposure */
+static void
+reshape(int width, int height)
+{
+   GLfloat ar = (GLfloat) width / (GLfloat) height;
+
+   glViewport(0, 0, (GLint) width, (GLint) height);
+
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   glFrustum(-ar, ar, -1, 1, 5.0, 60.0);
+
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   glTranslatef(0.0, 0.0, -10.0);
+}
+
+
+static void
+init(void)
+{
+   glClearColor(0.4, 0.4, 0.4, 0.0);
+}
+
+
+static void
+special_key(int special)
+{
+   switch (special) {
+   case EGLUT_KEY_LEFT:
+      view_roty += 5.0;
+      break;
+   case EGLUT_KEY_RIGHT:
+      view_roty -= 5.0;
+      break;
+   case EGLUT_KEY_UP:
+      view_rotx += 5.0;
+      break;
+   case EGLUT_KEY_DOWN:
+      view_rotx -= 5.0;
+      break;
+   default:
+      break;
+   }
+}
+
 int
 main(int argc, char *argv[])
 {
@@ -458,15 +549,13 @@ main(int argc, char *argv[])
    eglutInitAPIMask(EGLUT_OPENGL_BIT);
    eglutInit(argc, argv);
 
-   eglutCreateWindow("eglgears");
+   eglutCreateWindow("egltri");
 
-   eglutIdleFunc(idle);
    eglutReshapeFunc(reshape);
    eglutDisplayFunc(draw);
+   eglutSpecialFunc(special_key);
 
    init();
-
-   glDrawBuffer(GL_BACK);
 
    eglutMainLoop();
 
@@ -475,9 +564,73 @@ main(int argc, char *argv[])
 ```
 
 We only need to implement the functions to draw and transfer the 3D object.
-For the details, please refer to other samples in `himesa`.
+For the details, please refer to other samples in `/device-side/samples/himesa`
+of HybridOS repo.
 
 ## Cairo and MiniGUI
+
+In hiCairo, we implement the MiniGUI backend for Cairo. When MiniGUI backend
+is enabled, you can use one of the following functions to create a cairo
+surface:
+
+- `cairo_minigui_surface_create` creates a cairo surface that targets
+  the given DC. If the given DC is not a memory DC or screen DC, this
+  function will create a memory DC which is compatible to the DC first.
+- `cairo_minigui_surface_create_with_memdc` creates a surface which
+  is associated with a new memory DC.
+- `cairo_minigui_surface_create_with_memdc_similar` creates a surface
+  associated with a new memory DC which is compatible to the given DC
+  but in the specified size.
+
+After created MiniGUI surface, you can use the following code to render
+2D vector graphics on the surface:
+
+```c
+static int draw_rectangle (HDC target_dc, int height, int height)
+{
+    int ret = 0;
+
+    cairo_surface_t* surface = cairo_minigui_surface_create_with_memdc (NULL,
+                CAIRO_FORMAT_RGB24, width, height);
+    if (surface == NULL) {
+        _ERR_PRINTF("hicairo: failed to create minigui surface\n");
+        ret = 1;
+        goto FAIL;
+    }
+
+    cairo_t* cr = cairo_create (surface);
+    if (cr == NULL) {
+        _ERR_PRINTF("hicairo: failed to create cairo context\n");
+        ret = 2;
+        goto FAIL;
+    }
+
+    // call cairo functions to draw vector objects here
+    cairo_set_source_rgb (cr, 1.0, 0, 0);
+    cairo_rectangle (cr, width * 0.25, height * 0.25, width * 0.5, height * 0.5);
+    cairo_set_line_width (cr, 2.0);
+    cairo_stroke (cr);
+
+    // swap the content on the cairo surface to MiniGUI DC (target_dc)
+    HDC cairo_dc = cairo_minigui_surface_get_dc (surface);
+    BitBlt(cairo_dc, 0, 0, width, height, target_hdc, 0, 0, 0);
+
+FAIL:
+    if (cr) {
+        cairo_destroy(cr);
+    }
+
+    if (surface) {
+        cairo_surface_finish(surface);
+        cairo_surface_destroy(surface);
+    }
+
+    return ret;
+}
+```
+
+For the detailed usage, please refer to the source files in
+`/device-side/samples/hicairo` of HybridOS repo.
 
 ----
 
