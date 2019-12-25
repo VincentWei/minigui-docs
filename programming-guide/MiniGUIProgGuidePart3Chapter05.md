@@ -104,17 +104,53 @@ REPO_URL=https://github.com/FMSoftCN
 
 git clone $REPO_URL/hidrm -b hybridos
 git clone $REPO_URL/hidrmdrivers
-git clone $REPO_URL/hicairo -b minigui-backend
 git clone $REPO_URL/himesa -b minigui-backend
+git clone $REPO_URL/hicairo -b minigui-backend
 ```
+
+_NOTE_ The above fetching script may changed in the future.
 
 The software all ship with the GNU autotools building scripts or
 the meson building scripts. You can refer to the README file for
 the instructions to build and install the software to your system.
 
-_NOTE_ The above fetching script may changed in the future.
+Please note that the installation order of the software:
+
+1. hiDRM.
+1. MiniGUI with DRM engine enabled.
+1. hiDRMDrivers.
+1. hiMesa with support for MiniGUI platform enabled.
+1. hiCairo with MiniGUI backend enabled.
 
 ## The EGL Implementation for MiniGUI
+
+> EGL™ is an interface between Khronos rendering APIs such as
+> OpenGL ES or OpenVG and the underlying native platform window system.
+> It handles graphics context management, surface/buffer binding, and
+> rendering synchronization and enables high-performance, accelerated,
+> mixed-mode 2D and 3D rendering using other Khronos APIs.
+> EGL also provides interop capability between Khronos to enable
+> efficient transfer of data between APIs – for example between a
+> video subsystem running OpenMAX AL and a GPU running OpenGL ES.
+
+As mentioned before, Mesa uses DRI to drive various GPUs and implement
+the graphics APIs. Basically, the EGL implementation for MiniGUI depends
+on the DRM engine of MiniGUI. On the other hand, if one MiniGUI instance
+was not using DRM engine, the EGL implementation can still use the
+software driver in Mesa to render the graphics objects.
+
+For more information about EGL, please refer to:
+
+- EGL Specification: <https://www.khronos.org/egl/>
+- EGL in Mesa: <https://mesa3d.org/egl.html>
+
+The EGL implementation for MiniGUI in Mesa is a sub driver of `egl_dri2`,
+which supports many platforms including `x11`, `wayland`, `drm`, and
+`surfaceless`.
+
+### APIs specific to DRM engine
+
+
 
 ## 3D Rendering on MiniGUI
 
