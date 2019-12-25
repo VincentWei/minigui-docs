@@ -433,6 +433,49 @@ of `MSG_PAINT`:
     }
 ```
 
+When you have done with the MiniGUI window, you can use the following code
+to destroy the surface, context, and terminate EGL:
+
+```c
+   eglMakeCurrent(dpy, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+   eglDestroySurface(dpy, surface);
+   eglDestroyContext(dpy, context);
+```
+
+### A simple EGLUT implementation
+
+In the HybridOS `himesa` sample, we implement a simple EGLUT, which provide
+an easy-to-use interface to show OpenGL, OpenGL ES, or OpenVG rendering content
+to a MiniGUI main window.
+
+By using the simple EGLUT, our OpenGL app will look very simple:
+
+```c
+int
+main(int argc, char *argv[])
+{
+   eglutInitWindowSize(300, 300);
+   eglutInitAPIMask(EGLUT_OPENGL_BIT);
+   eglutInit(argc, argv);
+
+   eglutCreateWindow("eglgears");
+
+   eglutIdleFunc(idle);
+   eglutReshapeFunc(reshape);
+   eglutDisplayFunc(draw);
+
+   init();
+
+   glDrawBuffer(GL_BACK);
+
+   eglutMainLoop();
+
+   return 0;
+}
+```
+
+We only need to implement the functions to draw and transfer the 3D object.
+For the details, please refer to other samples in `himesa`.
 
 ## Cairo and MiniGUI
 
