@@ -36,12 +36,23 @@ app can exploit the GPU accelerated functions to render 2D/3D objects.
 
 ## Architecture and Infrastructure
 
-The following chart shows the graphics stack on MiniGUI platform:
+In practice, MiniGUI and the software which are used to integrated with GPU
+constitute the graphics stack of HybridOS.
+
+[HybridOS](https://hybridos.fmsoft.cn) is a totally new open source
+operating system designed for smart IoT devices and cloud computing
+environment. [FMSoft Technologies], who is the developer of MiniGUI,
+initiated HybridOS project in 2018.
+
+HybridOS uses MiniGUI as the underlying windowing system, and
+the members of HybridOS project are now maintaining the graphics stack.
+
+The following chart shows the graphics stack of HybridOS:
 
 ```
-    -------------------------------------------------
+     -----------------------------------------------
     |           MiniGUI/HybridOS Apps               |
-    -------------------------------------------------
+    |-----------------------------------------------|
     |           |         (Graphics Stack)          |
     |           |              ---------------------|
     |           |              | hiMesa             |
@@ -49,12 +60,54 @@ The following chart shows the graphics stack on MiniGUI platform:
     |           | MiniGUI      |  | EGL for MiniGUI |
     | C++ libs  | hiDRMDrivers |  | GL, GLES, VG    |
     | C libs    | hiDRM        |  | GPU drivers     |
-    -------------------------------------------------
+    |-----------------------------------------------|
     |  Linux Kernel                                 |
-    |           ------------------------------------|
+    |            -----------------------------------|
     |           |        DRI and DRI Drivers        |
-    -------------------------------------------------
+     -----------------------------------------------
 ```
+
+As shown in the chart above, the HybridOS graphics stack
+consists of the following software:
+
+- [hiDRM](https://github.com/FMSoftCN/hidrm) is the LibDRM derivative
+  for HybridOS.
+- [hiDRMDrivers](https://github.com/FMSoftCN/hidrmdrivers) contains the
+  drivers for MiniGUI DRM engine.
+- [hiMesa](https://github.com/FMSoftCN/himesa) is the Mesa derivative
+  for HybridOS. It contains the following components:
+   1. The OpenGL, OpenGL ES v2, OpenGL ES v3 APIs and implementations.
+   1. The EGL implementation for MiniGUI platform.
+   1. The drivers for various GPUs.
+- [hiCairo](https://github.com/FMSoftCN/hicairo) is the Cairo derivative
+  for HybridOS. Cairo is the 2D vector graphics library for Gtk. We provide
+  support for MiniGUI backend in hiCairo.
+
+You can use the following script to fetch the source code of above software:
+
+```bash
+#!/bin/bash
+
+# Use this if you want to visit GitHub via HTTPS
+REPO_URL=https://github.com/FMSoftCN
+
+# Use this one if you can visit GitHub via SSH
+#REPO_URL=git@github.com:FMSoftCN
+
+# Use this one if you are a developer of MiniGUI/HybridOS
+#REPO_URL=git4os@gitlab.fmsoft.cn:hybridos
+
+git clone $REPO_URL/hidrm -b hybridos
+git clone $REPO_URL/hidrmdrivers
+git clone $REPO_URL/hicairo -b minigui-backend
+git clone $REPO_URL/himesa -b minigui-backend
+```
+
+The software all ship with the GNU autotools building scripts or
+the meson building scripts. You can refer to the README file for
+the instructions to build and install the software to your system.
+
+_NOTE_ The above fetching script may changed in the future.
 
 ## The EGL Implementation for MiniGUI
 
