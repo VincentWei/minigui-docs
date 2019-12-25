@@ -1,5 +1,14 @@
 # Integrating with GPU
 
+- [Introduction](#introduction)
+- [Architecture and Infrastructure](#architecture-and-infrastructure)
+- [The EGL Implementation for MiniGUI](#the-egl-implementation-for-minigui)
+   + [New APIs for GPU integration](#new-apis-for-gpu-integration)
+   + [Specification of EGL implementation for MiniGUI](#specification-of-egl-implementation-for-minigui)
+- [Using MiniGUI EGL for OpenGL and OpenGL ES](#using-minigui-egl-for-opengl-and-opengl-es)
+   + [A simple EGLUT implementation](#a-simple-eglut-implementation)
+- [Cairo and MiniGUI](#cairo-and-minigui)
+
 ## Introduction
 
 The graphics stack on Linux has had a long evolution.
@@ -442,6 +451,9 @@ to destroy the surface, context, and terminate EGL:
    eglDestroyContext(dpy, context);
 ```
 
+![alt](figures/mesa-minigui-gears.png)
+__Figure 2__ The gears rendered on MiniGUI by using hiMesa.
+
 ### A simple EGLUT implementation
 
 In the HybridOS `himesa` sample, we implement a simple EGLUT, which provide
@@ -628,6 +640,9 @@ FAIL:
     return ret;
 }
 ```
+
+![alt](figures/cairo-minigui-tiger.png)
+__Figure 2__ The tiger rendered on MiniGUI by using hiCairo.
 
 For the detailed usage, please refer to the source files in
 `/device-side/samples/hicairo` of HybridOS repo.
