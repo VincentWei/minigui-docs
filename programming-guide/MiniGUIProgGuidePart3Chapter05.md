@@ -139,13 +139,13 @@ Obviously, to integrate OpenGL and other graphics APIs with MiniGUI,
 we must implement EGL for MiniGUI.
 
 As mentioned before, Mesa uses DRI to drive various GPUs and implement
-the graphics APIs. Basically, the EGL implementation for MiniGUI depends
-on the DRM engine of MiniGUI.
-
+the graphics APIs.
 The EGL implementation for MiniGUI in Mesa is a sub driver of `egl_dri2`,
 which supports many platforms including `x11`, `wayland`, `drm`, and
 `surfaceless`.
 
+Basically, the EGL implementation for MiniGUI depends on the
+DRM engine of MiniGUI.
 On the other hand, if one MiniGUI instance was not using DRM engine,
 the EGL implementation for MiniGUI can still use the
 software driver in Mesa to render the graphics objects.
