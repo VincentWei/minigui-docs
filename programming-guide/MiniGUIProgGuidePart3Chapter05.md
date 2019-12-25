@@ -288,6 +288,85 @@ Revision History
 
 ## Using MiniGUI EGL for OpenGL and OpenGL ES
 
+HybridOS project gives some samples to use MiniGUI EGL for OpenGL and OpenGL ES
+in the directory `/device-side/samples/himesa` of the following repo:
+
+<https://github.com/FMSoftCN/hybridos>
+
+To check whether the EGL implementation contains the support for
+MiniGUI platform, you can use the following code:
+
+```c
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+static EGLDisplay get_default_minigui_display (void)
+{
+    const char *extensions;
+    extensions = eglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
+
+    if (extensions) {
+        if (strstr (extensions, "EGL_EXT_platform_base")) {
+
+            PFNEGLGETPLATFORMDISPLAYEXTPROC getPlatformDisplay =
+                (PFNEGLGETPLATFORMDISPLAYEXTPROC)
+                eglGetProcAddress ("eglGetPlatformDisplayEXT");
+
+           if (strstr (extensions, "EGL_EXT_platform_minigui"))
+                return getPlatformDisplay (EGL_PLATFORM_MINIGUI_EXT,
+                                          EGL_DEFAULT_DISPLAY, NULL);
+    }
+
+    return EGL_NO_DISPLAY;
+}
+```
+
+The function `get_default_minigui_display` checks and returns the
+default MiniGUI `EGLDisplay`. If failed, it returns `EGL_NO_DISPLAY`.
+
+Before calling this function, you should call `InitGUI` to initialize MiniGUI.
+Note that if you use `MiniGUIMain` instead of `main`, this function will be
+called automatically.
+
+Generally, you call the following code to initialize MiniGUI and MiniGUI EGL
+in your `main` function:
+
+```c
+#include <minigui/common.h>
+#include <minigui/minigui.h>
+#include <minigui/gdi.h>
+#include <minigui/window.h>
+
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+static void _fatal(const char* msg)
+{
+    fprintf (stderr, msg);
+    fprintf (stderr, "\n");
+    exit (1);
+}
+
+int init_minigui_and_egl(int argc, char* argv[])
+{
+    EGLNativeDisplayType native_dpy;
+    EGLDispaly dpy;
+    EGLint major, minor;
+
+    if (InitGUI (argc, (const char**)argv) != 0)
+        _fatal("failed to initialize native display");
+
+    native_dpy = (EGLNativeDisplayType)GetVideoHandle (HDC_SCREEN);
+    dpy = eglGetDisplay (native_dpy);
+
+    if (!eglInitialize (dpy, &major, &minor))
+      _fatal("failed to initialize EGL display");
+
+    return 0;
+}
+
+```
+
 ## Cairo and MiniGUI
 
 ----
