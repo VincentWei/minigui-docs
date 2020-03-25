@@ -44,6 +44,16 @@ Note that, generally, the driver will be implemented by the GPU
 or SoC vendors. The MiniGUI app developers do not need to
 care about this.
 
+Also note that, we changed the driver interface since MiniGUI 4.0.7.
+In fact, we changed the interface when developing MiniGUI 5.0.0, and
+introduced the changes to MiniGUI 4.0.7. Now, no matter which version
+you use, we will keep the driver interface is consistent for MiniGUI
+4.0.7 or later and 5.0.x.
+
+Therefore, this document conforms to both MiniGUI 4.0.7 or later and
+MiniGUI 5.0.x. We recommend that you upgrade to MiniGUI 4.0.7 or
+MiniGUI 5.0.0 as soon as possible.
+
 ## Compile-time Configuration
 
 There is one configure options related to the `drm` engine:
@@ -73,6 +83,7 @@ dpi=96
 pixelformat=XR24
 device=/dev/dri/card0
 exdriver=libhidrmdrivers.so.0
+double_buffering=true   # only MiniGUI 5.0.0 or later.
 ```
 
 Note that the `defaultmode` and `dpi` keys are standard keys for
@@ -89,12 +100,17 @@ of the screen surface in MiniGUI run-time configuration. For example,
 `AR24` means `A8R8G8B8` pixel format (`DRM_FORMAT_ARGB8888`).
 
 For more information, please see `<drm/drm_fourcc.h>` header file.
-Note that only 8/16/24/32 bpp RGB formats are supported.
+Note that only 8/16/24/32 bits per pixel formats are supported.
 
 You can use the key `drm.exdriver` to specify the SO name of the
 shared library, which implements the DRM driver for your GPU and
 export an external symbol called `__drm_ex_driver_get` to
 initialize the DRM driver.
+
+For MiniGUI 5.0.0 or later, you can also use another runtime configuration
+option `drm.double_buffering`. This option specifies whether double buffering
+is enabled. Use `true` or `yes` for enabled, anything else for disabled.
+Note that under compositing schema, double buffering is always enabled.
 
 ## Implementing a DRM driver
 
@@ -105,29 +121,44 @@ for your GPU externally.
 First, you need to implement the following external stub:
 
 ```cpp
-DrmDriverOps* __drm_ex_driver_get (const char* driver_name, int device_fd);
+DrmDriverOps* __drm_ex_driver_get (const char* driver_name, int device_fd,
+        int* version);
 ```
 
-This function takes tow arguments and returns NULL or
-a valid pointer of `DrmDriverOps` to MiniGUI. The argument `driver_name`
-gives the driver name determined by libdrm. Generally, it is the kernel
-driver name for your GPU. For example, for Intel i915/i965 GPUs, the
-driver name will be `i915`. The argument `device_fd` gives you
-the file descriptor of the opened DRI device.
+This function takes three arguments and returns NULL or a valid pointer of
+`DrmDriverOps`to MiniGUI.
 
-The `__drm_ex_driver_get` can return different
-`DrmDriverOps` to MiniGUI according to the driver name and device file
-descriptor. In this way, your implementation can support multiple GPUs.
+This function can return different `DrmDriverOps`to MiniGUI according to
+the driver name and device file descriptor. In this way, your DRM engine
+driver implementation can support multiple GPUs.
 
 If the external stub returns NULL, MiniGUI will try to use the dumb
-frame buffer instead.
+frame buffer instead. The arguments of this function have the following
+meanings:
 
-The `DrmDriverOps` is a struct type consisting of a set of operations
+- `driver_name`: This argument gives the driver name determined
+ by MiniGUI. Generally, it is the kernel driver name for your GPU.
+ For example, for Intel i915/i965 GPUs, the driver name will be `i915`.
+- `device_fd`: This argument gives the file descriptor of the
+ opened DRI device.
+- `version`: A pointer to an integer which will be used to return the
+ interface version of the DRM engine driver.
+
+Note that We use the version control since 4.0.7. It will be initialized
+to zero by MiniGUI before calling this function. Because an old
+driver for MiniGUI 4.0.6 or earlier will not change the value, MiniGUI
+will deny to load the old driver.
+
+The constant `DRM_DRIVER_VERSION` defines the current interface version code.
+A correctly implemented DRM engine driver should always return this constant
+value to MiniGUI.
+
+The `DrmDriverOps` is a structure type consisting of a set of operations
 (callbacks):
 
 ```cpp
 /**
- * The struct type defines the operations for a DRM driver.
+ * The structure type defines the operations for a DRM driver.
  */
 typedef struct _DrmDriverOps {
     /**
@@ -138,81 +169,95 @@ typedef struct _DrmDriverOps {
     DrmDriver* (*create_driver) (int device_fd);
 
     /**
-     * This operation destroies the DrmDriver object.
+     * This operation destroys the DrmDriver object.
      *
      * \note The driver must implement this operation.
      */
     void (*destroy_driver) (DrmDriver *driver);
 
     /**
-     * This operation flushs the batch buffer of the driver or the hardware cache.
+     * This operation flushes the batch buffer of the driver or
+     * the hardware cache.
      *
      * \note This operation can be NULL.
      */
     void (* flush_driver) (DrmDriver *driver);
 
     /**
-     * This operation creates a buffer with the specified pixel format,
-     * width, and height. If succeed, a valid DrmSurfaceBuffer object will
-     * be returned; NULL on error. Note that the field of `pixels` of the
-     * DrmSurfaceBuffer object is NULL until the \a map_buffer was called.
+     * This operation creates a surface buffer with the specified pixel format,
+     * header size, width, and height. If succeed, a valid DrmSurfaceBuffer
+     * object will be returned; NULL on error. Note that the field of `buff`
+     * of the DrmSurfaceBuffer object is NULL until the \a map_buffer was called.
      *
-     * \note The driver must implement this operation.
+     * \note The driver must implement this operation and fill all fields of
+     *  the new DrmSurfaceBuffer object.
      */
     DrmSurfaceBuffer* (* create_buffer) (DrmDriver *driver,
-            uint32_t drm_format,
-            unsigned int width, unsigned int height);
+            uint32_t drm_format, uint32_t hdr_size,
+            uint32_t width, uint32_t height);
 
     /**
-     * This operation creates a buffer for the given handle
-     * with the specified pixel format, width, and height. If succeed,
-     * a valid DrmSurfaceBuffer object will be returned; NULL on error.
+     * This operation creates a buffer from a given and possibly foreign handle
+     * with the size of the buffer. If succeed, a valid DrmSurfaceBuffer object
+     * will be returned; NULL on error.
      *
-     * \note This operation can be NULL.
+     * \note This operation can be NULL. Note that the handle might was created
+     *  by a foreign module. If implemented, the driver must
+     *  fill the correct prime_fd, handle, name, and size fields of the new
+     *  DrmSurfaceBuffer object.
      */
     DrmSurfaceBuffer* (* create_buffer_from_handle) (DrmDriver *driver,
-            uint32_t handle, unsigned long size, uint32_t drm_format,
-            unsigned int width, unsigned int height, unsigned int pitch);
+            uint32_t handle, size_t size);
 
     /**
      * This operation creates a buffer for the given system global name
-     * with the specified pixel format, width, and height. If succeed,
-     * a valid DrmSurfaceBuffer object will be returned; NULL on error.
+     * If succeed, a valid DrmSurfaceBuffer object will be returned;
+     * NULL on error.
      *
-     * \note This operation can be NULL.
+     * \note This operation can be NULL. If implemented, the driver must
+     *  fill the correct prime_fd, handle, name, and size fields of the new
+     *  DrmSurfaceBuffer object.
      */
     DrmSurfaceBuffer* (* create_buffer_from_name) (DrmDriver *driver,
-            uint32_t name, uint32_t drm_format,
-            unsigned int width, unsigned int height, unsigned int pitch);
+            uint32_t name);
 
     /**
      * This operation creates a buffer for the given PRIME file descriptor
      * with the specified pixel format, width, height, and pitch. If succeed,
      * a valid DrmSurfaceBuffer object will be returned; NULL on error.
      *
-     * \note This operation can be NULL.
+     * \note This operation can be NULL. If implemented, the driver must
+     *  fill the correct prime_fd, handle, name, and size fields of the new
+     *  DrmSurfaceBuffer object.
      */
     DrmSurfaceBuffer* (* create_buffer_from_prime_fd) (DrmDriver *driver,
-            int prime_fd, unsigned long size, uint32_t drm_format,
-            unsigned int width, unsigned int height, unsigned int pitch);
+            int prime_fd, size_t size);
 
     /**
      * This operation maps the buffer into the current process's virtual memory
      * space, and returns the virtual address. If failed, it returns NULL.
      *
-     * \note The driver must implement this operation.
+     * When \a for_scanout is not zero, the buffer will be used for scan out
+     * frame buffer.
+     *
+     * \note The driver must implement this operation. The driver must
+     *  set a valid value for buff field of the DrmSurfaceBuffer object
+     *  on success.
      */
-    uint8_t* (* map_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer);
+    uint8_t* (* map_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer,
+            int for_scanout);
 
     /**
      * This operation un-maps a buffer.
      *
-     * \note The driver must implement this operation.
+     * \note The driver must implement this operation. The driver must
+     *  set NULL for buff field of the DrmSurfaceBuffer object
+     *  on success.
      */
     void (* unmap_buffer) (DrmDriver *driver, DrmSurfaceBuffer* buffer);
 
     /**
-     * This operation destroies a buffer.
+     * This operation destroys a buffer.
      *
      * \note The driver must implement this operation.
      */
@@ -234,7 +279,7 @@ typedef struct _DrmDriverOps {
      * If succeed, it returns 0.
      *
      * \note If this operation is set as NULL, it will be supposed that
-     * the driver does not support any hardware accelerated blit operation.
+     * the driver does not support any hardware accelerated blitting operation.
      */
     int (* check_blit) (DrmDriver *driver,
             DrmSurfaceBuffer* src_buf, DrmSurfaceBuffer* dst_buf);
@@ -243,55 +288,74 @@ typedef struct _DrmDriverOps {
      * This operation copies bits from a source buffer to a destination buffer.
      *
      * \note If this operation is set as NULL, the driver does not support
-     * hardware accelerated copy blit.
+     * hardware accelerated copy blitting.
+     *
+     * \note Currently, the logical operation is ignored.
      */
     int (* copy_blit) (DrmDriver *driver,
             DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
             DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
-            enum DrmColorLogicOp logic_op);
+            ColorLogicalOp logic_op);
 
     /**
-     * This operation blits pixles from a source buffer with the source alpha value
-     * specified to a destination buffer.
+     * This operation blits pixels from a source buffer with the source alpha
+     * value specified to a destination buffer.
      *
      * \note If this operation is set as NULL, the driver does not support
-     * hardware accelerated blit with alpha.
+     * hardware accelerated blitting with alpha.
      */
     int (* alpha_blit) (DrmDriver *driver,
             DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint8_t alpha);
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
+            uint8_t alpha);
 
     /**
-     * This operation blits pixles from a source buffer to a destination buffer,
+     * This operation blits pixels from a source buffer to a destination buffer,
      * but skipping the pixel value specified by \a color_key.
      *
      * \note If this operation is set as NULL, the driver does not support
-     * hardware accelerated blit with color key.
+     * hardware accelerated blitting with color key.
      */
     int (* key_blit) (DrmDriver *driver,
             DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
-            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc, uint32_t color_key);
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
+            uint32_t color_key);
 
     /**
-     * This operation blits pixles from a source buffer with the source alpha value
-     * specified to a destination buffer, but skipping the pixel value specified.
+     * This operation blits pixels from a source buffer with the source alpha
+     * value specified to a destination buffer, but skipping the pixel value
+     * specified.
      *
      * \note If this operation is set as NULL, the driver does not support
-     * hardware accelerated blit with alpha and color key.
+     * hardware accelerated blitting with alpha and color key.
      */
     int (* alpha_key_blit) (DrmDriver *driver,
             DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
             DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
             uint8_t alpha, uint32_t color_key);
 
-} DrmDriverOps;
+    /**
+     * This operation blits pixels from a source buffer with the source alpha
+     * value of pixels to the destination buffer, and with the specified color
+     * compositing/blending method (\a ColorBlendMethod).
+     *
+     * \note If this operation is set as NULL, the driver does not support
+     * hardware accelerated blitting with alpha on basis per pixel.
+     *
+     * \note Currently, the color compositing/blending method is ignored.
+     */
+    int (* alpha_pixel_blit) (DrmDriver *driver,
+            DrmSurfaceBuffer* src_buf, const GAL_Rect* src_rc,
+            DrmSurfaceBuffer* dst_buf, const GAL_Rect* dst_rc,
+            ColorBlendMethod blend_method);
+
 ```
 
 If the external stub `__drm_ex_driver_get` returns a valid pointer
-of `DrmDriverOps`, MiniGUI will call the operation `create_driver`
-to initialize the DRM driver. The operation will return a pointer
-to the type of `DrmDriver`. All other operations of `DrmDriverOps`
-need this pointer as the context of your DRM driver.
+of `DrmDriverOps` and the version code is matched, MiniGUI will call
+the operation `create_driver` to initialize the DRM driver. The operation
+will return a pointer to the type of `DrmDriver`. All other operations of
+`DrmDriverOps` need this pointer as the context of your DRM driver.
 
 Note that MiniGUI does not define the detailed structure of
 `DrmDriver`, it is up to your implementation:
@@ -320,16 +384,6 @@ DRM drivers for MiniGUI in the following repo (`hiDRMDrivers`):
 
 <https://github.com/FMSoftCN/hidrmdrivers>
 
-Note that hiDRMDrivers depends on the LibDRM derivative for HybridOS
-called `hiDRM`, not the original libdrm:
-
-<https://github.com/FMSoftCN/hidrm>
-
-Please use the code on the branch `hybridos` of hiDRM repo.
-
-When you use hiDRMDrivers, please make sure that let MiniGUI
-use hiDRM as well.
-
 By using DRM engines and DRM drivers, MiniGUI and HybridOS now provide
 the GPU integration via `hiMesa` and `hiCairo`:
 
@@ -340,21 +394,34 @@ For the usage and samples, please refer to the chapter
 [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
 in the [MiniGUI Programming Guide](/programming-guide/README.md).
 
-## Restrictions
+## Precautions
 
-Currently (MiniGUI 4.0.4), the `drm` NEWGAL engine does not provide
-support for MiniGUI-Processes run-time mode. We will enhance this in
-the subsequent version of MiniGUI.
+Since MiniGUI 4.0.7/5.0.0, the DRM engine provides complete support for
+the MiniGUI-Processes runtime mode. However, you need to pay attention
+for the following matter:
 
-Also note that when you use the hardware accelerating driver, MiniGUI app
-may need the root privilege to call `drmSetMaster` to set the video mode.
-However, under MiniGUI-Processes run-time mode, only the server (`mginit`) will
-need this privilege when you use the future `drm` engine.
+The server (`mginit`) needs the root privilege to call `drmSetMaster` to act
+as the master process of Linux DRI. Only after the client was authenticated
+through the server (`mginit`), the client can get the rights to allocate buffer
+from the GPU. Otherwise, the client processes will failed to initialize the
+hardware accelerated DRM engine driver.
+
+Also note that, only the server (`mginit`) needs the root privilege.
+
+## Known Issues
+
+The following known issues are about hardware cursor of DRM engine (only
+for MiniGUI 5.0.0):
+
+- `drmSetCursor2` and `drmMoveCursor` do not work correctly in DRM engine.
+  Libdrm does not provide an interface to set the correct cursor plane, and
+  it seems that X held the cursor plane on my Linux PC.
+- When using a AR24 plane for cursor, `drmSetPlane` seems having a bad
+  performance.
 
 ## Future Features
 
 In the near future, the MiniGUI team will:
 
-* Enhance `drm` engine to support MiniGUI-Processes run-time mode.
 * Enhance `drm` engine to support video plane/overlay.
 
