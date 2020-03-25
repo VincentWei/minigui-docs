@@ -379,7 +379,7 @@ chard in `mg-tests/drm-engine/`. Please refer to `mg-tests` repository:
 ## DRM Drivers for HybridOS
 
 [HybridOS](https://hybridos.fmsoft.cn) uses MiniGUI as the
-underlying windowing system. So the HybridOS project maintains the
+underlying windowing system. The HybridOS project maintains the
 DRM drivers for MiniGUI in the following repo (`hiDRMDrivers`):
 
 <https://github.com/FMSoftCN/hidrmdrivers>
@@ -401,8 +401,8 @@ the MiniGUI-Processes runtime mode. However, you need to pay attention
 for the following matter:
 
 The server (`mginit`) needs the root privilege to call `drmSetMaster` to act
-as the master process of Linux DRI. Only after the client was authenticated
-through the server (`mginit`), the client can get the rights to allocate buffer
+as the master process of Linux DRI. Only after a client was authenticated
+through the server (`mginit`), the client can get the rights to allocate buffers
 from the GPU. Otherwise, the client processes will failed to initialize the
 hardware accelerated DRM engine driver.
 

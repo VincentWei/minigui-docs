@@ -32,6 +32,8 @@ We call these documents "MiniGUI Supplementary Documents".
 
 * [Release Notes for MiniGUI 5.0](Release-Notes-for-MiniGUI-5.0.md) -
     Enhancements and changes of MiniGUI 5.0.x.
+* [Write DRM Engine Driver for Your GPU](Writing-DRM-Engine-Driver-for-Your-GPU.md) -
+    Write a DRM engine driver to exploit the hardware accelerating functions of your GPU.
 * [Using Compositing Schema](Using-Compositing-Schema.md) -
     How to use compositing schema, and write a customized compositor.
 * [Using Main Window Levels](Using-Main-Window-Levels.md) -
