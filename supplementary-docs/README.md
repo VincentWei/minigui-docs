@@ -28,12 +28,25 @@ help you quickly grasp the relevant features.
 
 We call these documents "MiniGUI Supplementary Documents".
 
-## Features for Version 4.0 or later
+## Features for Version 5.0.x
+
+* [Release Notes for MiniGUI 5.0](Release-Notes-for-MiniGUI-5.0.md) -
+    Enhancements and changes of MiniGUI 5.0.x.
+* [Using Compositing Schema](Using-Compositing-Schema.md) -
+    How to use compositing schema, and write a customized compositor.
+* [Using Main Window Levels](Using-Main-Window-Levels.md) -
+    How to use different main window levels for special main windows.
+* [Using Virtual Window](Using-Virtual-Window.md) -
+    Using virtual window for mulithreading applications.
+* [Other Enhancements in MiniGUI 5.0](Other-Enhancements-in-MiniGUI-5.0.md) -
+    How to use the other minor enhancements in MiniGUI 5.0.
+
+## Features for Version 4.0.x
 
 * [Release Notes for MiniGUI 4.0](Release-Notes-for-MiniGUI-4.0.md) -
     Enhancements and changes of MiniGUI 4.0.x.
 * [Write DRM Engine Driver for Your GPU](Writing-DRM-Engine-Driver-for-Your-GPU.md) -
-    Writea DRI engine driver to exploit the hardware accelerating functions of your GPU.
+    Write a DRM engine driver to exploit the hardware accelerating functions of your GPU.
 * [Support and Use Extra Input Messages](Supporting-and-Using-Extra-Input-Messages.md) -
     Support and use extra input messages.
 * [Use Enhanced Font Interfaces](Using-Enhanced-Font-Interfaces.md) -
@@ -58,5 +71,5 @@ We call these documents "MiniGUI Supplementary Documents".
 
 ## Copying
 
-Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+Copyright © 2003 \~ 2020, Beijing FMSoft Technologies Co., Ltd.  
 All rights reserved.
