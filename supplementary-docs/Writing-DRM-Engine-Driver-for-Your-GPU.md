@@ -9,8 +9,9 @@ Table of Contents
 - [Run-time Configuration](#run-time-configuration)
 - [Implementing a DRM driver](#implementing-a-drm-driver)
 - [DRM Drivers for HybridOS](#drm-drivers-for-hybridos)
-- [Restrictions](#restrictions)
-- [Future Feature](#future-features)
+- [Precautions](#precautions)
+- [Known Issues](#known-issues)
+- [Future Features](#future-features)
 
 ## Overview
 
