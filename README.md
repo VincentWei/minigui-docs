@@ -9,13 +9,21 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
 - [MiniGUI Programming Guide](programming-guide/README.md)
 - [MiniGUI Supplementary Documents](supplementary-docs/README.md)
 - API Reference Manuals for MiniGUI Core
-   * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.4/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
+   * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
+   * [MiniGUI 5.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-thread runmode.
+   * [MiniGUI 5.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 standalone runmode.
+   * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.4/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
    * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-4.0.4/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
 - API Reference for MiniGUI Components
+   * [mGUtils 1.5 API Reference](http://www.minigui.com/doc-api-ref-mgutils-1.5.0/html/index.html) - The API reference for mGUtils V1.5.
+   * [mGPlus 1.5 API Reference](http://www.minigui.com/doc-api-ref-mgplus-1.5.0/html/index.html) - The API reference for mGUtils V1.5.
+   * [mGEff 1.5 API Reference](http://www.minigui.com/doc-api-ref-mgeff-1.5.0/html/index.html) - The API reference for mGEff V1.5.
+   * [mGNCS 1.5 API Reference](http://www.minigui.com/doc-api-ref-mgncs-1.5.0/html/index.html) - The API reference for mGNCS V1.5.
+   * [mGNCS4Touch 1.5 API Reference](http://www.minigui.com/doc-api-ref-mgncs4touch-1.5.0/html/index.html) - The API reference for mGNCS4Touch V1.5.
    * [mGUtils 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgutils-1.2.2/html/index.html) - The API reference for mGUtils V1.2.
    * [mGPlus 1.4 API Reference](http://www.minigui.com/doc-api-ref-mgplus-1.4.2/html/index.html) - The API reference for mGUtils V1.4.
    * [mGEff 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgeff-1.2.3/html/index.html) - The API reference for mGEff V1.2.
