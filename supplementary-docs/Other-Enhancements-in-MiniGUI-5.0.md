@@ -28,8 +28,8 @@ by calling `GetHostedById` function.
 
 Local data of a window are some void objects represented in DWORD values, and they
 are bound with different string names. In a window's life cycle, you can set, get,
-or remove a local data which is bound a specific name. This provides a easy-to-use
-way to manage multiple and complex objects of a window.
+or remove a local data which is bound with a specific name. This provides an
+easy-to-use way to manage multiple and complex objects of a window.
 
 - `SetWindowLocalData`: set a local data.
 - `GetWindowLocalData`: get a local data.

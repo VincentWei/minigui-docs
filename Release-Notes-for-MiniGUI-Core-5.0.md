@@ -1,4 +1,4 @@
-# Release Notes
+# Release Notes for MiniGUI Core 5.0.x
 
 - [Version 5.0.0](#version-500)
    + [What's new in version 5.0.0](#whats-new-in-version-500)

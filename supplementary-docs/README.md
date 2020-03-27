@@ -30,8 +30,6 @@ We call these documents "MiniGUI Supplementary Documents".
 
 ## Features for Version 5.0.x
 
-* [Release Notes for MiniGUI 5.0](Release-Notes-for-MiniGUI-5.0.md) -
-    Enhancements and changes of MiniGUI 5.0.x.
 * [Write DRM Engine Driver for Your GPU](Writing-DRM-Engine-Driver-for-Your-GPU.md) -
     Write a DRM engine driver to exploit the hardware accelerating functions of your GPU.
 * [Using Compositing Schema](Using-Compositing-Schema.md) -
@@ -45,8 +43,6 @@ We call these documents "MiniGUI Supplementary Documents".
 
 ## Features for Version 4.0.x
 
-* [Release Notes for MiniGUI 4.0](Release-Notes-for-MiniGUI-4.0.md) -
-    Enhancements and changes of MiniGUI 4.0.x.
 * [Write DRM Engine Driver for Your GPU](Writing-DRM-Engine-Driver-for-Your-GPU.md) -
     Write a DRM engine driver to exploit the hardware accelerating functions of your GPU.
 * [Support and Use Extra Input Messages](Supporting-and-Using-Extra-Input-Messages.md) -
@@ -58,8 +54,6 @@ We call these documents "MiniGUI Supplementary Documents".
 
 ## Features for Version 3.2 or later
 
-* [Release Notes for MiniGUI 3.2](Release-Notes-for-MiniGUI-3.2.md) -
-    Enhancements and changes of MiniGUI 3.2.x.
 * [Use CommLCD NEWGAL Engine and Comm IAL Engine](Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md) -
     Define external stubs to implement your CommLCD engine and Comm
     IAL engine outside MiniGUI Core.

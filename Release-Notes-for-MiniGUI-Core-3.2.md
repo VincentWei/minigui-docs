@@ -1,4 +1,4 @@
-# Release Notes for MiniGUI 3.2
+# Release Notes for MiniGUI Core 3.2
 
 Table of Contents
 

@@ -30,12 +30,14 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
    * [mGNCS 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs-1.2.5/html/index.html) - The API reference for mGNCS V1.2.
    * [mGNCS4Touch 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs4touch-1.2.4/html/index.html) - The API reference for mGNCS4Touch V1.2.
 - Links to Release Notes
-   * [MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
-   * [mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
-   * [mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
-   * [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
-   * [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
-   * [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
+   * [MiniGUI Core 5.0.x](Release-Notes-for-MiniGUI-Core-5.0.md)
+   * [MiniGUI Core 4.0.x](Release-Notes-for-MiniGUI-Core-4.0.md)
+   * [MiniGUI Core 3.2.x](Release-Notes-for-MiniGUI-Core-3.2.md)
+   * [mGUtils](Release-Notes-for-mGUtils.md)
+   * [mGPlus](Release-Notes-for-mGPlus.md)
+   * [mGEff](Release-Notes-for-mGEff.md)
+   * [mGNCS](Release-Notes-for-mGNCS.md)
+   * [mGNCS4Touch](Release-Notes-for-mGNCS4Touch.md)
 - [MiniGUI Porting Guide](porting-guide/README.md) - Old documents just FYI.
 
 ## 针对中文用户
