@@ -12,9 +12,9 @@ We maintains the documents for MiniGUI Core and MiniGUI components in this repos
    * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
    * [MiniGUI 5.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-thread runmode.
    * [MiniGUI 5.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 standalone runmode.
-   * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
-   * [MiniGUI 5.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-thread runmode.
-   * [MiniGUI 5.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 standalone runmode.
+   * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
+   * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
+   * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
    * [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
