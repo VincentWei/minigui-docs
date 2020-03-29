@@ -55,42 +55,121 @@ continues to release MiniGUI as a free software project.
 
 MiniGUI Core provides the basic windowing
 and graphics interfaces as well as a lot of standard controls (toolkit).
+
+### MiniGUI Components
+
 Besides MiniGUI Core, FMSoft also provides some components
 for the developers to develop app much easier:
 
-* [mGUtils]: A MiniGUI component which contains miscellaneous utilities
+* mGUtils: A MiniGUI component which contains miscellaneous utilities
   like `ColorSelectionDialogBox`, `FileOpenDialogBox`, and so on.
-* [mGPlus]: A MiniGUI component which provides support for advanced graphics
+* mGPlus: A MiniGUI component which provides support for advanced graphics
   functions like path, gradient, anti-aliased stretch, and color combination.
-* [mGEff]: mGEff provides an animation framework for MiniGUI app.
+* mGEff: mGEff provides an animation framework for MiniGUI app.
   It also provides some popular UI/UE special effects.
-* [mGNCS]: This component provides a new control set for MiniGUI app.
-* [mGNCS4Touch]: This component provides some new controls, which are
+* mGNCS: This component provides a new control set for MiniGUI app.
+* mGNCS4Touch: This component provides some new controls, which are
   compliant to the new control API spec of mGNCS, for devices with
   touch screens.
 
-You can download the source code tarballs of MiniGUI Core, MiniGUI
-components, and the dependent libraries from the download zone of
-the site:
+There are also some legacy MiniGUI components. But we will not maintain these
+components since MiniGUI v3.2.0:
 
-<http://www.minigui.com/download>
+* mGi: An input method component for MiniGUI. This component provides
+  some typical input methods (such as soft keyboard, hand-writing, and predict
+  text input for mobile phone) for MiniGUI apps.
+* mGp: A printing component for MiniGUI. By using mGp, you can print
+  out the graphics created by MiniGUI app to general-purpose printers.
+* mG3d: A simple three-dimension component for MiniGUI. This component
+  provides a simple 3D API for app. You can use mG3d to create simple
+  3D UI.
+
+MiniGUI is a free software project. In December 1998, the initiator of
+FMSoft, Wei Yongming, began to develop MiniGUI under the GNU General Public
+License (GPL). In September 2002, the core developers of
+MiniGUI founded FMSoft and started the commercial marketing with
+the free software. By now, FMSoft still continues to release MiniGUI
+as a free software project.
+
+You can download the source code tarball of MiniGUI and the dependent libraries
+from the download zone of the site:
+
+<http://www.minigui.com>
+
+### Open Source Apps Based-on MiniGUI
 
 FMSoft also releases some open source apps for MiniGUI on the site above,
 for examples:
 
-* mDolphin, licensed under Apache 2.0, is a full-featured
+* `mDolphin`, licensed under Apache 2.0, is a full-featured
   WEB/WAP browser, which is developed based on the open source browser
   core WebKit and uses MiniGUI as its underlying graphics support system.
-* mGallery, licensed under Apache 2.0, intends to
+* `mGallery`, licensed under Apache 2.0, intends to
   provide a total solution for PMP (Portable Multimedia Player),
   which uses MiniGUI as the graphics platform.
-* mSpider, licensed under GPL 3.0, intends to provide a
+* `mSpider`, licensed under GPL 3.0, intends to provide a
   light-weight MiniGUI-based web browser (HTML 3.2 and part JavaScript)
-* mEagle, licensed under GPL 3.0, is an embedded GIS development platform
+* `mEagle`, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
 
-FMSoft had created the public repositories for MiniGUI core, MiniGUI
-components, and other open source apps on GitHub. You can visit them on:
+### MiniGUI and HybridOS
+
+HybridOS is another large open source project initiated by FMSoft. It is
+a totally new open source operating system designed for smart IoT devices
+and cloud computing environment.
+
+In practice, MiniGUI and the software which are used to integrated with GPU
+constitute the graphics stack of HybridOS.
+
+HybridOS uses MiniGUI as the underlying windowing system, and the members of
+HybridOS project are now maintaining the whole graphics stack.
+The following chart shows the graphics stack of HybridOS:
+
+```
+  -----------------------------------------------
+ |           MiniGUI/HybridOS Apps               |
+ |-----------------------------------------------|
+ |           |         (Graphics Stack)          |
+ |           |              ---------------------|
+ |           |              | hiMesa             |
+ |           | hiCairo      |  ------------------|
+ |           | MiniGUI      |  | EGL for MiniGUI |
+ | C++ libs  | hiDRMDrivers |  | GL, GLES, VG    |
+ | C libs    | libDRM       |  | GPU drivers     |
+ |-----------------------------------------------|
+ |  Linux Kernel                                 |
+ |            -----------------------------------|
+ |           |        DRI and DRI Drivers        |
+  -----------------------------------------------
+```
+
+As shown in the chart above, the HybridOS graphics stack consists of
+the following software:
+
+- `libDRM` provides some user land APIs for Linux Direct Rendering Infrastructure.
+- `hiDRMDrivers` contains the drivers (user land drivers, not kernel drivers) for
+   MiniGUI DRM engine. The drivers implement the basic hardware accelerated
+   2D graphics operations of various GPUs for MiniGUI.
+- `hiMesa` is the Mesa derivative for HybridOS, while Mesa is the open source
+  implementation of OpenGL and other graphics APIs, including OpenGL ES
+  (versions 1, 2, 3), OpenCL, OpenMAX, and Vulkan. It contains the following
+  components:
+   + The implementation of OpenGL, OpenGL ES (v1, 2, 3), and other
+     graphics APIs.
+   + The EGL implementation for MiniGUI platform.
+   + The graphics drivers for various GPUs and a software driver called `swrast`.
+- `hiCairo` is the Cairo derivative for HybridOS. Cairo is a 2D vector graphics
+  library for Gtk. We provide support for MiniGUI backend in `hiCairo`.
+
+For more information about HybridOS, please refer to:
+
+<https://hybridos.fmsoft.cn/>
+
+### Source Code Repositories
+
+FMSoft had created the public repositories for MiniGUI Core, MiniGUI
+components, HybridOS, and other open source apps on GitHub. You can visit
+them on:
 
 <https://github.com/VincentWei>
 
@@ -98,9 +177,10 @@ and
 
 <https://github.com/FMSoftCN>
 
-We now maintain the documents about MiniGUI on the following public repo:
+We now maintain all documents about MiniGUI on the following public repo:
 
 <https://github.com/VincentWei/minigui-docs>
+
 
 ## CHARTS AND SCREENSHOTS
 
@@ -172,64 +252,132 @@ __Figure 10__ Samples of complex scripts: Arabic, Hebrew, and Thai.
 ![Complex Script: Hebrew](figures/complex-script-hebrew.png)
 ![Complex Script: Thai](figures/complex-script-thai.png)
 
-## A BRIEF BUILDING INSTRUCTION
 
-This instruction assumes that you are using Ubuntu Linux.
+__Figure 11__ Compositing Schema of MiniGUI 5.0
 
-### Prerequisites
+![Dynamic Wallpaper and Transparent Main Windows](figures/compositing-schema.png)
 
-You should run `apt install <package_name>` to install the following packages
-on your Ubuntu Linux.
 
-* Building tools:
-   * autoconf
-* Dependent libraries (all are optional):
-   * libjpeg64-dev
-   * libpng12-dev (use libpng-dev on Ubuntu Linux 18.04 LTS)
-   * libfreetype6-dev
+## NEW FEATURES IN VERSION 5.0.x
 
-### Building MiniGUI Core
+In version 5.0.0, we introduced some new and exciting features, and refactored
+a lot basic modules of MiniGUI Core.
 
-MiniGUI core uses GNU autoconf/automake scripts to configure and build the project.
+### Compositing Schema
 
-Run
+In this version, we enhanced the MiniGUI-Processes runtime mode to support
+the compositing schema. Under compositing schema, regardless a main window
+is created by the server (`mginit`) or a client, it renders the content in
+a separate rendering buffer, and the server composites the contents from
+all visible main windows to the ultimate scan-out frame buffer according to
+the z-order information.
 
-    $ ./configure; make; sudo make install
+On the contrary, the legacy schema of MiniGUI-Processes uses the same
+frame buffer for all processes (and all main windows) in the system.
+So the legacy schema is also called the shared frame buffer schema.
 
-to configure, make, and install the headers and the libraries. If there is not
-`configure` file, please run
+By enabling the compositing schema, MiniGUI now can provide a better
+implementation for multi-process environment:
 
-    $ ./autogen.sh
+- Easy to implement advanced user interfaces with rounded corners,
+  alpha blending, blurring, and so on.
+- Easy to implement animations for switching among main windows.
+- Better security. One client created by different user cannot
+  read/write contents in/to another windows owned by other clients.
 
-to generate the script.
+### New Main Window Types
 
-MiniGUI core also provides some configuration options to customize the features.
-For more information, please run
+In this version, we also enhanced the window manager of MiniGUI Core
+to support some special main window types.
 
-    $ ./configure --help
+Before 5.0.0, you can create a topmost main window with the style
+`WS_EX_TOPMOST` in order to show the main window above all normal main windows,
+and if you use MiniGUI-Processes runtime mode, the server (`mginit`) will
+always create global main windows, which are shown on other main windows
+created by clients.
 
-### Building the Comprehensive Demo
+Since 5.0.0, we introduce a concept of z-order levels for main windows.
+There are eight levels in MiniGUI from top to bottom:
 
-If you are anxious to see the comprehensive demo of MiniGUI core
-and MiniGUI components, please fetch one of the following repositories
-from GitHub and follow the instructions to build the samples and
-the demonstration programs:
+- The tooltip level (`WS_EX_WINTYPE_TOOLTIP`).
+- The system/global level (`WS_EX_WINTYPE_GLOBAL`).
+- The screen lock level (`WS_EX_WINTYPE_SCREENLOCK`).
+- The docker level (`WS_EX_WINTYPE_DOCKER`).
+- The higher level (`WS_EX_WINTYPE_HIGHER`).
+- The normal level (`WS_EX_WINTYPE_NORMAL`).
+- The launcher level (`WS_EX_WINTYPE_LAUNCHER`).
+- The desktop or wallpaper.
 
-https://github.com/VincentWei/build-minigui-4.0
+This enhancement allows us to create a special app which acts as
+screen lock, docker, or launcher.
 
-or
+### Virtual Window
 
-https://github.com/VincentWei/build-minigui-3.2
+You know that we can post or send a message to other windows which
+may run in another thread under MiniGUI-Threads. The MiniGUI
+messaging functions such as `PostMessage()`, `SendMessage()`,
+`SendNotifyMessage()`, and the window callback procedure
+provide a flexible, efficient, safe, and flexible data transfer
+and synchronization mechanism for your multithreaded applications.
 
-### Unit Tests
+For example, you can send or post a message to a window from a
+general purpose thread which may download a file from a remote
+server under MiniGUI-Threads.
 
-Since MiniGUI 4.0.0, we organize the unit test code of MiniGUI APIs in the
-following repository:
+But can we use the MiniGUI messaging mechanism under
+MiniGUI-Processes and MiniGUI-Standalone runtime modes for
+multithreading purpose? For example, we may download a file in a
+general thread and inform a window when the file is ready.
 
-https://github.com/VincentWei/mg-tests
+Furthermore, if we want to use the MiniGUI messaging mechanism in
+a general thread to handle messages from other threads, how to do this?
 
-If you are interested in hacking the MiniGUI code, please visit this repository.
+The virtual window provides a solution for the requirements above.
+A virtual window is a special window object which does not have
+a visible window area. But after you create a virtual window in
+a different thread, you can use the MiniGUI messaging mechanism
+to post or send messages between the current main window thread
+and the new thread.
 
+This enhancement provides a very useful facility to you in order to
+develop a well-designed multithreaded application.
+
+### Other Enhancements
+
+We also tune or enhance the following modules of MiniGUI Core:
+
+- Enhanced timer support. MiniGUI now manages the timers per message thread.
+  Under MiniGUI-Threads runtime mode, you can set up 32 (64 on 64-bit
+  architecture) timers for each GUI threads. If you enabled virtual window,
+  you can also do this for each message thread.
+- Support for listening a file descriptor as long as the underlying system
+  has the `select()` system call for all runtime modes. Now you can call
+  `RegisterListenFD()` to register a file descriptor to be listened, and
+  handle `MSG_FDEVENT` in your window callback procedure to read/write
+  from/to the file descriptor. Before this version, this feature only
+  available for MiniGUI-Processes runtime mode.
+- Support for local data of windows. You can now set or retrieve a local data
+  which is bound with a string name for a window. This will give you an
+  easy-to-use interface to manage various data of a window.
+- Support for hardware cursors under compositing schema. MiniGUI now can
+  utilize the hardware cursors if your graphics device support it.
+  You can also load a cursor from a PNG file.
+- Support for loading icon from a bitmap file. You can now load an icon
+  from a bitmap file such as a PNG file.
+- Unified the message hook functions for all runtime modes. MiniGUI now
+  provides the consistent message hook functions for all runtime modes.
+- Use the update regions for cumulative updating the screen. This will
+  eliminate the flickers due to the frequently redrawing of controls.
+
+Obviously, this version brings the largest improvement since MiniGUI 3.0.0.
+We did our best to ensure backward compatibility of the existed APIs
+so that the old applications can smoothly migrate to the new
+version. However, there are still some slight changes you need to take care.
+For more information, please refer to release notes files:
+
+- MiniGUI Core: <https://github.com/VincentWei/minigui/blob/rel-5-0/RELEASE-NOTES.md>
+- mGEff: <https://github.com/VincentWei/mgeff/blob/rel-5-0/RELEASE-NOTES.md>
+- mGNCS4Touch: <https://github.com/VincentWei/mgncs4touch/blob/rel-5-0/RELEASE-NOTES.md>
 
 ## NEW FEATURES IN VERSION 4.0.x
 
@@ -305,6 +453,64 @@ https://github.com/VincentWei/minigui/blob/rel-3-2/RELEASE-NOTES.md
   * 100MHz CPU
   * Runtime RAM consumption: 1MB
   * Static/shared library: 500KB ~ 900KB
+
+## A BRIEF BUILDING INSTRUCTION
+
+This instruction assumes that you are using Ubuntu Linux.
+
+### Prerequisites
+
+You should run `apt install <package_name>` to install the following packages
+on your Ubuntu Linux.
+
+* Building tools:
+   * autoconf
+* Dependent libraries (all are optional):
+   * libjpeg64-dev
+   * libpng12-dev (use libpng-dev on Ubuntu Linux 18.04 LTS)
+   * libfreetype6-dev
+
+### Building MiniGUI Core
+
+MiniGUI core uses GNU autoconf/automake scripts to configure and build the project.
+
+Run
+
+    $ ./configure; make; sudo make install
+
+to configure, make, and install the headers and the libraries. If there is not
+`configure` file, please run
+
+    $ ./autogen.sh
+
+to generate the script.
+
+MiniGUI core also provides some configuration options to customize the features.
+For more information, please run
+
+    $ ./configure --help
+
+### Building the Comprehensive Demo
+
+If you are anxious to see the comprehensive demo of MiniGUI core
+and MiniGUI components, please fetch one of the following repositories
+from GitHub and follow the instructions to build the samples and
+the demonstration programs:
+
+https://github.com/VincentWei/build-minigui-4.0
+
+or
+
+https://github.com/VincentWei/build-minigui-3.2
+
+### Unit Tests
+
+Since MiniGUI 4.0.0, we organize the unit test code of MiniGUI APIs in the
+following repository:
+
+https://github.com/VincentWei/mg-tests
+
+If you are interested in hacking the MiniGUI code, please visit this repository.
 
 
 ## HIGHLIGHTS OF MINIGUI

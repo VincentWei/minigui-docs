@@ -73,6 +73,9 @@ We hope that we can finish this work at the end of the year 2019.
 
 ### ChangeLog
 
+- 2020-03-30
+  Links for MiniGUI API references of 5.0.0/4.0.7; Drafts of supplementary documents for MiniGUI 5.0.0.
+
 - 2019-12-25  
   Draft of [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
 
