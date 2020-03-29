@@ -6,28 +6,37 @@ for embedded and/or smart IoT devices._
 ## TABLE OF CONTENTS
 
 - [INTRODUCTION](#introduction)
+   + [MiniGUI Components](#minigui-components)
+   + [Open Source Apps Based-on MiniGUI](#open-source-apps-based-on-minigui)
+   + [MiniGUI and HybridOS](#minigui-and-hybridos)
+   + [Source Code Repositories](#source-code-repositories)
 - [CHARTS AND SCREENSHOTS](#charts-and-screenshots)
-- [A BRIEF BUILDING INSTRUCTION](#a-brief-building-instruction)
-  * [Prerequisites](#prerequisites)
-  * [Building MiniGUI Core](#building-minigui-core)
-  * [Building the Comprehensive Demo](#building-the-comprehensive-demo)
-  * [Unit Tests](#unit-tests)
+- [NEW FEATURES IN VERSION 5.0.x](#new-features-in-version-50x)
+   + [Compositing Schema](#compositing-schema)
+   + [New Main Window Types](#new-main-window-types)
+   + [Virtual Window](#virtual-window)
+   + [Other Enhancements](#other-enhancements)
 - [NEW FEATURES IN VERSION 4.0.x](#new-features-in-version-40x)
 - [NEW FEATURES IN VERSION 3.2.x](#new-features-in-version-32x)
+- [A BRIEF BUILDING INSTRUCTION](#a-brief-building-instruction)
+   + [Building Whole MiniGUI](#building-whole-minigui)
+   + [Building MiniGUI Core](#building-minigui-core)
+   + [Unit Tests](#unit-tests)
 - [ADVANTAGES OF MINIGUI](#advantages-of-minigui)
 - [HIGHLIGHTS OF MINIGUI](#highlights-of-minigui)
-  * [The Runtime Modes of MiniGUI](#the-runtime-modes-of-minigui)
-  * [Support for Multiple Font Types](#support-for-multiple-font-types)
-  * [Support for Various Graphics Devices](#support-for-various-graphics-devices)
-  * [Support for Various Input Devices](#support-for-various-input-devices)
-  * [Common Controls](#common-controls)
-  * [Look and Feel Renderers](#look-and-feel-renderers)
-  * [Others](#others)
-  * [Successful Cases](#successful-cases)
+   + [The Runtime Modes of MiniGUI](#the-runtime-modes-of-minigui)
+   + [Support for Multiple Charsets](#support-for-multiple-charsets)
+   + [Support for Multiple Font Types](#support-for-multiple-font-types)
+   + [Support for Various Graphics Devices](#support-for-various-graphics-devices)
+   + [Support for Various Input Devices](#support-for-various-input-devices)
+   + [Common Controls](#common-controls)
+   + [Look and Feel Renderers](#look-and-feel-renderers)
+   + [Others](#others)
+   + [Successful Cases](#successful-cases)
 - [HISTORY](#history)
 - [AUTHORS AND COPYING](#authors-and-copying)
-  * [Not Free for Commercial Use](#not-free-for-commercial-use)
-  * [Special Statement](#special-statement)
+   + [Special Statement](#special-statement)
+   + [Not Free for Commercial Use](#not-free-for-commercial-use)
 - [A LITTLE FAQ](#a-little-faq)
 
 
@@ -433,6 +442,68 @@ For more information, please refer to `RELEASE-NOTES.md` file:
 https://github.com/VincentWei/minigui/blob/rel-3-2/RELEASE-NOTES.md
 
 
+## A BRIEF BUILDING INSTRUCTION
+
+### Building Whole MiniGUI
+
+If you are anxious to see the comprehensive demo of MiniGUI Core
+and MiniGUI components, please fetch one of the following repositories
+from GitHub and follow the instructions to build MiniGUI Core,
+MiniGUI components, the samples, and the demonstration programs:
+
+<https://github.com/VincentWei/build-minigui-5.0>
+
+or
+
+<https://github.com/VincentWei/build-minigui-4.0>
+
+or
+
+<https://github.com/VincentWei/build-minigui-3.2>
+
+### Building MiniGUI Core
+
+We recommend that you use a latest Linux distribution with long term support,
+for example, Ubuntu Linux LTS 16.04 or 18.04.
+
+On Ubuntu Linux LTS 16.04 or 18.04, you should run `apt install <package_name>`
+to install the following packages:
+
+ * Building tools:
+    * autoconf
+ * Dependent libraries (all are optional):
+    * libjpeg64-dev
+    * libpng12-dev (use libpng-dev on Ubuntu Linux 18.04 LTS)
+    * libfreetype6-dev
+
+MiniGUI Core uses GNU autoconf/automake scripts to configure and build the project.
+
+Run
+
+    $ ./configure; make; sudo make install
+
+to configure, make, and install the headers and the libraries. If there is not
+`configure` file, please run
+
+    $ ./autogen.sh
+
+to generate the script.
+
+MiniGUI Core also provides some configuration options to customize the features.
+For more information, please run
+
+    $ ./configure --help
+
+### Unit Tests
+
+Since MiniGUI 4.0.0, we organize the unit test code of MiniGUI APIs in the
+following repository:
+
+<https://github.com/VincentWei/mg-tests>
+
+If you are interested in hacking the MiniGUI code, please visit this repository.
+
+
 ## ADVANTAGES OF MINIGUI
 
 * Support for multiple operating systems:
@@ -453,64 +524,6 @@ https://github.com/VincentWei/minigui/blob/rel-3-2/RELEASE-NOTES.md
   * 100MHz CPU
   * Runtime RAM consumption: 1MB
   * Static/shared library: 500KB ~ 900KB
-
-## A BRIEF BUILDING INSTRUCTION
-
-This instruction assumes that you are using Ubuntu Linux.
-
-### Prerequisites
-
-You should run `apt install <package_name>` to install the following packages
-on your Ubuntu Linux.
-
-* Building tools:
-   * autoconf
-* Dependent libraries (all are optional):
-   * libjpeg64-dev
-   * libpng12-dev (use libpng-dev on Ubuntu Linux 18.04 LTS)
-   * libfreetype6-dev
-
-### Building MiniGUI Core
-
-MiniGUI core uses GNU autoconf/automake scripts to configure and build the project.
-
-Run
-
-    $ ./configure; make; sudo make install
-
-to configure, make, and install the headers and the libraries. If there is not
-`configure` file, please run
-
-    $ ./autogen.sh
-
-to generate the script.
-
-MiniGUI core also provides some configuration options to customize the features.
-For more information, please run
-
-    $ ./configure --help
-
-### Building the Comprehensive Demo
-
-If you are anxious to see the comprehensive demo of MiniGUI core
-and MiniGUI components, please fetch one of the following repositories
-from GitHub and follow the instructions to build the samples and
-the demonstration programs:
-
-https://github.com/VincentWei/build-minigui-4.0
-
-or
-
-https://github.com/VincentWei/build-minigui-3.2
-
-### Unit Tests
-
-Since MiniGUI 4.0.0, we organize the unit test code of MiniGUI APIs in the
-following repository:
-
-https://github.com/VincentWei/mg-tests
-
-If you are interested in hacking the MiniGUI code, please visit this repository.
 
 
 ## HIGHLIGHTS OF MINIGUI
