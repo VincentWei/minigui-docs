@@ -1,13 +1,15 @@
 # MiniGUI Overview
 
-_A mature and proven cross-platform windowing system and GUI system
+_A modern and mature cross-platform windowing system and GUI system
 for embedded and/or smart IoT devices._
 
 ## TABLE OF CONTENTS
 
 - [INTRODUCTION](#introduction)
+   + [What's MiniGUI](#whats-minigui)
    + [MiniGUI Components](#minigui-components)
    + [Open Source Apps Based-on MiniGUI](#open-source-apps-based-on-minigui)
+   + [App Frameworks on MiniGUI](#app-frameworks-on-minigui)
    + [MiniGUI and HybridOS](#minigui-and-hybridos)
    + [Source Code Repositories](#source-code-repositories)
 - [CHARTS AND SCREENSHOTS](#charts-and-screenshots)
@@ -42,28 +44,25 @@ for embedded and/or smart IoT devices._
 
 ## INTRODUCTION
 
-MiniGUI is a mature and proven cross-platform windowing system and a GUI
-(Graphics User Interface) support system for embedded systems and smart
-IoT devices.
-
-MiniGUI is released under GPLv3 and the dual-licensing applies to commercial
-use.
+### What's MiniGUI
 
 MiniGUI aims to provide a fast, stable, full-featured, and cross-platform
 windowing and GUI support system, which is especially fit for
 embedded systems or smart IoT devices based-on Linux/uClinux, eCos, and other
-traditional RTOSes, such as RT-Thread, RTEMS, FreeRTOS, VxWorks, ThreadX, Nucleus,
-pSOS, uC/OS-II, and OSE.
+traditional RTOSes, such as RT-Thread, FreeRTOS, RTEMS, VxWorks, ThreadX,
+Nucleus, pSOS, uC/OS-II, OSE, and others.
 
-MiniGUI is also a free software project. In December 1998, the initiator of
-FMSoft, Wei Yongming, began to develop MiniGUI under the GNU General Public
-License (GPL). In September 2002, the core developers of
-MiniGUI founded Beijing FMSoft Technologies Co., Ltd., and started the
-commercial marketing with the free software. By now, FMSoft still
-continues to release MiniGUI as a free software project.
+MiniGUI is released under GPLv3 and the dual-licensing applies to commercial
+use. In December 1998, the initiator of FMSoft, Wei Yongming, began to develop
+MiniGUI under the GNU General Public License (GPL). In September 2002, the core
+developers of MiniGUI founded [FMSoft](https://www.fmsoft.cn) and started the
+commercial marketing with the free software. By now, FMSoft still continues to
+release MiniGUI as a free software project.
 
-MiniGUI Core provides the basic windowing
-and graphics interfaces as well as a lot of standard controls (toolkit).
+For the live demos, source tarballs, and cases of MiniGUI, you can refer
+to the following website:
+
+<http://www.minigui.com>
 
 ### MiniGUI Components
 
@@ -120,6 +119,22 @@ for examples:
   light-weight MiniGUI-based web browser (HTML 3.2 and part JavaScript)
 * `mEagle`, licensed under GPL 3.0, is an embedded GIS development platform
   which addresses the needs of map browse, query, analysis, etc
+
+### App Frameworks on MiniGUI
+
+MiniGUI and its components provides a lot of controls/widgets to
+help your develop GUI apps in C/C++ programming language. However,
+alternatively, you can choose one of the following frameworks to
+develop your apps in a easy-to-use programming language other than C/C++.
+
+* [HybridOS](https://gitlab.fmsoft.cn/HybridOS/hybridos) provides
+  a complete software stack to develop an app which have rich functions
+  and excellent expressive in HTML5, CSS3, and JavaScript.
+* [hiACEJS](https://gitlab.fmsoft.cn/HybridOS/hiACEJS) provides
+  a light-weight app framework in JavaScript.
+
+You can also choose [HybridOS Lite](https://gitlab.fmsoft.cn/HybridOS/hybridos-lite)
+to develop apps with excellent expressive for cost-sensitive devices in C/C++ language.
 
 ### MiniGUI and HybridOS
 
@@ -180,15 +195,15 @@ FMSoft had created the public repositories for MiniGUI Core, MiniGUI
 components, HybridOS, and other open source apps on GitHub. You can visit
 them on:
 
-<https://github.com/VincentWei>
+<https://gitlab.fmsoft.cn/VincentWei>
 
 and
 
-<https://github.com/FMSoftCN>
+<https://gitlab.fmsoft.cn/HybridOS>
 
 We now maintain all documents about MiniGUI on the following public repo:
 
-<https://github.com/VincentWei/minigui-docs>
+<https://gitlab.fmsoft.cn/VincentWei/minigui-docs>
 
 
 ## CHARTS AND SCREENSHOTS
@@ -384,9 +399,9 @@ so that the old applications can smoothly migrate to the new
 version. However, there are still some slight changes you need to take care.
 For more information, please refer to release notes files:
 
-- MiniGUI Core: <https://github.com/VincentWei/minigui/blob/rel-5-0/RELEASE-NOTES.md>
-- mGEff: <https://github.com/VincentWei/mgeff/blob/rel-5-0/RELEASE-NOTES.md>
-- mGNCS4Touch: <https://github.com/VincentWei/mgncs4touch/blob/rel-5-0/RELEASE-NOTES.md>
+- MiniGUI Core: <https://gitlab.fmsoft.cn/VincentWei/minigui/blob/rel-5-0/RELEASE-NOTES.md>
+- mGEff: <https://gitlab.fmsoft.cn/VincentWei/mgeff/blob/rel-5-0/RELEASE-NOTES.md>
+- mGNCS4Touch: <https://gitlab.fmsoft.cn/VincentWei/mgncs4touch/blob/rel-5-0/RELEASE-NOTES.md>
 
 ## NEW FEATURES IN VERSION 4.0.x
 
@@ -423,7 +438,7 @@ in order to support [HybridOS Foundation Class Library].
 
 For more information, please refer to `RELEASE-NOTES.md` file:
 
-https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md
+https://gitlab.fmsoft.cn/VincentWei/minigui/blob/master/RELEASE-NOTES.md
 
 Because of the changes of some APIs, we recommended strongly that you
 use this version for new projects.
@@ -439,7 +454,7 @@ We introduce some new features in MiniGUI Version 3.2.x:
 
 For more information, please refer to `RELEASE-NOTES.md` file:
 
-https://github.com/VincentWei/minigui/blob/rel-3-2/RELEASE-NOTES.md
+https://gitlab.fmsoft.cn/VincentWei/minigui/blob/rel-3-2/RELEASE-NOTES.md
 
 
 ## A BRIEF BUILDING INSTRUCTION
@@ -451,15 +466,15 @@ and MiniGUI components, please fetch one of the following repositories
 from GitHub and follow the instructions to build MiniGUI Core,
 MiniGUI components, the samples, and the demonstration programs:
 
-<https://github.com/VincentWei/build-minigui-5.0>
+<https://gitlab.fmsoft.cn/VincentWei/build-minigui-5.0>
 
 or
 
-<https://github.com/VincentWei/build-minigui-4.0>
+<https://gitlab.fmsoft.cn/VincentWei/build-minigui-4.0>
 
 or
 
-<https://github.com/VincentWei/build-minigui-3.2>
+<https://gitlab.fmsoft.cn/VincentWei/build-minigui-3.2>
 
 ### Building MiniGUI Core
 
@@ -499,7 +514,7 @@ For more information, please run
 Since MiniGUI 4.0.0, we organize the unit test code of MiniGUI APIs in the
 following repository:
 
-<https://github.com/VincentWei/mg-tests>
+<https://gitlab.fmsoft.cn/VincentWei/mg-tests>
 
 If you are interested in hacking the MiniGUI code, please visit this repository.
 
@@ -694,6 +709,10 @@ complex writing systems (scripts), such as Arabic, Thai, and Indic.
 
 A brief history description of the development progress lay below:
 
+1. May, 2021:  
+   FMSoft released MiniGUI version 5.0.6.
+1. Mar., 2020:  
+   FMSoft released MiniGUI version 5.0.0.
 1. Jul., 2019:  
    FMSoft released MiniGUI version 4.0.0.
 1. Apr., 2019:  
@@ -884,12 +903,12 @@ Q: Can I get the tech support from MiniGUI team?
 A: Yes, FMSoft can provide you with guaranteed commercial technical
    support services. Please send messages to <sales@minigui.com>.
 
-[mGUtils]: https://github.com/VincentWei/mgutils
-[mGEff]: https://github.com/VincentWei/mgeff
-[mGPlus]: https://github.com/VincentWei/mgplus
-[mGNCS]: https://github.com/VincentWei/mgncs
-[mGNCS4Touch]: https://github.com/VincentWei/mgncs4touch
-[mGUXDemo]: https://github.com/VincentWei/cell-phone-ux-demo
+[mGUtils]: https://gitlab.fmsoft.cn/VincentWei/mgutils
+[mGEff]: https://gitlab.fmsoft.cn/VincentWei/mgeff
+[mGPlus]: https://gitlab.fmsoft.cn/VincentWei/mgplus
+[mGNCS]: https://gitlab.fmsoft.cn/VincentWei/mgncs
+[mGNCS4Touch]: https://gitlab.fmsoft.cn/VincentWei/mgncs4touch
+[mGUXDemo]: https://gitlab.fmsoft.cn/VincentWei/cell-phone-ux-demo
 
 [Quick Start]: /user-manual/MiniGUIUserManualQuickStart.md
 [Building MiniGUI]: /user-manual/MiniGUIUserManualBuildingMiniGUI.md
