@@ -4,15 +4,15 @@
 
 ## 目录
 
-- [前言](MiniGUIProgGuidePreface.md)
+- [前言](MiniGUIProgGuidePrefacezh.md)
 - Part I Foundation of MiniGUI Programming
-   - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
-   - [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
-   - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03.md)
-   - [Foundation of Control Programming](MiniGUIProgGuidePart1Chapter04.md)
-   - [Advanced Programming of Control](MiniGUIProgGuidePart1Chapter05.md)
-   - [Menu](MiniGUIProgGuidePart1Chapter06.md)
-   - [Scrollbar](MiniGUIProgGuidePart1Chapter07.md)
+   - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01zh.md)
+   - [Window and Message](MiniGUIProgGuidePart1Chapter02zh.md)
+   - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03zh.md)
+   - [Foundation of Control Programming](MiniGUIProgGuidePart1Chapter04zh.md)
+   - [Advanced Programming of Control](MiniGUIProgGuidePart1Chapter05zh.md)
+   - [Menu](MiniGUIProgGuidePart1Chapter06zh.md)
+   - [Scrollbar](MiniGUIProgGuidePart1Chapter07zh.md)
    - [Keyboard and Mouse](MiniGUIProgGuidePart1Chapter08.md)
    - [Icon, Cursor, and Caret](MiniGUIProgGuidePart1Chapter09.md)
    - [Look-and-feel and UI effects](MiniGUIProgGuidePart1Chapter10.md)
