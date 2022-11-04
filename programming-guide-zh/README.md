@@ -1,10 +1,10 @@
-# MiniGUI Programming Guide
+# MiniGUI 编程指南
 
-This document introduces the concepts and the main APIs to program MiniGUI apps in detail.
+本文档详细介绍了 MiniGUI 应用程序的概念和编程的主要 API。
 
-## Table of Contents
+## 目录
 
-- [Preface](MiniGUIProgGuidePreface.md)
+- [前言](MiniGUIProgGuidePreface.md)
 - Part I Foundation of MiniGUI Programming
    - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
    - [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
