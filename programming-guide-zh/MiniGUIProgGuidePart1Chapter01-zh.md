@@ -1,21 +1,21 @@
 # 开始 MiniGUI 编程
 
 - 基本的编程概念(#基本的编程概念)
-+ 事件驱动编程(#事件驱动编程)
-+ MiniGUI 的三种运行模式(#MiniGUI-的三种运行模式)
+   + 事件驱动编程(#事件驱动编程)
+   + MiniGUI 的三种运行模式(#MiniGUI-的三种运行模式)
 - 一个简单的 MiniGUI 程序(#一个简单的-MiniGUI-程序)
-+ 头文件(#头文件)
-+ 程序入口点(#程序入口点)
-+ MiniGUI-Processes 模式下加入层(#MiniGUI-Processes-模式下加入层)
-+ 创建和显示主窗口(#创建和显示主窗口)
-+ 进入消息循环(#进入消息循环)
-+ 窗口过程函数(#窗口过程函数)
-+ 屏幕输出(#屏幕输出)
-+ 程序的退出(#程序的退出)
+   + 头文件(#头文件)
+   + 程序入口点(#程序入口点)
+   + MiniGUI-Processes 模式下加入层(#MiniGUI-Processes-模式下加入层)
+   + 创建和显示主窗口(#创建和显示主窗口)
+   + 进入消息循环(#进入消息循环)
+   + 窗口过程函数(#窗口过程函数)
+   + 屏幕输出(#屏幕输出)
+   + 程序的退出(#程序的退出)
 - 编译、链接和运行(#编译链接和运行)
-+ 编译 MiniGUI 程序(#编译-MiniGUI-程序)
-+ MiniGUI 组件(#MiniGUI-组件)
-- 为MiniGUI 应用程序编写 Automake/Autoconf 脚本(#-MiniGUI-应用程序编写-Automake/Autoconf-脚本)
+   + 编译 MiniGUI 程序(#编译-MiniGUI-程序)
+   + MiniGUI 组件(#MiniGUI-组件)
+- 为 MiniGUI 应用程序编写 Automake/Autoconf 脚本(#为-MiniGUI-应用程序编写-Automake/Autoconf-脚本)
 
 本章以一个简单的 MiniGUI 程序为例讲述 MiniGUI 编程的基本概念和基础知识。
 
@@ -41,7 +41,7 @@ MiniGUI 是一个窗口系统及图形用户界面支持系统，通常的 GUI �
 - MiniGUI-Processes。和 MiniGUI-Threads 相反，MiniGUI-Processes 上的每个程序是独立的进程，每个进程也可以建立多个窗口。MiniGUI-Processes 适合于具有完整 UNIX 特性的嵌入式操作系统，比如嵌入式 Linux。
 - MiniGUI-Standalone。这种运行模式下，MiniGUI 可以以独立进程的方式运行，既不需要多线程也不需要多进程的支持，这种运行模式适合功能单一的应用场合。比如在一些使用 uClinux 的嵌入式产品中，因为各种原因而缺少线程库支持，这时，就可以使用 MiniGUI-Standalone 来开发应用软件。
 
-和 Linux 这样的类 UNIX 操作系统相比，一般意义上的嵌入式操作系统具有一些特殊性。举例而言，诸如 uClinux、uC/OS-II、eCos、VxWorks 等操作系统，通常运行在没有 MMU（内存管理单元，用于提供虚拟内存支持）的 CPU 上，这时，往往就没有进程的概念，而只有线程或者任务的概念，这样，GUI 系统的运行环境也就大相径庭。因此，为了适合不同的操作系统环境，我们可将 MiniGUI 配置成上述三种运行模式。
+和 Linux 这样的类 UNIX 操作系统相比，一般意义上的嵌入式操作系统具有一些特殊性。举例而言，诸如 `uClinux`、`uC/OS-II`、`eCos`、`VxWorks` 等操作系统，通常运行在没有 MMU（内存管理单元，用于提供虚拟内存支持）的 CPU 上，这时，往往就没有进程的概念，而只有线程或者任务的概念，这样，GUI 系统的运行环境也就大相径庭。因此，为了适合不同的操作系统环境，我们可将 MiniGUI 配置成上述三种运行模式。
 
 一般而言，MiniGUI-Standalone 模式的适应面最广，可以支持几乎所有的操作系统，甚至包括类似 DOS 这样的操作系统；MiniGUI-Threads 模式的适用面次之，可运行在支持多任务的实时嵌入式操作系统，或者具备完整 UNIX 特性的普通操作系统之上；MiniGUI-Processes 模式的适用面较小，它仅适合于具备完整 UNIX 特性的普通操作系统。
 
@@ -139,8 +139,8 @@ int MiniGUIMain (int argc, const char* argv[])
 
 该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如图 1.1 所示。
 
-![Hello world 程序的输出](figures/2-1.jpeg)
-__图 2.1__ `helloworld` 程序的输出
+![Hello world 程序的输出](figures/1-1.jpeg)
+__图 1.1__ `helloworld` 程序的输出
 
 ### 头文件
 
@@ -371,7 +371,7 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 ## 编译、链接和运行
 
-### 编译MiniGUI程序
+### 编译 MiniGUI 程序
 
 你可以在命令行上输入如下的命令来编译 `helloworld.c`，并链接生成可执行文件 `helloworld`：
 
@@ -393,7 +393,7 @@ $ gcc –o helloworld helloworld.c –lpthread –lminigui_ths –ljpeg –lpng 
 $ ./helloworld
 ```
 
-程序的运行结果如图2.1所示。
+程序的运行结果如图1.1所示。
 
 > 【提示】如果已将 MiniGUI 配置为 MiniGUI-Threads 或 MiniGUI-Standalone 模式，则运行这些示例程序时无须启动 mginit 程序——这些程序可直接从控制台上运行。
 
