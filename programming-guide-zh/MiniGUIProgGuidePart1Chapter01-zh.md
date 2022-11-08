@@ -63,7 +63,7 @@ MiniGUI V2.0.x 完全地解决了这一问题。MiniGUI-Lite 运行模式下，�
 
 清单 2.1 helloworld.c
 
-```
+```c
 #include <stdio.h>
 
 #include <minigui/common.h>
