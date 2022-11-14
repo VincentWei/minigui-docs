@@ -121,6 +121,7 @@ int MiniGUIMain (int argc, const char* argv[])
 该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如__图 1.1__ 所示。
 
 ![Hello world 程序的输出](figures/Part1Chapter01-1.1.jpeg)
+
 __图 1.1__ `helloworld` 程序的输出
 
 ### 头文件
@@ -179,9 +180,9 @@ if (!ServerStartup (0 , 0 , 0)) {
 关于 MiniGUI-Processes 专有接口我们将在第 17 章给出详细的说明。
 
 >【注意】MiniGUI 针对三种运行模式分别定义了不同的宏。
-- MiniGUI-Threads： _MGRM_THREADS；
-- MiniGUI-Processes： _MGRM_PROCESSES 和 _LITE_VERSION。
-- MiniGUI-Standalone：_MGRM_STANDALONE 和（_LITE_VERSION 以及 _STAND_ALONE）。
+> - MiniGUI-Threads： _MGRM_THREADS；
+> - MiniGUI-Processes： _MGRM_PROCESSES 和 _LITE_VERSION。
+> - MiniGUI-Standalone：_MGRM_STANDALONE 和（_LITE_VERSION 以及 _STAND_ALONE）。
 
 ### 创建和显示主窗口
 
