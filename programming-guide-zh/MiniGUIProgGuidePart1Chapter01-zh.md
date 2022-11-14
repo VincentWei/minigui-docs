@@ -280,7 +280,7 @@ while (GetMessage(&Msg, hMainWnd)) {
 
 `Msg` 变量是类型为 `MSG` 的结构，`MSG` 结构在 `window.h` 中定义如下：
 
-```
+```c
 typedef struct _MSG
 {
         HWND            hwnd;
@@ -357,13 +357,13 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 你可以在命令行上输入如下的命令来编译 `helloworld.c`，并链接生成可执行文件 `helloworld`：
 
-```c
+```shell
 $ gcc –o helloworld helloworld.c –lminigui_procs –ljpeg –lpng –lz
 ```
 
 如果你将 MiniGUI 配置为 MiniGUI-Threads，则需要使用下面的编译选项：
 
-```c
+```shell
 $ gcc –o helloworld helloworld.c –lpthread –lminigui_ths –ljpeg –lpng –lz
 ```
 
@@ -371,7 +371,7 @@ $ gcc –o helloworld helloworld.c –lpthread –lminigui_ths –ljpeg –lpng 
 
 假定你将 MiniGUI 配置成了 MiniGUI-Processes，在运行 `helloworld` 程序之前，首先要确保已启动了 MiniGUI 的服务器端程序 `mginit`。比如你可以启动 `mg-samples` 中的 `mginit` 程序，然后进入 `helloworld` 文件所在目录，在命令行上输入 `./helloworld` 启动 `helloworld` 程序：
 
-```
+```shell
 $ ./helloworld
 ```
 
@@ -391,7 +391,7 @@ $ ./helloworld
 
 考虑到我们在本节中建立的项目还可以用于组织和维护本指南以后章节的示例程序，因此，我们在系统适当的目录下建立 `samples` 目录作为项目的根目录，并为项目取名为 `samples`。比如：
 
-```c
+```shell
 $ mkdir –p ~/minigui/samples
 ```
 
@@ -405,7 +405,7 @@ $ mkdir –p ~/minigui/samples
 
 首先，我们修改 `configure.in` 文件。修改后的文件如下所示（注意我们所做的中文注释，我们只修改了通过中文注释注解的那些宏）：
 
-```c
+```
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.13)
 
@@ -509,13 +509,13 @@ fi
 
 接下来，我们建立项目根目录下的 `Makefile.am` 文件。该文件内容如下：
 
-```c
+```makefile
 SUBDIRS = src
 ```
 
 上述文件内容告诉 Automake 系统进入 `src/` 目录继续处理。然后，我们建立 `src/` 子目录下的 `Makefile.am` 文件。该文件内容如下：
 
-```c
+```makefile
 noinst_PROGRAMS=helloworld
 
 helloworld_SOURCES=helloworld.c
@@ -523,7 +523,7 @@ helloworld_SOURCES=helloworld.c
 
 上述文件内容告诉 Automake 生成一个用来从 `helloworld.c` 建立 helloworld 程序的 Makefile 文件。最后，我们回到项目根目录下建立一个 `autogen.sh` 文件，内容如下：
 
-```c
+```shell
 #!/bin/sh
 
 aclocal
@@ -533,13 +533,13 @@ Autoconf
 
 该文件是一个 shell 脚本，依次调用了 `aclocal`、`automake` 和 `autoconf` 命令。请注意在建立该文件之后，要运行 `chmod` 命令使之变成可执行文件：
 
-```c
+```
 $ chmod +x autogen.sh
 ```
 
 至此，我们就可以运行如下命令生成项目所需的 Makefile 文件了：
 
-```c
+```
 $ ./autogen.sh
 $ ./configure
 ```
@@ -548,7 +548,7 @@ $ ./configure
 
 运行完上述命令之后，你会发现项目根目录下多了许多自动生成的文件。我们无需关注这些文件的用途，忽略这些文件，然后执行 `make` 命令：
 
-```c
+```
 $ make
 Making all in src
 make[1]: Entering directory `/home/weiym/minigui/samples/src'
@@ -567,7 +567,7 @@ make[1]: Leaving directory `/home/weiym/minigui/samples'
 
 假如你的 `helloworld` 程序规模非常庞大，因此将代码分开放在不同的源文件当中了，这时，你只需修改 `src/` 下的 `Makefile.am`，在 `helloworld_SOURCES` 后面添加这些源文件的名称，然后在项目根目录下重新执行 `make` 命令即可。例如：
 
-```
+```makefile
 noinst_PROGRAMS=helloworld
 
 helloworld_SOURCES=helloworld.c helloworld.h module1.c module2.c
@@ -577,7 +577,7 @@ helloworld_SOURCES=helloworld.c helloworld.h module1.c module2.c
 
 本指南其他章节的示例程序，也可以方便地添加到这个项目中。比如，为了将 `foo` 程序添加进去，我们可以如下修改 `src/` 子目录下的 `Makefile.am` 文件：
 
-```c
+```makefile
 noinst_PROGRAMS=helloworld foo
 
 helloworld_SOURCES=helloworld.c
