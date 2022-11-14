@@ -118,7 +118,7 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如__图 1.1__ 所示。
+该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如__图1.1__ 所示。
 
 ![Hello world 程序的输出](figures/Part1Chapter01-1.1.jpeg)
 
