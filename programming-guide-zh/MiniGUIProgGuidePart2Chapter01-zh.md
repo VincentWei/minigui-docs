@@ -61,7 +61,7 @@ BOOL GUIAPI InvalidateRect (HWND hWnd, const RECT* prc, BOOL bEraseBkgnd)
 各参数含义如下：
 
 ```
-hWnd        需要更新的窗口句柄
+hWnd         需要更新的窗口句柄
 prc          指向无效矩形的指针
 bEraseBkgnd  是否擦除窗口背景
 ```
