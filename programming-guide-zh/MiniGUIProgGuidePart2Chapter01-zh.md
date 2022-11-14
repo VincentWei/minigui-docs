@@ -3,13 +3,13 @@
 图形设备接口（GDI：Graphics Device Interface）是 GUI 系统的一个重要组成部分。通过 GDI，GUI 程序就可以在计算机屏幕上，或者其他的显示设备上进行图形输出，包括基本绘图和文本输出。本章以及其后的两章中，我们将详细描述 MiniGUI 中图形设备接口的重要概念，图形编程的方法和主要的 GDI 函数，并举例说明重要函数的用法。
 
 ## 1.1 MiniGUI 图形系统的架构
-
 ### 1.1.1 `GAL` 和 `GDI`
 
-为了把底层图形设备和上层图形接口分离开来，提高 MiniGUI 图形系统的可移植性，MiniGUI 中引入了图形抽象层（Graphics Abstract Layer，GAL）的概念。图形抽象层定义了一组不依赖于任何特殊硬件的抽象接口，所有顶层的图形操作都建立在这些抽象接口之上。而用于实现这一抽象接口的底层代码称为“图形引擎”，类似操作系统中的驱动程序。利用 `GAL`，MiniGUI 可以在许多已有的图形函数库上运行，比如 SVGALib 和 LibGGI。并且可以非常方便地将 MiniGUI 移植到其他 POSIX 系统上，只需要根据我们的抽象层接口实现新的图形引擎即可。比如，在基于 Linux 的系统上，我们可以在Linux `FrameBuffer` 驱动程序的基础上建立通用的 MiniGUI 图形引擎。实际上，包含在 MiniGUI 1.0.00 版本中的私有图形引擎（Native Engine）就是建立在 `FrameBuffer` 之上的图形引擎。一般而言，基于 Linux 的嵌入式系统均会提供 `FrameBuffer` 支持，这样私有图形引擎可以运行在一般的 `PC` 上，也可以运行在特定的嵌入式系统上。
+为了把底层图形设备和上层图形接口分离开来，提高 MiniGUI 图形系统的可移植性，MiniGUI 中引入了图形抽象层（Graphics Abstract Layer，GAL）的概念。图形抽象层定义了一组不依赖于任何特殊硬件的抽象接口，所有顶层的图形操作都建立在这些抽象接口之上。而用于实现这一抽象接口的底层代码称为“图形引擎”，类似操作系统中的驱动程序。利用 `GAL`，MiniGUI 可以在许多已有的图形函数库上运行，比如 SVGALib 和 LibGGI。并且可以非常方便地将 MiniGUI 移植到其他 POSIX 系统上，只需要根据我们的抽象层接口实现新的图形引擎即可。比如，在基于 Linux 的系统上，我们可以在 Linux `FrameBuffer` 驱动程序的基础上建立通用的 MiniGUI 图形引擎。实际上，包含在 MiniGUI 1.0.00 版本中的私有图形引擎（Native Engine）就是建立在 `FrameBuffer` 之上的图形引擎。一般而言，基于 Linux 的嵌入式系统均会提供 `FrameBuffer` 支持，这样私有图形引擎可以运行在一般的 `PC` 上，也可以运行在特定的嵌入式系统上。
 
 ### 1.1.2 新的 `GAL`
-MiniGUI 1.1.0 版本对GAL和GDI进行了大规模的改进，引入了新的 `GAL` 和新的 `GDI` 接口和功能。
+
+MiniGUI 1.1.0 版本对 `GAL` 和 `GDI` 进行了大规模的改进，引入了新的 `GAL` 和新的 `GDI` 接口和功能。
 
 在老的 `GAL` 和 `GDI` 的设计中，`GAL` 可以看成是 `GDI` 的图形驱动程序，许多图形操作函数，比如点、线、矩形填充、位图操作等等，均通过 `GAL` 的相应函数完成。这种设计的最大问题是无法对 `GDI` 进行扩展。比如要增加椭圆绘制函数，就需要在每个引擎当中实现椭圆的绘制函数。并且 `GDI` 管理的是剪切域，而 `GAL` 引擎却基于剪切矩形进行操作。这种方法也导致了 `GDI` 函数无法进行绘制优化。因此，在新的 `GAL` 和 `GDI` 接口设计中，我们将 `GAL` 的接口进行了限制，而将原有许多由 `GAL` 引擎完成的图形输出函数，提高到上层 `GDI` 函数中完成。新 `GAL`（`NEWGAL`）和新 `GDI`（`NEWGDI`）的功能划分如下：
 
@@ -28,15 +28,16 @@ MiniGUI 1.1.0 版本对GAL和GDI进行了大规模的改进，引入了新的 `G
 需要注意的是，`NEWGAL` 结构支持线性显示内存，同时也支持 8 位色以上的显示模式，对低于 8 位色的显示模式，或者不能直接访问显示帧缓冲区的显示设备，可以通过 `NEWGAL` 的 `Shadow` 引擎来提供相应的支持，而且 `Shadow` 引擎还可以支持屏幕坐标的旋转。在 `NEWGAL` 基础上提供了一些高级功能，我们将在第 15 章讲述基于 `NEWGAL` 的高级 `GDI` 接口。
 
 ## 1.2 窗口绘制和刷新
-
 ### 1.2.1 何时进行绘制
-应用程序使用窗口来作为主要的输出设备，也就是说，MiniGUI应用程序在它的窗口之内进行绘制。
+
+应用程序使用窗口来作为主要的输出设备，也就是说，MiniGUI 应用程序在它的窗口之内进行绘制。
 
 MiniGUI 对整个屏幕上的显示输出进行管理。如果窗口移动之类的动作引起窗口内容的改变，MiniGUI 对窗口内应该被更新的区域打上标志，然后给相应的应用程序窗口发送一个 `MSG_PAINT` 消息，应用程序收到该消息后就进行必要的绘制，以刷新窗口的显示。如果窗口内容的改变是由应用程序自己引起的，应用程序可以把受影响而需更新的窗口区域打上标志，并产生一个 `MSG_PAINT` 消息。
 
 如果需要在一个窗口内绘制，应用程序首先要获得该窗口的设备上下文句柄。应用程序的大部分绘制操作是在处理 `MSG_PAINT` 消息的过程中执行的，这时，应用程序应调用 `BeginPaint` 函数来获得设备上下文句柄。如果应用程序的某个操作要求立即的反馈，例如处理键盘和鼠标消息时，它可以立刻进行绘制而不用等待 `MSG_PAINT` 消息。应用程序在其它时候绘制时可以调用 `GetDC` 或 `GetClientDC` 来获得设备上下文句柄。
 
 ### 1.2.2 `MSG_PAINT` 消息
+
 通常应用程序在响应 `MSG_PAINT` 消息时执行窗口绘制。如果窗口的改变影响到客户区的内容，或者窗口的无效区域不为空，MiniGUI 就给相应的窗口过程函数发送 `MSG_PAINT` 消息。
 
 接收到 `MSG_PAINT` 消息时，应用程序应调用 `BeginPaint` 函数来获得设备上下文句柄，并用它调用GDI函数来执行更新客户区所必需的绘制操作。绘制结束之后，应用程序应调用 `EndPaint` 函数释放设备上下文句柄。
@@ -45,7 +46,7 @@ MiniGUI 对整个屏幕上的显示输出进行管理。如果窗口移动之类
 
 `MSG_PAINT` 消息的 `lParam` 参数为窗口的无效区域指针，应用程序可以用窗口的无效区域信息来优化绘制。例如把绘制限制在窗口的无效区域之内。如果应用程序的输出很简单，就可以忽略更新区域而在整个窗口内绘制，由 MiniGUI 来裁剪剪切域外的不必要的绘制，只有无效区域内的绘制才是可见的。
 
-应用程序绘制完成之后应调用 `EndPaint` 函数终结整个绘制过程。 `EndPaint 函数的主要工作是调用 `ReleaseDC` 函数释放由 `GetClientDC` 函数获取的设备上下文，此外，它还要显示被 `BeginPaint` 函数隐藏的插入符。
+应用程序绘制完成之后应调用 `EndPaint` 函数终结整个绘制过程。 `EndPaint` 函数的主要工作是调用 `ReleaseDC` 函数释放由 `GetClientDC` 函数获取的设备上下文，此外，它还要显示被 `BeginPaint` 函数隐藏的插入符。
 
 ### 1.2.3 有效区域和无效区域
 
@@ -74,7 +75,6 @@ bEraseBkgnd  是否擦除窗口背景
 `MSG_ERASEBKGND` 消息的 `lParam` 参数包含了一个 `RECT` 结构指针，指明应该擦除的矩形区域，应用程序可以使用该参数来绘制窗口背景。绘制完成之后，应用程序可以直接返回零，无需调用 `DefaultMainWinProc` 进行缺省的消息处理。有关处理 `MSG_ERASEBKGND` 消息的示例，可参阅本指南第 3 章中的相关章节。
 
 ## 1.3 图形设备上下文
-
 ### 1.3.1 图形设备的抽象
 
 应用程序一般在一个图形上下文（graphics context）上调用图形系统提供的绘制原语进行绘制。上下文是一个记录了绘制原语所使用的图形属性的对象。这些属性通常包括：
@@ -377,7 +377,6 @@ void GUIAPI SetWindowOrg(HDC hdc, POINT* pPt);
 `Get` 函数组用来获取窗口和视口的原点和范围，所获得的坐标值存储在 `POINT `结构 `pPt` 中；`Set` 函数组用 `POINT` 结构 `pPt` 中的值来设置窗口和视口的原点或范围。
 
 ## 1.5 矩形操作和区域操作
-
 ### 1.5.1 矩形操作
 
 矩形通常是指窗口或屏幕之上的一个矩形区域。在 MiniGUI 中，矩形是如下定义的：
@@ -489,17 +488,18 @@ static BLOCKHEAP sg_MyFreeClipRectList;
 
 ## 1.6 基本的图形绘制
 ### 1.6.1 基本绘图属性
+
 在了解基本绘图函数之前，我们首先了解一下基本绘图属性。在 MiniGUI 的目前版本中，绘图属性比较少，大体包括线条颜色、填充颜色、文本背景模式、文本颜色、`TAB` 键宽度等等。__表 1.1__ 给出了这些属性的操作函数。
 
 __表 1.1__  基本绘图属性及其操作函数
 
-| 绘图属性 | 操作函数 | 受影响的 `GDI` 函数 |
-|:--------|:--------|:-----------------|
-| 线条颜色 | `GetPenColor/SetPenColor` | `LineTo`、`Circle`、`Rectangle` |
-| 填充颜色  | `GetBrushColor/SetBrushColor` | `FillBox` |
-| 文本背景模式 | `GetBkMode/SetBkMode` | `TextOut`、`DrawText` |
-| 文本颜色 | `GetTextColor/SetTextColor` | 同上 | 
-|` TAB` 键宽度 | `GetTabStop/SetTabStop` | 同上 |
+| 绘图属性    | 操作函数                        | 受影响的 `GDI` 函数 |
+|:-----------|:-------------------------------|:-----------------|
+| 线条颜色    | `GetPenColor/SetPenColor`      | `LineTo`、`Circle`、`Rectangle` |
+| 填充颜色    | `GetBrushColor/SetBrushColor`  | `FillBox` |
+| 文本背景模式 | `GetBkMode/SetBkMode`          | `TextOut`、`DrawText` |
+| 文本颜色    | `GetTextColor/SetTextColor`    | 同上 | 
+|`TAB` 键宽度 | `GetTabStop/SetTabStop`        | 同上 |
 
 MiniGUI 目前版本中还定义了刷子和笔的若干函数，这些函数是为将来兼容性而定义的，目前无用。
 
@@ -621,42 +621,42 @@ void GUIAPI FillBox (HDC hdc, int x, int y, int w, int h);
 /** Expanded device-dependent bitmap structure. */
 struct _BITMAP
 {
-    /**
-  - Bitmap types, can be OR'ed by the following values:
-  -  - BMP_TYPE_NORMAL\n
-  -    A nomal bitmap, without alpha and color key.
-  -  - BMP_TYPE_RLE\n
-  -    A RLE encoded bitmap, not used so far.
-  -  - BMP_TYPE_ALPHA\n
-  -    Per-pixel alpha in the bitmap.
-  -  - BMP_TYPE_ALPHACHANNEL\n
-  -    The \a bmAlpha is a valid alpha channel value.
-  -  - BMP_TYPE_COLORKEY\n
-  -    The \a bmColorKey is a valid color key value.
-  -  - BMP_TYPE_PRIV_PIXEL\n
-  -    The bitmap have a private pixel format.
-     */
-    Uint8   bmType;
-    /** The bits per piexel. */
-    Uint8   bmBitsPerPixel;
-    /** The bytes per piexel. */
-    Uint8   bmBytesPerPixel;
-    /** The alpha channel value. */
-    Uint8   bmAlpha;
-    /** The color key value. */
-    Uint32  bmColorKey;
-
-    /** The width of the bitmap */
-    Uint32  bmWidth;
-    /** The height of the bitmap */
-    Uint32  bmHeight;
-    /** The pitch of the bitmap */
-    Uint32  bmPitch;
-    /** The bits of the bitmap */
-    Uint8*  bmBits;
-
-    /** The private pixel format */
-    void*   bmAlphaPixelFormat;
+        /**
+        * Bitmap types, can be OR'ed by the following values:
+        *  - BMP_TYPE_NORMAL\n
+        *    A nomal bitmap, without alpha and color key.
+        *  - BMP_TYPE_RLE\n
+        *    A RLE encoded bitmap, not used so far.
+        *  - BMP_TYPE_ALPHA\n
+        *    Per-pixel alpha in the bitmap.
+        *  - BMP_TYPE_ALPHACHANNEL\n
+        *    The \a bmAlpha is a valid alpha channel value.
+        *  - BMP_TYPE_COLORKEY\n
+        *    The \a bmColorKey is a valid color key value.
+        *  - BMP_TYPE_PRIV_PIXEL\n
+        *    The bitmap have a private pixel format.
+        */
+        Uint8   bmType;
+        /** The bits per piexel. */
+        Uint8   bmBitsPerPixel;
+        /** The bytes per piexel. */
+        Uint8   bmBytesPerPixel;
+        /** The alpha channel value. */
+        Uint8   bmAlpha;
+        /** The color key value. */
+        Uint32  bmColorKey;
+        
+        /** The width of the bitmap */
+        Uint32  bmWidth;
+        /** The height of the bitmap */
+        Uint32  bmHeight;
+        /** The pitch of the bitmap */
+        Uint32  bmPitch;
+        /** The bits of the bitmap */
+        Uint8*  bmBits;
+        
+        /** The private pixel format */
+        void*   bmAlphaPixelFormat;
 };
 
 #else
@@ -664,18 +664,18 @@ struct _BITMAP
 /* expanded bitmap struct */
 struct _BITMAP
 {
-    Uint8   bmType;
-    Uint8   bmBitsPerPixel;
-    Uint8   bmBytesPerPixel;
-    Uint8   bmReserved;
-
-    Uint32  bmColorKey;
-
-    Uint32  bmWidth;
-    Uint32  bmHeight;
-    Uint32  bmPitch;
-
-    void*   bmBits;
+        Uint8   bmType;
+        Uint8   bmBitsPerPixel;
+        Uint8   bmBytesPerPixel;
+        Uint8   bmReserved;
+        
+        Uint32  bmColorKey;
+        
+        Uint32  bmWidth;
+        Uint32  bmHeight;
+        Uint32  bmPitch;
+        
+        void*   bmBits;
 };
 
 #endif /* _USE_NEWGAL */
@@ -705,66 +705,67 @@ struct _BITMAP
 /** Device-independent bitmap structure. */
 struct _MYBITMAP
 {
-    /**
-  - Flags of the bitmap, can be OR'ed by the following values:
-  -  - MYBMP_TYPE_NORMAL\n
-  -    A normal palette bitmap.
-  -  - MYBMP_TYPE_RGB\n
-  -    A RGB bitmap.
-  -  - MYBMP_TYPE_BGR\n
-  -    A BGR bitmap.
-  -  - MYBMP_TYPE_RGBA\n
-  -    A RGBA bitmap.
-  -  - MYBMP_FLOW_DOWN\n
-  -    The scanline flows from top to bottom.
-  -  - MYBMP_FLOW_UP\n
-  -    The scanline flows from bottom to top.
-  -  - MYBMP_TRANSPARENT\n
-  -    Have a trasparent value.
-  -  - MYBMP_ALPHACHANNEL\n
-  -    Have a alpha channel.
-  -  - MYBMP_ALPHA\n
-  -    Have a per-pixel alpha value.
-  -  - MYBMP_RGBSIZE_3\n
-  -    Size of each RGB triple is 3 bytes.
-  -  - MYBMP_RGBSIZE_4\n
-  -    Size of each RGB triple is 4 bytes.
-  -  - MYBMP_LOAD_GRAYSCALE\n
-  -    Tell bitmap loader to load a grayscale bitmap.
-     */
-    DWORD flags;
-    /** The number of the frames. */
-    int   frames;
-    /** The pixel depth. */
-    Uint8 depth;
-    /** The alpha channel value. */
-    Uint8 alpha;
-    Uint8 reserved [2];
-    /** The transparent pixel. */
-    Uint32 transparent;
-
-    /** The width of the bitmap. */
-    Uint32 w;
-    /** The height of the bitmap. */
-    Uint32 h;
-    /** The pitch of the bitmap. */
-    Uint32 pitch;
-    /** The size of the bits of the bitmap. */
-    Uint32 size;
-
-    /** The pointer to the bits of the bitmap. */
-    BYTE* bits;
+        /**
+        * Flags of the bitmap, can be OR'ed by the following values:
+        *  - MYBMP_TYPE_NORMAL\n
+        *    A normal palette bitmap.
+        *  - MYBMP_TYPE_RGB\n
+        *    A RGB bitmap.
+        *  - MYBMP_TYPE_BGR\n
+        *    A BGR bitmap.
+        *  - MYBMP_TYPE_RGBA\n
+        *    A RGBA bitmap.
+        *  - MYBMP_FLOW_DOWN\n
+        *    The scanline flows from top to bottom.
+        *  - MYBMP_FLOW_UP\n
+        *    The scanline flows from bottom to top.
+        *  - MYBMP_TRANSPARENT\n
+        *    Have a trasparent value.
+        *  - MYBMP_ALPHACHANNEL\n
+        *    Have a alpha channel.
+        *  - MYBMP_ALPHA\n
+        *    Have a per-pixel alpha value.
+        *  - MYBMP_RGBSIZE_3\n
+        *    Size of each RGB triple is 3 bytes.
+        *  - MYBMP_RGBSIZE_4\n
+        *    Size of each RGB triple is 4 bytes.
+        *  - MYBMP_LOAD_GRAYSCALE\n
+        *    Tell bitmap loader to load a grayscale bitmap.
+        */
+        DWORD flags;
+        /** The number of the frames. */
+        int   frames;
+        /** The pixel depth. */
+        Uint8 depth;
+        /** The alpha channel value. */
+        Uint8 alpha;
+        Uint8 reserved [2];
+        /** The transparent pixel. */
+        Uint32 transparent;
+        
+        /** The width of the bitmap. */
+        Uint32 w;
+        /** The height of the bitmap. */
+        Uint32 h;
+        /** The pitch of the bitmap. */
+        Uint32 pitch;
+        /** The size of the bits of the bitmap. */
+        Uint32 size;
+        
+        /** The pointer to the bits of the bitmap. */
+        BYTE* bits;
 };
 ```
 
 ### 1.8.4 位图文件的装载
+
 通过 MiniGUI 的 `LoadBitmap` 函数组，可以将某种位图文件装载为 MiniGUI 设备相关的位图对象，即 `BITMAP` 对象。MiniGUI 目前可以用来装载 BMP 文件、JPG 文件、GIF 文件以及 PCX、TGA 等格式的位图文件，而 `LoadMyBitmap` 函数组则用来将位图文件装载成设备无关的位图对象。相关函数的原型如下（`minigui/gdi.h`）：
 
 ```c
 int GUIAPI LoadBitmapEx (HDC hdc, PBITMAP pBitmap, MG_RWops* area, const char* ext);
 int GUIAPI LoadBitmapFromFile (HDC hdc, PBITMAP pBitmap, const char* spFileName);
 int GUIAPI LoadBitmapFromMemory (HDC hdc, PBITMAP pBitmap, 
-                      void* mem, int size, const char* ext);
+void* mem, int size, const char* ext);
 
 #define LoadBitmap  LoadBitmapFromFile
 
@@ -773,7 +774,7 @@ void GUIAPI UnloadBitmap (PBITMAP pBitmap);
 int GUIAPI LoadMyBitmapEx (PMYBITMAP my_bmp, RGB* pal, MG_RWops* area, const char* ext);
 int GUIAPI LoadMyBitmapFromFile (PMYBITMAP my_bmp, RGB* pal, const char* file_name);
 int GUIAPI LoadMyBitmapFromMemory (PMYBITMAP my_bmp, RGB* pal, 
-                      void* mem, int size, const char* ext);
+void* mem, int size, const char* ext);
 
 void* GUIAPI InitMyBitmapSL (MG_RWops* area, const char* ext, MYBITMAP* my_bmp, RGB* pal);
 int   GUIAPI LoadMyBitmapSL (MG_RWops* area, void* load_info, MYBITMAP* my_bmp,CB_ONE_SCANLINE cb, void* context);
@@ -786,7 +787,7 @@ int   GUIAPI PaintImageFromMem (HDC hdc, int x, int y, const void* mem, int size
 void GUIAPI UnloadMyBitmap (PMYBITMAP my_bmp);
 
 int GUIAPI ExpandMyBitmap (HDC hdc, PBITMAP bmp, const MYBITMAP* my_bmp, 
-                     const RGB* pal, int frame);
+const RGB* pal, int frame);
 ```
 
 为了减少对内存资源的占用，`LoadBitmapE` 可将位图对象的逐个扫描行装载成设备无关的位图对象，从而可以减少对内存资源的占用。在这一过程中，`InitMyBitmapSL` 函数为 `LoadMyBitmapSL` 函数的装载进行初始化；在 `LoadMyBitmapSL` 每加载完一行后，将调用传入该函数的用户定义回调函数 `cb`，这样，应用程序就可以对装载后的一条扫描线进行处理，比如转换为 `BITMAP` 结构中的一条扫描线，或者直接输出到窗口客户区中。最后，当 `LoadMyBitmapSL` 返回后，用户应调用 `CleanupMyBitmapSL`  函数释放资源。
@@ -804,11 +805,12 @@ int GUIAPI ExpandMyBitmap (HDC hdc, PBITMAP bmp, const MYBITMAP* my_bmp,
 MiniGUI 中用于位块填充的函数为 `FillBoxWithBitmap` 和 `FillBoxWithBitmapPart`。`FillBoxWithBitmap` 用设备相关位图对象填充矩形框，可以用来扩大或者缩小位图；`FillBoxWithBitmapPart` 用设备相关位图对象的部分填充矩形框，也可以扩大或缩小位图。
 
 ```c
- void GUIAPI FillBoxWithBitmap (HDC hdc, int x, int y, int w, int h,
-                                 PBITMAP pBitmap);
-    void GUIAPI FillBoxWithBitmapPart (HDC hdc, int x, int y, int w, int h,
-                                 int bw, int bh, PBITMAP pBitmap, int xo, int yo);
+void GUIAPI FillBoxWithBitmap (HDC hdc, int x, int y, int w, int h,
+                            PBITMAP pBitmap);
+void GUIAPI FillBoxWithBitmapPart (HDC hdc, int x, int y, int w, int h,
+                            int bw, int bh, PBITMAP pBitmap, int xo, int yo);
 ```
+
 __清单 1.1__ 中的程序段从文件中装载了一个位图，并显示在屏幕上，其效果见__图 1.1__。注意其中 `FillBoxWithBitmapPart` 函数的使用。该程序的完整源代码可见本指南示例程序包 `mg-samples` 中的 `loadbmp.c`。
 
 __清单 1.1__  装载并显示位图
@@ -827,15 +829,15 @@ __清单 1.1__  装载并显示位图
             Rectangle (hdc, 0, 0, 100, 100);
 
             /* 
-          - 将位图缩放显示在窗口 (100,0,200,200) 的位置上。
-          - 这次显示的位图是上一个位图的两倍大小。
+             * 将位图缩放显示在窗口 (100,0,200,200) 的位置上。
+             * 这次显示的位图是上一个位图的两倍大小。
              */
             FillBoxWithBitmap (hdc, 100, 0, 200, 200, &bmp);
             Rectangle (hdc, 100, 0, 300, 200);
 
             /* 
-          - 以位图的实际大小显示，但取位图中 (10, 10, 410, 210) 处的部分位图
-          - 显示在屏幕 (0, 200, 400, 200) 的位置上。
+             * 以位图的实际大小显示，但取位图中 (10, 10, 410, 210) 处的部分位图
+             * 显示在屏幕 (0, 200, 400, 200) 的位置上。
              */
             FillBoxWithBitmapPart (hdc, 0, 200, 400, 200, 0, 0, &bmp, 10, 10);
             Rectangle (hdc, 0, 200, 400, 400);
@@ -850,10 +852,11 @@ __清单 1.1__  装载并显示位图
             return 0;
 ```
 
-![Hello world 程序的输出](figures/Part2Chapter01-1.1.jpeg)
+![装载并显示位图](figures/Part2Chapter01-1.1.jpeg)
 __图 1.1__  装载并显示位图
 
 ### 13.8.6 位块传送
+
 “位块传送（bit block transfer）”操作指的是把内存或显示 `RAM` 中的某块矩形区域的颜色数据复制到另一个内存或显示区域。位块传送通常是一个高速的图像传送操作。
 
 MiniGUI 中执行位块传送操作的函数为 `BitBlt` 和 `StretchBlt`。`BitBlt` 函数用来实现两个相同或不同的设备上下文之间的显示内存复制，`StretchBlt` 则在 `BitBlt` 的基础上进行缩放操作。
@@ -918,7 +921,7 @@ static int BitbltWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
 程序的输出如__图 1.2__ 所示。
 
-![Hello world 程序的输出](figures/Part2Chapter01-1.2.jpeg)
+![`BitBlt` 操作的演示](figures/Part2Chapter01-1.2.jpeg)
 __图 1.2__  `BitBlt` 操作的演示
 
 在 `bitblt.c` 程序中，`BitBlt` 操作的源设备上下文和目标设备上下文均为窗口的客户区，其设备上下文句柄由 `BeginPaint` 函数获得。
@@ -973,7 +976,7 @@ static int StretchbltWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 ```
 程序的输出如__图 1.3__ 所示。
 
-![Hello world 程序的输出](figures/Part2Chapter01-1.3.jpeg)
+![`StretchBlt` 操作的演示](figures/Part2Chapter01-1.3.jpeg)
 __图 1.3__  `StretchBlt` 操作的演示
 
 `StretchBlt` 操作涉及像素的复制或合并，因此会出现图像失真的情况。
