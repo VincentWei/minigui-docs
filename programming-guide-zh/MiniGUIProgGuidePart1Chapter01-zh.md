@@ -1,8 +1,8 @@
 # 开始 MiniGUI 编程
 
-## 基本的编程概念
+## 1.1 基本的编程概念
 
-### 事件驱动编程
+### 1.1.1 事件驱动编程
 
 MiniGUI 是一个窗口系统及图形用户界面支持系统，通常的 GUI 编程概念均适用于 MiniGUI 编程，如窗口和事件驱动编程等。
 
@@ -14,7 +14,7 @@ MiniGUI 是一个窗口系统及图形用户界面支持系统，通常的 GUI �
 
 应用程序可通过调用一些系统函数来要求重绘窗口或窗口的某一部分，这些事件通常由窗口例程来处理。
 
-### MiniGUI 的三种运行模式
+### 1.1.2 MiniGUI 的三种运行模式
 
 在编写第一个 MiniGUI 程序之前，需要了解如下事实：我们可将 MiniGUI 配置编译成三种具有不同体系架构的版本，我们称为运行模式：
 
@@ -38,7 +38,7 @@ MiniGUI V2.0.x 完全地解决了这一问题。MiniGUI-Lite 运行模式下，�
 
 此外，MiniGUI 提供类 Win32 的 `API`，熟悉 Win32 编程的读者可以很快地掌握 MiniGUI 编程的基本方法和各个 `API`。
 
-## 一个简单的 MiniGUI 程序
+## 1.2 一个简单的 MiniGUI 程序
 
 理解 MiniGUI 基本编程方法的最快途径就是分析一个简单程序的结构。__清单 1.1__ 是一个 MiniGUI 版本的“Hello world!”程序，我们将对其进行详细的解释说明。
 
@@ -124,7 +124,7 @@ int MiniGUIMain (int argc, const char* argv[])
 
 __图 1.1__ `helloworld` 程序的输出
 
-### 头文件
+### 1.2.1 头文件
 
 `helloworld.c` 的开始所包括的四个头文件 `<minigui/common.h>`、`<minigui/minigui.h>`、`<minigui/gdi.h>` 和 `<minigui/window.h>` 是所有的 MiniGUI 应用程序都必须包括的头文件：
 
@@ -147,7 +147,7 @@ __图 1.1__ `helloworld` 程序的输出
 #include <minigui/control.h>
 ```
 
-### 程序入口点
+### 1.2.2 程序入口点
 
 一个 C 程序的入口点为 `main` 函数，而一个 MiniGUI 程序的入口点为 `MiniGUIMain`，该函数原型如下:
 
@@ -157,7 +157,7 @@ int MiniGUIMain (int argc, const char* argv[]);
 
 这个函数其实是标准 C 程序入口函数 `main` 的一个封装宏。所以，每个 MiniGUI 应用程序（无论是服务器端程序 `mginit` 还是客户端应用程序）的入口点均为 `MiniGUIMain` 函数。参数 `argc` 和 `argv` 与 C 程序 `main` 函数的参数 `argc` 和 `argv` 的含义是一样的，分别为命令行参数个数和参数字符串数组指针。
 
-### MiniGUI-Processes 模式下加入层
+### 1.2.3 MiniGUI-Processes 模式下加入层
 
 ```c
 #ifdef _MGRM_PROCESSES
@@ -184,7 +184,7 @@ if (!ServerStartup (0 , 0 , 0)) {
 > - MiniGUI-Processes： `_MGRM_PROCESSES` 和 `_LITE_VERSION`。
 > - MiniGUI-Standalone：`_MGRM_STANDALONE` 和（`_LITE_VERSION` 以及 `_STAND_ALONE`）。
 
-### 创建和显示主窗口
+### 1.2.4 创建和显示主窗口
 
 ```c
 hMainWnd = CreateMainWindow (&CreateInfo);
@@ -267,7 +267,7 @@ ShowWindow(hMainWnd, SW_SHOWNORMAL);
 
 创建完主窗口之后，还需要调用 `ShowWindow` 函数才能把所创建的窗口显示在屏幕上。`ShowWindow` 的第一个参数为所要显示的窗口句柄，第二个参数指明显示窗口的方式（显示还是隐藏），`SW_SHOWNORMAL` 说明要显示主窗口，并把它置为顶层窗口。
 
-### 进入消息循环
+### 1.2.5 进入消息循环
 
 在调用 `ShowWindow` 函数之后，主窗口就会显示在屏幕上。和其它 GUI 一样,现在是进入消息循环的时候了。MiniGUI 为每一个 MiniGUI 程序维护一个消息队列。在发生事件之后，MiniGUI 将事件转换为一个消息，并将消息放入目标程序的消息队列之中。应用程序现在的任务就是执行如下的消息循环代码，不断地从消息队列中取出消息，进行处理：
 
@@ -323,7 +323,7 @@ DispatchMessage (&Msg);
 
 `DispatchMessage` 函数最终把消息发往消息的目标窗口的窗口过程，让窗口过程进行处理。在本例中，窗口过程就是 `HelloWinProc`。也就是说，MiniGUI 在 `DispatchMessage` 函数 中调用主窗口的窗口过程函数（回调函数）对发往该主窗口的消息进行处理。处理完消息之后，应用程序的窗口过程函数将返回到 `DispatchMessage` 函数中，而 `DispatchMessage` 函数最后又将返回到应用程序代码中，应用程序又从下一个 `GetMessage` 函数调用开始消息循环。
 
-### 窗口过程函数
+### 1.2.6 窗口过程函数
 
 窗口过程函数是 MiniGUI 程序的主体部分，应用程序实际所做的工作大部分都发生在窗口过程函数中，因为 GUI 程序的主要任务就是接收和处理窗口收到的各种消息。
 
@@ -339,21 +339,21 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 窗口过程函数不予处理的消息应该传给 `DefaultMainWinProc` 函数进行缺省处理，从 `DefaultMainWinProc` 返回的值必须由窗口过程返回。
 
-### 屏幕输出
+### 1.2.7 屏幕输出
 
 程序在响应 `MSG_PAINT` 消息时进行屏幕输出。应用程序应首先通过调用 `BeginPaint` 函数来获得设备上下文句柄，并用它调用 `GDI` 函数来执行绘制操作。这里，程序使用 `TextOut` 文本输出函数在客户区的中部显示了一个“Hello world!”字符串。绘制结束之后，应用程序应调用 `EndPaint` 函数释放设备上下文句柄。
 
 我们将在本指南第 2 篇对 MiniGUI 的图形设备接口进行详细的描述。
 
-### 程序的退出
+### 1.2.8 程序的退出
 
 用户单击窗口右上角的关闭按钮时窗口过程函数将收到一个 `MSG_CLOSE` 消息。`Helloworld` 程序在收到 `MSG_CLOSE` 消息时调用 `DestroyMainWindow` 函数销毁主窗口，并调用 `PostQuitMessage` 函数在消息队列中投入一个 `MSG_QUIT` 消息。当 `GetMessage` 函数取出 `MSG_QUIT` 消息时将返回0，最终导致程序退出消息循环。
 
 程序最后调用 `MainWindowThreadCleanup` 清除主窗口所使用的消息队列等系统资源并最终由 `MiniGUIMain` 返回。
 
-## 编译、链接和运行
+## 1.3 编译、链接和运行
 
-### 编译 MiniGUI 程序
+### 1.3.1 编译 MiniGUI 程序
 
 你可以在命令行上输入如下的命令来编译 `helloworld.c`，并链接生成可执行文件 `helloworld`：
 
@@ -379,11 +379,11 @@ $ ./helloworld
 
 > 【提示】如果已将 MiniGUI 配置为 MiniGUI-Threads 或 MiniGUI-Standalone 模式，则运行这些示例程序时无须启动 `mginit` 程序——这些程序可直接从控制台上运行。
 
-### MiniGUI 组件
+### 1.3.2 MiniGUI 组件
 
 除了核心函数库之外，MiniGUI 产品中还包含有 `mGi`、`mGp`、`mG3d`、`mGUtils`、`mGPlus` 等组件。如果你在程序中用到了这些组件提供的接口，那么需要在程序中包括相应的头文件，并在编译应用程序时链接相应的库。具体可参阅这些组件对应的使用说明文档。
 
-## 为MiniGUI 应用程序编写 Automake/Autoconf 脚本
+## 1.4 为 MiniGUI 应用程序编写 Automake/Autoconf 脚本
 
 我们已经了解 Autoconf/Automake 是 UNIX 系统下维护一个软件项目的最佳工具。它可以帮助我们从敲击重复的命令行工作中解脱出来，可以帮我们维护一个项目，甚至可以帮我们轻松完成程序的交叉编译。随 MiniGUI 产品一同发布的 `mg-samples` 就是一个利用 Autoconf/Automake 脚本组织起来的软件项目。
 
