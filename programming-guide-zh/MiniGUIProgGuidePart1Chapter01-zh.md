@@ -1,21 +1,21 @@
 # 开始 MiniGUI 编程
 
-- 基本的编程概念(#基本的编程概念)
-   + 事件驱动编程(#事件驱动编程)
-   + MiniGUI 的三种运行模式(#MiniGUI-的三种运行模式)
-- 一个简单的 MiniGUI 程序(#一个简单的-MiniGUI-程序)
-   + 头文件(#头文件)
-   + 程序入口点(#程序入口点)
-   + MiniGUI-Processes 模式下加入层(#MiniGUI-Processes-模式下加入层)
-   + 创建和显示主窗口(#创建和显示主窗口)
-   + 进入消息循环(#进入消息循环)
-   + 窗口过程函数(#窗口过程函数)
-   + 屏幕输出(#屏幕输出)
-   + 程序的退出(#程序的退出)
-- 编译、链接和运行(#编译链接和运行)
-   + 编译 MiniGUI 程序(#编译-MiniGUI-程序)
-   + MiniGUI 组件(#MiniGUI-组件)
-- 为 MiniGUI 应用程序编写 Automake/Autoconf 脚本(#为-MiniGUI-应用程序编写-Automake/Autoconf-脚本)
+- [基本的编程概念](#基本的编程概念)
+   + [事件驱动编程](#事件驱动编程)
+   + [MiniGUI 的三种运行模式](#minigui-的三种运行模式)
+- [一个简单的 MiniGUI 程序](#一个简单的-minigui-程序)
+   + [头文件](#头文件)
+   + [程序入口点](#程序入口点)
+   + [MiniGUI-Processes 模式下加入层](#minigui-processes-模式下加入层)
+   + [创建和显示主窗口](#创建和显示主窗口)
+   + [进入消息循环](#进入消息循环)
+   + [窗口过程函数](#窗口过程函数)
+   + [屏幕输出](#屏幕输出)
+   + [程序的退出](#程序的退出)
+- [编译、链接和运行](#编译链接和运行)
+   + [编译 MiniGUI 程序](#编译-minigui-程序)
+   + [MiniGUI 组件](#minigui-组件)
+- [为 MiniGUI 应用程序编写 Automake/Autoconf 脚本](#为-minigui-应用程序编写-automake/autoconf-脚本)
 
 本章以一个简单的 MiniGUI 程序为例讲述 MiniGUI 编程的基本概念和基础知识。
 
@@ -63,7 +63,7 @@ MiniGUI V2.0.x 完全地解决了这一问题。MiniGUI-Lite 运行模式下，�
 
 清单 2.1 helloworld.c
 
-```
+```c
 #include <stdio.h>
 
 #include <minigui/common.h>
@@ -140,6 +140,7 @@ int MiniGUIMain (int argc, const char* argv[])
 该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如图 1.1 所示。
 
 ![Hello world 程序的输出](figures/1-1.jpeg)
+
 __图 1.1__ `helloworld` 程序的输出
 
 ### 头文件
