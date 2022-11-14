@@ -1,24 +1,5 @@
 # 开始 MiniGUI 编程
 
-- [基本的编程概念](#基本的编程概念)
-   + [事件驱动编程](#事件驱动编程)
-   + [MiniGUI 的三种运行模式](#minigui-的三种运行模式)
-- [一个简单的 MiniGUI 程序](#一个简单的-minigui-程序)
-   + [头文件](#头文件)
-   + [程序入口点](#程序入口点)
-   + [MiniGUI-Processes 模式下加入层](#minigui-processes-模式下加入层)
-   + [创建和显示主窗口](#创建和显示主窗口)
-   + [进入消息循环](#进入消息循环)
-   + [窗口过程函数](#窗口过程函数)
-   + [屏幕输出](#屏幕输出)
-   + [程序的退出](#程序的退出)
-- [编译、链接和运行](#编译链接和运行)
-   + [编译 MiniGUI 程序](#编译-minigui-程序)
-   + [MiniGUI 组件](#minigui-组件)
-- [为 MiniGUI 应用程序编写 Automake/Autoconf 脚本](#为-minigui-应用程序编写-automake/autoconf-脚本)
-
-本章以一个简单的 MiniGUI 程序为例讲述 MiniGUI 编程的基本概念和基础知识。
-
 ## 基本的编程概念
 
 ### 事件驱动编程
@@ -53,15 +34,15 @@ MiniGUI V2.0.x 完全地解决了这一问题。MiniGUI-Lite 运行模式下，�
 
 在 MiniGUI-Processes 运行模式中，我们可以同时运行多个 MiniGUI 应用程序。首先我们启动一个服务器程序 mginit，然后我们可以启动其他作为客户端运行的 MiniGUI 应用程序。如果因为某种原因客户终止，服务器不会受任何影响，可以继续运行。
 
-> 【注意】本指南中，我们假定您安装的是 MiniGUI-Processes 运行模式。在运行这些示例程序之前，应该首先运行 mginit 程序，它可以是用户自定义的 mginit 程序或是 mg-samples 中提供的 mginit 程序。我们已经仔细编码以确保每个示例程序都能在 MiniGUI-Processes 及 MiniGUI-Threads 模式下编译并运行。
+> 【注意】本指南中，我们假定您安装的是 MiniGUI-Processes 运行模式。在运行这些示例程序之前，应该首先运行 mginit 程序，它可以是用户自定义的 `mginit` 程序或是 `mg-samples` 中提供的 `mginit` 程序。我们已经仔细编码以确保每个示例程序都能在 MiniGUI-Processes 及 MiniGUI-Threads 模式下编译并运行。
 
-此外，MiniGUI 提供类 Win32 的 API，熟悉 Win32 编程的读者可以很快地掌握 MiniGUI 编程的基本方法和各个 API。
+此外，MiniGUI 提供类 Win32 的 `API`，熟悉 Win32 编程的读者可以很快地掌握 MiniGUI 编程的基本方法和各个 `API`。
 
 ## 一个简单的 MiniGUI 程序
 
-理解 MiniGUI 基本编程方法的最快途径就是分析一个简单程序的结构。清单 2.1 是一个 MiniGUI 版本的“Hello world!”程序，我们将对其进行详细的解释说明。
+理解 MiniGUI 基本编程方法的最快途径就是分析一个简单程序的结构。__清单 1.1__ 是一个 MiniGUI 版本的“Hello world!”程序，我们将对其进行详细的解释说明。
 
-清单 2.1 helloworld.c
+__清单 1.1__ `helloworld.c`
 
 ```c
 #include <stdio.h>
@@ -137,10 +118,9 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如图 1.1 所示。
+该程序在屏幕上创建一个大小为 240x180 像素的应用程序窗口，并在窗口客户区的中部显示 “Hello, world!”，如__图 1.1__ 所示。
 
-![Hello world 程序的输出](figures/1-1.jpeg)
-
+![Hello world 程序的输出](figures/Part1Chapter01-1.1.jpeg)
 __图 1.1__ `helloworld` 程序的输出
 
 ### 头文件
@@ -158,7 +138,7 @@ __图 1.1__ `helloworld` 程序的输出
 
 所以，一个 MiniGUI 程序的开始通常包括如下的 MiniGUI 相关头文件：
 
-```
+```c
 #include <minigui/common.h>
 #include <minigui/minigui.h>
 #include <minigui/gdi.h>
@@ -170,7 +150,7 @@ __图 1.1__ `helloworld` 程序的输出
 
 一个 C 程序的入口点为 `main` 函数，而一个 MiniGUI 程序的入口点为 `MiniGUIMain`，该函数原型如下:
 
-```
+```c
 int MiniGUIMain (int argc, const char* argv[]);
 ```
 
@@ -178,7 +158,7 @@ int MiniGUIMain (int argc, const char* argv[]);
 
 ### MiniGUI-Processes 模式下加入层
 
-```
+```c
 #ifdef _MGRM_PROCESSES
 JoinLayer(NAME_DEF_LAYER , "helloworld" , 0 , 0);
 #endif
@@ -186,9 +166,9 @@ JoinLayer(NAME_DEF_LAYER , "helloworld" , 0 , 0);
 
 `JoinLayer` 是 MiniGUI-Processes 模式的专有函数，因此包含在 `_MGRM_PROCESSES` 宏的条件编译中。在 MiniGUI-Processes 运行模式下，每个 MiniGUI 客户端程序在调用其它 MiniGUI 函数之前必须调用该函数将自己添加到一个层中（或创建一个新层）4 。
 
-如果程序是 MiniGUI-Processes 的服务器程序（即 mginit），则应该调用 `ServerStartup` 函数：
+如果程序是 MiniGUI-Processes 的服务器程序（即 `mginit`），则应该调用 `ServerStartup` 函数：
 
-```
+```c
 if (!ServerStartup (0 , 0 , 0)) {
         fprintf (stderr,
         "Can not start the server of MiniGUI-Processes: mginit.\n");
@@ -205,55 +185,55 @@ if (!ServerStartup (0 , 0 , 0)) {
 
 ### 创建和显示主窗口
 
-```
+```c
 hMainWnd = CreateMainWindow (&CreateInfo);
 ```
 
 每个 MiniGUI 应用程序的初始界面一般都是一个主窗口，你可以通过调用 `CreateMainWindow` 函数来创建一个主窗口，其参数是一个指向 `MAINWINCREATE` 结构的指针，本例中就是`CreateInfo`，返回值为所创建主窗口的句柄。`MAINWINCREATE` 结构描述一个主窗口的属性，在使用 `CreateInfo` 创建主窗口之前，需要设置它的各项属性。
 
-```
+```c
 CreateInfo.dwStyle = WS_VISIBLE | WS_BORDER | WS_CAPTION;
 ```
 
 设置主窗口风格，这里把窗口设为初始可见的，并具有边框和标题栏。
 
-```
+```c
 CreateInfo.dwExStyle = WS_EX_NONE;
 ```
 
 设置主窗口的扩展风格，该窗口没有扩展风格。
 
-```
+```c
 CreateInfo.spCaption = "HelloWorld";
 ```
 
 设置主窗口的标题为“HelloWorld”.
 
-```
+```c
 CreateInfo.hMenu = 0;
 ```
 
 设置主窗口的主菜单，该窗口没有主菜单。
 
-```
+```c
 CreateInfo.hCursor = GetSystemCursor(0);
 ```
 
 设置主窗口的光标为系统缺省光标。
 
-```
+```c
 CreateInfo.hIcon = 0;
 ```
 
 设置主窗口的图标，该窗口没有图标。
 
-```
+```c
 CreateInfo.MainWindowProc = HelloWinProc;
 ```
 
 设置主窗口的窗口过程函数为 `HelloWinProc`，所有发往该窗口的消息由该函数处理。
 
-```
+```c
 CreateInfo.lx = 0;
 CreateInfo.ty = 0;
 CreateInfo.rx = 320;
@@ -262,25 +242,25 @@ CreateInfo.by = 240;
 
 设置主窗口在屏幕上的位置,该窗口左上角位于(0, 0),右下角位于(320, 240)。
 
-```
+```c
 CreateInfo.iBkColor = PIXEL_lightwhite;
 ```
 
 设置主窗口的背景色为白色；`PIXEL_lightwhite` 是 MiniGUI 预定义的象素值（白色）。
 
-```
+```c
 CreateInfo.dwAddData = 0;
 ```
 
 设置主窗口的附加数据，该窗口没有附加数据。
 
-```
+```c
 CreateInfo.hHosting = HWND_DESKTOP;
 ```
 
 设置主窗口的托管窗口为桌面窗口。
 
-```
+```c
 ShowWindow(hMainWnd, SW_SHOWNORMAL);
 ```
 
@@ -290,7 +270,7 @@ ShowWindow(hMainWnd, SW_SHOWNORMAL);
 
 在调用 `ShowWindow` 函数之后，主窗口就会显示在屏幕上。和其它 GUI 一样,现在是进入消息循环的时候了。MiniGUI 为每一个 MiniGUI 程序维护一个消息队列。在发生事件之后，MiniGUI 将事件转换为一个消息，并将消息放入目标程序的消息队列之中。应用程序现在的任务就是执行如下的消息循环代码，不断地从消息队列中取出消息，进行处理：
 
-```
+```c
 while (GetMessage(&Msg, hMainWnd)) {
         TranslateMessage(&Msg);
         DispatchMessage(&Msg);
@@ -316,11 +296,11 @@ typedef MSG* PMSG;
 
 `GetMessage` 函数调用从应用程序的消息队列中取出一个消息：
 
-```
+```c
 GetMessage( &Msg, hMainWnd);
 ```
 
-该函数调用的第二个参数为要获取消息的主窗口的句柄，第一个参数为一个指向 `MSG 结构的指针，`GetMessage` 函数将用从消息队列中取出的消息来填充该消息结构的各个域，包括：
+该函数调用的第二个参数为要获取消息的主窗口的句柄，第一个参数为一个指向 `MSG` 结构的指针，`GetMessage` 函数将用从消息队列中取出的消息来填充该消息结构的各个域，包括：
 
 - `hwnd`：消息发往的窗口的句柄。在 `helloworld.c` 程序中，该值与 `hMainWnd` 相同。
 - `message`：消息标识符。这是一个用于标识消息的整数值。每一个消息均有一个对应的预定义标识符，这些标识符定义在 `window.h` 头文件中，以前缀 `MSG` 开头。
@@ -330,13 +310,13 @@ GetMessage( &Msg, hMainWnd);
 
 只要从消息队列中取出的消息不为 `MSG_QUIT`，`GetMessage` 就返回一个非 0 值，消息循环将持续下去。`MSG_QUIT` 消息使 `GetMessage` 返回 0，导致消息循环的终止。
 
-```
+```c
 TranslateMessage (&Msg);
 ```
 
 `TranslateMessage` 函数把击键消息转换为 `MSG_CHAR` 消息,然后直接发送到窗口过程函数。
 
-```
+```c
 DispatchMessage (&Msg);
 ```
 
@@ -350,11 +330,11 @@ DispatchMessage (&Msg);
 
 窗口过程函数总是定义为如下形式：
 
-```
+```c
 static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
 
-窗口过程的 4 个参数与 MSG 结构的前四个域是相同的。第一个参数 `hWnd` 是接收消息的窗口的句柄，它与 `CreateMainWindow` 函数的返回值相同，该值标识了接收该消息的特定 窗口。第二个参数与 MSG 结构中的 `message` 域相同，它是一个标识窗口所收到消息的整数值。最后两个参数都是 32 位的消息参数，它提供和消息相关的特定信息。程序通常不直接调用窗口过程函数，而是由 MiniGUI 进行调用；也就是说,它是一个回调函数。
+窗口过程的 4 个参数与 MSG 结构的前四个域是相同的。第一个参数 `hWnd` 是接收消息的窗口的句柄，它与 `CreateMainWindow` 函数的返回值相同，该值标识了接收该消息的特定窗口。第二个参数与 `MSG` 结构中的 `message` 域相同，它是一个标识窗口所收到消息的整数值。最后两个参数都是 32 位的消息参数，它提供和消息相关的特定信息。程序通常不直接调用窗口过程函数，而是由 MiniGUI 进行调用；也就是说，它是一个回调函数。
 
 窗口过程函数不予处理的消息应该传给 `DefaultMainWinProc` 函数进行缺省处理，从 `DefaultMainWinProc` 返回的值必须由窗口过程返回。
 
@@ -366,7 +346,7 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 ### 程序的退出
 
-用户单击窗口右上角的关闭按钮时窗口过程函数将收到一个 `MSG_CLOSE` 消息。`Helloworld` 程序在收到 `MSG_CLOSE` 消息时调用 `DestroyMainWindow` 函数销毁主窗口，并调用`PostQuitMessage` 函数在消息队列中投入一个 `MSG_QUIT` 消息。当 `GetMessage` 函数取出 `MSG_QUIT` 消息时将返回0，最终导致程序退出消息循环。
+用户单击窗口右上角的关闭按钮时窗口过程函数将收到一个 `MSG_CLOSE` 消息。`Helloworld` 程序在收到 `MSG_CLOSE` 消息时调用 `DestroyMainWindow` 函数销毁主窗口，并调用 `PostQuitMessage` 函数在消息队列中投入一个 `MSG_QUIT` 消息。当 `GetMessage` 函数取出 `MSG_QUIT` 消息时将返回0，最终导致程序退出消息循环。
 
 程序最后调用 `MainWindowThreadCleanup` 清除主窗口所使用的消息队列等系统资源并最终由 `MiniGUIMain` 返回。
 
@@ -376,28 +356,27 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 你可以在命令行上输入如下的命令来编译 `helloworld.c`，并链接生成可执行文件 `helloworld`：
 
-```
+```c
 $ gcc –o helloworld helloworld.c –lminigui_procs –ljpeg –lpng –lz
 ```
 
 如果你将 MiniGUI 配置为 MiniGUI-Threads，则需要使用下面的编译选项：
 
-```
+```c
 $ gcc –o helloworld helloworld.c –lpthread –lminigui_ths –ljpeg –lpng –lz
 ```
 
 `-o` 选项告诉 gcc 要生成的目标文件名，这里是 `helloworld`；`-l` 选项指定生成 `helloworld` 要链接的库，这里链接的是 `minigui_procs` 函数库（MiniGUI 多进程模式）或者 `minigui_ths` 函数库（MiniGUI 多线程模式）。当 MiniGUI 配置为 MiniGUI-Threads 时，还要链接 `pthread` 库。`pthread` 是提供 POSIX 兼容线程支持的函数库，编译 MiniGUI-Threads 程序时必须连接这个函数库。其它要链接的 `jpeg`、`png`、`z` 等函数库，则是 MiniGUI 内部所依赖的函数库（这里假定您使用的 MiniGUI 打开了对 JPEG 及 PNG 图片格式的支持）。
 
-假定你将 MiniGUI 配置成了 MiniGUI-Processes，在运行 helloworld 程序之前，首先要确保已启动了 MiniGUI 的服务器端程序 `mginit`。比如你可以启动 `mg-samples` 中的 `mginit` 程序，然后进入 `helloworld` 文件所在目录，在命令行上输入 `./helloworld` 启动 `helloworld` 程序：
+假定你将 MiniGUI 配置成了 MiniGUI-Processes，在运行 `helloworld` 程序之前，首先要确保已启动了 MiniGUI 的服务器端程序 `mginit`。比如你可以启动 `mg-samples` 中的 `mginit` 程序，然后进入 `helloworld` 文件所在目录，在命令行上输入 `./helloworld` 启动 `helloworld` 程序：
 
 ```
 $ ./helloworld
 ```
 
-程序的运行结果如图1.1所示。
+程序的运行结果如__图 1.1__ 所示。
 
-> 【提示】如果已将 MiniGUI 配置为 MiniGUI-Threads 或 MiniGUI-Standalone 模式，则运行这些示例程序时无须启动 mginit 程序——这些程序可直接从控制台上运行。
-
+> 【提示】如果已将 MiniGUI 配置为 MiniGUI-Threads 或 MiniGUI-Standalone 模式，则运行这些示例程序时无须启动 `mginit` 程序——这些程序可直接从控制台上运行。
 
 ### MiniGUI 组件
 
@@ -411,21 +390,21 @@ $ ./helloworld
 
 考虑到我们在本节中建立的项目还可以用于组织和维护本指南以后章节的示例程序，因此，我们在系统适当的目录下建立 `samples` 目录作为项目的根目录，并为项目取名为 `samples`。比如：
 
-```
+```c
 $ mkdir –p ~/minigui/samples
 ```
 
-> 【提示】本指南假定你将 mg-samples 的源代码置于自己 HOME 目录的 minigui 目录下：~/minigui/mg-samples-3.0.x。
+> 【提示】本指南假定你将 `mg-samples` 的源代码置于自己 `HOME` 目录的 `minigui` 目录下：`~/minigui/mg-samples-3.0.x`。
 
 然后在 `samples` 下建立 `src` 目录，用来存放 `helloworld` 程序的源代码。将 `helloworld.c` 保存在 `samples/src/` 目录下，然后从 `mg-samples-3.0.x` 中复制 `configure.in` 文件。
 
-> 【提示】将源代码保存在单独的文件中可以帮助我们更好地管理项目文件，作为惯例，应将项目源代码保存在 src/ 目录下，将项目的全局性头文件保存在 include/ 目录下。
+> 【提示】将源代码保存在单独的文件中可以帮助我们更好地管理项目文件，作为惯例，应将项目源代码保存在 `src/` 目录下，将项目的全局性头文件保存在 `include/` 目录下。
 
 下面，我们就在 `mg-samples` 的管理脚本基础上针对 `samples` 项目进行修改。需要注意的是，这些脚本需要 Autoconf 2.53 和 Automake 1.6 及以上版本，使用低版本的（比如 Red Hat 7.x 及以下） Autoconf 和 Automake 会出现错误。
 
 首先，我们修改 `configure.in` 文件。修改后的文件如下所示（注意我们所做的中文注释，我们只修改了通过中文注释注解的那些宏）：
 
-```
+```c
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.13)
 
@@ -529,13 +508,13 @@ fi
 
 接下来，我们建立项目根目录下的 `Makefile.am` 文件。该文件内容如下：
 
-```
+```c
 SUBDIRS = src
 ```
 
 上述文件内容告诉 Automake 系统进入 `src/` 目录继续处理。然后，我们建立 `src/` 子目录下的 `Makefile.am` 文件。该文件内容如下：
 
-```
+```c
 noinst_PROGRAMS=helloworld
 
 helloworld_SOURCES=helloworld.c
@@ -543,7 +522,7 @@ helloworld_SOURCES=helloworld.c
 
 上述文件内容告诉 Automake 生成一个用来从 `helloworld.c` 建立 helloworld 程序的 Makefile 文件。最后，我们回到项目根目录下建立一个 `autogen.sh` 文件，内容如下：
 
-```
+```c
 #!/bin/sh
 
 aclocal
@@ -553,22 +532,22 @@ Autoconf
 
 该文件是一个 shell 脚本，依次调用了 `aclocal`、`automake` 和 `autoconf` 命令。请注意在建立该文件之后，要运行 `chmod` 命令使之变成可执行文件：
 
-```
+```c
 $ chmod +x autogen.sh
 ```
 
 至此，我们就可以运行如下命令生成项目所需的 Makefile 文件了：
 
-```
+```c
 $ ./autogen.sh
 $ ./configure
 ```
 
-> 【提示】每次修改 configure.in 文件之后，应执行 ./autogen.sh 命令更新 configure 脚本以及 makefile 文件。
+> 【提示】每次修改 `configure.in` 文件之后，应执行 `./autogen.sh` 命令更新 `configure` 脚本以及 `makefile` 文件。
 
 运行完上述命令之后，你会发现项目根目录下多了许多自动生成的文件。我们无需关注这些文件的用途，忽略这些文件，然后执行 `make` 命令：
 
-```
+```c
 $ make
 Making all in src
 make[1]: Entering directory `/home/weiym/minigui/samples/src'
@@ -593,11 +572,11 @@ noinst_PROGRAMS=helloworld
 helloworld_SOURCES=helloworld.c helloworld.h module1.c module2.c
 ```
 
-> 【提示】请将某个程序所依赖的源文件和头文件全部列在 foo_SOURCES 之后。
+> 【提示】请将某个程序所依赖的源文件和头文件全部列在 `foo_SOURCES` 之后。
 
 本指南其他章节的示例程序，也可以方便地添加到这个项目中。比如，为了将 `foo` 程序添加进去，我们可以如下修改 `src/` 子目录下的 `Makefile.am` 文件：
 
-```
+```c
 noinst_PROGRAMS=helloworld foo
 
 helloworld_SOURCES=helloworld.c
@@ -606,7 +585,7 @@ foo_SOURCES=foo.c
 
 这样，编译时就会在 `src/` 下生成两个程序文件，分别是 `helloworld` 和 `foo`。
 
-> 【提示】foo 一般用来指定一个假想的对象或名称，在实际项目中应该用真实名称替换（下同）。本章之后的示例程序均可以以这种方式将程序添加到 samples 项目中。
+> 【提示】`foo` 一般用来指定一个假想的对象或名称，在实际项目中应该用真实名称替换（下同）。本章之后的示例程序均可以以这种方式将程序添加到 `samples` 项目中。
 
 有了这样一个简单的项目框架和 Automake/Autoconf 脚本模板，我们就可以根据自己的需求进一步丰富这些脚本。这些脚本可以帮助我们完成许多工作，其中最重要的就是进行交叉编译选项的配置，以帮助我们将自己的应用程序移植到目标系统中。关于 MiniGUI 的安装和 MiniGUI 应用程序的交叉编译，可参阅《MiniGUI 用户手册》。
 
