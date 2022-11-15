@@ -95,7 +95,7 @@ const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
 const char* window_name, const char* layer_name);
 ```
 
-这个函数除了结构体指针 `pCreateInfo` 不能为空外，其他参数都可以传入空值。当后面四个参数都传入空值时，等效于 `CreateMainWindow` 函数。`CreateMainWindowEx` 可以让你指定渲染器的名称，并修改某些渲染参数。有关这方面的内容将在 11 章“界面外观及特效”里面的“[外观渲染器及窗口元素属性](MiniGUIProgGuidePart1Chapter10-zh.md#user-content-1-外观渲染器及窗口元素属性)”一节，详细介绍。参数 `window_name` 和 `layer_name` 是保留参数，调用函数，赋空值即可。
+这个函数除了结构体指针 `pCreateInfo` 不能为空外，其他参数都可以传入空值。当后面四个参数都传入空值时，等效于 `CreateMainWindow` 函数。`CreateMainWindowEx` 可以让你指定渲染器的名称，并修改某些渲染参数。有关这方面的内容将在 [Part1Chapter10 界面外观及特效](MiniGUIProgGuidePart1Chapter10-zh.md)”里面的“[外观渲染器及窗口元素属性](MiniGUIProgGuidePart1Chapter10-zh.md#user-content-1-外观渲染器及窗口元素属性)”一节，详细介绍。参数 `window_name` 和 `layer_name` 是保留参数，调用函数，赋空值即可。
 
 ### 2.3 窗口风格
 
@@ -464,7 +464,7 @@ UnregisterMyControl();
 
 __图 8__ 用自定义的控件显示 Hello, world!
 
-本指南 [Part1Chapter04](programming-guide-zh/MiniGUIProgGuidePart1Chapter04-zh.md) 中将讲述控件编程的基础知识, [Part1Chapter05](programming-guide-zh/MiniGUIProgGuidePart1Chapter05-zh.md) 讲述控件相关的高级编程技术; 在第 4 篇介绍所有的 MiniGUI 预定义控件。
+本指南 [Part1Chapter04](MiniGUIProgGuidePart1Chapter04-zh.md) 中将讲述控件编程的基础知识, [Part1Chapter05](MiniGUIProgGuidePart1Chapter05-zh.md) 讲述控件相关的高级编程技术; 在第 4 篇介绍所有的 MiniGUI 预定义控件。
 
 ### 1.2.8 输入法支持
 
