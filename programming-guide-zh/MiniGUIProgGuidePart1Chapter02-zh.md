@@ -936,7 +936,7 @@ __表 2__ 通用窗口操作函数
 | `GetActiveWindow`          | 获取当前活动主窗口             | |
 | `SetActiveWindow`          | 设置当前活动主窗口             | |
 | `GetCapture`               | 获取当前捕获鼠标的窗口          | |
-| `SetCapture`               | 捕获鼠标	                    | 第 9 章讲述鼠标捕获相关内容 |
+| `SetCapture`               | 捕获鼠标	                    | [Part1Chapter08 讲述鼠标捕获相关内容](MiniGUIProgGuidePart1Chapter08-zh.md#user-content-23-鼠标捕获) |
 | `ReleaseCapture`           | 释放鼠标                     | |
 | `MoveWindow`               | 移动窗口或改变窗口大小          | |
 | `ScrollWindow`             | 自 1.6.8 版 本 , `ScrollWindow` 函滚动窗口客户区的内容 | 数可根据客户区的滚动情况自动调整窗口内子窗口的位置。具体来说 , 当 子 窗 口 所 在 位 置 在 `ScrollWindow` 第 二 个 传 入 参 数 指定的矩形内时,将相应调整子窗口位置;如果该参数为 `NULL`,则调整所有子窗口位置。 |
