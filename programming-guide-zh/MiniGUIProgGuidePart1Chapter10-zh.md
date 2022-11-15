@@ -1,6 +1,6 @@
 # 界面外观及特效
 
-## 1.1 外观渲染器及窗口元素属性
+## 1 外观渲染器及窗口元素属性
 
 MiniGUI 3.0 在窗口以及控件的外观绘制的实现上，采用了与以前的版本完全不同的实现机制。以前的版本在编译前就必须进行编译配置，选定界面风格，而且只能在 `fashion`、`classic` 和 `flat` 三种风格之间选择其一。MiniGUI 3.0 采用外观渲染器技术实现窗口以及控件外观的绘制。MiniGUI 为应用程序准备了四种渲染器，在实际应用时，择其一便可。渲染器技术的优点在于，可以通过 MiniGUI 配置文件来修改界面外观，也可以通过函数接口来控制界面外观。应用程序甚至可以定制自己的渲染器，这就为应用程序根据实际应用环境灵活定制自己的界面提供了极大的方便。渲染器的实现分为以下两个部分：
 
@@ -11,11 +11,11 @@ MiniGUI 渲染器对窗口以及控件的各个部分进行了属性划分，�
 
 应用程序可以选择为某个窗口使用特定的渲染器，并定义窗口元素的外观属性信息。 应用程序也可以定义自己的渲染器来绘制界面。
 
-### 1.1.1 窗口元素属性
+### 1.1 窗口元素属性
 
 参照 Windows XP/Windows 2000， MiniGUI 对窗口元素进行了如下的划分：
 
-__表 1.1__ 窗口元素划分以及他们在配置文件和代码里的名称
+__表 1__ 窗口元素划分以及他们在配置文件和代码里的名称
 
 | 在配置文件中的名称	| 代码名称	| 说明 |
 |:----------------- |:---------|:----|
@@ -56,12 +56,13 @@ __表 1.1__ 窗口元素划分以及他们在配置文件和代码里的名称
 |bgc_desktop   |WE_BGC_DESKTOP|桌面背景色|
 
 
-上表对窗口的组成元素都一一进行了介绍。窗口元素在配置文件中的名称，表示是这个元素在 MiniGUI 配置文件 MiniGUI.cfg 中的名称。可以在程序运行前修改这个配置文件中的窗口元素的属性值，以改变运行时窗口的外观。窗口元素的代码名称，是在使用函数接口修改窗口元素的属性值时用来指定窗口元素的。
+上表对窗口的组成元素都一一进行了介绍。窗口元素在配置文件中的名称，表示是这个元素在 MiniGUI 配置文件 `MiniGUI.cfg` 中的名称。可以在程序运行前修改这个配置文件中的窗口元素的属性值，以改变运行时窗口的外观。窗口元素的代码名称，是在使用函数接口修改窗口元素的属性值时用来指定窗口元素的。
 
-### 1.1.2 皮肤渲染器的窗口皮肤属性
+### 1.2 皮肤渲染器的窗口皮肤属性
+
 为了用渲染器替换原先 `MGExt` 库中的 `SKIN` 相关接口，我们使用了皮肤渲染器。皮肤渲染器除了拥有其他渲染器拥有的窗口属性外，它还拥有窗口皮肤属性。下表是对窗口皮肤属性的详细说明：
 
-__表 1.2__ 窗口皮肤属性以及他们在配置文件和代码里的名称
+__表 2__ 窗口皮肤属性以及他们在配置文件和代码里的名称
 
 | 在配置文件中的名称 | 代码名称 | 说明 |
 |:----------------|:-------|:----|
@@ -94,7 +95,7 @@ __表 1.2__ 窗口皮肤属性以及他们在配置文件和代码里的名称
 |skin_progressbar_hchunk  |WE_LFSKIN_PROGRESS_HCHUNK|水平进度条滑块皮肤图片|
 |skin_progressbar_vchunk  |WE_LFSKIN_PROGRESS_VCHUNK|垂直进度条滑块皮肤图片|
 
-### 1.1.3 窗口属性操作函数
+### 1.3 窗口属性操作函数
 
 对窗口属性值的修改可以在程序执行前，通过修改 MiniGUI 配置文件来实现对窗口外观的控制。也可以通过函数接口，在程序里面对窗口外观进行定制。 为了方便对窗口属性的操作，MiniGUI 定义了下面的函数接口，来实现对窗口属性的操作。
 
@@ -111,7 +112,7 @@ MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd,
 const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs);
 ```
 
-上面所有函数里面的 `we_attr_id` 都是指窗口元素属性 `id`。这个`id`值必须是__表1.1__ 和 __1.2__ 中的代码名称。
+上面所有函数里面的 `we_attr_id` 都是指窗口元素属性 `id`。这个`id`值必须是表 1 和表 2 中的代码名称。
 函数 `GetWindowElementAttr` 用于获取指定窗口的某个元素属性的属性值。`hWnd` 是窗口句柄，`we_attr_id` 是窗口元素属性 `id`。 下面的代码是获取三维物体边框及表面颜色。
 
 ```c
@@ -172,7 +173,7 @@ WINDOW_ELEMENT_ATTR my_we_attrs [] = {
 };
 ```
 
-### 1.1.4 渲染器管理
+### 1.4 渲染器管理
 
 前面说过渲染器是由窗口元素属性和与之配套的渲染方法组成。窗口属性及其相关的函数接口都已经介绍过了，现在来介绍渲染方法以及渲染器的使用。渲染器所使用的结构体名称叫 `WINDOW_ELEMENT_RENDERER` ，它是由渲染器名称、渲染方法接口指针以及相关的窗口属性组成。
 
@@ -247,7 +248,7 @@ typedef struct _WINDOW_ELEMENT_RENDERER {
 
 下表是对结构体中各成员的一个解释说明。
 
-__表 1.3__ 渲染器结构体成员说明
+__表 3__ 渲染器结构体成员说明
 
 | 成员名称 | 说明 |
 |:--------|:----|
@@ -336,7 +337,7 @@ MG_EXPORT const char* GUIAPI SetDefaultWindowElementRenderer (const char* name);
 MG_EXPORT BOOL GUIAPI SetWindowElementRenderer (HWND hWnd, const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs);
 ```
 
-### 1.1.5 主窗口的创建
+### 1.5 主窗口的创建
 
 在采用渲染器对窗口进行绘制之后，主窗口的创建需要传入更多的参数，但是为了保证兼容性，MiniGUI 创建了一个新的主窗口创建函数 `CreateMainWindowEx` 并对老的的创建函数进行了封装。下面是函数原型。
 
@@ -356,7 +357,7 @@ static inline HWND GUIAPI CreateMainWindow (PMAINWINCREATE pCreateInfo)
 - `werdr_name` 表示要使用的窗口元素渲染器名称，为空时使用默认的窗口渲染器。
 - `we_attrs` 指向窗口元素的外观属性表，为空时使用默认的窗口元素外观属性表。
 
-### 1.1.6 控件的创建
+### 1.6 控件的创建
 
 和主窗口的创建类似，控件也引入了新的创建函数 `CreateWindowEx2` ，并对原来的创建函数 `CreateWindowEx` 进行了封装。
 
@@ -384,7 +385,7 @@ id, x, y, w, h, parent, add_data)
 
 这些函数在“控件编程基础”一章已经有详细的说明，这里就不赘述了。
 
-### 1.1.7 对话框的创建
+### 1.7 对话框的创建
 
 - 模态对话框的创建
 
@@ -418,15 +419,15 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 }
 ```
 
-上面以 `Ex` 结尾的函数都是新增加的函数。这些函数的说明在“对话框编程基础”一章已经有详细说明。
+上面以 `Ex` 结尾的函数都是新增加的函数。这些函数的说明在“[对话框编程基础](MiniGUIProgGuidePart1Chapter03-zh.md)”一章已经有详细说明。
 
-## 1.2 主窗口双缓冲区
+## 2 主窗口双缓冲区
 
-主窗口双缓冲机制是 MiniGUI 提供的一种窗口绘制技术。在双缓冲机制下，主窗口在绘制时，首先是绘制到与主窗口 DC 相匹配的内存 DC 当中，进而对内存 DC 当中的数据运用各种算法进行运算，从而实现各种界面特效，比如：窗口推拉动画效果，卷帘效果，翻页效果等等。主窗口双缓冲机制的另一个作用就是能够提高窗口绘屏时的效率，解决主窗口在绘屏时的闪烁问题。
+主窗口双缓冲机制是 MiniGUI 提供的一种窗口绘制技术。在双缓冲机制下，主窗口在绘制时，首先是绘制到与主窗口 `DC` 相匹配的内存 `DC` 当中，进而对内存 `DC` 当中的数据运用各种算法进行运算，从而实现各种界面特效，比如：窗口推拉动画效果，卷帘效果，翻页效果等等。主窗口双缓冲机制的另一个作用就是能够提高窗口绘屏时的效率，解决主窗口在绘屏时的闪烁问题。
 
-### 1.2.1 双缓冲窗口扩展风格
+### 2.1 双缓冲窗口扩展风格
 
-利用双缓冲窗口扩展风格可以在创建主窗口或者对话框时，使它们带有与窗口 DC 相匹配的内存 DC。双缓冲窗口扩展风格定义如下：
+利用双缓冲窗口扩展风格可以在创建主窗口或者对话框时，使它们带有与窗口 `DC` 相匹配的内存 `DC`。双缓冲窗口扩展风格定义如下：
 
 ```c
 #define WS_EX_AUTOSECONDARYDC     0x00001000L
@@ -456,9 +457,9 @@ CreateInfo.hHosting = hosting;
 hMainWnd = CreateMainWindow (&CreateInfo);
 ```
 
-### 1.2.2 双缓冲区机制的相关函数
+### 2.2 双缓冲区机制的相关函数
 
-- 双缓冲区 DC 创建函数 `CreateSecondaryDC` ， 它将根据传入的窗口大小，创建兼容的内存 DC 并返回。
+- 双缓冲区 DC 创建函数 `CreateSecondaryDC` ， 它将根据传入的窗口大小，创建兼容的内存 `DC` 并返回。
 
 ```c
 MG_EXPORT HDC GUIAPI CreateSecondaryDC (HWND hwnd);
@@ -476,7 +477,7 @@ MG_EXPORT HDC GUIAPI SetSecondaryDC (HWND hwnd, HDC secondary_dc, ON_UPDATE_SECO
 - 如果主窗口具有 `WS_EX_AUTOSecondaryDC` 风格，则会取消该风格，并调用 `DeleteSecondaryDC` 函数删除已有的双缓冲区 ，并返回 `HDC_SCREEN`。
 - 如果主窗口没有 `WS_EX_AUTOSecondaryDC` 风格，则返回原先的双缓冲区句柄。原先的双缓冲区由应用程序自行管理。
 - 如果传入 `HDC_SCREEN`，将取消窗口的双缓冲机制。
-- 如果调用该函数时，传递进入的 `ON_UPDATE_SecondaryDC` 回调函数为 `NULL`，则这时 MiniGUI 不会自动完成屏幕 DC 到屏幕的显示的绘制，用户需要使用基本的块拷贝函数完成双缓冲区到屏幕 DC 的复制；否则调用该回调函数由应用程序负责从双缓冲区到屏幕 DC 的复制，应用程序可在此时完成界面特效。
+- 如果调用该函数时，传递进入的 `ON_UPDATE_SecondaryDC` 回调函数为 `NULL`，则这时 MiniGUI 不会自动完成屏幕 `DC` 到屏幕的显示的绘制，用户需要使用基本的块拷贝函数完成双缓冲区到屏幕 `DC` 的复制；否则调用该回调函数由应用程序负责从双缓冲区到屏幕 `DC` 的复制，应用程序可在此时完成界面特效。
 
 下面的示例代码，在设置了主窗口双缓冲区之后，将主窗口绘制到了双缓冲区上。
 
@@ -494,36 +495,36 @@ SetSecondaryDC(hWnd, hdc, NULL);
 MG_EXPORT HDC GUIAPI GetSecondaryDC (HWND hwnd);
 ```
 
-- `GetSecondaryClientDC` 函数。该函数用于双缓冲窗体的客户区绘制 DC，如果窗体不支持双缓冲，则直接返回一般的客户区 DC，相当于调用 `GetClientDC` 。
+- `GetSecondaryClientDC` 函数。该函数用于双缓冲窗体的客户区绘制 `DC`，如果窗体不支持双缓冲，则直接返回一般的客户区 `DC`，相当于调用 `GetClientDC` 。
 
 ```c
 MG_EXPORT HDC GUIAPI GetSecondaryClientDC (HWND hwnd);
 ```
 
-- `ReleaseSecondaryDC` 函数。该函数用于释放双缓冲 DC, 如果是主窗体本身的双缓冲 DC，则什么也不处理；否则释该 DC。
+- `ReleaseSecondaryDC` 函数。该函数用于释放双缓冲 `DC`, 如果是主窗体本身的双缓冲 `DC`，则什么也不处理；否则释该 `DC`。
 
 ```c
 MG_EXPORT void GUIAPI ReleaseSecondaryDC (HWND hwnd, HDC hdc);
 ```
-- `DeleteSecondaryDC` 函数。该函数删除由 `CreateSecondaryDC` 创建的内存 DC。
+- `DeleteSecondaryDC` 函数。该函数删除由 `CreateSecondaryDC` 创建的内存 `DC`。
 
 ```c
 static inline void GUIAPI DeleteSecondaryDC (HWND hwnd);
 ```
 
-- `GetSecondarySubDC` 函数。该函数仅针对双缓冲，在私有窗口 DC 基础上创建子 DC，使之可以作为主窗口的客户 DC，或者控件的 DC 使用。具有 `WS_EX_SecondaryDC` 风格的主窗口及其控件，在绘制其非客户区时，或者 `BeginPaint` 函数的返回值，都应该使用 `GetSecondarySubDC` 函数来获取双缓冲区 DC 对应的子DC。从而确保在该主窗口中的所有绘制都作用在双缓冲区 DC 上。
+- `GetSecondarySubDC` 函数。该函数仅针对双缓冲，在私有窗口 `DC` 基础上创建子 `DC`，使之可以作为主窗口的客户 `DC`，或者控件的 `DC` 使用。具有 `WS_EX_SecondaryDC` 风格的主窗口及其控件，在绘制其非客户区时，或者 `BeginPaint` 函数的返回值，都应该使用 `GetSecondarySubDC` 函数来获取双缓冲区 `DC` 对应的子 `DC`。从而确保在该主窗口中的所有绘制都作用在双缓冲区 `DC` 上。
 
 ```c
 HDC GUIAPI GetSecondarySubDC (HDC secondary_dc, HWND hwnd_main, HWND hwnd_child, BOOL client);
 ```
 
-- `ReleaseSecondarySubDC` 函数。该函数释放私有 DC 的子 DC。
+- `ReleaseSecondarySubDC` 函数。该函数释放私有 `DC` 的子 `DC`。
 
 ```c
 void GUIAPI ReleaseSecondarySubDC (HDC secondary_subdc, HWND hwnd_child);
 ```
 
-### 1.2.3 双缓冲区机制特效示例(淡入淡出特效、推拉特效和卷帘特效）
+### 2.3 双缓冲区机制特效示例(淡入淡出特效、推拉特效和卷帘特效）
 
 - 创建带有双缓冲区的主窗口，并在窗口创建之后，消息循环之前添加特效的代码
 
@@ -833,13 +834,15 @@ static void ue_3_term (HWND hwnd)
 
 - 三种特效的效果图
 
+![Hello world 程序的输出](figures/Part1Chapter10-01.jpeg)
+
 __图 1.1__ 主窗口双缓冲的特效图
 
-## 1.3 桌面定制
+## 3 桌面定制
 
 MiniGUI 以回调函数的形式提供了一套桌面窗口定制接口。通过这套接口，应用程序可以控制桌面窗口对各种消息的响应，实现一个类似 Windows 桌面这样的桌面窗口。
 
-### 1.3.1 桌面定制结构体
+### 3.1 桌面定制结构体
 
 ```c
 typedef struct _DESKTOPOPS {
@@ -899,7 +902,7 @@ typedef struct _DESKTOPOPS {
 - `customize_desktop_menu` : 用户自定义的弹出式菜单构造函数;
 - `desktop_menucmd_handler` : 弹出式菜单的响应函数。
 
-### 1.3.2 相关函数
+### 3.2 相关函数
 
 - 定制接口设置函数：
 
@@ -918,9 +921,9 @@ void DesktopUpdateAllWindow (void);
 
 此函数刷新桌面上的全部窗口。方便应用程序实现对说面上所有窗口的重绘工作。
 
-### 1.3.3 编程实例
+### 3.3 编程实例
 
-本编程示例摘自本指南示例代码包 `mg-samples` 里面的 `mginit` 目录中的。限于篇幅，此处只摘录关键部分代码。 桌面定制接口回调函数定义在 desktop.c 文件里面：
+本编程示例摘自本指南示例代码包 `mg-samples` 里面的 `mginit` 目录中的。限于篇幅，此处只摘录关键部分代码。 桌面定制接口回调函数定义在 `desktop.c` 文件里面：
 
 ```c
 DESKTOPOPS mg_dsk_ops =
@@ -1386,7 +1389,7 @@ static void this_desktop_menucmd_handler (void* context, int id)
 }
 ```
 
-另外，还有一个配置文件 mginit.rc，通过读取该文件，获得桌面的相关资源，配置文件 mginit.rc 的内容如下：
+另外，还有一个配置文件 `mginit.rc`，通过读取该文件，获得桌面的相关资源，配置文件 `mginit.rc` 的内容如下：
 
 ```c
 [taskbar]
@@ -1469,7 +1472,7 @@ layer=
 pictrue=res/thaifont.png
 ```
 
-在主函数里面将初始化好的桌面定制结构体，设置到 MiniGUI 里面。下面的代码在 mginit.c （具体的说明请参考：第 17 章 开发定制的 MiniGUI-Processes 服务器程序）里面：
+在主函数里面将初始化好的桌面定制结构体，设置到 MiniGUI 里面。下面的代码在 `mginit.c` （具体的说明请参考：第 17 章 开发定制的 MiniGUI-Processes 服务器程序）里面：
 
 ```c
 int MiniGUIMain (int args, const char* arg[])
@@ -1507,5 +1510,7 @@ int MiniGUIMain (int args, const char* arg[])
 ```
 
 程序运行的效果如下：
+
+![桌面定制效果图](figures/Part1Chapter10-02.jpeg)
 
 __图 1.2__ 桌面定制效果图
