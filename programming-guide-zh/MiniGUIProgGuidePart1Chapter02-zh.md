@@ -82,14 +82,14 @@ CreateInfo.hHosting          窗口消息队列的托管窗口
 
 上面提到有两个函数可以用来创建一个主窗口，一个是 `CreateMainWindow` ， 一个是 `CreateMainWindowEx`。 `CreateMainWindow` 函数的原型如下：
 
-```cpp
+```c
 HWND GUIAPI CreateMainWindow (PMAINWINCREATE pCreateInfo)
 ```
 
 只要传入赋值好的结构体指针 `pCreateInfo`，就可以创建一个主窗口了。
 `CreateMainWindowEx` 函数的原型如下：
 
-```cpp
+```c
 HWND GUIAPI CreateMainWindowEx (PMAINWINCREATE pCreateInfo,
 const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
 const char* window_name, const char* layer_name);
@@ -134,7 +134,7 @@ __表 1__ 窗口的通用风格
 
 要创建不规则窗口或者控件，可以在窗口或者控件创建完成之后，调用 `SetWindowMask` 来实现不规则窗口或控件。
 
-```cpp
+```c
 BOOL GUIAPI SetWindowMask (HWND hWnd, const MYBITMAP* new_mask)
 ```
 
@@ -142,7 +142,7 @@ BOOL GUIAPI SetWindowMask (HWND hWnd, const MYBITMAP* new_mask)
 
 下面的代码是创建不规则窗口的代码示例。
 
-```cpp
+```c
 pal = (RGB *)malloc (256 * sizeof (RGB));
 LoadMyBitmap (&mybmp, pal, "11.bmp");
 
@@ -163,7 +163,7 @@ __图 4__ 设置透明色为白色生成的不规则窗口
 
 下面的代码是创建一个不规则控件的代码示例。
 
-```cpp
+```c
 pal = (RGB *)malloc (256 * sizeof (RGB));
 LoadMyBitmap (&mybmp, pal, "./33.bmp");
 
@@ -189,13 +189,13 @@ __图 5__ 背景色为红色的多行编辑框
 
 除了上面的方法，还可以调用下面的函数改变已有主窗口或者控件的可显示区域，达到实现不规则窗口或者控件的目的：
 
-```cpp
+```c
 HWND GUIAPI SetWindowRegion (HWND hwnd, const REGION* region);
 ```
 
 例如：
 
-```cpp
+```c
 HWND btn;
 btn = CreateWindow (CTRL_BUTTON,
 0, 
@@ -225,7 +225,7 @@ __图 6__ 圆形按钮
 
 例如：
 
-```cpp
+```c
 int MiniGUIMain (int argc, const char* argv[])
 {
         MSG Msg;
@@ -276,7 +276,7 @@ __图 7__ 为圆角窗口
 
 应用程序一般在主窗口过程中接收到 `MSG_CLOSE` 消息时调用这个函数销毁主窗口，然后调用 `PostQuitMessage` 消息终止消息循环。如下所示：
 
-```cpp
+```c
 case MSG_CLOSE:
 // 销毁主窗口
 DestroyMainWindow (hWnd);
@@ -293,14 +293,14 @@ return 0;
 
 对话框是一种特殊的主窗口，应用程序一般通过`DialogBoxIndirectParam` 函数创建对话框：
 
-```cpp
+```c
 int  GUIAPI DialogBoxIndirectParam (PDLGTEMPLATE pDlgTemplate,
 HWND hOwner, WNDPROC DlgProc, LPARAM lParam);
 ```
 
 该函数建立的对话框称为模态对话框。用户需要为此函数准备对话框模板和对话框的窗口过程函数。上面的函数其实是函数 `DialogBoxIndirectParamEx` 兼容版本。
 
-```cpp
+```c
 MG_EXPORT int GUIAPI DialogBoxIndirectParamEx (PDLGTEMPLATE pDlgTemplate,
 HWND hOwner, WNDPROC DlgProc, LPARAM lParam,
 const char* werdr_name, WINDOW_ELEMENT_ATTR* we_attrs,
@@ -316,7 +316,7 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 
 `DialogBoxIndirectParamEx` 是一个功能更加强大的对话框创建函数，它除了需要指定对话框模板和对话框的窗口过程函数，还可以指定渲染器的名称和相关的渲染参数，获得不同风格的对话框外观。关于渲染器，我们将在后面详细介绍。
 
-本指南第 4 章讲述对话框的基本编程技术。
+本指南 [Part1Chapter03](MiniGUIProgGuidePart1Chapter03-zh.md) 讲述对话框的基本编程技术。
 
 ### 2.7 控件和控件类
 
@@ -324,7 +324,7 @@ MiniGUI 的每个控件都是某个控件类的实例，每个控件类有一个
 
 MiniGUI 中控件类的定义如下：
 
-```cpp
+```c
 typedef struct _WNDCLASS
 {
         /** the class name */
@@ -366,32 +366,32 @@ typedef WNDCLASS* PWNDCLASS;
 
 MiniGUI 中控件类操作的相关函数如下：
 
-```cpp
+```c
 BOOL GUIAPI RegisterWindowClass (PWNDCLASS pWndClass) ;
 
 ```
 
 该函数注册一个控件类。
 
-```cpp
+```c
 BOOL GUIAPI UnregisterWindowClass (const char *szClassName) ;
 ```
 
 该函数注销一个控件类。
 
-```cpp
+```c
 const char* GUIAPI GetClassName (HWND hWnd) ;
 ```
 
 该函数获取指定控件的类名。
 
-```cpp
+```c
 BOOL GUIAPI GetWindowClassInfo (PWNDCLASS pWndClass) ;
 ```
 
 该函数获取指定控件类的类信息。
 
-```cpp
+```c
 BOOL GUIAPI SetWindowClassInfo (const WNDCLASS *pWndClass) ;
 ```
 
@@ -399,7 +399,7 @@ BOOL GUIAPI SetWindowClassInfo (const WNDCLASS *pWndClass) ;
 
 下面的代码演示了在应用程序中如何使用 `WNDCLASS` 结构、`RegisterWindowClass` 函数和 `UnregisterWindowClass` 函数注册自定义控件类：
 
-```cpp
+```c
 /* 定义控件类的名字 */
 #define MY_CTRL_NAME "mycontrol"
 
@@ -442,7 +442,7 @@ static void UnregisterMyControl (void)
 
 上面建立的这个控件类在创建控件实例后，仅仅完成一件工作，就是在自己的客户区输出“Hello, world!”。在自己的应用程序中，使用这个自定义控件类的一般过程如下：
 
-```cpp
+```c
 /* 注册控件类 */
 RegisterMyControl();
 
@@ -464,9 +464,9 @@ UnregisterMyControl();
 
 __图 8__ 用自定义的控件显示 Hello, world!
 
-本指南 [Part1Chapter04](MiniGUIProgGuidePart1Chapter04-zh.md) 中将讲述控件编程的基础知识, [Part1Chapter05](MiniGUIProgGuidePart1Chapter05-zh.md) 讲述控件相关的高级编程技术; 在第 4 篇介绍所有的 MiniGUI 预定义控件。
+本指南 [Part1Chapter04](MiniGUIProgGuidePart1Chapter04-zh.md) 中将讲述控件编程的基础知识, [Part1Chapter05](MiniGUIProgGuidePart1Chapter05-zh.md) 讲述控件相关的高级编程技术; 在第 6 篇介绍所有的 MiniGUI 预定义控件。
 
-### 1.2.8 输入法支持
+### 2.8 输入法支持
 
 输入法是 MiniGUI 为支持中文、韩文、日文等多字节字符集而引入的机制，和 Windows 系统下的输入法类似，输入法通常以顶层窗口的形式出现，并截获系统中的按键信息，经过适当的处理，将翻译之后的字符发送到当前活动窗口。在 MiniGUI3.0 版本中，输入法内容被重新增强并单独提出作为一个组件来提供给客户进行使用。详细请见 mgi 组件相关介绍
 
@@ -477,9 +477,9 @@ MiniGUI 应用程序通过接收消息来和外界交互。消息由系统或应
 
 系统把消息发送给应用程序窗口过程，窗口过程有四个参数：窗口句柄、消息标识以及两个 32 位的消息参数。窗口句柄决定消息所发送的目标窗口，MiniGUI 可以用它来确定向哪一个窗口过程发送消息。消息标识是一个整数常量，由它来标明消息的类型。如果窗口过程接收到一条消息，它就通过消息标识来确定消息的类型以及如何处理。消息的参数对消息的内容作进一步的说明，它的意义通常取决于消息本身，可以是一个整数、位标志或数据结构指针等。比如，对鼠标消息而言，`lParam` 中一般包含鼠标的位置信息，而 `wParam` 参数中则包含发生该消息时，对应的 SHIFT 键的状态信息等。对其他不同的消息类型来讲，`wParam` 和 `lParam` 也具有明确的定义。应用程序一般都需要检查消息参数以确定如何处理消息。
 
-在第 2 章已经提到，在 MiniGUI 中，消息被如下定义 `<minigui/window.h>` ：
+在“[Part1Chapter01](MiniGUIProgGuidePart1Chapter01-zh.md)”已经提到，在 MiniGUI 中，消息被如下定义 `<minigui/window.h>` ：
 
-```cpp
+```c
 typedef struct _MSG
 {
         HWND             hwnd;
@@ -509,7 +509,7 @@ MiniGUI 中预定义的通用消息有以下几类：
 
 用户也可以自定义消息，并定义消息的 `wParam` 和 `lParam` 意义。为了使用户能够自定义消息，MiniGUI 定义了 `MSG_USER` 宏，应用程序可如下定义自己的消息：
 
-```cpp
+```c
 #define MSG_MYMESSAGE1    (MSG_USER + 1)
 #define MSG_MYMESSAGE2    (MSG_USER + 2)
 ```
@@ -531,7 +531,7 @@ MiniGUI 有两种向窗口过程发送消息的办法：
 
 应用程序可以通过 `GetMessage` 函数从它的消息队列中取出一条消息，该函数用所取出消息的信息填充一个MSG消息结构。应用程序还可以调用 `HavePendingMessage` 函数来检查消息队列中是否有消息而不取出消息。
 
-```cpp
+```c
 int GUIAPI GetMessage (PMSG pMsg, HWND hWnd);
 BOOL GUIAPI HavePendingMessage (HWND hMainWnd);
 ```
@@ -593,7 +593,7 @@ do {
 
 窗口过程如果不处理某条消息，一般必须把这条消息传给系统进行默认处理。主窗口过程通常调用 `DefaultMainWinProc`（MiniGUI 默认为 `PreDefMainWinProc`）来完成消息的默认处理工作，并返回该函数的返回值。
 
-```cpp
+```c
 int PreDefMainWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
 
@@ -601,13 +601,13 @@ int PreDefMainWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 对话框的缺省消息处理由 `DefaultDialogProc` 函数（MiniGUI 默认为 `PreDefDialogProc`）完成。
 
-```cpp
+```c
 int PreDefDialogProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
 
 控件窗口的缺省消息处理由 `DefaultControlProc` 函数（MiniGUI 默认为 `PreDefControlProc`）完成。
 
-```cpp
+```c
 int PreDefControlProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
 
@@ -627,19 +627,19 @@ int PreDefControlProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 其它的消息处理函数还有：
 
-```cpp
+```c
 int GUIAPI BroadcastMessage ( int iMsg, WPARAM wParam, LPARAM lParam );
 ```
 
 该函数将指定消息广播给桌面上的所有主窗口。
 
-```cpp
+```c
 int GUIAPI ThrowAwayMessages (  HWND pMainWnd );
 ```
 
 该函数丢弃和指定窗口相关的消息队列中的所有消息，并返回所丢弃的消息个数。
 
-```cpp
+```c
 BOOL GUIAPI WaitMessage ( PMSG pMsg, HWND hMainWnd );
 ```
 
@@ -669,13 +669,13 @@ int GUIAPI Send2Client ( MSG * msg,  int cli );
 - `SOCKERR_CLOSED`：通讯所用的套接字已被关闭
 - `SOCKERR_INVARG`：使用非法的参数
 
-```CPP
+```C
 BOOL GUIAPI Send2TopMostClients (  int iMsg, WPARAM wParam, LPARAM lParam );
 ```
 
 `Send2TopMostClients` 函数发送一个消息给顶层中的所有客户。该函数定义在 MiniGUI-Processes 中，而且只能被服务器程序 mginit 所调用。
 
-```cpp
+```c
 BOOL GUIAPI Send2ActiveWindow (const MG_Layer* layer,
 int iMsg, WPARAM wParam, LPARAM lParam); 
 ```
@@ -696,7 +696,7 @@ MiniGUI-Processes 还定义了一个特殊消息—— `MSG_SRVNOTIFY`，服务�
 
 对输入法窗口来讲，必须在该消息的处理中进行输入法窗口的注册工作，比如：
 
-```cpp
+```c
 case MSG_NCCREATE:
 if (hz_input_init())
 /* Register before show the window. */
@@ -710,7 +710,7 @@ break;
 
 该消息窗口尺寸发生变化时，或者建立窗口时发送到窗口过程，用来确定窗口大小。`wParam` 包含预期的窗口尺寸值，而 `lParam` 用来保存结果值。MiniGUI 的默认处理如下：
 
-```cpp
+```c
 case MSG_SIZECHANGING:
 memcpy ((PRECT)lParam, (PRECT)wParam, sizeof (RECT));
 return 0;
@@ -718,7 +718,7 @@ return 0;
 
 你可以截获该消息的处理，从而让即将创建的窗口位于指定的位置，或者具有固定的大小，比如在旋钮控件中，就处理了该消息，使之具有固定的大小：
 
-```cpp
+```c
 case MSG_SIZECHANGING:
 {
         const RECT* rcExpect = (const RECT*) wParam;
@@ -736,7 +736,7 @@ case MSG_SIZECHANGING:
 
 `MSG_SIZECHANGED` 消息在窗口尺寸发生变化后发送到窗口过程，以确定窗口客户区的大小，其参数和 `MSG_SIZECHANGING` 消息类似。`wParam` 参数包含窗口大小信息，`lParam` 参数是用来保存窗口客户区大小的 `RECT` 指针，并且具有默认值。如果该消息的处理返回非零值，则将采用 `lParam` 当中包含的大小值作为客户区的大小；否则，将忽略该消息的处理。比如在 `SPINBOX` 控件中，就处理了该消息，并使客户区占具所有的窗口范围：
 
-```cpp
+```c
 case MSG_SIZECHANGED
 {
         RECT* rcClient = (RECT*) lPraram;
@@ -757,7 +757,7 @@ case MSG_SIZECHANGED
 
 当应用程序调用 `SetWindowFont` 改变窗口的默认字体时，将发送该消息到窗口过程。通常情况下，应用程序应该将此消息传递给默认的窗口过程处理；但如果窗口不允许用户改变默认字体的话，就可以截获该消息并返回非零值。比如，MiniGUI 的简单编辑框只能处理等宽字体，因此，可如下处理该消息：
 
-```cpp
+```c
 case MSG_FONTCHANGING:
 return -1;
 ```
@@ -768,7 +768,7 @@ return -1;
 
 当应用程序调用 `SetWindowFont` 改变了窗口的默认字体后，将发送该消息到窗口过程。此时，窗口过程可以进行一些处理以便反映出新的字体设置。比如，MiniGUI 的编辑框就要处理这个消息，并最终重绘编辑框：
 
-```cpp
+```c
 case MSG_FONTCHANGED:
 {
         sled =(PSLEDITDATA) GetWindowAdditionalData2 (hWnd);
@@ -791,14 +791,14 @@ case MSG_FONTCHANGED:
 
 当系统需要清除窗口背景时，将发送该消息到窗口过程。通常情况下，应用程序调用 `InvalidateRect` 或者 `UpdateWindow` 等函数并为 `bErase` 参数传递 `TRUE` 时，系统将发送该消息通知窗口清除背景。默认窗口过程将以背景色刷新窗口客户区。某些窗口比较特殊，往往会在 `MSG_PAINT` 消息中重绘所有的窗口客户区，就可以忽略对该消息的处理：
 
-```cpp
+```c
 MSG_EARSEBKGND:
 return 0;
 ```
 
 还有一些窗口希望在窗口背景上填充一个图片，则可以在该消息的处理中进行填充操作:
 
-```cpp
+```c
 MSG_EARSEBKGND:
 HDC hdc = (HDC)wParam;
 const RECT* clip = (const RECT*) lParam;
@@ -834,7 +834,7 @@ __图 9__ 使用图片作为窗口背景
 
 该消息在需要进行窗口重绘时发送到窗口过程。MiniGUI 通过判断窗口是否含有无效区域来确定是否需要重绘。当窗口在初始显示、从隐藏状态变化为显示状态、从部分不可见到可见状态，或者应用程序调用 `InvalidateRect` 函数使某个矩形区域变成无效时，窗口将具有特定的无效区域。这时，MiniGUI 将在处理完所有的邮寄消息、通知消息之后处理无效区域，并向窗口过程发送 `MSG_PAINT` 消息。该消息的典型处理如下：
 
-```cpp
+```c
 case MSG_PAINT:
 {
         HDC hdc;
@@ -849,7 +849,7 @@ case MSG_PAINT:
 }
 ```
 
-需要注意的是，应用程序在处理完该消息之后，应该直接返回，而不应该传递给默认窗口过程处理。在本指南第 2 篇中将详细讲述 MiniGUI 的设备上下文以及绘图函数。
+需要注意的是，应用程序在处理完该消息之后，应该直接返回，而不应该传递给默认窗口过程处理。在本指南第 3 篇中将详细讲述 MiniGUI 的设备上下文以及绘图函数。
 
 ### 4.9 MSG_CLOSE
 
@@ -863,7 +863,7 @@ case MSG_PAINT:
 
 - 应用程序应在 `MSG_DESTROY` 消息中销毁被托管主窗口的位图、字体等资源：
 
-```cpp
+```c
 case MSG_DESTROY:
 DestroyIcon (icon1);
 DestroyIcon (icon2);
@@ -873,7 +873,7 @@ return 0;
 
 - 在被托管主窗口响应 `MSG_CLOSE` 消息时，调用 `DestroyMainWindow` 函数并调用 `MainWindowCleanup` 函数：
 
-```cpp
+```c
 case MSG_CLOSE:
 DestroyMainWindow (hWnd);
 MainWindowCleanup (hWnd);
