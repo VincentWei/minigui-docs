@@ -1,7 +1,6 @@
 # 开始 MiniGUI 编程
 
 ## 1 基本的编程概念
-
 ### 1.1 事件驱动编程
 
 MiniGUI 是一个窗口系统及图形用户界面支持系统，通常的 GUI 编程概念均适用于 MiniGUI 编程，如窗口和事件驱动编程等。
@@ -40,9 +39,9 @@ MiniGUI V2.0.x 完全地解决了这一问题。MiniGUI-Lite 运行模式下，�
 
 ## 2 一个简单的 MiniGUI 程序
 
-理解 MiniGUI 基本编程方法的最快途径就是分析一个简单程序的结构。__清单 1.1__ 是一个 MiniGUI 版本的“Hello world!”程序，我们将对其进行详细的解释说明。
+理解 MiniGUI 基本编程方法的最快途径就是分析一个简单程序的结构。清单 1 是一个 MiniGUI 版本的“Hello world!”程序，我们将对其进行详细的解释说明。
 
-__清单 1.1__ `helloworld.c`
+__清单 1__ `helloworld.c`
 
 ```c
 #include <stdio.h>
@@ -177,7 +176,7 @@ if (!ServerStartup (0 , 0 , 0)) {
 }
 ```
 
-关于 MiniGUI-Processes 专有接口我们将在第 17 章给出详细的说明。
+关于 MiniGUI-Processes 专有接口我们将在 [Part3Chapter02](programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md) 给出详细的说明。
 
 >【注意】MiniGUI 针对三种运行模式分别定义了不同的宏。
 > - MiniGUI-Threads：` _MGRM_THREADS`；
@@ -352,7 +351,6 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 程序最后调用 `MainWindowThreadCleanup` 清除主窗口所使用的消息队列等系统资源并最终由 `MiniGUIMain` 返回。
 
 ## 3 编译、链接和运行
-
 ### 3.1 编译 MiniGUI 程序
 
 你可以在命令行上输入如下的命令来编译 `helloworld.c`，并链接生成可执行文件 `helloworld`：
@@ -375,7 +373,7 @@ $ gcc –o helloworld helloworld.c –lpthread –lminigui_ths –ljpeg –lpng 
 $ ./helloworld
 ```
 
-程序的运行结果如__图 1__ 所示。
+程序的运行结果如图 1 所示。
 
 > 【提示】如果已将 MiniGUI 配置为 MiniGUI-Threads 或 MiniGUI-Standalone 模式，则运行这些示例程序时无须启动 `mginit` 程序——这些程序可直接从控制台上运行。
 
