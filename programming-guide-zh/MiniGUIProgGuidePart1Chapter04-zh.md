@@ -2,7 +2,7 @@
 
 较为复杂的 GUI 系统中，都带有预定义的控件集合，它们是人机交互的主要元素。本章将说明什么是控件、控件类，并简单介绍 MiniGUI 中的预定义控件类。
 
-# 1.1 控件和控件类
+# 1 控件和控件类
 
 许多人对控件（或者部件）的概念已经相当熟悉了。控件可以理解为主窗口中的子窗口。这些子窗口的行为和主窗口一样，既能够接收键盘和鼠标等外部输入，也可以在自己的区域内进行输出――只是它们的所有活动被限制在主窗口中。MiniGUI 也支持子窗口，并且可以在子窗口中嵌套建立子窗口。我们将 MiniGUI 中的所有子窗口均称为控件。
 
@@ -14,39 +14,39 @@
 
 在 MiniGUI 中，我们认为主窗口通常是一种比较特殊的窗口。因为主窗口代码的可重用性一般很低，如果按照通常的方式为每个主窗口注册一个窗口类的话，则会导致额外不必要的存储空间，所以我们并没有在主窗口提供窗口类支持。但主窗口中的所有子窗口，即控件，均支持窗口类（控件类）的概念。MiniGUI 提供了常用的预定义控件类，包括按钮（包括单选钮、复选钮）、静态框、列表框、进度条、滑块、编辑框等等。程序也可以定制自己的控件类，注册后再创建对应的实例。
 
-__表 1.1__ 给出了 MiniGUI 预先定义的控件类和相应类名称定义。
+__表 1__ 给出了 MiniGUI 预先定义的控件类和相应类名称定义。
 
-__表 1.1__ MiniGUI 预定义的控件类和对应类名称
+__表 1__ MiniGUI 预定义的控件类和对应类名称
 
-| 控件类	| 类名称	| 宏定义	| 备注 |
-|:------|:------|:-----|:-----|
-| 静态框	| "static"	| CTRL_STATIC	| 见第19章 |
-| 按钮	| "button"	| CTRL_BUTTON	| 见第20章 |
-| 列表框	| "listbox"	| CTRL_LISTBOX	| 见第21章 |
-| 单行编辑框	| "sledit"	| CTRL_SLEDIT	| 见第22章 |
-| 多行编辑框	| "mledit"	| CTRL_MLEDIT	| （同 `CTRL_TEXTEDIT` 控件） |
-| 文本编辑框	| “textedit”	| CTRL_TEXTEDIT	| 见第22章 |
-| 组合框	| “combobox”	| CTRL_COMBOBOX	| 见第23章 |
-| 菜单按钮	| "menubutton"	| CTRL_MENUBUTTON	| 见第24章 |
-| 进度条	| "progressbar"	| CTRL_PRORESSBAR	| 见第25章 |
-| 滑块	| "trackbar"	| CTRL_TRACKBAR	| 见第26章 |
-| 工具栏	| "newtoolbar"	| CTRL_NEWTOOLBAR	| 见第27章 |
-| 属性表	| "propsheet"	| CTRL_PROPSHEET	| 见第28章 |
-| 滚动窗口控件	| "ScrollWnd"	| CTRL_SCROLLWND	| 见第29章 |
-| 滚动型控件	| "ScrollView"	| CTRL_SCROLLVIEW	| 见第30章 |
-| 树型控件	| "treeview"	| CTRL_TREEVIEW	| 见第31章 |
-| 列表型控件	| "listview"	| CTRL_LISTVIEW	| 见第32章 |
-| 月历	| "MonthCalendar"	| CTRL_MONTHCALENDAR |	见第33章 |
-| 旋钮控件	| "SpinBox"	| CTRL_SPINBOX	| 见第34章 |
-| 酷工具栏	| "CoolBar"	| CTRL_COOLBAR	| 见第35章 |
-| 动画控件	| "Animation"	| CTRL_ANIMATION	| 见第36章 |
-| 网格控件	| “gridview”	| CTRL_GRidVIEW	| 见第37章 |
-| 图标型控件	| “IconView”	| CTRL_ICONVIEW	| 见第38章 |
-| 滚动条控件	| "ScrollBar"	| CTRL_SCROLLBAR	| 见第39章 |
+| 控件类      | 类名称	        | 宏定义	       | 备注 |
+|:-----------|:---------------|:--------------------|:-----|
+| 静态框      | "static"       | `CTRL_STATIC`       | 见第19章 |
+| 按钮        | "button"       | `CTRL_BUTTON`       | 见第20章 |
+| 列表框      | "listbox"      | `CTRL_LISTBOX`      | 见第21章 |
+| 单行编辑框   | "sledit"	| `CTRL_SLEDIT`       | 见第22章 |
+| 多行编辑框   | "mledit"	| `CTRL_MLEDIT`       | （同 `CTRL_TEXTEDIT` 控件） |
+| 文本编辑框   | “textedit”	| `CTRL_TEXTEDIT`     | 见第22章 |
+| 组合框      | “combobox”	| `CTRL_COMBOBOX`     | 见第23章 |
+| 菜单按钮     | "menubutton"	| `CTRL_MENUBUTTON`   | 见第24章 |
+| 进度条      | "progressbar"	| `CTRL_PRORESSBAR`   | 见第25章 |
+| 滑块        | "trackbar"	| `CTRL_TRACKBAR`     | 见第26章 |
+| 工具栏      | "newtoolbar"	| `CTRL_NEWTOOLBAR`   | 见第27章 |
+| 属性表      | "propsheet"	| `CTRL_PROPSHEET`    | 见第28章 |
+| 滚动窗口控件 | "ScrollWnd"	 | `CTRL_SCROLLWND`    | 见第29章 |
+| 滚动型控件  | "ScrollView"	| `CTRL_SCROLLVIEW`    | 见第30章 |
+| 树型控件    | "treeview"	| `CTRL_TREEVIEW`      | 见第31章 |
+| 列表型控件  | "listview"	| `CTRL_LISTVIEW`      | 见第32章 |
+| 月历	     | "MonthCalendar" | `CTRL_MONTHCALENDAR` |	见第33章 |
+| 旋钮控件    | "SpinBox"	| `CTRL_SPINBOX`       | 见第34章 |
+| 酷工具栏    | "CoolBar"	| `CTRL_COOLBAR`       | 见第35章 |
+| 动画控件    | "Animation"	| `CTRL_ANIMATION`     | 见第36章 |
+| 网格控件    | “gridview”	| `CTRL_GRidVIEW`      | 见第37章 |
+| 图标型控件  | “IconView”	| `CTRL_ICONVIEW`       | 见第38章 |
+| 滚动条控件  | "ScrollBar"	| `CTRL_SCROLLBAR`      | 见第39章 |
 
-## 1.2 利用预定义控件类创建控件实例
+## 2 利用预定义控件类创建控件实例
 
-在 MiniGUI 中，通过调用 `CreateWindow` 函数（`CreateWindow` 其实是 `CreateWindowEx` 函数的宏），可以建立某个控件类的一个实例。控件类既可以是__表 1.1__ 中预定义 MiniGUI 控件类，也可以是用户自定义的控件类。下面是与 `CreateWindow` 函数相关的几个函数的原型（<minigui/window.h>）：
+在 MiniGUI 中，通过调用 `CreateWindow` 函数（`CreateWindow` 其实是 `CreateWindowEx` 函数的宏），可以建立某个控件类的一个实例。控件类既可以是__表 1.1__ 中预定义 MiniGUI 控件类，也可以是用户自定义的控件类。下面是与 `CreateWindow` 函数相关的几个函数的原型（`minigui/window.h`）：
 
 ```c
 HWND GUIAPI CreateWindowEx2 (const char* spClassName,
@@ -70,17 +70,17 @@ CreateWindowEx(class_name, caption, style, 0, id, x, y, w, h, parent, add_data)
 BOOL GUIAPI DestroyWindow (HWND hWnd);
 ```
 
-`CreateWindow` 函数建立一个子窗口，即控件。它指定了控件类`class_name`、控件标题 `caption`、控件风格 `style`、控件的标识符 `id`、以及窗口的初始位置和大小 `x, y, w, h`。该函数同时指定子窗口的父窗口 `parent` 。参数 `add_data` 用来向控件传递其特有数据的指针，该指针所指向的数据结构随控件类的不同而不同。
+`CreateWindow` 函数建立一个子窗口，即控件。它指定了控件类 `class_name`、控件标题 `caption`、控件风格 `style`、控件的标识符 `id`、以及窗口的初始位置和大小 `x, y, w, h`。该函数同时指定子窗口的父窗口 `parent` 。参数 `add_data` 用来向控件传递其特有数据的指针，该指针所指向的数据结构随控件类的不同而不同。
 
-`CreateWindow`Ex 函数的功能和 `CreateWindow` 函数一致，不过，可以通过 `CreateWindow`Ex 函数指定控件的扩展风格`dwExstyle`。
+`CreateWindowEx` 函数的功能和 `CreateWindow` 函数一致，不过，可以通过 `CreateWindowEx` 函数指定控件的扩展风格 `dwExstyle`。
 
 `CreateWindowEx2` 函数是 MiniGUI 3.0 新增的函数，该函数在 `CreateWindowEx` 基础之上增加了两个新的参数：`werdr_name` 和 `we_attrs`，分别用来指定控件所使用的渲染器名称以及渲染器属性。
 
 `DestroyWindow` 函数用来销毁用上述两个函数建立的控件或者子窗口。
 
-__清单 1.1__ 中的程序利用预定义控件类创建了几种控件：静态框、按钮和单行编辑框。其中 `hStaticWnd1` 是建立在主窗口 `hWnd` 中的静态框；`hButton1`、`hButton2`、`hEdit1`、`hStaticWnd2` 则是建立在 `hStaicWnd1` 内部的几个控件，并作为 `hStaticWnd1` 的子控件而存在；而 `hEdit2` 是 `hStaicWnd2` 的子控件，是 `hStaticWnd1` 的子子控件。
+__清单 1__ 中的程序利用预定义控件类创建了几种控件：静态框、按钮和单行编辑框。其中 `hStaticWnd1` 是建立在主窗口 `hWnd` 中的静态框；`hButton1`、`hButton2`、`hEdit1`、`hStaticWnd2` 则是建立在 `hStaicWnd1` 内部的几个控件，并作为 `hStaticWnd1` 的子控件而存在；而 `hEdit2` 是 `hStaicWnd2` 的子控件，是 `hStaticWnd1` 的子子控件。
 
-__清单 1.1__ 利用预定义控件类创建控件
+__清单 1__ 利用预定义控件类创建控件
 
 ```c
 #define IDC_STATIC1     100
@@ -131,7 +131,7 @@ IDC_EDIT2,
 0, 20, 100, 24, hStaticWnd2, 0);
 ```
 
-## 1.3 控件编程涉及的内容
+## 3 控件编程涉及的内容
 
 在控件编程中，所涉及到的内容除了控件的创建和销毁之外，一般还涉及到如下主题：
 
@@ -155,9 +155,9 @@ switch (message) {
 
 - MiniGUI v1.2.6 及其后版本中针对控件的通知消息处理引入了`SetNotificationCallback` 函数，该函数可以为控件设置一个通知消息的回调函数。当控件有通知消息时，将调用该函数，而不是发送通知消息到父窗口。新的应用程序应尽量使用这个函数来处理控件的通知消息，以便获得良好的程序结构。本指南示例程序全部使用这一接口来处理控件的通知消息。
 
-__清单 1.2__ 中的函数使用预定义控件类建立了一个简单的对话框。当用户在编辑框中输入以毫米为单位的数据时，系统将在编辑框之下的静态框中显示对应的以英寸为单位的数据，并在用户选择“确定”按钮时将用户输入的数据返回到调用该对话框的程序。
+__清单 2__ 中的函数使用预定义控件类建立了一个简单的对话框。当用户在编辑框中输入以毫米为单位的数据时，系统将在编辑框之下的静态框中显示对应的以英寸为单位的数据，并在用户选择“确定”按钮时将用户输入的数据返回到调用该对话框的程序。
 
-__清单 1.2__ 使用预定义控件实现简单输入对话框
+__清单 2__ 使用预定义控件实现简单输入对话框
 
 ```c
 #include <stdio.h>
@@ -306,20 +306,21 @@ int MiniGUIMain (int argc, const char* argv[])
 #endif
 ```
 
-__清单 1.2__ 程序的运行效果见图 1.1。该程序的完整源代码请见本指南示例程序包 `mg-samples` 中的 input.c 文件。
+__清单 2__ 程序的运行效果见__图 1__。该程序的完整源代码请见本指南示例程序包 `mg-samples` 中的 `input.c` 文件。
 
-图 1.1 简单输入对话框
+![简单输入对话框](figures/Part1Chapter04-01.jpeg)
+__图 1__ 简单输入对话框
 
 在本指南第 4 篇中，我们将详细介绍 MiniGUI 的各个预定义控件，我们将主要从三个方面介绍所有预定义控件：控件的用途、控件风格、控件消息以及控件的通知消息，并给出控件的编程实例。
 
-## 1.4 控件专用的操作函数
+## 4 控件专用的操作函数
 
-MiniGUI 提供了一些控件专用的操作函数，见__表 1.2__。
+MiniGUI 提供了一些控件专用的操作函数，见__表 2__。
 
-__表 1.2__ 通用控件操作函数
+__表 2__ 通用控件操作函数
 
-| 函数名称	| 用途	| 备注 |
-|:------|:------|:------|
-| `GetNotificationCallback` |	获取控件的通知消息回调函数	| 在 MiniGUI 1.2.6 版本中出现 |
-| `SetNotificationCallback`	 | 设置控件的通知消息回调函数	| （同上） |
-| `NotifyparentEx`	| 发送控件通知消息	 | |
+| 函数名称	             | 用途	              | 备注 |
+|:--------------------------|:----------------------|:------|
+| `GetNotificationCallback` | 获取控件的通知消息回调函数 | 在 MiniGUI 1.2.6 版本中出现 |
+| `SetNotificationCallback` | 设置控件的通知消息回调函数 | （同上） |
+| `NotifyparentEx`	    | 发送控件通知消息	       |  |
