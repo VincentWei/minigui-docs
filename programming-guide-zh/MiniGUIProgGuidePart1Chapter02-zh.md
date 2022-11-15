@@ -316,7 +316,7 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 
 `DialogBoxIndirectParamEx` 是一个功能更加强大的对话框创建函数，它除了需要指定对话框模板和对话框的窗口过程函数，还可以指定渲染器的名称和相关的渲染参数，获得不同风格的对话框外观。关于渲染器，我们将在后面详细介绍。
 
-本指南 [Part1Chapter03](MiniGUIProgGuidePart1Chapter03-zh.md) 讲述对话框的基本编程技术。
+本指南“[对话框编程基础](MiniGUIProgGuidePart1Chapter03-zh.md)”讲述对话框的基本编程技术。
 
 ### 2.7 控件和控件类
 
@@ -464,7 +464,7 @@ UnregisterMyControl();
 
 __图 8__ 用自定义的控件显示 Hello, world!
 
-本指南 [Part1Chapter04](MiniGUIProgGuidePart1Chapter04-zh.md) 中将讲述控件编程的基础知识, [Part1Chapter05](MiniGUIProgGuidePart1Chapter05-zh.md) 讲述控件相关的高级编程技术; 在第 6 篇介绍所有的 MiniGUI 预定义控件。
+本指南“[控件编程基础](MiniGUIProgGuidePart1Chapter04-zh.md)”中将讲述控件编程的基础知识，“[控件高级编程](MiniGUIProgGuidePart1Chapter05-zh.md)”讲述控件相关的高级编程技术; 在第 6 篇介绍所有的 MiniGUI 预定义控件。
 
 ### 2.8 输入法支持
 
@@ -544,7 +544,7 @@ BOOL GUIAPI HavePendingMessage (HWND hMainWnd);
 
 消息循环就是一个循环体，在这个循环体中，程序利用 `GetMessage` 函数不停地从消息队列中获得消息，然后利用 `DispatchMessage` 函数将消息发送到指定的窗口，也就是调用指定窗口的窗口过程，并传递消息及其参数。典型的消息循环如下所示：
 
-```cpp
+```c
 MSG  Msg;
 HWND hMainWnd;
 MAINWINCREATE CreateInfo;
@@ -567,7 +567,7 @@ while (GetMessage (&Msg, hMainWnd)) {
 
 在 MiniGUI-Threads 中，当我们需要在等待消息时立即返回以便处理其他事务时，可以使用 `HavePendingMessage` 函数。比如：
 
-```cpp
+```c
 do {
         /* It is time to read from master pty, and output. */
         ReadMasterPty (pConInfo);
@@ -649,7 +649,7 @@ BOOL GUIAPI WaitMessage ( PMSG pMsg, HWND hMainWnd );
 
 MiniGUI 还定义了一些 MiniGUI-Processes 的专用函数，可用于从 MiniGUI-Processes 服务器程序向其他客户程序发送消息。
 
-```CPP
+```C
 int GUIAPI Send2Client ( MSG * msg,  int cli );
 ```
 
@@ -690,7 +690,7 @@ MiniGUI-Processes 还定义了一个特殊消息—— `MSG_SRVNOTIFY`，服务�
 
 在窗口（包括主窗口和子窗口在内）的生存周期当中，有几个重要的消息需要仔细处理。下面描述这些消息的概念和典型处理。
 
-### 4.1 MSG_NCCREATE
+### 4.1 `MSG_NCCREATE`
 
 该消息在 MiniGUI 建立主窗口的过程中发送到窗口过程。`lParam` 中包含了由 `CreateMainWindow` 传递进入的 `pCreateInfo` 结构指针。你可以在该消息的处理过程中修改 `pCreateInfo` 结构中的某些值。需要注意的是，系统向窗口过程发送此消息时，窗口对象尚未建立，因此，在处理该消息时不能使用 `GetDC` 等函数获得该窗口的设备上下文，也不能在 `MSG_NCCREATE` 消息中建立子窗口。
 
@@ -706,7 +706,7 @@ return -1;
 break;
 ```
 
-### 4.2 MSG_SIZECHANGING
+### 4.2 `MSG_SIZECHANGING`
 
 该消息窗口尺寸发生变化时，或者建立窗口时发送到窗口过程，用来确定窗口大小。`wParam` 包含预期的窗口尺寸值，而 `lParam` 用来保存结果值。MiniGUI 的默认处理如下：
 
@@ -749,11 +749,11 @@ case MSG_SIZECHANGED
 
 `MSG_CSIZECHANGED` 消息是窗口客户区的尺寸发生变化后发送到窗口过程的通知消息，应用程序可以利用该消息对窗口客户区尺寸发生变化的事件做进一步处理。该消息的 `wParam` 和 `lParam` 参数分别包含新的客户区宽度和高度。
 
-### 4.4 MSG_CREATE
+### 4.4 `MSG_CREATE`
 
 该消息在窗口成功创建并添加到 MiniGUI 的窗口管理器之后发送到窗口过程。这时，应用程序可以在其中创建子窗口。如果该消息返回非零值，则将销毁新建的窗口。
 
-### 4.5 MSG_FONTCHANGING
+### 4.5 `MSG_FONTCHANGING`
 
 当应用程序调用 `SetWindowFont` 改变窗口的默认字体时，将发送该消息到窗口过程。通常情况下，应用程序应该将此消息传递给默认的窗口过程处理；但如果窗口不允许用户改变默认字体的话，就可以截获该消息并返回非零值。比如，MiniGUI 的简单编辑框只能处理等宽字体，因此，可如下处理该消息：
 
@@ -764,7 +764,7 @@ return -1;
 
 应用程序处理该消息并返回非零值之后，`SetWindowFont` 函数将中止继续处理而返回，也就是说，窗口的默认字体不会发生改变。
 
-### 4.6 MSG_FONTCHANGED
+### 4.6 `MSG_FONTCHANGED`
 
 当应用程序调用 `SetWindowFont` 改变了窗口的默认字体后，将发送该消息到窗口过程。此时，窗口过程可以进行一些处理以便反映出新的字体设置。比如，MiniGUI 的编辑框就要处理这个消息，并最终重绘编辑框：
 
@@ -787,7 +787,7 @@ case MSG_FONTCHANGED:
 }
 ```
 
-### 4.7 MSG_ERASEBKGND
+### 4.7 `MSG_ERASEBKGND`
 
 当系统需要清除窗口背景时，将发送该消息到窗口过程。通常情况下，应用程序调用 `InvalidateRect` 或者 `UpdateWindow` 等函数并为 `bErase` 参数传递 `TRUE` 时，系统将发送该消息通知窗口清除背景。默认窗口过程将以背景色刷新窗口客户区。某些窗口比较特殊，往往会在 `MSG_PAINT` 消息中重绘所有的窗口客户区，就可以忽略对该消息的处理：
 
@@ -828,9 +828,10 @@ return 0;
 用图片填充窗口背景的完整实现可参阅本指南示例程序包 `mg-samples` 中的 `bmpbkgnd.c` 程序，该程序的运行效果如图 9 所示。
 
 ![使用图片作为窗口背景](figures/Part1Chapter02-09.jpeg)
+
 __图 9__ 使用图片作为窗口背景
 
-### 4.8 MSG_PAINT
+### 4.8 `MSG_PAINT`
 
 该消息在需要进行窗口重绘时发送到窗口过程。MiniGUI 通过判断窗口是否含有无效区域来确定是否需要重绘。当窗口在初始显示、从隐藏状态变化为显示状态、从部分不可见到可见状态，或者应用程序调用 `InvalidateRect` 函数使某个矩形区域变成无效时，窗口将具有特定的无效区域。这时，MiniGUI 将在处理完所有的邮寄消息、通知消息之后处理无效区域，并向窗口过程发送 `MSG_PAINT` 消息。该消息的典型处理如下：
 
@@ -851,11 +852,11 @@ case MSG_PAINT:
 
 需要注意的是，应用程序在处理完该消息之后，应该直接返回，而不应该传递给默认窗口过程处理。在本指南第 3 篇中将详细讲述 MiniGUI 的设备上下文以及绘图函数。
 
-### 4.9 MSG_CLOSE
+### 4.9 `MSG_CLOSE`
 
 当用户点击窗口上的“关闭”按钮时，MiniGUI 向窗口过程发送 `MSG_CLOSE` 消息。应用程序应在响应该消息时调用 `DestroyMainWindow` 销毁主窗口。如果窗口具有 `WS_MINIMIZEBOX` 和 `WS_MAXMIZEBOX` 风格，窗口标题栏上还将显示“最小化”和“最大化”按钮。目前，MiniGUI 尚未实现对这些风格的处理，但应用程序可以利用这两个风格显示其他的按钮，比如“确定”和“帮助”按钮，然后在窗口过程中处理 `MSG_MINIMIZE` 和 `MSG_MAXIMIZE` 消息。
 
-### 4.10 MSG_DESTROY
+### 4.10 `MSG_DESTROY`
 
 该消息在应用程序调用 `DestroyMainWindow` 或者 `DestroyWindow` 时发送到窗口过程当中，用来通知系统即将销毁一个窗口。如果该消息的处理返回非零值，则将取消销毁过程。
 
@@ -914,9 +915,9 @@ __表 2__ 通用窗口操作函数
 | `GetWindowAdditionalData`  | 获取窗口附加数据一           | |
 | `SetWindowAdditionalData`  | 设置窗口附加数据一           | |
 | `GetWindowAdditionalData2` | 获取窗口附加数据二	     | 对话框和控件在内部已使用附加数据二,保留附加数据一给应用程序使用 |
-| `SetWindowAdditionalData2` | 设置窗口附加数据二            | |
+| `SetWindowAdditionalData2` | 设置窗口附加数据二            | 对话框和控件在内部已使用附加数据二,保留附加数据一给应用程序使用 |
 | `GetWindowCaption`         | 获取窗口标题                  | 通常用于主窗口 |
-| `SetWindowCaption`         | 设置窗口标题                  | |
+| `SetWindowCaption`         | 设置窗口标题                  | 通常用于主窗口 |
 | `InvalidateRect`           | 使窗口的给定矩形区域无效	       | 将引发窗口重绘 |
 | `GetUpdateRect`            | 获取窗口当前的无效区域外包矩形   | |
 | `ClientToScreen`           | 将窗口客户区坐标转换为屏幕坐标   | |
@@ -932,11 +933,11 @@ __表 2__ 通用窗口操作函数
 | `GetNextMainWindow`        | 获取下一个主窗口句柄	      | 用于遍历所有主窗口 |
 | `GetHosting`               | 获取某个主窗口的托管窗口        | |	 
 | `GetFirstHosted`           | 获取某个主窗口的第一个被托管窗口	| 用于遍历某个主窗口的所有被托管窗口 |
-| `GetNextHosted`            | 获取下一个被托管窗口           | |
+| `GetNextHosted`            | 获取下一个被托管窗口           | 用于遍历某个主窗口的所有被托管窗口 |
 | `GetActiveWindow`          | 获取当前活动主窗口             | |
 | `SetActiveWindow`          | 设置当前活动主窗口             | |
 | `GetCapture`               | 获取当前捕获鼠标的窗口          | |
-| `SetCapture`               | 捕获鼠标	                    | [Part1Chapter08 讲述鼠标捕获相关内容](MiniGUIProgGuidePart1Chapter08-zh.md#user-content-23-鼠标捕获) |
-| `ReleaseCapture`           | 释放鼠标                     | |
+| `SetCapture`               | 捕获鼠标	                    | “[键盘和鼠标](MiniGUIProgGuidePart1Chapter08-zh.md#user-content-23-鼠标捕获)”讲述鼠标捕获相关内容 |
+| `ReleaseCapture`           | 释放鼠标                     | “[键盘和鼠标](MiniGUIProgGuidePart1Chapter08-zh.md#user-content-23-鼠标捕获)”讲述鼠标捕获相关内容 |
 | `MoveWindow`               | 移动窗口或改变窗口大小          | |
 | `ScrollWindow`             | 自 1.6.8 版 本 , `ScrollWindow` 函滚动窗口客户区的内容 | 数可根据客户区的滚动情况自动调整窗口内子窗口的位置。具体来说 , 当 子 窗 口 所 在 位 置 在 `ScrollWindow` 第 二 个 传 入 参 数 指定的矩形内时,将相应调整子窗口位置;如果该参数为 `NULL`,则调整所有子窗口位置。 |
