@@ -267,4 +267,5 @@ static int TimeEditorWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lPar
 /* 以下创建主窗口的代码从略 */
 ```
 ![时间编辑器的运行效果](figures/Part2Chapter05-01.jpeg)
+
 __图 1__ 时间编辑器的运行效果
