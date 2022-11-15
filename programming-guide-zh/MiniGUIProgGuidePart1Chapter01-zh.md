@@ -164,7 +164,7 @@ JoinLayer(NAME_DEF_LAYER , "helloworld" , 0 , 0);
 #endif
 ```
 
-`JoinLayer` 是 MiniGUI-Processes 模式的专有函数，因此包含在 `_MGRM_PROCESSES` 宏的条件编译中。在 MiniGUI-Processes 运行模式下，每个 MiniGUI 客户端程序在调用其它 MiniGUI 函数之前必须调用该函数将自己添加到一个层中（或创建一个新层）4 。
+`JoinLayer` 是 MiniGUI-Processes 模式的专有函数，因此包含在 `_MGRM_PROCESSES` 宏的条件编译中。在 MiniGUI-Processes 运行模式下，每个 MiniGUI 客户端程序在调用其它 MiniGUI 函数之前必须调用该函数将自己添加到一个层中（或创建一个新层）。
 
 如果程序是 MiniGUI-Processes 的服务器程序（即 `mginit`），则应该调用 `ServerStartup` 函数：
 
@@ -176,7 +176,7 @@ if (!ServerStartup (0 , 0 , 0)) {
 }
 ```
 
-关于 MiniGUI-Processes 专有接口我们将在 [Part3Chapter02](programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md) 给出详细的说明。
+关于 MiniGUI-Processes 专有接口我们将在[开发定制的 MiniGUI-Processes 服务器程序](programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md)中给出详细的说明。
 
 >【注意】MiniGUI 针对三种运行模式分别定义了不同的宏。
 > - MiniGUI-Threads：` _MGRM_THREADS`；
@@ -342,7 +342,7 @@ static int HelloWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 
 程序在响应 `MSG_PAINT` 消息时进行屏幕输出。应用程序应首先通过调用 `BeginPaint` 函数来获得设备上下文句柄，并用它调用 `GDI` 函数来执行绘制操作。这里，程序使用 `TextOut` 文本输出函数在客户区的中部显示了一个“Hello world!”字符串。绘制结束之后，应用程序应调用 `EndPaint` 函数释放设备上下文句柄。
 
-我们将在本指南第 2 篇对 MiniGUI 的图形设备接口进行详细的描述。
+我们将在本指南第 3 篇对 MiniGUI 的图形设备接口进行详细的描述。
 
 ### 2.8 程序的退出
 
@@ -586,6 +586,6 @@ foo_SOURCES=foo.c
 
 > 【提示】`foo` 一般用来指定一个假想的对象或名称，在实际项目中应该用真实名称替换（下同）。本章之后的示例程序均可以以这种方式将程序添加到 `samples` 项目中。
 
-有了这样一个简单的项目框架和 Automake/Autoconf 脚本模板，我们就可以根据自己的需求进一步丰富这些脚本。这些脚本可以帮助我们完成许多工作，其中最重要的就是进行交叉编译选项的配置，以帮助我们将自己的应用程序移植到目标系统中。关于 MiniGUI 的安装和 MiniGUI 应用程序的交叉编译，可参阅《MiniGUI 用户手册》。
+有了这样一个简单的项目框架和 Automake/Autoconf 脚本模板，我们就可以根据自己的需求进一步丰富这些脚本。这些脚本可以帮助我们完成许多工作，其中最重要的就是进行交叉编译选项的配置，以帮助我们将自己的应用程序移植到目标系统中。关于 MiniGUI 的安装和 MiniGUI 应用程序的交叉编译，可参阅[《MiniGUI 用户手册》](user-manual/README.md)。
 
 本指南完整的示例代码包为 `mg-samples-3.0.x.tar.gz`。该软件包中的包含了本指南的所有示例程序，并含有完整的 Autoconf/Automake 脚本，可供读者参考。
