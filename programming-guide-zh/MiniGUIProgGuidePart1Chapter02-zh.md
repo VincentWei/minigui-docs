@@ -4,19 +4,19 @@
 
 本章将具体描述 MiniGUI 中的窗口模型和消息处理机制，以及用来处理消息的几个重要函数，并描述 MiniGUI-Threads 和 MiniGUI-Processes 在消息循环实现上的一些不同。
 
-## 1.1 窗口系统和窗口
+## 1 窗口系统和窗口
 
-### 1.1.1 什么是窗口系统
+### 1.1 什么是窗口系统
 
-拥有图形用户界面的计算机通过窗口系统（Window System）来管理应用程序在屏幕上的显示。一个图形用户界面系统的组成一般有图 1.1 所示的关系。
+拥有图形用户界面的计算机通过窗口系统（Window System）来管理应用程序在屏幕上的显示。一个图形用户界面系统的组成一般有__图 1__ 所示的关系。
 
-![图形用户界面系统的组成](figures/Part1Chapter02-1-1.jpeg)
+![图形用户界面系统的组成](figures/Part1Chapter02-01.jpeg)
 
-__图 1.1__ 图形用户界面系统的组成
+__图 1__ 图形用户界面系统的组成
 
 窗口系统是一个软件系统，它通过把显示屏幕分隔为不同的部分来帮助用户管理和控制不同的显示环境。窗口系统提供基于窗口的工作模式，每个窗口是屏幕上的一个矩形区域，平行于屏幕的边界。应用程序可以拥有一个或多个窗口，窗口系统通常采用“重叠窗口”的概念和机制来管理窗口的显示，各个窗口在屏幕上是相互重叠的。窗口系统克服了老式终端机上字符工作模式下一次只能在一个屏幕做一件工作的的缺点，它使得用户在一个屏幕上可以同时看到几件工作，还可以方便地切换工作项目。
 
-### 1.1.2 窗口的概念
+### 1.2 窗口的概念
 
 窗口是屏幕上的一个矩形区域。在传统的窗口系统模型中，应用程序的可视部分由一个或多个窗口构成。每一个窗口代表屏幕上的一块绘制区域，窗口系统控制该绘制区域到实际屏幕的映射，也就是控制窗口的位置、大小以及可见区域。每个窗口被分配一个屏幕绘制区域来显示本窗口的部分或全部，也许根本没有分配到屏幕区域（该窗口完全被其它的重叠窗口所覆盖和隐藏）。
 
@@ -33,27 +33,27 @@ __图 1.1__ 图形用户界面系统的组成
 - 窗口有从属关系，也就是说，某些窗口的生命周期和可见性由它的所有者决定。父窗口通常拥有它们的子窗口。
 - 一个应用程序窗口一般包括如下部分：
 - 一个可视的边界。
-- 一个窗口ID，客户程序使用该ID来操作窗口，MiniGUI 中称为“窗口句柄”。
+- 一个窗口 ID，客户程序使用该 ID 来操作窗口，MiniGUI 中称为“窗口句柄”。
 - 一些其它特性：高、宽、背景色等。
 - 可能有菜单和滚动条等附加窗口元素。
 
-## 1.2 MiniGUI 的窗口
+## 2 MiniGUI 的窗口
 
-### 1.2.1 窗口类型
+### 2.1 窗口类型
 
-MiniGUI 中有三种窗口类型：主窗口、对话框和控件窗口（子窗口）。每一个MiniGUI 应用程序一般都要创建一个主窗口，作为应用程序的主界面或开始界面。主窗口通常包括一些子窗口，这些子窗口通常是控件窗口，也可以是自定义窗口类。应用程序还会创建其它类型的窗口，例如对话框和消息框。对话框本质上就是主窗口，应用程序一般通过对话框提示用户进行输入操作。消息框是用于给用户一些提示或警告的主窗口，属于内建的对话框类型。
+MiniGUI 中有三种窗口类型：主窗口、对话框和控件窗口（子窗口）。每一个 MiniGUI 应用程序一般都要创建一个主窗口，作为应用程序的主界面或开始界面。主窗口通常包括一些子窗口，这些子窗口通常是控件窗口，也可以是自定义窗口类。应用程序还会创建其它类型的窗口，例如对话框和消息框。对话框本质上就是主窗口，应用程序一般通过对话框提示用户进行输入操作。消息框是用于给用户一些提示或警告的主窗口，属于内建的对话框类型。
 
-![MiniGUI 典型主窗口（经典风格）](figures/Part1Chapter02-1-2.jpeg)
+![MiniGUI 典型主窗口（经典风格）](figures/Part1Chapter02-02.jpeg)
 
-图 1.2 MiniGUI 典型主窗口（经典风格）
+图 2 MiniGUI 典型主窗口（经典风格）
 
-> 【提示】你可以在程序里面改变 MiniGUI 显示窗口的渲染风格。图 1.2、图 1.3 给出了不同渲染风格下的显示效果。有关 MiniGUI 渲染风格的设置，请参考后面的章节。
+> 【提示】你可以在程序里面改变 MiniGUI 显示窗口的渲染风格。__图 2__、__图 3__ 给出了不同渲染风格下的显示效果。有关 MiniGUI 渲染风格的设置，请参考后面的章节。
 
-![Hello world 程序的输出](figures/Part1Chapter02-1-3.jpeg)
+![MiniGUI 典型对话框（FLAT风格)](figures/Part1Chapter02-03.jpeg)
 
-图 1.3 MiniGUI 典型对话框（FLAT风格）
+__图 3__ MiniGUI 典型对话框（FLAT风格）
 
-### 1.2.2 主窗口的创建
+### 2.2 主窗口的创建
 
 MiniGUI 中的主窗口没有窗口类的概念，应通过初始化一个 `MAINWINCREATE` 结构，然后调用 `CreateMainWindow` 或者是 `CreateMainWindowEx` 函数来创建一个主窗口。`MAINWINCREATE` 结构的成员解释如下：
 
@@ -100,40 +100,40 @@ const char* window_name, const char* layer_name);
 
 这个函数除了结构体指针 `pCreateInfo` 不能为空外，其他参数都可以传入空值。当后面四个参数都传入空值时，等效于 `CreateMainWindow` 函数。`CreateMainWindowEx` 可以让你指定渲染器的名称，并修改某些渲染参数。有关这方面的内容将在 11 章“界面外观及特效”里面的“外观渲染器及窗口元素属性”一节，详细介绍。参数 `window_name` 和 `layer_name` 是保留参数，调用函数，赋空值即可。
 
-### 1.2.3 窗口风格
+### 2.3 窗口风格
 
-窗口风格用来控制窗口的一些外观及行为方式，比如窗口的边框类型、窗口是否可见、窗口是否可用等等。在 MiniGUI 中，窗口风格又划分为普通风格和扩展风格，在创建窗口或者控件时，分别通过 `dwStyle` 和 `dwExStyle` 参数指定。我们将在后面讨论控件的章节中描述控件特有的风格，表 1.1 给出的风格是一些通用风格，这些风格的标识定义在 `<minigui/window.h>` 中，通常以 `WS_` 或者 `WS_EX` 的形式开头。
+窗口风格用来控制窗口的一些外观及行为方式，比如窗口的边框类型、窗口是否可见、窗口是否可用等等。在 MiniGUI 中，窗口风格又划分为普通风格和扩展风格，在创建窗口或者控件时，分别通过 `dwStyle` 和 `dwExStyle` 参数指定。我们将在后面讨论控件的章节中描述控件特有的风格，__表 1__ 给出的风格是一些通用风格，这些风格的标识定义在 `<minigui/window.h>` 中，通常以 `WS_` 或者 `WS_EX` 的形式开头。
 
-__表 1.1__ 窗口的通用风格
+__表 1__ 窗口的通用风格
 
-| 风格标识 | 含义	| 备注 | 
-|:---|:--|:---|
-| `WS_NONE` |未指定任何风格 | |
-| `WS_VISIBLE`	| 创建初始可见的窗口| |
-| `WS_DISABLED` | 创建初始被禁止的窗口| |
-| `WS_CAPTION`	| 创建含标题栏的主窗口	| 仅用于主窗口 |
-| `WS_SYSMENU`	| 创建含系统菜单的主窗口 |	仅用于主窗口 |
-| `WS_BORDER`	| 创建有边框的窗口 | |
-| `WS_THICKFRAME`	| 创建具有厚边框的窗口 | |
-| `WS_THINFRAME`	| 创建具有薄边框的窗口 | |
-| `WS_VSCROLL`	| 创建带垂直滚动条的窗口 | |
-| `WS_HSCROLL`	创建带水平滚动条的窗口 | |
-| `WS_MINIMIZEBOX`	| 标题栏上带最小化按钮	| 仅用于主窗口 |
-| `WS_MAXIMIZEBOX`	| 标题栏上带最大化按钮	| 仅用于主窗口 |
-| `WS_EX_NONE`	| 无扩展风格 | |
-| `WS_EX_USEPRIVATECDC`	| 使用私有 `DC`	| 仅用于主窗口 |
-| `WS_EX_TOPMOST`	| 建立始终处于顶层的主窗口	| 仅用于主窗口 |
-| `WS_EX_TOOLWINDOW	`| 建立 `Tooltip` 主窗口	 | 仅 用 于 主 窗 口 。`Tooltip` 主 窗 口 将不会拥有输入焦点,但仍接收鼠标消息 |
-| `WS_EX_TRANSPARENT`	| 透明窗口风格	| 仅用于控件 |
-| `WS_EX_USEPARENTFONT`	| 使用父窗口字体作为默认字体 | |
-| `WS_EX_USEPARENTCURSOR`	| 使用父窗口光标作为默认光标 | |
-| `WS_EX_NOCLOSEBOX`	| 主窗口标题栏上不带关闭按钮 | |
-| `WS_EX_CTRLASMAINWIN`	| 建立可显示在主窗口之外的控件	| 仅用于控件 |
-| `WS_EX_TROUNDCNS`	| 建立左上角和右上角是圆角的窗口	 | |
-| `WS_EX_BROUNDCNS`	| 建立左下角和右下角是圆角的窗口	 | |
-| `WS_EX_CLIPCHILDREN`	| 调用 `BegainPaint` 获 得 `DC` 并刷新窗口客户区时, 子窗口所占区域将被剪切;也就是说,向窗口客户区的输出不会输出到子窗口所在位置。	| 该风格将导致额外的内存占用并影响绘制效率。只有窗口的输出和其子窗口的输出发生重叠时才应使用该风格,一般的对话框窗口、属性页控件无需使用该风格。 |
+| 风格标识                 | 含义                  | 备注 | 
+|:------------------------|:---------------------|:-----|
+| `WS_NONE`               |未指定任何风格           | |
+| `WS_VISIBLE`	          | 创建初始可见的窗口       | |
+| `WS_DISABLED`           | 创建初始被禁止的窗口      | |
+| `WS_CAPTION`            | 创建含标题栏的主窗口       | 仅用于主窗口 |
+| `WS_SYSMENU`            | 创建含系统菜单的主窗口     | 仅用于主窗口 |
+| `WS_BORDER`             | 创建有边框的窗口          | |
+| `WS_THICKFRAME`         | 创建具有厚边框的窗口       | |
+| `WS_THINFRAME`          | 创建具有薄边框的窗口        | |
+| `WS_VSCROLL`            | 创建带垂直滚动条的窗口      | |
+| `WS_HSCROLL`            | 创建带水平滚动条的窗口      | |
+| `WS_MINIMIZEBOX`        | 标题栏上带最小化按钮        | 仅用于主窗口 |
+| `WS_MAXIMIZEBOX`        | 标题栏上带最大化按钮        | 仅用于主窗口 |
+| `WS_EX_NONE`            | 无扩展风格                | |
+| `WS_EX_USEPRIVATECDC`	  | 使用私有 `DC`             | 仅用于主窗口 |
+| `WS_EX_TOPMOST`         | 建立始终处于顶层的主窗口     | 仅用于主窗口 |
+| `WS_EX_TOOLWINDOW`      | 建立 `Tooltip` 主窗口      | 仅 用 于 主 窗 口 。`Tooltip` 主 窗 口 将不会拥有输入焦点,但仍接收鼠标消息 |
+| `WS_EX_TRANSPARENT`     | 透明窗口风格                | 仅用于控件 |
+| `WS_EX_USEPARENTFONT`	  | 使用父窗口字体作为默认字体    | |
+| `WS_EX_USEPARENTCURSOR` | 使用父窗口光标作为默认光标    | |
+| `WS_EX_NOCLOSEBOX`      | 主窗口标题栏上不带关闭按钮    | |
+| `WS_EX_CTRLASMAINWIN`	  | 建立可显示在主窗口之外的控件   | 仅用于控件 |
+| `WS_EX_TROUNDCNS`       | 建立左上角和右上角是圆角的窗口 | |
+| `WS_EX_BROUNDCNS`       | 建立左下角和右下角是圆角的窗口 | |
+| `WS_EX_CLIPCHILDREN`    | 调用 `BegainPaint` 获 得 `DC` 并刷新窗口客户区时, 子窗口所占区域将被剪切;也就是说,向窗口客户区的输出不会输出到子窗口所在位置。	| 该风格将导致额外的内存占用并影响绘制效率。只有窗口的输出和其子窗口的输出发生重叠时才应使用该风格,一般的对话框窗口、属性页控件无需使用该风格。 |
 
-### 1.2.4 不规则窗口的创建
+### 2.4 不规则窗口的创建
 
 要创建不规则窗口或者控件，可以在窗口或者控件创建完成之后，调用 `SetWindowMask` 来实现不规则窗口或控件。
 
@@ -142,6 +142,7 @@ BOOL GUIAPI SetWindowMask (HWND hWnd, const MYBITMAP* new_mask)
 ```
 
 `new_mask` 参数是一个 `MYBITMAP` 结构，应用程序应使用 `MYBITMAP` 结构中的透明值表示掩码，即透明像素点在创建后的主窗口之外，透明像素点所在的位置将显示背景色。
+
 下面的代码是创建不规则窗口的代码示例。
 
 ```cpp
@@ -159,9 +160,9 @@ if (hMainWnd == HWND_INVALID)
 return -1;
 ```
 
-![设置透明色为白色生成的不规则窗口](figures/Part1Chapter02-1-4.jpeg)
+![设置透明色为白色生成的不规则窗口](figures/Part1Chapter02-04.jpeg)
 
-__图 1.4__ 设置透明色为白色生成的不规则窗口
+__图 4__ 设置透明色为白色生成的不规则窗口
 
 下面的代码是创建一个不规则控件的代码示例。
 
@@ -185,9 +186,9 @@ return -1;
 SetWindowBkColor(btn1, PIXEL_red); 
 ```
 
-![背景色为红色的多行编辑框](figures/Part1Chapter02-1-5.jpeg)
+![背景色为红色的多行编辑框](figures/Part1Chapter02-05.jpeg)
 
-__图 1.5__ 背景色为红色的多行编辑框
+__图 5__ 背景色为红色的多行编辑框
 
 除了上面的方法，还可以调用下面的函数改变已有主窗口或者控件的可显示区域，达到实现不规则窗口或者控件的目的：
 
@@ -219,9 +220,9 @@ EmptyClipRgn (&circle_rgn);
 DestroyFreeClipRectList (&cliprc_heap);
 ```
 
-![圆形按钮](figures/Part1Chapter02-1-6.jpeg)
+![圆形按钮](figures/Part1Chapter02-06.jpeg)
 
-__图 1.6__ 圆形按钮
+__图 6__ 圆形按钮
 
 为了方便使用，MiniGUI 创建了两个扩展风格 `WS_EX_TROUNDCNS` 和 `WS_EX_BROUNDCNS`，用于实现圆角窗口。当要实现此种不规则窗口时，只要添加此两种扩展风格即可，不需要再调用 `SetWindowMask` 和 `SetWindowRegion` 函数。
 
@@ -268,10 +269,10 @@ int MiniGUIMain (int argc, const char* argv[])
 }
 ```
 
-![为圆角窗口](figures/Part1Chapter02-1-7.jpeg)
-__图 1.7__ 为圆角窗口
+![为圆角窗口](figures/Part1Chapter02-07.jpeg)
+__图 7__ 为圆角窗口
 
-### 1.2.5 主窗口的销毁
+### 2.5 主窗口的销毁
 
 要销毁一个主窗口，可以利用 `DestroyMainWindow` (hWnd) 函数。该函数将向窗口过程发送 `MSG_DESTROY` 消息，并在该消息返回非零值时终止销毁过程。
 
@@ -286,11 +287,11 @@ PostQuitMessage(hWnd);
 return 0;
 ```
 
-`DestroyMainWindow` 销毁一个主窗口，但不会销毁主窗口所使用的消息队列以及窗口对象本身。因此，应用程序要在线程或进程的最后使用`MainWindowCleaup` 最终清除主窗口所使用的消息队列以及窗口对象本身。
+`DestroyMainWindow` 销毁一个主窗口，但不会销毁主窗口所使用的消息队列以及窗口对象本身。因此，应用程序要在线程或进程的最后使用 `MainWindowCleaup` 最终清除主窗口所使用的消息队列以及窗口对象本身。
 
 在销毁一个主窗口时，MiniGUI 将调用 `DestroyMainWindow` 函数销毁所有的被托管窗口。
 
-### 1.2.6 对话框
+### 2.6 对话框
 
 对话框是一种特殊的主窗口，应用程序一般通过`DialogBoxIndirectParam` 函数创建对话框：
 
@@ -319,7 +320,7 @@ HWND hOwner, WNDPROC DlgProc, LPARAM lParam)
 
 本指南第 4 章讲述对话框的基本编程技术。
 
-### 1.2.7 控件和控件类
+### 2.7 控件和控件类
 
 MiniGUI 的每个控件都是某个控件类的实例，每个控件类有一个与之对应的控件过程，由所有同类的控件实例共享。
 
@@ -459,20 +460,20 @@ DestroyWindow (hwnd);
 UnregisterMyControl();
 ```
 
-__图 1.8__ 显示的窗口中建立了一个上述自定义控件类的实例，其中显示了“Hello, world！ - from my control.”。该程序的完整清单请参阅本指南示例程序包 `mg-samples` 中的 `mycontrol.c` 文件。
+__图 8__ 显示的窗口中建立了一个上述自定义控件类的实例，其中显示了“Hello, world！ - from my control.”。该程序的完整清单请参阅本指南示例程序包 `mg-samples` 中的 `mycontrol.c` 文件。
 
-![用自定义的控件显示 Hello, world!](figures/Part1Chapter02-1-8.jpeg)
-__图 1.8__ 用自定义的控件显示 Hello, world!
+![用自定义的控件显示 Hello, world!](figures/Part1Chapter02-08.jpeg)
+__图 8__ 用自定义的控件显示 Hello, world!
 
 本指南第 5 章中将讲述控件编程的基础知识,第 6 章讲述控件相关的高级编程技术; 在第 4 篇介绍所有的 MiniGUI 预定义控件。
 
 ### 1.2.8 输入法支持
 
-输入法是 MiniGUI 为支持中文、韩文、日文等多字节字符集而引入的机制，和 Windows 系统下的输入法类似，输入法通常以顶层窗口的形式出现，并截获系统中的按键信息，经过适当的处理，将翻译之后的字符发送到当前活动窗口。在MiniGUI3.0版本中，输入法内容被重新增强并单独提出作为一个组件来提供给客户进行使用。详细请见mgi组件相关介绍
+输入法是 MiniGUI 为支持中文、韩文、日文等多字节字符集而引入的机制，和 Windows 系统下的输入法类似，输入法通常以顶层窗口的形式出现，并截获系统中的按键信息，经过适当的处理，将翻译之后的字符发送到当前活动窗口。在 MiniGUI3.0 版本中，输入法内容被重新增强并单独提出作为一个组件来提供给客户进行使用。详细请见 mgi 组件相关介绍
 
-## 1.3 消息与消息处理
+## 3 消息与消息处理
 
-### 1.3.1 消息
+### 3.1 消息
 
 MiniGUI 应用程序通过接收消息来和外界交互。消息由系统或应用程序产生，系统对输入事件产生消息，系统对应用程序的响应也会产生消息，应用程序可以通过产生消息来完成某个任务，或者与其它应用程序的窗口进行通讯。总而言之，MiniGUI 是消息驱动的系统，一切运作都围绕着消息进行。
 
@@ -497,7 +498,7 @@ typedef MSG* PMSG;
 
 MSG 消息结构的成员包括该消息所属的窗口 `hwnd` 、消息标识 `message` 、消息的 `WPARAM` 型参数 `wParam` 、消息的 `LPARAM` 型参数 `lParam` 以及消息发生的时间。
 
-### 1.3.2 消息的种类
+### 3.2 消息的种类
 
 MiniGUI 中预定义的通用消息有以下几类：
 
@@ -517,7 +518,7 @@ MiniGUI 中预定义的通用消息有以下几类：
 
 用户可以在自己的程序中使用自定义消息，并利用自定义消息传递数据。
 
-### 1.3.3 消息队列
+### 3.3 消息队列
 
 MiniGUI 有两种向窗口过程发送消息的办法：
 
@@ -539,7 +540,7 @@ BOOL GUIAPI HavePendingMessage (HWND hMainWnd);
 
 非排队消息不通过消息队列而直接发送到目标窗口的窗口过程。系统一般通过发送非排队消息通知窗口完成一些需要立即处理的事件，比如 `MSG_ERASEBKGND` 消息。
 
-### 1.3.4 消息的处理
+### 3.4 消息的处理
 
 应用程序必须及时处理投递到它的消息队列中的消息，程序一般在 `MiniGUIMain` 函数中通过一个消息循环来处理消息队列中的消息。
 
@@ -612,7 +613,7 @@ int PreDefDialogProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 int PreDefControlProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam);
 ```
 
-### 1.3.5 发送和投递消息
+### 3.5 发送和投递消息
 
 投递（邮寄）一条消息就是把消息复制到消息队列中，发送消息则是直接把消息发送到窗口过程函数。
 
@@ -646,7 +647,7 @@ BOOL GUIAPI WaitMessage ( PMSG pMsg, HWND hMainWnd );
 
 该函数等待主窗口消息队列中的消息，消息队列中一有消息就返回。不同于 `GetMessage`， 这个函数并不从消息队列中移走消息。
 
-### 1.3.6 MiniGUI-Processes 的专用消息处理函数
+### 3.6 MiniGUI-Processes 的专用消息处理函数
 
 MiniGUI 还定义了一些 MiniGUI-Processes 的专用函数，可用于从 MiniGUI-Processes 服务器程序向其他客户程序发送消息。
 
@@ -687,11 +688,11 @@ int iMsg, WPARAM wParam, LPARAM lParam);
 
 MiniGUI-Processes 还定义了一个特殊消息—— `MSG_SRVNOTIFY`，服务器可以将该消息及其参数发送给某个特定客户，客户在收到该消息之后，将把该消息广播到所有的客户主窗口。
 
-## 1.4 几个重要的消息及其处理
+## 4 几个重要的消息及其处理
 
 在窗口（包括主窗口和子窗口在内）的生存周期当中，有几个重要的消息需要仔细处理。下面描述这些消息的概念和典型处理。
 
-### 1.4.1 MSG_NCCREATE
+### 4.1 MSG_NCCREATE
 
 该消息在 MiniGUI 建立主窗口的过程中发送到窗口过程。`lParam` 中包含了由 `CreateMainWindow` 传递进入的 `pCreateInfo` 结构指针。你可以在该消息的处理过程中修改 `pCreateInfo` 结构中的某些值。需要注意的是，系统向窗口过程发送此消息时，窗口对象尚未建立，因此，在处理该消息时不能使用 `GetDC` 等函数获得该窗口的设备上下文，也不能在 `MSG_NCCREATE` 消息中建立子窗口。
 
@@ -707,7 +708,7 @@ return -1;
 break;
 ```
 
-### 1.4.2 MSG_SIZECHANGING
+### 4.2 MSG_SIZECHANGING
 
 该消息窗口尺寸发生变化时，或者建立窗口时发送到窗口过程，用来确定窗口大小。`wParam` 包含预期的窗口尺寸值，而 `lParam` 用来保存结果值。MiniGUI 的默认处理如下：
 
@@ -733,7 +734,7 @@ case MSG_SIZECHANGING:
 }
 ```
 
-### 1.4.3 MSG_SIZECHANGED 和 MSG_CSIZECHANGED
+### 4.3 `MSG_SIZECHANGED` 和 `MSG_CSIZECHANGED`
 
 `MSG_SIZECHANGED` 消息在窗口尺寸发生变化后发送到窗口过程，以确定窗口客户区的大小，其参数和 `MSG_SIZECHANGING` 消息类似。`wParam` 参数包含窗口大小信息，`lParam` 参数是用来保存窗口客户区大小的 `RECT` 指针，并且具有默认值。如果该消息的处理返回非零值，则将采用 `lParam` 当中包含的大小值作为客户区的大小；否则，将忽略该消息的处理。比如在 `SPINBOX` 控件中，就处理了该消息，并使客户区占具所有的窗口范围：
 
@@ -750,11 +751,11 @@ case MSG_SIZECHANGED
 
 `MSG_CSIZECHANGED` 消息是窗口客户区的尺寸发生变化后发送到窗口过程的通知消息，应用程序可以利用该消息对窗口客户区尺寸发生变化的事件做进一步处理。该消息的 `wParam` 和 `lParam` 参数分别包含新的客户区宽度和高度。
 
-### 1.4.4 MSG_CREATE
+### 4.4 MSG_CREATE
 
 该消息在窗口成功创建并添加到 MiniGUI 的窗口管理器之后发送到窗口过程。这时，应用程序可以在其中创建子窗口。如果该消息返回非零值，则将销毁新建的窗口。
 
-### 1.4.5 MSG_FONTCHANGING
+### 4.5 MSG_FONTCHANGING
 
 当应用程序调用 `SetWindowFont` 改变窗口的默认字体时，将发送该消息到窗口过程。通常情况下，应用程序应该将此消息传递给默认的窗口过程处理；但如果窗口不允许用户改变默认字体的话，就可以截获该消息并返回非零值。比如，MiniGUI 的简单编辑框只能处理等宽字体，因此，可如下处理该消息：
 
@@ -765,7 +766,7 @@ return -1;
 
 应用程序处理该消息并返回非零值之后，`SetWindowFont` 函数将中止继续处理而返回，也就是说，窗口的默认字体不会发生改变。
 
-### 1.4.6 MSG_FONTCHANGED
+### 4.6 MSG_FONTCHANGED
 
 当应用程序调用 `SetWindowFont` 改变了窗口的默认字体后，将发送该消息到窗口过程。此时，窗口过程可以进行一些处理以便反映出新的字体设置。比如，MiniGUI 的编辑框就要处理这个消息，并最终重绘编辑框：
 
@@ -788,7 +789,7 @@ case MSG_FONTCHANGED:
 }
 ```
 
-### 1.4.7 MSG_ERASEBKGND
+### 4.7 MSG_ERASEBKGND
 
 当系统需要清除窗口背景时，将发送该消息到窗口过程。通常情况下，应用程序调用 `InvalidateRect` 或者 `UpdateWindow` 等函数并为 `bErase` 参数传递 `TRUE` 时，系统将发送该消息通知窗口清除背景。默认窗口过程将以背景色刷新窗口客户区。某些窗口比较特殊，往往会在 `MSG_PAINT` 消息中重绘所有的窗口客户区，就可以忽略对该消息的处理：
 
@@ -826,12 +827,12 @@ ReleaseDC (hdc);
 return 0;
 ```
 
-用图片填充窗口背景的完整实现可参阅本指南示例程序包 `mg-samples` 中的 `bmpbkgnd.c` 程序，该程序的运行效果如图 1.9 所示。
+用图片填充窗口背景的完整实现可参阅本指南示例程序包 `mg-samples` 中的 `bmpbkgnd.c` 程序，该程序的运行效果如__图 9__ 所示。
 
-![Hello world 程序的输出](figures/Part1Chapter02-1-9.jpeg)
-__图 1.9__ 使用图片作为窗口背景
+![使用图片作为窗口背景](figures/Part1Chapter02-09.jpeg)
+__图 9__ 使用图片作为窗口背景
 
-### 1.4.8 MSG_PAINT
+### 4.8 MSG_PAINT
 
 该消息在需要进行窗口重绘时发送到窗口过程。MiniGUI 通过判断窗口是否含有无效区域来确定是否需要重绘。当窗口在初始显示、从隐藏状态变化为显示状态、从部分不可见到可见状态，或者应用程序调用 `InvalidateRect` 函数使某个矩形区域变成无效时，窗口将具有特定的无效区域。这时，MiniGUI 将在处理完所有的邮寄消息、通知消息之后处理无效区域，并向窗口过程发送 `MSG_PAINT` 消息。该消息的典型处理如下：
 
@@ -852,11 +853,11 @@ case MSG_PAINT:
 
 需要注意的是，应用程序在处理完该消息之后，应该直接返回，而不应该传递给默认窗口过程处理。在本指南第 2 篇中将详细讲述 MiniGUI 的设备上下文以及绘图函数。
 
-### 1.4.9 MSG_CLOSE
+### 4.9 MSG_CLOSE
 
 当用户点击窗口上的“关闭”按钮时，MiniGUI 向窗口过程发送 `MSG_CLOSE` 消息。应用程序应在响应该消息时调用 `DestroyMainWindow` 销毁主窗口。如果窗口具有 `WS_MINIMIZEBOX` 和 `WS_MAXMIZEBOX` 风格，窗口标题栏上还将显示“最小化”和“最大化”按钮。目前，MiniGUI 尚未实现对这些风格的处理，但应用程序可以利用这两个风格显示其他的按钮，比如“确定”和“帮助”按钮，然后在窗口过程中处理 `MSG_MINIMIZE` 和 `MSG_MAXIMIZE` 消息。
 
-### 1.4.10 MSG_DESTROY
+### 4.10 MSG_DESTROY
 
 该消息在应用程序调用 `DestroyMainWindow` 或者 `DestroyWindow` 时发送到窗口过程当中，用来通知系统即将销毁一个窗口。如果该消息的处理返回非零值，则将取消销毁过程。
 
@@ -885,59 +886,59 @@ return 0;
 
 我们也可以将托管主窗口的资源释放代码放在 `MSG_DESTROY` 消息中。 这样，不管用户关闭的是托管主窗口还是被托管主窗口，窗口本身以及相关资源均可以被完整释放。
 
-## 1.5 通用窗口操作函数
+## 5 通用窗口操作函数
 
-MiniGUI 提供了一些通用的窗口操作函数，可用于主窗口和控件，__表 1.2__ 汇总了这些函数。在本指南中，我们用“窗口”这一术语来泛指主窗口和控件。如果没有特指，用于窗口的函数可用于主窗口或者控件。
+MiniGUI 提供了一些通用的窗口操作函数，可用于主窗口和控件，__表 2__ 汇总了这些函数。在本指南中，我们用“窗口”这一术语来泛指主窗口和控件。如果没有特指，用于窗口的函数可用于主窗口或者控件。
 
-__表 1.2__ 通用窗口操作函数
+__表 2__ 通用窗口操作函数
 
-| 函数名称	| 用途	| 备注 |
-|:---|:--|:---|
-| `UpdateWindow`	| 立即更新某个窗口 | |
-| `ShowWindow`	| 显示或隐藏某个窗口
-| `IsWindowVisible |	判断某个窗口是否可见	| 控件和主窗口均可用 |
-| `EnableWindow`	| 使能或禁止某个窗口 | |
-| `IsWindowEnabled`	| 判断某个窗口是否可用 | |
-| `GetClientRect`	| 获取窗口客户区矩形 | |
-| `GetWindowRect`	| 获取窗口矩形	| 屏幕坐标系中的窗口尺寸 |
-| `GetWindowBkColor`	| 获取窗口背景色 | |
-| `SetWindowBkColor`	| 设置窗口背景色 | |
-| `GetWindowFont`	| 获取窗口默认字体 | |
-| `SetWindowFont`	| 设置窗口默认字体 | |
-| `GetWindowCursor`	| 获取窗口光标 | |
-| `SetWindowCursor`	| 设置窗口光标 | |
-| `GetWindowStyle`	| 获取窗口风格 | |
-| `GetWindowExStyle`	| 获取窗口扩展风格 | |
-| `GetFocusChild`	| 获取拥有输入焦点的子窗口	| |
-| `SetFocusChild`	| 设置焦点子窗口	| | 
-| `GetWindowCallbackProc`	| 获取窗口过程函数 | |
-| `SetWindowCallbackProc`	| 设置窗口过程函数 | |
-| `GetWindowAdditionalData`	| 获取窗口附加数据一 | |
-| `SetWindowAdditionalData`	| 设置窗口附加数据一 | |
-| `GetWindowAdditionalData2` |	获取窗口附加数据二	| 对话框和控件在内部已使用附加数据二,保留附加数据一给应用程序使用 |
-| `SetWindowAdditionalData2	`| 设置窗口附加数据二 | |
-| `GetWindowCaption`	| 获取窗口标题	| 通常用于主窗口 |
-| `SetWindowCaption`	| 设置窗口标题 | |
-| `InvalidateRect`	| 使窗口的给定矩形区域无效	| 将引发窗口重绘 |
-| `GetUpdateRect`	| 获取窗口当前的无效区域外包矩形 | |
-| `ClientToScreen`	| 将窗口客户区坐标转换为屏幕坐标 | |
-| `ScreenToClient`	| 将屏幕坐标转换为客户区坐标 | |
-| `WindowToScreen`	| 将窗口坐标转换为屏幕坐标 | |
-| `ScreenToWindow`	| 将屏幕坐标转换为窗口坐标 | |
-| `IsMainWindow`	| 判断给定窗口是否为主窗口 | |
-| `IsControl`	| 判断给定窗口是否为控件 | |
-| `IsDialog`	| 判断给定窗口是否为对话框 | |
-| `GetParent`	| 获取窗口的父窗口句柄	| 主 窗 口 的 父 窗 口 永 远 为 `HWND_DESKTOP` |
-| `GetMainWindowHandle`	| 返回包含某个窗口的主窗口句柄 | |
-| `GetNextChild`	| 获取下一个子窗口	| 用于遍历某个窗口的所有子窗口 |
-| `GetNextMainWindow`	| 获取下一个主窗口句柄	| 用于遍历所有主窗口 |
-| `GetHosting`	| 获取某个主窗口的托管窗口 | |	 
-| `GetFirstHosted`	| 获取某个主窗口的第一个被托管窗口	| 用于遍历某个主窗口的所有被托管窗口 |
-| `GetNextHosted`	| 获取下一个被托管窗口 | |
-| `GetActiveWindow` |	获取当前活动主窗口 | |
-| `SetActiveWindow` |	设置当前活动主窗口 | |
-| `GetCapture`	| 获取当前捕获鼠标的窗口 | |
-| `SetCapture`	| 捕获鼠标	| 第 9 章讲述鼠标捕获相关内容 |
-| `ReleaseCapture`	| 释放鼠标 | |
-| `MoveWindow`	| 移动窗口或改变窗口大小 | |
-| `ScrollWindow`	| 自 1.6.8 版 本 , `ScrollWindow` 函滚动窗口客户区的内容	| 数可根据客户区的滚动情况自动调整窗口内子窗口的位置。具体来说 , 当 子 窗 口 所 在 位 置 在 `ScrollWindow` 第 二 个 传 入 参 数 指定的矩形内时,将相应调整子窗口位置;如果该参数为 `NULL`,则调整所有子窗口位置。 |
+| 函数名称	              | 用途	                 | 备注  |
+|:---------------------------|:------------------------|:-----|
+| `UpdateWindow`             | 立即更新某个窗口          |  |
+| `ShowWindow`	             | 显示或隐藏某个窗口         |  |
+| `IsWindowVisible`          | 判断某个窗口是否可见	  | 控件和主窗口均可用 |
+| `EnableWindow`             | 使能或禁止某个窗口         | |
+| `IsWindowEnabled`          | 判断某个窗口是否可用        | |
+| `GetClientRect`            | 获取窗口客户区矩形         | |
+| `GetWindowRect`            | 获取窗口矩形	         | 屏幕坐标系中的窗口尺寸 |
+| `GetWindowBkColor`         | 获取窗口背景色            | |
+| `SetWindowBkColor`         | 设置窗口背景色            | |
+| `GetWindowFont`            | 获取窗口默认字体           | |
+| `SetWindowFont`            | 设置窗口默认字体           | |
+| `GetWindowCursor`          | 获取窗口光标              | |
+| `SetWindowCursor`          | 设置窗口光标              | |
+| `GetWindowStyle`           | 获取窗口风格              | |
+| `GetWindowExStyle`         | 获取窗口扩展风格           | |
+| `GetFocusChild`            | 获取拥有输入焦点的子窗口     | |
+| `SetFocusChild`            | 设置焦点子窗口	           | | 
+| `GetWindowCallbackProc`    | 获取窗口过程函数            | |
+| `SetWindowCallbackProc`    | 设置窗口过程函数            | |
+| `GetWindowAdditionalData`  | 获取窗口附加数据一           | |
+| `SetWindowAdditionalData`  | 设置窗口附加数据一           | |
+| `GetWindowAdditionalData2` | 获取窗口附加数据二	     | 对话框和控件在内部已使用附加数据二,保留附加数据一给应用程序使用 |
+| `SetWindowAdditionalData2` | 设置窗口附加数据二            | |
+| `GetWindowCaption`         | 获取窗口标题                  | 通常用于主窗口 |
+| `SetWindowCaption`         | 设置窗口标题                  | |
+| `InvalidateRect`           | 使窗口的给定矩形区域无效	       | 将引发窗口重绘 |
+| `GetUpdateRect`            | 获取窗口当前的无效区域外包矩形   | |
+| `ClientToScreen`           | 将窗口客户区坐标转换为屏幕坐标   | |
+| `ScreenToClient`           | 将屏幕坐标转换为客户区坐标      | |
+| `WindowToScreen`           | 将窗口坐标转换为屏幕坐标        | |
+| `ScreenToWindow`           | 将屏幕坐标转换为窗口坐标        | |
+| `IsMainWindow`             | 判断给定窗口是否为主窗口        | |
+| `IsControl`                | 判断给定窗口是否为控件         | |
+| `IsDialog`                 | 判断给定窗口是否为对话框       | |
+| `GetParent`                | 获取窗口的父窗口句柄	      | 主 窗 口 的 父 窗 口 永 远 为 `HWND_DESKTOP` |
+| `GetMainWindowHandle`      | 返回包含某个窗口的主窗口句柄     | |
+| `GetNextChild`             | 获取下一个子窗口	              | 用于遍历某个窗口的所有子窗口 |
+| `GetNextMainWindow`        | 获取下一个主窗口句柄	      | 用于遍历所有主窗口 |
+| `GetHosting`               | 获取某个主窗口的托管窗口        | |	 
+| `GetFirstHosted`           | 获取某个主窗口的第一个被托管窗口	| 用于遍历某个主窗口的所有被托管窗口 |
+| `GetNextHosted`            | 获取下一个被托管窗口           | |
+| `GetActiveWindow`          | 获取当前活动主窗口             | |
+| `SetActiveWindow`          | 设置当前活动主窗口             | |
+| `GetCapture`               | 获取当前捕获鼠标的窗口          | |
+| `SetCapture`               | 捕获鼠标	                    | 第 9 章讲述鼠标捕获相关内容 |
+| `ReleaseCapture`           | 释放鼠标                     | |
+| `MoveWindow`               | 移动窗口或改变窗口大小          | |
+| `ScrollWindow`             | 自 1.6.8 版 本 , `ScrollWindow` 函滚动窗口客户区的内容 | 数可根据客户区的滚动情况自动调整窗口内子窗口的位置。具体来说 , 当 子 窗 口 所 在 位 置 在 `ScrollWindow` 第 二 个 传 入 参 数 指定的矩形内时,将相应调整子窗口位置;如果该参数为 `NULL`,则调整所有子窗口位置。 |
