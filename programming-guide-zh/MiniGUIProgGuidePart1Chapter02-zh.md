@@ -95,7 +95,7 @@ const char* werdr_name, const WINDOW_ELEMENT_ATTR* we_attrs,
 const char* window_name, const char* layer_name);
 ```
 
-这个函数除了结构体指针 `pCreateInfo` 不能为空外，其他参数都可以传入空值。当后面四个参数都传入空值时，等效于 `CreateMainWindow` 函数。`CreateMainWindowEx` 可以让你指定渲染器的名称，并修改某些渲染参数。有关这方面的内容将在 [Part1Chapter10 界面外观及特效](MiniGUIProgGuidePart1Chapter10-zh.md)”里面的“[外观渲染器及窗口元素属性](MiniGUIProgGuidePart1Chapter10-zh.md#user-content-1-外观渲染器及窗口元素属性)”一节，详细介绍。参数 `window_name` 和 `layer_name` 是保留参数，调用函数，赋空值即可。
+这个函数除了结构体指针 `pCreateInfo` 不能为空外，其他参数都可以传入空值。当后面四个参数都传入空值时，等效于 `CreateMainWindow` 函数。`CreateMainWindowEx` 可以让你指定渲染器的名称，并修改某些渲染参数。有关这方面的内容将在 “[Part1Chapter10 界面外观及特效](MiniGUIProgGuidePart1Chapter10-zh.md)”里面的“[外观渲染器及窗口元素属性](MiniGUIProgGuidePart1Chapter10-zh.md#user-content-1-外观渲染器及窗口元素属性)”一节，详细介绍。参数 `window_name` 和 `layer_name` 是保留参数，调用函数，赋空值即可。
 
 ### 2.3 窗口风格
 
