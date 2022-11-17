@@ -6,7 +6,7 @@
 
 面板及其派生类的类继承关系如下：
 
-- [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget)
+- [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh.md#3-mwidget)
    - [`mPanel`](#2-mpanel)
       - [`mComboBox`](#3-mcombobox)
       - `mMainWnd`
@@ -25,25 +25,25 @@ Panel 必须存在于 `MainWnd`, `DialogBox`, 另一 Panel 控件或其它控件
 
 ### 2.1 `mPanel` 风格
 
-继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 的风格
+继承自 [mWidget](MiniGUIProgGuidePart2Chapter04-zh.md#3-mwidget) 的风格
 
 ### 2.2 `mPanel` 属性
 
-继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 的属性
+继承自 [mWidget](MiniGUIProgGuidePart2Chapter04-zh.md#3-mwidget) 的属性
 
 ### 2.3 `mPanel` 事件
 
-继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 的事件
+继承自 [mWidget](MiniGUIProgGuidePart2Chapter04-zh.md#3-mwidget) 的事件
 
 ### 2.4 `mPanel` 方法
 
-继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 的方法
+继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh.md#3-mwidget) 的方法
 
 该类没有新增方法。
 
 ### 2.5 `mPanel` 渲染器
 
-继承自 [`mWidget`](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 渲染器
+继承自 [mWidget](MiniGUIProgGuidePart2Chapter04-zh#3-mwidget) 渲染器
 
 `mPanel` 无新增加渲染器方法。
 
@@ -252,7 +252,7 @@ int MiniGUIMain(int argc, const char* argv[])
 
 ### 3.1 `mCombobox` 风格
 
-继承自 [`mPanel`](#21-mpanel-风格) 的风格
+继承自 [mPanel](#21-mpanel-风格) 的风格
 
 | 风格名 | mStudio 属性名 | 说明 |
 |:------|:--------------|:----|
@@ -268,7 +268,7 @@ int MiniGUIMain(int argc, const char* argv[])
 
 ### 3.2 `mCombobox` 属性
 
-继承自 [`mPanel`](#22-mpanel-属性) 的属性
+继承自 [mPanel](#22-mpanel-属性) 的属性
 
 | 属性名 | mStudio 属性名 | 类型 | RW | 说明 |
 |:------|:--------------|:----|:----|:----|
@@ -280,7 +280,7 @@ int MiniGUIMain(int argc, const char* argv[])
 
 ### 3.3 `mCombobox` 事件
 
-继承自 [`mPanel`](#23-mpanel-事件) 的事件
+继承自 [mPanel](#23-mpanel-事件) 的事件
 
 | 事件 ID | 参数 | 说明 |
 |:-------|:-----|:----|
@@ -295,7 +295,7 @@ int MiniGUIMain(int argc, const char* argv[])
 
 ### 3.4 `mCombobox` 方法
 
-继承自 [`mPanel`](#24-mpanel-方法) 的方法
+继承自 [mPanel](#24-mpanel-方法) 的方法
 
 #### 3.4.1 `addItem`
 
