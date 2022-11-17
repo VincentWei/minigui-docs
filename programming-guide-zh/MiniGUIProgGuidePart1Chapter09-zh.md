@@ -1,16 +1,16 @@
 # 图标、光标和插入符
 
-## 1.1 图标
+## 1 图标
 
 图标是一张小的图片，通常用来代表一个应用程序，或者用于警告消息框等窗口中。它是由一个位图和一个位屏蔽位图组合而成，可以在图片中产生透明图像区域。一个图标文件中可以包含一个以上的图标映像，应用程序可以根据各个图标映像的大小和颜色位数来选择其中之一来使用。
 
 MiniGUI 中提供了对单色和 16 色和 256 色 Windows 图标的载入、显示、创建和销毁的支持。
 
-### 1.1.1 图标的装载和显示
+### 1.1 图标的装载和显示
 
 应用程序可以使用 `LoadIconFromFile` 函数来装载图标文件，函数的原型如下：
 
-```
+```c
 HICON GUIAPI LoadIconFromFile (HDC hdc, const char* filename, int which);
 ```
 
@@ -41,9 +41,9 @@ void GUIAPI DrawIcon (HDC hdc, int x, int y, int w, int h, HICON hicon);
 - w, h 矩形的宽和高
 - hicon 图标对象的句柄
 
-__清单 1.1__ 中的程序 drawicon.c 说明了如何由图标文件装载图标，然后在窗口的客户区内绘制图标。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 drawicon.c 程序。
+清单 1 中的程序 `drawicon.c` 说明了如何由图标文件装载图标，然后在窗口的客户区内绘制图标。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 `drawicon.c` 程序。
 
-__清单 1.1__ 绘制图标
+__清单 1__ 绘制图标
 
 ```c
 #include <minigui/common.h>
@@ -92,13 +92,16 @@ static int DrawiconWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
 /* 以下创建窗口的代码从略 */
 ```
-程序的输出如__图 1.1__ 所示。
 
-__图 1.1__ 图标的绘制
+程序的输出如图 1 所示。
 
-上述程序从图标文件 myicon.ico 中载入两个尺寸分别为 32x32 像素和 16x16 像素的 16 色图标。序号为 0 的图标为 32x32 像素的大图标，存放在图标对象 `myicon_large` 中；序号为 1 的图标为 16x16 像素的小图标，存放在图标对象 `myicon_small`中。程序在处理 `MSG_PAINT` 消息时使用 `DrawIcon` 函数把这两个图标绘制到窗口的客户区之上。我们注意到程序调用 `DrawIcon` 函数时传给它的w和h参数均为 0，这种情况下 `DrawIcon` 函数将按图标的原始大小绘制图标，没有缩放。
+![图标的绘制](figures/Part1Chapter09-01.jpeg)
 
-### 1.1.2 图标的销毁
+__图 1__ 图标的绘制
+
+上述程序从图标文件 `myicon.ico` 中载入两个尺寸分别为 32x32 像素和 16x16 像素的 16 色图标。序号为 0 的图标为 32x32 像素的大图标，存放在图标对象 `myicon_large` 中；序号为 1 的图标为 16x16 像素的小图标，存放在图标对象 `myicon_small`中。程序在处理 `MSG_PAINT` 消息时使用 `DrawIcon` 函数把这两个图标绘制到窗口的客户区之上。我们注意到程序调用 `DrawIcon` 函数时传给它的w和h参数均为 0，这种情况下 `DrawIcon` 函数将按图标的原始大小绘制图标，没有缩放。
+
+### 1.2 图标的销毁
 
 应用程序不再需要某个在运行时创建的图标时就应该销毁它。上述程序在即将退出时（收到 `MSG_CLOSE` 消息）调用 `DestroyIcon` 函数销毁了先前使用 `LoadIconFromFile` 函数所载入的两个图标。`DestroyIcon` 函数销毁图标句柄，并释放它所占用的内存。该函数的定义如下：
 
@@ -108,7 +111,7 @@ BOOL GUIAPI DestroyIcon(HICON hicon);
 
 `DestroyIcon` 函数只有一个参数 `hicon`，指定所要销毁的图标对象。由 `LoadIconFromFile` 函数载入的图标要用 `DestroyIcon` 来销毁。下面我们还将看到，应用程序使用 `CreateIcon` 函数动态创建的图标也由 `DestroyIcon` 来销毁。
 
-### 1.1.3 图标的创建
+### 1.3 图标的创建
 
 除了从图标文件中载入图标之外，应用程序还可以使用 `CreateIcon` 函数在运行时动态创建图标。由该函数创建的图标同样需要用 `DestroyIcon` 函数来销毁。`CreateIcon` 函数的原型如下：
 
@@ -135,9 +138,9 @@ pal         图标调色板
 
 `CreateIcon` 按照指定的图标尺寸、颜色和内存中的位屏蔽位图映像等数据创建图标。w 和 h 参数所指定的图标宽度和高度必须是系统支持的尺寸，如 16x16 像素或 32x32 像素。`pAndBits` 指向一个字节数组，该数组包含图标的AND位屏蔽位图的映像数据，AND 位屏蔽位图是一个单色位图。`pXorBits` 指向一个包含图标的 XOR 位屏蔽位图映像数据的字节数组，XOR 位屏蔽位图可以是单色位图，也可以是彩色位图。MiniGUI目前支持单色、16 色和 256 色的三种图标。`colornum` 指定图标的颜色位数，或者说 XOR 位屏蔽位图（彩色位图）的颜色位数。对于单色图标，它应该为 1，对于 16 色图标，它应该为 4，对于 256 色图标，它应该是 8。
 
-__清单 1.2__ 中的代码描述了如何使用 `CreateIcon` 函数在运行时创建自定义图标。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 createicon.c 程序。
+清单 2 中的代码描述了如何使用 `CreateIcon` 函数在运行时创建自定义图标。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 `createicon.c` 程序。
 
-__清单 1.2__ 创建图标
+__清单 2__ 创建图标
 
 ```c
 #include <minigui/common.h>
@@ -237,13 +240,15 @@ static int CreateiconWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 /* 以下创建主窗口的代码从略 */
 ```
 
-程序的输出如__图 1.2__ 所示。
+程序的输出如图 2 所示。
 
-__图 1.2__ 图标的创建
+![图标的创建](figures/Part1Chapter09-02.jpeg)
 
-__清单 1.2__ 中的程序根据 `ANDmaskIcon` 和 `XORmaskIcon` 位屏蔽字节数组中的数据，调用 `CreateIcon` 函数在运行时创建了一个自定义图标 new_icon，图标的大小为 16x16 像素，颜色位数为 4。程序然后使用 `DrawIcon` 函数把所创建的“问号”图标分别以原始尺寸和放大的尺寸绘制在窗口的客户区内。最后，在 `MSG_CLOSE` 消息中，程序调用 `DestroyIcon` 函数把由 `CreateIcon` 函数所创建的自定义图标销毁掉。
+__图 2__ 图标的创建
 
-### 1.1.4 使用系统图标
+清单 2 中的程序根据 `ANDmaskIcon` 和 `XORmaskIcon` 位屏蔽字节数组中的数据，调用 `CreateIcon` 函数在运行时创建了一个自定义图标 `new_icon`，图标的大小为 16x16 像素，颜色位数为 4。程序然后使用 `DrawIcon` 函数把所创建的“问号”图标分别以原始尺寸和放大的尺寸绘制在窗口的客户区内。最后，在 `MSG_CLOSE` 消息中，程序调用 `DestroyIcon` 函数把由 `CreateIcon` 函数所创建的自定义图标销毁掉。
+
+### 1.4 使用系统图标
 
 MiniGUI 的配置文件 MiniGUI.cfg 中的各个渲染器部分定义了系统所使用和提供的所有图标，下面是 Classic 渲染器所使用的图标：
 
@@ -279,11 +284,11 @@ HICON GUIAPI GetSmallSystemIcon (int id);
 #define IDI_INFORMATION         IDI_ASTERISK
 ```
 
-可见，它们分别代表 MiniGUI.cfg 中序号从 0 到 4 的 5 个图标文件。
+可见，它们分别代表 `MiniGUI.cfg` 中序号从 0 到 4 的 5 个图标文件。
 
 由 `GetLargeSystemIcon` 和 `GetSmallSystemIcon` 函数获取的图标为系统预定义的图标，属于系统共享资源，不需要由应用程序来销毁。
 
-此外，应用程序还可以使用 `LoadSystemIcon` 函数直接从 MiniGUI.cfg 配置文件中定义的图标文件中载入所需的系统图标。该函数定义如下：
+此外，应用程序还可以使用 `LoadSystemIcon` 函数直接从 `MiniGUI.cfg` 配置文件中定义的图标文件中载入所需的系统图标。该函数定义如下：
 
 ```c
 HICON GUIAPI LoadSystemIcon (const char* szItemName, int which);
@@ -293,13 +298,13 @@ HICON GUIAPI LoadSystemIcon (const char* szItemName, int which);
 
 `LoadSystemIcon` 实际上是通过调用 `LoadIconFromFile` 来载入图标的。显然，由它所创建的图标在不再需要的时候也必须使用 `DestroyIcon` 函数来销毁。
 
-## 1.2 光标
+## 2 光标
 
 光标是一个小的位图，它在屏幕上的位置由鼠标等定点设备控制，用来指示定点的位置。当用户移动鼠标时，光标在屏幕上作相应的移动。如果光标移动到了窗口的不同区域或不同的窗口内时，系统很可能会改变光标的外形。光标内一个称为热点的像素标志光标的准确屏幕位置，系统用这个点来跟踪和识别光标的位置。例如，箭头光标的热点一般是它的箭头位置。光标的热点通常就是光标的焦点。如果有一个鼠标输入事件发生，系统将把包含热点坐标的鼠标消息发送给光标热点所在的窗口或捕获到鼠标的窗口。
 
 MiniGUI 中提供了对单色和 16 色光标的装载、创建、显示、销毁和移动等操作的函数。MiniGUI 目前不支持 256 色光标和动画光标。
 
-### 1.2.1 光标的载入和创建
+### 2.1 光标的载入和创建
 
 应用程序可以使用 `LoadCursorFromFile` 函数从一个 Windows 光标文件中载入光标。该函数的原型如下：
 
@@ -335,7 +340,7 @@ colornum               XOR位屏蔽光标位图映像的颜色位数
 
 和 `CreateIcon` 函数创建图标的方式类似，`CreateCursor` 函数按照指定的光标尺寸、颜色和内存中的位屏蔽位图映像等数据创建光标，不同的是使用 `CreateCursor` 函数还必须指定所创建光标的热点位置。`xhotspot` 和 `yhotspot` 参数分别指定所创建光标的热点在光标图片中的水平坐标和垂直坐标。w 和 h 参数所指定的光标宽度和高度必须是系统支持的尺寸，而 MiniGUI 中只能使用 32x32 像素的光标。因此，w和h参数的值只能为 32。`pAndBits` 指向一个包含光标的 AND 位屏蔽位图映像数据的字节数组， AND 位屏蔽位图是一个单色位图。`pXorBits` 指向一个包含光标的 XOR 位屏蔽位图映像数据的字节数组，XOR 位屏蔽位图可以是单色位图，也可以是彩色位图。MiniGUI 目前支持单色的和 16 色的两种光标。`colornum` 指定光标的颜色位数，或者说 XOR 位屏蔽位图（彩色位图）的颜色位数。对于单色光标，它应该为 1，对于 16 色光标，它应该为 4。
 
-### 1.2.2 光标的销毁
+### 2.2 光标的销毁
 
 应用程序不再需要某个在运行时创建的光标时就应该销毁它。`DestroyCursor`函数可以用来销毁由 `LoadCursorFromFile` 函数和 `CreateCursor` 函数创建的光标，并释放光标对象所占用的内存。该函数的定义如下：
 
@@ -345,7 +350,7 @@ BOOL GUIAPI DestroyCursor (HCURSOR hcsr);
 
 `DestroyCursor` 函数的参数 `hcursor` 指定所要销毁的光标对象。
 
-### 1.2.3 光标的定位和显示
+### 2.3 光标的定位和显示
 
 如果系统包含鼠标，系统将自动地显示光标，并根据鼠标移动指定的位置更新它在屏幕上的位置，重新绘制光标。应用程序可以通过调用 `GetCursorPos` 函数来获取光标的当前屏幕位置，通过调用 `SetCursorPos` 函数来把光标移动到屏幕上的指定位置。
 
@@ -401,7 +406,7 @@ int GUIAPI ShowCursor (BOOL fShow);
 
 参数 `fshow` 为 `FALSE` 时 `ShowCursor` 函数隐藏光标，为`TRUE` 时显示光标。`ShowCursor` 并不改变当前光标的外形。该函数在内部使用一个光标显示计数器来决定是否隐藏或显示光标。每次调用 `ShowCursor` 函数试图显示光标都使该计数器加 1 而试图隐藏光标则使计数器减 1。只有当这个计数器大于或等于 0 时光标才是可见的。
 
-### 1.2.4 光标限定
+### 2.4 光标限定
 
 应用程序使用 `ClipCursor` 函数把光标限定在屏幕的某个矩形区域内，这常用于响应某一特定的限制矩形区域内的事件。函数定义如下：
 
@@ -417,7 +422,7 @@ void GUIAPI ClipCursor (const RECT* prc);
 void GUIAPI GetClipCursor (RECT* prc);
 ```
 
-### 1.2.5 使用系统光标
+### 2.5 使用系统光标
 
 MiniGUI 的配置文件 MiniGUI.cfg 中的 `cursorinfo` 部分定义了系统所使用和提供的所有光标，如下：
 
@@ -453,7 +458,7 @@ cursor22=ve_split.cur
 
 MiniGUI 源代码中定义的系统所使用光标的最大数目为 `MAX_SYSCURSORINDEX + 1`。`MAX_SYSCURSORINDEX` 为最大的系统光标索引值，定义为 22，因此系统预定义的光标最大数目为 23。
 
-MiniGUI 在系统初始化时根据 MiniGUI.cfg 配置文件中 `cursorinfo` 部分的设置，把所有的系统光标从所指定的光标文件中载入内存。应用程序可以通过 `GetSystemCursor` 函数来获取内存中的系统光标。此函数定义如下：
+MiniGUI 在系统初始化时根据 `MiniGUI.cfg` 配置文件中 `cursorinfo` 部分的设置，把所有的系统光标从所指定的光标文件中载入内存。应用程序可以通过 `GetSystemCursor` 函数来获取内存中的系统光标。此函数定义如下：
 
 ```c
 HCURSOR GUIAPI GetSystemCursor (int csrid);
@@ -520,11 +525,11 @@ IDC_SPLIT_VERT        垂直分割光标
 
 由 `GetSystemCursor` 函数获取的光标为系统预定义的光标，属于系统共享资源，不需要由应用程序来销毁。
 
-### 1.2.6 示例程序
+### 2.6 示例程序
 
-__清单 1.3__ 中的代码说明了 MiniGUI 中光标的使用。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 cursordemo.c 程序。
+清单 3 中的代码说明了 MiniGUI 中光标的使用。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 `cursordemo.c` 程序。
 
-__清单 1.3__ 鼠标光标的使用
+__清单 3__ 鼠标光标的使用
 
 ```c
 #include <minigui/common.h>
@@ -620,15 +625,17 @@ static int CursordemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lPara
 /* 以下创建主窗口的代码从略 */
 ```
 
-图 1.3 光标的使用
+![光标的使用](figures/Part1Chapter09-03.jpeg)
 
-上面的示例程序的运行主界面如__图 1.3__ 所示。主窗口过程调用 `RegisterTrapwindow` 函数注册一个窗口类 “trap”，然后在窗口的左上角（10, 10）处创建了一个大小为 100x100 的 “trap” 类型的子窗口。`RegisterTrapwindow` 函数在注册 “trap” 窗口类时，把窗口的背景色设置为黑色，窗口类光标设置为手形指点光标（IDC_HAND_POINT）。`trap` 窗口类的窗口过程函数在处理 `MSG_MOUSEMOVE` 消息时，调用 `ClipCursor` 函数把光标限定在本窗口之内。
+__图 3__ 光标的使用
+
+上面的示例程序的运行主界面如图 3 所示。主窗口过程调用 `RegisterTrapwindow` 函数注册一个窗口类 “trap”，然后在窗口的左上角（10, 10）处创建了一个大小为 100x100 的 “trap” 类型的子窗口。`RegisterTrapwindow` 函数在注册 “trap” 窗口类时，把窗口的背景色设置为黑色，窗口类光标设置为手形指点光标（`IDC_HAND_POINT`）。`trap` 窗口类的窗口过程函数在处理 `MSG_MOUSEMOVE` 消息时，调用 `ClipCursor` 函数把光标限定在本窗口之内。
 
 主窗口过程在处理 `MSG_LBUTTONDOWN` 消息时首先调用 `GetWindowRect` 函数取得主窗口矩形，使用 `ClipCursor` 函数把光标限定在主窗口范围之内，然后调用 `ShowCursor` 函数把光标隐藏掉。在处理 `MSG_RBUTTONDOWN` 消息时，调用 `ShowCursor` 函数把光标显示出来。主窗口过程在处理 `MSG_SETCURSOR` 消息时调用 `SetCursor` 函数把当前光标（箭头光标）重新设置为“I”形光标。
 
 程序运行时，当用户在主窗口内点击鼠标左键时，光标的移动范围将被限制在主窗口之内，而且被隐藏掉。用户可以通过点击设备右键来重新显示光标。当光标被移动到 `trap` 窗口上时，光标将被“抓住”在这个黑色的窗口范围之内。
 
-## 1.3 插入符
+## 3 插入符
 
 插入符是指窗口客户区之内一个闪烁的符号，通常用于指示键盘输入的位置。常见的插入符外形为下划线、垂直线和方块等。
 
@@ -663,7 +670,7 @@ BOOL GUIAPI DestroyCaret (HWND hWnd);
 
 `DestroyCaret` 函数销毁一个窗口的插入符，并把它从屏幕上删除。 如果程序中需要插入符，我们可以在 `MSG_CREATE` 消息中调用 `CreateCaret` 函数创建它，然后在收到 `MSG_DESTROY` 消息时调用 `DestroyCaret` 函数销毁。
 
-### 1.3.2 显示和隐藏插入符
+### 3.2 显示和隐藏插入符
 
 在某一个时刻只能有一个窗口拥有键盘输入焦点。通常接收键盘输入的窗口在接收到输入焦点时显示插入符，在失去输入焦点时隐藏插入符。
 系统给收到输入焦点的窗口发送 `MSG_SETFOCUS` 消息，应用程序应该在收到该消息时调用 `ShowCaret` 函数显示插入符。窗口失去键盘输入键盘时，系统给这个窗口发送一个 `MSG_KILLFOCUS` 消息，应用程序在处理这个消息时要调用 `HideCaret` 函数把插入符隐藏掉。这两个函数的定义如下：
@@ -675,7 +682,7 @@ BOOL GUIAPI HideCaret (HWND hWnd);
 
 `ShowCaret` 函数使给定窗口的插入符可见，插入符出现后将自动地开始闪烁。`HideCaret` 函数从屏幕上删除插入符。如果应用程序在处理 `MSG_PAINT` 以外的消息时必须重新绘制屏幕，同时又要保留插入符，那么可以在绘制前使用 `HideCaret` 函数先隐藏插入符，在绘制结束后再使用 `ShowCaret` 函数重新显示插入符。如果应用程序处理的是 `MSG_PAINT` 消息，就不需要去隐藏和重新显示插入符，因为 `BeginPaint` 和 `EndPaint` 函数会自动地完成这些操作。
 
-### 1.3.3 插入符的定位
+### 3.3 插入符的定位
 
 应用程序使用 `GetCaretPos` 函数来获取插入符的所在位置，使用 `SetCaretPos` 函数在一个窗口之内移动插入符。
 
@@ -685,7 +692,7 @@ BOOL GUIAPI SetCaretPos (HWND hWnd, int x, int y);
 ```
 `GetCaretPos` 函数把窗口的插入符在客户区内的位置复制到由 `pPt` 指定的 `POINT` 结构变量中。`SetCaretPos` 函数把窗口的插入符移动到由 x 和 y 指定的客户区内位置，该函数不管插入符是否可见都移动它。
 
-### 1.3.4 调整插入符的闪烁时间
+### 3.4 调整插入符的闪烁时间
 
 反向显示插入符所消耗的时间称为反转时间。闪烁时间是指显示、反向显示、再恢复所消耗的时间。应用程序使用 `GetCaretBlinkTime` 函数来获取插入符的反转时间，该时间以毫秒计数。系统缺省的插入符反转时间为 500 毫秒。如果要定义插入符的反转时间，可以使用 `SetCaretBlinkTime`。插入符反转时间最小不能小于 100 毫秒。这两个函数的定义如下:
 
@@ -694,11 +701,11 @@ UINT GUIAPI GetCaretBlinkTime (HWND hWnd);
 BOOL GUIAPI SetCaretBlinkTime (HWND hWnd, UINT uTime);
 ```
 
-### 1.3.5 示例——简单编辑框窗口
+### 3.5 示例——简单编辑框窗口
 
-__清单 1.4__ 中的程序使用本节所讨论的插入符函数创建了一个简单的文本输入窗口，你可以把它看作是一个简单的编辑框控件。在“myedit”控件中，你可以输入 10 个以内的字符，用左右箭头键（插入符移动键）来移动插入符，用退格键删除窗口中的字符。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 caretdemo.c 程序。
+清单 4 中的程序使用本节所讨论的插入符函数创建了一个简单的文本输入窗口，你可以把它看作是一个简单的编辑框控件。在“myedit”控件中，你可以输入 10 个以内的字符，用左右箭头键（插入符移动键）来移动插入符，用退格键删除窗口中的字符。该程序的完整源代码见本指南示例程序包 `mg-samples` 中的 `caretdemo.c` 程序。
 
-__清单 1.4__ 插入符的使用
+__清单 4__ 插入符的使用
 
 ```c
 #include <stdio.h>
@@ -873,7 +880,9 @@ static int CaretdemoWinProc(HWND hWnd, int message, WPARAM wParam, LPARAM lParam
 /* 以下创建主窗口的代码从略 */
 ```
 
-__图 1.4__ 一个简单的编辑框
+![一个简单的编辑框](figures/Part1Chapter09-04.jpeg)
+
+__图 4__ 一个简单的编辑框
 
 为了简单起见，我们在“myedit”中使用了等宽字体，因为其它字体的处理要困难得多。`myedit` 的窗口过程函数使用 `GetSystemFont` (`SYSLOGFONT_WCHAR_DEF`) 获取系统缺省的等宽字体，然后调用 `SetWindowFont` 设置文本输入窗口的字体。`myedit` 在 `MSG_CREATE` 消息中调用 `CreateCaret` 函数创建了一个与字符同高、宽度为 1 的插入符。
 
