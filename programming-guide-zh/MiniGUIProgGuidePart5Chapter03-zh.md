@@ -6,7 +6,7 @@
 
 因此，本章将介绍 MiniGUI 3.0 的 `Custom IAL` 接口，并重点介绍如何开发 `custom` 输入引擎。
 
-## 1.1 `Shadow` 图形引擎
+## 1 `Shadow` 图形引擎
 
 该引擎的主要功能是：
 
@@ -45,7 +45,7 @@ rotate_screen=normal
 
 - `shadow` 引擎的色深配置在 8 位色以上，真实引擎的色深配置为真实的色深。
 
-## 1.2 `MLShadow` 图形引擎
+## 2 `MLShadow` 图形引擎
 
 MLShadow 引擎是实现了在机顶盒、PMP 等产品的方案中提供多个显示层，以完成类似硬件提供的图形层叠加功能，自动实现层之间的透明、半透明的显示。该引擎的主要功能是：
 
@@ -87,7 +87,7 @@ BOOL mlsEnableSlaveScreen (HDC dc_mls, BOOL enable)；
 ```
 此函数设置显示层 `dc_mls` 是否可见，即是否参加图形层的混合叠加操作。`enable` 为 `TRUE` 时，为可见；为 `FALSE` 时，不可见。
 
-## 1.3  `pc_xvfb` 图形引擎
+## 3  `pc_xvfb` 图形引擎
 
 该引擎的主要功能是：
 
@@ -108,7 +108,7 @@ exec_file=/usr/local/bin/qvfb2
 - `window_caption` 是标题栏文字
 - `exec_file` 是虚拟帧缓冲区程序。`qvfb` 对应的程序是 `qvfb2`，`wvfb` 对应的程序是 `wvfb2`，`mvfb` 对应的程序是 `mvfb2`。
 
-## 1.4  `rtos_xvfb` 图形引擎
+## 4  `rtos_xvfb` 图形引擎
 
 借助 `rtos_xvfb` 引擎，可将 MiniGUI 运行在某个已有的 `RTOS` 图形系统之上，比如 uC/GUI、Gtk+、Tilcon 等。其原理如下：
 - 由 `rtos_xvfb` 程序模块创建窗口，分配虚拟帧缓冲区，然后以线程方式启动 MiniGUI 程序，MiniGUI 程序在虚拟缓冲区中绘制。下面是创建和销毁虚拟帧缓冲区的接口：
@@ -140,7 +140,7 @@ int xVFBNotifyNewEvent (const void* xvfb_event_buffer, XVFBEVENT* event);
 defaultmode=800x600-16bpp
 ```
 
-## 1.5 `CommLCD` 引擎
+## 5 `CommLCD` 引擎
 
 该引擎的主要功能是：
 
@@ -228,7 +228,7 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 ……
 ```
 
-## 1.6 `Comm IAL` 引擎
+## 6 `Comm IAL` 引擎
 
 MiniGUI 为传统嵌入式操作系统提供了 Common 输入引擎（comm），使用该引擎可以很方便地实现对键盘、鼠标或触摸屏等输入设备的支持。
 
@@ -250,7 +250,7 @@ int __comminput_wait_for_input (void);
 
 在使用该引擎时，需要根据操作系统或底层驱动由客户自己为 MiniGUI 实现上述 5 个函数接口。 
 
-## 1.7 `Custom IAL` 引擎
+## 7 `Custom IAL` 引擎
 
 MiniGUI 3.0 专业版和标准版的输入和输出引擎都是飞漫软件定制实现的，当然如果客户需要自己定制IAL的话，我们也可以提供 `custom-ial` 的库由客户自定义 `ial` 引擎接口的实现。按照下面的方法编写好 `IAL` 源代码后，要将该源代码编译生成一个 `ial` 库，最后将实例、`minigui` 库和 `ial` 库一起编译，才可以生成正确的可执行文件。`custom` 输入引擎在 `customial.h` 中给用户提供了定制键盘和鼠标消息处理的接口。用户只要实现下面的接口，就可以实现对相关消息的处理了：
 
@@ -308,13 +308,13 @@ typedef struct tagINPUT
 - `set_leds` 设置键盘的锁定 `LED`，用于设置大写锁定、数字小键盘锁定、滚动锁定等
 - `wait_event` 上层调用该函数等待底层引擎上发生输入事件； 需要注意的是，该函数对 MiniGUI-Threads 和 MiniGUI-Processes 版本具有不同的接口，并且一定要利用 `select` 或者等价的 `poll` 系统调用实现这个函数
 
-## 1.8 `Custom IAL` 引擎实例
+## 8 `Custom IAL` 引擎实例
 
 其实开发一个新的 `IAL` 引擎并不困难。用户可通过 `customial.h` 定义的接口 来定制 `custom IAL` 输入引擎。下面以 `iPAQ` 为例，说明如何定制用户输入引擎（custom IAL）。
 
-COMPAQ 公司生产的 `iPAQ` 是基于 `StrongARM` 的一款高端手持终端产品，它含有触摸屏以及几个控制键。触摸屏类似 PC 上的鼠标，但只能区分左键。对按键，我们可以将其模拟为 PC 键盘的某几个控制键，比如光标键、`ENTER` 键、功能键等等。该引擎的源代码见__清单 1.1__。
+COMPAQ 公司生产的 `iPAQ` 是基于 `StrongARM` 的一款高端手持终端产品，它含有触摸屏以及几个控制键。触摸屏类似 PC 上的鼠标，但只能区分左键。对按键，我们可以将其模拟为 PC 键盘的某几个控制键，比如光标键、`ENTER` 键、功能键等等。该引擎的源代码见清单 1。
 
-__清单 1.1__  以 `iPAQ` 为例的定制输入引擎（custom IAL）
+__清单 1__  以 `iPAQ` 为例的定制输入引擎（custom IAL）
 
 ```c
 #include <stdio.h>
