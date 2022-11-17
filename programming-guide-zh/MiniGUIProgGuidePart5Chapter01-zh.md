@@ -2,7 +2,11 @@
 
 图形设备接口（GDI：Graphics Device Interface）是 GUI 系统的一个重要组成部分。通过 GDI，GUI 程序就可以在计算机屏幕上，或者其他的显示设备上进行图形输出，包括基本绘图和文本输出。本章以及其后的两章中，我们将详细描述 MiniGUI 中图形设备接口的重要概念，图形编程的方法和主要的 GDI 函数，并举例说明重要函数的用法。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter01-zh.md
 ## 1.1 MiniGUI 图形系统的架构
+=======
+## 1 异步事件处理
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter01-zh.md
 
 ### 1.1.1 `GAL` 和 `GDI`
 
@@ -167,15 +171,20 @@ MSG_PAINT:
 这样可以避免不必要的重绘操作，从而提高绘图效率。
 设备上下文可通过 `GetClientDC` 和 `ReleaseDC` 获取和释放。由 `GetDC` 所获取的设备上下文是针对整个窗口的，而 `GetClientDC` 所获取的设备上下文是针对窗口客户区，也就是说，前一个函数获得的设备上下文，其坐标原点位于窗口左上角，输出被限定在窗口范围之内；后一个函数获得的设备上下文，其坐标原点位于窗口客户区左上角，输出被限定在窗口客户区范围之内。函数 `GetSubDC` 能够获取指定 `DC` 的兼容子 `DC`，子 `DC` 所包含的只是指定 `DC` 的某一个限定区域。 下面是这四个函数的原型说明（`minigui/gdi.h`）：
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter01-zh.md
 ```c
 HDC GUIAPI GetDC (HWND hwnd);
 HDC GUIAPI GetSubDC (HDC hdc, int off_x, int off_y, int width, int height);
  HDC GUIAPI GetClientDC (HWND hwnd);
  void GUIAPI ReleaseDC (HDC hdc);
 ```
+=======
+## 2 MiniGUI-Processes 与进程间通讯
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter01-zh.md
 
 `GetDC`、`GetSubDC` 和 `GetClientDC` 是从系统预留的若干个 `DC` 当中获得一个目前尚未使用的设备上下文。所以，应该注意如下两点：
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter01-zh.md
 - 在使用完成一个由 `GetDC`、`GetSubDC` 或 `GetClientDC` 返回的设备上下文之后，应该尽快调用 `ReleaseDC` 释放。
 - 避免同时使用多个设备上下文，并避免在递归函数中调用 `GetDC`、`GetSubDC` 和 `GetClientDC` 。
 
@@ -188,10 +197,22 @@ HDC GUIAPI GetSubDC (HDC hdc, int off_x, int off_y, int width, int height);
  HDC GUIAPI GetPrivateClientDC (HWND hwnd);
  void GUIAPI DeletePrivateDC (HDC hdc);
 ```
+=======
+### 2.1 MiniGUI-Processes 的多进程模型
+
+Processes 版本是支持客户服务器（C/S）方式的多进程系统，在运行过程中有且仅有一个服务器程序在运行，它的全局变量 `mgServer` 被设为 `TRUE`，其余的 MiniGUI 应用程序为客户，`mgServer` 变量被设为 `FALSE`。各个应用程序分别运行于各自不同的进程空间，如__图 1__ 所示。
+
+![多进程模型](figures/Part3Chapter01-01.jpeg)
+__图 1__  多进程模型
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter01-zh.md
 
 在建立主窗口时，如果主窗口的扩展风格中指定了 `WS_EX_USEPRIVATECDC` 风格，则 `CreateMainWindow` 函数会自动为该窗口的客户区建立私有设备上下文。通过 `GetPrivateClientDC` 函数，可以获得该设备上下文。对控件而言，如果控件类具有 `CS_OWNDC` 属性，则所有属于该控件类的控件将自动建立私有设备上下文。`DeletePrivateDC` 函数用来删除私有设备上下文。对上述两种情况，系统将在销毁窗口时自动调用 `DeletePrivateDC` 函数。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter01-zh.md
 ### 1.3.3 设备上下文句柄的保存和恢复
+=======
+### 2.2 简单请求/应答处理
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter01-zh.md
 
 设备上下文可通过 `SaveDC` 和 `RestoreDC` 保存和恢复。下面是这二个函数的原型说明（`minigui/gdi.h`）：
 
@@ -376,7 +397,11 @@ void GUIAPI SetWindowOrg(HDC hdc, POINT* pPt);
 
 `Get` 函数组用来获取窗口和视口的原点和范围，所获得的坐标值存储在 `POINT `结构 `pPt` 中；`Set` 函数组用 `POINT` 结构 `pPt` 中的值来设置窗口和视口的原点或范围。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter01-zh.md
 ## 1.5 矩形操作和区域操作
+=======
+### 2.3 UNIX Domain Socket 封装
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter01-zh.md
 
 ### 1.5.1 矩形操作
 

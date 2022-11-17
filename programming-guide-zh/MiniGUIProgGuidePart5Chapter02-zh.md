@@ -2,7 +2,11 @@
 
 前面已经讲到，MiniGUI 的文本处理和显示部分有一些自己的特色。本章将详细介绍和文本处理相关的一些基本概念，并介绍 MiniGUI 中用于文本处理和显示的 `API`。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 ## 1.1 字符集和编码
+=======
+## 1 `mg-samples` 中 `mginit` 程序
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 字符集（charset），是为了表示某种语言而定义的字符集合；编码则是为了在计算机中表示某个字符集中的字符而设定的编码规则，它通常以固定的顺序排列字符，并以此做为记录、存贮、传递、交换的统一内部特征。接触过计算机的人都知道美国国家标准局定义的 `ASCII` 码。我们可以将 `ASCII` 理解为美国英语字符集的一种编码形式；这种编码形式使用一个 7 位字节来表示一个字符，字符范围从 0x00 到 0x7F。
 
@@ -10,7 +14,11 @@
 
 在计算机的应用范围扩大到全球各个地区的时候，仅仅使用 `ASCII` 无法满足非英语国家的需求。为此，几乎所有的国家都定义了针对官方语言的字符集以及编码规范或者标准。大家都熟悉的 `GB2312-80` 标准就是中国定义的简体中文字符集标准，其中含有 682 个符号、6763 个汉字，它共分 87 个区，每个区含 94 个字符。类似的还有用于单字节字符集的 `ISO8859` 字符集系列，日本的`JISX0201`、`JISX0208` 字符集，以及台湾省制定的 `BIG5` 繁体中文字符集标准等等。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 一个字符集可以有不同的编码形式。拿 `GB2312` 字符集来讲，通常我们使用的是 `EUC` 编码（即扩展 `UNIX` 编码），它将每个 `GB2312` 字符编码为 2 个字节，高低两个字节的范围均为 0xA1\~0xFE。高字节表示的是 `GB2312` 字符的区码，低字节表示的 `GB2312` 字符的位码。还有一种常见的 `GB2312` 编码形式是 `HZ` 编码，它去掉了 `EUC` 编码的最高位，使得汉字可以用 `ASCII` 码中的字符来表示，比如 `EUC` 编码中的汉字“啊”编码为“0xB1A1”，而 `HZ` 编码则为“\~{1!~}”。
+=======
+### 1.1 初始化 MiniGUI-Processes 的服务器功能
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 随着各个国家和地区字符集标准的出台和升级，又引入了兼容性问题。比如，一个采用 `GB2312` `EUC` 编码的文本文件就无法在采用 `BIG5` 编码的系统上正常显示。为此，一些国际组织开始致力于全球统一字符集标准的开发，也就是我们熟知的 `UNICODE` 字符集。
 
@@ -173,12 +181,16 @@ FONT_OTHER_AUTOSCALE, FONT_UNDERLINE_LINE, FONT_STRUCKOUT_NONE,
 
 我们还可以调用 `GetSystemFont`  函数返回指定的系统逻辑字体，其中 `font_id` 参数可取如下值：
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 - `SYSLOGFONT_DEFAULT`：系统默认字体，必须是单字节字符集逻辑字体，必须由 `RBF` 设备字体组成。
 - `SYSLOGFONT_WCHAR_DEF`：系统默认多字节字符集字体，通常由 `RBF` 设备字体组成，并且多字节字体的宽度是`SYSLOGFONT_DEFAULT` 逻辑字体的两倍。
 - `SYSLOGFONT_FIXED`：固定宽度的系统字体。
 - `SYSLOGFONT_CAPTION`：用于显示标题栏文本的逻辑字体。
 - `SYSLOGFONT_MENU`：用于显示菜单文本的逻辑字体。
 - `SYSLOGFONT_CONTROL`：用于控件的默认逻辑字体。
+=======
+### 1.2 创建任务栏
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 上述这些系统逻辑字体在 MiniGUI 初始化时根据 `MiniGUI.cfg` 文件中的定义创建。
 
@@ -201,8 +213,12 @@ int GUIAPI GetFirstWord (PLOGFONT log_font, const char* mstr, int len,
 WORDINFO* word_info);
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 `GetTextMCharInfo` 函数返回多语种混和文本中每个字符的字节位置。比如对“ABC汉语”字符串，该函数将在 `pos_chars` 中返回 {0, 1, 2, 3, 5} 5 个值。`GetTextWordInfo` 函数则将分析多语种混和文本中每个单词的位置。对单字节字符集文本，单词以空格、`TAB` 键为分界，对多字节字符集文本，单词以单个字符为界。`GetFirstMCharLen` 函数返回第一个混和文本字符的字节长度。
 `GetFirstWord` 函数返回第一个混和文本单词的单词信息。
+=======
+### 1.4 启动默认程序
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 ## 1.5 文本转换
 
@@ -259,9 +275,13 @@ void GUIAPI GetTextExtent (HDC hdc, const char* spText, int len, SIZE* pSize);
 void GUIAPI GetTabbedTextExtent (HDC hdc, const char* spText, int len, SIZE* pSize);
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 `GetTextExtentPoint`  函数计算在给定的输出宽度内输出多字节文本时（即输出的字符限制在一定的宽度当中），可输出的最大字符个数、每个字符所在的字节位置、每个字符的输出位置，以及实际的输出高度和宽度。`GetTextExtentPoint`  函数是个综合性的函数，它对编辑器类型的应用程序非常有用，比如 MiniGUI 的单行和多行编辑框控件中，就使用这个函数来计算插入符的位置信息。
 
 `GetTabbedTextExtentPoint` 函数在 `GetTextExtentPoint` 函数的基础上，增加了对回车、换行和TAB键等格式化字符的处理。
+=======
+### 1.5 进入消息循环
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 `GetFontHeight` 和 `GetMaxFontWidth` 则返回逻辑字体的高度和最大字符宽度。`GetTextExtent` 计算文本的输出高度和宽度。`GetTabbedTextExtent` 函数返回格式化字符串的输出高度和宽度。
 
@@ -290,7 +310,11 @@ UINT nFormat, DTFIRSTLINE *firstline);
 
 `TextOutLen`  函数用来在给定位置输出指定长度的字符串，若长度为 -1，则字符串必须是以 '\0' 结尾的。`TabbedTextOutLen`  函数用来输出格式化字符串。`TabbedTextOutEx` 函数用来输出格式化字符串，但可以指定字符串中每个 `TAB` 键的位置。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 __图 1.1__ 是 `TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果。
+=======
+## 2 最简单的 `mginit` 程序
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 ![`TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果](figures/Part2Chapter02-1.1.jpeg)
 __图 1.1__  `TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果
@@ -376,7 +400,11 @@ __图 1.2__  `DrawText` 函数的输出效果
 
 除上述文本输出函数之外，MiniGUI 还提供了__表 1.2__ 所列出的函数，可用来设定（或查询）文本输出的字符间隔、行前间隔和行后间隔等等信息。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 __表 1.2__  设定文本输出间隔的函数
+=======
+## 3 MiniGUI-Processes 客户端专用函数
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 | 函数名称 | 含义 |
 |:--------|:----|
@@ -442,7 +470,11 @@ __表 1.3__ MiniGUI 支持的字体渲染特效
 
 __表 1.3__ 中给出的风格字符可以在定义逻辑字体的名称时使用。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 ## 1.8 `BIDI` 文本的使用
+=======
+## 4 `Mginit` 专用的其他函数和接口
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md
 
 一般情况下，`Latin` 等文本都是以左到右的顺序存储以及显示，但也有部分中亚国家(如阿拉伯文)语言是从右到左进行显示的，当这些文本混合在一起时，就形成了复杂的双向文本显示问题.
 
@@ -458,7 +490,20 @@ name0=vbf-naskhi-rrncnn-18-21-ISO8859-6
 fontfile0=/usr/local/share/minigui/res/font/naskhi-18-21-iso8859-6.vbf
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter02-zh.md
 下面是阿拉伯文的演示：
 
 ![阿拉伯字体演示](figures/Part2Chapter02-1.3.jpeg)
 _图 1.3__  阿拉伯字体演示
+=======
+- `ServerSetTopmostLayer`：该函数将把指定的层切换到最上面。
+- `ServerCreateLayer`：该函数将在系统中创建指定的层。
+- `ServerDeleteLayer`：该函数从系统中删除指定的层。
+- `GetClientByPID`：该函数根据客户的进程标识号返回客户标识号。
+- `SetTopmostClient`：该函数通过指定的客户标识号来设置顶层。它将把客户所在的层切换到最上面。
+- `SetServerEventHook`：该函数在 `mginit` 中设置底层事件的钩子，在钩子函数返回零给 MiniGUI 时，MiniGUI 将继续事件的处理，并最终将事件发送到当前活动客户；反之将终止事件的处理。
+- `Send2Client`：服务器可利用该消息将指定的消息发送到某个客户。
+- `ServerGetNextZNode`：该函数用于遍历所有的 Z 序节点。
+- `ServerGetZNodeInfo`：该函数用于获得某个特定 Z 序节点的信息。
+- `ServerDoZNodeOperation`：该函数用于完成切换主窗口 Z 序和/或设置某主窗口为当前活动窗口。
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter02-zh.md

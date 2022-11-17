@@ -6,9 +6,13 @@
 
 新的 `GDI` 采用了新的区域算法，即在 X Window 和其他 GUI 系统当中广泛使用的区域算法。这种区域称作“x-y-banned”区域，并且具有如下特点：
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 - 区域由互不相交的非空矩形组成。
 - 区域又可以划分为若干互不相交的水平条带，每个水平条带中的矩形是等高，而且是上对齐的；或者说，这些矩形具有相同的高度，而且所有矩形的左上角 y 坐标相等。
 - 区域中矩形的排列，首先是在 x 方向（在一个条带中）从左到右排列，然后按照 y 坐标从上到下排列。
+=======
+## 1 `Shadow` 图形引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 在 `GDI` 函数进行绘图输出时，可以利用 x-y-banned 区域的特殊性质进行绘图的优化。在将来版本中添加的绘图函数，将充分利用这一特性进行绘图输出上的优化。
 
@@ -89,7 +93,11 @@ void GUIAPI DeleteMemDC (HDC mem_dc);
 
 `ConvertMemDC` 函数用来将一个任意的内存 `DC` 对象，根据给定的参考 `DC` 的象素格式进行转换，使得结果 `DC` 具有和参考 `DC` 一样的象素格式。这样，转换后的 `DC` 就能够快速 `Blit` 到与之兼容的 `DC` 上。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 `SetMemDCAlpha` 函数用来设定或者取消整个内存 `DC` 对象的 Alpha 通道值。我们还可以通过 `MEMDC_FLAG_RLEACCEL` 标志指定内存 `DC` 采用或者取消 `RLE` 编码方式。Alpha 通道值将作用在 `DC` 的所有象素点上。
+=======
+## 2 `MLShadow` 图形引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 `SetMemDCColorKey` 函数用来设定或者取消整个内存 `DC` 对象的 `ColorKey`，即透明象素值。我们还可以通过 `MEMDC_FLAG_RLEACCEL` 标志指定内存 `DC` 采用或者取消 `RLE` 编码方式。
 
@@ -256,11 +264,15 @@ HDC GUIAPI CreateMemDCFromBitmap (HDC hdc, BITMAP* bmp);
 HDC GUIAPI CreateMemDCFromMyBitmap (HDC hdc, MYBITMAP* mybmp);
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 需要注意的是，许多 `GAL` 引擎不能对系统内存到显示内存的 `BitBlt` 操作提供硬件加速，所以，`FillBoxWithBitmap` 函数，以及从 `BITMAP` 对象或者 `MYBITMAP` 对象创建的内存 `DC` 无法通过硬件加速功能快速 `BitBlt` 到其他 `DC` 上。如果希望达到这样的效果，可以通过预先创建的建立于显示内存中的 `DC` 进行快速的 `BitBlt` 运算。
 
 ## 1.5 新的 `GDI` 绘图函数
 
 除了光栅操作以外，还添加了一些有用的 GDI 绘图函数，包括 `FillBox`、`FillCircle` 等等。已有的 `GDI` 函数有：
+=======
+## 3  `pc_xvfb` 图形引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 ```c
 void GUIAPI FillBox (HDC hdc, int x, int y, int w, int h);
@@ -297,7 +309,11 @@ int GUIAPI StretchPaintImageEx (HDC hdc, int x, int y, int w, int h, MG_RWops* a
 - `StretchPaintImageFromMem` 用于从内存中读取图片信息并进行缩放处理。`hdc` 表示绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`mem` 指向内存中保存图片信息的数据块，`size`	表示 `mem` 指向的数据块的大小，`ext` 为图片的文件类型，即文件扩展名。
 - `StretchPaintImageEx` 用于从数据源中读取图片信息并同时进行缩放处理。`hdc` 表示绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`area` 表示数据源，`ext` 为图片的文件类型，即文件扩展名。
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 ### 1.6.2 图片旋转函数
+=======
+## 4  `rtos_xvfb` 图形引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 MiniGUI 提供以下函数用于支持图片的旋转，并在旋转的同时支持缩放。
 
@@ -393,7 +409,11 @@ typedef void (* CB_ARC) (void* context, int x, int y);
 void GUIAPI CircleArcGenerator (void* context, int sx, int sy, int r, int ang1, int ang2, CB_ARC cb);
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 首先要指定圆弧的圆心、半径、起始角度和终止角度。需要注意的是，起始角度和终止角度是以 1/64 度为单位表示的，而不是浮点数。然后传递 `cb` 回调函数。每生成一个圆弧上的点，该函数将调用回调函数，并传递新点的坐标值 (x, y)。
+=======
+## 5 `CommLCD` 引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 ### 1.7.5 垂直单调多边形生成器
 
@@ -535,7 +555,11 @@ void DrawMyCircle (HDC hdc, int x, int y, int r, gal_pixel pixel)
 }
 ```
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 从上面的例子可以看出，曲线和填充生成器的用法极其简单，而且结构清晰明了。读者在自己的开发过程中，也可以学习这种方法。
+=======
+## 6 `Comm IAL` 引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 ## 1.8 绘制复杂曲线
 
@@ -563,9 +587,13 @@ void GUIAPI CircleArc (HDC hdc, int sx, int sy, int r, int ang1, int ang2);
 
 作为示例，我们看 `Circle` 和 `Ellipse` 函数的用法。假定给定了两个点，pts[0] 和 pts[1]，其中 pts[0] 是圆心或者椭圆心，而 pts[1] 是圆或者椭圆外切矩形的一个顶点。下面的程序段绘制由这两个点给定的圆或者椭圆：
 
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 ```c
 int rx = ABS (pts[1].x - pts[0].x);
 int ry = ABS (pts[1].y - pts[0].y);
+=======
+## 7 `Custom IAL` 引擎
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 
 if (rx == ry)
 Circle (hdc, pts[0].x, pts[0].y, rx);
@@ -596,6 +624,7 @@ BOOL GUIAPI FloodFill (HDC hdc, int x, int y);
 下面的例子说明了如何使用 `FillCircle` 和 `FillEllipse` 函数填充圆或者椭圆。假定给定了两个点，pts[0] 和 pts[1]，其中 pts[0] 是圆心或者椭圆心，而 pts[1] 是圆或者椭圆外切矩形的一个顶点。
 
 ```c
+<<<<<<< HEAD:programming-guide-zh/MiniGUIProgGuidePart3Chapter03-zh.md
 int rx = ABS (pts[1].x - pts[0].x);
 int ry = ABS (pts[1].y - pts[0].y);
 
@@ -623,6 +652,103 @@ __清单 1.3__ 创建特殊区域
 static BLOCKHEAP my_cliprc_heap;
 
 static void GDIDemo_Region (HWND hWnd, HDC hdc)
+=======
+typedef struct tagINPUT
+{
+        char*   id;
+        
+        // Initialization and termination
+        BOOL (*init_input) (struct tagINPUT *input, const char* mdev, const char* mtype);
+        void (*term_input) (void);
+        
+        // Mouse operations
+        int  (*update_mouse) (void);
+        void (*get_mouse_xy) (int* x, int* y);
+        void (*set_mouse_xy) (int x, int y);
+        int  (*get_mouse_button) (void);
+        void (*set_mouse_range) (int minx, int miny, int maxx, int maxy);
+        void (*suspend_mouse) (void);
+        int (*resume_mouse) (void);
+        
+        // Keyboard operations
+        int  (*update_keyboard) (void);
+        const char* (*get_keyboard_state) (void);
+        void (*suspend_keyboard) (void);
+        int (*resume_keyboard) (void);
+        void (*set_leds) (unsigned int leds);
+        
+        // Event
+        int (*wait_event) (int which, int maxfd, fd_set *in, fd_set *out, 
+        fd_set *except, struct timeval *timeout);
+        
+        char mdev [MAX_PATH + 1];
+}INPUT;
+```
+
+这些成员的功能如下：
+
+- `update_mouse` 通知底层引擎更新鼠标信息
+- `get_mouse_xy` 上层调用该函数可获得最新的鼠标 x,y 坐标值
+- `set_mouse_xy` 上层调用该函数可以设置鼠标位置到新的坐标值。对不支持这一功能的引擎，该成员可为空
+- `get_mouse_button` 获取鼠标按钮状态。返回值可以是 `IAL_MOUSE_LEFTBUTTON`、 `IAL_MOUSE_MIDDLEBUTTON`、`IAL_MOUSE_RIGHTBUTTON` 等值“或”的结果。 分别表示鼠标左键、中键、右键的按下状态
+- `set_mouse_range` 设置鼠标的活动范围。对不支持这一功能的引擎，可设置该成员为空
+- `update_keyboard` 通知底层引擎更新键盘信息
+- `get_keyboard_state` 获取键盘状态，返回一个字符数组，其中包含以扫描码索引的键盘按键状态， 按下为 1，释放为 0
+- `suspend_keyboard` 暂停键盘设备读取，用于虚拟控制台切换。对嵌入式设备来讲，通常可设置为空
+- `resume_keyboard` 继续键盘设备读取，用于虚拟控制台切换。对嵌入式设备来讲，通常可设置为空
+- `set_leds` 设置键盘的锁定 `LED`，用于设置大写锁定、数字小键盘锁定、滚动锁定等
+- `wait_event` 上层调用该函数等待底层引擎上发生输入事件； 需要注意的是，该函数对 MiniGUI-Threads 和 MiniGUI-Processes 版本具有不同的接口，并且一定要利用 `select` 或者等价的 `poll` 系统调用实现这个函数
+
+## 8 `Custom IAL` 引擎实例
+
+其实开发一个新的 `IAL` 引擎并不困难。用户可通过 `customial.h` 定义的接口 来定制 `custom IAL` 输入引擎。下面以 `iPAQ` 为例，说明如何定制用户输入引擎（custom IAL）。
+
+COMPAQ 公司生产的 `iPAQ` 是基于 `StrongARM` 的一款高端手持终端产品，它含有触摸屏以及几个控制键。触摸屏类似 PC 上的鼠标，但只能区分左键。对按键，我们可以将其模拟为 PC 键盘的某几个控制键，比如光标键、`ENTER` 键、功能键等等。该引擎的源代码见清单 1。
+
+__清单 1__  以 `iPAQ` 为例的定制输入引擎（custom IAL）
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/poll.h>
+#include <linux/kd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+
+#include <minigui/mgconfig.h>
+#include <minigui/common.h>
+#include <minigui/customial.h>
+#ifdef _MGIAL_CUSTOM
+
+
+/* for data reading from /dev/hs3600_ts */
+typedef struct {
+        unsigned short b;
+        unsigned short x;
+        unsigned short y;
+        unsigned short pad;
+} POS;
+
+static unsigned char state [NR_KEYS];
+static int ts = -1;
+static int btn_fd = -1;
+static unsigned char btn_state=0;
+static int mousex = 0;
+static int mousey = 0;
+static POS pos;
+
+#undef _DEBUG
+
+/************************  Low Level Input Operations **********************/
+/*
+* Mouse operations -- Event
+*/
+static int mouse_update(void)
+>>>>>>> b010f5169ff89c84c1c0fde5ed38651bb12e1208:programming-guide-zh/MiniGUIProgGuidePart5Chapter03-zh.md
 {
         CLIPRGN my_cliprgn1;
         CLIPRGN my_cliprgn2;

@@ -18,7 +18,7 @@
    - [界面外观及特效](MiniGUIProgGuidePart1Chapter10-zh.md)
    - [其他编程主题](MiniGUIProgGuidePart1Chapter11-zh.md)
 - 第2篇：MiniGUI 图形编程   
-- [图形设备接口](MiniGUIProgGuidePart2Chapter01-zh.md)
+   - [图形设备接口](MiniGUIProgGuidePart2Chapter01-zh.md)
    - [文本的处理和显示](MiniGUIProgGuidePart2Chapter02-zh.md)
    - [高级图形函数](MiniGUIProgGuidePart2Chapter03-zh.md)
 - 第3篇：MiniGUI 高级编程
