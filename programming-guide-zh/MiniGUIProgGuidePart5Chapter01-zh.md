@@ -2,7 +2,7 @@
 
 本章讲述在 MiniGUI-Processes 中应用程序如何处理异步事件，并在 MiniGUI 提供的接口之上完成进程间的通讯任务。
 
-## 1.1 异步事件处理
+## 1 异步事件处理
 
 一般而言，GUI 系统的应用程序编程接口主要集中于窗口、消息队列、图形设备等相关方面。但因为 GUI 系统在处理系统事件时通常会提供自己的机制，而这些机制往往会和操作系统本身提供的机制不相兼容。比如，MiniGUI 提供了消息循环机制，与此相应，应用程序的结构一般是消息驱动的；也就是说，应用程序通过被动接收消息来工作。但很多情况下，应用程序需要主动监视某个系统事件，比如在 UNIX 操作系统中，可以通过 select 系统调用监听某个文件描述符上是否有可读数据。这样，需要把 MiniGUI 的消息队列机制和现有操作系统的其他机制融合在一起，为应用程序提供一个一致的机制。本文将讲述几种解决这一问题的方法。
 
@@ -75,20 +75,20 @@ static int VCOnGUIMainWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lPa
 
 在下一部分当中，我们还可以看到 `RegisterListenFD` 函数的使用。显然，通过这种简单的注册监听文件描述符的接口，MiniGUI-Processes 程序能够方便地利用底层的消息机制完成对异步事件的处理。
 
-## 1.2 MiniGUI-Processes 与进程间通讯
+## 2 MiniGUI-Processes 与进程间通讯
 
 我们知道，MiniGUI-Processes 采用 UNIX Domain Socket 实现客户程序和服务器程序之间的交互。应用程序也可以利用这一机制，完成自己的通讯任务――客户向服务器提交请求，而服务器完成对客户的请求处理并应答。一方面，在 MiniGUI-Processes 的服务器程序中，你可以扩展这一机制，注册自己的请求处理函数，完成定制的请求/响应通讯任务。另一方面，MiniGUI-Processes 当中也提供了若干用来创建和操作 UNIX Domain Socket 的函数，任何 MiniGUI-Processes 的应用程序都可以建立 UNIX Domain Socket，并完成和其他 MiniGUI-Processes 应用程序之间的数据交换。本文将举例讲述如何利用 MiniGUI-Processes 提供的函数完成此类通讯任务。在讲述具体接口之前，我们先看看 MiniGUI 的多进程模型以及服务器与客户间的通讯方式。
 
-### 1.2.1 MiniGUI-Processes 的多进程模型
+### 2.1 MiniGUI-Processes 的多进程模型
 
-Processes 版本是支持客户服务器（C/S）方式的多进程系统，在运行过程中有且仅有一个服务器程序在运行，它的全局变量 `mgServer` 被设为 `TRUE`，其余的 MiniGUI 应用程序为客户，`mgServer` 变量被设为 `FALSE`。各个应用程序分别运行于各自不同的进程空间，如__图 1.1__ 所示。
+Processes 版本是支持客户服务器（C/S）方式的多进程系统，在运行过程中有且仅有一个服务器程序在运行，它的全局变量 `mgServer` 被设为 `TRUE`，其余的 MiniGUI 应用程序为客户，`mgServer` 变量被设为 `FALSE`。各个应用程序分别运行于各自不同的进程空间，如__图 1__ 所示。
 
-![多进程模型](figures/Part3Chapter01-1.1.jpeg)
-__图 1.1__  多进程模型
+![多进程模型](figures/Part3Chapter01-01.jpeg)
+__图 1__  多进程模型
 
 目前的程序结构使每个加载的进程拥有一个自已的桌面模型及其消息队列，进程间的通信依靠以下所提到的进程通信模型来完成。
 
-### 1.2.2 简单请求/应答处理
+### 2.2 简单请求/应答处理
 
 我们知道，MiniGUI-Processes 利用了 UNIX Domain Socket 实现服务器和客户程序之间的通讯。为了实现客户和服务器之间的简单方便的通讯，MiniGUI-Processes 中定义了一种简单的请求/响应结构。客户程序通过指定的结构将请求发送到服务器，服务器处理请求并应答。在客户端，一个请求定义如下（`minigui/minigui.h`）：
 
@@ -180,7 +180,7 @@ printf (“the returned value: %d\n”, ret_value);    /* ret_value 的值应该
 
 读者已经看到，通过这种简单的请求/应答技术，MiniGUI-Processes 客户程序和服务器程序之间可以建立一种非常方便的进程间通讯机制。但这种技术也有一些缺点，比如受到 `MAX_REQID` 大小的影响，通讯机制并不是非常灵活，而且请求只能发送给 MiniGUI-Processes 的服务器程序（即 mginit）处理等等。
 
-### 1.2.3 UNIX Domain Socket 封装
+### 2.3 UNIX Domain Socket 封装
 
 为了解决上述简单请求/应答机制的不足，MiniGUI-Processes 也提供了经过封装的 UNIX Domain Socket 处理函数。这些函数的接口原型如下（`minigui/minigui.h`）：
 
