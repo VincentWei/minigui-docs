@@ -1,6 +1,6 @@
 # 其他编程主题
 
-## 1.1 定时器
+## 1 定时器
 
 在 MiniGUI 中，应用程序可以调用 `SetTimer` 函数创建定时器。当创建的定时器到期时，创建定时器时指定的窗口就会收到 `MSG_TIMER` 消息，并传递到期的定时器标识号和定时器被触发时的系统滴答值。在不需要定时器时，应用程序可以调用 `KillTimer` 函数删除定时器。在 MiniGUI 2.0.4/1.6.10 及其后版本中，MiniGUI 新增了 `SetTimerEx` 和 `ResetTimerEx` 两个函数。使用 `SetTimerEx` 函数可指定定时器回调函数，而 `SetTimer` 和 `ResetTimer` 被定义为 `SetTimerEx` 和 `ResetTimerEx` 的宏。相关的函数接口定义如下：
 
@@ -37,9 +37,9 @@ MiniGUI 的定时器机制给应用程序提供了一种比较方便的定时机
 
 这样，当设定的定时器频率很高时，就有可能出现定时器消息丢失或者间隔不均匀的情况。如果应用程序需要比较精确的定时器机制，则应该采用其它操作系统的机制。比如在 Linux 操作系统中，可以使用 `setitimer` 系统调用，并自行处理 `SIGALRM` 信号。需要注意的是，MiniGUI-Processes 的服务器进程，即 `mginit` 程序已经调用 `setitimer` 系统调用安装了定时器，因此，应用程序自己实现的 `mginit` 程序不应该再使用 `setitimer` 实现自己的定时器，但 MiniGUI-Processes 的客户程序仍可以调用 `setitimer` 函数。MiniGUI-Threads 则没有这样的限制。
 
-__清单 1.1__ 中的程序建立了一个间隔为 1 秒的定时器，然后在定时器到时时用当前的时间设置静态框的文本，从而达到显示时钟的目的，最后，在关闭窗口时删除这个定时器。
+清单 1 中的程序建立了一个间隔为 1 秒的定时器，然后在定时器到时时用当前的时间设置静态框的文本，从而达到显示时钟的目的，最后，在关闭窗口时删除这个定时器。
 
-__清单 1.1__ 定时器的使用
+__清单 1__ 定时器的使用
 
 ```c
 #define _ID_TIMER 100
@@ -101,17 +101,17 @@ static int TaskBarWinProc (HWND hWnd, int message, WPARAM wParam, LPARAM lParam)
 
 另外，还有两个函数用于查询系统中的定时器使用状态。`IsTimerInstalled` 函数用于检查一个定时器是否被安装到指定的窗口上。`HaveFreeTimer` 用于检测系统中是否还有可用的定时器资源。
 
-## 1.2 剪贴板
+## 2 剪贴板
 
 剪贴板是一个数据传送的工具，可以用于应用程序之间和应用程序内部的数据交互。它的原理比较简单，就是一个程序把数据放到剪贴板上，另一个应用程序从剪贴板上把数据取下来，剪贴板是应用程序间的一个数据中转站。
 
 MiniGUI 中的编辑框控件支持剪贴板操作，当用户选择文本然后按“CTRL+C”键时，数据将被复制到系统默认的文本剪贴板；当用户按“CTRL+V”键时，数据将从剪贴板复制到编辑框中。
 
-### 1.2.1 创建和销毁剪贴板
+### 2.1 创建和销毁剪贴板
 
 MiniGUI 提供了一个默认的文本剪贴板，名字为 `CBNAME_TEXT`（字符串名”text”），用于文本的复制和粘贴。应用程序可以直接使用该剪贴板，不需要其它额外的操作。应用程序自定义的剪贴板需要使用 `CreateClipBoard` 函数创建，使用完之后用 `DestroyClipBoard` 函数进行销毁。
 
-MiniGUI 中最多只能有 `NR_CLIPBOARDS` 个剪贴板，包括系统默认的文本剪贴板和用户自定义的剪贴板。`NR_CLIPBOARDS` 宏在 window.h 头文件中默认定义为 4。
+MiniGUI 中最多只能有 `NR_CLIPBOARDS` 个剪贴板，包括系统默认的文本剪贴板和用户自定义的剪贴板。`NR_CLIPBOARDS` 宏在 `window.h` 头文件中默认定义为 4。
 
 `CreateClipBoard` 函数创建一个指定名字的剪贴板，该名字不能和已有的剪贴板（系统定义的或者用户定义的）名字重复。
 
@@ -127,7 +127,7 @@ int GUIAPI CreateClipBoard (const char* cb_name, size_t size);
 int GUIAPI DestroyClipBoard (const char* cb_name);
 ```
 
-### 1.2.2 把数据传送到剪贴板
+### 2.2 把数据传送到剪贴板
 
 `SetClipBoardData` 函数把数据传送到指定的剪贴板。
 
@@ -140,7 +140,7 @@ int GUIAPI SetClipBoardData (const char* cb_name, void* data, size_t n, int cbop
 - `CBOP_NORMAL`：默认的覆盖操作，新的数据覆盖剪贴板已有的数据；
 - `CBOP_APPEND`：追加操作，新的数据将被附加到剪贴板已有数据之后。
 
-### 1.2.3 从剪贴板上获取数据
+### 2.3 从剪贴板上获取数据
 
 `GetClipBoardDataLen` 函数用来获取剪贴板上数据的大小。
 
@@ -166,7 +166,7 @@ int GUIAPI GetClipBoardByte (const char* cb_name, int index, unsigned char* byte
 
 `index` 指定数据的索引位置，`byte` 用来保存获取的字节数据。
 
-## 1.3 读写配置文件
+## 3 读写配置文件
 
 MiniGUI 的配置文件（默认为 `/usr/local/etc/MiniGUI.cfg ` 文件）采用了类似 Windows INI 文件的格式。这种文件格式非常简单，如下所示：
 
@@ -180,7 +180,7 @@ key-name3=key-value3
 key-name4=key-value4
 ```
 
-这种配置文件中的信息以 `section` 分组，然后用 `key=value` 的形式指定参数及其值。应用程序也可以利用这种配置文件格式保存一些配置信息，为此，MiniGUI 提供了如下函数（<minigui/minigui.h>）：
+这种配置文件中的信息以 `section` 分组，然后用 `key=value` 的形式指定参数及其值。应用程序也可以利用这种配置文件格式保存一些配置信息，为此，MiniGUI 提供了如下函数（`<minigui/minigui.h>`）：
 
 ```c
 int GUIAPI GetValueFromEtcFile (const char* pEtcFile, const char* pSection,
@@ -279,9 +279,9 @@ tip=Control&Panel
 icon=res/kcmx.gif
 ```
 
-其中的 [mginit] 段记录了应用程序个数（nr 键），以及自动启动的应用程序索引（autostart 键）。而 [appX] 段记录了每个应用程序的信息，包括该应用程序的路径、名称、图标等等。__清单 1.2__ 中的代码演示了如何使用 MiniGUI 的配置文件函数获取这些信息（该代码段来自 mde 演示包中的 mginit 程序）。
+其中的 [mginit] 段记录了应用程序个数（nr 键），以及自动启动的应用程序索引（autostart 键）。而 [appX] 段记录了每个应用程序的信息，包括该应用程序的路径、名称、图标等等。清单 2 中的代码演示了如何使用 MiniGUI 的配置文件函数获取这些信息（该代码段来自 mde 演示包中的 mginit 程序）。
 
-__清单 1.2__ 使用 MiniGUI 的配置文件函数获取信息
+__清单 2__ 使用 MiniGUI 的配置文件函数获取信息
 
 ```c
 #define APP_INFO_FILE “mginit.rc”
@@ -361,7 +361,7 @@ UnloadEtcFile (hAppInfo);
 
 当然，需要把 `get_app_info` 函数中的 `GetValueFromEtcFile` 改为 `GetValueFromEtc`。
 
-## 1.4 编写可移植程序
+## 4 编写可移植程序
 
 我们知道，许多嵌入式系统所使用的 CPU 具有和普通台式机 CPU 完全不同的构造和特点。但有了操作系统和高级语言，可以最大程度上将这些不同隐藏起来。只要利用高级语言编程，编译器和操作系统能够帮助程序员解决许多和 CPU 构造及特点相关的问题，从而节省程序开发时间，并提高程序开发效率。然而某些 CPU 特点却是应用程序开发人员所必须面对的，这其中就有如下几个需要特别注意的方面：
 
@@ -370,7 +370,7 @@ UnloadEtcFile (hAppInfo);
 
 为了编写具有最广泛适应性的可移植代码，应用程序开发人员必须注意到这些不同，并且根据情况编写可移植代码。这里，我们将描述如何在 MiniGUI 应用程序中编写可移植代码。
 
-### 1.4.1 理解并使用 MiniGUI 的 Endian 读写函数
+### 4.1 理解并使用 MiniGUI 的 Endian 读写函数
 
 为了解决上述的第一个问题，MiniGUI 提供了若干 Endian 相关的读写函数。这些函数可以划分为如下两类：
 
@@ -411,11 +411,11 @@ MGUI_WriteLE32 (out, count);  // 以 Little Endian 字节序保存 count 到文�
 ...
 ```
 
-### 1.4.2 利用条件编译编写可移植代码
+### 4.2 利用条件编译编写可移植代码
 
-在涉及到可移植性问题的时候，有时我们能够方便地通过 4.1 中描述的方法进行函数封装，从而提供具有良好移植性的代码，但有时我们无法通过函数封装的方法提供可移植性代码。这时，恐怕只能使用条件编译了。__清单 1.3__ 中的代码说明了如何使用条件编译的方法确保程序正常工作（该代码来自 MiniGUI `src/kernel/sharedres.c`）。
+在涉及到可移植性问题的时候，有时我们能够方便地通过 4.1 中描述的方法进行函数封装，从而提供具有良好移植性的代码，但有时我们无法通过函数封装的方法提供可移植性代码。这时，恐怕只能使用条件编译了。清单 3 中的代码说明了如何使用条件编译的方法确保程序正常工作（该代码来自 MiniGUI `src/kernel/sharedres.c`）。
 
-__清单 1.3__ 条件编译的使用
+__清单 3__ 条件编译的使用
 
 ```c
 /* 如果系统不支持共享内存，则定义 _USE_MMAP
@@ -490,9 +490,9 @@ void *LoadSharedResource (void)
 }
 ```
 
-上述程序段是 MiniGUI-Processes 服务器程序用来装载共享资源的。如果系统支持共享内存，则初始化共享内存对象，并将装载的共享资源关联到共享内存对象，然后将共享内存对象 ID 写入文件；如果系统不支持共享内存，则将初始化后的共享资源全部写入文件。在客户端，如果支持共享内存，则可以从文件中获得共享内存对象 ID，并直接关联到共享内存；如果不支持共享内存，则可以使用 mmap 系统调用，将文件映射到进程的地址空间。客户端的代码段见__清单 1.4__。
+上述程序段是 MiniGUI-Processes 服务器程序用来装载共享资源的。如果系统支持共享内存，则初始化共享内存对象，并将装载的共享资源关联到共享内存对象，然后将共享内存对象 ID 写入文件；如果系统不支持共享内存，则将初始化后的共享资源全部写入文件。在客户端，如果支持共享内存，则可以从文件中获得共享内存对象 ID，并直接关联到共享内存；如果不支持共享内存，则可以使用 mmap 系统调用，将文件映射到进程的地址空间。客户端的代码段见清单 4。
 
-__清单 1.4__ 条件编译的使用（续）
+__清单 4__ 条件编译的使用（续）
 
 ```c
 void* AttachSharedResource (void)
@@ -536,11 +536,11 @@ void* AttachSharedResource (void)
 - 整数、浮点数和定点数之间的转换。利用 `itofix` 和 `fixtoi` 函数可实现整数和定点数之间的相互转换；利用 `ftofix` 和 `fixtof` 函数可实现浮点数和定点数之间的转换。
 - 定点数加、减、乘、除等基本运算。利用 `fixadd`、`fixsub`、`fixmul`、`fixdiv`、`fixsqrt` 等函数可实现定点数加、减、乘、除以及平方根运算。
 - 定点数的三角运算。利用 `fixcos`、`fixsin`、`fixtan`、`fixacos`、`fixasin` 等函数可求给定定点数的余弦、正弦、正切、反余弦、反正弦值。
-- 矩阵、向量等运算。矩阵、向量相关运算在三维图形中非常重要，限于篇幅，本文不会详细讲述这些运算，读者可参阅 MiniGUI 的 <minigui/fixedmath.h> 头文件。
+- 矩阵、向量等运算。矩阵、向量相关运算在三维图形中非常重要，限于篇幅，本文不会详细讲述这些运算，读者可参阅 MiniGUI 的 `<minigui/fixedmath.h>` 头文件。
 
-__清单 1.5__ 中的代码段演示了定点数的用法，该程序段将输入的平面直角坐标系的坐标转换成相对应的屏幕坐标。
+清单 5 中的代码段演示了定点数的用法，该程序段将输入的平面直角坐标系的坐标转换成相对应的屏幕坐标。
 
-__清单 1.5__ 定点数运算
+__清单 5__ 定点数运算
 
 ```c
 void scale_to_window (const double * in_x, const double * in_y, double * out_x, double * out_y)
