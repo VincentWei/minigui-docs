@@ -923,7 +923,7 @@ static NCS_WND_TEMPLATE _ctrl_templ[] = {
 
 本实例为用户演示了如何绘制各种矩形
 
-![rect](figures/Part2Chapter06-06.png)
+![rect](figures/Part2Chapter05-06.png)
 
 __清单 3__ rectangle.c
 
@@ -1350,9 +1350,10 @@ BOOL (*checkBtn)(clsName *group, mWidget *btn_to_check);
 * 返回值：`BOOL`      
 
 ### 6.3 `mButtonGroup` 实例
+
 ![buttongroup](figures/Part2Chapter05-11.png)
 
-请参见[按钮系列控件类中的 `mRadioButton`](programming-guide/MiniGUIProgGuidePart2Chapter06-zh.md#mradiobutton)
+请参见[按钮系列控件类中的 `mRadioButton`](programming-guide/MiniGUIProgGuidePart2Chapter06-zh.md#5-mradiobutton)
 
 ## 7 `mLEDLabel`
 
