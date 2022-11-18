@@ -10,7 +10,7 @@
    - [mScrollWidget](MiniGUIProgGuidePart2Chapter08-zh.md#3-mscrollwidget)
       - [mItemView](#6-mitemview)
          - [mListBox](#8-mlistbox)
-         - [mScrollView][#7-mscrollview]]
+         - [mScrollView](#7-mscrollview)
          - [mIconView](#9-miconview)
          - [mListView](#10-mlistview)
 
