@@ -39,7 +39,7 @@
 - 第 3 篇：MiniGUI 图形编程   
    - [图形设备接口](MiniGUIProgGuidePart3Chapter01-zh.md)
    - [文本的处理和显示](MiniGUIProgGuidePart3Chapter02-zh.md)
-   - [高级图形函数](MiniGUIProgGuidePart3Chapter03-zh.md)
+   - [基于 NEWGAL 的高级 GDI 函数](MiniGUIProgGuidePart3Chapter03-zh.md)
    - [使用 mGPlus](MiniGUIProgGuidePart3Chapter04-zh.md)
    - [与 GPU 集成](MiniGUIProgGuidePart3Chapter05-zh.md)
 - 第 4 篇：视觉效果和动画
