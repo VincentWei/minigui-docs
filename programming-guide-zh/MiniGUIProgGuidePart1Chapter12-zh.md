@@ -124,7 +124,8 @@ __图 2__  利用 myWinEntries 函数创建的对话框
 
 颜色选择对话框提供了一种直观的方式使用户可以在 RGB 颜色空间中选择一个想要的颜色值，如图 3 所示。
 
-1[](figures/Part1Chapter12-03.png)
+![颜色选择对话框](figures/Part1Chapter12-03.png)
+
 __图 3__  颜色选择对话框
 
 ```c
@@ -191,9 +192,9 @@ typedef struct _COLORDLGDATA {
 
 is_save = FALSE，创建的对话框为文件打开对话框,该对话框的效果如图 4 所示。
 
-![](figures/Part1Chapter12-04.png
+![新的文件打开对话框](figures/Part1Chapter12-04.png)
 
-__图 4  新的文件打开对话框
+__图 4__  新的文件打开对话框
 
 ```c
 BOOL FileOpenSaveDialog  (PDLGTEMPLATE dlg_template,  HWND hwnd, WNDPROC proc, PFILEDLGDATA pfdd)；
@@ -240,7 +241,7 @@ typedef struct _FILEDLGDATA
 
 `is_save = TRUE`，创建的对话框为文件保存对话框,该对话框的效果如图 5 所示。
 
-![](figures/Part1Chapter12-05.png)
+![新的文件打开对话框](figures/Part1Chapter12-05.png)
 
 __图 5__  新的文件打开对话框
 
@@ -254,7 +255,7 @@ BOOL FileOpenSaveDialog  (PDLGTEMPLATE dlg_template,  HWND hwnd, WNDPROC proc, P
 
 字体选择对话框，可以方便快捷的定制一种字体，如图 6 所示。
 
-![](figures/Part1Chapter12-0.png)
+![字体选择对话框](figures/Part1Chapter12-06.png)
 
 __图 6__  字体选择对话框
 
@@ -287,7 +288,7 @@ typedef struct _FONTDLGDATA {
 
 信息对话框可以很方便的显示各种文字。
 
-![](figures/Part1Chapter12-07.png)
+![信息提示对话框](figures/Part1Chapter12-07.png)
 
 __图 7__  信息提示对话框
 
@@ -625,11 +626,11 @@ label 字符串为该图片标签所要显示的文字内容； `label_chars` �
 - 文字图片中的文字等距离水平排列，可有多行，但每行不能超过20个字符
 - 文字图片中的文字要和 `label_chars` 所规定的可选文字完全相符
 
-我们举一个简单的例子。如果要使用一个内容为“21:30”的数码管风格的数字图片标签，图片来自于一个数码管风格的数字及字符图片，如图 1所示。
+我们举一个简单的例子。如果要使用一个内容为“21:30”的数码管风格的数字图片标签，图片来自于一个数码管风格的数字及字符图片，如图 8 所示。
 
 ![图片标签的文字图片](figures/Part1Chapter12-08.jpeg)
 
-__图 1__  图片标签的文字图片
+__图 8__  图片标签的文字图片
 
 那么该图片标签应该定义如下：
 
@@ -644,11 +645,11 @@ label_chars = “0123456789:.”;
 
 ### 4.7 命令按钮
 
-命令按钮是一个和普通的按钮控件作用类似的皮肤元素，它具有正常、按下、高亮和禁用四种状态。我们使用 `skin_item_t` 结构定义一个命令按钮时，style 项应具有 `SI_TYPE_CMDBUTTON` 风格；`bmp_index` 项所表示的图片应包括从左到右依次排列的四个大小相同，分别表示正常、按下、高亮和禁用四种状态的按钮图片，如图 2所示。
+命令按钮是一个和普通的按钮控件作用类似的皮肤元素，它具有正常、按下、高亮和禁用四种状态。我们使用 `skin_item_t` 结构定义一个命令按钮时，style 项应具有 `SI_TYPE_CMDBUTTON` 风格；`bmp_index` 项所表示的图片应包括从左到右依次排列的四个大小相同，分别表示正常、按下、高亮和禁用四种状态的按钮图片，如图 9 所示。
 
 ![包含四种状态的命令按钮图片](figures/Part1Chapter12-09.jpeg)
 
-__图 2__  包含四种状态的命令按钮图片
+__图 9__  包含四种状态的命令按钮图片
 
 命令按钮有一种特定的状态 `SI_BTNSTATUS_CLICKED`，表示按钮被按下。
 
@@ -921,10 +922,10 @@ int MiniGUIMain (int argc, const char *argv[])
 
 程序定义了一个皮肤窗口 `main_skin`，它包含了八个皮肤元素，包括五个命令按钮，两个普通滑条和一个图片标签。程序首先将皮肤窗口需要的位图资源载入，然后调用 `skin_init()` 函数对皮肤进行初始化。如果皮肤初始化成功，则调用 `create_skin_main_window()` 函数创建皮肤窗口，并进入皮肤窗口的消息循环。当程序结束时，需要调用 `skin_deinit()` 函数将皮肤撤销。
 
-程序运行界面如图 3。
+程序运行界面如图 10。
 
 ![皮肤界面示例](figures/Part1Chapter12-10.jpg)
 
-__图 3__  皮肤界面示例
+__图 10__  皮肤界面示例
 
 
