@@ -1,4 +1,4 @@
-# 使用 mGPlus 进行矢量图形
+# 使用 mGPlus
 
 mGPlus 组件是对 MiniGUI 3.0 图形绘制接口的一个扩充和增强，主要提供对二维矢量图形和高级图形算法的支持，如路径、渐变填充和颜色组合等。mGPlus 用来实现 MiniGUI 3.0 中的 Fashion 外观渲染器，也用于 mDolphin 浏览器实现高级的图形功能，如 HTML 5 中的 Canvas 标记、SVG 支持等。
 
