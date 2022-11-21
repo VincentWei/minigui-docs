@@ -96,7 +96,7 @@ void GUIAPI DeleteMemDC (HDC mem_dc);
 `CreateMemDCFromBitmap` 函数可以创建一个指向设备相关位图并和指定 `DC` 兼容的内存 `DC`，这样可以实现快速的设备位图到屏幕的各种转换绘制。
 
 `CreateMemDCFromMyBitmap` 函数创建指向设备无关位图的内存 `DC`。
-`
+
 内存 `DC` 和其他 `DC` 一样，也可以调用 `GDI` 的绘图函数向内存 `DC` 中进行任意的绘图输出，然后再 `BitBlt` 到其他 `DC` 中。清单 1 中的程序来自 `mg-sample` 的 `graphic` 程序，它演示了如何使用内存 `DC` 向窗口 `DC` 进行透明和 Alpha 混合的 `Blitting` 操作。
 
 __清单 1__  增强的 `BITMAP` 操作
@@ -293,7 +293,7 @@ int GUIAPI StretchPaintImageEx (HDC hdc, int x, int y, int w, int h, MG_RWops* a
 ```
 
 - `StretchPaintImageFromFile` 用于从文件读入图片信息并进行缩放处理。`hdc` 为绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`spFileName` 为图片文件名的指针。
-- `StretchPaintImageFromMem` 用于从内存中读取图片信息并进行缩放处理。`hdc` 表示绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`mem` 指向内存中保存图片信息的数据块，`size`	表示 `mem` 指向的数据块的大小，`ext` 为图片的文件类型，即文件扩展名。
+- `StretchPaintImageFromMem` 用于从内存中读取图片信息并进行缩放处理。`hdc` 表示绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`mem` 指向内存中保存图片信息的数据块，`size` 表示 `mem` 指向的数据块的大小，`ext` 为图片的文件类型，即文件扩展名。
 - `StretchPaintImageEx` 用于从数据源中读取图片信息并同时进行缩放处理。`hdc` 表示绘图的图形设备上下文句柄，x 和 y 表示处理后的图片在图形设备上的绘制位置，w 和 h 表示图像被缩放后的宽度和高度，`area` 表示数据源，`ext` 为图片的文件类型，即文件扩展名。
 
 ### 6.2 图片旋转函数
@@ -382,7 +382,7 @@ void GUIAPI EllipseGenerator (void* context, int sx, int sy, int rx, int ry, CB_
 
 首先要指定椭圆心坐标以及 X 轴和 Y 轴半径，并传递上下文信息以及回调函数，每生成一个点，生成器将调用一次 `cb` 回调函数，并传递三个值：x1、x2 和 y。这三个值实际表示了椭圆上的两个点：(x1, y) 和 (x2, y)。因为椭圆的对称性，生成器只要计算椭圆上的二分之一圆弧点即可得出椭圆上所有的点。
 
-### 1.4 圆弧生成器
+### 7.4 圆弧生成器
 
 MiniGUI 定义的圆弧生成器如下所示：
 
