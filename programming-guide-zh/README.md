@@ -44,7 +44,7 @@
    - [与 GPU 集成](MiniGUIProgGuidePart3Chapter05-zh.md)
 - 第 4 篇：视觉效果和动画
    - [使用 mGEff 进行视觉效果和动画](MiniGUIProgGuidePart4Chapter01-zh.md)
-   - [使用 mGNCS ](MiniGUIProgGuidePart4Chapter02-zh.md)
+   - [使用 mGNCS4Touch](MiniGUIProgGuidePart4Chapter02-zh.md)
    - [C++ UX 框架](MiniGUIProgGuidePart3Chapter03-zh.md)
 - 第 5 篇：MiniGUI 高级编程
    - [进程间通讯及异步事件处理](MiniGUIProgGuidePart5Chapter01-zh.md)
