@@ -2,7 +2,7 @@
 
 `mginit` 是 MiniGUI-Processes 的服务器程序，该程序为客户应用程序准备共享资源，并管理客户创建的窗口。本章将讲述如何根据项目需求编写定制的 MiniGUI-Processes 服务器程序，并首先以 `mg-samples` 的 `mginit` 程序为例，分析 `mginit` 程序的基本组成要素。
 
-## 1.1 `mg-samples` 中 `mginit` 程序
+## 1 `mg-samples` 中 `mginit` 程序
 
 `mg-samples` 中的 `mginit` 程序结构比较简单，该程序主要完成的工作如下：
 
@@ -14,7 +14,7 @@
 
 接下来我们详细分析这个 `mginit` 程序的功能实现。
 
-### 1.1.1 初始化 MiniGUI-Processes 的服务器功能
+### 1.1 初始化 MiniGUI-Processes 的服务器功能
 
 该段代码位于 `MiniGUIMain` 函数中，如下所示：
 
@@ -192,19 +192,20 @@ int def_nr_topmosts, int def_nr_normals);
 
 可以给此函数传递一些参数来控制窗口管理的限定：
 
-- `nr_globals`：全局Z序节点的数量。所有由 `mginit` 创建的Z序节点都是全局对象。
-- `def_nr_topmosts`：缺省顶层Z序节点的最大数。它也是新层时的缺省顶层Z序节点的默认数。
-- `def_nr_normals`：新层普通Z序节点的最大数。它也是新层普通Z序节点的默认数。
+- `nr_globals`：全局 Z 序节点的数量。所有由 `mginit` 创建的 Z 序节点都是全局对象。
+- `def_nr_topmosts`：缺省顶层 Z 序节点的最大数。它也是新层时的缺省顶层 Z 序节点的默认数。
+- `def_nr_normals`：新层普通 Z 序节点的最大数。它也是新层普通 Z 序节点的默认数。
 
-### 1.1.2 创建任务栏
+### 1.2 创建任务栏
 
-上面已经提到，这个 `mginit` 程序使用任务栏以及其中的按钮表示当前系统中的层，并提供了一个简单的用户接口（见图 1.1）：
+上面已经提到，这个 `mginit` 程序使用任务栏以及其中的按钮表示当前系统中的层，并提供了一个简单的用户接口（见图 1）：
 
 - 用户选择任务栏上的工具栏图标，就可以启动某个应用程序。
 - 用户点击任务栏上的按钮，就可以将这个按钮代表的层切换到最上面显示。
 
-![mg-samples 的 mginit 程序建立的任务栏](figures/Part3Chapter02-1.1.jpeg)
-<center> 图 17.1 `mg-samples` 的 `mginit` 程序建立的任务栏
+![mg-samples 的 mginit 程序建立的任务栏](figures/Part3Chapter02-01.jpeg)
+
+__图 1__ `mg-samples` 的 `mginit` 程序建立的任务栏
 
 这个任务栏使用酷工具栏（CoolBar）控件建立用来启动应用程序的工具栏。它读取了 `mginit.rc` 文件中的应用程序配置信息并初始化了这些应用程序的信息，包括应用程序名称、描述字符串、对应的程序图标等等。
 
@@ -212,7 +213,7 @@ int def_nr_topmosts, int def_nr_normals);
 
 因为这些代码并不是 `mginit` 程序所特有的，所以不再赘述。
 
-### 1.1.4 启动默认程序
+### 1.3 启动默认程序
 
 `mginit.rc` 文件中定义了一个初始要启动的应用程序，下面的代码启动了这个应用程序：
 
@@ -270,10 +271,9 @@ pid_t exec_app (int app)
 }
 ```
 
-### 1.1.5 进入消息循环
+### 1.4 进入消息循环
 
 接下来，这个 `mginit` 程序进入了消息循环：
-
 
 ```c
 while (GetMessage (&msg, hTaskBar)) {
@@ -283,11 +283,11 @@ while (GetMessage (&msg, hTaskBar)) {
 
 当任务栏退出时，将终止消息循环，最终退出 MiniGUI-Processes 系统。
 
-## 1.2 最简单的 `mginit` 程序
+## 2 最简单的 `mginit` 程序
 
-`mg-samples` 的 `mginit` 程序其实并不复杂，它演示了一个 MiniGUI-Processes 服务器程序的基本构造方法。本节我们将构建一个最简单的 `mginit` 程序，这个程序的功能非常简单，它初始化了 MiniGUI-Processes，然后启动了 `helloworld` 程序。该程序还演示了服务器事件钩子函数的使用，当用户按 F1 到 F4 的按键时，将启动其他一些客户程序，用户在长时间没有操作时，`mginit` 会启动一个屏幕保护程序。当用户关闭所有的客户程序时，`mginit` 程序退出。__清单 1.1__ 给出了这个 `mginit` 程序的代码，其完整源代码以及屏幕保护程序的代码可见本指南示例程序包 `mg-samples` 中 `src` 目录的 `mginit.c` 和 `scrnsaver.c` 文件。
+`mg-samples` 的 `mginit` 程序其实并不复杂，它演示了一个 MiniGUI-Processes 服务器程序的基本构造方法。本节我们将构建一个最简单的 `mginit` 程序，这个程序的功能非常简单，它初始化了 MiniGUI-Processes，然后启动了 `helloworld` 程序。该程序还演示了服务器事件钩子函数的使用，当用户按 F1 到 F4 的按键时，将启动其他一些客户程序，用户在长时间没有操作时，`mginit` 会启动一个屏幕保护程序。当用户关闭所有的客户程序时，`mginit` 程序退出。清单 1 给出了这个 `mginit` 程序的代码，其完整源代码以及屏幕保护程序的代码可见本指南示例程序包 `mg-samples` 中 `src` 目录的 `mginit.c` 和 `scrnsaver.c` 文件。
 
-__清单 1.1__ 简单 `mginit` 程序的源代码
+__清单 1__ 简单 `mginit` 程序的源代码
 
 ```c
 #include <stdio.h>
@@ -440,8 +440,7 @@ $ gcc –o mginit mginit.c –lminigui
 ```
 因为这个 `mginit` 程序启动时要启动 `helloworld` 客户程序，所以，必须确保当前目录下存在 `helloworld` 程序。
 
-
-## 1.3 MiniGUI-Processes 客户端专用函数
+## 3 MiniGUI-Processes 客户端专用函数
 
 众所周知，MiniGUI-Processes 在调用 MiniGUI 的其它函数之前先调用 `JoinLayer` 用于将自己添加到一个层中。除了 `JoinLayer`，客户可以调用其他函数来得到层的消息，删除层或是改变顶层。
 
@@ -464,11 +463,11 @@ int* nr_clients, BOOL* is_topmost, int* cli_active);
 
 如果指定的指针不为 `NULL`，那么通过该指针将返回层的信息。层的信息分别包括，层中客户的数量、层是否为顶层、客户标识符（哪个客户的窗口是当前活动窗口）。
 
-客户调用 `SetTopmostLayer` 函数将指定的层设置为最顶层，调用 `DeleteLayer` 来删除层。关于这些功能的详细信息，可以参阅《MiniGUI API Reference Manual》。
+客户调用 `SetTopmostLayer` 函数将指定的层设置为最顶层，调用 `DeleteLayer` 来删除层。关于这些功能的详细信息，可以参阅[《MiniGUI API Reference Manual》](api-reference/README.md)。
 
-## 1.4 `Mginit` 专用的其他函数和接口
+## 4 `Mginit` 专用的其他函数和接口
 
-除了上面介绍的 `ServerStartup`、`OnNewDelClient`、`mgClients` 等函数和变量之外，MiniGUI-Processes 还为 `mginit` 程序定义了若干接口，专用于 MiniGUI-Processes 的服务器程序。本节将简单总结这些接口，详细信息请参阅《MiniGUI API Reference》。
+除了上面介绍的 `ServerStartup`、`OnNewDelClient`、`mgClients` 等函数和变量之外，MiniGUI-Processes 还为 `mginit` 程序定义了若干接口，专用于 MiniGUI-Processes 的服务器程序。本节将简单总结这些接口，详细信息请参阅[《MiniGUI API Reference Manual》](api-reference/README.md)。
 
 - `ServerSetTopmostLayer`：该函数将把指定的层切换到最上面。
 - `ServerCreateLayer`：该函数将在系统中创建指定的层。
