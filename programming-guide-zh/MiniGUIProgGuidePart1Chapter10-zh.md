@@ -307,7 +307,7 @@ MiniGUI 提供了如下的函数接口对渲染器进行管理：
 MG_EXPORT const WINDOW_ELEMENT_RENDERER* GUIAPI GetWindowRendererFromName (const char* name);
 ```
 
-- `AddWindowElementRenderer` 函数： 添加渲染器到MiniGUI 。下面是函数原型：
+- `AddWindowElementRenderer` 函数： 添加渲染器到 MiniGUI 。下面是函数原型：
 
 ```c
 MG_EXPORT BOOL GUIAPI AddWindowElementRenderer (const char* name, const WINDOW_ELEMENT_RENDERER* we_rdr);
@@ -834,9 +834,9 @@ static void ue_3_term (HWND hwnd)
 
 - 三种特效的效果图
 
-![Hello world 程序的输出](figures/Part1Chapter10-01.jpeg)
+![主窗口双缓冲的特效图](figures/Part1Chapter10-01.gif)
 
-__图 1.1__ 主窗口双缓冲的特效图
+__图 1__ 主窗口双缓冲的特效图
 
 ## 3 桌面定制
 
@@ -1472,7 +1472,7 @@ layer=
 pictrue=res/thaifont.png
 ```
 
-在主函数里面将初始化好的桌面定制结构体，设置到 MiniGUI 里面。下面的代码在 `mginit.c` （具体的说明请参考：第 17 章 开发定制的 MiniGUI-Processes 服务器程序）里面：
+在主函数里面将初始化好的桌面定制结构体，设置到 MiniGUI 里面。下面的代码在 `mginit.c` （具体的说明请参考《开发定制的 MiniGUI-Processes 服务器程序》一章）里面：
 
 ```c
 int MiniGUIMain (int args, const char* arg[])
@@ -1511,6 +1511,6 @@ int MiniGUIMain (int args, const char* arg[])
 
 程序运行的效果如下：
 
-![桌面定制效果图](figures/Part1Chapter10-02.jpeg)
+![桌面定制效果图](figures/Part1Chapter10-02.png)
 
-__图 1.2__ 桌面定制效果图
+__图 2__ 桌面定制效果图
