@@ -1,12 +1,12 @@
 # 图形引擎及输入引擎
 
-在 MiniGUI 0.3.xx 的开发过程中，我们引入了图形和输入抽象层（Graphics and Input Abstract Layer，`GAL` 和 `IAL`）的概念。抽象层的概念类似 Linux 内核虚拟文件系统的概念。它定义了一组不依赖于任何特殊硬件的抽象接口，所有顶层的图形操作和输入处理都建立在抽象接口之上。而用于实现这一抽象接口的底层代码称为“图形引擎”或“输入引擎”，类似操作系统中的驱动程序。这实际是一种面向对象的程序结构。利用这种抽象接口，我们可以将 MiniGUI 非常方便地移植到其他 POSIX 系统上，只需要根据我们的抽象层接口实现新的图形引擎和输入引擎即可。一般而言，基于 Linux 的嵌入式系统内核会提供 `FrameBuffer` 支持，这样 MiniGUI 已有的 `FBCON` 图形引擎可以运行在一般的 PC 上，也可以运行在特定的嵌入式系统上。因此，通常我们不需要开发针对特定嵌入式设备的图形引擎，而只要使用 `FBCON` 图形引擎即可。同时，MiniGUI 还提供了 `Shadow`、`CommLCD` 等应用于不同场合的图形引擎，本章的 1.1 和 1.2 小节将对其进行简要的介绍。
+在 MiniGUI 0.3.xx 的开发过程中，我们引入了图形和输入抽象层（Graphics and Input Abstract Layer，`GAL` 和 `IAL`）的概念。抽象层的概念类似 Linux 内核虚拟文件系统的概念。它定义了一组不依赖于任何特殊硬件的抽象接口，所有顶层的图形操作和输入处理都建立在抽象接口之上。而用于实现这一抽象接口的底层代码称为“图形引擎”或“输入引擎”，类似操作系统中的驱动程序。这实际是一种面向对象的程序结构。利用这种抽象接口，我们可以将 MiniGUI 非常方便地移植到其他 POSIX 系统上，只需要根据我们的抽象层接口实现新的图形引擎和输入引擎即可。一般而言，基于 Linux 的嵌入式系统内核会提供 `FrameBuffer` 支持，这样 MiniGUI 已有的 `FBCON` 图形引擎可以运行在一般的 PC 上，也可以运行在特定的嵌入式系统上。因此，通常我们不需要开发针对特定嵌入式设备的图形引擎，而只要使用 `FBCON` 图形引擎即可。同时，MiniGUI 还提供了 `Shadow`、`CommLCD` 等应用于不同场合的图形引擎，本章的 1 和 2 小节将对其进行简要的介绍。
 
 但相比图形来讲，将 MiniGUI 的底层输入与上层相隔显得更为重要。在基于 Linux 的嵌入式系统中，图形引擎可以通过 `FrameBuffer` 而获得，而输入设备的处理却没有统一的接口。在 PC 上，我们通常使用键盘和鼠标，而在嵌入式系统上，可能只有触摸屏和为数不多的几个键。在这种情况下，提供一个抽象的输入层，就显得格外重要。
 
 因此，本章将介绍 MiniGUI 3.0 的 `Custom IAL` 接口，并重点介绍如何开发 `custom` 输入引擎。
 
-## 1.1 `Shadow` 图形引擎
+## 1 `Shadow` 图形引擎
 
 该引擎的主要功能是：
 
@@ -45,7 +45,7 @@ rotate_screen=normal
 
 - `shadow` 引擎的色深配置在 8 位色以上，真实引擎的色深配置为真实的色深。
 
-## 1.2 `MLShadow` 图形引擎
+## 2 `MLShadow` 图形引擎
 
 MLShadow 引擎是实现了在机顶盒、PMP 等产品的方案中提供多个显示层，以完成类似硬件提供的图形层叠加功能，自动实现层之间的透明、半透明的显示。该引擎的主要功能是：
 
@@ -87,7 +87,7 @@ BOOL mlsEnableSlaveScreen (HDC dc_mls, BOOL enable)；
 ```
 此函数设置显示层 `dc_mls` 是否可见，即是否参加图形层的混合叠加操作。`enable` 为 `TRUE` 时，为可见；为 `FALSE` 时，不可见。
 
-## 1.3  `pc_xvfb` 图形引擎
+## 3  `pc_xvfb` 图形引擎
 
 该引擎的主要功能是：
 
@@ -108,7 +108,7 @@ exec_file=/usr/local/bin/qvfb2
 - `window_caption` 是标题栏文字
 - `exec_file` 是虚拟帧缓冲区程序。`qvfb` 对应的程序是 `qvfb2`，`wvfb` 对应的程序是 `wvfb2`，`mvfb` 对应的程序是 `mvfb2`。
 
-## 1.4  `rtos_xvfb` 图形引擎
+## 4  `rtos_xvfb` 图形引擎
 
 借助 `rtos_xvfb` 引擎，可将 MiniGUI 运行在某个已有的 `RTOS` 图形系统之上，比如 uC/GUI、Gtk+、Tilcon 等。其原理如下：
 - 由 `rtos_xvfb` 程序模块创建窗口，分配虚拟帧缓冲区，然后以线程方式启动 MiniGUI 程序，MiniGUI 程序在虚拟缓冲区中绘制。下面是创建和销毁虚拟帧缓冲区的接口：
@@ -140,7 +140,7 @@ int xVFBNotifyNewEvent (const void* xvfb_event_buffer, XVFBEVENT* event);
 defaultmode=800x600-16bpp
 ```
 
-## 1.5 `CommLCD` 引擎
+## 5 `CommLCD` 引擎
 
 该引擎的主要功能是：
 
@@ -155,6 +155,7 @@ int __commlcd_drv_getinfo (struct commlcd_info *li);
 int __commlcd_drv_release (void);
 int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors);
 ```
+
 - `__commlcd_drv_init` 函数用于初始化 `LCD` 设备。
 - `__commlcd_drv_release` 函数用于释放 `LCD` 设备。
 - `__commlcd_drv_getinfo` 函数用于获取 `LCD` 设备的相关信息，如 `LCD` 分辨率，`bpp`，象素格式，一条扫描线所占字节数和 `framebuffer` 地址等。
@@ -228,7 +229,7 @@ int __commlcd_drv_setclut (int firstcolor, int ncolors, GAL_Color *colors)
 ……
 ```
 
-## 1.6 `Comm IAL` 引擎
+## 6 `Comm IAL` 引擎
 
 MiniGUI 为传统嵌入式操作系统提供了 Common 输入引擎（comm），使用该引擎可以很方便地实现对键盘、鼠标或触摸屏等输入设备的支持。
 
@@ -250,9 +251,9 @@ int __comminput_wait_for_input (void);
 
 在使用该引擎时，需要根据操作系统或底层驱动由客户自己为 MiniGUI 实现上述 5 个函数接口。 
 
-## 1.7 `Custom IAL` 引擎
+## 7 `Custom IAL` 引擎
 
-MiniGUI 3.0 专业版和标准版的输入和输出引擎都是飞漫软件定制实现的，当然如果客户需要自己定制IAL的话，我们也可以提供 `custom-ial` 的库由客户自定义 `ial` 引擎接口的实现。按照下面的方法编写好 `IAL` 源代码后，要将该源代码编译生成一个 `ial` 库，最后将实例、`minigui` 库和 `ial` 库一起编译，才可以生成正确的可执行文件。`custom` 输入引擎在 `customial.h` 中给用户提供了定制键盘和鼠标消息处理的接口。用户只要实现下面的接口，就可以实现对相关消息的处理了：
+MiniGUI 3.0 专业版和标准版的输入和输出引擎都是飞漫软件定制实现的，当然如果客户需要自己定制 `IAL` 的话，我们也可以提供 `custom-ial` 的库由客户自定义 `ial` 引擎接口的实现。按照下面的方法编写好 `IAL` 源代码后，要将该源代码编译生成一个 `ial` 库，最后将实例、`minigui` 库和 `ial` 库一起编译，才可以生成正确的可执行文件。`custom` 输入引擎在 `customial.h` 中给用户提供了定制键盘和鼠标消息处理的接口。用户只要实现下面的接口，就可以实现对相关消息的处理了：
 
 ```c
 BOOL InitCustomInput (INPUT* input, const char* mdev, const char* mtype);
@@ -312,9 +313,9 @@ typedef struct tagINPUT
 
 其实开发一个新的 `IAL` 引擎并不困难。用户可通过 `customial.h` 定义的接口 来定制 `custom IAL` 输入引擎。下面以 `iPAQ` 为例，说明如何定制用户输入引擎（custom IAL）。
 
-COMPAQ 公司生产的 `iPAQ` 是基于 `StrongARM` 的一款高端手持终端产品，它含有触摸屏以及几个控制键。触摸屏类似 PC 上的鼠标，但只能区分左键。对按键，我们可以将其模拟为 PC 键盘的某几个控制键，比如光标键、`ENTER` 键、功能键等等。该引擎的源代码见__清单 1.1__。
+COMPAQ 公司生产的 `iPAQ` 是基于 `StrongARM` 的一款高端手持终端产品，它含有触摸屏以及几个控制键。触摸屏类似 PC 上的鼠标，但只能区分左键。对按键，我们可以将其模拟为 PC 键盘的某几个控制键，比如光标键、`ENTER` 键、功能键等等。该引擎的源代码见清单 1。
 
-__清单 1.1__  以 `iPAQ` 为例的定制输入引擎（custom IAL）
+__清单 1__  以 `iPAQ` 为例的定制输入引擎（custom IAL）
 
 ```c
 #include <stdio.h>
