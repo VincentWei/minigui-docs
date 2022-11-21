@@ -157,7 +157,7 @@ if (hMainWnd == HWND_INVALID)
 return -1;
 ```
 
-![设置透明色为白色生成的不规则窗口](figures/Part1Chapter02-04.jpeg)
+![设置透明色为白色生成的不规则窗口](figures/Part1Chapter02-04.png)
 
 __图 4__ 设置透明色为白色生成的不规则窗口
 
@@ -183,7 +183,7 @@ return -1;
 SetWindowBkColor(btn1, PIXEL_red); 
 ```
 
-![背景色为红色的多行编辑框](figures/Part1Chapter02-05.jpeg)
+![背景色为红色的多行编辑框](figures/Part1Chapter02-05.png)
 
 __图 5__ 背景色为红色的多行编辑框
 
@@ -217,7 +217,7 @@ EmptyClipRgn (&circle_rgn);
 DestroyFreeClipRectList (&cliprc_heap);
 ```
 
-![圆形按钮](figures/Part1Chapter02-06.jpeg)
+![圆形按钮](figures/Part1Chapter02-06.png)
 
 __图 6__ 圆形按钮
 
@@ -266,7 +266,7 @@ int MiniGUIMain (int argc, const char* argv[])
 }
 ```
 
-![为圆角窗口](figures/Part1Chapter02-07.jpeg)
+![为圆角窗口](figures/Part1Chapter02-07.png)
 
 __图 7__ 为圆角窗口
 
