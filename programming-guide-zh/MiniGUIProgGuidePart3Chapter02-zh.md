@@ -126,7 +126,6 @@ FONT_UNDERLINE_NONE, FONT_STRUCKOUT_NONE,
 
 > 【提示】有关设备字体的定义及名称格式信息，请参阅《MiniGUI 用户手册》 3.1.4 小节。
 
-
 ## 3 逻辑字体
 
 逻辑字体是一个 `GDI` 物件，它的代号储存在 `HFONT` 型态的变数中，逻辑字体是字体的描述。和逻辑画笔及逻辑画刷一样，它是抽象的物件，只有当应用程式呼叫 `SelectObject` 将它选入装置内容时，它才成为真实的物件。
@@ -290,16 +289,17 @@ UINT nFormat, DTFIRSTLINE *firstline);
 
 `TextOutLen`  函数用来在给定位置输出指定长度的字符串，若长度为 -1，则字符串必须是以 '\0' 结尾的。`TabbedTextOutLen`  函数用来输出格式化字符串。`TabbedTextOutEx` 函数用来输出格式化字符串，但可以指定字符串中每个 `TAB` 键的位置。
 
-__图 1__ 是 `TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果。
+图 1 是 `TextOut`、`TabbedTextOut` 以及 `TabbedTextOutEx` 函数的输出效果。
 
-![`TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果](figures/Part2Chapter02-01.jpeg)
-__图 1__  `TextOut` 、`TabbedTextOut`  以及 `TabbedTextOutEx` 函数的输出效果
+![TextOut、TabbedTextOut 以及 TabbedTextOutEx 函数的输出效果](figures/Part2Chapter02-01.jpeg)
+
+__图 1__  TextOut、TabbedTextOut 以及 TabbedTextOutEx 函数的输出效果
 
 `DrawText` 系列函数是功能最复杂的文本输出函数，可以以不同的对齐方式在指定的矩形内部输出文本。
 `DrawTextEx`  函数在 `DrawText` 函数的基础上增加了对输入文本首行缩进字符数的指定。
 `DrawTextEx2`  函数在前两者的基础上，增加了对首行能显示的字符个数的计算。这在多行编辑框里面非常有用处，因为多行编辑框需要根据编辑框的宽度计算一行能显示多少字符，以便知道第二行应该从哪个字符开始显示。参数 `firstline` 就包含了第一行所能显示字符个数，并且将它显示出来了。
 
-目前 `DrawText` 系列函数尚不支持对 `UTF-16` 编码的文本输出。__表 1__ 给出了 `DrawText` 支持的格式。
+目前 `DrawText` 系列函数尚不支持对 `UTF-16` 编码的文本输出。表 1 给出了 `DrawText` 支持的格式。
 
 __表 1__  `DrawText` 的输出格式
 
@@ -320,7 +320,7 @@ __表 1__  `DrawText` 的输出格式
 |`DT_CALCRECT`   |不作实际输出,只计算实际的输出矩形大小||
 
 
-__清单 1__ 中的程序段，就根据要输出的字符串所描述的那样，调用 `DrawText` 函数进行对齐文本输出。该程序的完整源代码见 `MDE` 中的 `fontdemo.c` 程序。__图 2__ 是该程序段的输出效果。
+清单 1 中的程序段，就根据要输出的字符串所描述的那样，调用 `DrawText` 函数进行对齐文本输出。该程序的完整源代码见 `MDE` 中的 `fontdemo.c` 程序。图 2 是该程序段的输出效果。
 
 __清单 1__  `DrawText` 函数的使用
 
@@ -370,11 +370,11 @@ void OnModeDrawText (HDC hdc)
 }
 ```
 
-![`DrawText` 函数的输出效果](figures/Part2Chapter02-02.jpeg)
+![DrawText 函数的输出效果](figures/Part2Chapter02-02.jpeg)
 
-__图 2__  `DrawText` 函数的输出效果
+__图 2__  DrawText 函数的输出效果
 
-除上述文本输出函数之外，MiniGUI 还提供了__表 2__ 所列出的函数，可用来设定（或查询）文本输出的字符间隔、行前间隔和行后间隔等等信息。
+除上述文本输出函数之外，MiniGUI 还提供了表 2 所列出的函数，可用来设定（或查询）文本输出的字符间隔、行前间隔和行后间隔等等信息。
 
 __表 2__  设定文本输出间隔的函数
 
@@ -413,7 +413,7 @@ ft2SetLcdFilter (mg_font, MG_SMOOTH_DEFAULT);
 TextOut(hdc, 0,0, "text with FreeType2 sub-pixels smooth");
 ```
 
-字体的渲染特效一般通过逻辑字体的风格指定。比如，在创建逻辑字体时，如果指定 `FS_WEIGHT_BOOK` 风格，则将使用低通滤波算法来处理矢量字体的字型边缘，在 MiniGUI 放大点阵字体的字型时，也会采用低通滤波算法来处理字型的边缘，从而消除因为自动放大而产生的边缘锯齿。__表 3__ 给出了 MiniGUI 支持的字体渲染特效。
+字体的渲染特效一般通过逻辑字体的风格指定。比如，在创建逻辑字体时，如果指定 `FS_WEIGHT_BOOK` 风格，则将使用低通滤波算法来处理矢量字体的字型边缘，在 MiniGUI 放大点阵字体的字型时，也会采用低通滤波算法来处理字型的边缘，从而消除因为自动放大而产生的边缘锯齿。表 3 给出了 MiniGUI 支持的字体渲染特效。
 
 __表 3__ MiniGUI 支持的字体渲染特效
 
@@ -440,7 +440,7 @@ __表 3__ MiniGUI 支持的字体渲染特效
 |struckout:<br>`FONT_STRUCKOUT_NONE` |第六位“n” |`FS_STRUCKOUT_NONE` |无删除线|
 |struckout:<br>`FONT_STRUCKOUT_LINE` |第六位“s” |`FS_STRUCKOUT_LINE` |添加删除线|
 
-__表 3__ 中给出的风格字符可以在定义逻辑字体的名称时使用。
+表 3 中给出的风格字符可以在定义逻辑字体的名称时使用。
 
 ## 8 `BIDI` 文本的使用
 
@@ -461,4 +461,5 @@ fontfile0=/usr/local/share/minigui/res/font/naskhi-18-21-iso8859-6.vbf
 下面是阿拉伯文的演示：
 
 ![阿拉伯字体演示](figures/Part2Chapter02-03.jpeg)
-_图 3__  阿拉伯字体演示
+
+__图 3__  阿拉伯字体演示
