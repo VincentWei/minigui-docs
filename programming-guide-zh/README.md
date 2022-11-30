@@ -2,8 +2,6 @@
 
 本文详细介绍了为MiniGUI应用程序编程的概念和主要API。
 
-## 目录
-
 ### [前言](MiniGUIProgGuidePreface-zh.md)
 ### 第1篇：MiniGUI 编程基础
    - [开始 MiniGUI 编程](MiniGUIProgGuidePart1Chapter01-zh.md)
