@@ -33,6 +33,6 @@ Here are the links to the API reference manuals of MiniGUI Core and components.
 
 ## Copying
 
-Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+Copyright © 2003 \~ 2022, Beijing FMSoft Technologies Co., Ltd.  
 All rights reserved.
 
