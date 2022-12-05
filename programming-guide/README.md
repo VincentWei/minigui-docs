@@ -81,6 +81,6 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
 
 ## Copying
 
-Copyright © 2003 \~ 2019, Beijing FMSoft Technologies Co., Ltd.  
+Copyright © 2003 \~ 2022, Beijing FMSoft Technologies Co., Ltd.  
 All rights reserved.
 
