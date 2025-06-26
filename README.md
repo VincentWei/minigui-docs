@@ -25,7 +25,7 @@ We have cleaned up the following documents:
 - MiniGUI Programming Guide
 - MiniGUI Supplementary Documents
 
-### ChangeLog
+## ChangeLog
 
 - 2025-06-30  
   Update for MiniGUI version 5.0.16.  
