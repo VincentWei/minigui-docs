@@ -3,44 +3,7 @@
 _A modern and mature cross-platform windowing system and GUI system
 for embedded and/or smart IoT devices._
 
-## TABLE OF CONTENTS
-
-- [INTRODUCTION](#introduction)
-   + [What's MiniGUI](#whats-minigui)
-   + [MiniGUI Components](#minigui-components)
-   + [Open Source Apps Based-on MiniGUI](#open-source-apps-based-on-minigui)
-   + [App Frameworks on MiniGUI](#app-frameworks-on-minigui)
-   + [MiniGUI and HybridOS](#minigui-and-hybridos)
-   + [Source Code Repositories](#source-code-repositories)
-- [CHARTS AND SCREENSHOTS](#charts-and-screenshots)
-- [NEW FEATURES IN VERSION 5.0.x](#new-features-in-version-50x)
-   + [Compositing Schema](#compositing-schema)
-   + [New Main Window Types](#new-main-window-types)
-   + [Virtual Window](#virtual-window)
-   + [Other Enhancements](#other-enhancements)
-- [NEW FEATURES IN VERSION 4.0.x](#new-features-in-version-40x)
-- [NEW FEATURES IN VERSION 3.2.x](#new-features-in-version-32x)
-- [A BRIEF BUILDING INSTRUCTION](#a-brief-building-instruction)
-   + [Building Whole MiniGUI](#building-whole-minigui)
-   + [Building MiniGUI Core](#building-minigui-core)
-   + [Unit Tests](#unit-tests)
-- [ADVANTAGES OF MINIGUI](#advantages-of-minigui)
-- [HIGHLIGHTS OF MINIGUI](#highlights-of-minigui)
-   + [The Runtime Modes of MiniGUI](#the-runtime-modes-of-minigui)
-   + [Support for Multiple Charsets](#support-for-multiple-charsets)
-   + [Support for Multiple Font Types](#support-for-multiple-font-types)
-   + [Support for Various Graphics Devices](#support-for-various-graphics-devices)
-   + [Support for Various Input Devices](#support-for-various-input-devices)
-   + [Common Controls](#common-controls)
-   + [Look and Feel Renderers](#look-and-feel-renderers)
-   + [Others](#others)
-   + [Successful Cases](#successful-cases)
-- [HISTORY](#history)
-- [AUTHORS AND COPYING](#authors-and-copying)
-   + [Special Statement](#special-statement)
-   + [Not Free for Commercial Use](#not-free-for-commercial-use)
-- [A LITTLE FAQ](#a-little-faq)
-
+[TOC]
 
 ## INTRODUCTION
 
@@ -709,6 +672,8 @@ complex writing systems (scripts), such as Arabic, Thai, and Indic.
 
 A brief history description of the development progress lay below:
 
+1. Jun., 2025:  
+   FMSoft released MiniGUI version 5.0.16.
 1. May, 2021:  
    FMSoft released MiniGUI version 5.0.6.
 1. Mar., 2020:  
@@ -919,8 +884,9 @@ A: Yes, FMSoft can provide you with guaranteed commercial technical
 [FAQs]: /user-manual/MiniGUIUserManualFAQsEN.md
 [常见问题]: /user-manual/MiniGUIUserManualFAQsZH.md
 
-[Release Notes for MiniGUI 3.2]: /supplementary-docs/Release-Notes-for-MiniGUI-3.2.md
-[Release Notes for MiniGUI 4.0]: /supplementary-docs/Release-Notes-for-MiniGUI-4.0.md
+[Release Notes for MiniGUI 5.0]: /release-notes/Release-Notes-for-MiniGUI-5.0.md
+[Release Notes for MiniGUI 4.0]: /release-notes/Release-Notes-for-MiniGUI-4.0.md
+[Release Notes for MiniGUI 3.2]: /release-notes/Release-Notes-for-MiniGUI-3.2.md
 [Showing Text in Complex or Mixed Scripts]: /supplementary-docs/Showing-Text-in-Complex-or-Mixed-Scripts.md
 [Supporting and Using Extra Input Messages]: /supplementary-docs/Supporting-and-Using-Extra-Input-Messages.md
 [Using CommLCD NEWGAL Engine and Comm IAL Engine]: /supplementary-docs/Using-CommLCD-NEWGAL-Engine-and-Comm-IAL-Engine.md
@@ -939,3 +905,4 @@ A: Yes, FMSoft can provide you with guaranteed commercial technical
 [Beijing FMSoft Technologies Co., Ltd.]: https://www.fmsoft.cn
 [FMSoft Technologies]: https://www.fmsoft.cn
 [HarfBuzz]: https://www.freedesktop.org/wiki/Software/HarfBuzz/
+

@@ -7,6 +7,9 @@ Here are the links to the API reference manuals of MiniGUI Core and components.
 
 ### API Reference for MiniGUI Core
 
+* [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
+* [MiniGUI 5.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-thread runmode.
+* [MiniGUI 5.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 standalone runmode.
 * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/doc-api-ref-minigui-procs-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
 * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/doc-api-ref-minigui-ths-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
 * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/doc-api-ref-minigui-sa-4.0.0/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
@@ -22,17 +25,17 @@ Here are the links to the API reference manuals of MiniGUI Core and components.
 * [mGNCS 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgncs-1.2.4/html/index.html) - The API reference for mGNCS V1.2.
 * [mGNCS4Touch 1.2 API Reference](http://www.minigui.com/doc-api-ref-mgncs4touch-1.2.2/html/index.html) - The API reference for mGNCS4Touch V1.2.
 
-### Links to Release Notes
+### Links to Repositories
 
-* [MiniGUI Core](https://github.com/VincentWei/minigui/blob/master/RELEASE-NOTES.md)
-* [mGUtils](https://github.com/VincentWei/mgutils/blob/master/RELEASE-NOTES.md)
-* [mGPlus](https://github.com/VincentWei/mgplus/blob/master/RELEASE-NOTES.md)
-* [mGEff](https://github.com/VincentWei/mgeff/blob/master/RELEASE-NOTES.md)
-* [mGNCS](https://github.com/VincentWei/mgncs/blob/master/RELEASE-NOTES.md)
-* [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch/blob/master/RELEASE-NOTES.md)
+* [MiniGUI Core](https://github.com/VincentWei/minigui)
+* [mGUtils](https://github.com/VincentWei/mgutils)
+* [mGPlus](https://github.com/VincentWei/mgplus)
+* [mGEff](https://github.com/VincentWei/mgeff)
+* [mGNCS](https://github.com/VincentWei/mgncs)
+* [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch)
 
 ## Copying
 
-Copyright © 2003 \~ 2022, Beijing FMSoft Technologies Co., Ltd.  
+Copyright © 2003 \~ 2025, Beijing FMSoft Technologies Co., Ltd.  
 All rights reserved.
 

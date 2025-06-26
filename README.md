@@ -43,6 +43,16 @@ We have cleaned up the following documents:
 - 2019-10-24  
   MiniGUI User Manual is ready.
 
+## Links to Repositories
+
+* [MiniGUI Core](https://github.com/VincentWei/minigui)
+* [mGUtils](https://github.com/VincentWei/mgutils)
+* [mGPlus](https://github.com/VincentWei/mgplus)
+* [mGEff](https://github.com/VincentWei/mgeff)
+* [mGNCS](https://github.com/VincentWei/mgncs)
+* [mGNCS4Touch](https://github.com/VincentWei/mgncs4touch)
+* [MiniGUI Demos](https://github.com/VincentWei/minigui-demos)
+
 ## 针对中文用户
 
 很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大，
