@@ -1,4 +1,4 @@
-# Summay
+# Summary
 
 ## Overview
 
@@ -114,7 +114,7 @@
     * [mGPlus](release-notes/Release-Notes-for-mGPlus.md)
     * [mGEff](release-notes/Release-Notes-for-mGEff.md)
     * [mGNCS](release-notes/Release-Notes-for-mGNCS.md)
-    * [mGNCS4Touch](Release-Notes-for-mGNCS4Touch.md)
+    * [mGNCS4Touch](release-notes/Release-Notes-for-mGNCS4Touch.md)
 
 - API Reference Manuals for MiniGUI Core
     * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
