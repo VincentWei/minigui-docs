@@ -1,5 +1,31 @@
-# Release Notes for MiniGUI Core 5.0.x
+# Release Notes
 
+- [Version 5.0.16](#version-5016)
+   + [What's new in version 5.0.16](#whats-new-in-version-5016)
+- [Version 5.0.15](#version-5015)
+   + [What's new in version 5.0.15](#whats-new-in-version-5015)
+- [Version 5.0.13](#version-5013)
+   + [What's new in version 5.0.13](#whats-new-in-version-5013)
+- [Version 5.0.12](#version-5012)
+   + [What's new in version 5.0.12](#whats-new-in-version-5012)
+- [Version 5.0.11](#version-5011)
+   + [What's new in version 5.0.11](#whats-new-in-version-5011)
+- [Version 5.0.10](#version-5010)
+   + [What's new in version 5.0.10](#whats-new-in-version-5010)
+- [Version 5.0.9](#version-508)
+   + [What's new in version 5.0.9](#whats-new-in-version-508)
+- [Version 5.0.8](#version-508)
+   + [What's new in version 5.0.8](#whats-new-in-version-508)
+- [Version 5.0.6](#version-506)
+   + [What's new in version 5.0.6](#whats-new-in-version-506)
+- [Version 5.0.5](#version-505)
+   + [What's new in version 5.0.5](#whats-new-in-version-505)
+- [Version 5.0.4](#version-504)
+   + [What's new in version 5.0.4](#whats-new-in-version-504)
+- [Version 5.0.3](#version-503)
+   + [What's new in version 5.0.3](#whats-new-in-version-503)
+- [Version 5.0.2](#version-502)
+   + [What's new in version 5.0.2](#whats-new-in-version-502)
 - [Version 5.0.0](#version-500)
    + [What's new in version 5.0.0](#whats-new-in-version-500)
    + [Compositing schema](#compositing-schema)
@@ -9,6 +35,261 @@
    + [Other new APIs](#other-new-apis)
    + [Changes leading to incompatibility](#changes-leading-to-incompatibility)
    + [Deprecated APIs](#deprecated-apis)
+
+## Version 5.0.16
+
+On May 27, 2025, FMSoft announces the availability of MiniGUI 5.0.16,
+which is a bugfix release with some minor enhancements of MiniGUI 5.0.x.
+
+* BUGFIXING:
+   - The desktop thread can not handle the request from other threads as soon as possible.
+   - The `MSG_TIMEOUT` message can not be fired correctly under MiniGUI-Threads mode.
+   - Bad subpixel rendering when background color is RGBA0000.
+* TUNING:
+   - Tune `configure.ac` and `Makefile.am` to use the system libtool scripts.
+   - Do not check `pciaccess` if the target architecture is not `i386`.
+
+## Version 5.0.15
+
+On May 09, 2025, FMSoft announces the availability of MiniGUI 5.0.15,
+which is an enhancement release with some minor enhancements
+of MiniGUI 5.0.x.
+
+* ENHANCEMENTS:
+   - Optimize NEWGAL engines: `shadow`, `drm`, and `fbcon` for large resolution.
+   - New APIs: `GetWindowSharedSurfaceFD()` and `CreateMemDCFromSharedSurfaceFD()` for compositing schema.
+* CHANGES:
+   - The operations for DRM userland driver changed.
+
+## Version 5.0.13
+
+On Aug. 31, 2023, FMSoft announces the availability of MiniGUI 5.0.13,
+which is an enhancement release with some minor enhancements
+of MiniGUI 5.0.x.
+
+### What's new in version 5.0.13
+
+In this version, we made some enhancements:
+
+* ENHANCEMENTS:
+   - Disable BIDI for text in UTF-8 charset by default.
+* CHANGES:
+   - Add `BIDI_FLAG_NONE` and `BIDI_FLAG_LEGACY`.
+* BUGFIXING:
+   - Ignore C0CTRL characters when renerding text.
+   - Support for vowels.
+
+## Version 5.0.12
+
+On May 10, 2023, FMSoft announces the availability of MiniGUI 5.0.12,
+which is an enhancement release with some minor enhancements
+of MiniGUI 5.0.x.
+
+### What's new in version 5.0.12
+
+In this version, we made some enhancements:
+
+* ENHANCEMENTS:
+  - Add new API `GetACharsExtentPointEx()`.
+  - Add new APIs `GetTabbedACharsExtent()`, `GetTabbedACharsExtentPoint()`,
+    and `GetTabbedACharsExtentPointEx()`.
+  - Enhance two APIs `GetTextExtentPoint()` and `GetTabbedTextExtentPoint()`
+    to support BIDI charsets.
+  - Tune management of tick count.
+* BUGFIXING:
+   - Fix a typo: `Achar2UChar()` to `AChar2UChar()`.
+
+## Version 5.0.11
+
+On Dec. 31, 2022, FMSoft announces the availability of MiniGUI 5.0.11,
+which is a bug fixing release with bug fixes and some minor enhancements
+of MiniGUI 5.0.x.
+
+### What's new in version 5.0.11
+
+In this version, we made some enhancements
+
+* ENHANCEMENTS:
+* BUGFIXING:
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/94
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/96
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/105
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/106
+* OPTIMIZATIONS:
+   - Optimize the refresh of scrolled.
+* TUNING:
+   - Call `mg_FreeMsgQueueForThisThread` immediately in `TerminateGUI()`.
+   - Use `CreateLogFontEx` instead of `CreateLogFont` to follow the new style convention of font name when creating the system logfonts,
+     but the orientation is ignored for the system logfont.
+
+## Version 5.0.10
+
+On Sep. 30, 2022, FMSoft announces the availability of MiniGUI 5.0.10,
+which is a bug fixing release with bug fixes and some minor enhancements
+of MiniGUI 5.0.x.
+
+### What's new in version 5.0.10
+
+In this version, we made some enhancements
+
+* ENHANCEMENTS:
+   - Enhance `fbcon` engine to support double buffering for Threads and Standalone mode. (Runtime option: `fbcon.double_buffering`).
+   - Cleanup and enhance `shadow` engine to use `SyncUpdate` method.
+   - Relaying `MSG_IDLE` messages to the active descendant controls in every 0.5s.
+* BUGFIXING:
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/83
+   - Fix a bug reported in https://github.com/VincentWei/minigui/issues/87
+   - Fix bugs reported in https://github.com/VincentWei/minigui/issues/89
+   - Fix some bugs when virtual window enabled under Standalone and Processes runtime modes.
+* OPTIMIZATIONS:
+* TUNING:
+   - Fix some warnings reported by GCC 12.
+   - Use inline functions for SetCursor and SetDefaultCursor instead of macros.
+
+## Version 5.0.9
+
+On Jan. 14, 2022, FMSoft announces the availability of MiniGUI 5.0.9,
+which is a bug fixing release with minor enhancements of MiniGUI 5.0.x.
+
+### What's new in version 5.0.9
+
+In this version, we fixed some bugs:
+
+* BUGFIXING:
+   - Fix a crash bug in `InitSubDC()` of `src/newgdi/gdi.c`.
+* ENHANCEMENTS:
+* OPTIMIZATIONS:
+* TUNING:
+   - Change copyright year to 2022.
+
+## Version 5.0.8
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.8,
+which is a bug fixing release with minor enhancements of MiniGUI 5.0.x.
+
+### What's new in version 5.0.8
+
+In this version, we fixed some bugs and made some optimizations and enhancements:
+
+* BUGFIXING:
+* ENHANCEMENTS:
+   - Support for WebP image format based on `libwebp`.
+   - Support for two ARM64-based hardware platforms: PX30 and R818.
+   - New surface pixel format for main window: `ST_PIXEL_XRGB565` under compositing schema.
+* OPTIMIZATIONS:
+   - Shrink heap size for fixed string.
+   - Optimize the memory use of blitting context.
+* TUNING:
+   - Tune code of fbcon video engine for compositing schema.
+   - Fix warnings and errors for conditional compilation.
+
+## Version 5.0.6
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.6,
+which is the bug fixing release of MiniGUI 5.0.x.
+
+### What's new in version 5.0.6
+
+In this version, we fixed some bugs and made some optimizations and enhancements:
+
+* BUGFIXING:
+   - Fix bugs of switching layers under MiniGUI-Processes.
+   - Fix bugs of `FBCon` and `PC_XVFB` engines: the dirty rectangles are
+     not set empty after calling `SyncUpdate`.
+   - Fix memory leaks when using block heap.
+   - Fix a bug in ServerGetWinZNodeRegion.
+* ENHANCEMENTS:
+   - Enhance `GetGlyphInfo` to return the FreeType face, font file path, and glyph
+     index.
+   - NEW API `StretchBltEx` to support different scaling filters and rotation.
+   - Use Pixman to support color blending methods for `BitBlt` and `StretchBlt`.
+   - Enhance fallback compositor to support animation when switching among layers.
+   - New API `SetMainWindowGestureFlags` and `MSG_GESTURETEST` message for
+     gesture test and setting the gesture flags of a specific main window.
+   - Tune implementation of Tooltip window.
+* OPTIMIZATIONS:
+   - Optimize the fallback compositor for lucent windows.
+   - Use Pixman to optimize `FillBox`, `BitBlt`, and `StretchBlt`.
+   - Optimize the management of BLOCKHEAP.
+   - Optimize the `__mg_lookfor_unused_slot`.
+
+Note that the binary backward-compatibility was broken, two operations added to
+`CompositorOps`. You should rebuild all MiniGUI applications.
+
+Also note that the compositing schema is now enabled by default.
+
+## Version 5.0.5
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.5,
+which is the bug fixing release of MiniGUI 5.0.x.
+
+### What's new in version 5.0.5
+
+In this version, we fixed some bugs and made some minor enhancements:
+
+* BUGFIXING:
+   - Adjust the constants for `WS_XXXX` macros to avoid duplicated values.
+
+Note that the binary backward-compatibility was broken. You should
+rebuild all MiniGUI applications.
+
+## Version 5.0.4
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.4,
+which is the bug fixing release of MiniGUI 5.0.x.
+
+### What's new in version 5.0.4
+
+In this version, we fixed some bugs and made some minor enhancements:
+
+* BUGFIXING:
+   - Fix bugs in ServerGetWinZNodeRegion: must check for possible empty mask rect
+     and bad assignment of maskrect
+   - Fix a potential bug: only increase `nr_mask_rects` for not empty mask rectangle.
+   - Fix a bug: update surface of controls surface in `travel_children_with_priv_cdc`.
+* ENHANCEMENTS:
+  - New IAL engine: `--enable-singletouchkeyial` to build the IAL engine for
+    single touch screen and key buttons.
+
+## Version 5.0.3
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.3,
+which is the bug fixing release of MiniGUI 5.0.x.
+
+### What's new in version 5.0.3
+
+In this version, we fixed some bugs and made some minor enhancements:
+
+* BUGFIXING:
+   - Always check expired timers even got `EINTR`.
+   - Add static modifier to `refresh_dirty_region` method of the fallback compositor.
+   - Fix a bug in `RegisterListenFD`.
+   - Fix a bug in `allocate_more_fd_slots`.
+* TUNING:
+  - Rebuild the private data for all visible z-nodes after selected a new compositor.
+* ENHANCEMENTS:
+  - New configuration option: `--enable-mgslicefallback` to build a fallback
+    implementation of mgslice.
+  - New API: `ServerGetTopmostZNodeOfType`.
+  - Merge some code by @ehello (<https://github.com/ehello>) for FreeRTOS.
+
+## Version 5.0.2
+
+The MiniGUI development team announces the availability of MiniGUI 5.0.2,
+which is the bug fixing release of MiniGUI 5.0.x.
+
+### What's new in version 5.0.2
+
+In this version, we tuned some code for GCC 9 and fixed some bugs:
+
+* BUGFIXING:
+   - Initialize `cfg_res_path` in function `__sysres_get_system_res_path()`.
+   - Always return TRUE in `subtract_rgn_by_node()`.
+* ADJUSTMENTS:
+   - Use upstream Harfbuzz for glyph shaping of complex scripts instead
+     of the modified version.
+* TUNING:
+  - Tune some code to depress compilation warnings.
 
 ## Version 5.0.0
 
@@ -63,7 +344,7 @@ exciting features for MiniGUI:
 * ADJUSTMENTS:
    - `g_rcScr` now is defined a macro calling function `GetScreenRect()`.
    - `mgIsServer` now is define a macro calling function `IsServer()`.
-* TUNNING
+* TUNING
    - Tune the `drm` (DRM) engine to support MiniGUI-Processes runtime mode
      and compositing schema.
    - Tune the `fbcon` (Linux Frame Buffer) engine to support compositing schema.

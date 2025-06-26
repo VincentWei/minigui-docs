@@ -2,59 +2,20 @@
 
 We maintains the documents for MiniGUI Core and MiniGUI components in this repository.
 
-## Table of Contents
+MiniGUI aims to provide a fast, stable, full-featured, and cross-platform windowing and GUI support system,
+        which is especially fit for embedded systems or smart IoT devices based-on Linux/uClinux, eCos,
+        and other traditional RTOSes, such as RT-Thread, FreeRTOS, RTEMS, VxWorks, ThreadX, Nucleus, pSOS, uC/OS-II, OSE, and others.
 
-- [MiniGUI Overview](MiniGUI-Overview.md)
-- [MiniGUI User Manual](user-manual/README.md)
-- [MiniGUI Programming Guide](programming-guide/README.md)
-- [MiniGUI Supplementary Documents](supplementary-docs/README.md)
-- API Reference Manuals for MiniGUI Core
-   * [MiniGUI 5.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-process runmode.
-   * [MiniGUI 5.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 multi-thread runmode.
-   * [MiniGUI 5.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-5.0.0/html/index.html) - The API reference for MiniGUI V5.0 standalone runmode.
-   * [MiniGUI 4.0 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-procs-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 multi-process runmode.
-   * [MiniGUI 4.0 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-ths-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 multi-thread runmode.
-   * [MiniGUI 4.0 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/doc-api-ref-minigui-sa-4.0.7/html/index.html) - The API reference for MiniGUI V4.0 standalone runmode.
-   * [MiniGUI 3.2 API Reference (MiniGUI-Processes mode)](http://www.minigui.com/api_ref/minigui-3.2.0/procs/index.html) - The API reference for MiniGUI V3.2 multi-process runmode.
-   * [MiniGUI 3.2 API Reference (MiniGUI-Threads mode)](http://www.minigui.com/api_ref/minigui-3.2.0/ths/index.html) - The API reference for MiniGUI V3.2 multi-thread runmode.
-   * [MiniGUI 3.2 API Reference (MiniGUI-Standalone mode)](http://www.minigui.com/api_ref/minigui-3.2.0/sa/index.html) - The API reference for MiniGUI V3.2 standalone runmode.
-- API Reference for MiniGUI Components
-   * [mGUtils 1.5 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgutils-1.5.0/html/index.html) - The API reference for mGUtils V1.5.
-   * [mGPlus 1.5 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgplus-1.5.0/html/index.html) - The API reference for mGUtils V1.5.
-   * [mGEff 1.5 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgeff-1.5.0/html/index.html) - The API reference for mGEff V1.5.
-   * [mGNCS 1.5 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs-1.5.0/html/index.html) - The API reference for mGNCS V1.5.
-   * [mGNCS4Touch 1.5 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs4touch-1.5.0/html/index.html) - The API reference for mGNCS4Touch V1.5.
-   * [mGUtils 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgutils-1.2.2/html/index.html) - The API reference for mGUtils V1.2.
-   * [mGPlus 1.4 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgplus-1.4.2/html/index.html) - The API reference for mGUtils V1.4.
-   * [mGEff 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgeff-1.2.3/html/index.html) - The API reference for mGEff V1.2.
-   * [mGNCS 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs-1.2.5/html/index.html) - The API reference for mGNCS V1.2.
-   * [mGNCS4Touch 1.2 API Reference](http://www.minigui.com/api_ref/doc-api-ref-mgncs4touch-1.2.4/html/index.html) - The API reference for mGNCS4Touch V1.2.
-- Links to Release Notes
-   * [MiniGUI Core 5.0.x](Release-Notes-for-MiniGUI-Core-5.0.md)
-   * [MiniGUI Core 4.0.x](Release-Notes-for-MiniGUI-Core-4.0.md)
-   * [MiniGUI Core 3.2.x](Release-Notes-for-MiniGUI-Core-3.2.md)
-   * [mGUtils](Release-Notes-for-mGUtils.md)
-   * [mGPlus](Release-Notes-for-mGPlus.md)
-   * [mGEff](Release-Notes-for-mGEff.md)
-   * [mGNCS](Release-Notes-for-mGNCS.md)
-   * [mGNCS4Touch](Release-Notes-for-mGNCS4Touch.md)
-- [MiniGUI Porting Guide](porting-guide/README.md) - Old documents just FYI.
+This is the source tree of MiniGUI Core, which provides the windowing and graphics interfaces as well as a lot of standard controls (toolkit).
 
-## 针对中文用户
+MiniGUI is released under GPLv3 and the dual-licensing applies to commercial use.
+In December 1998, the initiator of FMSoft, [Vincent Wei], began to develop MiniGUI under the GNU General Public License (GPL).
+In September 2002, the core developers of MiniGUI founded [FMSoft] and started the commercial marketing with the free software.
+By now, FMSoft still continues to release MiniGUI as a free software project.
 
-很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大，
-所以从 MiniGUI 3.2 版本开始，我们选择优先维护英文版本，中文版本就不再维护了。
-这主要出于如下几个方面的因素考虑：
+For the live demos, source tarballs, and cases of MiniGUI, you can refer to the following website:
 
-- 作为一个面向全球的开源软件，要服务所有国家或地区的开发者，英语是目前最好的语言。
-- 使用英文，可以避免一些由于术语翻译不准确而导致的问题，对开发者理解工作原理会更有帮助。
-- MiniGUI 各文档中使用的英文，不论是词汇还是语法，都相对简单，有一定基础的开发者都可以顺利阅读和理解。
-- 现有的机器翻译工具（比如 https://translate.google.cn 或者 Chrome 浏览器的网页翻译功能），
-可以将英文文档比较准确地翻译成中文文档，而如果要将中文文档翻译成英文，效果还差很多。
-
-另外，我们以前撰写的中文文档，仍保留在老的 MiniGUI Wiki 站点上，供参考：
-
-<http://wiki.minigui.com/twiki/bin/view/Products/WebHome>
+<http://www.minigui.com>
 
 ## Current Status
 
