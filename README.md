@@ -58,3 +58,8 @@ We have cleaned up the following documents:
 
 <http://wiki.minigui.com/twiki/bin/view/Products/WebHome>
 
+## Copying
+
+Copyright © 2003 \~ 2025, [Beijing FMSoft Technologies Co., Ltd.](https://www.fmsoft.cn)  
+All rights reserved.
+
