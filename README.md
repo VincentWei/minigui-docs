@@ -25,30 +25,36 @@ We have cleaned up the following documents:
 - MiniGUI Programming Guide
 - MiniGUI Supplementary Documents
 
-The following documents need to be written:
-
-- [The C++ UX Framework](/programming-guide/MiniGUIProgGuidePart4Chapter03.md)
-- [Code Style and Project Specification](/programming-guide/MiniGUIProgGuideAppendixA.md)
-
-We hope that we can finish this work at the end of the year 2019.
-
 ### ChangeLog
 
-- 2020-03-30
+- 2025-06-30  
+  Update for MiniGUI version 5.0.16.  
+  Tune the structure for GitBook.
+- 2020-03-30  
   Links for MiniGUI API references of 5.0.0/4.0.7; Drafts of supplementary documents for MiniGUI 5.0.0.
-
 - 2019-12-25  
   Draft of [Integrating with GPU](/programming-guide/MiniGUIProgGuidePart3Chapter05.md)
-
 - 2019-12-24  
   Tune for MiniGUI version 4.0.4.
-
 - 2019-10-30  
   MiniGUI Programming Guide is ready.
-
 - 2019-10-27  
   MiniGUI Supplementary Documents is ready.
-
 - 2019-10-24  
   MiniGUI User Manual is ready.
+
+## 针对中文用户
+
+很多中文开发者希望有中文文档。以前我们的确维护有中英文两个版本，但文档的维护工作量实在很大，
+所以从 MiniGUI 3.2 版本开始，我们选择优先维护英文版本，中文版本就不再维护了。
+这主要出于如下几个方面的因素考虑：
+
+- 作为一个面向全球的开源软件，要服务所有国家或地区的开发者，英语是目前最好的语言。
+- 使用英文，可以避免一些由于术语翻译不准确而导致的问题，对开发者理解工作原理会更有帮助。
+- MiniGUI 各文档中使用的英文，不论是词汇还是语法，都相对简单，有一定基础的开发者都可以顺利阅读和理解。
+- 现有基于大语言模型的翻译工具，已经能够替代人类完成技术文档的翻译工作。
+
+另外，我们以前撰写的中文文档，仍保留在老的 MiniGUI Wiki 站点上，供参考：
+
+<http://wiki.minigui.com/twiki/bin/view/Products/WebHome>
 
