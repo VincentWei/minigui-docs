@@ -4,9 +4,9 @@ This document introduces the concepts and the main APIs to program MiniGUI apps 
 
 ## Table of Contents
 
-- [Preface](MiniGUIProgGuidePreface.md)
+- [Preface](programming-guide/MiniGUIProgGuidePreface.md)
 - Part I Foundation of MiniGUI Programming
-   - [Beginning MiniGUI Programming](MiniGUIProgGuidePart1Chapter01.md)
+   - [Beginning MiniGUI Programming](programming-guide/MiniGUIProgGuidePart1Chapter01.md)
    - [Window and Message](MiniGUIProgGuidePart1Chapter02.md)
    - [Foundation of Dialog Box Programming](MiniGUIProgGuidePart1Chapter03.md)
    - [Foundation of Control Programming](MiniGUIProgGuidePart1Chapter04.md)
